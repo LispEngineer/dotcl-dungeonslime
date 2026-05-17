@@ -45,6 +45,64 @@ So, all the steps:
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
 
+
+# Functionality Implemented
+
+MonoGame Dungeon Slime features:
+* Game1: constructor
+* Game1: LoadContent
+* Game1: Update
+* Game1: Draw
+  * This is currently still doing the original MonoGame demo's color cycling
+
+
+# TO DO
+
+* Implement a REPL, so that the game can be running while there is a console
+  REPL to interact with the game, live.
+
+* Implement a system to convert a CLOS class to a CLR/C# class somehow,
+  or really, create a C# proxy for the CLOS class.
+  (I'm still noodling ways to do that.)
+  * Make it as generic as possible.
+  * Maybe a base CLOS class that implements functionality to create that
+    proxy on the fly, and has a reference to the proxy for reuse.
+
+* Implement nice helpers for the C# MonoGame classes & calls:
+  * Easy access to various Enumerations 
+    (e.g., [`Keys`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Input.Keys.html))
+  * Easy access to static classes and methods
+
+
+# Open Questions
+
+* How do I make an invocation on the `base` of a C# class?
+  * Doesn't seem to be possible with the `dotnet` package.
+  * Probably need to create a C# helper class to do this for me. Sigh.
+  * Use IL instruction CALL instead of CALLVIRT to invoke the specific
+    superclass method.
+
+* How do I pass a boolean "False" to a C# function?
+  * Try `(dotnet:box nil "BOOL")` as in 
+    `(dotnet:invoke an-object "AMethod" (dotnet:box nil "BOOL"))`
+
+* Is there a fast way to invoke C# functions/methods without going through
+  introspection? I.e., a way to say "save the method call to X(a1, a2, a3)"
+  and then invoke that method call on an object quickly with minimal overhead,
+  preferably as if it were being directly invoked?
+
+
+## Issues Filed
+
+* [Add constructor arguments to dotnet:define-class](https://github.com/dotcl/dotcl/issues/13).
+
+* [Add `base` support in Lisp](https://github.com/dotcl/dotcl/issues/14).
+
+
+
+
+
+
 ---
 # Original README from SANO-san 
 Below here is the original README from SANO,Masatoshi

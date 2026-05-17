@@ -8,6 +8,9 @@
 
 (in-package :cl-user)
 
+;; Turn off optimization and include lots of debugging
+(declaim (optimize (debug 3)))
+
 (format *error-output* "[main.lisp] loading in package ~S~%" *package*)
 
 (require :dotnet-class)
@@ -59,29 +62,66 @@
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
   ;; and its initial keyword arguments are processed.
-  (format t "Booting up game-1...~%")
+  (format *error-output* "Booting up game-1...~%")
 
-  (if (monogame game)
-    (format t "Monogame passed to game~%")
-    (format t "No monogame passed to game~%")))
+  (let* ((monogame (monogame game))
+         ;; Really should check if monogame is nil first, but for now ...
+         (content (dotnet:invoke monogame "Content")))
 
-  ;; To-Do: these 3 c# things:
-  #|
-  _graphics = new GraphicsDeviceManager(this);
-  Content.RootDirectory = "Content";
-  IsMouseVisible = true;
-  |#
+    ;; Quick sanity check; change this to an error in the future.
+    (if monogame
+      (format *error-output* "Monogame passed to game~%")
+      (format *error-output* "No monogame passed to game~%"))
+
+    ;; Do the initialization per the MonoGame demo:
+    ;; https://docs.monogame.net/articles/tutorials/building_2d_games/03_the_game1_file/index.html#exploring-the-game1-class
+
+    ;; Changes: The GraphicsDeviceManager was already instantiated in the
+    ;; monogame C# class, so we just have to get it.
+    ;; Original: _graphics = new GraphicsDeviceManager(this);
+    (setf (graphics game) (dotnet:invoke monogame "GDM")) 
+    ;; Content.RootDirectory = "Content";
+    (setf (dotnet:invoke content "RootDirectory") "Content")
+    ;; IsMouseVisible = true;
+    (setf (dotnet:invoke monogame "IsMouseVisible") T)))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
-  (format t "[main.lisp] game-1:draw: game = ~A, gt = ~A~%" game gt)
+  ;(format t "[main.lisp] game-1:draw: game = ~A, gt = ~A~%" game gt)
   (let* ((mg (monogame game))
-         (_unused1 (format t "[main.lisp] game-1:draw: mg = ~A~%" mg))
+         ;(_unused1 (format t "[main.lisp] game-1:draw: mg = ~A~%" mg))
          (gd (dotnet:invoke mg "GraphicsDevice"))
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs)))
-    (dotnet:invoke gd "Clear" c)))
+    (dotnet:invoke gd "Clear" c)
+    ;; Invoke the base class draw as well now
+    ;; THIS DOES NOT WORK
+    ;; (dotnet:invoke (dotnet:invoke mg "base") "Draw" gt)
+    ))
+
+(defmethod load-content ((game game-1))
+  "Creates the Sprite Batch from our Content directory."
+  ; protected override void LoadContent() { _spriteBatch = new SpriteBatch(GraphicsDevice); }
+  (let* ((mg (monogame game))
+         (gd (dotnet:invoke mg "GraphicsDevice")))
+    (format *error-output* "[main.lisp] game-1:load-content: gd = ~A~%" gd)
+    (setf (sprite-batch game) (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" gd))
+    (format *error-output* "[main.lisp] game-1:load-content: sprite-batch = ~A~%" (sprite-batch game))))
+
+(defmethod update ((game game-1) gt) ;; GameTime
+  "Quit the game if ESC key is pressed."
+  ; if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+  ;     Exit();
+  ; base.Update(gameTime);
+  (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
+         ;; Keys is an enumerated type; we can get the value of Escape this way
+         (esc-key (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape"))
+         ;; This will return nil or t
+         (esc-down (dotnet:invoke kb-state "IsKeyDown" esc-key)))
+    (when esc-down
+      (format *error-output* "[main.lisp] game-1:update: esc-down = ~A~%" esc-down)
+      (dotnet:invoke (monogame game) "Exit"))))
 
 
 (defparameter *game*
@@ -95,20 +135,35 @@
 ;; GraphicsDeviceManager(this) — its mere construction registers it on
 ;; the Game so GraphicsDevice gets initialized later.
 (dotnet:define-class "Demo.LispGame" (Game)
+
   (:fields
     ;; The CLOS Object that his CLR object is wrapping
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
     ("GDM" "Microsoft.Xna.Framework.GraphicsDeviceManager"))
+
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
     (let ((gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
-      (setf (dotnet:invoke self "GDM") gdm)))
+      (setf (dotnet:invoke self "GDM") gdm)
+      (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A~%" gdm)))
+
+  ;; Note: There is no current way using the dotnet package to call
+  ;; the base class of a given new class you've created.
   (:methods
     ("Draw" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
-        (draw clos-instance gt)))))
+        ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
+        (draw clos-instance gt)))
+
+    ("LoadContent" () :returns Void :override t
+      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
+        (format t "[main.lisp] Demo.LispGame.LoadContent: clos-instance = ~A~%" clos-instance)
+        (load-content clos-instance)))
+
+    ("Update" ((gt GameTime)) :returns Void :override t
+      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
+        (update clos-instance gt)))))
 
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
