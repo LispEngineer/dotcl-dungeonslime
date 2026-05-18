@@ -97,6 +97,12 @@ the `--base` argument to see it work (in C#).
   and then invoke that method call on an object quickly with minimal overhead,
   preferably as if it were being directly invoked?
 
+* In `dotnet:define-class`, how would I specify a field of class
+  `Func<object, object[], object>`?
+
+* Does not appear the `dotnet` package exposes a way to get or set the
+  value of a standard C# array.
+
 
 ## Issues Filed
 
@@ -104,7 +110,7 @@ the `--base` argument to see it work (in C#).
 
 * [Add `base` support in Lisp](https://github.com/dotcl/dotcl/issues/14).
 
-
+* [Add array indexer](https://github.com/dotcl/dotcl/issues/15).
 
 
 

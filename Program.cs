@@ -35,7 +35,7 @@ if (args.Length > 0 && args[0] == "--base") {
     }
     Console.WriteLine();
 
-    var func = DynamicBaseCaller.CallBaseMethodBuilder(Calc, "Add", 
+    var func = DynamicBaseCaller.CallBaseMethodBuilder(Calc, "Add",
         new Type[] { typeof(int), typeof(string) });
     Console.WriteLine("The next 2 lines should be the Base Calculator (again)");
     Console.WriteLine(func(Calc, new object[] { 5, "six" }));

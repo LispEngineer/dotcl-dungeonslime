@@ -79,7 +79,7 @@
     ;; Changes: The GraphicsDeviceManager was already instantiated in the
     ;; monogame C# class, so we just have to get it.
     ;; Original: _graphics = new GraphicsDeviceManager(this);
-    (setf (graphics game) (dotnet:invoke monogame "GDM")) 
+    (setf (graphics game) (dotnet:invoke monogame "GDM"))
     ;; Content.RootDirectory = "Content";
     (setf (dotnet:invoke content "RootDirectory") "Content")
     ;; IsMouseVisible = true;
@@ -137,16 +137,34 @@
 (dotnet:define-class "Demo.LispGame" (Game)
 
   (:fields
-    ;; The CLOS Object that his CLR object is wrapping
+    ;; The CLOS Object that this CLR object is wrapping
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
-    ("GDM" "Microsoft.Xna.Framework.GraphicsDeviceManager"))
+    ("GDM" "Microsoft.Xna.Framework.GraphicsDeviceManager")
+    ("DrawBaseFunc" Object))
 
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
-    (let ((gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
+    (let* ((gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self))
+           ;; We need to create an array of Type (Type[]) for calling CallBaseMethodBuilder
+           (type-type (dotnet:static "System.Type" "GetType" "System.Type"))
+           (type-arr (dotnet:static "System.Array" "CreateInstance" type-type 1)))
       (setf (dotnet:invoke self "GDM") gdm)
-      (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A~%" gdm)))
+      (format *error-output* "[main.lisp] Demo.LispGame:ctor: 1~%")
+      ;; Save the delegate of the superclass Draw invoker
+      ;(setf (dotnet:ref type-arr 0) type-type) ;; THIS DOES NOT WORK: System.MissingMethodException: Method 'System.Type[].set_Item' not found.
+      (dotnet:invoke type-arr "SetValue" type-type 0)
+      (format *error-output* "[main.lisp] Demo.LispGame:ctor: ~A~%" type-arr)
+      #| ;; Ignore this non-working code for now
+      (setf (dotnet:invoke self "DrawBaseFunc")
+        ;; The below does not work:
+        ;; DOTNET:STATIC DynamicBaseCaller.CallBaseMethodBuilder: Method 'Draw' with matching signature not found on base type 'Game'.
+        ;; But it should work:
+        ;; CallBaseMethodBuilder(object target, string methodName, Type[] paramTypes)
+        (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Draw" type-arr))
+      |#
+      (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
+        gdm (dotnet:invoke self "DrawBaseFunc"))))
 
   ;; Note: There is no current way using the dotnet package to call
   ;; the base class of a given new class you've created.
@@ -177,7 +195,7 @@
    then instantiates the CLOS object with a link to the C# object,
    then associates the C# object with the CLOS object."
   (let* ((cs (dotnet:new "Demo.LispGame")) ;; cs = C# object
-         (clos (make-instance 'game-1 :monogame cs))) 
+         (clos (make-instance 'game-1 :monogame cs)))
     ;; We have to assocaite these two, which is to say associate
     ;; the cs with the clos, since clos is already associated with cs.
     (setf (dotnet:invoke cs "CLOSObject") clos)
