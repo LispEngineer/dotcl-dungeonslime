@@ -3,10 +3,18 @@ using DotCL;
 // Quick sanity check: a pure C# Game subclass that clears to red. If this
 // shows red, MonoGame works in this project; the issue is dotcl interop
 // passing struct args to .NET methods.
-if (args.Length > 0 && args[0] == "--csharp-sanity")
-{
+if (args.Length > 0 && args[0] == "--csharp-sanity") {
     using var sanity = new CsharpSanityGame();
     sanity.Run();
+    return;
+}
+
+// Test our creation to call base classes of random C# objects
+if (args.Length > 0 && args[0] == "--base") {
+    var Child = new Child();
+    Child.Speak();
+    Console.WriteLine("The next line should be the parent");
+    DynamicBaseCaller.CallBaseMethod(Child, "Speak");
     return;
 }
 
