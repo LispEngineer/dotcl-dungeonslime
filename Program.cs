@@ -14,7 +14,27 @@ if (args.Length > 0 && args[0] == "--base") {
     var Child = new Child();
     Child.Speak();
     Console.WriteLine("The next line should be the parent");
-    DynamicBaseCaller.CallBaseMethod(Child, "Speak");
+    DynamicBaseCaller.CallBaseMethod_VoidVoid(Child, "Speak");
+    Console.WriteLine();
+
+    var Calc = new AdvancedCalculator();
+    Console.WriteLine(Calc.Add(1, "two"));
+    Console.WriteLine("The next line should be the Base Calculator");
+    Console.WriteLine(
+        DynamicBaseCaller.CallBaseMethod(Calc, "Add",
+            new Type[] { typeof(int), typeof(string) },
+            new object[] { 3, "four" })
+    );
+    Console.WriteLine();
+
+    Console.WriteLine("The next line should be the parent (again)");
+    var ret = DynamicBaseCaller.CallBaseMethod(Child, "Speak", null, null);
+    Console.WriteLine($"Value of ret: {ret}; is ret null? {ret == null}");
+    if (ret != null) {
+        Console.WriteLine($"Type of ret: {ret.GetType().FullName}");
+    }
+
+
     return;
 }
 

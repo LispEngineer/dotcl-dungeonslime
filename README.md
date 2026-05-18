@@ -55,6 +55,12 @@ MonoGame Dungeon Slime features:
 * Game1: Draw
   * This is currently still doing the original MonoGame demo's color cycling
 
+BaseCaller: This is a class that works around the missing base class
+calling function in the dotnet package. Run the built binary with
+the `--base` argument to see it work (in C#).
+* Call a base method taking Void returning Void
+* Call any base method
+* TODO: Cache the delegate for reuse (performance optimization)
 
 # TO DO
 
@@ -102,7 +108,7 @@ MonoGame Dungeon Slime features:
 
 
 
-
+---
 ---
 # Original README from SANO-san 
 Below here is the original README from SANO,Masatoshi
