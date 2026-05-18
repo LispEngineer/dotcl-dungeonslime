@@ -33,7 +33,13 @@ if (args.Length > 0 && args[0] == "--base") {
     if (ret != null) {
         Console.WriteLine($"Type of ret: {ret.GetType().FullName}");
     }
+    Console.WriteLine();
 
+    var func = DynamicBaseCaller.CallBaseMethodBuilder(Calc, "Add", 
+        new Type[] { typeof(int), typeof(string) });
+    Console.WriteLine("The next 2 lines should be the Base Calculator (again)");
+    Console.WriteLine(func(Calc, new object[] { 5, "six" }));
+    Console.WriteLine(DynamicBaseCaller.CallFunc(func, Calc, 7, "eight"));
 
     return;
 }

@@ -50,22 +50,16 @@ public static class DynamicBaseCaller {
         invokeBase(target);
     } // CallBaseMethod_VoidVoid
 
-    /** Calls the named method on the target object.
+    /** Returns a Func to call the named method on the target object.
      * This must be a method that takes the specified arguments and returns anything.
      */
-    public static object CallBaseMethod(object target, string methodName, Type[] paramTypes, object[] args)
-    {
+    public static Func<object, object[], object> CallBaseMethodBuilder(object target, string methodName, Type[] paramTypes) {
         if (target == null) {
             throw new ArgumentNullException(nameof(target));
         }
 
         // Sanitize inputs
         paramTypes ??= Type.EmptyTypes;
-        args ??= [];
-
-        if (paramTypes.Length != args.Length) {
-            throw new ArgumentException("Parameter types array and arguments array must have the same length.");
-        }
 
         Type targetType = target.GetType();
         Type baseType = targetType.BaseType;
@@ -136,8 +130,30 @@ public static class DynamicBaseCaller {
         Func<object, object[], object> invokeBase = (Func<object, object[], object>)
             dynamicMethod.CreateDelegate(typeof(Func<object, object[], object>));
 
+        return invokeBase;
+    } // CallBaseMethodBuilder
+
+    /** Calls the named method on the target object.
+     * This must be a method that takes the specified arguments and returns anything.
+     */
+    public static object CallBaseMethod(object target, string methodName, Type[] paramTypes, object[] args) {
+        args ??= [];
+        paramTypes ??= Type.EmptyTypes;
+
+        if (args.Length != paramTypes.Length) {
+            throw new ArgumentException("Parameter types array and arguments array must have the same length.");
+        }
+
+        var invokeBase = CallBaseMethodBuilder(target, methodName, paramTypes);
+
         return invokeBase(target, args);
     } // CallBaseMethod
+
+    /** Helper function to call a Func on a target object.
+     * This is to make it easy to call a cached/stored Func from lisp. */
+    public static object CallFunc(Func<object, object[], object> func, object target, params object[] args) {
+        return func(target, args);
+    } // CallFunc
 } // DynamicBaseCaller
 
 ////////////////////////////////////////////////////////////////////////////////
