@@ -144,7 +144,10 @@
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
     ("GDM" "Microsoft.Xna.Framework.GraphicsDeviceManager")
-    ("DrawBaseFunc" Object))
+    ;; These are actually Func<...> but I don't know how to specify that here
+    ;; in dotnet:define-class yet.
+    ("DrawBaseFunc" Object)
+    ("UpdateBaseFunc" Object))
 
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
@@ -167,9 +170,11 @@
       (dotnet:invoke type-arr "SetValue" gt-type 0)
       (format *error-output* "[main.lisp] Demo.LispGame:ctor: ~A~%" type-arr)
 
-      ;; Save the delegate of the superclass Draw invoker for later efficient reuse.
+      ;; Save delegate of the superclass Draw/Update invoker for later efficient reuse.
       (setf (dotnet:invoke self "DrawBaseFunc")
         (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Draw" type-arr))
+      (setf (dotnet:invoke self "UpdateBaseFunc")
+        (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Update" type-arr))
 
       (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
         gdm (dotnet:invoke self "DrawBaseFunc"))))
@@ -198,8 +203,12 @@
         (load-content clos-instance)))
 
     ("Update" ((gt GameTime)) :returns Void :override t
-      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (update clos-instance gt)))))
+      (let ((clos-instance (dotnet:invoke self "CLOSObject"))
+            (base-func (dotnet:invoke self "UpdateBaseFunc")))
+        (update clos-instance gt)
+        ;; Call the base class Update(gt) method
+        (when base-func
+          (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))))))
 
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
