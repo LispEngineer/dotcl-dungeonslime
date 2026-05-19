@@ -85,6 +85,9 @@
     ;; IsMouseVisible = true;
     (setf (dotnet:invoke monogame "IsMouseVisible") T)))
 
+(defmethod initialize ((game game-1))
+  "Does nothing, for now.")
+
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
   ;(format t "[main.lisp] game-1:draw: game = ~A, gt = ~A~%" game gt)
@@ -174,6 +177,12 @@
   ;; Note: There is no current way using the dotnet package to call
   ;; the base class of a given new class you've created.
   (:methods
+    ("Initialize" () :returns Void :override t
+      (format *error-output* "[main.lisp] Demo.LispGame:Initialize: self = ~A~%" self)
+      (initialize (dotnet:invoke self "CLOSObject"))
+      ;; Just call the base Initialize()
+      (dotnet:static "DynamicBaseCaller" "CallBaseMethod_VoidVoid" self "Initialize"))
+
     ("Draw" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject"))
             (base-func (dotnet:invoke self "DrawBaseFunc")))
