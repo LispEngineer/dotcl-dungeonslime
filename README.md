@@ -40,6 +40,8 @@ in the `MonoGameLispDemo.csproj` file.
 So, all the steps:
 
 1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
+   * This project's build files assume this was done there, and that the `dotcl`
+     was locally built rather than retrieved from NuGet.
 
 2. `dotnet build MonoGameLispDemo.csproj -c Debug`
 
@@ -63,6 +65,10 @@ the `--base` argument to see it work (in C#).
 * TODO: Cache the delegate for reuse (performance optimization)
 
 # TO DO
+
+* Implement the `base` calls for the `dotnet:define-class`'d version of
+  the MonoGame (or the CLOS version) per MonoGame documentation.
+  Does not seem to matter much that it is missing for now.
 
 * Implement a REPL, so that the game can be running while there is a console
   REPL to interact with the game, live.

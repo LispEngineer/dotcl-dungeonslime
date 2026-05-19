@@ -146,23 +146,28 @@
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
     (let* ((gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self))
-           ;; We need to create an array of Type (Type[]) for calling CallBaseMethodBuilder
+           ;; We need to create an array of Type (Type[]) for calling CallBaseMethodBuilder.
+           ;; 'type-type' is the Type object for System.Type itself, used as the element type of the array.
            (type-type (dotnet:static "System.Type" "GetType" "System.Type"))
+           ;; 'gt-type' is the Type object for GameTime, which we need for the method signature.
+           ;; We use our helper function because Type.GetType() was not finding it.
+           ;; NOT WORKING: (gt-type (dotnet:static "System.Type" "GetType" "Microsoft.Xna.Framework.GameTime"))           
+           (gt-type (dotnet:static "DynamicBaseCaller" "GetType" "Microsoft.Xna.Framework.GameTime"))
+           ;; Create a standard C# System.Type[] array of length 1.
            (type-arr (dotnet:static "System.Array" "CreateInstance" type-type 1)))
+
       (setf (dotnet:invoke self "GDM") gdm)
       (format *error-output* "[main.lisp] Demo.LispGame:ctor: 1~%")
-      ;; Save the delegate of the superclass Draw invoker
-      ;(setf (dotnet:ref type-arr 0) type-type) ;; THIS DOES NOT WORK: System.MissingMethodException: Method 'System.Type[].set_Item' not found.
-      (dotnet:invoke type-arr "SetValue" type-type 0)
+
+      ;; We put gt-type (typeof(GameTime)) into the Type[] array at index 0.
+      ;; Note that dotnet:ref does not work for real C# arrays.
+      (dotnet:invoke type-arr "SetValue" gt-type 0)
       (format *error-output* "[main.lisp] Demo.LispGame:ctor: ~A~%" type-arr)
-      #| ;; Ignore this non-working code for now
+
+      ;; Save the delegate of the superclass Draw invoker for later efficient reuse.
       (setf (dotnet:invoke self "DrawBaseFunc")
-        ;; The below does not work:
-        ;; DOTNET:STATIC DynamicBaseCaller.CallBaseMethodBuilder: Method 'Draw' with matching signature not found on base type 'Game'.
-        ;; But it should work:
-        ;; CallBaseMethodBuilder(object target, string methodName, Type[] paramTypes)
         (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Draw" type-arr))
-      |#
+
       (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
         gdm (dotnet:invoke self "DrawBaseFunc"))))
 
@@ -170,9 +175,13 @@
   ;; the base class of a given new class you've created.
   (:methods
     ("Draw" ((gt GameTime)) :returns Void :override t
-      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
+      (let ((clos-instance (dotnet:invoke self "CLOSObject"))
+            (base-func (dotnet:invoke self "DrawBaseFunc")))
         ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
-        (draw clos-instance gt)))
+        (draw clos-instance gt)
+        ;; Call the base class Draw(gt) method
+        (when base-func
+          (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))))
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
