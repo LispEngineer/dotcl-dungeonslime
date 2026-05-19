@@ -145,6 +145,7 @@
 
   (:fields
     ;; The CLOS Object that this CLR object is wrapping
+    ;; TODO: Figure out the proper class instead of just Object
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
     ("GDM" GRAPHICSDEVICEMANAGER)
