@@ -12,15 +12,15 @@ public static class DynamicBaseCaller {
             throw new ArgumentNullException(nameof(target));
         }
 
-        Type targetType = target.GetType();
-        Type baseType = targetType.BaseType;
+        Type? targetType = target.GetType();
+        Type? baseType = targetType.BaseType;
 
         if (baseType == null) {
             throw new InvalidOperationException($"Type '{targetType.Name}' does not have a base class.");
         }
 
         // 1. Get the method from the base type specifically
-        MethodInfo baseMethod = baseType.GetMethod(
+        MethodInfo? baseMethod = baseType.GetMethod(
             methodName,
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
         );
@@ -53,8 +53,9 @@ public static class DynamicBaseCaller {
 
     /** Returns a Func to call the named method on the target object.
      * This must be a method that takes the specified arguments and returns anything.
+     * If there are no parameters, the paramTypes can be null.
      */
-    public static Func<object, object[], object> CallBaseMethodBuilder(object target, string methodName, Type[] paramTypes) {
+    public static Func<object, object[], object> CallBaseMethodBuilder(object target, string methodName, Type[]? paramTypes) {
         if (target == null) {
             throw new ArgumentNullException(nameof(target));
         }
@@ -62,15 +63,15 @@ public static class DynamicBaseCaller {
         // Sanitize inputs
         paramTypes ??= Type.EmptyTypes;
 
-        Type targetType = target.GetType();
-        Type baseType = targetType.BaseType;
+        Type? targetType = target.GetType();
+        Type? baseType = targetType.BaseType;
 
         if (baseType == null) {
             throw new InvalidOperationException($"Type '{targetType.Name}' does not have a base class.");
         }
 
         // 1. Get the specific method matching the provided parameter types
-        MethodInfo baseMethod = baseType.GetMethod(
+        MethodInfo? baseMethod = baseType.GetMethod(
             methodName,
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
             null,
@@ -136,8 +137,9 @@ public static class DynamicBaseCaller {
 
     /** Calls the named method on the target object.
      * This must be a method that takes the specified arguments and returns anything.
+     * If there are no parameters, the paramTypes and args can be null.
      */
-    public static object CallBaseMethod(object target, string methodName, Type[] paramTypes, object[] args) {
+    public static object CallBaseMethod(object target, string methodName, Type[]? paramTypes, object[]? args) {
         args ??= [];
         paramTypes ??= Type.EmptyTypes;
 
@@ -155,13 +157,13 @@ public static class DynamicBaseCaller {
      * types in external assemblies like MonoGame.Framework.
      * Returns null if nothing is found.
      */
-    public static Type GetType(string typeName) {
+    public static Type? GetType(string typeName) {
         if (string.IsNullOrEmpty(typeName)) {
             return null;
         }
 
         // 1. Try the standard way
-        Type t = Type.GetType(typeName);
+        Type? t = Type.GetType(typeName);
         if (t != null) {
             return t;
         }

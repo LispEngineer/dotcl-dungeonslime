@@ -163,6 +163,9 @@
            ;; We use our helper function because Type.GetType() was not finding it.
            ;; NOT WORKING: (gt-type (dotnet:static "System.Type" "GetType" "Microsoft.Xna.Framework.GameTime"))           
            (gt-type (dotnet:static "DynamicBaseCaller" "GetType" "Microsoft.Xna.Framework.GameTime"))
+           ;; I found a dotcl-provided version of my GetType above, but it is not
+           ;; callable.
+           ;; (gt-type (dotnet::resolve-type "Microsoft.Xna.Framework.GameTime"))
            ;; Create a standard C# System.Type[] array of length 1.
            (type-arr (dotnet:static "System.Array" "CreateInstance" type-type 1)))
 
