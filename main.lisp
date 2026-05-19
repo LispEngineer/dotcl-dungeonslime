@@ -24,7 +24,11 @@
   (setf (gethash "GAMETIME" dotnet::*type-aliases*)
         "Microsoft.Xna.Framework.GameTime")
   (setf (gethash "GRAPHICSDEVICEMANAGER" dotnet::*type-aliases*)
-        "Microsoft.Xna.Framework.GraphicsDeviceManager"))
+        "Microsoft.Xna.Framework.GraphicsDeviceManager")
+  ;; Create an alias for the functions returned from DynamicBaseCaller
+  ;; (This does not seem to work.)
+  (setf (gethash "BASEFUNC" dotnet::*type-aliases*)
+        "System.Func`3[[System.Object],[System.Object[]],[System.Object]]"))
 
 ;; Animated background color: hue cycles with elapsed time.
 (defun pulse-color (seconds)
@@ -143,11 +147,10 @@
     ;; The CLOS Object that this CLR object is wrapping
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
-    ("GDM" "Microsoft.Xna.Framework.GraphicsDeviceManager")
-    ;; These are actually Func<...> but I don't know how to specify that here
-    ;; in dotnet:define-class yet.
-    ("DrawBaseFunc" Object)
-    ("UpdateBaseFunc" Object))
+    ("GDM" GRAPHICSDEVICEMANAGER)
+    ;; Cache our base Func<> callers for efficiency
+    ("DrawBaseFunc" BASEFUNC)
+    ("UpdateBaseFunc" BASEFUNC))
 
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
@@ -176,7 +179,7 @@
       (setf (dotnet:invoke self "UpdateBaseFunc")
         (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Update" type-arr))
 
-      (format t "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
+      (format *error-output* "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
         gdm (dotnet:invoke self "DrawBaseFunc"))))
 
   ;; Note: There is no current way using the dotnet package to call
@@ -199,7 +202,7 @@
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (format t "[main.lisp] Demo.LispGame.LoadContent: clos-instance = ~A~%" clos-instance)
+        (format *error-output* "[main.lisp] Demo.LispGame.LoadContent: clos-instance = ~A~%" clos-instance)
         (load-content clos-instance)))
 
     ("Update" ((gt GameTime)) :returns Void :override t
