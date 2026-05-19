@@ -51,24 +51,18 @@ So, all the steps:
 # Functionality Implemented
 
 MonoGame Dungeon Slime features:
-* Game1: constructor
-* Game1: LoadContent
-* Game1: Update
-* Game1: Draw
-  * This is currently still doing the original MonoGame demo's color cycling
+* All "[Chapter 03: The Game1 File](https://docs.monogame.net/articles/tutorials/building_2d_games/03_the_game1_file/index.html#exploring-the-game1-class)" content
+  * Except: this is currently still doing the original MonoGame demo's color cycling
 
 BaseCaller: This is a class that works around the missing base class
 calling function in the dotnet package. Run the built binary with
 the `--base` argument to see it work (in C#).
 * Call a base method taking Void returning Void
-* Call any base method
-* TODO: Cache the delegate for reuse (performance optimization)
+* Get a `Func<>` to call any base method
+* Invoke that `Func`tion
+* Get any type by String name, even if System.Type.GetType() would fail
 
 # TO DO
-
-* Implement the `base` calls for the `dotnet:define-class`'d version of
-  the MonoGame (or the CLOS version) per MonoGame documentation.
-  Does not seem to matter much that it is missing for now.
 
 * Implement a REPL, so that the game can be running while there is a console
   REPL to interact with the game, live.
@@ -85,16 +79,18 @@ the `--base` argument to see it work (in C#).
     (e.g., [`Keys`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Input.Keys.html))
   * Easy access to static classes and methods
 
+* Look into the performance of the various `dotnet:` calls in the main
+  event loop (e.g., `Update()` and `Draw()`). See if there is optimization
+  that can be made.
 
 # Open Questions
 
 * How do I make an invocation on the `base` of a C# class?
   * Doesn't seem to be possible with the `dotnet` package.
-  * Probably need to create a C# helper class to do this for me. Sigh.
-  * Use IL instruction CALL instead of CALLVIRT to invoke the specific
-    superclass method.
+  * Created a C# helper class to do this for me.
 
-* How do I pass a boolean "False" to a C# function?
+* How do I pass a boolean "False" to a C# function with `dotnet:invoke`?
+  * Do I just send in `nil`?
   * Try `(dotnet:box nil "BOOL")` as in 
     `(dotnet:invoke an-object "AMethod" (dotnet:box nil "BOOL"))`
 
