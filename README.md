@@ -43,7 +43,8 @@ So, all the steps:
    * This project's build files assume this was done there, and that the `dotcl`
      was locally built rather than retrieved from NuGet.
 
-2. `dotnet build MonoGameLispDemo.csproj -c Debug`
+2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
+   * `-v n` makes Lisp compilation errors be shown.
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
 
@@ -62,10 +63,15 @@ the `--base` argument to see it work (in C#).
 * Invoke that `Func`tion
 * Get any type by String name, even if System.Type.GetType() would fail
 
-# TO DO
+Basic REPL:
+* Launches a super simplistic REPL background thread that uses
+  standard input and output. Control-D will exit the REPL.
+* Demonstrate the REPL interacting with live game state with
+  `(setf color-cycle-period 1.0)` to speed the color cycling.
+* Evaluate `(exit)` to quit the game.
 
-* Implement a REPL, so that the game can be running while there is a console
-  REPL to interact with the game, live.
+
+# TO DO
 
 * Implement a system to convert a CLOS class to a CLR/C# class somehow,
   or really, create a C# proxy for the CLOS class.

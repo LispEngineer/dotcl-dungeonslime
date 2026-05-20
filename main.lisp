@@ -14,6 +14,8 @@
 (format *error-output* "[main.lisp] loading in package ~S~%" *package*)
 
 (require :dotnet-class)
+(require "dotcl-thread") ;; Does not work if used as :dotcl-thread
+(require "dotcl-repl")
 
 ;; Type aliases visible at compile-time too: dotnet:define-class resolves
 ;; short names while macroexpanding, so eval-when keeps the registration
@@ -30,20 +32,16 @@
   (setf (gethash "BASEFUNC" dotnet::*type-aliases*)
         "System.Func`3[[System.Object],[System.Object[]],[System.Object]]"))
 
+(defparameter color-cycle-period 6.0
+  "How fast we cycle through hues in seconds.")
+
 ;; Animated background color: hue cycles with elapsed time.
 (defun pulse-color (seconds)
-  "Return Color RGB cycling through hues over a 6-second period."
-  (let* ((t-norm (mod seconds 6.0))
-         (phase (floor t-norm 2.0))
-         (frac  (mod t-norm 2.0))
-         (a (round (* 255 (- 1.0 (abs (- 1.0 frac))))))
-         (b (round (* 255 (abs (- 1.0 frac)))))
-         (r 0) (g 0) (bl 0))
-    (case phase
-      (0 (setf r b g a bl 0))      ; red→green
-      (1 (setf r 0 g b bl a))      ; green→blue
-      (2 (setf r a g 0 bl b)))     ; blue→red
-    (dotnet:new "Microsoft.Xna.Framework.Color" r g bl)))
+  "Return Color cycling through brightness over a specified period."
+  (let* ((t-norm (mod seconds color-cycle-period))
+         (frac (/ t-norm color-cycle-period))
+         (a (round (* 255 frac))))
+    (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object
@@ -66,7 +64,7 @@
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
   ;; and its initial keyword arguments are processed.
-  (format *error-output* "Booting up game-1...~%")
+  (format *error-output* "[game-1:initialize-instance:after] Booting up game-1...~%")
 
   (let* ((monogame (monogame game))
          ;; Really should check if monogame is nil first, but for now ...
@@ -74,8 +72,8 @@
 
     ;; Quick sanity check; change this to an error in the future.
     (if monogame
-      (format *error-output* "Monogame passed to game~%")
-      (format *error-output* "No monogame passed to game~%"))
+      (format *error-output* "[game-1:initialize-instance:after] Monogame passed to game~%")
+      (format *error-output* "[game-1:initialize-instance:after] ERROR: No monogame passed to game~%"))
 
     ;; Do the initialization per the MonoGame demo:
     ;; https://docs.monogame.net/articles/tutorials/building_2d_games/03_the_game1_file/index.html#exploring-the-game1-class
@@ -112,9 +110,9 @@
   ; protected override void LoadContent() { _spriteBatch = new SpriteBatch(GraphicsDevice); }
   (let* ((mg (monogame game))
          (gd (dotnet:invoke mg "GraphicsDevice")))
-    (format *error-output* "[main.lisp] game-1:load-content: gd = ~A~%" gd)
+    (format *error-output* "[game-1:load-content] gd = ~A~%" gd)
     (setf (sprite-batch game) (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" gd))
-    (format *error-output* "[main.lisp] game-1:load-content: sprite-batch = ~A~%" (sprite-batch game))))
+    (format *error-output* "[game-1:load-content] sprite-batch = ~A~%" (sprite-batch game))))
 
 (defmethod update ((game game-1) gt) ;; GameTime
   "Quit the game if ESC key is pressed."
@@ -127,13 +125,12 @@
          ;; This will return nil or t
          (esc-down (dotnet:invoke kb-state "IsKeyDown" esc-key)))
     (when esc-down
-      (format *error-output* "[main.lisp] game-1:update: esc-down = ~A~%" esc-down)
+      (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
+      (force-output *error-output*) ;; finish-output alternatively
       (dotnet:invoke (monogame game) "Exit"))))
 
-
-(defparameter *game*
-  "The CLOS object of the game"
-  nil)
+(defparameter *game* nil
+  "The CLOS object of the game")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object
@@ -170,12 +167,11 @@
            (type-arr (dotnet:static "System.Array" "CreateInstance" type-type 1)))
 
       (setf (dotnet:invoke self "GDM") gdm)
-      (format *error-output* "[main.lisp] Demo.LispGame:ctor: 1~%")
 
       ;; We put gt-type (typeof(GameTime)) into the Type[] array at index 0.
       ;; Note that dotnet:ref does not work for real C# arrays.
       (dotnet:invoke type-arr "SetValue" gt-type 0)
-      (format *error-output* "[main.lisp] Demo.LispGame:ctor: ~A~%" type-arr)
+      (format *error-output* "[Demo.LispGame] ctor: ~A~%" type-arr)
 
       ;; Save delegate of the superclass Draw/Update invoker for later efficient reuse.
       (setf (dotnet:invoke self "DrawBaseFunc")
@@ -183,14 +179,14 @@
       (setf (dotnet:invoke self "UpdateBaseFunc")
         (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Update" type-arr))
 
-      (format *error-output* "[main.lisp] Demo.LispGame:ctor: GDM = ~A; DBF = ~A~%"
+      (format *error-output* "[Demo.LispGame] ctor: GDM = ~A; DBF = ~A~%"
         gdm (dotnet:invoke self "DrawBaseFunc"))))
 
   ;; Note: There is no current way using the dotnet package to call
   ;; the base class of a given new class you've created.
   (:methods
     ("Initialize" () :returns Void :override t
-      (format *error-output* "[main.lisp] Demo.LispGame:Initialize: self = ~A~%" self)
+      (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
       (initialize (dotnet:invoke self "CLOSObject"))
       ;; Just call the base Initialize()
       (dotnet:static "DynamicBaseCaller" "CallBaseMethod_VoidVoid" self "Initialize"))
@@ -206,7 +202,7 @@
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (format *error-output* "[main.lisp] Demo.LispGame.LoadContent: clos-instance = ~A~%" clos-instance)
+        (format *error-output* "[Demo.LispGame] LoadContent: clos-instance = ~A~%" clos-instance)
         (load-content clos-instance)))
 
     ("Update" ((gt GameTime)) :returns Void :override t
@@ -219,9 +215,8 @@
 
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
-(defparameter *cs-game*
-  "CLR class of the game, vs the CLOS class of the game."
-  nil)
+(defparameter *cs-game* nil
+  "CLR class of the game, vs the CLOS class of the game.")
 
 (defun make-game ()
   "Instantiate Demo.LispGame for Program.cs to Run().
@@ -243,3 +238,33 @@
         (fboundp 'make-game))
 (format *error-output* "[main.lisp] *game*: ~A~%" *game*)
 (format *error-output* "[main.lisp] *cs-game*: ~A~%" *cs-game*)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; REPL
+
+(defun run-repl ()
+  "Run a super basic CL REPL with the current standard input and output."
+  (format t "~%--- MonoGame Lisp REPL started ---~%")
+  (loop
+    (let ((line (dotcl-repl:readline "MONOGAME-LISP> ")))
+      (when (null line) ;; Exit on Ctrl+D; TODO: exit the game after confirmation?
+        (format t "Exiting MONOGAME-LISP REPL.~%")
+        (return))
+      (handler-case
+          (let* ((input (make-string-input-stream line))
+                 (form (read input nil nil)))
+            (when form
+                (let ((results (multiple-value-list (eval form))))
+                  (dolist (res results)
+                    (prin1 res)
+                    (terpri)))))
+        (error (c)
+          (format t "Error: ~A~%" c))))))
+
+(defun start-background-repl ()
+  "Starts a REPL in a background thread."
+  (dotcl-thread:make-thread #'run-repl :name "REPL"))
+
+(format *error-output* "[main.lisp] Spawning background REPL until control-D~%")
+(start-background-repl)
+

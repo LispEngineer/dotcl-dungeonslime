@@ -62,16 +62,16 @@ _ = typeof(Microsoft.Xna.Framework.Graphics.GraphicsDevice).FullName;
 
 var manifestPath = Path.Combine(
     AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
-Console.WriteLine($"[dotcl] manifest: {manifestPath}");
+Console.WriteLine($"[Program.cs] manifest: {manifestPath}");
 var loaded = DotclHost.LoadFromManifest(manifestPath);
-Console.WriteLine($"[dotcl] LoadFromManifest loaded {loaded} fasls");
+Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 
 // MAKE-GAME (defined in main.lisp) returns a Demo.LispGame instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
 if (gameObj is LispDotNetObject dno
     && dno.Value is Microsoft.Xna.Framework.Game game)
 {
-    Console.WriteLine($"[dotcl] running game: {game.GetType().FullName}");
+    Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
     game.Run();
 }
 else
