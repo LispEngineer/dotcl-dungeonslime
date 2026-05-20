@@ -23,31 +23,29 @@ The goals of this code are:
 
 This is heavily a work in progress.
 
-## How to Use
+## How to Use (vendored version)
 
 I've built and tested this on Ubuntu 24.04 on x64 only. I make no
 guarantees that this will work on any other platform.
 
-You will need to check out [dotcl](https://github.com/dotcl/dotcl) 
-in a sibling directory to this one
-and build and install the `dotcl` tool. This demo uses various files
-assuming they are in that sibling directory. These references are
-in the `MonoGameLispDemo.csproj` file.
+The `vendor/dotcl` directory contains these pre-built dotcl 0.1.7 files:
+* `dotcl.core` - pre-compiled DotCL Common Lisp compiler core
+* `DotCL.Runtime.dll` - DotCL's C# Runtime
+* `Dotcl.targets` - MSBuild target instructions
 
-(As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
-`dotnet tool install --global dotcl` does not work for me.)
+I got these from an earlier local build and install of dotcl 0.1.7 checked out
+freshly from GitHub. In theory, this project now has no dependency
+on any other dotcl local code.
 
-So, all the steps:
-
-1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
-   * This project's build files assume this was done there, and that the `dotcl`
-     was locally built rather than retrieved from NuGet.
+1. `dotnet clean` (if necessary)
 
 2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
+   * `-v d` shows more detail than `n`.
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
 
+When upgrading dotcl, make sure to upgrade these vendored files.
 
 # Functionality Implemented
 
@@ -120,6 +118,36 @@ Basic REPL:
 * [Add `base` support in Lisp](https://github.com/dotcl/dotcl/issues/14).
 
 * [Add array indexer](https://github.com/dotcl/dotcl/issues/15).
+
+
+# Appendix
+
+## How to Use (dotcl sibling)
+
+I've built and tested this on Ubuntu 24.04 on x64 only. I make no
+guarantees that this will work on any other platform.
+
+You will need to check out [dotcl](https://github.com/dotcl/dotcl)
+in a sibling directory to this one
+and build and install the `dotcl` tool. This demo uses various files
+assuming they are in that sibling directory. These references are
+in the `MonoGameLispDemo.csproj` file.
+
+(As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
+`dotnet tool install --global dotcl` does not work for me.)
+
+So, all the steps:
+
+1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
+   * This project's build files assume this was done there, and that the `dotcl`
+     was locally built rather than retrieved from NuGet.
+
+2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
+   * `-v n` makes Lisp compilation errors be shown.
+
+3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+
+
 
 
 

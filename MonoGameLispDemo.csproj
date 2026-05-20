@@ -29,12 +29,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-
     <!-- #166 project-core flow: Dotcl.targets walks .asd, compiles main.lisp,
          writes manifest. Runtime side just calls Initialize + LoadFromManifest. -->
     <DotclProjectAsd>$(MSBuildProjectDirectory)/MonoGameLispDemo.asd</DotclProjectAsd>
-    <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
-    <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
+    <!-- Point to the vendored DotCL compiler core -->
+    <DotclBaseCore>$(MSBuildProjectDirectory)/vendor/dotcl/dotcl.core</DotclBaseCore>
   </PropertyGroup>
 
   <ItemGroup>
@@ -50,9 +49,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
+    <!-- Reference the local vendored library DLL -->
+    <Reference Include="vendor/dotcl/DotCL.Runtime.dll" />
   </ItemGroup>
 
-  <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
+  <!-- Import the local vendored build targets -->
+  <Import Project="vendor/dotcl/Dotcl.targets" />
 
 </Project>

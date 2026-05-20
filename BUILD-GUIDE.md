@@ -70,14 +70,13 @@ These custom variables define parameters utilized by the imported Lisp build tar
 ```xml
   <PropertyGroup>
     <DotclProjectAsd>$(MSBuildProjectDirectory)/MonoGameLispDemo.asd</DotclProjectAsd>
-    <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
-    <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
+    <!-- Point to the local vendored compiler core -->
+    <DotclBaseCore>$(MSBuildProjectDirectory)/vendor/dotcl/dotcl.core</DotclBaseCore>
   </PropertyGroup>
 ```
 *   **`$(MSBuildProjectDirectory)`**: A built-in macro containing the absolute path to this project's directory.
 *   **`<DotclProjectAsd>`**: Points to the ASDF system definition file (`.asd`) for this project, defining the Lisp source files.
-*   **`<DotclRuntimeProject>`**: Points to the local C# project file that implements the `dotcl` runtime.
-*   **`<DotclBaseCore>`**: Points to the pre-compiled Lisp core file (`dotcl.core`) containing CL standard definitions.
+*   **`<DotclBaseCore>`**: Points to the pre-compiled Lisp core file (`dotcl.core`) containing CL standard definitions, now stored locally in the `vendor/` folder.
 
 ---
 
@@ -99,19 +98,21 @@ These custom variables define parameters utilized by the imported Lisp build tar
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
+    <!-- Reference the local vendored library DLL directly -->
+    <Reference Include="vendor/dotcl/DotCL.Runtime.dll" />
   </ItemGroup>
 ```
 *   **`PackageReference`**: Resolves and installs the MonoGame framework from NuGet. `DesktopGL` uses the SDL2 cross-platform backend with OpenGL for graphic operations.
-*   **`ProjectReference`**: Links the C# source code of the `dotcl` runtime directly. This compiles the runtime engine side-by-side with your game binary.
+*   **`Reference`**: Links the pre-compiled C# `dotcl` runtime DLL from the local `vendor/` folder, removing the external project dependency.
 
 ---
 
 ### Import Targets Integration
 ```xml
-  <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
+  <!-- Import the local vendored build targets -->
+  <Import Project="vendor/dotcl/Dotcl.targets" />
 ```
-*   **`<Import>`**: Merges the custom `Dotcl.targets` build pipeline into this project's build cycle. This instructs MSBuild on how to execute Lisp compilation.
+*   **`<Import>`**: Merges the custom `Dotcl.targets` build pipeline (stored in your `vendor/` directory) into this project's build cycle. This instructs MSBuild on how to execute Lisp compilation.
 
 ---
 
@@ -120,7 +121,7 @@ These custom variables define parameters utilized by the imported Lisp build tar
 When you run `dotnet build`, the build pipeline processes the project in two main stages:
 
 ### Stage 1: The Lisp Build (Custom Targets)
-1.  **Resolve Dependencies:** The `DotclResolveDeps` target invokes the local `dotcl` runtime binary on `MonoGameLispDemo.asd` with `--resolve-deps`. This analyzes dependencies (like `dotnet-class`, `dotcl-thread`, and `dotcl-repl`) and produces manifests of these dependencies and core source files.
+1.  **Resolve Dependencies:** The `DotclResolveDeps` target invokes the global `dotcl` CLI compiler tool (found on your system's `PATH`) on `MonoGameLispDemo.asd` with `--resolve-deps`. This analyzes dependencies (like `dotnet-class`, `dotcl-thread`, and `dotcl-repl`) and produces manifests of these dependencies and core source files.
 2.  **Lisp Compilation:** The `DotclCompileRoot` target runs `dotcl` with `--compile-project` on the `.asd` file. It concatenates `main.lisp` and compiles it into `MonoGameLispDemo.fasl` (a compiled .NET IL assembly representing your Lisp code).
 3.  **Asset Bundling:** The standard compiler core (`dotcl.core`) along with dependency `.fasl` assemblies and the manifest are bundled together inside the build output directory `dotcl-fasl/`.
 
@@ -134,7 +135,7 @@ When you run `dotnet build`, the build pipeline processes the project in two mai
 
 ---
 
-## 3. Sibling Files and Dependency Breakdown
+## 3. Local and Vendored Files Breakdown
 
 ### Project Files
 *   **[MonoGameLispDemo.asd](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
@@ -142,10 +143,8 @@ When you run `dotnet build`, the build pipeline processes the project in two mai
 *   **[Program.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs)**: The C# host program. It boots `dotcl`, loads manifest assets, resolves the Lisp game class instance, and triggers MonoGame's main loop.
 *   **[BaseCaller.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/BaseCaller.cs)**: Workaround utilities to allow Lisp classes to invoke parent class methods (e.g. `base.Update()` or `base.Draw()`).
 
-### dotcl Sibling Repository Files
-*   **`../dotcl/compiler/dotcl.core`**: The foundational compiled Lisp state file containing the runtime's core and ANSI-compatible Lisp compiler definitions.
-*   **`../dotcl/runtime/DotCL.Runtime.csproj`**: The MSBuild file for the Lisp execution interop library.
-*   **`../dotcl/runtime/build/Dotcl.targets`**: The XML file outlining custom build steps, handling dependency resolution and compilation targets.
-*   **[DotclHost.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/DotclHost.cs)**: The C# host class providing utility methods for launching, evaluating, and querying Lisp scripts and modules in a C# environment.
-*   **[Program.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/Program.cs)**: The entry point code for the standalone `dotcl` CLI engine, executing compiling directives during build actions.
-*   **[Runtime.DotNet.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/Runtime.DotNet.cs)**: Bridge code containing the low-level logic mapping Lisp operations to .NET Interop execution.
+### Vendored Assets (`vendor/dotcl/`)
+*   **`vendor/dotcl/dotcl.core`**: The foundational compiled Lisp state file containing the runtime's core and ANSI-compatible Lisp compiler definitions.
+*   **`vendor/dotcl/Dotcl.targets`**: The XML file outlining custom build steps, handling dependency resolution and compilation targets.
+*   **`vendor/dotcl/DotCL.Runtime.dll`**: The pre-compiled C# interop library implementing the execution engine and Lisp-to-.NET bindings.
+
