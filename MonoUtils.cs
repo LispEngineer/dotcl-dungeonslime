@@ -31,9 +31,55 @@ public static class MonoUtils {
         return totalSum;
     } // AddThree
 
-    /** A class method version of the dotnet:static-generic function.
-     *
-     * TODO: This is super inefficient. We should probably memoize this such
+    /// <summary>
+    ///   Invokes a generic instance method dynamically on a target object from Common Lisp.
+    ///   This is a class method version of the dotnet:static-generic function.
+    ///
+    ///   I have not tested this with functions that take complex types such as
+    ///   List<List<Map<String,Object>>> or anything like that!
+    /// </summary>
+    /// <param name="args">
+    ///   An array of LispObject arguments from Lisp:
+    /// <list type="bullet">
+    /// <item>
+    ///   <term>args[0]</term>
+    ///   <description>The target instance object to call the method on.</description>
+    /// </item>
+    /// <item>
+    ///   <term>args[1]</term>
+    ///   <description>The name of the generic instance method (String).</description>
+    /// </item>
+    /// <item>
+    ///   <term>args[2]</term>
+    ///   <description>A Lisp list of generic type argument name strings.</description>
+    /// </item>
+    /// <item>
+    ///   <term>args[3..]</term>
+    /// <description>The actual arguments to pass to the generic method.</description>
+    /// </item>
+    /// </list>
+    /// </param>
+    /// <returns>The LispObject representation of the method's return value.</returns>
+    /// <remarks>
+    /// Detailed Lisp Usage:
+    /// <code>
+    ///   (monoutils:invoke-generic instance "MethodName" '("TypeArg1" "TypeArg2" ...) arg1 arg2 ...)
+    /// </code>
+    ///
+    /// Example: Calling a generic method Draw&lt;T&gt; (specialized to Texture2D):
+    /// If there is a generic method "Draw" on an object "renderer" with signature
+    /// <c>public void Draw&lt;T&gt;(T asset, Vector2 position, Color color)</c>,
+    /// it can be invoked from Lisp as follows:
+    /// <code>
+    /// (let ((texture (logo game))
+    ///       (position (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero"))
+    ///       (color (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
+    ///   (monoutils:invoke-generic renderer "Draw"
+    ///                             '("Microsoft.Xna.Framework.Graphics.Texture2D")
+    ///                             texture position color))
+    /// </code>
+    /// </remarks>
+    /* TODO: This is super inefficient. We should probably memoize this such
      * that the concrete method located is stored, with the key being
      * the provided target class type, the method name, and the
      * type arguments.
