@@ -35,7 +35,9 @@ assuming they are in that sibling directory. These references are
 in the `MonoGameLispDemo.csproj` file.
 
 (As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
-`dotnet tool install --global dotcl` does not work for me.)
+`dotnet tool install --global dotcl` does not work for me.
+As of 0.1.8 I am still using the self-compiled `dotcl` but I did
+not test the `dotnet tool install`ed one.)
 
 So, all the steps:
 
@@ -45,6 +47,7 @@ So, all the steps:
 
 2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
+   * `-v d` shows more details.
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
 

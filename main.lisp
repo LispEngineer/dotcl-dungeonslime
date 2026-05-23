@@ -169,9 +169,9 @@
       (setf (dotnet:invoke self "GDM") gdm)
 
       ;; We put gt-type (typeof(GameTime)) into the Type[] array at index 0.
-      ;; Note that dotnet:ref does not work for real C# arrays.
-      (dotnet:invoke type-arr "SetValue" gt-type 0)
-      (format *error-output* "[Demo.LispGame] ctor: ~A~%" type-arr)
+      (setf (dotnet:ref type-arr 0) gt-type)
+      (format *error-output* "[Demo.LispGame] ctor: type-arr[0] = ~A~%" (dotnet:ref type-arr 0))
+      (format *error-output* "[Demo.LispGame] ctor: type-arr = ~A~%" type-arr)
 
       ;; Save delegate of the superclass Draw/Update invoker for later efficient reuse.
       (setf (dotnet:invoke self "DrawBaseFunc")
