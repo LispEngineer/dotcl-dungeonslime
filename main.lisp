@@ -17,6 +17,11 @@
 (require "dotcl-thread") ;; Does not work if used as :dotcl-thread
 (require "dotcl-repl")
 
+; Test call-base functionality
+(let ((child (dotnet:new "Child")))
+  (dotnet:invoke child "Speak")
+  (dotnet:call-base child "Speak"))
+
 ;; Type aliases visible at compile-time too: dotnet:define-class resolves
 ;; short names while macroexpanding, so eval-when keeps the registration
 ;; effective in both compile and load phases.
@@ -49,14 +54,14 @@
 (defparameter *core* nil
   "The singleton instance of the MonoGame Core CLOS class")
 
-(defparameter +window-defaults+
+(defconstant +window-defaults+
   '(:title "Dungeon Slime"
     :width 1280
     :height 720
     :full-screen nil)
   "Default size, type and title of the game window")
 
-(defparameter +content-default+ "Content"
+(defconstant +content-default+ "Content"
   "The default content directory for the ContentManager")
 
 ;; MonoGame Core implemented as a CLOS class
@@ -70,22 +75,28 @@
     ;; This is a plist with keys :title, :width, :height, :full-screen
     ;; that configures the initial game window
     :initarg :window-info
+    :initform nil
     :accessor window-info)
+   ;; In the C# Core, these next are all static fields, so use :allocation :class
    (graphics
     ;; This is an instance of GraphicsDeviceManager on the monogame instance
     :initarg :graphics
+    :allocation :class
     :accessor graphics)
    (graphics-device
     ;; This is an instance of GraphicsDevice on the monogame instance
     :initarg :graphics-device
+    :allocation :class
     :accessor graphics-device)
    (sprite-batch
     ;; This is created during the LoadContent call
     :initarg :sprite-batch
+    :allocation :class
     :accessor sprite-batch)
    (content
     ;; This is our ContentManager
     :initarg :content
+    :allocation :class
     :accessor content)))
 
 (defmethod initialize-instance :after ((game core) &key)
@@ -97,102 +108,117 @@
     (error "only one core is permitted"))
 
   (format *error-output* "[core:initialize-instance:after] Booting up core...~%")
+  (format *error-output* "[core:initialize-instance:after] monogame = ~A~%" (monogame game))
 
   ;; Save our singleton instance
   (setf *core* game)
 
-  (let ((monogame (monogame game))
-        (gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" monogame))
+  (let* ((mg (monogame game))
+         (gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" mg)))
 
     ;; Get the GraphicsDeviceManager from the C# class instance
     (setf (graphics game) gdm)
 
     ;; Set the graphic window size & type
     (setf (dotnet:invoke gdm "PreferredBackBufferWidth")
-      (getf (window-instance game) :width (getf +window-defaults+ :width)))
+      (getf (window-info game) :width (getf +window-defaults+ :width)))
     (setf (dotnet:invoke gdm "PreferredBackBufferHeight")
-      (getf (window-instance game) :height (getf +window-defaults+ :height)))
+      (getf (window-info game) :height (getf +window-defaults+ :height)))
     (setf (dotnet:invoke gdm "IsFullScreen")
-      (getf (window-instance game) :full-screen (getf +window-defaults+ :full-screen)))
+      (getf (window-info game) :full-screen (getf +window-defaults+ :full-screen)))
     (dotnet:invoke gdm "ApplyChanges") ;; Make the changes above live
 
     ;; Set the title of the game window (on C# Window.Title property)
-    (setf (dotnet:invoke (dotnet:invoke monogame "Window") "Title")
-      (getf (window-instance game) :title (getf +window-defaults+ :title)))
+    (setf (dotnet:invoke (dotnet:invoke mg "Window") "Title")
+      (getf (window-info game) :title (getf +window-defaults+ :title)))
 
     ;; Save the C# class's ContentManager
-    (let ((cs-content (dotnet:invoke monogame "Content")))
+    (let ((cs-content (dotnet:invoke mg "Content")))
       (setf (content game) cs-content)
       ;; and set its root directory to Content/
       (setf (dotnet:invoke cs-content "RootDirectory")
         +content-default+))
 
     ;; Ensure mouse pointer is visible by default
-    (setf (dotnet:invoke monogame "IsMouseVisible") T)))
+    (setf (dotnet:invoke mg "IsMouseVisible") T))
 
   (format *error-output* "[core:initialize-instance:after] core booted.~%"))
 
 (defmethod initialize ((game core))
   "First ensures the base class is initialized. Then sets up the
    graphics-device and sprite-batch."
-  
+
   (format *error-output* "[core:initialize] started...~%")
 
-  (let ((monogame (monogame game))
-        (base-gd (dotnet:invoke monogame "GraphicsDevice")))
+  (let* ((monogame (monogame game))
+         (base-gd (dotnet:invoke monogame "GraphicsDevice")))
+
+    ;; Initialize the base class, which in Core is the monogame class
+    (dotnet:call-base monogame "Initialize")
+
     (setf (graphics-device game) base-gd)
     (setf (sprite-batch game)
       (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd)))
 
   (format *error-output* "[core:initialize] complete.~%"))
 
+(defmethod load-content ((game core))
+  "Just calls the monogame base class equivalent."
+  ; protected override void LoadContent() { _spriteBatch = new SpriteBatch(GraphicsDevice); }
+  (format *error-output* "[core:load-content] calling Game.LoadContent()~%")
+  (dotnet:call-base (monogame game) "LoadContent")
+  (format *error-output* "[core:load-content] Game.LoadContent() complete~%"))
+
+(defmethod update ((game core) gt) ;; GameTime
+  "Just calls the monogame base class equivalent."
+  (dotnet:call-base (monogame game) "Update" gt))
+
+(defmethod draw ((game core) gt) ;; GameTime
+  "Just calls the monogame base class equivalent."
+  (dotnet:call-base (monogame game) "Draw" gt))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MonoGame CLOS Object "Game-1
+;; MonoGame CLOS Object game-1, with parent class core
+
+(defconstant +esc-key+
+  (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape")
+  "Cache this enumerated value from C# for quick and easy reuse")
+
+(defparameter *game* nil
+  "The CLOS object of the MonoGame Game")
 
 ;; MonoGame Game implemented as a CLOS class
-(defclass game-1 ()
-  ((monogame
-    ;; This is a reference to the C# MonoGame Game class instance
-    :initarg :monogame
-    :accessor monogame)
-   (graphics
-    ;; This is an instance of GraphicsDeviceManager on the monogame instance
-    :initarg :graphics
-    :accessor graphics)
-   (sprite-batch
-    ;; This is created during the LoadContent call
-    :initarg :sprite-batch
-    :accessor sprite-batch)))
+(defclass game-1 (core))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
   ;; and its initial keyword arguments are processed.
   (format *error-output* "[game-1:initialize-instance:after] Booting up game-1...~%")
-
-  (let* ((monogame (monogame game))
-         ;; Really should check if monogame is nil first, but for now ...
-         (content (dotnet:invoke monogame "Content")))
-
-    ;; Quick sanity check; change this to an error in the future.
-    (if monogame
-      (format *error-output* "[game-1:initialize-instance:after] Monogame passed to game~%")
-      (format *error-output* "[game-1:initialize-instance:after] ERROR: No monogame passed to game~%"))
-
-    ;; Do the initialization per the MonoGame demo:
-    ;; https://docs.monogame.net/articles/tutorials/building_2d_games/03_the_game1_file/index.html#exploring-the-game1-class
-
-    ;; Changes: The GraphicsDeviceManager was already instantiated in the
-    ;; monogame C# class, so we just have to get it.
-    ;; Original: _graphics = new GraphicsDeviceManager(this);
-    (setf (graphics game) (dotnet:invoke monogame "GDM"))
-    ;; Content.RootDirectory = "Content";
-    (setf (dotnet:invoke content "RootDirectory") "Content")
-    ;; IsMouseVisible = true;
-    (setf (dotnet:invoke monogame "IsMouseVisible") T)))
+  (format *error-output* "[game-1:initialize-instance:after] game-1 booted.~%"))
 
 (defmethod initialize ((game game-1))
-  "Does nothing, for now.")
+  "Does nothing, for now. Just call the base class's initialize."
+  ;; equivalent to C# base.Initialize()
+  (call-next-method game))
+
+(defmethod load-content ((game game-1))
+  "Nothing, for now (except pass to base class)."
+  (call-next-method game))
+
+(defmethod update ((game game-1) gt) ;; GameTime
+  "Quit the game if ESC key is pressed."
+  ; if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+  ;     Exit();
+  ; base.Update(gameTime);
+  (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
+         ;; This will return nil or t
+         (esc-down (dotnet:invoke kb-state "IsKeyDown" +esc-key+)))
+    (when esc-down
+      (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
+      (force-output *error-output*) ;; finish-output alternatively
+      (dotnet:invoke (monogame game) "Exit")))
+
+  (call-next-method game gt))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
@@ -203,59 +229,25 @@
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs)))
-    (dotnet:invoke gd "Clear" c)
-    ;; Invoke the base class draw as well now
-    ;; THIS DOES NOT WORK
-    ;; (dotnet:invoke (dotnet:invoke mg "base") "Draw" gt)
-    ))
+    (dotnet:invoke gd "Clear" c))
 
-(defmethod load-content ((game game-1))
-  "Creates the Sprite Batch from our Content directory."
-  ; protected override void LoadContent() { _spriteBatch = new SpriteBatch(GraphicsDevice); }
-  (let* ((mg (monogame game))
-         (gd (dotnet:invoke mg "GraphicsDevice")))
-    (format *error-output* "[game-1:load-content] gd = ~A~%" gd)
-    (setf (sprite-batch game) (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" gd))
-    (format *error-output* "[game-1:load-content] sprite-batch = ~A~%" (sprite-batch game))))
-
-(defmethod update ((game game-1) gt) ;; GameTime
-  "Quit the game if ESC key is pressed."
-  ; if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-  ;     Exit();
-  ; base.Update(gameTime);
-  (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
-         ;; Keys is an enumerated type; we can get the value of Escape this way
-         (esc-key (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape"))
-         ;; This will return nil or t
-         (esc-down (dotnet:invoke kb-state "IsKeyDown" esc-key)))
-    (when esc-down
-      (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
-      (force-output *error-output*) ;; finish-output alternatively
-      (dotnet:invoke (monogame game) "Exit"))))
-
-(defparameter *game* nil
-  "The CLOS object of the game")
+  (call-next-method game gt))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object
 
-;; Demo.LispGame: subclass of Game. The constructor must instantiate a
-;; GraphicsDeviceManager(this) — its mere construction registers it on
-;; the Game so GraphicsDevice gets initialized later.
+;; Demo.LispGame: subclass of Game.
 (dotnet:define-class "Demo.LispGame" (Game)
 
   (:fields
     ;; The CLOS Object that this CLR object is wrapping
     ;; TODO: Figure out the proper class instead of just Object
-    ("CLOSObject" Object)
-    ;; The MonoGame GraphicsDeviceManager that is created in the constructor
-    ("GDM" GRAPHICSDEVICEMANAGER))
+    ("CLOSObject" Object))
 
   (:ctor ()
     ;; In dotcl 0.1.7, only zero-argument constructors are supported with the define-class macro.
     ;; This restriction was silently lifted in 0.1.8.
-    (setf (dotnet:invoke self "GDM")
-      (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
+  )
 
   ;; However, as of 0.1.8, multiple constructors are not yet supported, so
   ;; leaving this commented out for now. If it is the only :ctor, then it
@@ -263,9 +255,7 @@
   ;; be silently ignored.
   #|
   (:ctor ((clos-obj Object))
-    (setf (dotnet:invoke self "CLOSObject") clos-obj)
-    (setf (dotnet:invoke self "GDM")
-      (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
+    (setf (dotnet:invoke self "CLOSObject") clos-obj))
   |#
 
   ;; Note: There is no current way using the dotnet package to call
@@ -273,32 +263,25 @@
   (:methods
     ("Initialize" () :returns Void :override t
       (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
-      (initialize (dotnet:invoke self "CLOSObject"))
-      ;; Just call the base Initialize()
-      (dotnet:call-base self "Initialize"))
+      ;; This will call the base of this C# object if desired
+      (initialize (dotnet:invoke self "CLOSObject")))
 
     ("Draw" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
         ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
-        (draw clos-instance gt)
-        ;; Call the base class Draw(gt) method
-        (dotnet:call-base self "Draw" gt)))
+        ;; This will call the base of this C# object if desired
+        (draw clos-instance gt)))
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
         (format *error-output* "[Demo.LispGame] LoadContent: clos-instance = ~A~%" clos-instance)
+        ;; This will call the base of this C# object if desired
         (load-content clos-instance)))
 
     ("Update" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (update clos-instance gt)
-        ;; Call the base class Update(gt) method
-        (dotnet:call-base self "Update" gt)))))
-
-; Test the call-base functionality
-(let ((child (dotnet:new "Child")))
-  (dotnet:invoke child "Speak")
-  (dotnet:call-base child "Speak"))
+        ;; This will call the base of this C# object if desired
+        (update clos-instance gt)))))
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
 (defparameter *cs-game* nil
@@ -309,7 +292,7 @@
    This first instantiates the C#/CLR object,
    then instantiates the CLOS object with a link to the C# object,
    then associates the C# object with the CLOS object."
-  (let* ((cs (dotnet:new "Demo.LispGame")) ;; cs = C# object
+  (let* ((cs (dotnet:new "Demo.LispGame")) ;; cs = c-sharp object
          (clos (make-instance 'game-1 :monogame cs)))
     ;; We have to assocaite these two, which is to say associate
     ;; the cs with the clos, since clos is already associated with cs.

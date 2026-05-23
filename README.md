@@ -55,16 +55,10 @@ So, all the steps:
 # Functionality Implemented
 
 MonoGame Dungeon Slime features:
-* All "[Chapter 03: The Game1 File](https://docs.monogame.net/articles/tutorials/building_2d_games/03_the_game1_file/index.html#exploring-the-game1-class)" content
+* All "[Chapter 04: Creating a Class Library](https://docs.monogame.net/articles/tutorials/building_2d_games/04_creating_a_class_library/index.html?tabs=vscode)" content
+  * Except: The base Core class and Game1 are both CLOS classes
+    * The base CLOS Core class does callbacks into the MonoGame Game class
   * Except: this is currently still doing the original MonoGame demo's color cycling
-
-BaseCaller: This is a class that works around the missing base class
-calling function in the dotnet package. Run the built binary with
-the `--base` argument to see it work (in C#).
-* Call a base method taking Void returning Void
-* Get a `Func<>` to call any base method
-* Invoke that `Func`tion
-* Get any type by String name, even if System.Type.GetType() would fail
 
 Basic REPL:
 * Launches a super simplistic REPL background thread that uses
@@ -73,6 +67,16 @@ Basic REPL:
   `(setf color-cycle-period 1.0)` to speed the color cycling.
 * Evaluate `(exit)` to quit the game.
 
+## Deprecated Functionality
+
+BaseCaller: This is a class that works around the missing base class
+calling function in the dotnet package. Run the built binary with
+the `--base` argument to see it work (in C#).
+* Call a base method taking Void returning Void
+* Get a `Func<>` to call any base method
+* Invoke that `Func`tion
+* Get any type by String name, even if System.Type.GetType() would fail
+* Deprecated because SANO-san implemented `dotnet:call-base`
 
 # TO DO
 
