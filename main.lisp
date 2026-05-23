@@ -209,8 +209,8 @@
   "Load our logo then pass to base class."
   (format *error-output* "[game-1:load-content] Loading logo...~%")
   (let* ((cont (content game))
-         ;; "Load<Texture2D>" does not work
-         (l (dotnet:invoke cont "Load" "images/logo")))
+         ;; Use our C# helper to invoke generic Content.Load<Texture2D>
+         (l (dotnet:static "MonoGameLispUtilities" "LoadTexture2D" cont "images/logo")))
     (format *error-output* "[game-1:load-content] Loaded logo = ~A~%" l)
     (setf (logo game) l))
   (call-next-method game))

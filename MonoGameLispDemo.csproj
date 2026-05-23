@@ -47,6 +47,8 @@
          on Snapdragon Windows ARM64; DesktopGL has better ARM64 coverage
          since SDL2 is multi-arch. -->
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*" />
+    <!-- Build our content library for ContentManager to load -->
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
   </ItemGroup>
 
   <ItemGroup>

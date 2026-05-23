@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -184,6 +185,7 @@ public static class DynamicBaseCaller {
     public static object CallFunc(Func<object, object[], object> func, object target, params object[] args) {
         return func(target, args);
     } // CallFunc
+
 } // DynamicBaseCaller
 
 ////////////////////////////////////////////////////////////////////////////////
