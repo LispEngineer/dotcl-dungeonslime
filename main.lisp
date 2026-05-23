@@ -189,7 +189,8 @@
       (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
       (initialize (dotnet:invoke self "CLOSObject"))
       ;; Just call the base Initialize()
-      (dotnet:static "DynamicBaseCaller" "CallBaseMethod_VoidVoid" self "Initialize"))
+      ; (dotnet:static "DynamicBaseCaller" "CallBaseMethod_VoidVoid" self "Initialize")
+      (dotnet:call-base self "Initialize"))
 
     ("Draw" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject"))
@@ -197,8 +198,9 @@
         ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
         (draw clos-instance gt)
         ;; Call the base class Draw(gt) method
-        (when base-func
-          (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))))
+        ; (when base-func
+        ;   (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))
+        (dotnet:call-base self "Draw" gt)))
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
@@ -210,9 +212,14 @@
             (base-func (dotnet:invoke self "UpdateBaseFunc")))
         (update clos-instance gt)
         ;; Call the base class Update(gt) method
-        (when base-func
-          (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))))))
+        ; (when base-func
+        ;   (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))
+        (dotnet:call-base self "Update" gt)))))
 
+; Test the call-base functionality
+(let ((child (dotnet:new "Child")))
+  (dotnet:invoke child "Speak")
+  (dotnet:call-base child "Speak"))
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
 (defparameter *cs-game* nil
