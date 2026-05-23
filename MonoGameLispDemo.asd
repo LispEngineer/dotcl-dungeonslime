@@ -4,4 +4,5 @@
   :depends-on ("dotnet-class"
                "dotcl-thread"
                "dotcl-repl")
-  :components ((:file "main")))
+  :components ((:file "monoutils")
+               (:file "main" :depends-on ("monoutils"))))

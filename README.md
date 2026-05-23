@@ -74,9 +74,14 @@ Basic REPL:
   `(setf color-cycle-period 1.0)` to speed the color cycling.
 * Evaluate `(exit)` to quit the game.
 
-Building a Lisp Package in C#:
-* Proof of concept "MonoUtils" package with a proof of concept
-  "Add3" function exposed to Lisp as: `(monoutils:add3 1 2 3)`.
+`MonoUtils` Lisp Package written in C#:
+* Proof of concept "MonoUtils" package written in C#.
+* Provide a shim in `monoutils.lisp`.
+* Have the top level `.asd` file include this shim and make the 
+  `main.lisp` depend on it.
+* Proof of concept "Add3" function exposed to Lisp as: `(monoutils:add3 1 2 3)`.
+* Implement a `monoutils:invoke-generic` as an analog to the existing
+  `dotnet:static-generic`. Use that for calling `Load<Texture2D>()`.
 
 ## Deprecated Functionality
 

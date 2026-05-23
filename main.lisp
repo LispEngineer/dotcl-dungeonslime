@@ -21,10 +21,7 @@
 
 ;; Expose our C# function "add3" by creating the package and exported
 ;; symbol during compilation.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defpackage :monoutils
-    (:use :cl)
-    (:export :add3)))
+
 
 ;; Test Add3
 (format t "Add3 sum = ~A~%" (monoutils:add3 1 2.0 9/3))
@@ -51,6 +48,8 @@
         "Microsoft.Xna.Framework.GameTime")
   (setf (gethash "GRAPHICSDEVICEMANAGER" dotnet::*type-aliases*)
         "Microsoft.Xna.Framework.GraphicsDeviceManager")
+  (setf (gethash "TEXTURE2D" dotnet::*type-aliases*)
+        "Microsoft.Xna.Framework.Graphics.Texture2D")
   ;; Create an alias for the functions returned from DynamicBaseCaller
   ;; (This does not seem to work.)
   (setf (gethash "BASEFUNC" dotnet::*type-aliases*)
@@ -230,8 +229,13 @@
   "Load our logo then pass to base class."
   (format *error-output* "[game-1:load-content] Loading logo...~%")
   (let* ((cont (content game))
+         #|
          ;; Use our C# helper to invoke generic Content.Load<Texture2D>
          (l (dotnet:static "MonoGameLispUtilities" "LoadTexture2D" cont "images/logo")))
+         |#
+         ;; Use monoutils:invoke-generic to load generic Content.Load<Texture2D>
+         ;; TEXTURE2D
+         (l (monoutils:invoke-generic cont "Load" '("Microsoft.Xna.Framework.Graphics.Texture2D") "images/logo")))
     (format *error-output* "[game-1:load-content] Loaded logo = ~A~%" l)
     (setf (logo game) l))
   (call-next-method game))
