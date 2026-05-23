@@ -52,11 +52,26 @@ So, all the steps:
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
-2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
+2. `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
    * `-v d` shows more details.
+   * `-v diag` shows the most, but I haven't really noticed a difference.
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+
+## Related Documents
+
+* [lispdoc.md](doc/lispdoc.md) describes DotCL's `LispDoc`
+  annotation, which I thought would generate docstrings.
+  This does not work as of 0.1.8.
+
+* [BUILD-GUIDE.md](doc/BUILD-GUIDE.md) describes in great detail how this
+  project is built when you call `dotnet build`.
+
+* [dotnet-static-generic.md](doc/dotnet-static-generic.md) describes how
+  the current `dotnet:static-generic` function works, as I wanted to
+  create an analoguous `monoutils:invoke-generic` function. I hope that
+  function or an analog will be incorporated into DotCL.
 
 
 # Functionality Implemented
