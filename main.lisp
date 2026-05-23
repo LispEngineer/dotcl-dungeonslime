@@ -193,7 +193,6 @@
     ;; This is a Texture2D instance
     :accessor logo)))
 
-
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
   ;; and its initial keyword arguments are processed.
@@ -239,9 +238,13 @@
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
+         (sb (sprite-batch game))
          (v2-0 (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero"))
          (white (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
-    (dotnet:invoke gd "Clear" c))
+    (dotnet:invoke gd "Clear" c)
+    (dotnet:invoke sb "Begin")
+    (dotnet:invoke sb "Draw" (logo game) v2-0 white)
+    (dotnet:invoke sb "End"))
 
   (call-next-method game gt))
 
