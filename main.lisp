@@ -237,7 +237,7 @@
          |#
          ;; Use monoutils:invoke-generic to load generic Content.Load<Texture2D>
          ;; TEXTURE2D
-         (l (monoutils:invoke-generic cont "Load" '("Microsoft.Xna.Framework.Graphics.Texture2D") "images/logo")))
+         (l (monoutils:invoke-generic cont "Load" '("TEXTURE2D") "images/logo")))
     (format *error-output* "[game-1:load-content] Loaded logo = ~A~%" l)
     (setf (logo game) l))
   (call-next-method game))

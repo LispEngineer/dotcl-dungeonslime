@@ -31,6 +31,44 @@ public static class MonoUtils {
         return totalSum;
     } // AddThree
 
+    /** This is a C# equivalent to dotnet::%resolve-type in DotCL.
+     * This looks up the specified typeName parameter in the
+     * dotnet:*type-aliases* hashtable and returns the expanded
+     * type name, if found. It looks up both the uppercased version
+     * using (ToUpperInvariant()) as well as the originally passed
+     * in string. */
+    private static string ResolveTypeAlias(string typeName) {
+        try {
+            Symbol typeAliasesSym = Startup.SymInPkg("*TYPE-ALIASES*", "DOTNET");
+            if (typeAliasesSym == null || typeAliasesSym.Value == null) {
+                return typeName;
+            }
+            LispObject val = DynamicBindings.Get(typeAliasesSym);
+            if (val is LispHashTable ht) {
+                string upperName = typeName.ToUpperInvariant();
+                LispObject mapped = ht.Get(new LispString(upperName), Nil.Instance);
+                if (mapped is LispString ls) {
+                    return ls.Value;
+                } else if (mapped is Symbol sym) {
+                    return sym.Name;
+                }
+
+                mapped = ht.Get(new LispString(typeName), Nil.Instance);
+                if (mapped is LispString ls2) {
+                    return ls2.Value;
+                } else if (mapped is Symbol sym2) {
+                    return sym2.Name;
+                }
+            }
+        } catch {
+            // Fall back to original typeName if lookups fail or are not bound yet
+            // TODO: Log something?
+        }
+        return typeName;
+    } // ResolveTypeAlias
+
+
+
     /// <summary>
     ///   Invokes a generic instance method dynamically on a target object from Common Lisp.
     ///   This is a class method version of the dotnet:static-generic function.
@@ -125,10 +163,11 @@ public static class MonoUtils {
         // 4. Resolve type names into concrete System.Type instances
         var concreteTypes = new Type[typeArgNames.Count];
         for (int i = 0; i < typeArgNames.Count; i++) {
-            var t = DynamicBaseCaller.GetType(typeArgNames[i]);
+            string resolvedTypeName = ResolveTypeAlias(typeArgNames[i]);
+            var t = DynamicBaseCaller.GetType(resolvedTypeName);
             if (t == null) {
                 throw new LispErrorException(
-                        new LispError($"INVOKE-GENERIC: type not found: {typeArgNames[i]}"));
+                        new LispError($"INVOKE-GENERIC: type not found: {typeArgNames[i]} (resolved as: {resolvedTypeName})"));
             }
             concreteTypes[i] = t;
         }

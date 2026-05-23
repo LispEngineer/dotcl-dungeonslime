@@ -81,7 +81,11 @@ Basic REPL:
   `main.lisp` depend on it.
 * Proof of concept "Add3" function exposed to Lisp as: `(monoutils:add3 1 2 3)`.
 * Implement a `monoutils:invoke-generic` as an analog to the existing
-  `dotnet:static-generic`. Use that for calling `Load<Texture2D>()`.
+  `dotnet:static-generic`. It supports resolving generic type arguments via Lisp type
+  aliases (e.g., `'("TEXTURE2D")` instead of the fully qualified 
+  `'("Microsoft.Xna.Framework.Graphics.Texture2D")`) registered in
+  `dotnet::*type-aliases*`. 
+  * Used for calling `Load<Texture2D>()` dynamically.
 
 ## Deprecated Functionality
 
