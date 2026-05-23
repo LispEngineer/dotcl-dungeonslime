@@ -145,42 +145,12 @@
     ;; TODO: Figure out the proper class instead of just Object
     ("CLOSObject" Object)
     ;; The MonoGame GraphicsDeviceManager that is created in the constructor
-    ("GDM" GRAPHICSDEVICEMANAGER)
-    ;; Cache our base Func<> callers for efficiency
-    ("DrawBaseFunc" BASEFUNC)
-    ("UpdateBaseFunc" BASEFUNC))
+    ("GDM" GRAPHICSDEVICEMANAGER))
 
   (:ctor ()
     ;; Currently, only zero-argument constructors are supported with the define-class macro.
-    (let* ((gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self))
-           ;; We need to create an array of Type (Type[]) for calling CallBaseMethodBuilder.
-           ;; 'type-type' is the Type object for System.Type itself, used as the element type of the array.
-           (type-type (dotnet:static "System.Type" "GetType" "System.Type"))
-           ;; 'gt-type' is the Type object for GameTime, which we need for the method signature.
-           ;; We use our helper function because Type.GetType() was not finding it.
-           ;; NOT WORKING: (gt-type (dotnet:static "System.Type" "GetType" "Microsoft.Xna.Framework.GameTime"))           
-           (gt-type (dotnet:static "DynamicBaseCaller" "GetType" "Microsoft.Xna.Framework.GameTime"))
-           ;; I found a dotcl-provided version of my GetType above, but it is not
-           ;; callable.
-           ;; (gt-type (dotnet::resolve-type "Microsoft.Xna.Framework.GameTime"))
-           ;; Create a standard C# System.Type[] array of length 1.
-           (type-arr (dotnet:static "System.Array" "CreateInstance" type-type 1)))
-
-      (setf (dotnet:invoke self "GDM") gdm)
-
-      ;; We put gt-type (typeof(GameTime)) into the Type[] array at index 0.
-      (setf (dotnet:ref type-arr 0) gt-type)
-      (format *error-output* "[Demo.LispGame] ctor: type-arr[0] = ~A~%" (dotnet:ref type-arr 0))
-      (format *error-output* "[Demo.LispGame] ctor: type-arr = ~A~%" type-arr)
-
-      ;; Save delegate of the superclass Draw/Update invoker for later efficient reuse.
-      (setf (dotnet:invoke self "DrawBaseFunc")
-        (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Draw" type-arr))
-      (setf (dotnet:invoke self "UpdateBaseFunc")
-        (dotnet:static "DynamicBaseCaller" "CallBaseMethodBuilder" self "Update" type-arr))
-
-      (format *error-output* "[Demo.LispGame] ctor: GDM = ~A; DBF = ~A~%"
-        gdm (dotnet:invoke self "DrawBaseFunc"))))
+    (setf (dotnet:invoke self "GDM")
+      (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
 
   ;; Note: There is no current way using the dotnet package to call
   ;; the base class of a given new class you've created.
@@ -189,17 +159,13 @@
       (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
       (initialize (dotnet:invoke self "CLOSObject"))
       ;; Just call the base Initialize()
-      ; (dotnet:static "DynamicBaseCaller" "CallBaseMethod_VoidVoid" self "Initialize")
       (dotnet:call-base self "Initialize"))
 
     ("Draw" ((gt GameTime)) :returns Void :override t
-      (let ((clos-instance (dotnet:invoke self "CLOSObject"))
-            (base-func (dotnet:invoke self "DrawBaseFunc")))
+      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
         ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
         (draw clos-instance gt)
         ;; Call the base class Draw(gt) method
-        ; (when base-func
-        ;   (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))
         (dotnet:call-base self "Draw" gt)))
 
     ("LoadContent" () :returns Void :override t
@@ -208,12 +174,9 @@
         (load-content clos-instance)))
 
     ("Update" ((gt GameTime)) :returns Void :override t
-      (let ((clos-instance (dotnet:invoke self "CLOSObject"))
-            (base-func (dotnet:invoke self "UpdateBaseFunc")))
+      (let ((clos-instance (dotnet:invoke self "CLOSObject")))
         (update clos-instance gt)
         ;; Call the base class Update(gt) method
-        ; (when base-func
-        ;   (dotnet:static "DynamicBaseCaller" "CallFunc" base-func self gt))
         (dotnet:call-base self "Update" gt)))))
 
 ; Test the call-base functionality
