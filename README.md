@@ -18,10 +18,12 @@ The goals of this code are:
 
 2. Make a clean set of Lispy functions for interacting with MonoGame.
 
-3. Eventually: Implement the [MonoGame 2D Dungeon Slime demo](https://docs.monogame.net/articles/tutorials/building_2d_games/index.html)
+3. Implement the [MonoGame 2D Dungeon Slime demo](https://docs.monogame.net/articles/tutorials/building_2d_games/index.html)
    in as Lispy a manner as I can.
 
-This is heavily a work in progress.
+This is heavily a work in progress. The code may not be as clean as I
+would like, but this is a proof of concept for creating my own
+game in Common Lisp later.
 
 ## How to Use
 
@@ -44,6 +46,11 @@ So, all the steps:
 1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
    * This project's build files assume this was done there, and that the `dotcl`
      was locally built rather than retrieved from NuGet.
+
+2. To use the MonoGame Content Builder, in this project's home directory:
+   `dotnet tool restore`
+   * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
+     among other things.
 
 2. `dotnet build MonoGameLispDemo.csproj -v n -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
@@ -77,6 +84,7 @@ the `--base` argument to see it work (in C#).
 * Invoke that `Func`tion
 * Get any type by String name, even if System.Type.GetType() would fail
 * Deprecated because SANO-san implemented `dotnet:call-base`
+
 
 # TO DO
 
@@ -123,11 +131,14 @@ the `--base` argument to see it work (in C#).
 ## Issues Filed
 
 * [Add constructor arguments to dotnet:define-class](https://github.com/dotcl/dotcl/issues/13).
+  * Changed to "support multiple constructors", because SANO-san 
+    implemented the constructor arguments
 
 * [Add `base` support in Lisp](https://github.com/dotcl/dotcl/issues/14).
+  * CLOSED: SANO-san implemented this
 
 * [Add array indexer](https://github.com/dotcl/dotcl/issues/15).
-
+  * CLOSED: SANO-san implemented this
 
 
 ---

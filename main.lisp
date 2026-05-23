@@ -188,7 +188,11 @@
   "The CLOS object of the MonoGame Game")
 
 ;; MonoGame Game implemented as a CLOS class
-(defclass game-1 (core))
+(defclass game-1 (core)
+  ((logo
+    ;; This is a Texture2D instance
+    :accessor logo)))
+
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -202,7 +206,13 @@
   (call-next-method game))
 
 (defmethod load-content ((game game-1))
-  "Nothing, for now (except pass to base class)."
+  "Load our logo then pass to base class."
+  (format *error-output* "[game-1:load-content] Loading logo...~%")
+  (let* ((cont (content game))
+         ;; "Load<Texture2D>" does not work
+         (l (dotnet:invoke cont "Load" "images/logo")))
+    (format *error-output* "[game-1:load-content] Loaded logo = ~A~%" l)
+    (setf (logo game) l))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
@@ -228,7 +238,9 @@
          (gd (dotnet:invoke mg "GraphicsDevice"))
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
-         (c (pulse-color secs)))
+         (c (pulse-color secs))
+         (v2-0 (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero"))
+         (white (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
     (dotnet:invoke gd "Clear" c))
 
   (call-next-method game gt))
