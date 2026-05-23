@@ -148,9 +148,21 @@
     ("GDM" GRAPHICSDEVICEMANAGER))
 
   (:ctor ()
-    ;; Currently, only zero-argument constructors are supported with the define-class macro.
+    ;; In dotcl 0.1.7, only zero-argument constructors are supported with the define-class macro.
+    ;; This restriction was silently lifted in 0.1.8.
     (setf (dotnet:invoke self "GDM")
       (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
+
+  ;; However, as of 0.1.8, multiple constructors are not yet supported, so
+  ;; leaving this commented out for now. If it is the only :ctor, then it
+  ;; does indeed work. If it is left in as a second constructor, it seems to
+  ;; be silently ignored.
+  #|
+  (:ctor ((clos-obj Object))
+    (setf (dotnet:invoke self "CLOSObject") clos-obj)
+    (setf (dotnet:invoke self "GDM")
+      (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" self)))
+  |#
 
   ;; Note: There is no current way using the dotnet package to call
   ;; the base class of a given new class you've created.
