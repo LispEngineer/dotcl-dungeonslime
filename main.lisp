@@ -242,7 +242,9 @@
          (v2-0 (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero"))
          (white (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
     (dotnet:invoke gd "Clear" c)
-    (dotnet:invoke sb "Begin")
+    (dotnet:invoke sb "Begin"
+                   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
+                   nil nil nil nil nil nil)
     (dotnet:invoke sb "Draw" (logo game) v2-0 white)
     (dotnet:invoke sb "End"))
 

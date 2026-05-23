@@ -130,7 +130,11 @@ the `--base` argument to see it work (in C#).
 
 ## Issues Filed
 
-* [Add constructor arguments to dotnet:define-class](https://github.com/dotcl/dotcl/issues/13).
+* [Invoke non-static methods with generic type arguments](https://github.com/dotcl/dotcl/issues/23)
+
+* [Omit default parameters in `dotnet:invoke`](https://github.com/dotcl/dotcl/issues/24)
+
+* [Add constructor arguments to `dotnet:define-class`](https://github.com/dotcl/dotcl/issues/13).
   * Changed to "support multiple constructors", because SANO-san 
     implemented the constructor arguments
 
