@@ -44,7 +44,111 @@
     (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MonoGame CLOS Object
+;; MonoGame Core CLOS Object
+
+(defparameter *core* nil
+  "The singleton instance of the MonoGame Core CLOS class")
+
+(defparameter +window-defaults+
+  '(:title "Dungeon Slime"
+    :width 1280
+    :height 720
+    :full-screen nil)
+  "Default size, type and title of the game window")
+
+(defparameter +content-default+ "Content"
+  "The default content directory for the ContentManager")
+
+;; MonoGame Core implemented as a CLOS class
+;; See: https://docs.monogame.net/articles/tutorials/building_2d_games/04_creating_a_class_library/index.html?tabs=vscode#creating-our-first-library-module
+(defclass core ()
+  ((monogame
+    ;; This is a reference to the C# MonoGame Game class instance
+    :initarg :monogame ;; This MUST be initialized with this keyword
+    :accessor monogame)
+   (window-info
+    ;; This is a plist with keys :title, :width, :height, :full-screen
+    ;; that configures the initial game window
+    :initarg :window-info
+    :accessor window-info)
+   (graphics
+    ;; This is an instance of GraphicsDeviceManager on the monogame instance
+    :initarg :graphics
+    :accessor graphics)
+   (graphics-device
+    ;; This is an instance of GraphicsDevice on the monogame instance
+    :initarg :graphics-device
+    :accessor graphics-device)
+   (sprite-batch
+    ;; This is created during the LoadContent call
+    :initarg :sprite-batch
+    :accessor sprite-batch)
+   (content
+    ;; This is our ContentManager
+    :initarg :content
+    :accessor content)))
+
+(defmethod initialize-instance :after ((game core) &key)
+  ;; This code runs immediately after a core object is created
+  ;; and its initial keyword arguments are processed.
+  (when (null (monogame game))
+    (error "core must be initialized with a MonoGame Game C# class instance"))
+  (when *core*
+    (error "only one core is permitted"))
+
+  (format *error-output* "[core:initialize-instance:after] Booting up core...~%")
+
+  ;; Save our singleton instance
+  (setf *core* game)
+
+  (let ((monogame (monogame game))
+        (gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" monogame))
+
+    ;; Get the GraphicsDeviceManager from the C# class instance
+    (setf (graphics game) gdm)
+
+    ;; Set the graphic window size & type
+    (setf (dotnet:invoke gdm "PreferredBackBufferWidth")
+      (getf (window-instance game) :width (getf +window-defaults+ :width)))
+    (setf (dotnet:invoke gdm "PreferredBackBufferHeight")
+      (getf (window-instance game) :height (getf +window-defaults+ :height)))
+    (setf (dotnet:invoke gdm "IsFullScreen")
+      (getf (window-instance game) :full-screen (getf +window-defaults+ :full-screen)))
+    (dotnet:invoke gdm "ApplyChanges") ;; Make the changes above live
+
+    ;; Set the title of the game window (on C# Window.Title property)
+    (setf (dotnet:invoke (dotnet:invoke monogame "Window") "Title")
+      (getf (window-instance game) :title (getf +window-defaults+ :title)))
+
+    ;; Save the C# class's ContentManager
+    (let ((cs-content (dotnet:invoke monogame "Content")))
+      (setf (content game) cs-content)
+      ;; and set its root directory to Content/
+      (setf (dotnet:invoke cs-content "RootDirectory")
+        +content-default+))
+
+    ;; Ensure mouse pointer is visible by default
+    (setf (dotnet:invoke monogame "IsMouseVisible") T)))
+
+  (format *error-output* "[core:initialize-instance:after] core booted.~%"))
+
+(defmethod initialize ((game core))
+  "First ensures the base class is initialized. Then sets up the
+   graphics-device and sprite-batch."
+  
+  (format *error-output* "[core:initialize] started...~%")
+
+  (let ((monogame (monogame game))
+        (base-gd (dotnet:invoke monogame "GraphicsDevice")))
+    (setf (graphics-device game) base-gd)
+    (setf (sprite-batch game)
+      (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd)))
+
+  (format *error-output* "[core:initialize] complete.~%"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MonoGame CLOS Object "Game-1
 
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 ()
