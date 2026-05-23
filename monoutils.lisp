@@ -1,7 +1,5 @@
 ;;; monoutils.lisp — Package definition and shims for custom C# utils.
 ;;;
-;;; These functions are defined in MonoUtils.cs, and made available to
-;;; the system by calling MonoUtilsRegistrar.Initialize().
 
 (in-package :cl-user)
 
@@ -10,3 +8,12 @@
     (:use :cl)
     (:export :add3
              :invoke-generic)))
+
+(setf (documentation 'monoutils:invoke-generic 'function)
+      "Invokes a generic instance method dynamically on a target object from Common Lisp.
+
+Usage:
+  (monoutils:invoke-generic instance \"MethodName\" '(\"TypeArg1\" \"TypeArg2\" ...) arg1 arg2 ...)
+
+Example:
+  (monoutils:invoke-generic renderer \"Draw\" '(\"Microsoft.Xna.Framework.Graphics.Texture2D\") texture position color)")
