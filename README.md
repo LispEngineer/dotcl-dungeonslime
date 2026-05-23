@@ -77,7 +77,6 @@ Basic REPL:
 Building a Lisp Package in C#:
 * Proof of concept "MonoUtils" package with a proof of concept
   "Add3" function exposed to Lisp as: `(monoutils:add3 1 2 3)`.
-  (Not yet functional.)
 
 ## Deprecated Functionality
 
@@ -108,6 +107,10 @@ the `--base` argument to see it work (in C#).
 * Look into the performance of the various `dotnet:` calls in the main
   event loop (e.g., `Update()` and `Draw()`). See if there is optimization
   that can be made.
+
+* Figure out how a C# only Lisp package can be imported using just
+  a `require` statement, like most Lisp packages. I am guessing this
+  will require a package stub to be created somewhere/somehow.
 
 
 # Open Questions

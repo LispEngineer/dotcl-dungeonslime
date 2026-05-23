@@ -7,33 +7,39 @@
 ;;; runtime.
 
 (in-package :cl-user)
+(format *error-output* "[main.lisp] loading in package ~S~%" *package*)
 
 ;; Turn off optimization and include lots of debugging
 (declaim (optimize (debug 3)))
 
-(format *error-output* "[main.lisp] loading in package ~S~%" *package*)
-
 (require :dotnet-class)
 (require "dotcl-thread") ;; Does not work if used as :dotcl-thread
 (require "dotcl-repl")
-(require "monoutils")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Proofs of concept & functionality tests
+
+;; Expose our C# function "add3" by creating the package and exported
+;; symbol during compilation.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defpackage :monoutils
+    (:use :cl)
+    (:export :add3)))
 
 ;; Test Add3
-
-(format t "Add3 sum = ~A~%" (monoutils:add3 1 2 3))
+(format t "Add3 sum = ~A~%" (monoutils:add3 1 2.0 9/3))
 (handler-case
     (monoutils:add3 1 "two" 3)
   (type-error (c)
     (format t "Caught expected type error: ~A~%" c)))
 
-
-
-
-
-; Test call-base functionality
+;; Test call-base functionality
 (let ((child (dotnet:new "Child")))
   (dotnet:invoke child "Speak")
   (dotnet:call-base child "Speak"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DotCL Type Definitions
 
 ;; Type aliases visible at compile-time too: dotnet:define-class resolves
 ;; short names while macroexpanding, so eval-when keeps the registration
@@ -50,6 +56,9 @@
   (setf (gethash "BASEFUNC" dotnet::*type-aliases*)
         "System.Func`3[[System.Object],[System.Object[]],[System.Object]]"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Game Functions
+
 (defparameter color-cycle-period 6.0
   "How fast we cycle through hues in seconds.")
 
@@ -61,7 +70,7 @@
          (a (round (* 255 frac))))
     (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame Core CLOS Object
 
 (defparameter *core* nil
