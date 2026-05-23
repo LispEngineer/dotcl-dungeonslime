@@ -61,3 +61,17 @@ The NuGet (.NET) libraries in use are:
 * Do include detailed comments with any code written,
   or changes to code made.
 * Update the `README.md` file with documentation on new features.
+
+# Code Style Instructions
+
+## C# Code Style
+
+* You must keep an open brace of a block on the same line as
+  what preceeds it, rather than alone on a new line, separated by
+  exactly one space.
+* Every block on an `if` or `else` must be surrounded by braces.
+* The `else` clause in an `if` statment should have the close and
+  open brace on the same line as the `else`, each separated by 
+  exactly one space.
+
+## Common Lisp Code Style

@@ -74,6 +74,11 @@ Basic REPL:
   `(setf color-cycle-period 1.0)` to speed the color cycling.
 * Evaluate `(exit)` to quit the game.
 
+Building a Lisp Package in C#:
+* Proof of concept "MonoUtils" package with a proof of concept
+  "Add3" function exposed to Lisp as: `(monoutils:add3 1 2 3)`.
+  (Not yet functional.)
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

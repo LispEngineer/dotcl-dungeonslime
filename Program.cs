@@ -50,6 +50,7 @@ if (args.Length > 0 && args[0] == "--base") {
 // via DotclHost.Call("MAKE-GAME") and Run() it on the main thread.
 
 DotclHost.Initialize();
+MonoUtilsRegistrar.Initialize();
 
 // Force MonoGame's core types loaded so dotcl's ResolveDotNetType can see
 // Game / GraphicsDeviceManager / GameTime / Color / GraphicsDevice when the

@@ -16,6 +16,19 @@
 (require :dotnet-class)
 (require "dotcl-thread") ;; Does not work if used as :dotcl-thread
 (require "dotcl-repl")
+(require "monoutils")
+
+;; Test Add3
+
+(format t "Add3 sum = ~A~%" (monoutils:add3 1 2 3))
+(handler-case
+    (monoutils:add3 1 "two" 3)
+  (type-error (c)
+    (format t "Caught expected type error: ~A~%" c)))
+
+
+
+
 
 ; Test call-base functionality
 (let ((child (dotnet:new "Child")))
