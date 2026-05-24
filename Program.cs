@@ -1,3 +1,9 @@
+// This file is the main entry point when we build a full
+// executable in C#. It is executed in sequence as if this
+// were a static void Main. This is the standard since
+// C# 9 and .NET 6.
+// See: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/#top-level-statements-vs-main-method
+
 using DotCL;
 
 // Quick sanity check: a pure C# Game subclass that clears to red. If this
@@ -6,6 +12,7 @@ using DotCL;
 if (args.Length > 0 && args[0] == "--csharp-sanity") {
     using var sanity = new CsharpSanityGame();
     sanity.Run();
+    sanity.Dispose();
     return;
 }
 
@@ -50,16 +57,13 @@ if (args.Length > 0 && args[0] == "--base") {
 // via DotclHost.Call("MAKE-GAME") and Run() it on the main thread.
 
 DotclHost.Initialize();
+
+// Register my Custom C#-implemented Lisp package with DotCL's
+// package registry.
 MonoUtilsRegistrar.Initialize();
 
-// Force MonoGame's core types loaded so dotcl's ResolveDotNetType can see
-// Game / GraphicsDeviceManager / GameTime / Color / GraphicsDevice when the
-// Lisp side names them by short name.
-_ = typeof(Microsoft.Xna.Framework.Game).FullName;
-_ = typeof(Microsoft.Xna.Framework.GraphicsDeviceManager).FullName;
-_ = typeof(Microsoft.Xna.Framework.GameTime).FullName;
-_ = typeof(Microsoft.Xna.Framework.Color).FullName;
-_ = typeof(Microsoft.Xna.Framework.Graphics.GraphicsDevice).FullName;
+// dotcl's ResolveDotNetType does not seem to need the types force
+// previously loaded at this point anymore.
 
 var manifestPath = Path.Combine(
     AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
@@ -70,13 +74,12 @@ Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 // MAKE-GAME (defined in main.lisp) returns a Demo.LispGame instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
 if (gameObj is LispDotNetObject dno
-    && dno.Value is Microsoft.Xna.Framework.Game game)
-{
+    && dno.Value is Microsoft.Xna.Framework.Game game) {
     Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
     game.Run();
-}
-else
-{
+    // Not necessary if the process ends after this, but if it doesn't:
+    game.Dispose();
+} else {
     throw new InvalidOperationException(
         $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
 }

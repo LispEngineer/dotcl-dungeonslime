@@ -30,3 +30,6 @@
 ;; NOTE: This will require the REPL be killed when the game exits.
 ;; And no REPL will be available until that happens.
 ;; (dotnet:invoke *mg-game* "Run")
+
+;; To clean up after running the game:
+;; (dotnet:invoke *mg-game* "Dispose")

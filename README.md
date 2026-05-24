@@ -76,20 +76,16 @@ sorry!
 ;; cl-user::*mg-game*
 (load "load-repl.lisp")
 
-;; This next does not work - see note below
+;; Execute the game then, with this:
 (dotnet:invoke *mg-game* "Run")
+
+;; After the game executes and returns to the REPL, clean up with this:
+(dotnet:invoke *mg-game* "Dispose")
+;; otherwise the game window will just sit there and cause grief.
 ```
 
-**NOTE**: This will run the game, but for whatever reason when you
-exit the game (closing the window or ESC) it does not exit cleanly
-and you will have to kill the REPL.
-
-Note if you try to do something like
-`(dotcl-thread:make-thread (lambda () (dotnet:invoke *mg-game* "Run")))`,
-it will also not work, because you'll eventually get an error like:
-`GraphicsDevice.Clear: Operation not called on UI thread.`
-
-TODO: Make the game itself spawn the background REPL?
+TODO: I have not yet figured out a way to run the game a second
+time from the REPL.
 
 
 ## Related Documents
@@ -107,7 +103,9 @@ TODO: Make the game itself spawn the background REPL?
   function or an analog will be incorporated into DotCL.
 
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
-  human consumption. Used to provide guidance to Google's Antigravity CLI,
+  human consumption. Used to provide guidance to Google's 
+  [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
+  (formerly called Gemini CLI)
   which the author sometimes uses with Gemini to figure things out.
 
 
@@ -119,7 +117,7 @@ MonoGame Dungeon Slime features:
     * The base CLOS Core class does callbacks into the MonoGame Game class
   * Except: this is currently still doing the original MonoGame demo's color cycling
 
-Basic REPL:
+Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses
   standard input and output. Control-D will exit the REPL.
 * Demonstrate the REPL interacting with live game state with
