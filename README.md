@@ -137,6 +137,10 @@ Basic in-game REPL:
 * Demonstrate the REPL interacting with live game state with
   `(setf color-cycle-period 1.0)` to speed the color cycling.
 * Evaluate `(exit)` to quit the game.
+* Submitted change for `dotcl-repl` with `console-read-key-interruptable`
+  to use a busy wait loop checking `Console.KeyAvailable` and sleeping for
+  50ms intervals, trapping `ThreadInterruptedException` so that the REPL
+  thread can be interrupted cleanly.
 
 `MonoUtils` Lisp Package written in C#:
 * Proof of concept "MonoUtils" package written in C#.
@@ -190,25 +194,6 @@ the `--base` argument to see it work (in C#).
   a `require` statement, like most Lisp packages. I am guessing this
   will require a package stub to be created somewhere/somehow.
 
-* Re-implement or modify `dotcl-repl`'s `console-read-key` to do busy
-  waits so it can be interrupted:
-  ```c#
-  try {
-    while (!Console.KeyAvailable && !threadShouldExit) {
-        // Sleep for a short duration to keep CPU usage near 0%
-        Thread.Sleep(50); 
-    }
-    if (threadShouldExit) { return null }
-    return Console.ReadKey(true);
-    Console.WriteLine($"You pressed {key.Key}");
-  } catch (ThreadInterruptedException) {
-    return null;
-  }
-  ```
-  or better yet, use 
-  [`CancellationToken`](https://medium.com/@mitesh_shah/a-deep-dive-into-c-s-cancellationtoken-44bc7664555f)
-   instead of some random boolean.
-
 
 # Open Questions
 
@@ -227,6 +212,8 @@ the `--base` argument to see it work (in C#).
 
 
 ## Issues Filed
+
+* [Enable `dotcl-repl:readline` to be interrupted](https://github.com/dotcl/dotcl/pull/28)
 
 * [Fix backwards `dotcl-repl` history](https://github.com/dotcl/dotcl/pull/27)
 
