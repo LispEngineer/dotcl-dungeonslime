@@ -23,7 +23,7 @@ The goals of this code are:
 
 This is heavily a work in progress. The code may not be as clean as I
 would like, but this is a proof of concept for creating my own
-game in Common Lisp later.
+game in SANO-san's awesome DotCL Common Lisp later.
 
 ## How to Use
 
@@ -59,6 +59,47 @@ So, all the steps:
 
 3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
 
+### How to Load in REPL
+
+First, build the game per the above - this will ensure the C#
+files are all compiled into `.dll` files which we can load.
+
+Invoke DotCL with `rlwrap --always-readline dotcl` (or omit rlwrap
+if you prefer).
+
+```lisp
+;; Load MonoGame first
+(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
+
+;; Load the C# project assembly
+(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo.dll")
+
+;; Run the C# Registrar - this creates the "MONOUTILS" package and adds
+;; the C#-impleemnted functions to it
+(dotnet:static "MonoUtilsRegistrar" "Initialize")
+
+;; Load the Lisp code
+(require "asdf")
+;; This adds the current directory to the ASDF search list. It has very
+;; long output due to my use of Roswell so I truncate it.
+(length (push '*default-pathname-defaults* asdf:*central-registry*))
+;; Prevent the game's background REPL from spawning
+(defparameter *no-monogame-lisp-repl* t) ;; In CL-USER
+(asdf:load-system "MonoGameLispDemo")
+
+;; Create the game objects
+(defparameter *mg-game* (make-game))
+;; Tell MonoGame where to load content assets from
+;; (change this for your local installation)
+(setf (dotnet:invoke (content *game*) "RootDirectory") "/home/dfields/src/cl/MonoGameLispDemo-standalone/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
+;; This next does not work - see note below
+(dotnet:invoke *mg-game* "Run")
+```
+
+**NOTE**: This will run the game, but for whatever reason when you
+exit the game (closing the window or ESC) it does not exit cleanly
+and you will have to kill the REPL.
+
 ## Related Documents
 
 * [lispdoc.md](doc/lispdoc.md) describes DotCL's `LispDoc`
@@ -72,6 +113,10 @@ So, all the steps:
   the current `dotnet:static-generic` function works, as I wanted to
   create an analoguous `monoutils:invoke-generic` function. I hope that
   function or an analog will be incorporated into DotCL.
+
+* [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
+  human consumption. Used to provide guidance to Google's Antigravity CLI,
+  which the author sometimes uses with Gemini to figure things out.
 
 
 # Functionality Implemented
@@ -116,6 +161,8 @@ the `--base` argument to see it work (in C#).
 
 # TO DO
 
+* Refactor `main.lisp` into multiple logical files
+
 * Implement a system to convert a CLOS class to a CLR/C# class somehow,
   or really, create a C# proxy for the CLOS class.
   (I'm still noodling ways to do that.)
@@ -135,6 +182,14 @@ the `--base` argument to see it work (in C#).
 * Figure out how a C# only Lisp package can be imported using just
   a `require` statement, like most Lisp packages. I am guessing this
   will require a package stub to be created somewhere/somehow.
+
+* Figure out how to load the whole game, C# bits and all, at a
+  DotCL REPL.
+  * This will load the Lisp package, but won't work until the C#
+    classes are loaded:
+    * `(require "asdf")`
+    * `(push '*default-pathname-defaults* asdf:*central-registry*)`
+    * `(asdf:load-system "MonoGameLispDemo")`
 
 
 # Open Questions
@@ -175,6 +230,16 @@ the `--base` argument to see it work (in C#).
 
 * [Add array indexer](https://github.com/dotcl/dotcl/issues/15).
   * CLOSED: SANO-san implemented this
+
+
+# Miscellaneous Notes
+
+* Quicklisp: You can use SBCL to load Quicklisp packages. As of now,
+  Quicklisp does not load in DotCL (there are DotCL language issues
+  and also needs a DotCL-specific socket implementation). However,
+  once loaded in SBCL, you can use DotCL's ASDF to load those systems,
+  e.g., `(asdf:load-system "MonoGameLispDemo")`.
+  * I may work on the Quicklisp DotCL implementation at some point.
 
 
 ---

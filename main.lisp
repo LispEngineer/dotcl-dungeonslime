@@ -5,6 +5,9 @@
 ;;; time. main.lisp is compiled into MonoGameLispDemo.fasl by the
 ;;; project-core build target (#166); main.lisp itself doesn't ship at
 ;;; runtime.
+;;;
+;;; Ultimately this will implement the MonoGame's Dungeon Slime tutorial
+;;; project in DotCL-flavored ANSI Common Lisp.
 
 (in-package :cl-user)
 (format *error-output* "[main.lisp] loading in package ~S~%" *package*)
@@ -376,8 +379,11 @@
           (format t "Error: ~A~%" c))))))
 
 (defun start-background-repl ()
-  "Starts a REPL in a background thread."
-  (dotcl-thread:make-thread #'run-repl :name "REPL"))
+  "Starts a REPL in a background thread. However, sometimes we don't want
+   that, such as when we're already running in a top-level REPL, so
+   we check if cl-user::*no-monogame-lisp-repl* is bound and true first."
+  (unless (and (boundp 'cl-user::*no-monogame-lisp-repl*) cl-user::*no-monogame-lisp-repl*)
+    (dotcl-thread:make-thread #'run-repl :name "REPL")))
 
 (format *error-output* "[main.lisp] Spawning background REPL until control-D~%")
 (start-background-repl)

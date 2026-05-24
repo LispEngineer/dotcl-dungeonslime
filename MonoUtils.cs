@@ -67,8 +67,6 @@ public static class MonoUtils {
         return typeName;
     } // ResolveTypeAlias
 
-
-
     /// <summary>
     ///   Invokes a generic instance method dynamically on a target object from Common Lisp.
     ///   This is a class method version of the dotnet:static-generic function.
