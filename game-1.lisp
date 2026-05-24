@@ -113,8 +113,16 @@
          (cb-h (height client-bounds))
          (l-w (width logo))
          (l-h (height logo))
+         (i-w (width +icon-rect+))
+         (i-h (height +icon-rect+))
+         (w-w (width +wordmark-rect+))
+         (w-h (height +wordmark-rect+))
          (logo-ctr (vector2 (* l-w 0.5) (* l-h 0.5)))
-         (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5))))
+         ;; The center of an offset (Source Rectangle) is not offset by the
+         ;; source rectangle's x and y, so we can just use these:
+         (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5)))
+         (icon-ctr (vector2 (* i-w 0.5) (* i-h 0.5)))
+         (wordmark-ctr (vector2 (* w-w 0.5) (* w-h 0.5))))
 
     (dotnet:invoke gd "Clear" c)
     (dotnet:invoke sb "Begin"
@@ -124,20 +132,20 @@
     ;; Use the full Draw call with every parameter
     (dotnet:invoke sb "Draw" logo                  ;; Texture
                              screen-ctr            ;; Position
-                             nil #|+icon-rect+|#           ;; Source Rectangle
+                             +icon-rect+           ;; Source Rectangle
                              +color-white+         ;; Color
                              rot                   ;; float rotation, e.g. (°2R 45)
-                             logo-ctr              ;; origin
+                             icon-ctr              ;; origin
                              1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
                              0e0)                  ;; float Layer Depth
 
     (dotnet:invoke sb "Draw" logo                  ;; Texture
                              screen-ctr            ;; Position
-                             nil #|+wordmark-rect+|# ;; Source Rectangle
+                             +wordmark-rect+       ;; Source Rectangle
                              +color-white+         ;; Color
                              (- rot)               ;; float rotation, e.g. (°2R 45)
-                             logo-ctr              ;; origin
+                             wordmark-ctr          ;; origin
                              1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
                              0e0)                  ;; float Layer Depth

@@ -317,8 +317,7 @@ the `--base` argument to see it work (in C#).
 
 ## Open Bugs
 
-* Cannot get the `SpriteBatch.Draw()` to take my Source Rectangle.
-  (Chapter 6 of tutorial.) Working on it.
+(none)
 
 
 # TO DO
