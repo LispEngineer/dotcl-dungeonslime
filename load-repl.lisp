@@ -16,8 +16,10 @@
 ;; This adds the current directory to the ASDF search list. It has very
 ;; long output due to my use of Roswell so I truncate it.
 (length (push '*default-pathname-defaults* asdf:*central-registry*))
-;; Prevent the game's background REPL from spawning
-(defparameter *no-monogame-lisp-repl* t) ;; In CL-USER
+
+;; Prevent the game's background REPL from spawning if desired
+;; (defparameter *no-monogame-lisp-repl* t) ;; In CL-USER
+
 (asdf:load-system "MonoGameLispDemo")
 
 ;; Create the game objects

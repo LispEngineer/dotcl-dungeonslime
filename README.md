@@ -141,6 +141,11 @@ Basic in-game REPL:
   to use a busy wait loop checking `Console.KeyAvailable` and sleeping for
   50ms intervals, trapping `ThreadInterruptedException` so that the REPL
   thread can be interrupted cleanly.
+* REPL is started and stopped by the MonoGame `Game.Run()` by hooking into
+  `BeginRun()` and `EndRun()`
+* Note that the background REPL spawned when running from a top level
+  REPL session does not interact well if the top level REPL is using rlwrap
+  like `rlwrap --always-readline dotcl`.
 
 `MonoUtils` Lisp Package written in C#:
 * Proof of concept "MonoUtils" package written in C#.
@@ -194,6 +199,12 @@ the `--base` argument to see it work (in C#).
   a `require` statement, like most Lisp packages. I am guessing this
   will require a package stub to be created somewhere/somehow.
 
+* If the standalone game is exited using the GUI of the game (currently
+  by pressing `ESC`), it gives this error:
+  ```
+  Thread "REPL" error: Thread was interrupted from a waiting state.
+  ```
+  I don't know why, and it doesn't seem to matter, but...?
 
 # Open Questions
 

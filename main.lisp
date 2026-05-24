@@ -216,6 +216,18 @@
   (format *error-output* "[core:dispose] calling super/Game.Dispose()~%")
   (dotnet:call-base (monogame game) "Dispose"))
 
+(defmethod begin-run ((game core))
+  "Start our background REPL - if configured to do so."
+  (format *error-output* "[core:begin-run] Possibly spawning background REPL until control-D~%")
+  (start-background-repl)
+  (dotnet:call-base (monogame game) "BeginRun"))
+
+(defmethod end-run ((game core))
+  "Stop our background REPL - if running."
+  (kill-background-repl)
+  (dotnet:call-base (monogame game) "EndRun"))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object game-1, with parent class core
 
@@ -344,6 +356,16 @@
         ;; This will call the base of this C# object if desired
         (update clos-instance gt)))
 
+    ("BeginRun" () :returns Void :override t
+      ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_BeginRun
+      (format *error-output* "[Demo.LispGame] BeginRun~%")
+      (begin-run (dotnet:invoke self "CLOSObject")))
+
+    ("EndRun" () :returns Void :override t
+      ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_EndRun
+      (format *error-output* "[Demo.LispGame] EndRun~%")
+      (end-run (dotnet:invoke self "CLOSObject")))
+
     ("Dispose" () :returns Void
       ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_Dispose
       ;; Clean up after running a game
@@ -426,7 +448,4 @@
   ;; Otherwise, nothing bad happens but it won't be interruptable.
   (when (and *background-repl* (thread-alive-p *background-repl*))
     (dotcl-thread:destroy-thread *background-repl*)))
-
-(format *error-output* "[main.lisp] Spawning background REPL until control-D~%")
-(start-background-repl)
 
