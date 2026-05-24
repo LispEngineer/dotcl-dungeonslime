@@ -10,5 +10,6 @@
                (:file "type-aliases")
                (:file "constants")
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
+               (:file "game-1" :depends-on ("constants" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on
-                 ("mg-core" "type-aliases" "constants" "poc-test" "monoutils" "game-repl"))))
+                 ("mg-core" "game-1" "type-aliases" "constants" "poc-test" "monoutils" "game-repl"))))
