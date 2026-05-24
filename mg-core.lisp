@@ -146,12 +146,14 @@
 (defmethod begin-run ((game core))
   "Start our background REPL - if configured to do so."
   (format *error-output* "[core:begin-run] Possibly spawning background REPL until control-D~%")
-  (start-background-repl)
+  ;; Call start-background-repl exported from the game-repl package.
+  (game-repl:start-background-repl)
   (dotnet:call-base (monogame game) "BeginRun"))
 
 (defmethod end-run ((game core))
   "Stop our background REPL - if running."
-  (kill-background-repl)
+  ;; Call kill-background-repl exported from the game-repl package.
+  (game-repl:kill-background-repl)
   (dotnet:call-base (monogame game) "EndRun"))
 
 
@@ -189,19 +191,19 @@
 
   (:methods
     ("Initialize" () :returns Void :override t
-      (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
+      (format *error-output* "[MonoGameCLOSProxy] Initialize: self = ~A~%" self)
       ;; This will call the base of this C# object if desired
       (initialize (dotnet:invoke self "CLOSObject")))
 
     ("Draw" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        ;(format t "[main.lisp] Demo.LispGame.Draw: clos-instance = ~A~%" clos-instance)
+        ;(format t "[main.lisp] MonoGameCLOSProxy.Draw: clos-instance = ~A~%" clos-instance)
         ;; This will call the base of this C# object if desired
         (draw clos-instance gt)))
 
     ("LoadContent" () :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
-        (format *error-output* "[Demo.LispGame] LoadContent: clos-instance = ~A~%" clos-instance)
+        (format *error-output* "[MonoGameCLOSProxy] LoadContent: clos-instance = ~A~%" clos-instance)
         ;; This will call the base of this C# object if desired
         (load-content clos-instance)))
 
@@ -212,12 +214,12 @@
 
     ("BeginRun" () :returns Void :override t
       ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_BeginRun
-      (format *error-output* "[Demo.LispGame] BeginRun~%")
+      (format *error-output* "[MonoGameCLOSProxy] BeginRun~%")
       (begin-run (dotnet:invoke self "CLOSObject")))
 
     ("EndRun" () :returns Void :override t
       ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_EndRun
-      (format *error-output* "[Demo.LispGame] EndRun~%")
+      (format *error-output* "[MonoGameCLOSProxy] EndRun~%")
       (end-run (dotnet:invoke self "CLOSObject")))
 
     ("Dispose" () :returns Void

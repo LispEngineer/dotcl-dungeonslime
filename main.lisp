@@ -14,11 +14,11 @@
   "CLR class of the game, vs the CLOS class of the game.")
 
 (defun make-game ()
-  "Instantiate Demo.LispGame for Program.cs to Run().
+  "Instantiate MonoGameCLOSProxy for Program.cs to Run().
    This first instantiates the C#/CLR object,
    then instantiates the CLOS object with a link to the C# object,
    then associates the C# object with the CLOS object."
-  (let* ((cs (dotnet:new "Demo.LispGame")) ;; cs = c-sharp object
+  (let* ((cs (dotnet:new "MonoGameCLOSProxy")) ;; cs = c-sharp object
          (clos (make-instance 'game-1 :monogame cs)))
     ;; We have to assocaite these two, which is to say associate
     ;; the cs with the clos, since clos is already associated with cs.

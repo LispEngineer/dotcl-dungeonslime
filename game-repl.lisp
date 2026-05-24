@@ -4,6 +4,18 @@
 
 (in-package :cl-user)
 
+;; Define the game-repl package at load-time/compile-time to isolate REPL symbols.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defpackage :game-repl
+    (:use :cl)
+    (:export #:run-repl
+             #:start-background-repl
+             #:kill-background-repl
+             #:*no-lisp-repl*
+             #:*background-repl*)))
+
+(in-package :game-repl)
+
 (require "dotcl-thread")
 (require "dotcl-repl")
 
@@ -44,9 +56,9 @@
 (defun start-background-repl ()
   "Starts a REPL in a background thread. However, sometimes we don't want
    that, such as when we're already running in a top-level REPL, so
-   we check if cl-user::*no-monogame-lisp-repl* is bound and true first.
+   we check if game-repl:*no-lisp-repl* is bound and true first.
    Returns the thread from dotcl-thread:make-thread."
-  (unless (and (boundp 'cl-user::*no-monogame-lisp-repl*) cl-user::*no-monogame-lisp-repl*)
+  (unless *no-lisp-repl*
     (setf *background-repl* (dotcl-thread:make-thread #'run-repl :name "REPL"))
     *background-repl*))
 
@@ -58,6 +70,5 @@
   ;; For this to work, we need a patched DotCL 0.1.8 or the pull request
   ;; submitted to DotCL maintainer to be accepted in a future DotCL release.
   ;; Otherwise, nothing bad happens but it won't be interruptable.
-  (when (and *background-repl* (thread-alive-p *background-repl*))
+  (when (and *background-repl* (dotcl-thread:thread-alive-p *background-repl*))
     (dotcl-thread:destroy-thread *background-repl*)))
-

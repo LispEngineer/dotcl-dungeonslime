@@ -52,7 +52,7 @@ if (args.Length > 0 && args[0] == "--base") {
 }
 
 // Boot dotcl BEFORE constructing the Game so the Lisp side has a chance to
-// (dotnet:define-class "Demo.LispGame" (Game) ...) and the dynamically
+// (dotnet:define-class "MonoGameCLOSProxy" (Game) ...) and the dynamically
 // emitted assembly is loaded. Then we instantiate the Lisp-defined type
 // via DotclHost.Call("MAKE-GAME") and Run() it on the main thread.
 
@@ -71,7 +71,7 @@ Console.WriteLine($"[Program.cs] manifest: {manifestPath}");
 var loaded = DotclHost.LoadFromManifest(manifestPath);
 Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 
-// MAKE-GAME (defined in main.lisp) returns a Demo.LispGame instance.
+// MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
 if (gameObj is LispDotNetObject dno
     && dno.Value is Microsoft.Xna.Framework.Game game) {
