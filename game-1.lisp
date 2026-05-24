@@ -5,6 +5,7 @@
 ;;; project in DotCL-flavored ANSI Common Lisp.
 
 (in-package :cl-user)
+(use-package :mg-classes)
 (require :dotnet-class)
 
 (format *error-output* "[game-1.lisp] Loading in package ~S~%" *package*)
@@ -87,13 +88,12 @@
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
          (sb (sprite-batch game))
-         (v2-0 (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero"))
          (white (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
     (dotnet:invoke gd "Clear" c)
     (dotnet:invoke sb "Begin"
                    (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
                    nil nil nil nil nil nil)
-    (dotnet:invoke sb "Draw" (logo game) v2-0 white)
+    (dotnet:invoke sb "Draw" (logo game) +v2-0+ white)
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))

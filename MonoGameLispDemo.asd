@@ -11,7 +11,8 @@
                (:file "game-repl")
                (:file "type-aliases")
                (:file "constants")
+               (:file "mg-classes" :depends-on ("type-aliases"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
-               (:file "game-1" :depends-on ("constants" "type-aliases" "mg-core" "monoutils"))
+               (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on
                  ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl"))))

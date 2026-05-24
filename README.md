@@ -355,6 +355,9 @@ the `--base` argument to see it work (in C#).
 
 # Open Questions
 
+* How do I make a multimethod `defmethod` which can specialize on the class of a
+  C# class?
+
 * How do I pass a boolean "False" to a C# function with `dotnet:invoke`?
   * Do I just send in `nil`?
   * Try `(dotnet:box nil "BOOL")` as in 
@@ -370,6 +373,8 @@ the `--base` argument to see it work (in C#).
 
 
 ## Issues Filed
+
+* FR:[Extend multimethods to C# types](https://github.com/dotcl/dotcl/issues/29)
 
 * [Enable `dotcl-repl:readline` to be interrupted](https://github.com/dotcl/dotcl/pull/28)
 
