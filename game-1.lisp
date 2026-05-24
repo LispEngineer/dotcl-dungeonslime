@@ -88,12 +88,20 @@
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
          (sb (sprite-batch game))
-         (white (dotnet:static "Microsoft.Xna.Framework.Color" "White")))
+         (client-bounds (dotnet:invoke (dotnet:invoke (monogame game) "Window") "ClientBounds"))
+         (logo (logo game))
+         (cb-w (width client-bounds))
+         (cb-h (height client-bounds))
+         (l-w (width logo))
+         (l-h (height logo))
+         ;; Put the logo smack in the middle of the window
+         (pos (vector2 (- (* cb-w 0.5) (* l-w 0.5)) (- (* cb-h 0.5) (* l-h 0.5)))))
+
     (dotnet:invoke gd "Clear" c)
     (dotnet:invoke sb "Begin"
                    (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
                    nil nil nil nil nil nil)
-    (dotnet:invoke sb "Draw" (logo game) +v2-0+ white)
+    (dotnet:invoke sb "Draw" logo pos +color-white+)
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))

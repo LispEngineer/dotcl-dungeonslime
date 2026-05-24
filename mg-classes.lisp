@@ -13,8 +13,10 @@
              #:+v2-1+
              #:+v2-x1+
              #:+v2-y1+
-             #:v2-x
-             #:v2-y)))
+             #:x
+             #:y
+             #:width
+             #:height)))
 
 (in-package :mg-classes)
 (require :dotnet-class)
@@ -41,10 +43,18 @@
 ;; If we figure out C# class dispatched multimethods, just make "x" and "y".
 ;; They may be the same anyway, if the accessors on the class are the same!
 
-(defun v2-x (vec)
-  "Get X component of a C# Vector2"
+(defun x (vec)
+  "Get X component of a C# Type with an X field, e.g. Vector2, Rectangle"
   (dotnet:invoke vec "X"))
 
-(defun v2-y (vec)
-  "Get Y component of a C# Vector2"
+(defun y (vec)
+  "Get Y component of a C# Type with an Y field, e.g. Vector2, Rectangle"
   (dotnet:invoke vec "Y"))
+
+(defun width (rect)
+  "Get the width of a C# Rectangle"
+  (dotnet:invoke rect "Width"))
+
+(defun height (rect)
+  "Get the height of a C# Rectangle"
+  (dotnet:invoke rect "Height"))

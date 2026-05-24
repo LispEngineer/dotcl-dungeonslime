@@ -318,7 +318,8 @@ the `--base` argument to see it work (in C#).
 
 # TO DO
 
-* Refactor `main.lisp` into multiple logical files.
+* Build a MultiInvoke which does invoke on each one along the way, for example,
+  `(multi-invoke mg-game "Window" "ClientBounds" "Width")`.
 
 * Make the Run() spawn the background REPL if it was executed from
   the DotCL repl.

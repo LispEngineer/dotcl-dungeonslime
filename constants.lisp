@@ -22,3 +22,6 @@
   (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape")
   "Cache this enumerated value from C# for quick and easy reuse")
 
+(defconstant +color-white+
+  (dotnet:static "Microsoft.Xna.Framework.Color" "White")
+  "Color White")
