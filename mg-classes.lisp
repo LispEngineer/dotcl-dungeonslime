@@ -16,7 +16,8 @@
              #:x
              #:y
              #:width
-             #:height)))
+             #:height
+             #:°2R)))
 
 (in-package :mg-classes)
 (require :dotnet-class)
@@ -58,3 +59,7 @@
 (defun height (rect)
   "Get the height of a C# Rectangle"
   (dotnet:invoke rect "Height"))
+
+(defun °2R (degrees)
+  "Convert degrees to radians, returning a single-float (used commonly in MonoGame)"
+  (coerce (* degrees (/ pi 180)) 'single-float))

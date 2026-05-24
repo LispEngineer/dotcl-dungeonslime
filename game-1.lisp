@@ -17,6 +17,9 @@
 (defparameter color-cycle-period 6.0
   "How fast we cycle through hues in seconds.")
 
+(defparameter rotation-period 5.0
+  "How fast we rotate the logo in seconds.")
+
 ;; Animated background color: hue cycles with elapsed time.
 (defun pulse-color (seconds)
   "Return Color cycling through brightness over a specified period."
@@ -24,6 +27,10 @@
          (frac (/ t-norm color-cycle-period))
          (a (round (* 255 frac))))
     (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
+
+(defun rotation (seconds)
+  "Return the rotation amount for the given time in Radians."
+  (°2R (/ (* 360 seconds) rotation-period)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object game-1, with parent class core
@@ -87,6 +94,7 @@
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
+         (rot (rotation secs))
          (sb (sprite-batch game))
          (client-bounds (dotnet:invoke (dotnet:invoke (monogame game) "Window") "ClientBounds"))
          (logo (logo game))
@@ -94,8 +102,8 @@
          (cb-h (height client-bounds))
          (l-w (width logo))
          (l-h (height logo))
-         ;; Put the logo smack in the middle of the window
-         (pos (vector2 (- (* cb-w 0.5) (* l-w 0.5)) (- (* cb-h 0.5) (* l-h 0.5)))))
+         (logo-ctr (vector2 (* l-w 0.5) (* l-h 0.5)))
+         (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5))))
 
     (dotnet:invoke gd "Clear" c)
     (dotnet:invoke sb "Begin"
@@ -103,14 +111,14 @@
                    nil nil nil nil nil nil)
     ;; Use the full Draw call with every parameter
     (dotnet:invoke sb "Draw" logo                  ;; Texture
-                             pos                   ;; Position
+                             screen-ctr            ;; Position
                              nil                   ;; Source Rectangle
                              +color-white+         ;; Color
-                             0.0e0                 ;; float rotation
-                             +v2-0+                ;; origin
-                             1.0e0                 ;; float scale
+                             rot                   ;; float rotation, e.g. (°2R 45)
+                             logo-ctr              ;; origin
+                             1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
-                             0.0e0)                ;; float Layer Depth
+                             0e0)                  ;; float Layer Depth
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))
