@@ -21,6 +21,9 @@
 ;; (defparameter *no-monogame-lisp-repl* t) ;; In CL-USER
 
 (asdf:load-system "MonoGameLispDemo")
+; Load a system super verbosely
+; (let ((*load-verbose* t)(*compile-verbose* t)(*compile-print* t))  (asdf:load-system "MonoGameLispDemo"))
+
 
 ;; Create the game objects
 (defparameter *mg-game* (make-game))

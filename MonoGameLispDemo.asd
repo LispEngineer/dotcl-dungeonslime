@@ -5,5 +5,8 @@
                "dotcl-thread"
                "dotcl-repl")
   :components ((:file "monoutils")
+               (:file "poc-test" :depends-on ("monoutils"))
                (:file "game-repl")
-               (:file "main" :depends-on ("monoutils" "game-repl"))))
+               (:file "type-aliases")
+               (:file "constants")
+               (:file "main" :depends-on ("type-aliases" "constants" "poc-test" "monoutils" "game-repl"))))

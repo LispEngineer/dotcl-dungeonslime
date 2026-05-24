@@ -19,47 +19,6 @@
 (require "dotcl-thread") ;; Does not work if used as :dotcl-thread
 (require "dotcl-repl")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Proofs of concept & functionality tests
-
-;; Expose our C# function "add3" by creating the package and exported
-;; symbol during compilation.
-
-;; Test Add3
-(format t "Add3 sum = ~A~%" (monoutils:add3 1 2.0 9/3))
-(handler-case
-    (monoutils:add3 1 "two" 3)
-  (type-error (c)
-    (format t "Caught expected type error: ~A~%" c)))
-
-(format *error-output* "invoke-generic docs: ~A~%"
-  (documentation 'monoutils:invoke-generic 'function))
-
-;; Test call-base functionality
-(let ((child (dotnet:new "Child")))
-  (dotnet:invoke child "Speak")
-  (dotnet:call-base child "Speak"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; DotCL Type Definitions
-
-;; Type aliases visible at compile-time too: dotnet:define-class resolves
-;; short names while macroexpanding, so eval-when keeps the registration
-;; effective in both compile and load phases.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (setf (gethash "GAME" dotnet::*type-aliases*)
-        "Microsoft.Xna.Framework.Game")
-  (setf (gethash "GAMETIME" dotnet::*type-aliases*)
-        "Microsoft.Xna.Framework.GameTime")
-  (setf (gethash "GRAPHICSDEVICEMANAGER" dotnet::*type-aliases*)
-        "Microsoft.Xna.Framework.GraphicsDeviceManager")
-  (setf (gethash "TEXTURE2D" dotnet::*type-aliases*)
-        "Microsoft.Xna.Framework.Graphics.Texture2D")
-  ;; Create an alias for the functions returned from DynamicBaseCaller
-  ;; (This does not seem to work.)
-  (setf (gethash "BASEFUNC" dotnet::*type-aliases*)
-        "System.Func`3[[System.Object],[System.Object[]],[System.Object]]"))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Game Functions
 
@@ -230,10 +189,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object game-1, with parent class core
-
-(defconstant +esc-key+
-  (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape")
-  "Cache this enumerated value from C# for quick and easy reuse")
 
 (defparameter *game* nil
   "The CLOS object of the MonoGame Game")

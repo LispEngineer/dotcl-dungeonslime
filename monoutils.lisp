@@ -9,6 +9,8 @@
     (:export :add3
              :invoke-generic)))
 
+(format *error-output* "[monoutils.lisp] Loading in package ~S~%" *package*)
+
 (setf (documentation 'monoutils:invoke-generic 'function)
       "Invokes a generic instance method dynamically on a target object from Common Lisp.
 

@@ -7,6 +7,8 @@
 (require "dotcl-thread")
 (require "dotcl-repl")
 
+(format *error-output* "[game-repl.lisp] Loading in package ~S~%" *package*)
+
 (defvar *no-lisp-repl* nil
   "Set this to non-nil if you want to prevent the REPL from being
    spawned.")
