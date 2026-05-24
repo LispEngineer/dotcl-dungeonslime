@@ -1,26 +1,15 @@
-;;; main.lisp — MonoGame Game subclass written in Lisp.
+;;; main.lisp
 ;;;
-;;; Demonstrates `dotnet:define-class` against the MonoGame `Game` class.
-;;; Update + Draw are overridden to animate the background color over
-;;; time. main.lisp is compiled into MonoGameLispDemo.fasl by the
-;;; project-core build target (#166); main.lisp itself doesn't ship at
-;;; runtime.
-;;;
-;;; Ultimately this will implement the MonoGame's Dungeon Slime tutorial
-;;; project in DotCL-flavored ANSI Common Lisp.
+;;; Package up the CLOS game-1 with the .NET proxy and make
+;;; it available to the C# Program.cs as "make-game".
+;;; When the game is made, save the C# class as *cs-game* and
+;;; the CLOS class as *game*.
 
 (in-package :cl-user)
+(require :dotnet-class)
+
 (format *error-output* "[main.lisp] Loading in package ~S~%" *package*)
 
-;; Turn off optimization and include lots of debugging
-(declaim (optimize (debug 3)))
-
-(require :dotnet-class)
-(require "dotcl-thread") ;; Does not work if used as :dotcl-thread
-(require "dotcl-repl")
-
-
-(format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
 (defparameter *cs-game* nil
   "CLR class of the game, vs the CLOS class of the game.")
 
@@ -40,7 +29,4 @@
     ;; And return our CLR object
     cs))
 
-(format *error-output* "[main.lisp] make-game defined: ~S~%"
-        (fboundp 'make-game))
-(format *error-output* "[main.lisp] *game*: ~A~%" *game*)
-(format *error-output* "[main.lisp] *cs-game*: ~A~%" *cs-game*)
+(format *error-output* "[main.lisp] make-game defined: ~S~%" (fboundp 'make-game))

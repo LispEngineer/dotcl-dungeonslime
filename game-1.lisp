@@ -1,11 +1,13 @@
 ;;; Actual implementation of the MonoGame Game as a CLOS sub-class
 ;;; of the core game class.
+;;;
+;;; Ultimately this will implement the MonoGame's Dungeon Slime tutorial
+;;; project in DotCL-flavored ANSI Common Lisp.
 
 (in-package :cl-user)
 (require :dotnet-class)
 
 (format *error-output* "[game-1.lisp] Loading in package ~S~%" *package*)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
