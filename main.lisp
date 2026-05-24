@@ -387,7 +387,7 @@
 (defun run-repl ()
   "Run a super basic CL REPL with the current standard input and output."
   (format *error-output* "~%--- MonoGame Lisp REPL starting ---~%")
-  (sleep 3) ;; Give a moment for the rest of the game to launch
+  (sleep 2) ;; Give a moment for the rest of the game to launch
   (format *error-output* "~%--- MonoGame Lisp REPL started ---~%")
   (loop
     ;; TODO: Figure out a graceful way to exit the background REPL
@@ -415,6 +415,17 @@
   (unless (and (boundp 'cl-user::*no-monogame-lisp-repl*) cl-user::*no-monogame-lisp-repl*)
     (setf *background-repl* (dotcl-thread:make-thread #'run-repl :name "REPL"))
     *background-repl*))
+
+(defun kill-background-repl ()
+  "Kills the background REPL thread. This is not guaranteed to work, as
+   the thread may not notice the interrupt from dotcl-thread:destroy-thread.
+   Does nothing if the *background-repl* has never been started, or if the
+   thread therein is not alive."
+  ;; For this to work, we need a patched DotCL 0.1.8 or the pull request
+  ;; submitted to DotCL maintainer to be accepted in a future DotCL release.
+  ;; Otherwise, nothing bad happens but it won't be interruptable.
+  (when (and *background-repl* (thread-alive-p *background-repl*))
+    (dotcl-thread:destroy-thread *background-repl*)))
 
 (format *error-output* "[main.lisp] Spawning background REPL until control-D~%")
 (start-background-repl)
