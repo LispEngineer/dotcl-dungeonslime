@@ -204,7 +204,10 @@ the `--base` argument to see it work (in C#).
   ```
   Thread "REPL" error: Thread was interrupted from a waiting state.
   ```
-  I don't know why, and it doesn't seem to matter, but...?
+  This only happens if the background REPL has not yet launched and
+  its thread is sleeping a bit before starting the REPL.
+  It doesn't seem to matter. So put a wrapper around that sleep and
+  catch that error and exit?
 
 # Open Questions
 
