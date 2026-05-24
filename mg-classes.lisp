@@ -41,6 +41,11 @@
    are float."
   (dotnet:new "Microsoft.Xna.Framework.Vector2" x y))
 
+(defun rect (x y w h)
+  "Returns a new C# Rectangle with the specified values. The number types in Vector2
+   are float."
+  (dotnet:new "Microsoft.Xna.Framework.Rectangle" x y w h))
+
 ;; If we figure out C# class dispatched multimethods, just make "x" and "y".
 ;; They may be the same anyway, if the accessors on the class are the same!
 

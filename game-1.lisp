@@ -12,6 +12,16 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MonoGame Icon info
+
+(defconstant +icon-rect+ (rect 0 0 128 128)
+  "The icon part of the logo")
+
+(defconstant +wordmark-rect+ (rect 150 34 458 58)
+  "The wordmark part of the logo")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Game Functions
 
 (defparameter color-cycle-period 6.0
@@ -31,6 +41,7 @@
 (defun rotation (seconds)
   "Return the rotation amount for the given time in Radians."
   (°2R (/ (* 360 seconds) rotation-period)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object game-1, with parent class core
@@ -109,16 +120,28 @@
     (dotnet:invoke sb "Begin"
                    (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
                    nil nil nil nil nil nil)
+
     ;; Use the full Draw call with every parameter
     (dotnet:invoke sb "Draw" logo                  ;; Texture
                              screen-ctr            ;; Position
-                             nil                   ;; Source Rectangle
+                             nil #|+icon-rect+|#           ;; Source Rectangle
                              +color-white+         ;; Color
                              rot                   ;; float rotation, e.g. (°2R 45)
                              logo-ctr              ;; origin
                              1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
                              0e0)                  ;; float Layer Depth
+
+    (dotnet:invoke sb "Draw" logo                  ;; Texture
+                             screen-ctr            ;; Position
+                             nil #|+wordmark-rect+|# ;; Source Rectangle
+                             +color-white+         ;; Color
+                             (- rot)               ;; float rotation, e.g. (°2R 45)
+                             logo-ctr              ;; origin
+                             1e0                   ;; float scale
+                             +sprite-effects-none+ ;; effects
+                             0e0)                  ;; float Layer Depth
+
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))

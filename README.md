@@ -315,6 +315,11 @@ the `--base` argument to see it work (in C#).
 * Get any type by String name, even if System.Type.GetType() would fail
 * Deprecated because SANO-san implemented `dotnet:call-base`
 
+## Open Bugs
+
+* Cannot get the `SpriteBatch.Draw()` to take my Source Rectangle.
+  (Chapter 6 of tutorial.) Working on it.
+
 
 # TO DO
 
