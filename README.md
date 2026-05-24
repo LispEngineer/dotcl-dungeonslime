@@ -212,7 +212,6 @@ In my case, it shows the game window and then segfaults out.
 * `MonoGameLispUtilities.cs`: *Deprecated!* My implementation of helper functions
   such as making non-generic versions of calls like `Load<Texture2D>`. Not needed
   anymore with my `invoke-generic` function in MonoUtils.
-  
 
 ## MonoGame Files
 
@@ -227,6 +226,45 @@ In my case, it shows the game window and then segfaults out.
 * `MonoGameLispDemo.csproj`: This is the C# Project file for the game. Its
   mystical incantations produce the final standalone binary. For more
   details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
+
+
+# A Note on ML/AI & Tooling
+
+You may have noticed some references to Antigravity and Gemini. I do use
+Antigravity CLI (and the predecessor Gemini CLI) in my recreational coding,
+including this project. I also use the Gemini Code Assist plug-in for VS
+Code, my primary IDE. (I also use vi (vim), IntelliJ, Rider, and Emacs on
+occasion.)
+
+Almost none of the code herein is written by AI/ML tools. I enjoy the act
+of writing code (and especially documentation) and knowing how everything 
+is put together, so I like it this way, for now.
+
+Where I have found the tools to be extremely useful are in several cases:
+
+* **Explanations**: Gemini 3.5 Flash especially has been extremely good at
+  explaining what is going on in SANO-san's DotCL and how it interacts with
+  C# / CLR. I have found its explanations to be so clear that I have been
+  saving some of them in various `.md` files herein.
+
+* **Troubleshooting**: When I hit a wall and can't figure something out,
+  Gemini often is able to get me going again. And, I mean, much faster than
+  my traditional Googling it and reading docs and staring at the screen.
+  Embarrassingly, although I've been Lisping for almost 40 years now, I still
+  sometimes make dumb errors like having a paren in the wrong place, which it
+  finds very quickly. (I don't use paredit or other structural editing
+  tools. I am happy this way. I do love "rainbow parentheses" though!)
+
+* **Coding**: When I have something well defined that I just don't feel like
+  writing (usually because I've written it a jillion times before), I will
+  ask Gemini to do it. I usually overspecify my instructions compared to what
+  I have seen other tool users do, but it also means that in general the
+  output gets pretty close to my standards and I can use it with only
+  some edits.
+
+I do not submit ML-developed CLs / PRs (Change Lists / Pull Requests) to
+others in general. In the rare case if I would include tool-generated code, I
+have fully vetted it and would vouch for it as if I wrote it myself. 
 
 
 # Functionality Implemented
