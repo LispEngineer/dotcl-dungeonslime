@@ -203,6 +203,19 @@
   "Just calls the monogame base class equivalent."
   (dotnet:call-base (monogame game) "Draw" gt))
 
+(defmethod dispose ((game core))
+  "Calls the base class's Dispose after doing our own disposing.
+   Note that in the C# class, Dispose() is NOT virtual."
+  ;; Unload the content first
+  (format *error-output* "[core:dispose] unloading content...~%")
+  (dotnet:invoke (content game) "Unload")
+  (format *error-output* "[core:dispose] unloading content complete~%")
+  ;; Delete our *core* so we can recreate a game.
+  (format *error-output* "[core:dispose] destroying *core* singleton instance~%")
+  (setf *core* nil)
+  (format *error-output* "[core:dispose] calling super/Game.Dispose()~%")
+  (dotnet:call-base (monogame game) "Dispose"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLOS Object game-1, with parent class core
 
@@ -329,7 +342,14 @@
     ("Update" ((gt GameTime)) :returns Void :override t
       (let ((clos-instance (dotnet:invoke self "CLOSObject")))
         ;; This will call the base of this C# object if desired
-        (update clos-instance gt)))))
+        (update clos-instance gt)))
+
+    ("Dispose" () :returns Void
+      ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_Dispose
+      ;; Clean up after running a game
+      ;; This is NOT a virtual method, so it will hide the super class's
+      ;; method of the same name.
+      (dispose (dotnet:invoke self "CLOSObject")))))
 
 (format *error-output* "[main.lisp] about to defparameter *cs-game*~%")
 (defparameter *cs-game* nil

@@ -84,8 +84,18 @@ sorry!
 ;; otherwise the game window will just sit there and cause grief.
 ```
 
-TODO: I have not yet figured out a way to run the game a second
-time from the REPL.
+To run the game a second time: (**NOT** working)
+
+```lisp
+(setf *mg-game* (make-game))
+(setf (dotnet:invoke (content *game*) "RootDirectory") "/home/dfields/src/cl/MonoGameLispDemo-standalone/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
+(dotnet:invoke *mg-game* "Run")
+```
+
+Note that this currently does **NOT** work.
+It seems others have tried;
+[see this issue](https://github.com/MonoGame/MonoGame/issues/7816).
+In my case, it shows the game window and then segfaults out.
 
 
 ## Related Documents
@@ -151,7 +161,10 @@ the `--base` argument to see it work (in C#).
 
 # TO DO
 
-* Refactor `main.lisp` into multiple logical files
+* Refactor `main.lisp` into multiple logical files.
+
+* Make the Run() spawn the background REPL if it was executed from
+  the DotCL repl.
 
 * Implement a system to convert a CLOS class to a CLR/C# class somehow,
   or really, create a C# proxy for the CLOS class.
