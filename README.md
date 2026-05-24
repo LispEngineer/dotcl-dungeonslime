@@ -1,4 +1,4 @@
-# dotcl MonoGame Demonstration v2
+# dotcl MonoGame Common Lisp Dungeon Slime
 
 * Author: [Douglas P. Fields, Jr.](mailto:symbolics@lisp.engineer)
 * License: MIT (see [LICENSE](LICENSE)), per original author
@@ -37,10 +37,20 @@ and build and install the `dotcl` tool. This demo uses various files
 assuming they are in that sibling directory. These references are
 in the `MonoGameLispDemo.csproj` file.
 
-(As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
+### DotCL Version
+
+As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
 `dotnet tool install --global dotcl` does not work for me.
 As of 0.1.8 I am still using the self-compiled `dotcl` but I did
-not test the `dotnet tool install`ed one.)
+not test the `dotnet tool install`ed one.
+
+I am using a patched 0.1.8 that fixes a minor bug in the
+provided readline (backwards history) and also allows the
+readline to be interrupted (i.e., to stop a background thread).
+The game should build fine without these minor patches, which
+I have already submitted to DotCL.
+
+### Build & Launch Steps
 
 So, all the steps:
 
@@ -99,7 +109,9 @@ It seems others have tried;
 In my case, it shows the game window and then segfaults out.
 
 
-## Related Documents
+# Source File Descriptions
+
+## Documentation
 
 * [README-original.md](README-original.md) The original
   author SANO-san's README. Note: in Japanese.
@@ -121,6 +133,100 @@ In my case, it shows the game window and then segfaults out.
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
   (formerly called Gemini CLI)
   which the author sometimes uses with Gemini to figure things out.
+
+## Lisp
+
+* `settings.lisp`: Defines system-wide Lisp settings (e.g., `declaim`).
+
+* `constants.lisp`: Defines system-wide constants; very often these are
+  Lispy versions of C# enumerations.
+
+* `mg-core.lisp`: Creates a C# class `MonoGameCLOSProxy` which acts as a proxy between the
+  MonoGame Game C# world and the Lisp CLOS world. Defines a base CLOS
+  class called `core` which defines all the methods that are the target
+  of this proxy class. Importantly, the `core` must be given a reference
+  to an instantiated proxy class when instantiated! 
+  
+  This base `core` class has mostly administrative functionality:
+  * Start and stop the background REPL
+  * Set up the game window size, etc.
+  * Save various MonoGame-relevant items in CLOS slots in the
+    "constructor" (via `initialize-instance :after`)
+
+* `game-1.lisp`: An extension of the `core` class above that actually
+  will implement the MonoGame Dungeon Slime logic. For now, it also will
+  steadily rotate the background color between black and red, which speed can
+  be controlled with `color-cycle-period`. Changing that acts as a good test
+  that the in-game REPL is working.
+
+* `game-repl.lisp`: Provides functions to launch a background thread which
+  operates a Lisp REPL. Sorta klugey for now but works.
+
+* `load-repl.lisp`: Not a part of the sources of the game; use this like
+  `(load "load-repl.lisp")` from a clean `dotcl` REPL instance to get the
+  entire game loaded and ready for REPL hacking.
+
+* `main.lisp`: The main functions which instantiate the MonoGame Game class
+  by creating the CLOS and C# objects, associating them together, and
+  returning the C# class. It also stores the two classes in `*game*` and
+  `*cs-game*` (C sharp game).
+
+* `monoutils.lisp`: Lisp stub for the `MonoUtils.cs` class, which defines
+  several C# functions intended to be used from Lisp land. Works similarly
+  to DotCL's `dotnet` package. Also contains the documentation strings for
+  the functions as I couldn't figure out how to set them in the C# source.
+
+* `poc-test.lisp`: Optional Proofs of Concept and Tests that can be run by
+  including them in the `.asd` file (commented out by default). Useful during
+  development only.
+
+* `type-aliases.lisp`: Provides MonoGame-specific and other C# type aliases
+  into `dotnet::*type-aliases*` mostly for ease of reading the code.
+
+* `MonoGameLispDemo.asd`: ASDF system definition file for this game.
+
+## C#
+
+* `CsharpSanityGame.cs`: A MonoGame instance fully in C# to prove that
+  MonoGame has loaded correctly.
+
+* `MonoUtils.cs`: Containts the C# implementation of an `invoke-generic`
+  function that is akin to `dotnet:static-generic`. Also has a
+  `MonoUtilsRegistrar` class which will register the functions in the
+  DotCL environment under the `MONOUTILS` package; this needs to be
+  called at some point before use to make the functions visible to
+  Lisp.
+
+* `Program.cs`: Main launcher for the stand-alone executable. 
+  Optional arguments:
+  * `--csharp-sanity`
+  * `--base`
+
+### Deprecated C# Files
+
+* `BaseCaller.cs`: *Deprecated!* My implementation of methods that can call the "base"
+  class method of another class. Made before DotCL 0.1.8 added `call-base`.
+  I might go back to using it if performance dictates, because it provides
+  a `Func` that can be cached and called quickly without further reflection. 
+
+* `MonoGameLispUtilities.cs`: *Deprecated!* My implementation of helper functions
+  such as making non-generic versions of calls like `Load<Texture2D>`. Not needed
+  anymore with my `invoke-generic` function in MonoUtils.
+  
+
+## MonoGame Files
+
+* `Content/`: All the files that the game needs for pictures, etc.
+
+* `Content.mgcb`: MonoGame Content Builder configuration. This references all
+  the content that the `ContentManager` can load. I think there is something a
+  little off with my configuration, but it works.
+
+## Project Files
+
+* `MonoGameLispDemo.csproj`: This is the C# Project file for the game. Its
+  mystical incantations produce the final standalone binary. For more
+  details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
 
 
 # Functionality Implemented

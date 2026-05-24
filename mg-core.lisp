@@ -15,16 +15,6 @@
 (defparameter *core* nil
   "The singleton instance of the MonoGame Core CLOS class")
 
-(defconstant +window-defaults+
-  '(:title "Dungeon Slime"
-    :width 1280
-    :height 720
-    :full-screen nil)
-  "Default size, type and title of the game window")
-
-(defconstant +content-default+ "Content"
-  "The default content directory for the ContentManager")
-
 ;; MonoGame Core implemented as a CLOS class
 ;; See: https://docs.monogame.net/articles/tutorials/building_2d_games/04_creating_a_class_library/index.html?tabs=vscode#creating-our-first-library-module
 (defclass core ()
@@ -149,6 +139,8 @@
   (format *error-output* "[core:dispose] destroying *core* singleton instance~%")
   (setf *core* nil)
   (format *error-output* "[core:dispose] calling super/Game.Dispose()~%")
+  ;; This works to call the base class Dispose even though it's not virtual.
+  ;; Sort of like calling super.Dispose()
   (dotnet:call-base (monogame game) "Dispose"))
 
 (defmethod begin-run ((game core))
@@ -166,8 +158,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object
 
-;; Demo.LispGame: subclass of Game.
-(dotnet:define-class "Demo.LispGame" (Game)
+;; MonoGameLispProxy: subclass of (MonoGame) Game.
+;; This forwards all method calls to a contained CLOS object,
+;; and contains just a single field holding said CLOS object.
+;; If any calls have to be forwarded to the base Game class,
+;; the CLOS instance will have to handle that.
+;; This implements a non-virtual Dispose() method that will
+;; also be proxied to the CLOS object; I highly recommend that CLOS
+;; then also call the shadowed/hidden base Game.Dispose().
+(dotnet:define-class "MonoGameCLOSProxy" (Game)
 
   (:fields
     ;; The CLOS Object that this CLR object is wrapping
@@ -188,8 +187,6 @@
     (setf (dotnet:invoke self "CLOSObject") clos-obj))
   |#
 
-  ;; Note: There is no current way using the dotnet package to call
-  ;; the base class of a given new class you've created.
   (:methods
     ("Initialize" () :returns Void :override t
       (format *error-output* "[Demo.LispGame] Initialize: self = ~A~%" self)
@@ -228,4 +225,5 @@
       ;; Clean up after running a game
       ;; This is NOT a virtual method, so it will hide the super class's
       ;; method of the same name.
+      ;; The receiver should probably call MonoGame's Game.Dispose()
       (dispose (dotnet:invoke self "CLOSObject")))))
