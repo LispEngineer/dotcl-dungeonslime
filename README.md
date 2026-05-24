@@ -62,36 +62,20 @@ So, all the steps:
 ### How to Load in REPL
 
 First, build the game per the above - this will ensure the C#
-files are all compiled into `.dll` files which we can load.
+files are all compiled into `.dll` files which we can load, and
+the ContentManager can load its content.
 
 Invoke DotCL with `rlwrap --always-readline dotcl` (or omit rlwrap
 if you prefer).
 
+You will need to edit `load-repl.lisp` for your directory structure,
+sorry!
+
 ```lisp
-;; Load MonoGame first
-(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
+;; Load all the necessary dependencies and make a game instance as
+;; cl-user::*mg-game*
+(load "load-repl.lisp")
 
-;; Load the C# project assembly
-(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo.dll")
-
-;; Run the C# Registrar - this creates the "MONOUTILS" package and adds
-;; the C#-impleemnted functions to it
-(dotnet:static "MonoUtilsRegistrar" "Initialize")
-
-;; Load the Lisp code
-(require "asdf")
-;; This adds the current directory to the ASDF search list. It has very
-;; long output due to my use of Roswell so I truncate it.
-(length (push '*default-pathname-defaults* asdf:*central-registry*))
-;; Prevent the game's background REPL from spawning
-(defparameter *no-monogame-lisp-repl* t) ;; In CL-USER
-(asdf:load-system "MonoGameLispDemo")
-
-;; Create the game objects
-(defparameter *mg-game* (make-game))
-;; Tell MonoGame where to load content assets from
-;; (change this for your local installation)
-(setf (dotnet:invoke (content *game*) "RootDirectory") "/home/dfields/src/cl/MonoGameLispDemo-standalone/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
 ;; This next does not work - see note below
 (dotnet:invoke *mg-game* "Run")
 ```
@@ -99,6 +83,14 @@ if you prefer).
 **NOTE**: This will run the game, but for whatever reason when you
 exit the game (closing the window or ESC) it does not exit cleanly
 and you will have to kill the REPL.
+
+Note if you try to do something like
+`(dotcl-thread:make-thread (lambda () (dotnet:invoke *mg-game* "Run")))`,
+it will also not work, because you'll eventually get an error like:
+`GraphicsDevice.Clear: Operation not called on UI thread.`
+
+TODO: Make the game itself spawn the background REPL?
+
 
 ## Related Documents
 
@@ -182,14 +174,6 @@ the `--base` argument to see it work (in C#).
 * Figure out how a C# only Lisp package can be imported using just
   a `require` statement, like most Lisp packages. I am guessing this
   will require a package stub to be created somewhere/somehow.
-
-* Figure out how to load the whole game, C# bits and all, at a
-  DotCL REPL.
-  * This will load the Lisp package, but won't work until the C#
-    classes are loaded:
-    * `(require "asdf")`
-    * `(push '*default-pathname-defaults* asdf:*central-registry*)`
-    * `(asdf:load-system "MonoGameLispDemo")`
 
 
 # Open Questions
