@@ -101,7 +101,16 @@
     (dotnet:invoke sb "Begin"
                    (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
                    nil nil nil nil nil nil)
-    (dotnet:invoke sb "Draw" logo pos +color-white+)
+    ;; Use the full Draw call with every parameter
+    (dotnet:invoke sb "Draw" logo                  ;; Texture
+                             pos                   ;; Position
+                             nil                   ;; Source Rectangle
+                             +color-white+         ;; Color
+                             0.0e0                 ;; float rotation
+                             +v2-0+                ;; origin
+                             1.0e0                 ;; float scale
+                             +sprite-effects-none+ ;; effects
+                             0.0e0)                ;; float Layer Depth
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))
