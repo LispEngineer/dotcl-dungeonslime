@@ -5,4 +5,5 @@
                "dotcl-thread"
                "dotcl-repl")
   :components ((:file "monoutils")
-               (:file "main" :depends-on ("monoutils"))))
+               (:file "game-repl")
+               (:file "main" :depends-on ("monoutils" "game-repl"))))
