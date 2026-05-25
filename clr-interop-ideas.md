@@ -12,33 +12,44 @@ things in the operator position, including literal strings,
 or different things in function cells of symbols. They're not
 all necessarily compatible with each other.
 
-* ("Literal String" CLRObject ...) dotnet:invoke
+* `("Literal String" CLRObject ...)`
+  * If CLRObject is a C# object
+    * turn into `(dotnet:invoke CLRObject "Literal String" ...)`
   * If CLRObject is a Type - make a static call on the type
-  * If "Literal String" is "new" then act as allocator?
-* ("Literal String" "Literal String" ...)  dotnet:static
-  * Or a C# Type object for the 2nd slot
-* (defun Symbol "Literal String" "Doc String")
-* Chained accessors: "A.B.C"
+    * Turn into `(dotnet:static <Type String of CLRObject> "Literal String" ...)`
+  * If "Literal String" is "new" then act as an allocator/constructor
+    * CLRObject is a String = of that type
+    * CLRObject is a Type = of that type
+    * CLRObject is an instance = of the same type of instance
+* `("Literal String1" "Literal String2" ...)`
+  * Turn into `(dotnet:static "Literal String2" "Literal String1" ...)`
+  * Or a if a C# Type object for the 2nd slot:
+    * Turn into `(dotnet:static "Type of 2nd slot" "Literal String1" ...)`
+* `(defun Symbol "Literal String" "Doc String")`
+* Chained accessors: `"A.B.C"`
   * Each can be a Property or Method of no arguments
-* ('("String1" "String2" ...) CLRObject/LiteralString...)
-* "String<Type, ...>"
+  * `('("String1" "String2" ...) CLRObject/LiteralString...)`
+    * Call "String1" on CLRObject/LiteralString
+    * Then "String2" on the result
+    * Then ... on each preceding result
+* `"String<Type, ...>"`
   * Allow Generic function specification
-* "String[<Type, ...>]([Type, ...])"
+* `"String[<Type, ...>]([Type, ...])"`
   * Allow exact function specfication with parameters specified
-* (Symbol ...) where Symbol has no function cell but does have a
+* `(Symbol ...)` where Symbol has no function cell but does have a
   value cell with a literal String or other interop value (e.g., a
   c# delegate, etc.)?
   * This feels like it blurs too many lines, and we should just allow
     strings or other C#/CLR callables to be put directly into a symbol's function cell
-* Some mechanism to defun something with a CLR Func<>
+* Some mechanism to defun something with a CLR `Func<>`
   or other callables
 * Some way to call overloaded operators on types elegantly
   * `"operator+"`, etc.?
   * `"+"` → `"op_Addition"`, etc.?
-* Support Extension Method calls, e.g. in C# "some-string".ExtensionMethod()
+* Support Extension Method calls, e.g. in C# `"some-string".ExtensionMethod()`
 * Allow delegates in operator position, e.g., C# Action
   * Should it should be in Function cell
-  * (defun symbol delegate "docstring")
+  * `(defun symbol delegate "docstring")`
     * where delegate could be a symbol whose value cell contains the C# delegate object
 * Allow C# MethodInfo in operator position, e.g., 
 * Allow C# 9 Function Pointers (`delegate*`) in operator position
