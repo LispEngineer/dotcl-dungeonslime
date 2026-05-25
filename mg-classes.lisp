@@ -36,10 +36,24 @@
 (defconstant +v2-y1+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "UnitY")
   "C#'s Vector2.UnitY")
 
-(defun vector2 (x y)
+(defun vector2 (x &optional (y 0.0e0 y-supplied-p))
   "Returns a new C# Vector2 with the specified values. The number types in Vector2
-   are float."
-  (dotnet:new "Microsoft.Xna.Framework.Vector2" x y))
+   are float. If the y parameter is omitted, the Vector2 is initialized with
+   both components initialized to x"
+  (if y-supplied-p
+    (dotnet:new "Microsoft.Xna.Framework.Vector2" x y)
+    (dotnet:new "Microsoft.Xna.Framework.Vector2" x)))
+
+(defun v2* (arg1 arg2)
+  "Multiply two C# Vector2s. Valid pairs:
+  Vector2, Vector2
+  short-float, Vector2
+  Vector2, short-float"
+  (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Multiply" arg1 arg2))
+
+;; TODO: Add all the other v2 operators
+;; TODO: Make a multimethod if/when DotCL implements 
+;;       C# type dispatching on multimethods
 
 (defun rect (x y w h)
   "Returns a new C# Rectangle with the specified values. The number types in Vector2

@@ -117,7 +117,8 @@
          (i-h (height +icon-rect+))
          (w-w (width +wordmark-rect+))
          (w-h (height +wordmark-rect+))
-         (logo-ctr (vector2 (* l-w 0.5) (* l-h 0.5)))
+         ;; 
+         (logo-ctr (v2* (vector2 l-w l-h) 0.5e0))
          ;; The center of an offset (Source Rectangle) is not offset by the
          ;; source rectangle's x and y, so we can just use these:
          (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5)))
