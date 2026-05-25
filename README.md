@@ -118,7 +118,7 @@ In my case, it shows the game window and then segfaults out.
 
 * [lispdoc.md](doc/lispdoc.md) describes DotCL's `LispDoc`
   annotation, which I thought would generate docstrings.
-  This does not work as of 0.1.8.
+  This does not work as of DotCL 0.1.8.
 
 * [BUILD-GUIDE.md](doc/BUILD-GUIDE.md) describes in great detail how this
   project is built when you call `dotnet build`.
@@ -127,6 +127,10 @@ In my case, it shows the game window and then segfaults out.
   the current `dotnet:static-generic` function works, as I wanted to
   create an analoguous `monoutils:invoke-generic` function. I hope that
   function or an analog will be incorporated into DotCL.
+
+* [dotcl-form-evaluation.md](doc/dotcl-form-evaluation.md) explains how
+  DotCL 0.1.8 evaluates and compiles a form. (It only does compilation,
+  no interpretive evaluation.)
 
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
