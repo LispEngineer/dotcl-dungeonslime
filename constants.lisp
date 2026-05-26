@@ -30,3 +30,18 @@
 
 (defconstant +sprite-effects-none+
   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteEffects" "None"))
+(defconstant +sprite-effects-flip-horizontally+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteEffects" "FlipHorizontally"))
+(defconstant +sprite-effects-flip-vertically+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteEffects" "FlipVertically"))
+
+(defconstant +sprite-sort-mode-back-to-front+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "BackToFront"))
+(defconstant +sprite-sort-mode-deferred+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred"))
+(defconstant +sprite-sort-mode-front-to-back+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "FrontToBack"))
+(defconstant +sprite-sort-mode-immediate+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Immediate"))
+(defconstant +sprite-sort-mode-texture+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Texture"))

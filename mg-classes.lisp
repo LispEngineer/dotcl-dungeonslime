@@ -1,6 +1,8 @@
 ;;; Douglas P. Fields, Jr. <symbolics@lisp.engineer>
 ;;;
-;;; Basic MonoGame classes turned Lispy
+;;; Basic MonoGame classes turned Lispy.
+;;; Many of these things would be more efficient if they were converted
+;;; into macros, but that's an optimization for another day.
 
 (in-package :cl-user)
 
@@ -82,3 +84,15 @@
 (defun °2R (degrees)
   "Convert degrees to radians, returning a single-float (used commonly in MonoGame)"
   (coerce (* degrees (/ pi 180)) 'single-float))
+
+;; Ease of use function for Sprite Batch Begin
+(defun sprite-batch-begin (sprite-batch
+                           &optional (sort-mode +sprite-sort-mode-deferred+)
+                           blend-state sampler-state depth-stencil-state
+                           rasterizer-state effect transform-matrix)
+  "Call the SpriteBatch.Begin() function with the specified arguments."
+  ;; FIXME: Once DotCL allows calling dotnet:invoke with partial arguments
+  ;; and default values for the rest, we can get rid of this.
+  (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
+                                      depth-stencil-state rasterizer-state
+                                      effect transform-matrix))

@@ -126,9 +126,7 @@
          (wordmark-ctr (vector2 (* w-w 0.5) (* w-h 0.5))))
 
     (dotnet:invoke gd "Clear" c)
-    (dotnet:invoke sb "Begin"
-                   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")
-                   nil nil nil nil nil nil)
+    (sprite-batch-begin sb +sprite-sort-mode-back-to-front+)
 
     ;; Use the full Draw call with every parameter
     (dotnet:invoke sb "Draw" logo                  ;; Texture
@@ -149,7 +147,7 @@
                              wordmark-ctr          ;; origin
                              1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
-                             0e0)                  ;; float Layer Depth
+                             1e0)                  ;; float Layer Depth
 
     (dotnet:invoke sb "End"))
 
