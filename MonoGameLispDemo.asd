@@ -8,11 +8,11 @@
                (:file "monoutils")
                (:file "constants")
                ;; Uncomment the below to run the Proof of Concepts & Tests
-               (:file "poc-test" :depends-on ("monoutils" "constants" "setings"))
+               (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
                (:file "game-repl")
                (:file "type-aliases")
-               (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes"))
                (:file "mg-classes" :depends-on ("type-aliases"))
+               (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on

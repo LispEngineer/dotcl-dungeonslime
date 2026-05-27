@@ -311,6 +311,14 @@ Basic in-game REPL:
   `'("Microsoft.Xna.Framework.Graphics.Texture2D")`) registered in
   `dotnet::*type-aliases*`. 
   * Used for calling `Load<Texture2D>()` dynamically.
+* `dotnet-p`: Tells if the argument is a Lisp-embedded dotnet/C#/CLR object.
+* `boxed-dotnet-p`: Tells if the argument is a boxed dotnet/C#/CLR object,
+  created with `dotnet:box`.
+* `get-type`: Returns the Type object of a DotNet object, or nil if not a DotNet
+  object. But if the arg is a string, tries to get the DotNet type of that name.
+* `get-type-full-name`: Returns the string of the type name from `get-type` or nil.
+  So if you pass it a string, it should return the same thing.
+
 
 ## Deprecated Functionality
 
@@ -329,6 +337,11 @@ the `--base` argument to see it work (in C#).
 
 
 # TO DO
+
+* Build a multimethod that dispatches on C# classes.
+  Rationale: I'd like `width` to work on CLOS classes AND C# classes.
+  * Exact class match (e.g., the string of the exact class name)
+  * Instance of class match (e.g., that class or any subclass)
 
 * Build a MultiInvoke which does invoke on each one along the way, for example,
   `(multi-invoke mg-game "Window" "ClientBounds" "Width")`.

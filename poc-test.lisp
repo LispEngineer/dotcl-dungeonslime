@@ -35,3 +35,4 @@
   (format *error-output* "dotnet-p +false+ = ~A~%" (monoutils:dotnet-p +false+))
   (format *error-output* "boxed-dotnet-p +false+ = ~A~%" (monoutils:boxed-dotnet-p +false+)))
 
+(format *error-output* "[poc-test.lisp] Loaded.~%")

@@ -2,21 +2,26 @@
 ;; (load "load-repl.lisp")
 
 ;; Load MonoGame first
+(format *error-output* "[load-repl.lisp] Loading MonoGame...~%")
 (dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
 
 ;; Load the C# project assembly
+(format *error-output* "[load-repl.lisp] Loading MonoGameLispDemo C# assembly...~%")
 (dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo.dll")
 
 ;; Run the C# Registrar - this creates the "MONOUTILS" package and adds
 ;; the C#-impleemnted functions to it
+(format *error-output* "[load-repl.lisp] Running MonoUtilsRegistrar...~%")
 (dotnet:static "MonoUtilsRegistrar" "Initialize")
 
 ;; Load the Lisp code
+(format *error-output* "[load-repl.lisp] Loading asdf...~%")
 (require "asdf")
 ;; This adds the current directory to the ASDF search list. It has very
 ;; long output due to my use of Roswell so I truncate it.
 (length (push '*default-pathname-defaults* asdf:*central-registry*))
 
+(format *error-output* "[load-repl.lisp] Loading MonoGameLispDemo ASDF system...~%")
 (asdf:load-system "MonoGameLispDemo")
 ; Load a system super verbosely
 ; (let ((*load-verbose* t)(*compile-verbose* t)(*compile-print* t))  (asdf:load-system "MonoGameLispDemo"))
@@ -25,6 +30,7 @@
 ;; (setf game-repl:*no-lisp-repl* t)
 
 ;; Create the game objects
+(format *error-output* "[load-repl.lisp] Creating game objects...~%")
 (defparameter *mg-game* (make-game))
 ;; Tell MonoGame where to load content assets from
 ;; (change this for your local installation)
