@@ -387,6 +387,8 @@ the `--base` argument to see it work (in C#).
 
 ## Issues Filed
 
+* [Getting types of non-Lisp objects](https://github.com/dotcl/dotcl/issues/31)
+
 * FR:[Extend multimethods to C# types](https://github.com/dotcl/dotcl/issues/29)
 
 * [Enable `dotcl-repl:readline` to be interrupted](https://github.com/dotcl/dotcl/pull/28)

@@ -16,6 +16,14 @@
   "The default content directory for the MonoGame ContentManager")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DotNet Interop
+
+(defconstant +false+
+  (dotnet:box nil "System.Boolean")
+  "Use this when .NET interop does not properly interpret a nil as
+   a boolean false in C#")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C# Enumeration References
 
 (defconstant +esc-key+
@@ -45,3 +53,4 @@
   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Immediate"))
 (defconstant +sprite-sort-mode-texture+
   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Texture"))
+

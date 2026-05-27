@@ -188,6 +188,38 @@ public static class MonoUtils {
                 $"INVOKE-GENERIC {type.FullName}.{memberName}: {tie.InnerException?.Message ?? tie.Message}"));
         }
     } // InvokeGeneric
+
+    /// <summary>
+    /// <lispdoc>(monoutils:dotnet-p object) -- Returns T if the object is a LispDotNetObject (a wrapper for a .NET instance), NIL otherwise.</lispdoc>
+    /// Checks if the provided LispObject is a wrapper for a .NET object.
+    /// This includes Boxed wrappers.
+    /// </summary>
+    /// <param name="args">A LispObject array where args[0] is the object to test.</param>
+    /// <returns>T.Instance if it is a LispDotNetObject, otherwise Nil.Instance.</returns>
+    public static LispObject IsDotNetObject(LispObject[] args) {
+        if (args == null) { return Nil.Instance; }
+        if (args.Length < 1) { return Nil.Instance; }
+
+        var obj = args[0];
+
+        // TODO: Multiple value return saying if it is boxed?
+        return obj is LispDotNetObject ? T.Instance : Nil.Instance;
+    } // Is DotNetObject
+
+    /// <summary>
+    /// <lispdoc>(monoutils:boxed-dotnet-p object) -- Returns T if the object is a LispDotNetBoxed (a .NET object wrapper with an explicit type hint), NIL otherwise.</lispdoc>
+    /// Checks if the provided LispObject is a LispDotNetBoxed instance.
+    /// </summary>
+    /// <param name="args">A LispObject array where args[0] is the object to test.</param>
+    /// <returns>T.Instance if it is a LispDotNetBoxed, otherwise Nil.Instance.</returns>
+    public static LispObject IsBoxedDotNetObject(LispObject[] args) {
+        if (args == null) { return Nil.Instance; }
+        if (args.Length < 1) { return Nil.Instance; }
+
+        var obj = args[0];
+
+        return obj is LispDotNetBoxed ? T.Instance : Nil.Instance;
+    } // Is DotNetObject
 } // MonoUtils
 
 /** Register the various functions in the MONOUTILS package
@@ -212,5 +244,15 @@ public static class MonoUtilsRegistrar {
         var (sym2, _) = pkg.Intern("INVOKE-GENERIC");
         pkg.Export(sym2);
         sym2.Function = new LispFunction(MonoUtils.InvokeGeneric, "INVOKE-GENERIC", arity: -1);
+
+        // Intern and export "DOTNET-P"
+        var (sym3, _) = pkg.Intern("DOTNET-P");
+        pkg.Export(sym3);
+        sym3.Function = new LispFunction(MonoUtils.IsDotNetObject, "DOTNET-P", arity: 1);
+
+        // Intern and export "BOXED-DOTNET-P"
+        var (sym4, _) = pkg.Intern("BOXED-DOTNET-P");
+        pkg.Export(sym4);
+        sym4.Function = new LispFunction(MonoUtils.IsBoxedDotNetObject, "BOXED-DOTNET-P", arity: 1);
     }
 }

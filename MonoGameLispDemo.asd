@@ -6,13 +6,14 @@
                "dotcl-repl")
   :components ((:file "settings") ;; Load this file first, it contains declaims
                (:file "monoutils")
+               (:file "constants")
                ;; Uncomment the below to run the Proof of Concepts & Tests
-               ;(:file "poc-test" :depends-on ("monoutils"))
+               (:file "poc-test" :depends-on ("monoutils" "constants" "setings"))
                (:file "game-repl")
                (:file "type-aliases")
-               (:file "constants")
+               (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes"))
                (:file "mg-classes" :depends-on ("type-aliases"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on
-                 ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl"))))
+                 ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings"))))

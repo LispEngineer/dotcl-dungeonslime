@@ -22,3 +22,16 @@
   (dotnet:invoke child "Speak")
   (dotnet:call-base child "Speak"))
 
+
+;; Test type stuff
+(let ((x (dotnet:new "System.Collections.ArrayList")))
+  (format *error-output* "x = ~A~%" x)
+  (format *error-output* "type-of x = ~A~%" (type-of x))
+  (format *error-output* "class-of x = ~A~%" (class-of x))
+  (format *error-output* "dotnet-p x = ~A~%" (monoutils:dotnet-p x))
+  (format *error-output* "boxed-dotnet-p x = ~A~%" (monoutils:boxed-dotnet-p))
+  (format *error-output* "get-type x = ~A~%" (monoutils:get-type x))
+  (format *error-output* "get-type-full-name x = ~A~%" (monoutils:get-type-full-name x))
+  (format *error-output* "dotnet-p +false+ = ~A~%" (monoutils:dotnet-p +false+))
+  (format *error-output* "boxed-dotnet-p +false+ = ~A~%" (monoutils:boxed-dotnet-p +false+)))
+

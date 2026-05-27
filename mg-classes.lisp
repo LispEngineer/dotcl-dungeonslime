@@ -19,7 +19,9 @@
              #:y
              #:width
              #:height
-             #:°2R)))
+             #:°2R
+             #:sprite-batch-begin
+             )))
 
 (in-package :mg-classes)
 (require :dotnet-class)
