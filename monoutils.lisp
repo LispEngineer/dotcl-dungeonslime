@@ -36,7 +36,8 @@ Example:
 ;; In C#, calling GetType() on a string can fail for types in external assemblies unless they  
 ;; are assembly-qualified. I created the DynamicBaseCaller.GetType() method to get
 ;; around that.
-
+;; TODO: Memoize this function, but only if the type was resolved and it
+;;       was a string input.
 (defun get-type (obj-or-string)
   "Gets the C# Type object of the specified object, or nil if none. If the
    obj is a Lisp string, it tries to get the C# Type with that name."

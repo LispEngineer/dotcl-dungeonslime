@@ -114,3 +114,18 @@ The NuGet (.NET) libraries in use are:
   exactly one space.
 
 ## Common Lisp Code Style
+
+* Do not use the short-circuit binary operators `and` and `or` as
+  flow control mechanisms. In other words, do *not* write code
+  like this:
+  ```lisp
+  (and arg-type
+       spec-type
+    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
+  ```
+  But rather, write code like this:
+  ```lisp
+  (when (and arg-type spec-type)
+    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
+  ```
+
