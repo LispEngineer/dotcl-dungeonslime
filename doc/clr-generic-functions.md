@@ -61,7 +61,7 @@ The big difference between `defmethod` and `defc#method` is that the
 instead of two:
 
 * `symbol` - a standard Common Lisp type or class specifier; `T` will
-  match anything (in Version 2)
+  match anything (in Version 2), even non-C# objects.
 * `(eql eql-specializer-form)` - standard Common Lisp `eql` specializer (in Version 3)
 * `string` - This is new: a static CL string, which is the fully qualified
   C# type name (e.g., `"Microsoft.Xna.Framework.Graphics.Texture2D"`,
@@ -150,3 +150,9 @@ invocation.
 
 For this initial implementation, **Pure Macro-Expansion** will be used for
 simplicity and self-containedness.
+
+
+# Longer Term Ideas
+
+* Implement a full version of this as a patch to DotCL to seamlessly handle
+  C# classes as first class citizens in the generic function community.
