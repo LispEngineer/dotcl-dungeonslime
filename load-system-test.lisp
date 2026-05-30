@@ -29,6 +29,8 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   ;; If needed, you can push search paths to asdf:*central-registry* here
+  (format *error-output* "[load-system-test.lisp] asdf:*central-registry* = ~A~%"
+          asdf:*central-registry*)
   (asdf:load-system "anaphora"))
 
 (format *error-output* "[load-system-test.lisp] (length asdf:*central-registry*) = ~A~%" 

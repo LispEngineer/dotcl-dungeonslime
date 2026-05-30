@@ -11,6 +11,10 @@
 * Do NOT make any changes to DotCL source code unless explicitly
   directed by the user. All the work for this project is to be done
   on this MonoGameLispDemo code only.
+* Any question about "how" to do something should be answered with
+  an explanation on how to accomplish the thing requested, without
+  you making any changes to any files or executing any commands that
+  could change files.
 
 
 # Useful Commands

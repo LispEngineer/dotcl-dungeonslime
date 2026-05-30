@@ -72,6 +72,8 @@ So, all the steps:
    * To run in test mode, add `--test` to the command line, and it will
      not invoke the game.
 
+5. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
+
 ### How to Load in REPL
 
 First, build the game per the above - this will ensure the C#
@@ -503,3 +505,6 @@ the `--base` argument to see it work (in C#).
   once loaded in SBCL, you can use DotCL's ASDF to load those systems,
   e.g., `(asdf:load-system "MonoGameLispDemo")`.
   * I may work on the Quicklisp DotCL implementation at some point.
+
+* MGCB: To copy the `test-atlas.lisp` file to the output Content directory,
+  add it to the `.mgcb` file and change the `Build Action` to `Copy`.

@@ -25,3 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Content/images/logo.png
 
+#begin Content/test-atlas.lisp
+/copy:Content/test-atlas.lisp
+

@@ -118,6 +118,23 @@
           (*package* (find-package :cl-user))) ; 3. Control package context
       (read stream nil :eof))))                ; 4. Graceful EOF handling
 
+(defconstant +base-directory+
+  (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")
+  "Get the C# base directory of this current executable")
+
+(defun path-combine (part1 part2 &optional (part3 nil part3-p) (part4 nil part4-p))
+  "Calls the C# Path Combining logic with 2-4 parameters."
+  (cond
+   (part4-p
+    (dotnet:static "System.IO.Path" "Combine" part1 part2 part3 part4))
+   (part3-p
+    (dotnet:static "System.IO.Path" "Combine" part1 part2 part3))
+   (t
+    (dotnet:static "System.IO.Path" "Combine" part1 part2))))
+
+(format *error-output* "[texture-region.lisp] +base-directory+ = ~A~%" +base-directory+)
+(format *error-output* "[texture-region.lisp] combined = ~A~%" (path-combine +base-directory+ "Content/test-atlas.lisp"))
+
 (defvar ta-example-atlas
   '(:texture "SomeTexture.png"
     :regions (:first  (:x 0   :y 0 :w 128 :h 128)
@@ -127,7 +144,7 @@
 
 (format *error-output* "[texture-atlas.lisp] example atlas texture: ~S~%" (getf ta-example-atlas :texture))
 
-(setf ta-example-atlas (safe-read-form-from-file "Content/test-atlas.lisp"))
+(setf ta-example-atlas (safe-read-form-from-file (path-combine +base-directory+ "Content/test-atlas.lisp")))
 
 (format *error-output* "[texture-atlas.lisp] example file atlas: ~S~%" ta-example-atlas)
 
@@ -171,7 +188,7 @@
       atlas)))
 
 ;; Test to ensure that the example test-atlas.lisp file can be read correctly.
-(let ((test-atlas (ta-from-file "Content/test-atlas.lisp")))
+(let ((test-atlas (ta-from-file (path-combine +base-directory+ "Content/test-atlas.lisp"))))
   (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
   (assert (typep test-atlas 'texture-atlas))
   (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
