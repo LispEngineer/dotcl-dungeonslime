@@ -361,8 +361,12 @@ C# Class-Aware Generic Function System (Version 1):
 
 Texture Regions and Texture Atlases:
 * Implemented the CLOS classes `texture-region` and `texture-atlas` to manage sprite subdivisions.
-* Created `safe-read-form-from-file` in `texture-region.lisp` to securely load 
+* Created `safe-read-form-from-file` in `texture-region.lisp` to securely load
   Lisp-based texture atlas descriptions without read-time evaluation.
+* Implemented `ta-from-file` in `texture-region.lisp` which loads a `texture-atlas` from a Lisp
+  form description file (like `Content/test-atlas.lisp`), converting symbol/keyword region
+  names to strings for the atlas registry. It is accompanied by a validation test
+  that runs on startup.
 
 
 ## Deprecated Functionality

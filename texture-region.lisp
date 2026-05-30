@@ -3,6 +3,7 @@
 ;;; MonoGame Tutorial Chapter 7: TextureRegion as a CLOS class.
 
 (in-package :cl-user)
+;; (require "asdf") ;; Load uiop library - THIS DOES NOT WORK
 
 (format *error-output* "[texture-region.lisp] Loading in package ~S~%" *package*)
 
@@ -130,3 +131,61 @@
 
 (format *error-output* "[texture-atlas.lisp] example file atlas: ~S~%" ta-example-atlas)
 
+(defun string-suffix-p (filename suffix)
+  "Implementation of uiop:string-suffix-p"
+  (null (mismatch suffix filename :from-end t :start2 (- (length filename) (length suffix)))))
+
+(defun ta-from-file (filepath &optional content-manager)
+  "Creates a texture-atlas from a Lisp form description file.
+   filepath: path to the file containing the Lisp form description.
+   content-manager: MonoGame ContentManager, used to load the texture.
+     (can be nil for testing purposes only!)
+   Returns the newly created texture atlas."
+  (let ((plist (safe-read-form-from-file filepath)))
+    (when (eq plist :eof)
+      (error "Empty or invalid texture atlas file: ~A" filepath))
+    (let* ((tex-name (getf plist :texture))
+           (regions-plist (getf plist :regions))
+           ;; Remove the .png suffix (if any) from the texture name
+           (clean-name (if (and (stringp tex-name)
+                                ;; (uiop:string-suffix-p tex-name ".png"))
+                                (string-suffix-p tex-name ".png"))
+                         (subseq tex-name 0 (- (length tex-name) 4))
+                         tex-name))
+           ;; For test purposes, we allow content-manager to be nil and just set
+           ;; the texture to the clean name
+           (tex (if content-manager
+                  (monoutils:invoke-generic content-manager "Load" '("TEXTURE2D") clean-name)
+                  clean-name))
+           ;; Create the texture-atlas instance
+           (atlas (make-instance 'texture-atlas :texture tex)))
+      ;; Add each region
+      (loop for (key val) on regions-plist by #'cddr
+            do (let ((name (string key))
+                      (x (getf val :x 0))
+                      (y (getf val :y 0))
+                      (w (getf val :w 0))
+                      (h (getf val :h 0)))
+                  (ta-add-region atlas name x y w h)))
+      ;; Return our completed texture atlas
+      atlas)))
+
+;; Test to ensure that the example test-atlas.lisp file can be read correctly.
+(let ((test-atlas (ta-from-file "Content/test-atlas.lisp")))
+  (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
+  (assert (typep test-atlas 'texture-atlas))
+  (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
+  (let ((reg-a (ta-get-region test-atlas "A"))
+        (reg-b (ta-get-region test-atlas "B")))
+    (assert reg-a)
+    (assert reg-b)
+    (assert (monoutils:dotnet-p (source-rect reg-a)))
+    (assert (equal (x (source-rect reg-a)) 0))
+    (assert (equal (y (source-rect reg-a)) 0))
+    (assert (equal (width (source-rect reg-a)) 64))
+    (assert (equal (height (source-rect reg-a)) 64))
+    (assert (equal (x (source-rect reg-b)) 64))
+    (assert (equal (y (source-rect reg-b)) 0))
+    (assert (equal (width (source-rect reg-b)) 64))
+    (assert (equal (height (source-rect reg-b)) 64)))
+  (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))

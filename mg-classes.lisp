@@ -11,6 +11,7 @@
   (defpackage :mg-classes
     (:use :cl)
     (:export #:vector2
+             #:rect
              #:+v2-0+
              #:+v2-1+
              #:+v2-x1+
