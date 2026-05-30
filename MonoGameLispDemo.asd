@@ -3,7 +3,8 @@
   :version "0.2"
   :depends-on ("dotnet-class"
                "dotcl-thread"
-               "dotcl-repl")
+               "dotcl-repl"
+               "anaphora")
   :components ((:file "settings") ;; Load this file first, it contains declaims
                (:file "monoutils")
                (:file "constants")

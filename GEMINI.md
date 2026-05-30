@@ -8,6 +8,9 @@
 * Update `antigravity-log.md` with any explanation you provide me,
   and a log of any changes you make to any files.
   * Create this file if it does not exist
+* Do NOT make any changes to DotCL source code unless explicitly
+  directed by the user. All the work for this project is to be done
+  on this MonoGameLispDemo code only.
 
 
 # Useful Commands
