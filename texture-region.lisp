@@ -24,16 +24,21 @@
     :initarg :source-rect))
   (:documentation "Stores a texture and its source rectangle."))
 
+(format *error-output* "[texture-region.lisp] Showing defined generic methods on width~%")
+(format *error-output* "[texture-region.lisp] Before defining texture-region specialization~%")
 (print-gf-methods 'width)
 (defmethod width ((tr texture-region))
   "Gets the width of the source-rect of this texture-region"
   (format *error-output* "[texture-region:width] tr = ~A~%" tr)
   (width (source-rect tr)))
+(format *error-output* "[texture-region.lisp] After defining texture-region specialization~%")
 (print-gf-methods 'width)
 (defmethod width ((str string))
   "Gets the length of this string"
   (length str))
+(format *error-output* "[texture-region.lisp] After defining string specialization~%")
 (print-gf-methods 'width)
+(format *error-output* "[texture-region.lisp] End showing defined generic methods on width~%")
 
 (defmethod height ((obj texture-region))
   "Gets the height of the source-rect of this texture-region"
