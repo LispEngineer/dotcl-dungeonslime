@@ -49,11 +49,17 @@
 (defparameter *game* nil
   "The CLOS object of the MonoGame Game")
 
+(defconstant +atlas-texture+ "images/atlas"
+  "The filename (without extension) of our texture atlas.")
+
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 (core)
-  ((logo
-    ;; This is a Texture2D instance
-    :accessor logo)))
+  ((slime
+    :accessor slime
+    :documentation "A Texture2D picture of a slime")
+   (bat
+    :accessor bat
+    :documentation "A Texture2D picture of a bat")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -67,18 +73,17 @@
   (call-next-method game))
 
 (defmethod load-content ((game game-1))
-  "Load our logo then pass to base class."
-  (format *error-output* "[game-1:load-content] Loading logo...~%")
+  "Load our atlas textures then pass to base class."
+  (format *error-output* "[game-1:load-content] Loading content...~%")
   (let* ((cont (content game))
-         #|
-         ;; Use our C# helper to invoke generic Content.Load<Texture2D>
-         (l (dotnet:static "MonoGameLispUtilities" "LoadTexture2D" cont "images/logo")))
-         |#
-         ;; Use monoutils:invoke-generic to load generic Content.Load<Texture2D>
-         ;; TEXTURE2D
-         (l (monoutils:invoke-generic cont "Load" '("TEXTURE2D") "images/logo")))
-    (format *error-output* "[game-1:load-content] Loaded logo = ~A~%" l)
-    (setf (logo game) l))
+         (atlas-texture (monoutils:invoke-generic cont "Load" '("TEXTURE2D") +atlas-texture+))
+         (atlas (make-instance 'texture-atlas :texture atlas-texture)))
+    (format *error-output* "[game-1:load-content] Loaded atlas texture = ~A~%" atlas-texture)
+    (ta-add-region atlas "slime" 0 0 20 20)
+    (ta-add-region atlas "bat" 20 0 20 20)
+    (format *error-output* "[game-1:load-content] atlas = ~A~%" atlas)
+    (setf (slime game) (ta-get-region atlas "slime"))
+    (setf (bat game) (ta-get-region atlas "bat")))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
@@ -105,10 +110,10 @@
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
-         (rot (rotation secs))
          (sb (sprite-batch game))
+         #|
+         (rot (rotation secs))
          (client-bounds (dotnet:invoke (dotnet:invoke (monogame game) "Window") "ClientBounds"))
-         (logo (logo game))
          (cb-w (width client-bounds))
          (cb-h (height client-bounds))
          (l-w (width logo))
@@ -123,11 +128,34 @@
          ;; source rectangle's x and y, so we can just use these:
          (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5)))
          (icon-ctr (vector2 (* i-w 0.5) (* i-h 0.5)))
-         (wordmark-ctr (vector2 (* w-w 0.5) (* w-h 0.5))))
+         (wordmark-ctr (vector2 (* w-w 0.5) (* w-h 0.5)))
+         |#
+        )
 
     (dotnet:invoke gd "Clear" c)
-    (sprite-batch-begin sb +sprite-sort-mode-back-to-front+)
 
+#|
+    // Begin the sprite batch to prepare for rendering.
+    SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+    // Draw the slime texture region at a scale of 4.0
+    _slime.Draw(SpriteBatch, Vector2.Zero, Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 0.0f);
+
+    // Draw the bat texture region 10px to the right of the slime at a scale of 4.0
+    _bat.Draw(SpriteBatch, new Vector2(_slime.Width * 4.0f + 10, 0), Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 1.0f);
+
+    // Always end the sprite batch when finished.
+    SpriteBatch.End();
+|#
+
+    ;; Prepare for rendering
+    (sprite-batch-begin sb :sampler-state +sampler-state-point-clamp+)
+
+    ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
+    (tr-draw (slime game) sb +v2-0+                                      +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 0.0e0)
+    (tr-draw (bat game)   sb (vector2 (+ 10 (* (width (slime game)) 4))) +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 1.0e0)
+
+#|
     ;; Use the full Draw call with every parameter
     (dotnet:invoke sb "Draw" logo                  ;; Texture
                              screen-ctr            ;; Position
@@ -148,6 +176,7 @@
                              1e0                   ;; float scale
                              +sprite-effects-none+ ;; effects
                              1e0)                  ;; float Layer Depth
+|#
 
     (dotnet:invoke sb "End"))
 

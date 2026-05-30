@@ -19,20 +19,34 @@
     ;; during MAKE-INSTANCE.
     :initarg :texture)
    (source-rect
+    :documentation "A MonoGame Rectangle referenced to the texture"
     :accessor source-rect
     :initarg :source-rect))
   (:documentation "Stores a texture and its source rectangle."))
 
-#|
+(print-gf-methods 'width)
 (defmethod width ((tr texture-region))
   "Gets the width of the source-rect of this texture-region"
   (format *error-output* "[texture-region:width] tr = ~A~%" tr)
   (width (source-rect tr)))
+(print-gf-methods 'width)
+(defmethod width ((str string))
+  "Gets the length of this string"
+  (length str))
+(print-gf-methods 'width)
 
 (defmethod height ((obj texture-region))
   "Gets the height of the source-rect of this texture-region"
   (height (source-rect obj)))
-|#
+
+(defmethod x ((obj texture-region))
+  "Gets the x-coordinate of the source-rect of this texture-region"
+  (format *error-output* "[texture-region:x] (source-rect obj) = ~A~%" (source-rect obj))
+  (x (source-rect obj)))
+
+(defmethod y ((obj texture-region))
+  "Gets the y-coordinate of the source-rect of this texture-region"
+  (y (source-rect obj)))
 
 (defun tr-draw (tr sb pos color 
                 &optional (rotation 0.0e0) (origin nil) (scale +v2-1+)
@@ -82,6 +96,7 @@
   ;; Create an empty hash table for the regions
   (setf (regions atlas) (make-hash-table :test #'equal)))
 
+;; TODO: Consider making these generic functions and dispatch on the texture-atlas?
 (defun ta-add-region (ta name x y w h)
   "Creates a new region and adds it to this texture atlas.
    name: The name to give the texture region.
@@ -231,12 +246,12 @@
     (assert reg-a)
     (assert reg-b)
     (assert (monoutils:dotnet-p (source-rect reg-a)))
-    (assert (equal (x (source-rect reg-a)) 0))
-    (assert (equal (y (source-rect reg-a)) 0))
-    (assert (equal (width (source-rect reg-a)) 64))
-    (assert (equal (height (source-rect reg-a)) 64))
-    (assert (equal (x (source-rect reg-b)) 64))
-    (assert (equal (y (source-rect reg-b)) 0))
-    (assert (equal (width (source-rect reg-b)) 64))
-    (assert (equal (height (source-rect reg-b)) 64)))
+    (assert (equal (x      reg-a) 0))
+    (assert (equal (y      reg-a) 0))
+    (assert (equal (width  reg-a) 64))
+    (assert (equal (height reg-a) 64))
+    (assert (equal (x      reg-b) 64))
+    (assert (equal (y      reg-b) 0))
+    (assert (equal (width  reg-b) 64))
+    (assert (equal (height reg-b) 64)))
   (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))

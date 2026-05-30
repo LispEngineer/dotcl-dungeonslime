@@ -74,6 +74,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Generic functions
 
+(defun print-gf-methods (gf-name)
+  "Prints information about a DotCL Generic Function"
+
+  (when (not (fboundp gf-name))
+    (format *error-output* "~&Generic Function ~S not yet defined.~%" gf-name)
+    (return-from print-gf-methods))
+
+  (let* ((gf (symbol-function gf-name))
+         (methods (dotcl-mop:generic-function-methods gf)))
+    (format *error-output* "~&Generic Function ~S has ~D method(s):~%" gf-name (length methods))
+    (dolist (m methods)
+      (let ((qualifiers (dotcl-mop:method-qualifiers m))
+            (specializers (mapcar (lambda (spec)
+                                    (if (typep spec 'class)
+                                        (class-name spec)
+                                        spec))
+                                  (dotcl-mop:method-specializers m))))
+        (format *error-output* "  Method qualifiers: ~A, Specializers: ~A~%" 
+                qualifiers specializers)))))
+
 ;; If we figure out C# class dispatched multimethods, just make "x" and "y".
 ;; They may be the same anyway, if the accessors on the class are the same!
 
@@ -95,14 +115,17 @@
     (dotnet:invoke obj "Y")
     (error "Unknown object for X: ~S" obj)))
 
+(print-gf-methods 'width)
 (defgeneric width (obj)
   (:documentation "Gets the width of the specified object"))
 
+(print-gf-methods 'width)
 (defmethod width ((obj t))
   "Get the width of a C# object like a Rectangle"
   (if (dotnet-p obj)
     (dotnet:invoke obj "Width")
     (error "Unknown object for width: ~S" obj)))
+(print-gf-methods 'width)
 
 (defgeneric height (obj)
   (:documentation "Gets the height of the specified object"))
@@ -121,6 +144,7 @@
   (coerce (* degrees (/ pi 180)) 'single-float))
 
 ;; Ease of use function for Sprite Batch Begin
+#|
 (defun sprite-batch-begin (sprite-batch
                            &optional (sort-mode +sprite-sort-mode-deferred+)
                            blend-state sampler-state depth-stencil-state
@@ -128,6 +152,24 @@
   "Call the SpriteBatch.Begin() function with the specified arguments."
   ;; FIXME: Once DotCL allows calling dotnet:invoke with partial arguments
   ;; and default values for the rest, we can get rid of this.
+  (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
+                                      depth-stencil-state rasterizer-state
+                                      effect transform-matrix))
+|#
+
+(format *error-output* "[mg-classes.lisp] cl-user::+sprite-sort-mode-deferred+ = ~A~%"
+        cl-user::+sprite-sort-mode-deferred+)
+
+;; Ease of use function for Sprite Batch Begin using keyword arguments
+(defun sprite-batch-begin (sprite-batch
+                            &key (sort-mode cl-user::+sprite-sort-mode-deferred+)
+                            (blend-state nil)
+                            (sampler-state nil)
+                            (depth-stencil-state nil)
+                            (rasterizer-state nil)
+                            (effect nil)
+                            (transform-matrix nil))
+  "Call the SpriteBatch.Begin() function with the specified arguments."
   (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
                                       depth-stencil-state rasterizer-state
                                       effect transform-matrix))

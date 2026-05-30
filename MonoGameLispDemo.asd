@@ -16,7 +16,7 @@
                (:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
                ;; End tests to uncomment
                (:file "game-repl")
-               (:file "mg-classes" :depends-on ("type-aliases" "clr-generic"))
+               (:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants" "dotnet-class"))
                (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))

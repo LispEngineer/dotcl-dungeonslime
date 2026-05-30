@@ -54,3 +54,6 @@
 (defconstant +sprite-sort-mode-texture+
   (dotnet:static "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Texture"))
 
+(defconstant +sampler-state-point-clamp+
+  (dotnet:static "Microsoft.Xna.Framework.Graphics.SamplerState" "PointClamp"))
+
