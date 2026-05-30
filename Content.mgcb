@@ -13,6 +13,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Content/atlas-definition.lisp
+/copy:Content/atlas-definition.lisp
+
 #begin Content/images/atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor

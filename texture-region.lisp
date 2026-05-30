@@ -153,8 +153,14 @@
   (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")
   "Get the C# base directory of this current executable")
 
+;; I have no idea why, but this stopped working...?
+;; %Unhandled exception. System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+;;  ---> System.MissingMethodException: Method 'System.IO.Path.Combine' not found.
+#|
 (defun path-combine (part1 part2 &optional (part3 nil part3-p) (part4 nil part4-p))
   "Calls the C# Path Combining logic with 2-4 parameters."
+  (format *error-output* "[path-combine] part1 = ~A, part2 = ~A, part3 = ~A, part4 = ~A, part3-p = ~A, part4-p = ~A%"
+          part1 part2 part3 part4 part3-p part4-p)
   (cond
    (part4-p
     (dotnet:static "System.IO.Path" "Combine" part1 part2 part3 part4))
@@ -162,6 +168,20 @@
     (dotnet:static "System.IO.Path" "Combine" part1 part2 part3))
    (t
     (dotnet:static "System.IO.Path" "Combine" part1 part2))))
+|#
+
+;; UIOP version
+(defun path-combine (part1 part2 &optional (part3 nil part3-p) (part4 nil part4-p))
+  "Calls the UIOP Path Combining logic with 2-4 parameters."
+  (format *error-output* "[path-combine] part1 = ~A, part2 = ~A, part3 = ~A, part4 = ~A, part3-p = ~A, part4-p = ~A~%"
+          part1 part2 part3 part4 part3-p part4-p)
+  (cond
+   (part4-p
+    (uiop:subpathname*  part1 part2 part3 part4))
+   (part3-p
+    (uiop:subpathname*  part1 part2 part3))
+   (t
+    (uiop:subpathname*  part1 part2))))
 
 #|
 (defun file-exists-and-readable-p (filename)
@@ -190,11 +210,19 @@
   ;; +base-directory+ to a reasonable setting:
   ;; [texture-region.lisp] +base-directory+ =
   ;;   /home/dfields/.dotnet/tools/.store/dotcl/0.1.8/dotcl.linux-x64/0.1.8/tools/net10.0/linux-x64/
-  (cond
-    ((file-exists-and-readable-p filename) filename)
-    ((file-exists-and-readable-p (path-combine +base-directory+ filename))
-     (path-combine +base-directory+ filename))
-    (t filename)))
+  (format *error-output* "[qualify-path] filename = ~A, +base-directory+ = ~A~%" filename +base-directory+)
+  (let ((combined (path-combine +base-directory+ filename)))
+    (format *error-output* "[qualify-path] combined = ~A~%" combined)
+    (cond
+      ((file-exists-and-readable-p filename) 
+       (format *error-output* "[qualify-path] exists~A") 
+       filename)
+      ((file-exists-and-readable-p combined)
+       (format *error-output* "[qualify-path] exists with +base-directory+ = ~S~A" combined)
+       combined)
+      (t 
+       (format *error-output* "[qualify-path] neither~A")
+       filename))))
 
 (format *error-output* "[texture-region.lisp] +base-directory+ = ~A~%" +base-directory+)
 (format *error-output* "[texture-region.lisp] combined = ~A~%" (qualify-path "Content/test-atlas.lisp"))
