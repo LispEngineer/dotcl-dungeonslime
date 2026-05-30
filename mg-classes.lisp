@@ -79,7 +79,7 @@
 (defgeneric x (obj)
   (:documentation "Gets the X component of the specified object"))
 
-(defmethod x (obj)
+(defmethod x ((obj t))
   "Get X component of a C# Type with an X field, e.g. Vector2, Rectangle"
   (if (dotnet-p obj)
     (dotnet:invoke obj "X")
@@ -88,7 +88,7 @@
 (defgeneric y (obj)
   (:documentation "Gets the Y component of the specified object"))
 
-(defmethod y (obj)
+(defmethod y ((obj t))
   "Get Y component of a C# Type with an Y field, e.g. Vector2, Rectangle"
   (if (dotnet-p obj)
     (dotnet:invoke obj "Y")
