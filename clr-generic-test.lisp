@@ -77,20 +77,20 @@
 (defc#generic test-alias-gf (obj)
   (:documentation "Test type alias resolution in C# generic functions"))
 
-(defc#method test-alias-gf ((obj "GAME"))
-  (format t "[test-alias-gf] GAME alias method called~%")
-  :game-alias)
+(defc#method test-alias-gf ((obj "GAMETIME"))
+  (format t "[test-alias-gf] GAMETIME alias method called~%")
+  :gametime-alias)
 
 (defc#method test-alias-gf ((obj t))
   (format t "[test-alias-gf] Fallback method called~%")
   :fallback)
 
-(let ((game (dotnet:new "Microsoft.Xna.Framework.Game")))
-  (let ((r-game (test-alias-gf game))
+(let ((gt (dotnet:new "Microsoft.Xna.Framework.GameTime")))
+  (let ((r-gt (test-alias-gf gt))
         (r-fallback (test-alias-gf 42)))
-    (format t "r-game = ~S, expected = ~S~%" r-game :game-alias)
+    (format t "r-gt = ~S, expected = ~S~%" r-gt :gametime-alias)
     (format t "r-fallback = ~S, expected = ~S~%" r-fallback :fallback)
-    (assert (eq r-game :game-alias))
+    (assert (eq r-gt :gametime-alias))
     (assert (eq r-fallback :fallback))))
 
 (format *error-output* "[clr-generic-test.lisp] All tests passed!~%")
