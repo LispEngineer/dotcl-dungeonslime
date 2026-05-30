@@ -28,6 +28,9 @@
 
 (format *error-output* "[mg-classes.lisp] Loading in package ~S~%" *package*)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Vector functions
+
 (defconstant +v2-0+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero")
   "C#'s Vector2.Zero")
 
@@ -59,29 +62,58 @@
 ;; TODO: Make a multimethod if/when DotCL implements 
 ;;       C# type dispatching on multimethods
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rectangle functions
+
 (defun rect (x y w h)
   "Returns a new C# Rectangle with the specified values. The number types in Vector2
    are float."
   (dotnet:new "Microsoft.Xna.Framework.Rectangle" x y w h))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Generic functions
+
 ;; If we figure out C# class dispatched multimethods, just make "x" and "y".
 ;; They may be the same anyway, if the accessors on the class are the same!
 
-(defun x (vec)
+(defgeneric x (obj)
+  (:documentation "Gets the X component of the specified object"))
+
+(defmethod x (obj)
   "Get X component of a C# Type with an X field, e.g. Vector2, Rectangle"
-  (dotnet:invoke vec "X"))
+  (if (dotnet-p obj)
+    (dotnet:invoke obj "X")
+    (error "Unknown object for X: ~S" obj)))
 
-(defun y (vec)
+(defgeneric y (obj)
+  (:documentation "Gets the Y component of the specified object"))
+
+(defmethod y (obj)
   "Get Y component of a C# Type with an Y field, e.g. Vector2, Rectangle"
-  (dotnet:invoke vec "Y"))
+  (if (dotnet-p obj)
+    (dotnet:invoke obj "Y")
+    (error "Unknown object for X: ~S" obj)))
 
-(defun width (rect)
-  "Get the width of a C# Rectangle"
-  (dotnet:invoke rect "Width"))
+(defgeneric width (obj)
+  (:documentation "Gets the width of the specified object"))
 
-(defun height (rect)
-  "Get the height of a C# Rectangle"
-  (dotnet:invoke rect "Height"))
+(defmethod width ((obj t))
+  "Get the width of a C# object like a Rectangle"
+  (if (dotnet-p obj)
+    (dotnet:invoke obj "Width")
+    (error "Unknown object for width: ~S" obj)))
+
+(defgeneric height (obj)
+  (:documentation "Gets the height of the specified object"))
+
+(defmethod height ((obj t))
+  "Get the height of a C# object like a Rectangle"
+  (if (dotnet-p obj)
+    (dotnet:invoke obj "Height")
+    (error "Unknown object for height: ~S" obj)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Helper Functions
 
 (defun °2R (degrees)
   "Convert degrees to radians, returning a single-float (used commonly in MonoGame)"

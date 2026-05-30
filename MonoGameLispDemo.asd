@@ -8,13 +8,14 @@
                (:file "monoutils")
                (:file "constants")
                (:file "type-aliases")
+               (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
                (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
-               (:file "clr-generic" :depends-on ("monoutils"))
                (:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
+               ;; End tests to uncomment
                (:file "game-repl")
-               (:file "mg-classes" :depends-on ("type-aliases"))
-               (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes"))
+               (:file "mg-classes" :depends-on ("type-aliases" "clr-generic"))
+               (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on
