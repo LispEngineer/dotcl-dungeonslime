@@ -132,6 +132,8 @@ The Common Lisp libraries in use are:
   * [UIOP Manual - HTML](https://asdf.common-lisp.dev/uiop.html)
   * [UIOP Manual - PDF](https://asdf.common-lisp.dev/uiop.pdf)
   * This is provided by DotCL
+* [Anaphora](https://quickref.common-lisp.net/anaphora.html)
+  * [Anaphora GitHub](https://github.com/spwhitton/anaphora)
 
 The NuGet (.NET) libraries in use are:
 * [MonoGame](https://monogame.net/)
