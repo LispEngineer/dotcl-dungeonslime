@@ -10,21 +10,63 @@
   * Create this file if it does not exist
 
 
+# Code Style Instructions
+
+## Testing
+
+All new code must have tests. However:
+* There is no test framework in use, so use language-native capabilities.
+* Print the results of tests on error output.
+* Tests should either run:
+  * With a command line flag like `--test`
+  * Every time the program starts
+
+## C# Code Style
+
+* You must keep an open brace of a block on the same line as
+  what preceeds it, rather than alone on a new line, separated by
+  exactly one space.
+* Every block on an `if` or `else` must be surrounded by braces.
+* The `else` clause in an `if` statment should have the close and
+  open brace on the same line as the `else`, each separated by 
+  exactly one space.
+
+## Common Lisp Code Style
+
+* Do not use the short-circuit binary operators `and` and `or` as
+  flow control mechanisms. In other words, do *not* write code
+  like this:
+  ```lisp
+  (and arg-type
+       spec-type
+    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
+  ```
+  But rather, write code like this:
+  ```lisp
+  (when (and arg-type spec-type)
+    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
+  ```
+
+
 # Language
 
 This software targets the [dotcl](https://github.com/dotcl/dotcl)
-Common Lisp environment on top of the DotNet CLR. It also uses the
+Common Lisp environment on top of the [DotNet CLR](https://learn.microsoft.com/en-us/dotnet/standard/clr).
+It also uses the
 [MonoGame](https://monogame.net/) library for the user interface.
-This is targeting the .Net (DotNet) 10 release.
+
+This application is targeting the .Net (DotNet) 10 release, and will
+likely target a newer .Net release when available.
 
 This code is written primarily in Common Lisp. Additional utilities
-are written in C# to ease the interface between the dotcl Common
+are written in C# to ease the interface between the DotCL Common
 Lisp environment and C#/MonoGame.
 
 It is running on Ubuntu 24.04 on the x86_64 platform. When possible,
-try to keep the code cross-platform.
+try to keep the code cross-platform, at least so it can be built and
+run on Windows 11 as well.
 
-This project is publicly available at https://github.com/LispEngineer/dotcl-dungeonslime .
+This project is publicly available on [GitHub](https://github.com/LispEngineer/dotcl-dungeonslime).
 
 Some useful Common Lisp documentation:
 * [Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)
@@ -54,7 +96,8 @@ MonoGame information:
 
 dotcl information:
 * [dotcl GitHub Repo](https://github.com/dotcl/dotcl)
-* [Local dotcl Source](../dotcl-clean) - sibling to this directory
+* [Local edited dotcl Source](../dotcl) - sibling to this director
+* [Local Unedited dotcl Source](../dotcl-clean) - sibling to this director
 
 
 # Libraries
@@ -99,33 +142,4 @@ The NuGet (.NET) libraries in use are:
   OCI (Open Container Initiative) containers
   * [OCIL HN Discussion](https://news.ycombinator.com/item?id=35973000)
   
-
-
-# Code Style Instructions
-
-## C# Code Style
-
-* You must keep an open brace of a block on the same line as
-  what preceeds it, rather than alone on a new line, separated by
-  exactly one space.
-* Every block on an `if` or `else` must be surrounded by braces.
-* The `else` clause in an `if` statment should have the close and
-  open brace on the same line as the `else`, each separated by 
-  exactly one space.
-
-## Common Lisp Code Style
-
-* Do not use the short-circuit binary operators `and` and `or` as
-  flow control mechanisms. In other words, do *not* write code
-  like this:
-  ```lisp
-  (and arg-type
-       spec-type
-    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
-  ```
-  But rather, write code like this:
-  ```lisp
-  (when (and arg-type spec-type)
-    (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
-  ```
 
