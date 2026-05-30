@@ -10,6 +10,19 @@
   * Create this file if it does not exist
 
 
+# Useful Commands
+
+* Run a dotcl REPL: `dotcl`
+* Build the project: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
+* Compile the lisp parts of the project:
+  * Linux: `dotnet run --project "/home/dfields/src/cl/MonoGameLispDemo-standalone/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"`
+  * (This can be found in the .csproj file.)
+* Run the game:
+  * Linux: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+* Run the game in test mode (no GUI launched):
+  * Linux: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --test`
+
+
 # Code Style Instructions
 
 ## Testing
@@ -141,5 +154,4 @@ The NuGet (.NET) libraries in use are:
 * [OCIL](https://github.com/ocicl/ocicl) - An ASDF alternative built on
   OCI (Open Container Initiative) containers
   * [OCIL HN Discussion](https://news.ycombinator.com/item?id=35973000)
-  
 

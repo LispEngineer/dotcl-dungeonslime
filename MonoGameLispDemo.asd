@@ -8,6 +8,7 @@
                (:file "monoutils")
                (:file "constants")
                (:file "type-aliases")
+               (:file "load-system-test")
                (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
                (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
