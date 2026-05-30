@@ -52,6 +52,10 @@
 (defconstant +atlas-texture+ "images/atlas"
   "The filename (without extension) of our texture atlas.")
 
+(defconstant +atlas-filename+ (uiop:subpathname* +content-default+ "atlas-definition.lisp")
+  "The filename of our Texture Atlas. Within the Content directory.")
+(format *error-output* "[game-1.lisp] +atlas-filename+ = ~A~%" +atlas-filename+)
+
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 (core)
   ((slime
@@ -76,14 +80,11 @@
   "Load our atlas textures then pass to base class."
   (format *error-output* "[game-1:load-content] Loading content...~%")
   (let* ((cont (content game))
-         (atlas-texture (monoutils:invoke-generic cont "Load" '("TEXTURE2D") +atlas-texture+))
-         (atlas (make-instance 'texture-atlas :texture atlas-texture)))
-    (format *error-output* "[game-1:load-content] Loaded atlas texture = ~A~%" atlas-texture)
-    (ta-add-region atlas "slime" 0 0 20 20)
-    (ta-add-region atlas "bat" 20 0 20 20)
-    (format *error-output* "[game-1:load-content] atlas = ~A~%" atlas)
+         (atlas (ta-from-file (qualify-path +atlas-filename+) cont)))
+    (format *error-output* "[game-1:load-content] Loaded atlas = ~A~%" atlas)
     (setf (slime game) (ta-get-region atlas "slime"))
-    (setf (bat game) (ta-get-region atlas "bat")))
+    (setf (bat game) (ta-get-region atlas "bat"))
+    (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game)))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
@@ -95,7 +96,6 @@
       (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
       (force-output *error-output*) ;; finish-output alternatively
       (dotnet:invoke (monogame game) "Exit")))
-
   (call-next-method game gt))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
