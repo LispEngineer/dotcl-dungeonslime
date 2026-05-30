@@ -138,11 +138,18 @@ In my case, it shows the game window and then segfaults out.
   DotCL 0.1.8 evaluates and compiles a form. (It only does compilation,
   no interpretive evaluation.)
 
+* [clr-generic-functions.md](doc/clr-generic-functions.md) describes the design
+  and implementation plan of the custom C# class-aware generic function system.
+
+* [dotcl-generic.md](doc/dotcl-generic.md) details the internal workings of
+  generic functions and method dispatch inside the DotCL 0.1.8 runtime environment.
+
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
   (formerly called Gemini CLI)
   which the author sometimes uses with Gemini to figure things out.
+  (See below for notes on the author's use of ML assistance.)
 
 ## Lisp
 
@@ -150,6 +157,19 @@ In my case, it shows the game window and then segfaults out.
 
 * `constants.lisp`: Defines system-wide constants; very often these are
   Lispy versions of C# enumerations.
+
+* `clr-generic.lisp`: Implements the Version 1 C# class-aware generic function
+  system macros (`defc#generic`, `defc#method`) and dispatch/specificity resolution logic.
+
+* `clr-generic-test.lisp`: Startup test suite verifying C# generic function 
+  dispatching, interface specificity, and alias resolution.
+
+* `mg-classes.lisp`: Defines basic MonoGame classes and functions in a Lisp-friendly way 
+  (e.g. `vector2`, `rect`, accessors `x`, `y`, `width`, `height`, and `sprite-batch-begin` helpers).
+
+* `texture-region.lisp`: Implements the CLOS classes `texture-region` and 
+  `texture-atlas` and associated drawing/retrieval functions, plus a safe Lisp form reader
+  from a filename.
 
 * `mg-core.lisp`: Creates a C# class `MonoGameCLOSProxy` which acts as a proxy between the
   MonoGame Game C# world and the Lisp CLOS world. Defines a base CLOS
@@ -211,6 +231,7 @@ In my case, it shows the game window and then segfaults out.
   Optional arguments:
   * `--csharp-sanity`
   * `--base`
+  * `--test` will prevent the actual MonoGame from running
 
 ### Deprecated C# Files
 
@@ -322,6 +343,26 @@ Basic in-game REPL:
   object. But if the arg is a string, tries to get the DotNet type of that name.
 * `get-type-full-name`: Returns the string of the type name from `get-type` or nil.
   So if you pass it a string, it should return the same thing.
+
+C# Class-Aware Generic Function System (Version 1):
+* Implemented the `defc#generic` and `defc#method` macros in `clr-generic.lisp` 
+  to support C# class type dispatch.
+* Uses reflection (`IsAssignableFrom` checks) to dynamically verify subclassing or 
+  interface implementation on the first argument of the generic function.
+* Performs topological class/interface inheritance specificity sorting on applicable 
+  methods to find the most specific target method.
+* Employs deterministic interface precedence sorting, utilizing alphabetical class 
+  names to break ties between unrelated classes/interfaces.
+* Supports type alias resolution via `dotnet::*type-aliases*` inside method specializers 
+  (e.g., `"GAMETIME"` resolves to `"Microsoft.Xna.Framework.GameTime"`).
+* Integrates a startup test suite in `clr-generic-test.lisp` checking type dispatch, 
+  interface precedence specificity (`ArrayList` vs `Hashtable` dispatching 
+  to `ICollection` vs `IDictionary`), and type alias resolution.
+
+Texture Regions and Texture Atlases:
+* Implemented the CLOS classes `texture-region` and `texture-atlas` to manage sprite subdivisions.
+* Created `safe-read-form-from-file` in `texture-region.lisp` to securely load 
+  Lisp-based texture atlas descriptions without read-time evaluation.
 
 
 ## Deprecated Functionality
