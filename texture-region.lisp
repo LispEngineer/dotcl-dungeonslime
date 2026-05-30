@@ -124,7 +124,9 @@
   "Example texture atlas. Note that the keys of the regions are converted from
    symbols to strings.")
 
-(format *error-output* "[texture-atlas.lisp] example texture: ~S~%" (getf ta-example-atlas :texture))
+(format *error-output* "[texture-atlas.lisp] example atlas texture: ~S~%" (getf ta-example-atlas :texture))
 
+(setf ta-example-atlas (safe-read-form-from-file "Content/test-atlas.lisp"))
 
+(format *error-output* "[texture-atlas.lisp] example file atlas: ~S~%" ta-example-atlas)
 
