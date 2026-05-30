@@ -75,24 +75,32 @@
 ;; Generic functions
 
 (defun print-gf-methods (gf-name)
-  "Prints information about a DotCL Generic Function"
+  "Prints information about a DotCL Generic Function, including docstrings."
 
   (when (not (fboundp gf-name))
     (format *error-output* "~&Generic Function ~S not yet defined.~%" gf-name)
     (return-from print-gf-methods))
 
   (let* ((gf (symbol-function gf-name))
+         ;; Retrieve the documentation string of the generic function if it exists.
+         (gf-doc (documentation gf 'function))
          (methods (dotcl-mop:generic-function-methods gf)))
     (format *error-output* "~&Generic Function ~S has ~D method(s):~%" gf-name (length methods))
+    (when gf-doc
+      (format *error-output* "  Docstring: ~S~%" gf-doc))
     (dolist (m methods)
       (let ((qualifiers (dotcl-mop:method-qualifiers m))
             (specializers (mapcar (lambda (spec)
                                     (if (typep spec 'class)
                                         (class-name spec)
                                         spec))
-                                  (dotcl-mop:method-specializers m))))
+                                  (dotcl-mop:method-specializers m)))
+            ;; Retrieve the documentation string of the method object.
+            (m-doc (documentation m t)))
         (format *error-output* "  Method qualifiers: ~A, Specializers: ~A~%" 
-                qualifiers specializers)))))
+                qualifiers specializers)
+        (when m-doc
+          (format *error-output* "    Doc: ~S~%" m-doc))))))
 
 ;; If we figure out C# class dispatched multimethods, just make "x" and "y".
 ;; They may be the same anyway, if the accessors on the class are the same!
@@ -135,6 +143,27 @@
   (if (dotnet-p obj)
     (dotnet:invoke obj "Height")
     (error "Unknown object for height: ~S" obj)))
+
+;; Check for bug that overwrites a single method specialized on T
+
+(format *error-output* "[mg-classes.lisp] Testing defining 3 methods called yyyy.~%")
+
+(print-gf-methods 'yyyy)
+(defgeneric yyyy (obj)
+  (:documentation "Test what happens after each method is defined"))
+(print-gf-methods 'yyyy)
+(defmethod yyyy ((obj t))
+  "Specialized on T"
+  :T)
+(print-gf-methods 'yyyy)
+(defmethod yyyy ((obj string))
+  "Specialized on string"
+  :string)
+(print-gf-methods 'yyyy)
+(defmethod yyyy ((obj integer))
+  "Specialized on integer"
+  :integer)
+(print-gf-methods 'yyyy)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper Functions
