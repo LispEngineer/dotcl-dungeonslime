@@ -55,6 +55,15 @@
     <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Copy the entire dotcl contrib directory (ASDF, UIOP, etc.) to the build output folder
+         so they can be dynamically resolved at runtime via (require "asdf") -->
+    <None Include="..\dotcl\contrib\**\*">
+      <Link>contrib\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
 
 </Project>

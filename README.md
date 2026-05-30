@@ -368,6 +368,29 @@ Texture Regions and Texture Atlases:
   names to strings for the atlas registry. It is accompanied by a validation test
   that runs on startup.
 
+## Use of ASDF in the Game at Runtime
+
+`(require "asdf")` fails at runtime with the error
+`DotCL.LispErrorException: REQUIRE: module "asdf" not found`
+due to a combination of two issues:
+
+1. ASDF is skipped during build dependency bundling:
+   Standard Lisp libraries in DotCL (like ASDF) do not define individual
+   `:components` children and have `NIL` pathnames (since they are
+   precompiled and shipped directly with the compiler). 
+   This causes DotCL's `--resolve-deps` tool to treat ASDF as a built-in package and
+   skip outputting it to the bundle manifest (`dotcl-deps.txt`). As a result, 
+   MSBuild never copied the prebuilt `asdf.fasl` into the game's
+   output directory.
+
+2. Missing `contrib` directory at runtime:
+   At runtime, DotCL's `MODULE-PROVIDE-CONTRIB` function dynamically searches for modules in a
+   `contrib/` subdirectory relative to the
+   executing process's `AppContext.BaseDirectory`
+   (which for the game is `bin/Debug/net10.0/ubuntu.24.04-x64/` ). 
+   Because the `contrib/` folder was not copied to the build output directory, 
+   DotCL was unable to locate `asdf.fasl` dynamically.
+
 
 ## Deprecated Functionality
 

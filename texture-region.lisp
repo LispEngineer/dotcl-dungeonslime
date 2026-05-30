@@ -3,7 +3,7 @@
 ;;; MonoGame Tutorial Chapter 7: TextureRegion as a CLOS class.
 
 (in-package :cl-user)
-;; (require "asdf") ;; Load uiop library - THIS DOES NOT WORK
+(require "asdf") ;; Load uiop library
 
 (format *error-output* "[texture-region.lisp] Loading in package ~S~%" *package*)
 
@@ -148,8 +148,8 @@
            (regions-plist (getf plist :regions))
            ;; Remove the .png suffix (if any) from the texture name
            (clean-name (if (and (stringp tex-name)
-                                ;; (uiop:string-suffix-p tex-name ".png"))
-                                (string-suffix-p tex-name ".png"))
+                                (uiop:string-suffix-p tex-name ".png"))
+                                ;; (string-suffix-p tex-name ".png"))
                          (subseq tex-name 0 (- (length tex-name) 4))
                          tex-name))
            ;; For test purposes, we allow content-manager to be nil and just set
