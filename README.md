@@ -63,12 +63,14 @@ So, all the steps:
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
-2. `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
+3. To build: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
    * `-v d` shows more details.
    * `-v diag` shows the most, but I haven't really noticed a difference.
 
-3. `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+4. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+   * To run in test mode, add `--test` to the command line, and it will
+     not invoke the game.
 
 ### How to Load in REPL
 

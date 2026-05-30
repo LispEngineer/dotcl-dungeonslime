@@ -51,6 +51,8 @@ if (args.Length > 0 && args[0] == "--base") {
     return;
 }
 
+var IsTestMode = (args.Length > 0 && args[0] == "--test");
+
 // Boot dotcl BEFORE constructing the Game so the Lisp side has a chance to
 // (dotnet:define-class "MonoGameCLOSProxy" (Game) ...) and the dynamically
 // emitted assembly is loaded. Then we instantiate the Lisp-defined type
@@ -73,13 +75,17 @@ Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 
 // MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
-if (gameObj is LispDotNetObject dno
-    && dno.Value is Microsoft.Xna.Framework.Game game) {
-    Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
-    game.Run();
-    // Not necessary if the process ends after this, but if it doesn't:
-    game.Dispose();
+if (!IsTestMode) {
+    if (gameObj is LispDotNetObject dno
+        && dno.Value is Microsoft.Xna.Framework.Game game) {
+        Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
+        game.Run();
+        // Not necessary if the process ends after this, but if it doesn't:
+        game.Dispose();
+    } else {
+        throw new InvalidOperationException(
+            $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
+    }
 } else {
-    throw new InvalidOperationException(
-        $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
+    Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
 }
