@@ -12,7 +12,7 @@ This document provides a detailed breakdown of how the C# `[LispDoc]` annotation
 The `dotcl` environment utilizes a custom **Roslyn Source Generator** to extract docstrings from C# XML comments and compile them into static metadata.
 
 ### The Attribute Definition
-The `LispDocAttribute` is defined dynamically during the analyzer/source generator pass inside the [`runtime.docgen`](file:///home/dfields/src/cl/dotcl/runtime.docgen/LispDocGenerator.cs#L23-L28) project:
+The `LispDocAttribute` is defined dynamically during the analyzer/source generator pass inside the [`runtime.docgen`](../../dotcl/runtime.docgen/LispDocGenerator.cs#L23-L28) project:
 ```csharp
 namespace DotCL {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
@@ -23,7 +23,7 @@ namespace DotCL {
 }
 ```
 
-### The Source Generator ([LispDocGenerator.cs](file:///home/dfields/src/cl/dotcl/runtime.docgen/LispDocGenerator.cs))
+### The Source Generator ([LispDocGenerator.cs](../../dotcl/runtime.docgen/LispDocGenerator.cs))
 During compilation of `DotCL.Runtime`, the source generator scans C# files for methods decorated with `[LispDoc("LISP-SYMBOL-NAME")]`:
 1. It reads the leading `///` XML comments for `<lispdoc>...</lispdoc>` elements.
 2. If the `<lispdoc>` element is absent, it falls back to the `<summary>` block.
@@ -54,7 +54,7 @@ internal static void SetFunctionDoc(string lispName, string docstring) =>
 
 Although docstrings are correctly generated and registered in C#'s `_docs` dictionary, the Lisp-side `documentation` generic function does **not** fall back to checking this dictionary.
 
-* In [`cil-stdlib.lisp`](file:///home/dfields/src/cl/dotcl/compiler/cil-stdlib.lisp#L1084-L1086), the Lisp generic function for retrieving symbol-function documentation is defined as:
+* In [`cil-stdlib.lisp`](../../dotcl/compiler/cil-stdlib.lisp#L1084-L1086), the Lisp generic function for retrieving symbol-function documentation is defined as:
   ```lisp
   (defmethod documentation ((x symbol) (doc-type (eql 'function)))
     (%get-doc x 'function))
@@ -76,13 +76,13 @@ Because there is no `%get-function-documentation` shim in `cil-stdlib.lisp` call
 
 To make C#-defined `[LispDoc]` attributes accessible via standard Lisp `(documentation '... 'function)` calls, two changes are required:
 
-### Step A: Register the C# helper in [`Runtime.Core.cs`](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Core.cs)
+### Step A: Register the C# helper in [`Runtime.Core.cs`](../../dotcl/runtime/Runtime.Core.cs)
 ```csharp
 // Expose the documentation lookup to Lisp
 Startup.RegisterBinary("%GET-FUNCTION-DOCUMENTATION", (sym, type) => Runtime.Documentation(sym, type));
 ```
 
-### Step B: Add the fallback in Lisp ([`cil-stdlib.lisp`](file:///home/dfields/src/cl/dotcl/compiler/cil-stdlib.lisp#L1084-L1086))
+### Step B: Add the fallback in Lisp ([`cil-stdlib.lisp`](../../dotcl/compiler/cil-stdlib.lisp#L1084-L1086))
 ```lisp
 (defmethod documentation ((x symbol) (doc-type (eql 'function)))
   (or (%get-doc x 'function)

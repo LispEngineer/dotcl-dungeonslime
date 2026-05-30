@@ -15,15 +15,15 @@ This document explains the internal execution and compilation pipeline of DotCL 
 
 When a form is dynamically evaluated (e.g., from the REPL or load path), execution starts in C#:
 
-* **File:** [runtime/Runtime.Misc.cs](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Misc.cs)
-* **Method:** `public static LispObject Eval(LispObject form)` (around [line 2168](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Misc.cs#L2168))
+* **File:** [runtime/Runtime.Misc.cs](../../dotcl/runtime/Runtime.Misc.cs)
+* **Method:** `public static LispObject Eval(LispObject form)` (around [line 2168](../../dotcl/runtime/Runtime.Misc.cs#L2168))
 
 ### Flow:
 1. **Stack Safety Check:** Invokes `RuntimeHelpers.TryEnsureSufficientExecutionStack()` to prevent stack overflow errors.
 2. **Fast Path (Self-Evaluating Forms):** Bypasses full compilation and lock acquisition for immutable objects: `Number`, `LispChar`, `LispString`, `T`, and `Nil`.
 3. **Symbol Path:** Resolves symbol variables dynamically via the thread-local store `DynamicBindings.TryGet()`.
 4. **Compound Path:** Obtains the global `_evalLock` and calls `EvalCompound(form)`.
-   * **Method:** `private static LispObject EvalCompound(LispObject form)` (around [line 2191](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Misc.cs#L2191))
+   * **Method:** `private static LispObject EvalCompound(LispObject form)` (around [line 2191](../../dotcl/runtime/Runtime.Misc.cs#L2191))
    * Calls `CompileTopLevelEval(form)` to generate a CIL instruction list.
    * Runs `DotCL.Emitter.CilAssembler.AssembleAndRun(instrList)` to dynamically compile and run the instruction list.
 
@@ -31,8 +31,8 @@ When a form is dynamically evaluated (e.g., from the REPL or load path), executi
 
 ## 2. Compiler Invocation: `CompileTopLevelEval`
 
-* **File:** [runtime/Runtime.Misc.cs](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Misc.cs)
-* **Method:** `internal static LispObject CompileTopLevelEval(LispObject form)` (around [line 1076](file:///home/dfields/src/cl/dotcl/runtime/Runtime.Misc.cs#L1076))
+* **File:** [runtime/Runtime.Misc.cs](../../dotcl/runtime/Runtime.Misc.cs)
+* **Method:** `internal static LispObject CompileTopLevelEval(LispObject form)` (around [line 1076](../../dotcl/runtime/Runtime.Misc.cs#L1076))
 
 This method retrieves a reference to the Lisp compiler function `COMPILE-TOPLEVEL-EVAL` (registered under the `DOTCL.CIL-COMPILER` package) and executes it to produce the CIL assembly instruction forms:
 ```csharp
@@ -44,8 +44,8 @@ return _cachedCompileTopLevelEval.Invoke1(form);
 
 ## 3. The Lisp Compiler Toplevel
 
-* **File:** [compiler/cil-analysis.lisp](file:///home/dfields/src/cl/dotcl/compiler/cil-analysis.lisp)
-* **Function:** `(defun compile-toplevel-eval (expr))` (around [line 868](file:///home/dfields/src/cl/dotcl/compiler/cil-analysis.lisp#L868))
+* **File:** [compiler/cil-analysis.lisp](../../dotcl/compiler/cil-analysis.lisp)
+* **Function:** `(defun compile-toplevel-eval (expr))` (around [line 868](../../dotcl/compiler/cil-analysis.lisp#L868))
 
 This function binds compiler state dynamically (like local variables, label counters, special declarations, and macroexpansion cache), sets `*at-toplevel*` and `*in-tail-position*` to `t`, and compiles the expression:
 ```lisp
@@ -57,11 +57,11 @@ This function binds compiler state dynamically (like local variables, label coun
 
 ## 4. Expression and Form Dispatch
 
-* **File:** [compiler/cil-compiler.lisp](file:///home/dfields/src/cl/dotcl/compiler/cil-compiler.lisp)
+* **File:** [compiler/cil-compiler.lisp](../../dotcl/compiler/cil-compiler.lisp)
 * **Functions:**
-  * `(defun compile-expr (expr))` (around [line 522](file:///home/dfields/src/cl/dotcl/compiler/cil-compiler.lisp#L522))
-  * `(defun compile-expr-raw (expr))` (around [line 487](file:///home/dfields/src/cl/dotcl/compiler/cil-compiler.lisp#L487))
-  * `(defun compile-form (expr))` (around [line 566](file:///home/dfields/src/cl/dotcl/compiler/cil-compiler.lisp#L566))
+  * `(defun compile-expr (expr))` (around [line 522](../../dotcl/compiler/cil-compiler.lisp#L522))
+  * `(defun compile-expr-raw (expr))` (around [line 487](../../dotcl/compiler/cil-compiler.lisp#L487))
+  * `(defun compile-form (expr))` (around [line 566](../../dotcl/compiler/cil-compiler.lisp#L566))
 
 ### Compiler Dispatch Flow:
 1. `compile-expr` calls `compile-expr-raw`, and if the compiler is not in a multiple-values propagating context (i.e., `*in-mv-context*`, `*in-tail-position*`, or a `single-value-form-p`), it appends `(:call "Runtime.UnwrapMv")` to discard extra values.
@@ -69,7 +69,7 @@ This function binds compiler state dynamically (like local variables, label coun
 3. `compile-form` binds `*compile-depth*` and `op` (the car of the list, which occupies the operator position). It dispatches on the operator as follows:
    * **`quote`:** If `op` is the symbol `quote`, it returns instructions from `compile-quoted`.
    * **Lexical functions:** If `op` is a symbol shadowed by a lexical function (`flet`/`labels`) in the current scope, it delegates to `compile-named-call`.
-   * **Special operators/Primitives:** If `op` is a symbol registered in the `*compile-form-handlers*` hash table (defined in [compiler/cil-forms.lisp](file:///home/dfields/src/cl/dotcl/compiler/cil-forms.lisp)), it calls the corresponding handler.
+   * **Special operators/Primitives:** If `op` is a symbol registered in the `*compile-form-handlers*` hash table (defined in [compiler/cil-forms.lisp](../../dotcl/compiler/cil-forms.lisp)), it calls the corresponding handler.
    * **Compound Operator (`(consp op)`):**
      * If `op` is a lambda form `(lambda (...) ...)`, it compiles the lambda into a `LispFunction` instance, generates instructions to build the argument array via `compile-args-array`, and emits `(:callvirt "LispFunction.Invoke")`.
      * If `op` is a `declare` form, it wraps it in a `locally` block.
@@ -83,8 +83,8 @@ This function binds compiler state dynamically (like local variables, label coun
 
 ## 5. Global/Named Function Calls
 
-* **File:** [compiler/cil-forms.lisp](file:///home/dfields/src/cl/dotcl/compiler/cil-forms.lisp)
-* **Function:** `(defun compile-named-call (name args))` (around [line 146](file:///home/dfields/src/cl/dotcl/compiler/cil-forms.lisp#L146))
+* **File:** [compiler/cil-forms.lisp](../../dotcl/compiler/cil-forms.lisp)
+* **Function:** `(defun compile-named-call (name args))` (around [line 146](../../dotcl/compiler/cil-forms.lisp#L146))
 
 ### Compilation:
 1. Checks for tail-call optimizations (Self-TCO or Mutual-TCO) and emits jumps if applicable.
@@ -107,7 +107,7 @@ This function binds compiler state dynamically (like local variables, label coun
 
 ## 7. Extending Operator Position Capabilities
 
-If you want to extend what can occupy the operator position (e.g., permitting a string for a C# method invocation, a .NET delegate, or a specific .NET object type), you would modify **`compile-form`** inside [compiler/cil-compiler.lisp](file:///home/dfields/src/cl/dotcl/compiler/cil-compiler.lisp#L566).
+If you want to extend what can occupy the operator position (e.g., permitting a string for a C# method invocation, a .NET delegate, or a specific .NET object type), you would modify **`compile-form`** inside [compiler/cil-compiler.lisp](../../dotcl/compiler/cil-compiler.lisp#L566).
 
 For instance, to support using a string in the operator position as a dynamic C# method call (like `("ToString" obj)`):
 ```lisp

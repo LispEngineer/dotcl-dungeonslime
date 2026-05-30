@@ -12,7 +12,7 @@ This document provides a detailed breakdown of the `MonoGameLispDemo.csproj` pro
 
 ## 1. Line-by-Line Breakdown of `MonoGameLispDemo.csproj`
 
-Here is the explanation for every configuration section in [MonoGameLispDemo.csproj](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.csproj).
+Here is the explanation for every configuration section in [MonoGameLispDemo.csproj](../MonoGameLispDemo.csproj).
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -125,7 +125,7 @@ When you run `dotnet build`, the build pipeline processes the project in two mai
 3.  **Asset Bundling:** The standard compiler core (`dotcl.core`) along with dependency `.fasl` assemblies and the manifest are bundled together inside the build output directory `dotcl-fasl/`.
 
 ### Stage 2: The C# Build (SDK Compiler)
-1.  **Core Compilation:** The standard C# compiler compiles [Program.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs), [BaseCaller.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/BaseCaller.cs), and [CsharpSanityGame.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/CsharpSanityGame.cs).
+1.  **Core Compilation:** The standard C# compiler compiles [Program.cs](../Program.cs), [BaseCaller.cs](../BaseCaller.cs), and [CsharpSanityGame.cs](../CsharpSanityGame.cs).
 2.  **Asset Injection:** The files in the `dotcl-fasl/` directory are injected as outputs to the execution folder.
 3.  **Bootstrapping:** When you launch the final executable:
     *   `DotclHost.Initialize()` runs standard package setup.
@@ -137,15 +137,15 @@ When you run `dotnet build`, the build pipeline processes the project in two mai
 ## 3. Sibling Files and Dependency Breakdown
 
 ### Project Files
-*   **[MonoGameLispDemo.asd](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
-*   **[main.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/main.lisp)**: The Lisp application file. It uses `dotnet:define-class` to create class definitions recognized by C# (inheriting from MonoGame's `Game`), defines update loops, and color cycle logic.
-*   **[Program.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs)**: The C# host program. It boots `dotcl`, loads manifest assets, resolves the Lisp game class instance, and triggers MonoGame's main loop.
-*   **[BaseCaller.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/BaseCaller.cs)**: Workaround utilities to allow Lisp classes to invoke parent class methods (e.g. `base.Update()` or `base.Draw()`).
+*   **[MonoGameLispDemo.asd](../MonoGameLispDemo.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
+*   **[main.lisp](../main.lisp)**: The Lisp application file. It uses `dotnet:define-class` to create class definitions recognized by C# (inheriting from MonoGame's `Game`), defines update loops, and color cycle logic.
+*   **[Program.cs](../Program.cs)**: The C# host program. It boots `dotcl`, loads manifest assets, resolves the Lisp game class instance, and triggers MonoGame's main loop.
+*   **[BaseCaller.cs](../BaseCaller.cs)**: Workaround utilities to allow Lisp classes to invoke parent class methods (e.g. `base.Update()` or `base.Draw()`).
 
 ### dotcl Sibling Repository Files
 *   **`../dotcl/compiler/dotcl.core`**: The foundational compiled Lisp state file containing the runtime's core and ANSI-compatible Lisp compiler definitions.
 *   **`../dotcl/runtime/DotCL.Runtime.csproj`**: The MSBuild file for the Lisp execution interop library.
 *   **`../dotcl/runtime/build/Dotcl.targets`**: The XML file outlining custom build steps, handling dependency resolution and compilation targets.
-*   **[DotclHost.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/DotclHost.cs)**: The C# host class providing utility methods for launching, evaluating, and querying Lisp scripts and modules in a C# environment.
-*   **[Program.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/Program.cs)**: The entry point code for the standalone `dotcl` CLI engine, executing compiling directives during build actions.
-*   **[Runtime.DotNet.cs](file:///home/dfields/src/cl/dotcl-clean/runtime/Runtime.DotNet.cs)**: Bridge code containing the low-level logic mapping Lisp operations to .NET Interop execution.
+*   **[DotclHost.cs](../../dotcl-clean/runtime/DotclHost.cs)**: The C# host class providing utility methods for launching, evaluating, and querying Lisp scripts and modules in a C# environment.
+*   **[Program.cs](../../dotcl-clean/runtime/Program.cs)**: The entry point code for the standalone `dotcl` CLI engine, executing compiling directives during build actions.
+*   **[Runtime.DotNet.cs](../../dotcl-clean/runtime/Runtime.DotNet.cs)**: Bridge code containing the low-level logic mapping Lisp operations to .NET Interop execution.
