@@ -88,9 +88,6 @@
 
 (defmethod update ((game game-1) gt) ;; GameTime
   "Quit the game if ESC key is pressed."
-  ; if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-  ;     Exit();
-  ; base.Update(gameTime);
   (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
          ;; This will return nil or t
          (esc-down (dotnet:invoke kb-state "IsKeyDown" +esc-key+)))
@@ -103,80 +100,22 @@
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
-  ;(format t "[main.lisp] game-1:draw: game = ~A, gt = ~A~%" game gt)
   (let* ((mg (monogame game))
-         ;(_unused1 (format t "[main.lisp] game-1:draw: mg = ~A~%" mg))
          (gd (dotnet:invoke mg "GraphicsDevice"))
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
          (c (pulse-color secs))
          (sb (sprite-batch game))
-         #|
-         (rot (rotation secs))
-         (client-bounds (dotnet:invoke (dotnet:invoke (monogame game) "Window") "ClientBounds"))
-         (cb-w (width client-bounds))
-         (cb-h (height client-bounds))
-         (l-w (width logo))
-         (l-h (height logo))
-         (i-w (width +icon-rect+))
-         (i-h (height +icon-rect+))
-         (w-w (width +wordmark-rect+))
-         (w-h (height +wordmark-rect+))
-         ;; 
-         (logo-ctr (v2* (vector2 l-w l-h) 0.5e0))
-         ;; The center of an offset (Source Rectangle) is not offset by the
-         ;; source rectangle's x and y, so we can just use these:
-         (screen-ctr (vector2 (* cb-w 0.5) (* cb-h 0.5)))
-         (icon-ctr (vector2 (* i-w 0.5) (* i-h 0.5)))
-         (wordmark-ctr (vector2 (* w-w 0.5) (* w-h 0.5)))
-         |#
         )
 
     (dotnet:invoke gd "Clear" c)
-
-#|
-    // Begin the sprite batch to prepare for rendering.
-    SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-    // Draw the slime texture region at a scale of 4.0
-    _slime.Draw(SpriteBatch, Vector2.Zero, Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 0.0f);
-
-    // Draw the bat texture region 10px to the right of the slime at a scale of 4.0
-    _bat.Draw(SpriteBatch, new Vector2(_slime.Width * 4.0f + 10, 0), Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 1.0f);
-
-    // Always end the sprite batch when finished.
-    SpriteBatch.End();
-|#
 
     ;; Prepare for rendering
     (sprite-batch-begin sb :sampler-state +sampler-state-point-clamp+)
 
     ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
-    (tr-draw (slime game) sb +v2-0+                                      +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 0.0e0)
-    (tr-draw (bat game)   sb (vector2 (+ 10 (* (width (slime game)) 4))) +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 1.0e0)
-
-#|
-    ;; Use the full Draw call with every parameter
-    (dotnet:invoke sb "Draw" logo                  ;; Texture
-                             screen-ctr            ;; Position
-                             +icon-rect+           ;; Source Rectangle
-                             +color-white+         ;; Color
-                             rot                   ;; float rotation, e.g. (°2R 45)
-                             icon-ctr              ;; origin
-                             1e0                   ;; float scale
-                             +sprite-effects-none+ ;; effects
-                             0e0)                  ;; float Layer Depth
-
-    (dotnet:invoke sb "Draw" logo                  ;; Texture
-                             screen-ctr            ;; Position
-                             +wordmark-rect+       ;; Source Rectangle
-                             +color-white+         ;; Color
-                             (- rot)               ;; float rotation, e.g. (°2R 45)
-                             wordmark-ctr          ;; origin
-                             1e0                   ;; float scale
-                             +sprite-effects-none+ ;; effects
-                             1e0)                  ;; float Layer Depth
-|#
+    (tr-draw (slime game) sb +v2-0+                                        +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 0.0e0)
+    (tr-draw (bat game)   sb (vector2 (+ 10 (* (width (slime game)) 4)) 0) +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 1.0e0)
 
     (dotnet:invoke sb "End"))
 
