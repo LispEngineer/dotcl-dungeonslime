@@ -221,8 +221,10 @@
    filepath: path to the file containing the Lisp form description.
    content-manager: MonoGame ContentManager, used to load the texture.
      (can be nil for testing purposes only!)
+   All texture name keys are downcased.
    Returns the newly created texture atlas."
   (let ((plist (safe-read-form-from-file filepath)))
+    (format *error-output* "[ta-from-file] plist = ~A~%" plist)
     (when (eq plist :eof)
       (error "Empty or invalid texture atlas file: ~A" filepath))
     (let* ((tex-name (getf plist :texture))
@@ -240,14 +242,16 @@
                   clean-name))
            ;; Create the texture-atlas instance
            (atlas (make-instance 'texture-atlas :texture tex)))
+      (format *error-output* "[ta-from-file] atlas texture = ~A~%" tex)
       ;; Add each region
       (loop for (key val) on regions-plist by #'cddr
-            do (let ((name (string key))
+            do (let ((name (string-downcase (string key)))
                       (x (getf val :x 0))
                       (y (getf val :y 0))
                       (w (getf val :w 0))
                       (h (getf val :h 0)))
-                  (ta-add-region atlas name x y w h)))
+                 (format *error-output* "[ta-from-file] region: ~S ~S ~S ~S ~S~%" name x y w h)
+                 (ta-add-region atlas name x y w h)))
       ;; Return our completed texture atlas
       atlas)))
 
@@ -256,8 +260,8 @@
   (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
   (assert (typep test-atlas 'texture-atlas))
   (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
-  (let ((reg-a (ta-get-region test-atlas "A"))
-        (reg-b (ta-get-region test-atlas "B")))
+  (let ((reg-a (ta-get-region test-atlas "a"))
+        (reg-b (ta-get-region test-atlas "b")))
     (assert reg-a)
     (assert reg-b)
     (assert (monoutils:dotnet-p (source-rect reg-a)))

@@ -82,6 +82,8 @@
   (let* ((cont (content game))
          (atlas (ta-from-file (qualify-path +atlas-filename+) cont)))
     (format *error-output* "[game-1:load-content] Loaded atlas = ~A~%" atlas)
+    (loop for key being the hash-keys of (regions atlas) using (hash-value value)
+      do (format *error-output* "[game-1:load-content]   Key: ~a, Value: ~a~%" key value))
     (setf (slime game) (ta-get-region atlas "slime"))
     (setf (bat game) (ta-get-region atlas "bat"))
     (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game)))
