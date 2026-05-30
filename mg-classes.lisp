@@ -165,6 +165,15 @@
   :integer)
 (print-gf-methods 'yyyy)
 
+(format *error-output* "[mg-classes.lisp] Undefining yyyy.~%")
+;; DotCL keeps track of generic functions in an internal C# dictionary (_gfRegistry)
+;; to manage CLOS dispatch and compilation. Even after calling fmakunbound, 
+;; the generic function object remains registered.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (fmakunbound 'yyyy)
+  (dotnet:static "DotCL.Runtime" "RemoveGfRegistryEntry" 'yyyy nil)) ; nil = not a setf function
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper Functions
 

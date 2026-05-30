@@ -548,3 +548,12 @@ the `--base` argument to see it work (in C#).
   * `su - dummy` (or any other user)
   * `export DISPLAY=:0` (use X11)
   * `/tmp/ubuntu.24.04-x64/MonoGameLispDemo` (optionally add `--test`)
+
+* DotCL compiles the root system by concatenating
+  all source files in the system (in the order defined in the `.asd`file)
+  into a single `.concat.lisp` file.
+
+* DotCL keeps track of generic functions in an internal C# dictionary (_gfRegistry)
+  to manage CLOS dispatch and compilation. Even after calling fmakunbound, 
+  the generic function object remains registered.
+  See: `public static void RemoveGfRegistryEntry(Symbol sym, bool isSetf = false)`

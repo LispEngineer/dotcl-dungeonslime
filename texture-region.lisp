@@ -8,6 +8,14 @@
 
 (format *error-output* "[texture-region.lisp] Loading in package ~S~%" *package*)
 
+;; Alternatively to use-package, we can just get the specific symbols we want.
+;; (use-package :mg-classes)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (shadowing-import '(mg-classes:x
+                      mg-classes:y
+                      mg-classes:width
+                      mg-classes:height)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Texture Region
 
@@ -29,15 +37,17 @@
 (print-gf-methods 'width)
 (defmethod width ((tr texture-region))
   "Gets the width of the source-rect of this texture-region"
-  (format *error-output* "[texture-region:width] tr = ~A~%" tr)
+  ; (format *error-output* "[texture-region:width] tr = ~A~%" tr)
   (width (source-rect tr)))
 (format *error-output* "[texture-region.lisp] After defining texture-region specialization~%")
 (print-gf-methods 'width)
+#|
 (defmethod width ((str string))
   "Gets the length of this string"
   (length str))
 (format *error-output* "[texture-region.lisp] After defining string specialization~%")
 (print-gf-methods 'width)
+|#
 (format *error-output* "[texture-region.lisp] End showing defined generic methods on width~%")
 
 (defmethod height ((obj texture-region))
