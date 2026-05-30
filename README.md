@@ -280,10 +280,12 @@ have fully vetted it and would vouch for it as if I wrote it myself.
 # Functionality Implemented
 
 MonoGame Dungeon Slime features:
-* All "[Chapter 04: Creating a Class Library](https://docs.monogame.net/articles/tutorials/building_2d_games/04_creating_a_class_library/index.html?tabs=vscode)" content
+* All Chapters 1-6 content
   * Except: The base Core class and Game1 are both CLOS classes
     * The base CLOS Core class does callbacks into the MonoGame Game class
   * Except: this is currently still doing the original MonoGame demo's color cycling
+* Chapter 7 content, Texture Regions and Texture Atlases
+  * We don't use an XML file to define the Texture Atlas; we use a Lisp property list.
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses
