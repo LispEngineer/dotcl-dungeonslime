@@ -198,6 +198,9 @@ In my case, it shows the game window and then segfaults out.
   `(load "load-repl.lisp")` from a clean `dotcl` REPL instance to get the
   entire game loaded and ready for REPL hacking.
 
+* `load-system-test.lisp`: Proof of concept that we can load a system using
+  ASDF and use it in our binary. Also has related changes in `.csproj` file.
+
 * `main.lisp`: The main functions which instantiate the MonoGame Game class
   by creating the CLOS and C# objects, associating them together, and
   returning the C# class. It also stores the two classes in `*game*` and
@@ -211,6 +214,9 @@ In my case, it shows the game window and then segfaults out.
 * `poc-test.lisp`: Optional Proofs of Concept and Tests that can be run by
   including them in the `.asd` file (commented out by default). Useful during
   development only.
+
+* `texture-region.lisp`: The texture region class from Chapter 7 of the
+  Dungeon Slime MonoGame tutorial translated into Lisp.
 
 * `type-aliases.lisp`: Provides MonoGame-specific and other C# type aliases
   into `dotnet::*type-aliases*` mostly for ease of reading the code.
@@ -259,6 +265,31 @@ In my case, it shows the game window and then segfaults out.
 * `MonoGameLispDemo.csproj`: This is the C# Project file for the game. Its
   mystical incantations produce the final standalone binary. For more
   details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
+
+
+# Including Lisp Libraries
+
+It's very complicated to use a third party library right now in DotCL and
+this application, and have them available in the binary.
+
+1. Download the library using an SBCL with QuickLisp, because QuickLisp
+   does not yet support DotCL.
+
+2. You can then load the package with the DotCL built-in ASDF. However,
+   it requires some strange manner to make it work so it can be used
+   in the normal build process as well as loading from a REPL. See
+   [`load-system-test.lisp`](load-system-test.lisp) for details.
+
+3. However, that doesn't make it possible for the binary to get these
+   files when transferred to another system. So, the *source* needs to
+   be copied to the binary output in a `contrib` directory. I've added
+   a section to the `.csproj` that does that.
+
+TO DO: See if it is possible to have the DotCL compiled FASL files used
+instead?
+
+I've [submitted a request](https://github.com/dotcl/dotcl/issues/32)
+with DotCL to automate this somehow.
 
 
 # A Note on ML/AI & Tooling
@@ -369,6 +400,8 @@ Texture Regions and Texture Atlases:
   form description file (like `Content/test-atlas.lisp`), converting symbol/keyword region
   names to strings for the atlas registry. It is accompanied by a validation test
   that runs on startup.
+
+Lisp library usage. (See above.)
 
 ## Use of ASDF in the Game at Runtime
 
@@ -508,3 +541,10 @@ the `--base` argument to see it work (in C#).
 
 * MGCB: To copy the `test-atlas.lisp` file to the output Content directory,
   add it to the `.mgcb` file and change the `Build Action` to `Copy`.
+
+* To run the game as another user: (Remember I use Kubuntu 24.04 under Wayland)
+  * `cp -a bin/Debug/net10.0/ubuntu.24.04-x64/ /tmp` (or wherever)
+  * `xhost +si:localuser:dummy`
+  * `su - dummy` (or any other user)
+  * `export DISPLAY=:0` (use X11)
+  * `/tmp/ubuntu.24.04-x64/MonoGameLispDemo` (optionally add `--test`)

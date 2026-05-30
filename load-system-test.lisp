@@ -27,6 +27,18 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (require "asdf"))
 
+;; As the built binary execution includes the directories in the binary output
+;; directory under contrib in the ASDF Central Registry, something like
+;; this below appears to be unnecessary
+#|
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  ;; Get the directory where the running executable resides
+  (let ((app-base (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")))
+    (when app-base
+      (let ((anaphora-path (merge-pathnames "contrib/anaphora/" (pathname app-base))))
+        (pushnew anaphora-path asdf:*central-registry* :test #'equal)))))
+|#
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   ;; If needed, you can push search paths to asdf:*central-registry* here
   (format *error-output* "[load-system-test.lisp] asdf:*central-registry* = ~A~%"

@@ -64,6 +64,20 @@
     </None>
   </ItemGroup>
 
+  <!-- Copy Lisp Libraries to the build output directory -->
+  <ItemGroup>
+    <!-- Copy the anaphora Lisp source files to the build output directory -->
+    <None Include="../../../quicklisp/dists/quicklisp/software/anaphora-20220220-git/**/*.lisp">
+      <Link>contrib/anaphora/%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <!-- Copy the anaphora ASDF system definition files to the build output directory -->
+    <None Include="../../../quicklisp/dists/quicklisp/software/anaphora-20220220-git/**/*.asd">
+      <Link>contrib/anaphora/%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
 
 </Project>

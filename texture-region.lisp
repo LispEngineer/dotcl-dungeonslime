@@ -4,6 +4,7 @@
 
 (in-package :cl-user)
 (require "asdf") ;; Load uiop library
+; (require "anaphora") ; This doesn't work, but should have been loaded earlier
 
 (format *error-output* "[texture-region.lisp] Loading in package ~S~%" *package*)
 
@@ -132,8 +133,41 @@
    (t
     (dotnet:static "System.IO.Path" "Combine" part1 part2))))
 
+#|
+(defun file-exists-and-readable-p (filename)
+  "Returns T if the file exists and can be successfully opened for reading."
+  (let ((path (probe-file filename)))
+    (when path
+      ;; If probe-file found it, try to actually open it to test readability
+      (handler-case
+        (with-open-file (stream path :direction :input) t) ; Successfully opened! Return T
+        (file-error () nil))))) ; Catch OS permission/read errors and return NIL
+|#
+(defun file-exists-and-readable-p (filename)
+  "Returns T if the file exists and can be successfully opened for reading."
+  (anaphora:awhen (probe-file filename)
+    ;; If probe-file found it, try to actually open it to test readability
+    (handler-case
+      (with-open-file (stream it :direction :input) t) ; Successfully opened! Return T
+      (file-error () nil)))) ; Catch OS permission/read errors and return NIL
+
+(defun qualify-path (filename)
+  "Checks if we can read filename as it is, and returns it. Otherwise,
+   checks if it can be read after combining with +base-directory+ and then
+   will return that. Otherwise, just returns the original filename."
+  ;; This is necessary because when we (load "load-repl.lisp") to load the
+  ;; entire game from the REPL, DotCL doesn't actually set the 
+  ;; +base-directory+ to a reasonable setting:
+  ;; [texture-region.lisp] +base-directory+ =
+  ;;   /home/dfields/.dotnet/tools/.store/dotcl/0.1.8/dotcl.linux-x64/0.1.8/tools/net10.0/linux-x64/
+  (cond
+    ((file-exists-and-readable-p filename) filename)
+    ((file-exists-and-readable-p (path-combine +base-directory+ filename))
+     (path-combine +base-directory+ filename))
+    (t filename)))
+
 (format *error-output* "[texture-region.lisp] +base-directory+ = ~A~%" +base-directory+)
-(format *error-output* "[texture-region.lisp] combined = ~A~%" (path-combine +base-directory+ "Content/test-atlas.lisp"))
+(format *error-output* "[texture-region.lisp] combined = ~A~%" (qualify-path "Content/test-atlas.lisp"))
 
 (defvar ta-example-atlas
   '(:texture "SomeTexture.png"
@@ -144,7 +178,7 @@
 
 (format *error-output* "[texture-atlas.lisp] example atlas texture: ~S~%" (getf ta-example-atlas :texture))
 
-(setf ta-example-atlas (safe-read-form-from-file (path-combine +base-directory+ "Content/test-atlas.lisp")))
+(setf ta-example-atlas (safe-read-form-from-file (qualify-path "Content/test-atlas.lisp")))
 
 (format *error-output* "[texture-atlas.lisp] example file atlas: ~S~%" ta-example-atlas)
 
@@ -188,7 +222,7 @@
       atlas)))
 
 ;; Test to ensure that the example test-atlas.lisp file can be read correctly.
-(let ((test-atlas (ta-from-file (path-combine +base-directory+ "Content/test-atlas.lisp"))))
+(let ((test-atlas (ta-from-file (qualify-path "Content/test-atlas.lisp"))))
   (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
   (assert (typep test-atlas 'texture-atlas))
   (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
