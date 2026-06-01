@@ -20,6 +20,7 @@
                (:file "game-repl")
                (:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants"))
                (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
+               (:file "sprite" :depends-on ("mg-classes" "texture-region"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on

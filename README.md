@@ -215,6 +215,10 @@ In my case, it shows the game window and then segfaults out.
   including them in the `.asd` file (commented out by default). Useful during
   development only.
 
+* `sprite.lisp`: The Sprite class from the Dungeon Slime tutorial
+  [Chapter 8](https://docs.monogame.net/articles/tutorials/building_2d_games/08_the_sprite_class/index.html) 
+  as a CLOS class.
+
 * `texture-region.lisp`: The texture region class from Chapter 7 of the
   Dungeon Slime MonoGame tutorial translated into Lisp.
 
@@ -334,12 +338,12 @@ have fully vetted it and would vouch for it as if I wrote it myself.
 # Functionality Implemented
 
 MonoGame Dungeon Slime features:
-* All Chapters 1-6 content
-  * Except: The base Core class and Game1 are both CLOS classes
-    * The base CLOS Core class does callbacks into the MonoGame Game class
-  * Except: this is currently still doing the original MonoGame demo's color cycling
-* Chapter 7 content, Texture Regions and Texture Atlases
+* All Chapters 1-7 content
+  * Classes are implemented as CLOS classes
+    * The base CLOS Core class does callbacks into a MonoGame proxy Game class.
   * We don't use an XML file to define the Texture Atlas; we use a Lisp property list.
+  * Except: this is currently still doing the original MonoGame demo's color cycling
+* Chapter 8 content is partially implemented.
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

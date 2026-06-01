@@ -302,3 +302,5 @@
     (assert (equal (width  reg-b) 64))
     (assert (equal (height reg-b) 64)))
   (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))
+
+(format *error-output* "[texture-atlas.lisp] Loading complete.~%")

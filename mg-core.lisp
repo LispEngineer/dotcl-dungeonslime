@@ -21,7 +21,10 @@
   ((monogame
     ;; This is a reference to the C# MonoGame Game class instance
     :initarg :monogame ;; This MUST be initialized with this keyword
-    :accessor monogame)
+    :accessor monogame
+    :documentation "This is a reference to the C# MonoGame Game class instance,
+                    which is acting as a proxy of this class. This MUST be provided
+                    as an initarg in make-instance!")
    (window-info
     ;; This is a plist with keys :title, :width, :height, :full-screen
     ;; that configures the initial game window
