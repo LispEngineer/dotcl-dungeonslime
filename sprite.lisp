@@ -20,7 +20,6 @@
   ((region
     :accessor region
     :initarg :texture-region
-    :initform nil
     :documentation "The texture-region represented by this sprite. It can be provided
                     at make-instance time with :texture-region keyword argument.")
    (color
