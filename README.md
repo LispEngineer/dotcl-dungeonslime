@@ -338,12 +338,11 @@ have fully vetted it and would vouch for it as if I wrote it myself.
 # Functionality Implemented
 
 MonoGame Dungeon Slime features:
-* All Chapters 1-7 content
+* All Chapters 1-8 content
   * Classes are implemented as CLOS classes
     * The base CLOS Core class does callbacks into a MonoGame proxy Game class.
   * We don't use an XML file to define the Texture Atlas; we use a Lisp property list.
   * Except: this is currently still doing the original MonoGame demo's color cycling
-* Chapter 8 content is partially implemented.
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses
@@ -396,11 +395,12 @@ C# Class-Aware Generic Function System (Version 1):
   interface precedence specificity (`ArrayList` vs `Hashtable` dispatching 
   to `ICollection` vs `IDictionary`), and type alias resolution.
 
-Texture Regions and Texture Atlases:
-* Implemented the CLOS classes `texture-region` and `texture-atlas` to manage sprite subdivisions.
-* Created `safe-read-form-from-file` in `texture-region.lisp` to securely load
+Texture Regions, Sprites and Texture Atlases:
+* Implemented the CLOS classes `texture-region`, `sprite` and `texture-atlas` 
+  to manage sprite sheet subdivisions.
+* Created `safe-read-form-from-file` in `texture-atlas.lisp` to securely load
   Lisp-based texture atlas descriptions without read-time evaluation.
-* Implemented `ta-from-file` in `texture-region.lisp` which loads a `texture-atlas` from a Lisp
+* Implemented `ta-from-file` in `texture-atlas.lisp` which loads a `texture-atlas` from a Lisp
   form description file (like `Content/test-atlas.lisp`), converting symbol/keyword region
   names to strings for the atlas registry. It is accompanied by a validation test
   that runs on startup.
@@ -430,7 +430,6 @@ due to a combination of two issues:
    Because the `contrib/` folder was not copied to the build output directory, 
    DotCL was unable to locate `asdf.fasl` dynamically.
 
-
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class
@@ -449,16 +448,19 @@ the `--base` argument to see it work (in C#).
 
 # TO DO
 
-* Build a multimethod that dispatches on C# classes.
+* Break the code into different packages for everything and get it
+  all out of the `:cl-user` namespace.
+  * This is made somewhat more complicated by the "concatenate and compile"
+    mechanism the DotCL system uses to build a binary.
+
+* Enhance the generic methods that dispatch on C# classes.
   Rationale: I'd like `width` to work on CLOS classes AND C# classes.
   * Exact class match (e.g., the string of the exact class name)
   * Instance of class match (e.g., that class or any subclass)
+  * Make it work with basic `defmethod` not just `defc#method`
 
 * Build a MultiInvoke which does invoke on each one along the way, for example,
   `(multi-invoke mg-game "Window" "ClientBounds" "Width")`.
-
-* Make the Run() spawn the background REPL if it was executed from
-  the DotCL repl.
 
 * Implement a system to convert a CLOS class to a CLR/C# class somehow,
   or really, create a C# proxy for the CLOS class.
@@ -475,10 +477,6 @@ the `--base` argument to see it work (in C#).
 * Look into the performance of the various `dotnet:` calls in the main
   event loop (e.g., `Update()` and `Draw()`). See if there is optimization
   that can be made.
-
-* Figure out how a C# only Lisp package can be imported using just
-  a `require` statement, like most Lisp packages. I am guessing this
-  will require a package stub to be created somewhere/somehow.
 
 * If the standalone game is exited using the GUI of the game (currently
   by pressing `ESC`), it gives this error:
