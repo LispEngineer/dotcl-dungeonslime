@@ -16,6 +16,8 @@
              #:+v2-1+
              #:+v2-x1+
              #:+v2-y1+
+             #:v2*
+             #:print-gf-methods
              #:x
              #:y
              #:width

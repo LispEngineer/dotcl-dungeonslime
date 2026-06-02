@@ -79,3 +79,19 @@
    Height is calculated by multiplying the height of the source 
    texture region by the y-axis scale factor."
   (* (height (region obj)) (y (scale obj))))
+
+(defun sprite-center-origin (spr)
+  "Sets the origin of this sprite to the center.
+   Silently do nothing when the region is unbound."
+  (when (slot-boundp (region spr))
+    (setf (origin spr) 
+          (v2* (vector2 (height (region spr)) (width (region spr))) 0.5e0))))
+
+(defun sprite-draw (sprite sprite-batch position)
+  "Submit this sprite for drawing in the specified batch at the specified position."
+  (when (slot-boundp (region sprite))
+    (tr-draw (region sprite) sprite-batch position
+             (color sprite) (rotation sprite) (origin sprite) (scale sprite)
+             (effects sprite) (layer-depth sprite))))
+
+(format *error-output* "[sprite.lisp] Loading complete.~%" *package*)
