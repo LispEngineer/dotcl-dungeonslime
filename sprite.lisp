@@ -11,12 +11,9 @@
 (require :dotnet-class)
 
 ;; Alternatively to use-package, we can just get the specific symbols we want.
-;; (use-package :mg-classes)
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (shadowing-import '(mg-classes:x
-                      mg-classes:y
-                      mg-classes:width
-                      mg-classes:height)))
+(use-package :mg-classes)
+;; (eval-when (:compile-toplevel :load-toplevel :execute)
+;;   (shadowing-import '(mg-classes:x)))
 
 ;; MonoGame Game implemented as a CLOS class
 (defclass sprite ()
@@ -54,17 +51,17 @@
   ;; and its initial keyword arguments are processed.
   "Sets the default value of any unbound slot. Does not touch the region."
   (format *error-output* "[sprite:initialize-instance:after] Initializing sprite...~%")
-  (unless (slot-boundp (color spr))
+  (unless (slot-boundp spr 'color)
     (setf (color spr) +color-white+))
-  (unless (slot-boundp (rotation spr))
+  (unless (slot-boundp spr 'rotation)
     (setf (rotation spr) 0.0e0))
-  (unless (slot-boundp (scale spr))
+  (unless (slot-boundp spr 'scale)
     (setf (scale spr) +v2-1+))
-  (unless (slot-boundp (origin spr))
+  (unless (slot-boundp spr 'origin)
     (setf (origin spr) +v2-0+))
-  (unless (slot-boundp (effects spr))
+  (unless (slot-boundp spr 'effects)
     (setf (effects spr) +sprite-effects-none+))
-  (unless (slot-boundp (layer-depth spr))
+  (unless (slot-boundp spr 'layer-depth)
     (setf (layer-depth spr) 0.0e0))
   (format *error-output* "[sprite:initialize-instance:after] Sprite initialized.~%"))
 
@@ -84,12 +81,14 @@
   "Sets the origin of this sprite to the center.
    Silently do nothing when the region is unbound."
   (when (slot-boundp (region spr))
-    (setf (origin spr) 
+    (setf (origin spr)
           (v2* (vector2 (height (region spr)) (width (region spr))) 0.5e0))))
 
 (defun sprite-draw (sprite sprite-batch position)
   "Submit this sprite for drawing in the specified batch at the specified position."
-  (when (slot-boundp (region sprite))
+  ; (format *error-output* "[sprite-draw] sprite = ~A~%" sprite)
+  ; (format *error-output* "[sprite-draw] rotation = ~A~%" (rotation sprite))
+  (when (slot-boundp sprite 'region)
     (tr-draw (region sprite) sprite-batch position
              (color sprite) (rotation sprite) (origin sprite) (scale sprite)
              (effects sprite) (layer-depth sprite))))

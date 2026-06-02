@@ -67,6 +67,12 @@
   "Removes all regions from this texture atlas."
   (clear (regions ta)))
 
+(defun ta-create-sprite (ta region-name)
+  "Creates a sprite for the specified region name. If the region name is not
+   found, returns nil."
+  (anaphora:awhen (ta-get-region ta region-name)
+    (make-instance 'sprite :texture-region it)))
+
 (defun safe-read-form-from-file (filepath)
   "To safely load (or read) a single form from a file in Common Lisp,
    you must prevent read-time code execution, isolate symbol resolution,  

@@ -12,23 +12,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MonoGame Icon info
-
-(defconstant +icon-rect+ (rect 0 0 128 128)
-  "The icon part of the logo")
-
-(defconstant +wordmark-rect+ (rect 150 34 458 58)
-  "The wordmark part of the logo")
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Game Functions
 
 (defparameter color-cycle-period 6.0
   "How fast we cycle through hues in seconds.")
-
-(defparameter rotation-period 5.0
-  "How fast we rotate the logo in seconds.")
 
 ;; Animated background color: hue cycles with elapsed time.
 (defun pulse-color (seconds)
@@ -37,10 +24,6 @@
          (frac (/ t-norm color-cycle-period))
          (a (round (* 255 frac))))
     (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
-
-(defun rotation (seconds)
-  "Return the rotation amount for the given time in Radians."
-  (°2R (/ (* 360 seconds) rotation-period)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,10 +43,10 @@
 (defclass game-1 (core)
   ((slime
     :accessor slime
-    :documentation "A Texture2D picture of a slime")
+    :documentation "A Sprite of a slime")
    (bat
     :accessor bat
-    :documentation "A Texture2D picture of a bat")))
+    :documentation "A Sprite of a bat")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -84,8 +67,10 @@
     (format *error-output* "[game-1:load-content] Loaded atlas = ~A~%" atlas)
     (loop for key being the hash-keys of (regions atlas) using (hash-value value)
       do (format *error-output* "[game-1:load-content]   Key: ~a, Value: ~a~%" key value))
-    (setf (slime game) (ta-get-region atlas "slime"))
-    (setf (bat game) (ta-get-region atlas "bat"))
+    (setf (slime game) (ta-create-sprite atlas "slime"))
+    (setf (scale (slime game)) (vector2 4.0e0)) ; FIXME: Magic number
+    (setf (bat game) (ta-create-sprite atlas "bat"))
+    (setf (scale (bat game)) (vector2 4.0e0)) ; FIXME: Magic number
     (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game)))
   (call-next-method game))
 
@@ -106,9 +91,9 @@
          (gd (dotnet:invoke mg "GraphicsDevice"))
          (total (dotnet:invoke gt "TotalGameTime"))
          (secs (dotnet:invoke total "TotalSeconds"))
+         ;; Calculate our background color
          (c (pulse-color secs))
-         (sb (sprite-batch game))
-        )
+         (sb (sprite-batch game)))
 
     (dotnet:invoke gd "Clear" c)
 
@@ -116,8 +101,8 @@
     (sprite-batch-begin sb :sampler-state +sampler-state-point-clamp+)
 
     ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
-    (tr-draw (slime game) sb +v2-0+                                        +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 0.0e0)
-    (tr-draw (bat game)   sb (vector2 (+ 10 (* (width (slime game)) 4)) 0) +color-white+ 0.0e0 +v2-1+ 4.0e0 +sprite-effects-none+ 1.0e0)
+    (sprite-draw (slime game) sb +v2-0+)
+    (sprite-draw (bat game)   sb (vector2 (+ 10 (width (slime game)) 4) 0.0e0))
 
     (dotnet:invoke sb "End"))
 
