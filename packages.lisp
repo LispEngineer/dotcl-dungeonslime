@@ -4,7 +4,7 @@
 
 (format *error-output* "[packages.lisp] Loading beginning.~%" *package*)
 (in-package :cl-user)
-(format *error-output* "[animation.lisp] Defining packages in package ~S~%" *package*)
+(format *error-output* "[packages.lisp] Defining packages in package ~S~%" *package*)
 
 ;; TODO: Set :local-nicknames?
 
