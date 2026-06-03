@@ -12,6 +12,7 @@
                (:file "constants")
                (:file "type-aliases")
                (:file "load-system-test")
+               (:file "csharp")
                (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
                (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
@@ -21,7 +22,8 @@
                (:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants"))
                (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
                (:file "sprite" :depends-on ("mg-classes" "texture-region"))
-               (:file "texture-atlas" :depends-on ("texture-region" "monoutils" "constants" "mg-classes" "clr-generic"))
+               (:file "animation" :depends-on ("csharp" "texture-region"))
+               (:file "texture-atlas" :depends-on ("texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on

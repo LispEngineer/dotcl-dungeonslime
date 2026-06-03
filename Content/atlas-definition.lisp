@@ -2,10 +2,32 @@
 ; <TextureAtlas>
 ;     <Texture>images/atlas</Texture>
 ;     <Regions>
-;         <Region name="slime" x="0" y="0" width="20" height="20" />
-;         <Region name="bat" x="20" y="0" width="20" height="20" />
+;         <Region name="slime-1" x="0" y="0" width="20" height="20" />
+;         <Region name="slime-2" x="0" y="20" width="20" height="20" />
+;         <Region name="bat-1" x="20" y="0" width="20" height="20" />
+;         <Region name="bat-2" x="20" y="20" width="20" height="20" />
+;         <Region name="bat-3" x="40" y="0" width="20" height="20" />
 ;     </Regions>
+;     <Animations>
+;         <Animation name="slime-animation" delay="200">
+;             <Frame region="slime-1" />
+;             <Frame region="slime-2" />
+;         </Animation>
+;         <Animation name="bat-animation" delay="200">
+;             <Frame region="bat-1" />
+;             <Frame region="bat-2" />
+;             <Frame region="bat-1" />
+;             <Frame region="bat-3" />
+;         </Animation>
+;     </Animations>
 ; </TextureAtlas>
 (:texture "images/atlas"
-  :regions (:slime (:x 0   :y 0 :w 20 :h 20)
-            :bat   (:x 20  :y 0 :w 20 :h 20)))
+  :regions (:slime-1 (:x 0   :y 0  :w 20 :h 20)
+            :slime-2 (:x 0   :y 20 :w 20 :h 20)
+            :bat-1   (:x 20  :y 0  :w 20 :h 20)
+            :bat-2   (:x 20  :y 20 :w 20 :h 20)
+            :bat-3   (:x 40  :y 0  :w 20 :h 20))
+  :animations (:slime-animation (:delay  200
+                                 :frames (:slime-1 :slime-2))
+               :bat-animation   (:delay  200
+                                 :frames (:bat-1 :bat-2 :bat-1 :bat-3))))

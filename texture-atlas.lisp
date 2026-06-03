@@ -22,22 +22,26 @@
 (defclass texture-atlas ()
   ((regions
     :accessor regions
-    :documentation "All the regions in a hashtable indexed by string name")
+    :documentation "All the regions in a hashtable indexed by string name.")
    (texture
     :accessor texture
     :initarg :texture
-    :documentation "The base texture of the atlas") 
+    :documentation "The base texture of the atlas.") 
+   (animations
+    :accessor animations
+    :documentation "Stores animations in a hashtable indexed by string name.")
    (source-rect
     :accessor source-rect
     :initarg :source-rect))
-  (:documentation "Stores a texture and its source rectangle."))
+  (:documentation "Stores a texture associated regions and animations."))
 
 (defmethod initialize-instance :after ((atlas texture-atlas) &key)
   ;; This code runs immediately after a texture-atlas object is created
   ;; and its initial keyword arguments are processed.
   (format *error-output* "[texture-atlas:initialize-instance:after] Setting up texture-atlas~%")
-  ;; Create an empty hash table for the regions
-  (setf (regions atlas) (make-hash-table :test #'equal)))
+  ;; Create an empty hash table for the regions and animations
+  (setf (regions atlas)    (make-hash-table :test #'equal))
+  (setf (animations atlas) (make-hash-table :test #'equal)))
 
 ;; TODO: Consider making these generic functions and dispatch on the texture-atlas?
 (defun ta-add-region (ta name x y w h)
@@ -72,6 +76,19 @@
    found, returns nil."
   (anaphora:awhen (ta-get-region ta region-name)
     (make-instance 'sprite :texture-region it)))
+
+(defun ta-add-animation (ta name delay frames)
+  "Adds the given animation to this texture atlas with the specified name."
+  (setf (gethash name (animations ta)) 
+    (make-instance 'animation :delay delay :frames frames)))
+
+(defun ta-get-animation (ta name)
+  "Gets the animation from this texture atlas with the specified name."
+  (gethash name (animations ta)))
+
+(defun ta-remove-animation (ta name)
+  "Removes the animation with the specified name from this texture atlas."
+  (remhash name (animations ta)))
 
 (defun safe-read-form-from-file (filepath)
   "To safely load (or read) a single form from a file in Common Lisp,
@@ -191,6 +208,7 @@
       (error "Empty or invalid texture atlas file: ~A" filepath))
     (let* ((tex-name (getf plist :texture))
            (regions-plist (getf plist :regions))
+           (animations-plist (getf plist :animations))
            ;; Remove the .png suffix (if any) from the texture name
            (clean-name (if (and (stringp tex-name)
                                 (uiop:string-suffix-p tex-name ".png"))
@@ -208,12 +226,26 @@
       ;; Add each region
       (loop for (key val) on regions-plist by #'cddr
             do (let ((name (string-downcase (string key)))
-                      (x (getf val :x 0))
-                      (y (getf val :y 0))
-                      (w (getf val :w 0))
-                      (h (getf val :h 0)))
+                     (x (getf val :x 0))
+                     (y (getf val :y 0))
+                     (w (getf val :w 0))
+                     (h (getf val :h 0)))
                  (format *error-output* "[ta-from-file] region: ~S ~S ~S ~S ~S~%" name x y w h)
                  (ta-add-region atlas name x y w h)))
+      ;; Add each animation
+#|
+  :animations (:slime-animation (:delay  200
+                                 :frames (:slime-1 :slime-2))
+               :bat-animation   (:delay  200
+                                 :frames (:bat-1 :bat-2 :bat-1 :bat-3)))
+|#
+      (loop for (key val) on animations-plist by #'cddr
+            do (let* ((name (string-downcase (string key)))
+                      (delay (getf val :delay 100))
+                      (frames (getf val :frames '())))
+                 (format *error-output* "[ta-from-file] animation: ~S ~S ~S~%" name delay frames)
+                 (ta-add-animation atlas name delay
+                   (mapcar (lambda (sym) (ta-get-region atlas (string-downcase (string sym)))) frames))))
       ;; Return our completed texture atlas
       atlas)))
 
@@ -223,7 +255,8 @@
   (assert (typep test-atlas 'texture-atlas))
   (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
   (let ((reg-a (ta-get-region test-atlas "a"))
-        (reg-b (ta-get-region test-atlas "b")))
+        (reg-b (ta-get-region test-atlas "b"))
+        (ani-ab (ta-get-animation test-atlas "ab")))
     (assert reg-a)
     (assert reg-b)
     (assert (monoutils:dotnet-p (source-rect reg-a)))
@@ -234,7 +267,11 @@
     (assert (equal (x      reg-b) 64))
     (assert (equal (y      reg-b) 0))
     (assert (equal (width  reg-b) 64))
-    (assert (equal (height reg-b) 64)))
+    (assert (equal (height reg-b) 64))
+    ;; Animation tests
+    (assert (equal (delay ani-ab) 234))
+    ;; TODO: Check the values of the frames
+    (assert (equal (length (frames ani-ab))  5 )))
   (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))
 
 (format *error-output* "[texture-atlas.lisp] Loading complete.~%")

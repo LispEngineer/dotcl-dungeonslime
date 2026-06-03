@@ -15,7 +15,7 @@
 ;; (eval-when (:compile-toplevel :load-toplevel :execute)
 ;;   (shadowing-import '(mg-classes:x)))
 
-;; MonoGame Game implemented as a CLOS class
+;; Sprite implemented as a CLOS class
 (defclass sprite ()
   ((region
     :accessor region
