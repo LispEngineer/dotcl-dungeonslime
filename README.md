@@ -343,6 +343,7 @@ MonoGame Dungeon Slime features:
     * The base CLOS Core class does callbacks into a MonoGame proxy Game class.
   * We don't use an XML file to define the Texture Atlas; we use a Lisp property list.
   * Except: this is currently still doing the original MonoGame demo's color cycling
+* Chapter 9 (animations): partial implementation
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses
