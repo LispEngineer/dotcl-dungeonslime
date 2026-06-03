@@ -26,7 +26,7 @@
    (texture
     :accessor texture
     :initarg :texture
-    :documentation "The base texture of the atlas.") 
+    :documentation "The base texture of the atlas.")
    (animations
     :accessor animations
     :documentation "Stores animations in a hashtable indexed by string name.")
@@ -79,7 +79,7 @@
 
 (defun ta-add-animation (ta name delay frames)
   "Adds the given animation to this texture atlas with the specified name."
-  (setf (gethash name (animations ta)) 
+  (setf (gethash name (animations ta))
     (make-instance 'animation :delay delay :frames frames)))
 
 (defun ta-get-animation (ta name)

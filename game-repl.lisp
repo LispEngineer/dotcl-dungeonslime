@@ -2,20 +2,7 @@
 ;;;
 ;;; Background console REPL for a game
 
-(in-package :cl-user)
-
-;; Define the game-repl package at load-time/compile-time to isolate REPL symbols.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defpackage :game-repl
-    (:use :cl)
-    (:export #:run-repl
-             #:start-background-repl
-             #:kill-background-repl
-             #:*no-lisp-repl*
-             #:*background-repl*)))
-
 (in-package :game-repl)
-
 (require "dotcl-thread")
 (require "dotcl-repl")
 

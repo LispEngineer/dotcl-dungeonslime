@@ -2,16 +2,6 @@
 ;;;
 ;;; C# Utilities
 
-(format *error-output* "[csharp.lisp] Loading beginning.~%" *package*)
-(in-package :cl-user)
-
-;; Define the game-repl package at load-time/compile-time to isolate REPL symbols.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defpackage :csharp
-    (:use :cl)
-    (:export #:timespan-from-milliseconds
-             )))
-
 (in-package :csharp)
 (require :dotnet-class)
 

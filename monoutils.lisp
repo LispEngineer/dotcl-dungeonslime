@@ -1,17 +1,7 @@
 ;;; monoutils.lisp — Package definition and shims for custom C# utils.
 ;;;
 
-(in-package :cl-user)
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defpackage :monoutils
-    (:use :cl)
-    (:export :add3
-             :invoke-generic
-             :dotnet-p
-             :boxed-dotnet-p
-             :get-type
-             :get-type-full-name)))
+(in-package :monoutils)
 
 (format *error-output* "[monoutils.lisp] Loading in package ~S~%" *package*)
 

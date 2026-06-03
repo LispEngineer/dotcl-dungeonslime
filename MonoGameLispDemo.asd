@@ -8,18 +8,19 @@
   ;; Do not include any of the "depends-on" stuff above in the "depends-on"
   ;; clauses in the components!
   :components ((:file "settings") ;; Load this file first, it contains declaims
-               (:file "monoutils")
+               (:file "packages")
+               (:file "monoutils" :depends-on ("packages"))
                (:file "constants")
                (:file "type-aliases")
                (:file "load-system-test")
-               (:file "csharp")
+               (:file "csharp" :depends-on ("packages"))
                (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
                (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
                (:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
                ;; End tests to uncomment
-               (:file "game-repl")
-               (:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants"))
+               (:file "game-repl" :depends-on ("packages"))
+               (:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants" "packages"))
                (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
                (:file "sprite" :depends-on ("mg-classes" "texture-region"))
                (:file "animation" :depends-on ("csharp" "texture-region"))

@@ -67,9 +67,9 @@
     (format *error-output* "[game-1:load-content] Loaded atlas = ~A~%" atlas)
     (loop for key being the hash-keys of (regions atlas) using (hash-value value)
       do (format *error-output* "[game-1:load-content]   Key: ~a, Value: ~a~%" key value))
-    (setf (slime game) (ta-create-sprite atlas "slime"))
+    (setf (slime game) (ta-create-sprite atlas "slime-1"))
     (setf (scale (slime game)) (vector2 4.0e0)) ; FIXME: Magic number
-    (setf (bat game) (ta-create-sprite atlas "bat"))
+    (setf (bat game) (ta-create-sprite atlas "bat-1"))
     (setf (scale (bat game)) (vector2 4.0e0)) ; FIXME: Magic number
     (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game)))
   (call-next-method game))

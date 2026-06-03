@@ -4,28 +4,6 @@
 ;;; Many of these things would be more efficient if they were converted
 ;;; into macros, but that's an optimization for another day.
 
-(in-package :cl-user)
-
-;; Define the game-repl package at load-time/compile-time to isolate REPL symbols.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defpackage :mg-classes
-    (:use :cl)
-    (:export #:vector2
-             #:rect
-             #:+v2-0+
-             #:+v2-1+
-             #:+v2-x1+
-             #:+v2-y1+
-             #:v2*
-             #:print-gf-methods
-             #:x
-             #:y
-             #:width
-             #:height
-             #:°2R
-             #:sprite-batch-begin
-             )))
-
 (in-package :mg-classes)
 (require :dotnet-class)
 
