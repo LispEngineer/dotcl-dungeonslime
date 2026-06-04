@@ -146,6 +146,15 @@ In my case, it shows the game window and then segfaults out.
 * [dotcl-generic.md](doc/dotcl-generic.md) details the internal workings of
   generic functions and method dispatch inside the DotCL 0.1.8 runtime environment.
 
+* [package-dotnet.md](doc/package-dotnet.md) provides detailed documentation of
+  all 30 standard symbols and the 2 extra WinForms symbols in the DotCL `DOTNET` package.
+
+* [package-dotcl.md](doc/package-dotcl.md) lists the exported symbols in the `DOTCL` package.
+
+* [package-dotcl-mop.md](doc/package-dotcl-mop.md) lists the exported symbols in the `DOTCL-MOP` package.
+
+* [package-dotcl-internal.md](doc/package-dotcl-internal.md) provides detailed documentation of all 154 internal/system symbols in the `DOTCL-INTERNAL` package.
+
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
