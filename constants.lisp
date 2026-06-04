@@ -26,11 +26,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C# Enumeration References
 
-(defconstant +esc-key+
+(defconstant +key-esc+
   (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Escape")
   "Cache this enumerated value from C# for quick and easy reuse")
 
-;; Docstrings omitted hereonout because code is self-explanatory
+;; Docstrings mostly omitted hereonout because code is self-explanatory
+
+(defconstant +key-left+
+  (dotnet:static "Microsoft.Xna.Framework.Input.Keys" "Left"))
 
 (defconstant +color-white+
   (dotnet:static "Microsoft.Xna.Framework.Color" "White")

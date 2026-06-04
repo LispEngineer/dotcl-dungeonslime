@@ -78,11 +78,19 @@
   "Quit the game if ESC key is pressed."
   (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
          ;; This will return nil or t
-         (esc-down (dotnet:invoke kb-state "IsKeyDown" +esc-key+)))
+         (esc-down (dotnet:invoke kb-state "IsKeyDown" +key-esc+))
+         (left-down (dotnet:invoke kb-state "IsKeyDown" +key-left+)))
     (when esc-down
       (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
       (force-output *error-output*) ;; finish-output alternatively
-      (dotnet:invoke (monogame game) "Exit")))
+      (dotnet:invoke (monogame game) "Exit"))
+    ;; To test error handling in the game, we intentionally cause a Lisp error when
+    ;; the left button is pressed.
+    ;; TODO: Intentionally cause a C# exception when right is pressed.
+    (when left-down
+      (format *error-output* "[game-1:update] left-down = ~A; intentionally causing error~%" left-down)
+      (error "This is a test error in lisp code.")
+      (format *error-output* "[game-1:update] left-down = ~A; error caused~%" left-down)))
   (call-next-method game gt))
 
 (defmethod draw ((game game-1) gt) ;; GameTime

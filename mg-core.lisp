@@ -175,11 +175,37 @@
       (format *error-output* "[core:run] Error: ~A~%" e)
       (format *error-output* "[core:run] Type: ~A, Class: ~A, DotNet? ~A~%"
         (type-of e) (class-of e) (dotnet-p e))
+      (format *error-output* "[core:run] describe:~%")
       (describe e)
-      (uiop:print-backtrace :stream *standard-output* :condition c)
+      (format *error-output* "[core:run] backtrace:~%")
+      (uiop:print-backtrace :stream *error-output* :condition e)
+      ;; There is nothing useful that the debugger can do; all the
+      ;; choices seem to result in the program crashing with:
+      ;; [Program.cs] Got exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+      #|
+      ;; We should probably kill the background REPL first, if it is running,
+      ;; so we can take control of standard input
+      (format *error-output* "[core:run] (Possibly) Killing background REPL~%")
+      (game-repl:kill-background-repl)
+      (sleep 0.25e0)
+      (format *error-output* "[core:run] Invoking debugger~%")
+      (invoke-debugger e)
+      ;; Note, if you choose a RETRY restart, you get:
+      #|
+[Program.cs] Got exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> DotCL.RestartInvocationException: Restart invoked
+   at DotCL.Debugger.InvokeRestartByIndex(List`1 restarts, Int32 idx) in /home/dfields/src/cl/dotcl/runtime/Debugger.cs:line 130
+   at DotCL.Debugger.Enter(LispObject condition) in /home/dfields/src/cl/dotcl/runtime/Debugger.cs:line 50
+...
+Unhandled exception. DotCL.RestartInvocationException: Restart invoked
+   at Program.<Main>$(String[] args) in /home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs:line 98
+      |#
+      |#
       (format *error-output* "[core:run] End error handling and run.~%"))
-    (:no-error ()
-      (format *error-output* "[core:run] End error-free run.~%"))))
+    (:no-error (retval)
+      (format *error-output* "[core:run] End error-free run.~%")
+      ;; This is actually a Void method from a C# perspective
+      retval)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object

@@ -77,16 +77,35 @@ Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 var gameObj = DotclHost.Call("MAKE-GAME");
 if (IsTestMode) {
     Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
-} else {
-    if (gameObj is LispDotNetObject dno &&
-        dno.Value is Microsoft.Xna.Framework.Game game) {
-        Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
-        // TODO: Add exception catching around Run()
-        game.Run(); // This may not run the Run() method on the CLOS Proxy due to the "is" above
-        // Not necessary if the process ends after this, but if it doesn't:
-        game.Dispose();
+    return;
+}
+
+if (gameObj is LispDotNetObject dno &&
+    dno.Value is Microsoft.Xna.Framework.Game game) {
+    Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
+    // We invoke the (non-virtual) Run() method on this object directly, rather than casting this
+    // to Game, which would run that specific Run() method
+    var runMethod = game.GetType().GetMethod("Run",
+        System.Reflection.BindingFlags.Public |
+        System.Reflection.BindingFlags.Instance |
+        System.Reflection.BindingFlags.DeclaredOnly); // Non-virtual
+    if (runMethod != null) {
+        Console.WriteLine("[Program.cs] Executing actual object's shadowed Run()");
+        try {
+            runMethod.Invoke(game, null);
+        } catch (System.Reflection.TargetInvocationException ex) {
+            Console.WriteLine($"[Program.cs] Got exception: {ex}");
+            throw ex.InnerException ?? ex;
+        // TODO: Catch other exceptions
+        }
     } else {
-        throw new InvalidOperationException(
-            $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
+        // There was no shadowed Run() so just use the one on the Game
+        // TODO: Catch exceptions
+        game.Run();
     }
+    // Not necessary if the process ends after this, but if it doesn't:
+    game.Dispose();
+} else {
+    throw new InvalidOperationException(
+        $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
 }
