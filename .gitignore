@@ -2,3 +2,4 @@ bin/
 obj/
 .vscode/
 antigravity-log.md
+.aider*
