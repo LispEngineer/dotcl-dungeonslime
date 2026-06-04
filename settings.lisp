@@ -15,3 +15,9 @@
 
 ;; Turn off optimization and include lots of debugging
 (declaim (optimize (debug 3)))
+
+;; We can instruct the DotCL runtime to automatically print full 
+;; C# stack traces to standard error for all unhandled exceptions:
+;; (Do I need to require dotcl?)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (setf dotcl:*debug-stacktrace* t))

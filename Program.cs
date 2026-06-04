@@ -75,17 +75,18 @@ Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 
 // MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
-if (!IsTestMode) {
-    if (gameObj is LispDotNetObject dno
-        && dno.Value is Microsoft.Xna.Framework.Game game) {
+if (IsTestMode) {
+    Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
+} else {
+    if (gameObj is LispDotNetObject dno &&
+        dno.Value is Microsoft.Xna.Framework.Game game) {
         Console.WriteLine($"[Program.cs] running game: {game.GetType().FullName}");
-        game.Run();
+        // TODO: Add exception catching around Run()
+        game.Run(); // This may not run the Run() method on the CLOS Proxy due to the "is" above
         // Not necessary if the process ends after this, but if it doesn't:
         game.Dispose();
     } else {
         throw new InvalidOperationException(
             $"MAKE-GAME returned unexpected: {gameObj?.GetType().Name}");
     }
-} else {
-    Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
 }

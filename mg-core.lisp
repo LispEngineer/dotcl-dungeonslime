@@ -155,10 +155,31 @@
 
 (defmethod end-run ((game core))
   "Stop our background REPL - if running."
+  (format *error-output* "[core:end-run] Possibly killing background REPL~%")
   ;; Call kill-background-repl exported from the game-repl package.
   (game-repl:kill-background-repl)
   (dotnet:call-base (monogame game) "EndRun"))
 
+(defmethod run ((game core))
+  "Sets up error handling and then calls the parent's Run().
+   Not sure how this will actually handle Lisp or DotNet errors/exceptions,
+   but it will sure be interesting to see."
+  ;; I doubt this will actually be called from Program.cs
+  (handler-case
+    (progn
+      (format *error-output* "[core:run] Calling parent Game.Run().~%")
+      (dotnet:call-base (monogame game) "Run")
+      (format *error-output* "[core:run] Parent Game.Run() returned normally.~%"))
+    (error (e)
+      ;; If we get an error, we should probably kill the background REPL?
+      (format *error-output* "[core:run] Error: ~A~%" e)
+      (format *error-output* "[core:run] Type: ~A, Class: ~A, DotNet? ~A~%"
+        (type-of e) (class-of e) (dotnet-p e))
+      (describe e)
+      (uiop:print-backtrace :stream *standard-output* :condition c)
+      (format *error-output* "[core:run] End error handling and run.~%"))
+    (:no-error ()
+      (format *error-output* "[core:run] End error-free run.~%"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object
@@ -231,4 +252,10 @@
       ;; This is NOT a virtual method, so it will hide the super class's
       ;; method of the same name.
       ;; The receiver should probably call MonoGame's Game.Dispose()
-      (dispose (dotnet:invoke self "CLOSObject")))))
+      (dispose (dotnet:invoke self "CLOSObject")))
+      
+    ("Run" () :returns Void
+      ;; https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html#Microsoft_Xna_Framework_Game_Run
+      ;; Non-virtual method. The CLOSObject needs to call the
+      ;; MonoGame's Game.Run().
+      (run (dotnet:invoke self "CLOSObject")))))
