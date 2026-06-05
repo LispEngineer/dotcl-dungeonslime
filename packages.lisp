@@ -23,7 +23,11 @@
 
   (defpackage :csharp
     (:use :cl)
-    (:export #:timespan-from-milliseconds))
+    (:export #:timespan<-milliseconds
+             #:timespan->milliseconds
+             #:ts+
+             #:ts>
+             #:ts>=))
 
   (defpackage :mg-classes
     (:use :cl)
@@ -40,7 +44,10 @@
              #:width
              #:height
              #:°2R
-             #:sprite-batch-begin))
+             #:sprite-batch-begin
+             #:game-time-total
+             #:game-time-elapsed
+             #:game-time-slow?))
 
   (defpackage :game-repl
     (:use :cl)

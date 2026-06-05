@@ -51,7 +51,7 @@
    y: The top-left y-coordinate position of the region boundary relative to the top-left corner of the source texture boundary.
    width: The width, in pixels, of the region.
    height: The height, in pixels, of the region."
-  (let ((tr (make-instance 'texture-region 
+  (let ((tr (make-instance 'texture-region
                            :texture (texture ta)
                            :source-rect (rect x y w h))))
     (setf (gethash name (regions ta)) tr)))
@@ -78,7 +78,8 @@
     (make-instance 'sprite :texture-region it)))
 
 (defun ta-add-animation (ta name delay frames)
-  "Adds the given animation to this texture atlas with the specified name."
+  "Adds the given animation to this texture atlas with the specified name.
+   The delay should be a C# TimeSpan object."
   (setf (gethash name (animations ta))
     (make-instance 'animation :delay delay :frames frames)))
 
@@ -92,7 +93,7 @@
 
 (defun safe-read-form-from-file (filepath)
   "To safely load (or read) a single form from a file in Common Lisp,
-   you must prevent read-time code execution, isolate symbol resolution,  
+   you must prevent read-time code execution, isolate symbol resolution,
    and handle potential errors or end-of-file situations gracefully."
   (with-open-file (stream filepath :direction :input)
     (let ((*read-eval* nil)                    ; 1. Disable read-time execution (#.)
@@ -157,7 +158,7 @@
    checks if it can be read after combining with +base-directory+ and then
    will return that. Otherwise, just returns the original filename."
   ;; This is necessary because when we (load "load-repl.lisp") to load the
-  ;; entire game from the REPL, DotCL doesn't actually set the 
+  ;; entire game from the REPL, DotCL doesn't actually set the
   ;; +base-directory+ to a reasonable setting:
   ;; [texture-atlas.lisp] +base-directory+ =
   ;;   /home/dfields/.dotnet/tools/.store/dotcl/0.1.8/dotcl.linux-x64/0.1.8/tools/net10.0/linux-x64/
@@ -165,13 +166,13 @@
   (let ((combined (path-combine +base-directory+ filename)))
     (format *error-output* "[qualify-path] combined = ~A~%" combined)
     (cond
-      ((file-exists-and-readable-p filename) 
-       (format *error-output* "[qualify-path] exists~A") 
+      ((file-exists-and-readable-p filename)
+       (format *error-output* "[qualify-path] exists~A")
        filename)
       ((file-exists-and-readable-p combined)
        (format *error-output* "[qualify-path] exists with +base-directory+ = ~S~A" combined)
        combined)
-      (t 
+      (t
        (format *error-output* "[qualify-path] neither~A")
        filename))))
 
@@ -244,7 +245,8 @@
                       (delay (getf val :delay 100))
                       (frames (getf val :frames '())))
                  (format *error-output* "[ta-from-file] animation: ~S ~S ~S~%" name delay frames)
-                 (ta-add-animation atlas name delay
+                 (ta-add-animation atlas name
+                   (csharp:timespan<-milliseconds delay)
                    (mapcar (lambda (sym) (ta-get-region atlas (string-downcase (string sym)))) frames))))
       ;; Return our completed texture atlas
       atlas)))
@@ -269,9 +271,13 @@
     (assert (equal (width  reg-b) 64))
     (assert (equal (height reg-b) 64))
     ;; Animation tests
-    (assert (equal (delay ani-ab) 234))
+    (let* ((delay-ts (delay ani-ab))
+           (delay-ms (csharp:timespan->milliseconds delay-ts)))
+      (format *error-output* "[texture-atlas.lisp] delay-ts = ~A, delay-ms = ~A~%" delay-ts delay-ms)
+      ;; Use = instead of equal for numeric comparison to handle type differences (double-float vs integer)
+      (assert (= delay-ms 234)))
     ;; TODO: Check the values of the frames
-    (assert (equal (length (frames ani-ab))  5 )))
+    (assert (equal (length (frames ani-ab)) 5)))
   (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))
 
 (format *error-output* "[texture-atlas.lisp] Loading complete.~%")

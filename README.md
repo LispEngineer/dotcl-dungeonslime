@@ -52,7 +52,7 @@ I have already submitted to DotCL.
 
 ### Build & Launch Steps
 
-So, all the steps:
+Preparation:
 
 1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
    * This project's build files assume this was done there, and that the `dotcl`
@@ -63,16 +63,26 @@ So, all the steps:
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
-3. To build: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
+You can then use the provided `Makefile` to build, test, and run the project:
+
+* **Build the project:** `make build` (runs the `dotnet build` command)
+* **Run the test suite:** `make test` (runs the game in `--test` mode)
+* **Run the game:** `make run` (runs the GUI game)
+* **Clean build files:** `make clean`
+* **Run MonoGame Content Builder**: `make mgcb`
+
+Or manually run the steps:
+
+1. To build: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
    * `-v d` shows more details.
    * `-v diag` shows the most, but I haven't really noticed a difference.
 
-4. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
    * To run in test mode, add `--test` to the command line, and it will
      not invoke the game.
 
-5. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
+3. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
 
 ### How to Load in REPL
 

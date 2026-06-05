@@ -10,6 +10,24 @@
 (format *error-output* "[mg-classes.lisp] Loading in package ~S~%" *package*)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GameTime functions
+
+(defun game-time-total (gt)
+  "Gets TotalGameTime on this Microsoft.Xna.Framework.GameTime object,
+   which returns a C# TimeSpan."
+  (dotnet:invoke gt "TotalGameTime"))
+
+(defun game-time-elapsed (gt)
+  "Gets ElapsedGameTime on this Microsoft.Xna.Framework.GameTime object,
+   which is the time since the last call to Update().
+   Returns a C# TimeSpan."
+  (dotnet:invoke gt "ElapsedGameTime"))
+
+(defun game-time-slow? (gt)
+  "Gets IsRunningSlowly on this Microsoft.Xna.Framework.GameTime."
+  (dotnet:invoke gt "IsRunningSlowly"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vector functions
 
 (defconstant +v2-0+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero")
@@ -191,3 +209,4 @@
   (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
                                       depth-stencil-state rasterizer-state
                                       effect transform-matrix))
+
