@@ -47,7 +47,9 @@
              #:sprite-batch-begin
              #:game-time-total
              #:game-time-elapsed
-             #:game-time-slow?))
+             #:game-time-slow?
+             #:keyboard-state
+             #:key-down?))
 
   (defpackage :game-repl
     (:use :cl)

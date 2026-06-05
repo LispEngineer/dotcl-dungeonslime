@@ -164,7 +164,10 @@
   "Sets up error handling and then calls the parent's Run().
    Not sure how this will actually handle Lisp or DotNet errors/exceptions,
    but it will sure be interesting to see."
-  ;; I doubt this will actually be called from Program.cs
+  ;; For debugging, we can skip the handler-case, since the full stack trace
+  ;; upon crash in DotCL is better than the info I get below.
+  (dotnet:call-base (monogame game) "Run"))
+  #|
   (handler-case
     (progn
       (format *error-output* "[core:run] Calling parent Game.Run().~%")
@@ -206,7 +209,8 @@ Unhandled exception. DotCL.RestartInvocationException: Restart invoked
       (format *error-output* "[core:run] End error-free run.~%")
       ;; This is actually a Void method from a C# perspective
       retval)))
-
+  |#
+  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MonoGame CLR (C#) Object
 

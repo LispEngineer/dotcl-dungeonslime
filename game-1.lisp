@@ -43,10 +43,10 @@
 (defclass game-1 (core)
   ((slime
     :accessor slime
-    :documentation "A Sprite of a slime")
+    :documentation "An Animated Sprite of a slime")
    (bat
     :accessor bat
-    :documentation "A Sprite of a bat")))
+    :documentation "An Animated Sprite of a bat")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -67,19 +67,20 @@
     (format *error-output* "[game-1:load-content] Loaded atlas = ~A~%" atlas)
     (loop for key being the hash-keys of (regions atlas) using (hash-value value)
       do (format *error-output* "[game-1:load-content]   Key: ~a, Value: ~a~%" key value))
-    (setf (slime game) (ta-create-sprite atlas "slime-1"))
-    (setf (scale (slime game)) (vector2 4.0e0)) ; FIXME: Magic number
-    (setf (bat game) (ta-create-sprite atlas "bat-1"))
-    (setf (scale (bat game)) (vector2 4.0e0)) ; FIXME: Magic number
+    (setf (slime game) (ta-create-animated-sprite atlas "slime-animation"))
+    (setf (scale (slime game)) (vector2 4.0e0)) ; FIXME: Magic name & number
+    (setf (bat game) (ta-create-animated-sprite atlas "bat-animation"))
+    (setf (scale (bat game)) (vector2 4.0e0)) ; FIXME: Magic name & number
     (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game)))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
-  "Quit the game if ESC key is pressed."
-  (let* ((kb-state (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
+  "Quit the game if ESC key is pressed. Cause intentional error if left is pressed.
+   Updates the animated sprites."
+  (let* ((kb-state (keyboard-state))
          ;; This will return nil or t
-         (esc-down (dotnet:invoke kb-state "IsKeyDown" +key-esc+))
-         (left-down (dotnet:invoke kb-state "IsKeyDown" +key-left+)))
+         (esc-down  (key-down? kb-state +key-esc+))
+         (left-down (key-down? kb-state +key-left+)))
     (when esc-down
       (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
       (force-output *error-output*) ;; finish-output alternatively
@@ -91,6 +92,9 @@
       (format *error-output* "[game-1:update] left-down = ~A; intentionally causing error~%" left-down)
       (error "This is a test error in lisp code.")
       (format *error-output* "[game-1:update] left-down = ~A; error caused~%" left-down)))
+  ;; Send our updates to our other objects
+  (update (slime game) gt)
+  (update (bat game)   gt)
   (call-next-method game gt))
 
 (defmethod draw ((game game-1) gt) ;; GameTime

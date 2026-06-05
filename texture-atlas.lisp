@@ -77,6 +77,11 @@
   (anaphora:awhen (ta-get-region ta region-name)
     (make-instance 'sprite :texture-region it)))
 
+(defun ta-create-animated-sprite (ta sprite-name)
+  "Creates a new animated sprite using the animation from this
+   texture atlas with the specified name."
+  (make-instance 'animated-sprite :animation (ta-get-animation ta sprite-name)))
+
 (defun ta-add-animation (ta name delay frames)
   "Adds the given animation to this texture atlas with the specified name.
    The delay should be a C# TimeSpan object."

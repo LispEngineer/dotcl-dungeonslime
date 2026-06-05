@@ -210,3 +210,10 @@
                                       depth-stencil-state rasterizer-state
                                       effect transform-matrix))
 
+(defun keyboard-state ()
+  "Gets the keyboard state via Keyboard.GetState()"
+  (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
+
+(defun key-down? (keyboard-state key-code)
+  "Using keyboard-state, checks if key-code is pressed (down)."
+  (dotnet:invoke keyboard-state "IsKeyDown" key-code))
