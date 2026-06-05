@@ -6,40 +6,53 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ---
 
-## Index of Symbols
+## Index of Symbols (Grouped by Purpose)
 
+### Assembly & Package Management
+* [`DOTNET:LOAD-ASSEMBLY`](#dotnetload-assembly)
+* [`DOTNET:REQUIRE`](#dotnetrequire)
+
+### Object Creation & Class Definition
+* [`DOTNET:NEW`](#dotnetnew)
 * [`DOTNET:%DEFINE-CLASS`](#dotnetdefine-class)
-* [`DOTNET:%FFI-CALL`](#dotnetffi-call)
-* [`DOTNET:%FFI-CALL-PTR`](#dotnetffi-call-ptr)
+
+### Member Invocation & Property Access
+* [`DOTNET:INVOKE`](#dotnetinvoke)
 * [`DOTNET:%SET-INVOKE`](#dotnetset-invoke)
+* [`DOTNET:STATIC`](#dotnetstatic)
 * [`DOTNET:%SET-STATIC`](#dotnetset-static)
-* [`DOTNET:ADD-EVENT`](#dotnetadd-event)
-* [`DOTNET:ALLOC-MEM`](#dotnetalloc-mem)
-* [`DOTNET:BOX`](#dotnetbox)
 * [`DOTNET:CALL-BASE`](#dotnetcall-base)
 * [`DOTNET:CALL-OUT`](#dotnetcall-out)
-* [`DOTNET:FFI`](#dotnetffi)
-* [`DOTNET:FIND-SYMBOL`](#dotnetfind-symbol)
-* [`DOTNET:FIND-SYMBOL-ANY`](#dotnetfind-symbol-any)
-* [`DOTNET:FREE-LIBRARY`](#dotnetfree-library)
-* [`DOTNET:FREE-MEM`](#dotnetfree-mem)
-* [`DOTNET:INVOKE`](#dotnetinvoke)
-* [`DOTNET:LIBRARY-PATH`](#dotnetlibrary-path)
-* [`DOTNET:LOAD-ASSEMBLY`](#dotnetload-assembly)
-* [`DOTNET:LOAD-LIBRARY`](#dotnetload-library)
-* [`DOTNET:MAKE-DELEGATE`](#dotnetmake-delegate)
-* [`DOTNET:MEM-READ`](#dotnetmem-read)
-* [`DOTNET:MEM-WRITE`](#dotnetmem-write)
-* [`DOTNET:NEW`](#dotnetnew)
-* [`DOTNET:REMOVE-EVENT`](#dotnetremove-event)
-* [`DOTNET:REQUIRE`](#dotnetrequire)
-* [`DOTNET:STATIC`](#dotnetstatic)
 * [`DOTNET:STATIC-GENERIC`](#dotnetstatic-generic)
+* [`DOTNET:BOX`](#dotnetbox)
+
+### Event Handling & Delegates
+* [`DOTNET:ADD-EVENT`](#dotnetadd-event)
+* [`DOTNET:REMOVE-EVENT`](#dotnetremove-event)
+* [`DOTNET:MAKE-DELEGATE`](#dotnetmake-delegate)
+
+### Stream Wrapping
 * [`DOTNET:TO-STREAM`](#dotnetto-stream)
-* [`DOTNET:TYPE-ALIGN`](#dotnettype-align)
-* [`DOTNET:TYPE-SIZE`](#dotnettype-size)
+
+### WinForms STA UI Thread Support
 * [`DOTNET:UI-INVOKE`](#dotnetui-invoke)
 * [`DOTNET:UI-POST`](#dotnetui-post)
+
+### Unmanaged Memory & Native FFI
+* [`DOTNET:%FFI-CALL`](#dotnetffi-call)
+* [`DOTNET:%FFI-CALL-PTR`](#dotnetffi-call-ptr)
+* [`DOTNET:FFI`](#dotnetffi)
+* [`DOTNET:ALLOC-MEM`](#dotnetalloc-mem)
+* [`DOTNET:FREE-MEM`](#dotnetfree-mem)
+* [`DOTNET:MEM-READ`](#dotnetmem-read)
+* [`DOTNET:MEM-WRITE`](#dotnetmem-write)
+* [`DOTNET:TYPE-SIZE`](#dotnettype-size)
+* [`DOTNET:TYPE-ALIGN`](#dotnettype-align)
+* [`DOTNET:LOAD-LIBRARY`](#dotnetload-library)
+* [`DOTNET:FREE-LIBRARY`](#dotnetfree-library)
+* [`DOTNET:FIND-SYMBOL`](#dotnetfind-symbol)
+* [`DOTNET:FIND-SYMBOL-ANY`](#dotnetfind-symbol-any)
+* [`DOTNET:LIBRARY-PATH`](#dotnetlibrary-path)
 
 ---
 
