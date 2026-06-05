@@ -46,6 +46,7 @@
    (animation
     :accessor animation
     :initarg :animation
+    :initform nil
     :documentation "When setting a new animation, we initiatlize the sprite's
                     region to the first frame.")))
 
@@ -74,13 +75,13 @@
       sprite's region to the new current frame, and set the next-frame-time
       to the current game time plus our animation delay.
       The next frame could be the first frame if we're on the last frame."
-  (when (null animation)
+  (when (null (animation as))
     (return-from update nil))
 
-  (let ((anim (animation as))
-        (delay (delay anim))
-        (nft (next-frame-time as))
-        (cf (current-frame as)))
+  (let* ((anim (animation as))
+         (delay (delay anim))
+         (nft (next-frame-time as))
+         (cf (current-frame as)))
 
     ;; We have never updated before
     (when (null nft)

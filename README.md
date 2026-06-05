@@ -238,6 +238,9 @@ In my case, it shows the game window and then segfaults out.
   [Chapter 8](https://docs.monogame.net/articles/tutorials/building_2d_games/08_the_sprite_class/index.html) 
   as a CLOS class.
 
+* `animation.lisp`: The Animation and Animated Sprite classes from
+  Chapter 9 of the tutorial.
+
 * `texture-region.lisp`: The texture region class from Chapter 7 of the
   Dungeon Slime MonoGame tutorial translated into Lisp.
 
@@ -245,6 +248,11 @@ In my case, it shows the game window and then segfaults out.
   into `dotnet::*type-aliases*` mostly for ease of reading the code.
 
 * `MonoGameLispDemo.asd`: ASDF system definition file for this game.
+
+* `explore.lisp`: Just some functions I load into the REPL to explore
+  the areas of DotCL.
+
+* `csharp.lisp`: Useful utilities for calling into C# library classes.
 
 ## C#
 
