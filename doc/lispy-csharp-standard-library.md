@@ -36,11 +36,26 @@ Pros:
 
 Cons:
 
+### Option 1A (and 2A): Macro Package
+
+Have another package of the same exact (function)
+symbols but make them macros instead, to shave a tiny
+bit of efficiency, for things that just turn into
+simple `dotnet:invoke` (etc.) type calls.
+
+Load this package, which will transitively load
+the original package as well (not exporting its
+conflicting symbols).
+
+Use the original function package so I'll get
+nice stack traces for debugging. (Not that DotCL
+does that yet, but you get what I'm saying.)
+
 
 ## Option 2: Class name prefixes
 
 Abbreviate the class names (e.g., `TimeStamp` becomes `ts-`) and
-prefix each function with this abbreviation. Then, we need only
+prefix each function with this abbreviation. Then, I need only
 one package for each part of the C# namespace.
 
 * There may be some disambiguation necessary
@@ -49,10 +64,12 @@ Pros:
 
 Cons:
 
+### Option 2A: See Above for 1A
+
 ## Option 3: CLOS integration
 
 Once C# classes are integrated into the CLOS type hiearachy,
-we can define C# generic methods for all methods, and specialize
+I can define C# generic methods for all methods, and specialize
 them for each set of parameters. This way, there would be one
 (DotCL C# library) package with all the overloaded generics
 and each C# class that is specialized in
@@ -97,10 +114,10 @@ capabilities can be used beyond the .Net C# standard library
 initially targeted.
 
 The fourth implementation could output packages skipping any
-as yet unsupported feature, so that you could at least get some
+as yet unsupported feature, so that I could at least get some
 partial value out of classes with unsupported features.
 
-From there, each subsequent version should add capabilities until we have
+From there, each subsequent version should add capabilities until I have
 implemented everything possible. :) These versions should also add
 optimizations as well as supported features.
 
@@ -116,7 +133,7 @@ To get the raw data to convert to DotCL Common Lisp:
 
 Thoughts:
 * Handling extension methods
-* Handling partial classes (we shouldn't have to care?)
+* Handling partial classes (I shouldn't have to care?)
 
 ### Applicable Tools
 
@@ -125,7 +142,7 @@ Thoughts:
 * [`Mono.Cecil`](https://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cecil/)
 * [`dnlib`](https://github.com/0xd4d/dnlib)
 * Roslyn compiler & `Microsoft.CodeAnalysis`
-* ILSpy
+* [ILSpy](https://github.com/icsharpcode/ilspy)
 
 ### Library Files
 
@@ -133,28 +150,30 @@ Look around `~/.dotnet` which has way, way too many files...
 
 Core library:
 * `System.Private.CoreLib.dll` is private, OS-specific code
-* `System.Runtime.dll` and `netstandard.dll` are the things we
+* `System.Runtime.dll` and `netstandard.dll` are the things I
   actually link against, which calls the above.
 
 The Base Class Library (BCL) has many other assemblies, over 100.
 Some include:
 * `System.Collections.dll` and its ilk
 * `System.Net.Http.dll` for `HttpClient` and other `System.Net` assemblies
-* `System.Linq.dll` for LINQ (probably don't need this if we have CL!)
+* `System.Linq.dll` for LINQ (probably don't need this if I have CL!)
 * `System.Console.dll`
 * `System.IO.dll` and its related assemblies
 
 ### AOT
 
-What if all we have is AOT (ahead of time) compiled assemblies?
+What if all I have is AOT (ahead of time) compiled assemblies?
 Shoudln't worry about this for now...
 
 ## Type Library
 
 Create a package (library) of Type constants:
 
-* Since symbols can have any value, we can do things like: `+type-System.TimeSpan+`
-* We could have a method that gets a specialized generic type, 
+* Since symbols can have any value, I can do things like: `+type-System.TimeSpan+`.
+  * Come up with a nice naming convention, that sort of looks ugly, maybe
+    with different earmuffs and using a package instead of `type-` in the name?
+* I could have a method that gets a specialized generic type, 
   or constructed type, e.g.,
   `(get-type "System.Collections.ArrayList<string>")`, but that also
   could also add `+type-System.Collections.ArrayList<string>+` to the same
@@ -178,6 +197,7 @@ Output docstrings that include:
 * Original C# documentation (if any/available)
 * Detailed types of all parameters/overloads
 * Attributes
+* Version information?
 ...
 
 ## Version Information
@@ -243,7 +263,6 @@ Treat the same as classes? Implement special equality capabilities?
   * Data pointers (e.g., `T*`)
   * Function pointers (e.g., `delegate*`
 
-
 ## Enumerations
 
 ## Indexers
@@ -274,11 +293,12 @@ just static methods with names like `op_addition`.
 
 ## Delegates
 
+
 # Handling CIL Capabilities 
 
 C# is just one language on top of the Common Language Runtime (CIL).
 The Common Intermediate Language (CIL) offers many other capabilities
-that we might have to deal with if we parse the CIL directly.
+that I might have to deal with if I parse the CIL directly.
 
 ## CIL Global Methods & Fields
 
@@ -287,7 +307,7 @@ that we might have to deal with if we parse the CIL directly.
 ## CIL Array Indexing
 
 In CIL, arrays can be multi-dimensional and can have arbitrary lower bounds.
-(Hey Matlab, you could compile your 1-indexed arrays to CIL nicely, LOL.)
+(Hey Matlab, I could compile your 1-indexed arrays to CIL nicely, LOL.)
 
 ## Other CIL Stuff
 
@@ -305,7 +325,7 @@ This same treatment can be done for any other C# library.
 Some early possibilities:
 * MonoGame (of course!)
 * Godot
-  * Unity, if you want to support a commerical project
+  * Unity, if I want to support a commerical project
 * ASP.NET (DotCL Sample)
 * MAUI (DotCL Sample)
 
@@ -319,7 +339,7 @@ and output the Lispy interface packages.
 
 ## Other Language Targets
 
-DotCL targets the CLR. So, the Haskeller in me thinks we should look
+DotCL targets the CLR. So, the Haskeller in me thinks I should look
 at supporting F# capabilities in DotCL as well.
 (Talk about scope creep!)
 
