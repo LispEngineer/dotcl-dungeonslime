@@ -35,6 +35,8 @@ Make a package for each class.
 Pros:
 * Easiest to implement
 * Easiest to use (probably?)
+* Each package is very clean
+
 
 Cons:
 * Tons and tons of packages
@@ -58,7 +60,7 @@ Use the original function package so I'll get
 nice stack traces for debugging. (Not that DotCL
 does that yet, but you get what I'm saying.)
 
-## Option 2: Class name prefixes
+## Option 2: Package per Namespace - Class Name Prefixes
 
 Abbreviate the class names (e.g., `TimeStamp` becomes `ts-`) and
 prefix each function with this abbreviation. Then, I need only
@@ -71,6 +73,8 @@ Pros:
 * Fewer packages
 
 Cons:
+* More verbose due to the class name (or abbreviation) prefixes
+* Possible abbreviation collisions (requiring disambiguition)
 
 ### Option 2A: See Above for 1A
 
@@ -206,12 +210,21 @@ C# source and assemblies:
 * [`dnlib`](https://github.com/0xd4d/dnlib)
 * Roslyn compiler & `Microsoft.CodeAnalysis`
 * [ILSpy](https://github.com/icsharpcode/ilspy)
+* [DocFX](https://dotnet.github.io/docfx/)
+  * This can output detailed YAML files from an assembly
+    * The format is [documented here](https://dotnet.github.io/docfx/docs/dotnet-yaml-format.html)
+      (see `### YamlMime:ManagedReference` in the top line of an output file)
+  * A tool like [yq](https://github.com/mikefarah/yq) can convert to JSON
+  * A Lisp library like [Yamson](https://github.com/bohonghuang/yamson)
+    can read YAML (and might even work in DotCL, but it relies on several
+    other libraries transitively)
 
 C# documentation XML files:
 * [NuDoq](https://github.com/devlooped/NuDoq)
 * [DocXml](https://github.com/loxsmoke/DocXml)
 * [Namotion.Reflection](https://github.com/RicoSuter/Namotion.Reflection)
 * Roslyn again (for source with `///` documentation)
+* [MDoc](https://www.mono-project.com/docs/tools+libraries/tools/mdoc/)
 
 C# Project files: (MSBuild projects)
 * [Microsoft.Build.Locator](https://github.com/microsoft/MSBuildLocator)
@@ -481,7 +494,16 @@ Probably at most the same ones the Roslyn compiler would care about.
 
 ## Events
 
+Events in C# often have handlers added and removed using
+`+=` and `-=`. A more lispy version would be to have functions
+like `add-handler` and `remove-handler`.
+* `(add-handler obj 'event-name handler)`
+* `(add-handler obj 'event-name (lambda ...))`
+
 ## Delegates
+
+Thoughts:
+* Handle Lisp closures when passing to C# methods?
 
 ## `async`
 
@@ -495,6 +517,19 @@ it's actually a kind of state machine.)
 
 Leave it for a very late implementation phase.
 
+## Superclass Methods & Default Interface Methods
+
+Should the interface and super class methods be included in the
+class's methods directly? Or should they be just `use`d in the 
+package?
+
+
+# Other C# Considerations
+
+## Resource Management
+
+Consider how to handle a Lispy version of `using` or `IDisposable` constructs.
+* Make a `with-disposable` macro that calls `Dispose()` in an `unwind-protect`?
 
 # Handling CIL Capabilities
 
@@ -504,7 +539,13 @@ that I might have to deal with if I parse the CIL directly.
 
 ## CIL Global Methods & Fields
 
+Make these top-level Lisp global variables and functions in a
+`cil-globals` (`csharp-globals`?) package?
+
 ## CIL Method Overloading by Return Type
+
+These may need to be handled by having a return type parameter
+specifier in the method, e.g., `&key (return-type ...)`?
 
 ## CIL Array Indexing
 
@@ -519,6 +560,16 @@ these things that C# doesn't leverage.
 * `fault` blocks (beyond `try` - `catch` - `finally`)
 * Custom Modifiers (`modreq`, `modopt`)
 
+
+# Other Lisp Considerations
+
+Thoughts:
+* With so many symbols/packages, how would auto-complete capabilities
+  in tools like SLIME or Alive work - when/if they ever come to DotCL?
+  * What about "go to defintion" capabilities?
+* Many C# functions have names that exist in the `:cl` package already
+  (at least when folded in to camel-case). So, be careful in using these
+  packages lest the CL standard names be shadowed.
 
 # Other Libraries
 
