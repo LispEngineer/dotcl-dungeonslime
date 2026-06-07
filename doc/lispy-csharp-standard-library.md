@@ -33,8 +33,15 @@ Make a package for each class.
   * Example: `ts` for `csharp/System.Timespan`
 
 Pros:
+* Easiest to implement
+* Easiest to use (probably?)
 
 Cons:
+* Tons and tons of packages
+* Large number of symbols/code, most of which won't be useful
+  for any given project
+* Large `.fasls`
+* Lots of memory usage for all the symbols, etc. 
 
 ### Option 1A (and 2A): Macro Package
 
@@ -51,16 +58,17 @@ Use the original function package so I'll get
 nice stack traces for debugging. (Not that DotCL
 does that yet, but you get what I'm saying.)
 
-
 ## Option 2: Class name prefixes
 
 Abbreviate the class names (e.g., `TimeStamp` becomes `ts-`) and
 prefix each function with this abbreviation. Then, I need only
 one package for each part of the C# namespace.
 
+Thoughts:
 * There may be some disambiguation necessary
 
 Pros:
+* Fewer packages
 
 Cons:
 
@@ -84,8 +92,59 @@ Pros:
 
 Cons:
 
+## Option 4: On-Demand Package Creation
 
-## Option 4: (Other ideas?)
+If I pre-generate the entire C# standard library stubs (or other large
+library, e.g., MonoGame), this will make an enormous number of
+Lisp files, a huge number of packages and a ton of symbols.
+This will in turn slow down compilation, loading, execution,
+create large `.fasl` files, and use lots of memory unecessarily.
+
+Once I can automate the creation of the Lisp source (e.g., in Options
+1 or 2 above), I could turn this into a compile-time event instead.
+* Macro: `(csharp:with-types "System.IO" ...)`
+* Reader macro: `#cs(System.IO)`
+Have the compiler then generate all the material for the requested
+class, package, namespace, whatever, and make it available only
+after that.
+
+This could possibly be made into an ASDF extension.
+
+Thoughts:
+* How to handle things that span assemblies (like extensions or partial classes)?
+* How to identify everything relevant at runtime? (Dynamically load
+  all possible assemblies?)
+* How to handle the same thing attempted to be loaded multiple times?
+  (Like in different source files or even when called from DotCL Lisp
+  libraries being used either from ASDF or NuGet?)
+
+## Option 5: `.csproj` Build Time Package Creation
+
+As Option 4 above, but have a stage in the `dotnet build` cycle
+which generates the stubs for the desired set of C# classes.
+After all, this stage will also know all about everything else
+the project needs (i.e., all the Assemblies), so it could
+also call the Lispy-C#-package-builder to generate the `.lisp`
+source files, `.asd` ASDF system definitions, or whatever else,
+on the fly. It could also cache this (by storing the version
+of the assemblies from which it generated the code) so it would
+only need to do it once in a while.
+
+Later in the project, these same files could be automatically added
+to the generated output (preferably as `.fasl`), addressing one
+of the headaches I've encountered. (See, for instance, the mess
+I had to deal with in getting `anaphora` into this project's "binary" in a
+way that could be sent to another computer.)
+
+Thoughts:
+* How does it know what classes to generate Lisp interfaces for?
+  * Explicit list in `.csproj` or pointer to another file?
+  * Search the `.lisp` or `.asd` files for something that compiles
+    into a Lisp no-op? (`(with-c#-stubs ..)`)
+* How to handle recursive needs (e.g., how to package DotCL libraries
+  that use this capability and use them in other projects)?
+
+## Option N: (Other ideas?)
 
 TODO
 
@@ -130,19 +189,32 @@ To get the raw data to convert to DotCL Common Lisp:
   * Use the `.pdb` (Program Database) debugging symbols somehow?
 * Use reflection to learn everything about loaded assemblies
   and classes and do the work that way?
+* Parse C# documentation XML files
+  * `<GenerateDocumentationFile>true</GenerateDocumentationFile>`
 
 Thoughts:
 * Handling extension methods
+  * Put these in the target type's package/organization
 * Handling partial classes (I shouldn't have to care?)
 
 ### Applicable Tools
 
+C# source and assemblies:
 * [`System.Reflection.MetadataLoadContext`](https://learn.microsoft.com/en-us/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext)
 * `System.Reflection.Metadata`
 * [`Mono.Cecil`](https://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cecil/)
 * [`dnlib`](https://github.com/0xd4d/dnlib)
 * Roslyn compiler & `Microsoft.CodeAnalysis`
 * [ILSpy](https://github.com/icsharpcode/ilspy)
+
+C# documentation XML files:
+* [NuDoq](https://github.com/devlooped/NuDoq)
+* [DocXml](https://github.com/loxsmoke/DocXml)
+* [Namotion.Reflection](https://github.com/RicoSuter/Namotion.Reflection)
+* Roslyn again (for source with `///` documentation)
+
+C# Project files: (MSBuild projects)
+* [Microsoft.Build.Locator](https://github.com/microsoft/MSBuildLocator)
 
 ### Library Files
 
@@ -173,7 +245,7 @@ Create a package (library) of Type constants:
 * Since symbols can have any value, I can do things like: `+type-System.TimeSpan+`.
   * Come up with a nice naming convention, that sort of looks ugly, maybe
     with different earmuffs and using a package instead of `type-` in the name?
-* I could have a method that gets a specialized generic type, 
+* I could have a method that gets a specialized generic type,
   or constructed type, e.g.,
   `(get-type "System.Collections.ArrayList<string>")`, but that also
   could also add `+type-System.Collections.ArrayList<string>+` to the same
@@ -198,7 +270,13 @@ Output docstrings that include:
 * Detailed types of all parameters/overloads
 * Attributes
 * Version information?
-...
+* ...?
+
+Cons:
+* Would make the memory footprint much larger
+* Would potentially slow down compilation
+
+So, make this optional?
 
 ## Version Information
 
@@ -226,12 +304,39 @@ Version coreVersion = coreLibrary.GetName().Version;
 Console.WriteLine($"Core Library Version: {coreVersion}");
 ```
 
-## Anonymous Types & LINQ?
+## Anonymous Types
+
+Maybe map anonymous types to Lisp plists (or alists)?
+
+Consider mapping these back to
+[`System.Dynamic.ExpandoObject`](https://learn.microsoft.com/en-us/dotnet/api/system.dynamic.expandoobject?view=net-10.0)?
+Would that even be useful?
+
+## LINQ
+
+LINQ is not really needed while writing Lisp, but if I really want
+to do something, maybe make a DSL as a macro that will output
+a LINQ expression tree?
+(c.f. [`System.Linq.Expressions.Expression`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expression?view=net-10.0))
+After all, Common Lisp is *the* programmable language. :)
+
+This could be used for remote data providers like EF.
+
+```lisp
+(csharp:query (db-context users)
+  (where (user) (> (age user) 18))
+  (select (user) (name user)))
+```
 
 
 # Handling C# Capabilities
 
 ## Constructors
+
+Thoughts:
+* `make-<class-name>` is a Lispy convention
+* Use/allow keyword arguments instead of (or in addition to?)
+  positional arguments
 
 ## Generic Types
 
@@ -242,13 +347,63 @@ How to handle C# generics
 
 ## Parameters Defaults
 
+Thoughts:
+* See assembly metadata, `ParameterInfo.DefaultValue`
+* Map this to `&optional` and/or `&key` parameters
+
 ## `params`
 
-## Out/Ref Parameters
+Thoughts:
+* Map these to an `&rest` argument
+  * Allocate a C# array of an appropriate type to hold the values
+* For overloaded methods, handle/check all the other overloads first
+
+## `out` / `ref` Parameters
+
+### Option 1: Multiple Values
+
+(I believe this is similar to what DotCL already does.)
+
+Map `out` / `ref` parameters to Common Lisp multiple return values.
+The primary return value is the C# method's return value,
+followed by the updated `ref` and `out` arguments in declaration order.
+
+```lisp
+;; C#: bool TryGetValue(TKey key, out TValue value)
+(multiple-value-bind (found-p value) (try-get-value dict key)
+  (when found-p
+    (format t "Found: ~A~%" value)))
+```
+
+### Option 2: Reference Container
+
+Pass a reference container object that holds the value. Not exactly
+sure what would work nicely here, but something like this?
+
+For an `out` parameter:
+```lisp
+(let ((out-cell (csharp:ref-cell)))
+  (try-get-value dict key out-cell)
+  (value out-cell))
+```
+
+For a `ref`, specify the initial value:
+(note that this is not a good example since `try-get-value` uses an `out`)
+```lisp
+(let ((ref-cell (csharp:ref-cell initial-input-value)))
+  (try-get-value dict key ref-cell)
+  (value ref-cell))
+```
+
+## `in` Parameters
 
 ## Records
 
 Treat the same as classes? Implement special equality capabilities?
+
+Make a Lispy version of `with`? Implement as a macro?
+* C#: `var newPerson = person with { Age = 30 };`
+* Lisp: `(setf new-person (with-record-update person :age 30))`
 
 ## Value Types
 
@@ -261,19 +416,46 @@ Treat the same as classes? Implement special equality capabilities?
 * Nullable value types
 * Unsafe C#
   * Data pointers (e.g., `T*`)
-  * Function pointers (e.g., `delegate*`
+  * Function pointers (e.g., `delegate*`)
+
+## `ref struct`, `stackalloc` and Other Stack-Allocated Things
+
+Do something akin to Common Lisp's `dynamic-extent`, but force
+allocation on the stack? How to prevent escapes?
 
 ## Enumerations
 
+Thoughts:
+* Use the integral types (integer types) in the Lisp definitions?
+* How to deal with `[Flags]` specially?
+  * Not really necessary, they're still integral numeric types?
+* `ToString`, `Parse` and `TryParse`
+
 ## Indexers
+
+Thoughts:
+* Translated into a property called `Item` (or whatever `[IndexerName]` says)
+* `get_Item`, `set_Item`
+* Can be overloaded like any other C# method
+* DotCL already handles these
 
 ## Fields, Properties
 
-* Constants
-* Read-only fields
+Fields:
+* Instance fields
+* Static fields
+* Constant fields (`const`) - inlined, `literal`
+* Read-only fields (`readonly`)
+* Volatile fields - `modreq`
+
+Properties:
+* Just methods with `set_` and `get_` names and (possibly) a backing field.
+* `init` - Init-only properties (uses `modreq`)
+* `required` - `[RequiredMemberAttribute]`
 
 Thoughts:
-* `setf` forms for Fields & Properties
+* `setf` forms for fields & properties
+  * Already handled by DotCL
 
 ## Operator Overloading
 
@@ -284,6 +466,14 @@ just static methods with names like `op_addition`.
 
 ## Attributes
 
+* CIL `CustomAttribute` table
+* [Pseudo-attributes](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/pseudo-attributes)
+* C# Roslyn [Well-known Attributes](https://github.com/dotnet/roslyn)?
+
+Do I even care about attributes in our Lispy versions?
+If so, what limited subset do I care about?
+Probably at most the same ones the Roslyn compiler would care about.
+
 ## Nullability
 
 * `Nullable<T>`
@@ -293,8 +483,20 @@ just static methods with names like `op_addition`.
 
 ## Delegates
 
+## `async`
 
-# Handling CIL Capabilities 
+...and `await`.
+
+Maybe omit doing anything about this for now, because the C#
+compiler turns these "methods" into a "mess."
+(My thoughts trying to figure out how to reverse engineer it 
+for use in this case -
+it's actually a kind of state machine.)
+
+Leave it for a very late implementation phase.
+
+
+# Handling CIL Capabilities
 
 C# is just one language on top of the Common Language Runtime (CIL).
 The Common Intermediate Language (CIL) offers many other capabilities

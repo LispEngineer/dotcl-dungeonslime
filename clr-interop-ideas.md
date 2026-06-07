@@ -53,6 +53,11 @@ all necessarily compatible with each other.
     * where delegate could be a symbol whose value cell contains the C# delegate object
 * Allow C# MethodInfo in operator position, e.g., 
 * Allow C# 9 Function Pointers (`delegate*`) in operator position
+* Make CLOS instances of C# classes, with the full type specifiers as
+  potentially nested lists, e.g.,
+  * `(make-instance '(csharp:list string) :capacity 10)`
+  * This would map to the fully specified C# type `System.Collections.Generic.List<string>` (or whatever the exact C# type is)
+  * (Of course, use an actual instanantiable type, not `List` in this example)
 
 ## Optimization
 
