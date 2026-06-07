@@ -130,7 +130,7 @@ In my case, it shows the game window and then segfaults out.
 * [README-original.md](README-original.md): The original
   author SANO-san's README. Note: in Japanese.
 
-* [clr-interop-ideas.md](clr-interop-ideas.md): I've had some thoughts
+* [clr-interop-ideas.md](doc/clr-interop-ideas.md): I've had some thoughts
   and ideas on extending DotCL for interoperability with CLR and C#
   in a more coder-friendly way.
 
