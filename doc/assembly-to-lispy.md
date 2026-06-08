@@ -53,7 +53,54 @@ For anything which will have its name mangled in the CIL version
 version of the name which is what would need to be called by
 DotCL's `invoke`.
 
-# Implementation
+# Details of Output Format
+
+The general format is a Common Lisp s-expression.
+
+The top-level form is a list containing one entry per class (or other C# entity) being documented.
+
+Each entry is a Common Lisp plist with keys that are keywords. All keys are Common Lisp keywords.
+
+> [!IMPORTANT]
+> This section must be kept updated with any future changes to the `AssemblyToLispy` code and metadata output structure.
+
+## Entity Entry Details
+
+Each type entry plist contains the following entries, by key:
+
+* `:name` (String): The simple name of the type (e.g., `ArrayList` or ``Action`4``).
+* `:fully-qualified-name` (String): The fully qualified name of the type, including
+  the namespace (e.g., `System.Collections.ArrayList` or ``System.Action`4``).
+* `:namespace` (String): The namespace in which the type is defined 
+  (e.g., `System.Collections` or `System`).
+* `:kind` (Keyword): The classification of the C# entity. Must be one of the following:
+  * `:class` (a class type)
+  * `:struct` (a value type that is not an enum)
+  * `:interface` (an interface type)
+  * `:enum` (an enumeration type)
+  * `:delegate` (a delegate type)
+* `:superclass` (String or `nil`): The fully qualified name of the base class. 
+  If there is no base class (such as for interfaces or `System.Object`), 
+  this value is `nil`.
+* `:interfaces` (List of Strings or `nil`): An alphabetically sorted list of the fully
+  qualified names of all interfaces implemented by this type. If no interfaces are 
+  implemented, this value is `nil`.
+* `:flags` (List of Keywords or `nil`): A list of active boolean type flags, converted
+  to Lisp-friendly kebab-case keywords. If no flags are active, this value is `nil`.
+  Supported flag keywords are:
+  * `:abstract` (the type is abstract)
+  * `:sealed` (the type is sealed)
+  * `:import` (the type is imported from a COM type library)
+  * `:serializable` (the type has the `[Serializable]` attribute)
+  * `:generic-type` (the type is a generic type)
+  * `:generic-type-definition` (the type is a generic type definition)
+  * `:nested` (the type is nested inside another type)
+* `:methods` (List of Strings or `nil`): An alphabetically sorted list of the names 
+  of public methods declared directly on this type. If no public methods are declared
+  on this type, this value is `nil`.
+
+
+# Implementation Phases
 
 This will be implemented in phases.
 

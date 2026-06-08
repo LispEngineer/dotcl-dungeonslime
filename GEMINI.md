@@ -71,6 +71,17 @@ All new code must have tests. However:
   (when (and arg-type spec-type)
     (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
   ```
+# Markdown
+
+1. Don't put gratuitous spaces in markdown files; use the minimal 
+   synctactally correct whitespace
+   * Example: Never have two spaces where one is semantically all
+     that is necessary
+2. Wrap markdown lines between 80 and 100 characters long except when
+   not syntactically possible.
+3. If you are backtick-quoting something that contains a backtick,
+   you must use two leading and trailing backticks.
+   * Example: ``List`1``
 
 
 # Language
