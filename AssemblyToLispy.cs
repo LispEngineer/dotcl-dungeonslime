@@ -9,7 +9,7 @@ using System.Text;
 // Created: 2026-06-08
 // ML assistance: Antigravity CLI, v1.0.6, Gemini Flash 3.5 (Medium), Ubuntu 24.04
 
-/* Prompt used:
+/* Original prompt used for Phase 1:
 
 Please review doc/assembly-to-lispy.md.
 
@@ -122,21 +122,68 @@ namespace MonoGameLispDemo {
 
                     Console.WriteLine($"[OutputClass] Processing class: {fullName}");
 
+                    // Phase 1: Retrieve public methods declared only on this type
                     var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
                         .Select(m => m.Name)
                         .OrderBy(name => name)
                         .ToList();
 
-                    string methodsListStr = FormatLispList(methods);
-
                     // Phase 2A: Retrieve type kind, superclass, interfaces, and flags
                     string kindStr = GetTypeKind(type);
                     string superclassStr = type.BaseType != null ? EscapeLispString(type.BaseType.FullName ?? type.BaseType.Name) : "nil";
                     var interfaces = type.GetInterfaces().Select(i => i.FullName ?? i.Name).OrderBy(name => name).ToList();
-                    string interfacesStr = FormatLispList(interfaces);
                     string flagsStr = GetTypeFlags(type);
 
-                    string plistStr = $"(:name {EscapeLispString(typeName)} :fully-qualified-name {EscapeLispString(fullName)} :namespace {EscapeLispString(ns)} :kind {kindStr} :superclass {superclassStr} :interfaces {interfacesStr} :flags {flagsStr} :methods {methodsListStr})";
+                    // Phase 2B: Retrieve properties and fields
+                    var properties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
+                        .Where(p => {
+                            var getMethod = p.GetMethod;
+                            var setMethod = p.SetMethod;
+                            bool hasVisibleAccessor = (getMethod != null && (getMethod.IsPublic || getMethod.IsFamily || getMethod.IsFamilyOrAssembly))
+                                                   || (setMethod != null && (setMethod.IsPublic || setMethod.IsFamily || setMethod.IsFamilyOrAssembly));
+                            return hasVisibleAccessor && !p.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false);
+                        })
+                        .OrderBy(p => p.Name)
+                        .Select(FormatPropertyPlist)
+                        .ToList();
+
+                    var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
+                        .Where(f => (f.IsPublic || f.IsFamily || f.IsFamilyOrAssembly)
+                                    && !f.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false)
+                                    && !f.Name.StartsWith("<"))
+                        .OrderBy(f => f.Name)
+                        .Select(FormatFieldPlist)
+                        .ToList();
+
+                    // Build plist dynamically to omit keys with nil values
+                    var parts = new List<string>();
+                    parts.Add($":name {EscapeLispString(typeName)}");
+                    parts.Add($":fully-qualified-name {EscapeLispString(fullName)}");
+                    if (!string.IsNullOrEmpty(ns)) {
+                        parts.Add($":namespace {EscapeLispString(ns)}");
+                    }
+                    parts.Add($":kind {kindStr}");
+
+                    if (superclassStr != "nil") {
+                        parts.Add($":superclass {superclassStr}");
+                    }
+                    if (interfaces.Any()) {
+                        parts.Add($":interfaces {FormatLispList(interfaces)}");
+                    }
+                    if (flagsStr != "nil") {
+                        parts.Add($":flags {flagsStr}");
+                    }
+                    if (properties.Any()) {
+                        parts.Add($":properties ({string.Join(" ", properties)})");
+                    }
+                    if (fields.Any()) {
+                        parts.Add($":fields ({string.Join(" ", fields)})");
+                    }
+                    if (methods.Any()) {
+                        parts.Add($":methods {FormatLispList(methods)}");
+                    }
+
+                    string plistStr = "(" + string.Join(" ", parts) + ")";
                     plistStrings.Add(plistStr);
                 }
 
@@ -302,6 +349,74 @@ namespace MonoGameLispDemo {
             }
             return "(" + string.Join(" ", flags) + ")";
         }
+
+        /// <summary>
+        ///   Formats a property as a plist with accessible characteristics.
+        /// </summary>
+        /// <param name="prop">The property info.</param>
+        /// <returns>A plist string representation of the property.</returns>
+        private static string FormatPropertyPlist(PropertyInfo prop) {
+            var parts = new List<string>();
+            parts.Add($":name {EscapeLispString(prop.Name)}");
+
+            string propType = prop.PropertyType.FullName ?? prop.PropertyType.Name;
+            parts.Add($":type {EscapeLispString(propType)}");
+
+            var getMethod = prop.GetMethod;
+            var setMethod = prop.SetMethod;
+
+            bool isGetVisible = getMethod != null && (getMethod.IsPublic || getMethod.IsFamily || getMethod.IsFamilyOrAssembly);
+            bool isSetVisible = setMethod != null && (setMethod.IsPublic || setMethod.IsFamily || setMethod.IsFamilyOrAssembly);
+
+            if (isGetVisible) {
+                parts.Add(":readable t");
+            }
+            if (isSetVisible) {
+                parts.Add(":writeable t");
+            }
+
+            bool isStatic = (isGetVisible && getMethod!.IsStatic) || (isSetVisible && setMethod!.IsStatic);
+            if (isStatic) {
+                parts.Add(":static t");
+            }
+
+            if (isGetVisible) {
+                parts.Add($":get-method {EscapeLispString(getMethod!.Name)}");
+            }
+            if (isSetVisible) {
+                parts.Add($":set-method {EscapeLispString(setMethod!.Name)}");
+            }
+
+            return "(" + string.Join(" ", parts) + ")";
+        }
+
+        /// <summary>
+        ///   Formats a field as a plist with accessible characteristics.
+        /// </summary>
+        /// <param name="field">The field info.</param>
+        /// <returns>A plist string representation of the field.</returns>
+        private static string FormatFieldPlist(FieldInfo field) {
+            var parts = new List<string>();
+            parts.Add($":name {EscapeLispString(field.Name)}");
+
+            string fieldType = field.FieldType.FullName ?? field.FieldType.Name;
+            parts.Add($":type {EscapeLispString(fieldType)}");
+
+            if (field.IsStatic) {
+                parts.Add(":static t");
+            }
+            if (field.IsLiteral) {
+                parts.Add(":literal t");
+            }
+            if (field.IsInitOnly) {
+                parts.Add(":init-only t");
+            }
+            if (field.IsPublic) {
+                parts.Add(":public t");
+            }
+
+            return "(" + string.Join(" ", parts) + ")";
+        }
     }
 
     /// <summary>
@@ -350,6 +465,25 @@ namespace MonoGameLispDemo {
                 }
                 if (!content.Contains(":serializable")) {
                     throw new Exception("Test failed: ArrayList flags does not contain :serializable.");
+                }
+
+                // Verify Phase 2B properties for ArrayList
+                if (!content.Contains(":properties")) {
+                    throw new Exception("Test failed: ArrayList does not contain :properties.");
+                }
+                if (!content.Contains(":name \"Capacity\" :type \"System.Int32\" :readable t :writeable t :get-method \"get_Capacity\" :set-method \"set_Capacity\"")) {
+                    throw new Exception("Test failed: ArrayList capacity property is not correctly formatted.");
+                }
+                if (!content.Contains(":name \"Count\" :type \"System.Int32\" :readable t :get-method \"get_Count\"")) {
+                    throw new Exception("Test failed: ArrayList count property is not correctly formatted.");
+                }
+
+                // Verify Phase 2B fields (using System.EventArgs.Empty)
+                if (!content.Contains("\"System.EventArgs\"")) {
+                    throw new Exception("Test failed: Output does not contain System.EventArgs.");
+                }
+                if (!content.Contains(":name \"Empty\" :type \"System.EventArgs\" :static t :init-only t :public t")) {
+                    throw new Exception("Test failed: EventArgs.Empty field is not correctly formatted.");
                 }
 
                 // Check for some expected methods of ArrayList

@@ -95,9 +95,37 @@ Each type entry plist contains the following entries, by key:
   * `:generic-type` (the type is a generic type)
   * `:generic-type-definition` (the type is a generic type definition)
   * `:nested` (the type is nested inside another type)
-* `:methods` (List of Strings or `nil`): An alphabetically sorted list of the names 
-  of public methods declared directly on this type. If no public methods are declared
-  on this type, this value is `nil`.
+* `:properties` (List of Property Plists or omitted): A list of plists containing
+  details of public or protected properties declared directly on the type. If no
+  properties are declared, this key is omitted. Each property plist contains:
+  * `:name` (String): The name of the property.
+  * `:type` (String): The fully qualified type of the property.
+  * `:readable` (Keyword `t` or omitted): Omitted if the property is not
+    readable; otherwise `t`.
+  * `:writeable` (Keyword `t` or omitted): Omitted if the property is not
+    writeable; otherwise `t`.
+  * `:static` (Keyword `t` or omitted): Omitted if the property is not static;
+    otherwise `t`.
+  * `:get-method` (String or omitted): Omitted if there is no visible getter;
+    otherwise the name of the getter method.
+  * `:set-method` (String or omitted): Omitted if there is no visible setter;
+    otherwise the name of the setter method.
+* `:fields` (List of Field Plists or omitted): A list of plists containing
+  details of public or protected fields declared directly on the type. If no
+  fields are declared, this key is omitted. Each field plist contains:
+  * `:name` (String): The name of the field.
+  * `:type` (String): The fully qualified type of the field.
+  * `:static` (Keyword `t` or omitted): Omitted if the field is not static;
+    otherwise `t`.
+  * `:literal` (Keyword `t` or omitted): Omitted if the field is not a
+    compile-time constant; otherwise `t`.
+  * `:init-only` (Keyword `t` or omitted): Omitted if the field is not
+    read-only; otherwise `t`.
+  * `:public` (Keyword `t` or omitted): Omitted if the field is not public;
+    otherwise `t`.
+* `:methods` (List of Strings or omitted): An alphabetically sorted list of the
+  names of public methods declared directly on this type. If no public methods
+  are declared on this type, this key is omitted.
 
 
 # Implementation Phases
@@ -189,6 +217,17 @@ This sub-phase extracts member variables and metadata accessors:
     * `:literal`: `t` or `nil` (for constants).
     * `:init-only`: `t` or `nil` (for read-only fields).
     * `:public`: `t` or `nil`.
+
+* **Filtering of Compiler-Generated Members**:
+  * Members marked with `System.Runtime.CompilerServices.CompilerGeneratedAttribute`
+    are skipped to avoid cluttering the metadata with internal implementation
+    details (such as auto-property backing fields, iterator state machines, or
+    closures) that are not part of the developer-authored API.
+  * Fields starting with `<` (e.g., `<MyProperty>k__BackingField`) are omitted
+    because they represent internal backing fields for auto-implemented properties.
+    Access to these states is intended via public property accessor methods
+    (e.g., `get_MyProperty`), and their CIL names contain characters invalid in C#
+    identifiers.
 
 Any value that is `nil` should have its key omitted, as `getf` will
 default to `nil` anyway.
