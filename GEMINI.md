@@ -11,10 +11,15 @@
 * Do NOT make any changes to DotCL source code unless explicitly
   directed by the user. All the work for this project is to be done
   on this MonoGameLispDemo code only.
-* Any question about "how" to do something should be answered with
+* Any question about *how* to do something should be answered with
   an explanation on how to accomplish the thing requested, without
   you making any changes to any files or executing any commands that
   could change files.
+* When writing comments or documentation, do *not* use personal
+  pronouns such as "we" or "I." 
+  * For example, instead of saying
+    "We still capture this metadata for our Lisp packaging..."
+    say instead "This metadata is still captured for the Lisp packaging..."
 
 
 # Useful Commands

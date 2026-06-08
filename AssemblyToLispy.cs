@@ -276,6 +276,9 @@ namespace MonoGameLispDemo {
             if (type.IsImport) {
                 flags.Add(":" + CamelCaseToKebabCase("Import"));
             }
+            // Type.IsSerializable is marked obsolete starting in .NET 8.0 because formatter-based serialization
+            // is deprecated. This metadata is still captured for the Lisp packaging while suppressing 
+            // the SYSLIB0050 compiler warning locally to ensure a warning-free build.
 #pragma warning disable SYSLIB0050
             if (type.IsSerializable) {
                 flags.Add(":" + CamelCaseToKebabCase("Serializable"));
