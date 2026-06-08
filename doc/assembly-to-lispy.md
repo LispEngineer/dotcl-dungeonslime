@@ -132,9 +132,45 @@ Each type entry plist contains the following entries, by key:
     read-only; otherwise `t`.
   * `:public` (Keyword `t` or omitted): Omitted if the field is not public;
     otherwise `t`.
-* `:methods` (List of Strings or omitted): An alphabetically sorted list of the
-  names of public methods declared directly on this type. If no public methods
-  are declared on this type, this key is omitted.
+* `:constructors` (List of Constructor Plists or omitted): A list of plists containing
+  details of public or protected constructors declared directly on the type. If no
+  constructors are declared, this key is omitted. Each constructor plist contains:
+  * `:public` (Keyword `t` or omitted): Omitted if the constructor is not public;
+    otherwise `t`.
+  * `:protected` (Keyword `t` or omitted): Omitted if the constructor is not protected;
+    otherwise `t`.
+  * `:protected-internal` (Keyword `t` or omitted): Omitted if the constructor is
+    not protected internal; otherwise `t`.
+  * `:parameters` (List of Parameter Plists or omitted): An ordered list of plists
+    for each parameter. If the constructor takes no parameters, this key is omitted.
+* `:methods` (List of Method Plists or omitted): A list of plists containing
+  details of public or protected methods declared directly on the type. If no
+  methods are declared, this key is omitted. Each method plist contains:
+  * `:name` (String): The clean name of the method (mathematical/logical operator
+    symbols are used for C# operator overloads).
+  * `:mangled-name` (String or omitted): The CIL runtime name of the method. Omitted
+    if the clean name is identical to the mangled name.
+  * `:is-static` (Keyword `t` or omitted): Omitted if the method is not static;
+    otherwise `t`.
+  * `:return-type` (String): The fully qualified return type of the method (using
+    simplified backtick notation for generic types).
+  * `:assembly-qualified-return-type` (String or omitted): The full assembly-qualified
+    name of the return type. Omitted unless the type is assembly-qualified.
+  * `:parameters` (List of Parameter Plists or omitted): An ordered list of plists
+    for each parameter. If the method takes no parameters, this key is omitted.
+
+### Parameter Plist Details
+
+Each parameter plist contains:
+* `:name` (String): The name of the parameter.
+* `:type` (String): The fully qualified type of the parameter (using simplified
+  backtick notation for generic types).
+* `:assembly-qualified-type` (String or omitted): The full assembly-qualified
+  name of the parameter type. Omitted unless the type is assembly-qualified.
+* `:has-default` (Keyword `t` or omitted): Omitted if the parameter has no
+  default value; otherwise `t`.
+* `:default-value` (Lisp value or omitted): Omitted if `:has-default` is omitted;
+  otherwise the formatted default value as a valid Common Lisp literal.
 
 
 # Implementation Phases
@@ -340,3 +376,10 @@ This sub-phase implements advanced type-system characteristics:
 * Handle Extension Methods
   * Even if they're defined in other assemblies
   * How to find and enumerate them?
+
+* Antigravity's tests are extremely fragile
+  * Checking string output in the manner it does can find spurious matches
+    * Parse the S-expression in C# and check the results that way?
+    * Load the S-expression in a Lisp session and check results that way?
+  * Identify the location of the System.Runtime.dll programmatically and
+    read it that way?

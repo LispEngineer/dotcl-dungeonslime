@@ -440,6 +440,10 @@ namespace MonoGameLispDemo {
             var parts = new List<string>();
             if (ctor.IsPublic) {
                 parts.Add(":public t");
+            } else if (ctor.IsFamily) {
+                parts.Add(":protected t");
+            } else if (ctor.IsFamilyOrAssembly) {
+                parts.Add(":protected-internal t");
             }
 
             var parameters = ctor.GetParameters();
@@ -770,6 +774,14 @@ namespace MonoGameLispDemo {
                 }
                 if (!content.Contains(":assembly-qualified-type \"System.Collections.ObjectModel.ReadOnlyCollection`1[[System.Exception, System.Private.CoreLib,")) {
                     throw new Exception("Test failed: Sibling :assembly-qualified-type is missing or incorrect.");
+                }
+
+                // Verify that abstract classes with protected constructors output (:protected t)
+                if (!content.Contains("\"System.Attribute\"")) {
+                    throw new Exception("Test failed: Output does not contain System.Attribute.");
+                }
+                if (!content.Contains(":constructors ((:protected t))")) {
+                    throw new Exception("Test failed: Attribute protected constructor is not correctly formatted.");
                 }
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types
