@@ -257,6 +257,24 @@ This sub-phase extracts detailed signatures for methods, constructors, and param
 
 Continue the "omit `nil`s" convention from Phase 2B.
 
+* **Implementation Choices for Phase 2C**:
+  * **Overloads Handling**: Each overload is output as an individual plist inside
+    the `:methods` list. The `:methods` list is grouped (sorted) consecutively
+    first by clean name, and then by parameter count.
+  * **Accessor Filtering**: Property getters and setters, as well as event
+    accessors, are filtered out from the general `:methods` list (via checking
+    `method.IsSpecialName && !method.Name.StartsWith("op_")`) to prevent
+    duplicate method definitions.
+  * **Operator Overload Mapping**: Clean names for operator overloads are mapped
+    to standard mathematical/logical symbols (e.g. `+` for `op_Addition`, `<`
+    for `op_LessThan`), while `:mangled-name` captures the CIL runtime name
+    (`op_Addition`).
+  * **Mangled Name Omission**: If the clean name of a method is identical to its
+    mangled CIL name, the `:mangled-name` key is omitted from the plist.
+  * **Default Values Formatting**: Default values are formatted for Lisp:
+    `nil` maps to `:nil`, `bool` maps to `t`/`nil`, strings/chars are escaped,
+    and numbers use standard representations.
+
 ### Phase 2D: Add Documentation Information
 
 This sub-phase integrates assembly XML documentation comments into the metadata output:

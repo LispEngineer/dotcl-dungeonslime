@@ -122,10 +122,21 @@ namespace MonoGameLispDemo {
 
                     Console.WriteLine($"[OutputClass] Processing class: {fullName}");
 
-                    // Phase 1: Retrieve public methods declared only on this type
-                    var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
-                        .Select(m => m.Name)
-                        .OrderBy(name => name)
+                    // Phase 2C: Retrieve constructors
+                    var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                        .Where(c => c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly)
+                        .OrderBy(c => c.GetParameters().Length)
+                        .Select(FormatConstructorPlist)
+                        .ToList();
+
+                    // Phase 2C: Retrieve methods
+                    var methodsList = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
+                        .Where(m => (m.IsPublic || m.IsFamily || m.IsFamilyOrAssembly)
+                                    && (!m.IsSpecialName || m.Name.StartsWith("op_"))
+                                    && !m.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false))
+                        .OrderBy(m => GetCleanMethodName(m))
+                        .ThenBy(m => m.GetParameters().Length)
+                        .Select(FormatMethodPlist)
                         .ToList();
 
                     // Phase 2A: Retrieve type kind, superclass, interfaces, and flags
@@ -179,8 +190,11 @@ namespace MonoGameLispDemo {
                     if (fields.Any()) {
                         parts.Add($":fields ({string.Join(" ", fields)})");
                     }
-                    if (methods.Any()) {
-                        parts.Add($":methods {FormatLispList(methods)}");
+                    if (constructors.Any()) {
+                        parts.Add($":constructors ({string.Join(" ", constructors)})");
+                    }
+                    if (methodsList.Any()) {
+                        parts.Add($":methods ({string.Join(" ", methodsList)})");
                     }
 
                     string plistStr = "(" + string.Join(" ", parts) + ")";
@@ -417,6 +431,128 @@ namespace MonoGameLispDemo {
 
             return "(" + string.Join(" ", parts) + ")";
         }
+
+        /// <summary>
+        ///   Formats a constructor as a plist containing its parameters.
+        /// </summary>
+        /// <param name="ctor">The constructor info.</param>
+        /// <returns>A plist string representation of the constructor.</returns>
+        private static string FormatConstructorPlist(ConstructorInfo ctor) {
+            var parts = new List<string>();
+            if (ctor.IsPublic) {
+                parts.Add(":public t");
+            }
+
+            var parameters = ctor.GetParameters();
+            if (parameters.Length > 0) {
+                var paramPlists = parameters.Select(FormatParameterPlist).ToList();
+                parts.Add($":parameters ({string.Join(" ", paramPlists)})");
+            }
+
+            return "(" + string.Join(" ", parts) + ")";
+        }
+
+        /// <summary>
+        ///   Formats a method as a plist including its clean/mangled name, static status, return type, and parameters.
+        /// </summary>
+        /// <param name="method">The method info.</param>
+        /// <returns>A plist string representation of the method.</returns>
+        private static string FormatMethodPlist(MethodInfo method) {
+            var parts = new List<string>();
+            string cleanName = GetCleanMethodName(method);
+            parts.Add($":name {EscapeLispString(cleanName)}");
+
+            if (method.Name != cleanName) {
+                parts.Add($":mangled-name {EscapeLispString(method.Name)}");
+            }
+
+            if (method.IsStatic) {
+                parts.Add(":is-static t");
+            }
+
+            string retType = method.ReturnType.FullName ?? method.ReturnType.Name;
+            parts.Add($":return-type {EscapeLispString(retType)}");
+
+            var parameters = method.GetParameters();
+            if (parameters.Length > 0) {
+                var paramPlists = parameters.Select(FormatParameterPlist).ToList();
+                parts.Add($":parameters ({string.Join(" ", paramPlists)})");
+            }
+
+            return "(" + string.Join(" ", parts) + ")";
+        }
+
+        /// <summary>
+        ///   Formats a parameter as a plist including name, type, and default value.
+        /// </summary>
+        /// <param name="param">The parameter info.</param>
+        /// <returns>A plist string representation of the parameter.</returns>
+        private static string FormatParameterPlist(ParameterInfo param) {
+            var parts = new List<string>();
+            parts.Add($":name {EscapeLispString(param.Name ?? "")}");
+
+            string paramType = param.ParameterType.FullName ?? param.ParameterType.Name;
+            parts.Add($":type {EscapeLispString(paramType)}");
+
+            if (param.HasDefaultValue) {
+                parts.Add(":has-default t");
+                parts.Add($":default-value {FormatDefaultValue(param.DefaultValue)}");
+            }
+
+            return "(" + string.Join(" ", parts) + ")";
+        }
+
+        /// <summary>
+        ///   Formats a parameter's default value representation for Common Lisp.
+        /// </summary>
+        /// <param name="val">The default value object.</param>
+        /// <returns>A formatted representation string.</returns>
+        private static string FormatDefaultValue(object? val) {
+            if (val == null) {
+                return ":nil";
+            }
+            if (val is string s) {
+                return EscapeLispString(s);
+            }
+            if (val is bool b) {
+                return b ? "t" : "nil";
+            }
+            if (val is char c) {
+                return EscapeLispString(c.ToString());
+            }
+            return val.ToString() ?? ":nil";
+        }
+
+        /// <summary>
+        ///   Translates C# operator names into standard Lisp operator symbols, returning normal names unchanged.
+        /// </summary>
+        /// <param name="method">The method info to retrieve name for.</param>
+        /// <returns>The clean method name string.</returns>
+        private static string GetCleanMethodName(MethodInfo method) {
+            string name = method.Name;
+            if (name.StartsWith("op_")) {
+                switch (name) {
+                    case "op_Addition": return "+";
+                    case "op_Subtraction": return "-";
+                    case "op_Multiply": return "*";
+                    case "op_Division": return "/";
+                    case "op_Equality": return "=";
+                    case "op_Inequality": return "/=";
+                    case "op_LessThan": return "<";
+                    case "op_GreaterThan": return ">";
+                    case "op_LessThanOrEqual": return "<=";
+                    case "op_GreaterThanOrEqual": return ">=";
+                    case "op_UnaryPlus": return "+";
+                    case "op_UnaryNegation": return "-";
+                    case "op_LogicalNot": return "not";
+                    case "op_Increment": return "1+";
+                    case "op_Decrement": return "1-";
+                    case "op_True": return "true";
+                    case "op_False": return "false";
+                }
+            }
+            return name;
+        }
     }
 
     /// <summary>
@@ -486,9 +622,28 @@ namespace MonoGameLispDemo {
                     throw new Exception("Test failed: EventArgs.Empty field is not correctly formatted.");
                 }
 
-                // Check for some expected methods of ArrayList
-                if (!content.Contains("\"Add\"") || !content.Contains("\"Clear\"") || !content.Contains("\"Contains\"")) {
-                    throw new Exception("Test failed: System.Collections.ArrayList does not seem to have the expected methods.");
+                // Verify Phase 2C constructors (for ArrayList)
+                if (!content.Contains(":constructors")) {
+                    throw new Exception("Test failed: ArrayList does not contain :constructors.");
+                }
+                if (!content.Contains("(:public t :parameters ((:name \"capacity\" :type \"System.Int32\")))")) {
+                    throw new Exception("Test failed: ArrayList capacity constructor is not correctly formatted.");
+                }
+
+                // Verify Phase 2C methods and parameters (using System.Decimal operator +)
+                if (!content.Contains("\"System.Decimal\"")) {
+                    throw new Exception("Test failed: Output does not contain System.Decimal.");
+                }
+                if (!content.Contains(":name \"+\" :mangled-name \"op_Addition\" :is-static t :return-type \"System.Decimal\"")) {
+                    throw new Exception("Test failed: Decimal addition operator is not correctly formatted.");
+                }
+
+                // Check for some expected methods of ArrayList (now as plists under :methods)
+                if (!content.Contains(":name \"Add\" :return-type \"System.Int32\" :parameters ((:name \"value\" :type \"System.Object\"))")) {
+                    throw new Exception("Test failed: ArrayList.Add method is not correctly formatted.");
+                }
+                if (!content.Contains(":name \"Clear\" :return-type \"System.Void\"")) {
+                    throw new Exception("Test failed: ArrayList.Clear method is not correctly formatted.");
                 }
 
                 Console.WriteLine("[AssemblyToLispyTest] All tests PASSED successfully!");
