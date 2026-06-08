@@ -89,4 +89,46 @@ No parameters, nothing else. Just very basic information, to
 prove that we can read it and output a well-fromatted
 Common Lisp s-expression.
 
-## Phase 2: TODO
+### Notes on Output
+
+* **Names with backticks**: If a name has a backtick followed by a number,
+  that indicates the number of generic parameters that  class has.
+  For example, ``Tuple`3`` means a `Tuple` with 3 generic arguments.
+
+## Phase 2: Add More Type Details
+
+For version 2, we're going to add more details about each type
+that is found in the assembly.
+
+Details to add:
+* Kind of type: Class, Interface, Struct, Primitive, Value type, ...?
+  * (What are all the kinds of types C# / CLR / CIL has?) Maybe this should be a set of
+    flags instead of a single type, e.g., 
+    `:class-info (:primitive :value-type :array :enum)` (or whatever?)
+  * Contains Generic Parameters? (can also be told by the backtick in the name)
+  * Maybe all the `Is` properties on `Type` should become an entry in 
+    a `:type-flags` key in the plist, converted to a keyword and camel case
+    * Examples:
+    * `IsSealed` -> `:sealed`
+    * `IsNotPublic` -> `:not-public`
+    * Combined: `(:flags (:sealed :not-public))`
+* Superclass (if any), a.k.a. `BaseType`
+* Interfaces implemented
+* Fields
+  * Field name
+  * Field type
+  * Field information, e.g.,
+    * Read-only
+    * Const
+    * (others?)
+* Properties
+  * Property name
+  * Property type
+  * Readable, writeable, init-only
+
+Useful functions to implement:
+* `CamelCaseToSnakeCase`: Converts `CamelCase` to `camel-case`
+
+## Phase TODO:
+
+* List operator overloads (i.e., `op_` methods?)

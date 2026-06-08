@@ -55,4 +55,7 @@
 #|
 (defvar x (safe-read-form-from-file "/tmp/System.Runtime.lispy.metadata.tmp"))
 (find-if (lambda (item) (string= (getf item :name) "ArrayList")) x)
+;; All the generic types:
+(remove-if-not (lambda (str) (find #\` str))  (mapcar (lambda (item) (getf item :name)) x))
+;; All the generic methods: (none)
 |#
