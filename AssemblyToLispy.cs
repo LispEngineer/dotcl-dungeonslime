@@ -128,7 +128,15 @@ namespace MonoGameLispDemo {
                         .ToList();
 
                     string methodsListStr = FormatLispList(methods);
-                    string plistStr = $"(:name {EscapeLispString(typeName)} :fully-qualified-name {EscapeLispString(fullName)} :namespace {EscapeLispString(ns)} :methods {methodsListStr})";
+
+                    // Phase 2A: Retrieve type kind, superclass, interfaces, and flags
+                    string kindStr = GetTypeKind(type);
+                    string superclassStr = type.BaseType != null ? EscapeLispString(type.BaseType.FullName ?? type.BaseType.Name) : "nil";
+                    var interfaces = type.GetInterfaces().Select(i => i.FullName ?? i.Name).OrderBy(name => name).ToList();
+                    string interfacesStr = FormatLispList(interfaces);
+                    string flagsStr = GetTypeFlags(type);
+
+                    string plistStr = $"(:name {EscapeLispString(typeName)} :fully-qualified-name {EscapeLispString(fullName)} :namespace {EscapeLispString(ns)} :kind {kindStr} :superclass {superclassStr} :interfaces {interfacesStr} :flags {flagsStr} :methods {methodsListStr})";
                     plistStrings.Add(plistStr);
                 }
 
@@ -206,6 +214,87 @@ namespace MonoGameLispDemo {
             }
             return "(" + string.Join(" ", items.Select(EscapeLispString)) + ")";
         }
+
+        /// <summary>
+        ///   Converts a PascalCase or camelCase string to a Lisp kebab-case string.
+        /// </summary>
+        /// <param name="name">The PascalCase/camelCase string.</param>
+        /// <returns>A kebab-case representation.</returns>
+        public static string CamelCaseToKebabCase(string name) {
+            if (string.IsNullOrEmpty(name)) {
+                return string.Empty;
+            }
+            var sb = new StringBuilder();
+            for (int i = 0; i < name.Length; i++) {
+                char c = name[i];
+                if (char.IsUpper(c)) {
+                    if (i > 0 && name[i - 1] != '-' && (!char.IsUpper(name[i - 1]) || (i + 1 < name.Length && char.IsLower(name[i + 1])))) {
+                        sb.Append('-');
+                    }
+                    sb.Append(char.ToLower(c));
+                } else {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        ///   Determines the Common Lisp kind symbol of a type (e.g., :class, :struct, :interface, :enum, :delegate).
+        /// </summary>
+        /// <param name="type">The System.Type to analyze.</param>
+        /// <returns>A string representation of the Lisp keyword kind.</returns>
+        private static string GetTypeKind(Type type) {
+            if (type.IsEnum) {
+                return ":enum";
+            }
+            if (type.IsInterface) {
+                return ":interface";
+            }
+            if (typeof(Delegate).IsAssignableFrom(type)) {
+                return ":delegate";
+            }
+            if (type.IsValueType) {
+                return ":struct";
+            }
+            return ":class";
+        }
+
+        /// <summary>
+        ///   Evaluates standard boolean reflection flags for a type and formats them as a list of Lisp keywords.
+        /// </summary>
+        /// <param name="type">The System.Type to inspect.</param>
+        /// <returns>A string representing the Lisp list of keywords, or "nil" if empty.</returns>
+        private static string GetTypeFlags(Type type) {
+            var flags = new List<string>();
+            if (type.IsAbstract) {
+                flags.Add(":" + CamelCaseToKebabCase("Abstract"));
+            }
+            if (type.IsSealed) {
+                flags.Add(":" + CamelCaseToKebabCase("Sealed"));
+            }
+            if (type.IsImport) {
+                flags.Add(":" + CamelCaseToKebabCase("Import"));
+            }
+#pragma warning disable SYSLIB0050
+            if (type.IsSerializable) {
+                flags.Add(":" + CamelCaseToKebabCase("Serializable"));
+            }
+#pragma warning restore SYSLIB0050
+            if (type.IsGenericType) {
+                flags.Add(":" + CamelCaseToKebabCase("GenericType"));
+            }
+            if (type.IsGenericTypeDefinition) {
+                flags.Add(":" + CamelCaseToKebabCase("GenericTypeDefinition"));
+            }
+            if (type.IsNested) {
+                flags.Add(":" + CamelCaseToKebabCase("Nested"));
+            }
+            if (flags.Count == 0) {
+                return "nil";
+            }
+            return "(" + string.Join(" ", flags) + ")";
+        }
     }
 
     /// <summary>
@@ -240,6 +329,20 @@ namespace MonoGameLispDemo {
                 // Check for System.Collections.ArrayList
                 if (!content.Contains("\"System.Collections.ArrayList\"")) {
                     throw new Exception("Test failed: Output does not contain System.Collections.ArrayList.");
+                }
+
+                // Verify Phase 2A metadata fields for ArrayList
+                if (!content.Contains(":kind :class")) {
+                    throw new Exception("Test failed: ArrayList kind is not marked as :class.");
+                }
+                if (!content.Contains(":superclass \"System.Object\"")) {
+                    throw new Exception("Test failed: ArrayList superclass is not marked as \"System.Object\".");
+                }
+                if (!content.Contains("\"System.Collections.IList\"")) {
+                    throw new Exception("Test failed: ArrayList interfaces does not contain \"System.Collections.IList\".");
+                }
+                if (!content.Contains(":serializable")) {
+                    throw new Exception("Test failed: ArrayList flags does not contain :serializable.");
                 }
 
                 // Check for some expected methods of ArrayList

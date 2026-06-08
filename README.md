@@ -272,7 +272,11 @@ In my case, it shows the game window and then segfaults out.
   * `--base`
   * `--test` will prevent the actual MonoGame from running and will run the assembly-to-lispy test suite.
 
-* `AssemblyToLispy.cs`: Implements Phase 1 of the `assembly-to-lispy` specification. Extracts metadata (types and public methods) from a .NET assembly and outputs a Common Lisp S-expression representation. Contains `AssemblyToLispy.GenerateLispyMetadata` and the `AssemblyToLispyTest` verification suite.
+* `AssemblyToLispy.cs`: The `assembly-to-lispy` specification. 
+  * Extracts metadata (types and public methods) from a .NET assembly and outputs a 
+    Common Lisp S-expression representation.
+  * A super minor verification suite.
+  * Primarily implemented by Antigravity CLI / Gemini with my review.
 
 ### Deprecated C# Files
 
