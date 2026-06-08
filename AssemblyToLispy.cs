@@ -375,9 +375,7 @@ namespace MonoGameLispDemo {
         private static string FormatPropertyPlist(PropertyInfo prop) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(prop.Name)}");
-
-            string propType = prop.PropertyType.FullName ?? prop.PropertyType.Name;
-            parts.Add($":type {EscapeLispString(propType)}");
+            parts.Add(FormatTypeField(":type", prop.PropertyType));
 
             var getMethod = prop.GetMethod;
             var setMethod = prop.SetMethod;
@@ -415,9 +413,7 @@ namespace MonoGameLispDemo {
         private static string FormatFieldPlist(FieldInfo field) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(field.Name)}");
-
-            string fieldType = field.FieldType.FullName ?? field.FieldType.Name;
-            parts.Add($":type {EscapeLispString(fieldType)}");
+            parts.Add(FormatTypeField(":type", field.FieldType));
 
             if (field.IsStatic) {
                 parts.Add(":static t");
@@ -472,9 +468,7 @@ namespace MonoGameLispDemo {
             if (method.IsStatic) {
                 parts.Add(":is-static t");
             }
-
-            string retType = method.ReturnType.FullName ?? method.ReturnType.Name;
-            parts.Add($":return-type {EscapeLispString(retType)}");
+            parts.Add(FormatTypeField(":return-type", method.ReturnType));
 
             var parameters = method.GetParameters();
             if (parameters.Length > 0) {
@@ -493,9 +487,7 @@ namespace MonoGameLispDemo {
         private static string FormatParameterPlist(ParameterInfo param) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(param.Name ?? "")}");
-
-            string paramType = param.ParameterType.FullName ?? param.ParameterType.Name;
-            parts.Add($":type {EscapeLispString(paramType)}");
+            parts.Add(FormatTypeField(":type", param.ParameterType));
 
             if (param.HasDefaultValue) {
                 parts.Add(":has-default t");
@@ -618,6 +610,60 @@ namespace MonoGameLispDemo {
             }
             return name;
         }
+
+        /// <summary>
+        ///   Gets a simplified CLR backtick name for a type, recursively formatting generic arguments.
+        /// </summary>
+        /// <param name="type">The type to format.</param>
+        /// <returns>A simplified backtick type name string.</returns>
+        private static string GetFriendlyTypeName(Type type) {
+            if (type.IsGenericType) {
+                string baseName = type.GetGenericTypeDefinition().FullName ?? type.GetGenericTypeDefinition().Name;
+                var argNames = type.GetGenericArguments().Select(GetFriendlyTypeName);
+                return $"{baseName}[{string.Join(", ", argNames)}]";
+            }
+            return type.FullName ?? type.Name;
+        }
+
+        /// <summary>
+        ///   Programmatically determines if a type's FullName contains assembly qualifications by checking
+        ///   recursively if the type or any of its components is a closed generic type.
+        /// </summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns>True if the type's FullName is assembly-qualified; otherwise, false.</returns>
+        private static bool IsAssemblyQualified(Type type) {
+            if (type.IsGenericType && !type.IsGenericTypeDefinition) {
+                return true;
+            }
+            if (type.HasElementType) {
+                return IsAssemblyQualified(type.GetElementType()!);
+            }
+            if (type.IsGenericType) {
+                foreach (var arg in type.GetGenericArguments()) {
+                    if (IsAssemblyQualified(arg)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        ///   Formats a type field key-value pair, appending the assembly-qualified sibling if the type is programmatically assembly-qualified.
+        /// </summary>
+        /// <param name="key">The plist key (e.g. :type or :return-type).</param>
+        /// <param name="type">The type to format.</param>
+        /// <returns>The formatted key-value pair strings.</returns>
+        private static string FormatTypeField(string key, Type type) {
+            string friendlyName = GetFriendlyTypeName(type);
+            string result = $"{key} {EscapeLispString(friendlyName)}";
+
+            if (IsAssemblyQualified(type) && type.AssemblyQualifiedName != null) {
+                string aqKey = key == ":return-type" ? ":assembly-qualified-return-type" : ":assembly-qualified-type";
+                result += $" {aqKey} {EscapeLispString(type.AssemblyQualifiedName)}";
+            }
+            return result;
+        }
     }
 
     /// <summary>
@@ -715,6 +761,15 @@ namespace MonoGameLispDemo {
                 }
                 if (!content.Contains(":name \"Clear\" :return-type \"System.Void\"")) {
                     throw new Exception("Test failed: ArrayList.Clear method is not correctly formatted.");
+                }
+
+                // Verify that closed generic types are formatted using simplified backtick syntax (Option 2)
+                // and include the sibling :assembly-qualified-type field.
+                if (!content.Contains(":type \"System.Collections.ObjectModel.ReadOnlyCollection`1[System.Exception]\"")) {
+                    throw new Exception("Test failed: Generic ReadOnlyCollection type is not formatted using simplified backtick syntax.");
+                }
+                if (!content.Contains(":assembly-qualified-type \"System.Collections.ObjectModel.ReadOnlyCollection`1[[System.Exception, System.Private.CoreLib,")) {
+                    throw new Exception("Test failed: Sibling :assembly-qualified-type is missing or incorrect.");
                 }
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types

@@ -102,7 +102,10 @@ Each type entry plist contains the following entries, by key:
   details of public or protected properties declared directly on the type. If no
   properties are declared, this key is omitted. Each property plist contains:
   * `:name` (String): The name of the property.
-  * `:type` (String): The fully qualified type of the property.
+  * `:type` (String): The fully qualified type of the property (using simplified
+    backtick notation for generic types).
+  * `:assembly-qualified-type` (String or omitted): The full assembly-qualified name
+    of the property type. Omitted unless the type is assembly-qualified.
   * `:readable` (Keyword `t` or omitted): Omitted if the property is not
     readable; otherwise `t`.
   * `:writeable` (Keyword `t` or omitted): Omitted if the property is not
@@ -117,7 +120,10 @@ Each type entry plist contains the following entries, by key:
   details of public or protected fields declared directly on the type. If no
   fields are declared, this key is omitted. Each field plist contains:
   * `:name` (String): The name of the field.
-  * `:type` (String): The fully qualified type of the field.
+  * `:type` (String): The fully qualified type of the field (using simplified
+    backtick notation for generic types).
+  * `:assembly-qualified-type` (String or omitted): The full assembly-qualified name
+    of the field type. Omitted unless the type is assembly-qualified.
   * `:static` (Keyword `t` or omitted): Omitted if the field is not static;
     otherwise `t`.
   * `:literal` (Keyword `t` or omitted): Omitted if the field is not a
@@ -292,6 +298,19 @@ Continue the "omit `nil`s" convention from Phase 2B.
     * Enums, structs, and custom objects: Formatted as escaped Lisp strings
       (e.g. `"AllowThousands, Float"`), ensuring they parse as valid Lisp string
       literals.
+  * **Simplified Generic Type Formatting**: Closed generic types are formatted
+    using Option 2 (simplified backtick syntax: `Name`Arity[Args...]`),
+    recursively omitting assembly name, version, culture, and token attributes
+    for all generic type parameters.
+  * **Programmatic Assembly-Qualified Name Detection**: A type's name is detected
+    as assembly-qualified if it recursively contains any closed generic type
+    (using a helper that checks ``type.IsGenericType && !type.IsGenericTypeDefinition``
+    on the type and its elements or generic parameters).
+  * **Assembly-Qualified Sibling Fields**: When a type is programmatically
+    identified as assembly-qualified, an additional sibling field
+    (`:assembly-qualified-type` or `:assembly-qualified-return-type` for return
+    values) is output containing the complete assembly-qualified type string,
+    preserving full metadata details for future FFI use.
 
 ### Phase 2D: Add Documentation Information
 
