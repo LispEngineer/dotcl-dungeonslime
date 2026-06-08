@@ -57,6 +57,9 @@ DotCL's `invoke`.
 
 The general format is a Common Lisp s-expression.
 
+To ensure compatibility with Common Lisp readers and environments, the output
+file is encoded in UTF-8 without a Byte Order Mark (BOM).
+
 The top-level form is a list containing one entry per class (or other C# entity) being documented.
 
 Each entry is a Common Lisp plist with keys that are keywords. All keys are Common Lisp keywords.

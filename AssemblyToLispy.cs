@@ -213,7 +213,10 @@ namespace MonoGameLispDemo {
                     Directory.CreateDirectory(outputDirectory);
                 }
 
-                File.WriteAllText(outputFile, sb.ToString(), Encoding.UTF8);
+                // Write the output file using a UTF-8 encoding without a Byte Order Mark (BOM),
+                // as some Common Lisp readers and environments cannot process leading BOM characters.
+                var utf8WithoutBom = new UTF8Encoding(false);
+                File.WriteAllText(outputFile, sb.ToString(), utf8WithoutBom);
                 Console.WriteLine($"[AssemblyToLispy] Successfully wrote metadata to {outputFile}");
 
             } finally {
@@ -637,6 +640,12 @@ namespace MonoGameLispDemo {
 
                 if (!File.Exists(tempOutputFile)) {
                     throw new Exception($"Test failed: Output file was not created at {tempOutputFile}");
+                }
+
+                // Verify that the file does not begin with a UTF-8 Byte Order Mark (BOM)
+                byte[] fileBytes = File.ReadAllBytes(tempOutputFile);
+                if (fileBytes.Length >= 3 && fileBytes[0] == 0xEF && fileBytes[1] == 0xBB && fileBytes[2] == 0xBF) {
+                    throw new Exception("Test failed: Output file starts with a UTF-8 Byte Order Mark (BOM).");
                 }
 
                 string content = File.ReadAllText(tempOutputFile);
