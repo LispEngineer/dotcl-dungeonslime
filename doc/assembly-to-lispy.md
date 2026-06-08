@@ -235,22 +235,27 @@ default to `nil` anyway.
 ### Phase 2C: Add Details on Methods and Constructors
 
 This sub-phase extracts detailed signatures for methods, constructors, and parameter lists:
+
 * **Constructors**:
   * Extract using `type.GetConstructors()`.
-  * Format under a `:constructors` list as a plist containing `:parameters` (ordered list of parameter plists).
-* **Methods (including Operator Overloads)**:
-  * Group methods by clean name under `:methods`. For each overload, generate a plist:
-    * `:name`: Clean name.
-    * `:mangled-name`: Real CIL name (e.g., `op_Addition` for operator overloads).
-    * `:is-static`: `t` or `nil`.
-    * `:return-type`: Fully qualified name of the return type.
-    * `:parameters`: List of parameter plists (ordered).
-* **Parameters**:
-  * For each parameter, capture a plist:
-    * `:name`: Parameter name.
-    * `:type`: Fully qualified parameter type.
-    * `:has-default`: `t` or `nil`.
-    * `:default-value`: Formatted default value representation (e.g. string, number, or `:nil`).
+  * Format under a `:constructors` list as a plist containing `:parameters` 
+    (ordered list of parameter plists).
+
+* **Methods (including Operator Overloads)**: Group methods by clean name 
+  under `:methods`. For each method, generate a plist:
+  * `:name`: Clean name.
+  * `:mangled-name`: Real CIL name (e.g., `op_Addition` for operator overloads).
+  * `:is-static`: `t` or `nil`.
+  * `:return-type`: Fully qualified name of the return type.
+  * `:parameters`: List of parameter plists (ordered).
+
+* **Parameters**: For each parameter, capture a plist:
+  * `:name`: Parameter name.
+  * `:type`: Fully qualified parameter type.
+  * `:has-default`: `t` or `nil`.
+  * `:default-value`: Formatted default value representation (e.g. string, number, or `:nil`).
+
+Continue the "omit `nil`s" convention from Phase 2B.
 
 ### Phase 2D: Add Documentation Information
 
