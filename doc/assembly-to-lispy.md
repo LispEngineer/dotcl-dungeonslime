@@ -381,5 +381,9 @@ This sub-phase implements advanced type-system characteristics:
   * Checking string output in the manner it does can find spurious matches
     * Parse the S-expression in C# and check the results that way?
     * Load the S-expression in a Lisp session and check results that way?
+      * `(defparameter x (with-open-file (stream "/tmp/System.Runtime.lispy.metadata.tmp" :direction :input) (let ((*read-eval* nil)(*readtable* (copy-readtable nil))(*package* (find-package :cl-user)))(read stream nil :eof))))` loads the test output file into a Lisp REPL as `x`
+      * Regular Lisp expressions can then find what we want to check, e.g.,
+        `(find-if (lambda (item) (string= (getf item :name) "ArrayList")) x)` grabs the
+        `ArrayList` entry.
   * Identify the location of the System.Runtime.dll programmatically and
     read it that way?
