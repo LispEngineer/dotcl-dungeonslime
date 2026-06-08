@@ -95,57 +95,55 @@ Common Lisp s-expression.
   that indicates the number of generic parameters that  class has.
   For example, ``Tuple`3`` means a `Tuple` with 3 generic arguments.
 
-## Phase 2: Add More Type Details
+## Phase 2: Detailed Metadata and Documentation
 
-For version 2, we're going to add more details about each type
-that is found in the assembly.
+Phase 2 is divided into five sequential sub-phases:
 
-Details to add:
-* Kind of type: Class, Interface, Struct, Primitive, Value type, ...?
-  * (What are all the kinds of types C# / CLR / CIL has?) Maybe this should be a set of
-    flags instead of a single type, e.g., 
-    `:class-info (:primitive :value-type :array :enum)` (or whatever?)
-  * Contains Generic Parameters? (can also be told by the backtick in the name)
-  * Maybe all the `Is` properties on `Type` should become an entry in 
-    a `:type-flags` key in the plist, converted to a keyword and camel case
-    * Examples:
-    * `IsSealed` -> `:sealed`
-    * `IsNotPublic` -> `:not-public`
-    * Combined: `(:flags (:sealed :not-public))`
-* Superclass (if any), a.k.a. `BaseType`
-* Interfaces implemented
-* Fields
-  * Field name
-  * Field type
-  * Field information, e.g.,
-    * Read-only
-    * Const
-    * (others?)
-* Properties
-  * Property name
-  * Property type
-  * Readable, writeable, init-only
+* **Phase 2A**: Add general metadata
+* **Phase 2B**: Add details on fields and properties
+* **Phase 2C**: Add details on the methods and constructors
+* **Phase 2D**: Add documentation information
+* **Phase 2E**: Add remaining Phase 2 capabilities (generic constraints, attributes, etc.)
 
-Useful functions to implement:
-* `CamelCaseToKebabCase`: Converts `CamelCase` to `camel-case` (sometimes referred to as snake-case in the doc, but technically kebab-case in Lisp conventions).
+---
 
-### Antigravity/Gemini's Suggestions and Scope Improvements
+### Phase 2A: Add General Metadata
 
-To ensure Phase 2 results in metadata comprehensive enough for automatic package generation, we recommend expanding the scope to include:
-1. **XML Documentation Integration**: Parse the associated `.xml` documentation file generated with the assembly to attach `:documentation` strings to types, methods, fields, and properties.
-2. **Method Parameter Details**: Capture parameter names, fully qualified types, and default values to allow generation of correct Lisp function signatures and dynamic argument checking.
-3. **Generic Constraints**: Capture constraints on generic parameters (e.g., class, struct, new(), base-type) to support type-dispatching constraints.
-4. **Attribute Recognition**: Detect custom attributes such as `[Obsolete]` or `[Extension]` (crucial for identifying extension methods).
+This sub-phase extracts top-level type kind and classification properties:
+* **Kind of Type**: Output a `:kind` key (e.g., `:class`, `:struct`, `:interface`, `:enum`, `:delegate`).
+* **Inheritance**:
+  * `:superclass`: Fully qualified name of the base class.
+  * `:interfaces`: A list of fully qualified names of implemented interfaces.
+* **Type Flags**: Convert standard boolean reflection checks (`IsSealed`, `IsAbstract`, etc.) to Lisp-friendly keywords, mapped under a `:flags` key, e.g. `(:flags (:sealed :abstract))`.
+* **Kebab-Case Utility**: Implement a `CamelCaseToKebabCase` string helper (converts PascalCase/camelCase to kebab-case keywords, e.g., `:is-value-type`).
 
-### Phase 2: Implementation Plan (by Antigravity/Gemini)
+---
 
-#### 1. Kebab-Case Keyword Translation
-Convert C# PascalCase/camelCase type and member properties to Lisp-friendly kebab-case keywords.
-* Implement a `ToKebabCase` string helper.
-* Map type-boolean checks (e.g., `IsSealed`, `IsAbstract`, `IsValueType`) into a list of keywords under a `:flags` key, e.g., `(:flags (:sealed :value-type))`.
+### Phase 2B: Add Details on Fields and Properties
 
-#### 2. Detailed Member Metadata Plists
-Extend output serialization to capture detailed structures:
+This sub-phase extracts member variables and metadata accessors:
+* **Properties**:
+  * Extract using `type.GetProperties()`.
+  * Format each property as a plist:
+    * `:name`: Property name.
+    * `:type`: Fully qualified property type.
+    * `:readable`: `t` or `nil`.
+    * `:writeable`: `t` or `nil`.
+    * `:is-static`: `t` or `nil`.
+* **Fields**:
+  * Extract using `type.GetFields()`.
+  * Format each field as a plist:
+    * `:name`: Field name.
+    * `:type`: Fully qualified type.
+    * `:is-static`: `t` or `nil`.
+    * `:is-literal`: `t` or `nil` (for constants).
+    * `:is-init-only`: `t` or `nil` (for read-only fields).
+
+---
+
+### Phase 2C: Add Details on Methods and Constructors
+
+This sub-phase extracts detailed signatures for methods, constructors, and parameter lists:
 * **Constructors**:
   * Extract using `type.GetConstructors()`.
   * Format under a `:constructors` list as a plist containing `:parameters` (ordered list of parameter plists).
@@ -155,22 +153,40 @@ Extend output serialization to capture detailed structures:
     * `:mangled-name`: Real CIL name (e.g., `op_Addition` for operator overloads).
     * `:is-static`: `t` or `nil`.
     * `:return-type`: Fully qualified name of the return type.
-    * `:parameters`: List of parameter plists: `(:name "argName" :type "System.String" :has-default t :default-value "defaultVal")`.
-* **Properties**:
-  * Extract using `type.GetProperties()`.
-  * Format as: `(:name "PropName" :type "System.Int32" :readable t :writeable t :is-static nil)`.
-* **Fields**:
-  * Extract using `type.GetFields()`.
-  * Format as: `(:name "FieldName" :type "System.String" :is-static t :is-literal t :is-init-only nil)`.
+    * `:parameters`: List of parameter plists (ordered).
+* **Parameters**:
+  * For each parameter, capture a plist:
+    * `:name`: Parameter name.
+    * `:type`: Fully qualified parameter type.
+    * `:has-default`: `t` or `nil`.
+    * `:default-value`: Formatted default value representation (e.g. string, number, or `:nil`).
 
-#### 3. XML Documentation Integration
-If a matching documentation `.xml` file exists in the same directory as the target `.dll`:
-* **Parsing Approach**:
-  * **Option A (Direct Parsing)**: Load and parse the file directly using `System.Xml.Linq.XDocument`. This is lightweight and allows simple LINQ queries to map member signatures to summaries.
-  * **Option B (Roslyn Provider)**: Use `Microsoft.CodeAnalysis.XmlDocumentationProvider.CreateFromFile(xmlPath)` to obtain the documentation.
-    * *Note*: While this manages file loading/caching, it still returns raw XML strings (e.g., `<member name="...">...</member>`), meaning we still need to perform custom XML parsing to extract clean text. It also adds a dependency on the `Microsoft.CodeAnalysis` NuGet package.
-* Build a lookup dictionary matching XML member IDs (e.g., `T:System.Collections.ArrayList`, `M:System.Collections.ArrayList.Add(System.Object)`) to their `<summary>` and `<param>` summaries.
-* Append a `:documentation` key with the retrieved string to the corresponding type/member/property plist.
+---
+
+### Phase 2D: Add Documentation Information
+
+This sub-phase integrates assembly XML documentation comments into the metadata output:
+* **Parsing Options**:
+  * **Option A (Direct Parsing)**: Load and parse the associated `.xml` file directly using `System.Xml.Linq.XDocument`. This is self-contained and lightweight.
+  * **Option B (Roslyn Provider)**: Use `Microsoft.CodeAnalysis.XmlDocumentationProvider.CreateFromFile(xmlPath)` to obtain the documentation. Note that while this manages file loading/caching, it still returns raw XML strings (e.g., `<member name="...">...</member>`), requiring custom XML parsing to extract clean text. It also adds a dependency on the `Microsoft.CodeAnalysis` NuGet package.
+* **Signature Mapping**: Match reflection signatures to XML documentation keys:
+  * Types: `T:Namespace.TypeName`
+  * Methods: `M:Namespace.TypeName.MethodName(Args...)`
+  * Properties: `P:Namespace.TypeName.PropertyName`
+  * Fields: `F:Namespace.TypeName.FieldName`
+* **Output**: Build a dictionary lookup of XML comments, and append a `:documentation` key to the corresponding type/member/property plist containing the summary text and parameter descriptions.
+
+---
+
+### Phase 2E: Remaining Phase 2 Capabilities
+
+This sub-phase implements advanced type-system characteristics:
+* **Generic Constraints**:
+  * Extract constraints on generic parameters (e.g., `where T : class`, `new()`, base-type, or interface constraints) using `Type.GetGenericParameterConstraints()`.
+  * Format under `:generic-constraints` in the plist to support type-dispatching and constraints validation in the generated Lisp packages.
+* **Attributes**:
+  * Extract custom attributes applied to types or members (e.g., `[Obsolete]`, `[Extension]`, or custom attributes) using `GetCustomAttributes()`.
+  * Format under `:attributes` to enable detection of extension methods and lifecycle/deprecated annotations.
 
 ## Phase N: Future
 
