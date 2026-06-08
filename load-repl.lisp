@@ -42,8 +42,17 @@
 ;; NOTE: This will require the REPL be killed when the game exits.
 ;; And no REPL will be available until that happens.
 ;; (dotnet:invoke *mg-game* "Run")
+(format t "[load-repl.lisp] Example usage:~%")
 (format t "[load-repl.lisp] (dotnet:invoke *mg-game* \"Run\")~%")
 
 ;; To clean up after running the game:
 ;; (dotnet:invoke *mg-game* "Dispose")
 (format t "[load-repl.lisp] (dotnet:invoke *mg-game* \"Dispose\")~%")
+
+;; You can also do:
+(format t "[load-repl.lisp] (safe-read-form-from-file \"/tmp/System.Runtime.lispy.metadata.tmp\")")
+
+#|
+(defvar x (safe-read-form-from-file "/tmp/System.Runtime.lispy.metadata.tmp"))
+(find-if (lambda (item) (string= (getf item :name) "ArrayList")) x)
+|#

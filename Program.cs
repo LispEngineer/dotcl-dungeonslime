@@ -76,6 +76,8 @@ Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
 // MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
 var gameObj = DotclHost.Call("MAKE-GAME");
 if (IsTestMode) {
+    Console.WriteLine($"[Program.cs] Running assembly-to-lispy tests...");
+    MonoGameLispDemo.AssemblyToLispyTest.RunTests();
     Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
     return;
 }
