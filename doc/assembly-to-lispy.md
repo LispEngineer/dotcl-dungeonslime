@@ -165,7 +165,10 @@ Extend output serialization to capture detailed structures:
 
 #### 3. XML Documentation Integration
 If a matching documentation `.xml` file exists in the same directory as the target `.dll`:
-* Load and parse the file using `System.Xml.Linq.XDocument`.
+* **Parsing Approach**:
+  * **Option A (Direct Parsing)**: Load and parse the file directly using `System.Xml.Linq.XDocument`. This is lightweight and allows simple LINQ queries to map member signatures to summaries.
+  * **Option B (Roslyn Provider)**: Use `Microsoft.CodeAnalysis.XmlDocumentationProvider.CreateFromFile(xmlPath)` to obtain the documentation.
+    * *Note*: While this manages file loading/caching, it still returns raw XML strings (e.g., `<member name="...">...</member>`), meaning we still need to perform custom XML parsing to extract clean text. It also adds a dependency on the `Microsoft.CodeAnalysis` NuGet package.
 * Build a lookup dictionary matching XML member IDs (e.g., `T:System.Collections.ArrayList`, `M:System.Collections.ArrayList.Add(System.Object)`) to their `<summary>` and `<param>` summaries.
 * Append a `:documentation` key with the retrieved string to the corresponding type/member/property plist.
 
