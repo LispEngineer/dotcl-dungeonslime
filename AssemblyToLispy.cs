@@ -507,9 +507,10 @@ namespace MonoGameLispDemo {
         /// </summary>
         /// <param name="val">The default value object.</param>
         /// <returns>A formatted representation string.</returns>
-        private static string FormatDefaultValue(object? val) {
+        internal static string FormatDefaultValue(object? val) {
+            // 1. Serialize null as nil
             if (val == null) {
-                return ":nil";
+                return "nil";
             }
             if (val is string s) {
                 return EscapeLispString(s);
@@ -517,10 +518,71 @@ namespace MonoGameLispDemo {
             if (val is bool b) {
                 return b ? "t" : "nil";
             }
+            // 6. Format character as a Common Lisp character using DotCL's LispChar representation
             if (val is char c) {
-                return EscapeLispString(c.ToString());
+                return DotCL.LispChar.Make(c).ToString();
             }
-            return val.ToString() ?? ":nil";
+
+            // 3. Handle single-float format using DotCL's SingleFloat printer representation
+            if (val is float f) {
+                if (float.IsNaN(f) || float.IsInfinity(f)) {
+                    return EscapeLispString(f.ToString());
+                }
+                string sFloat = new DotCL.SingleFloat(f).ToString();
+                if (sFloat.StartsWith("#.SINGLE-FLOAT-")) {
+                    return sFloat;
+                }
+                if (sFloat.Contains("E") || sFloat.Contains("e")) {
+                    sFloat = sFloat.Replace("E", "f").Replace("e", "f").Replace("f+", "f");
+                } else {
+                    if (!sFloat.Contains(".")) {
+                        sFloat += ".0";
+                    }
+                    sFloat += "f0";
+                }
+                return sFloat;
+            }
+
+            // 4. Handle double-float format using DotCL's DoubleFloat printer representation directly
+            if (val is double d) {
+                return new DotCL.DoubleFloat(d).ToString();
+            }
+
+            // 5. Handle decimal formats: integral values as integers, fractional as ratio literals (numerator/denominator)
+            if (val is decimal dec) {
+                if (dec % 1 == 0) {
+                    return dec.ToString("0", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                
+                int[] bits = decimal.GetBits(dec);
+                var low = (uint)bits[0];
+                var mid = (uint)bits[1];
+                var high = (uint)bits[2];
+                var scale = (bits[3] >> 16) & 0x7F;
+                bool isNegative = (bits[3] & 0x80000000) != 0;
+
+                var numerator = new System.Numerics.BigInteger(low) 
+                              | (new System.Numerics.BigInteger(mid) << 32) 
+                              | (new System.Numerics.BigInteger(high) << 64);
+                if (isNegative) {
+                    numerator = -numerator;
+                }
+                var denominator = System.Numerics.BigInteger.Pow(10, scale);
+                var gcd = System.Numerics.BigInteger.GreatestCommonDivisor(numerator, denominator);
+                numerator /= gcd;
+                denominator /= gcd;
+
+                return $"{numerator}/{denominator}";
+            }
+
+            // 2. Handle integers
+            if (val is int || val is uint || val is long || val is ulong || 
+                val is short || val is ushort || val is byte || val is sbyte) {
+                return val.ToString() ?? "0";
+            }
+
+            // Fallback for enums, structs, and any other types: serializing as escaped string
+            return EscapeLispString(val.ToString() ?? "");
         }
 
         /// <summary>
@@ -646,6 +708,25 @@ namespace MonoGameLispDemo {
                     throw new Exception("Test failed: ArrayList.Clear method is not correctly formatted.");
                 }
 
+                // Verify FormatDefaultValue behavior directly for different Common Lisp types
+                AssertDefaultValue(null, "nil");
+                AssertDefaultValue("hello", "\"hello\"");
+                AssertDefaultValue(true, "t");
+                AssertDefaultValue(false, "nil");
+                AssertDefaultValue('A', "#\\LATIN CAPITAL LETTER A");
+                AssertDefaultValue(' ', "#\\Space");
+                AssertDefaultValue('\n', "#\\Newline");
+                AssertDefaultValue(123, "123");
+                AssertDefaultValue(-45L, "-45");
+                AssertDefaultValue(1.5f, "1.5f0");
+                AssertDefaultValue(1.23E-4f, "0.000123f0");
+                AssertDefaultValue(1.5d, "1.5d0");
+                AssertDefaultValue(1.23E-4d, "0.000123d0");
+                AssertDefaultValue(123.0m, "123");
+                AssertDefaultValue(1.25m, "5/4");
+                AssertDefaultValue(-0.05m, "-1/20");
+                AssertDefaultValue(System.IO.FileMode.Create, "\"Create\""); // Enum fallback
+
                 Console.WriteLine("[AssemblyToLispyTest] All tests PASSED successfully!");
 
             } catch (Exception ex) {
@@ -657,6 +738,13 @@ namespace MonoGameLispDemo {
                     Console.WriteLine($"[AssemblyToLispyTest] Test output file: {tempOutputFile}");
                     // File.Delete(tempOutputFile);
                 }
+            }
+        }
+
+        private static void AssertDefaultValue(object? value, string expected) {
+            string actual = AssemblyToLispy.FormatDefaultValue(value);
+            if (actual != expected) {
+                throw new Exception($"FormatDefaultValue assertion failed. Value: {value ?? "null"}, Expected: {expected}, Actual: {actual}");
             }
         }
     }

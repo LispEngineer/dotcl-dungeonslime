@@ -271,9 +271,24 @@ Continue the "omit `nil`s" convention from Phase 2B.
     (`op_Addition`).
   * **Mangled Name Omission**: If the clean name of a method is identical to its
     mangled CIL name, the `:mangled-name` key is omitted from the plist.
-  * **Default Values Formatting**: Default values are formatted for Lisp:
-    `nil` maps to `:nil`, `bool` maps to `t`/`nil`, strings/chars are escaped,
-    and numbers use standard representations.
+  * **Default Values Formatting**: Default values are formatted to ensure valid,
+    interpretable Common Lisp literals:
+    * `null`: Formatted as the Lisp symbol `nil`.
+    * `bool`: Formatted as `t` or `nil`.
+    * Integers: Formatted as raw integer strings (e.g. `123`).
+    * Single-floats: Formatted with the single-float exponent indicator `f` (e.g.
+      `1.5f0` or `0.000123f0`), leveraging DotCL's `SingleFloat` representation.
+    * Double-floats: Formatted with the double-float exponent indicator `d` (e.g.
+      `1.5d0` or `0.000123d0`), leveraging DotCL's `DoubleFloat` representation.
+    * Decimals: Integral decimal values are formatted as integers. Fractional
+      decimal values are serialized as simplified ratio literals (e.g. `5/4`)
+      using GCD reduction.
+    * Characters: Formatted as Common Lisp character literals (e.g. `#\Space`,
+      `#\Newline`, or `#\LATIN CAPITAL LETTER A`) leveraging DotCL's `LispChar`
+      definition.
+    * Enums, structs, and custom objects: Formatted as escaped Lisp strings
+      (e.g. `"AllowThousands, Float"`), ensuring they parse as valid Lisp string
+      literals.
 
 ### Phase 2D: Add Documentation Information
 
