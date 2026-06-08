@@ -381,6 +381,14 @@ namespace MonoGameLispDemo {
             return "(" + string.Join(" ", flags) + ")";
         }
 
+        /// <summary>
+        ///   Formats the metadata of a property as a Common Lisp property plist string.
+        ///   The plist contains the property name, type information, readability/writeability,
+        ///   static modifier, accessor names, and optional XML documentation.
+        /// </summary>
+        /// <param name="prop">The property reflection metadata info.</param>
+        /// <param name="xmlDoc">The dictionary of XML documentation elements mapped by member name.</param>
+        /// <returns>A plist string representation of the property.</returns>
         private static string FormatPropertyPlist(PropertyInfo prop, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(prop.Name)}");
@@ -423,6 +431,14 @@ namespace MonoGameLispDemo {
             return "(" + string.Join(" ", parts) + ")";
         }
 
+        /// <summary>
+        ///   Formats the metadata of a field as a Common Lisp field plist string.
+        ///   The plist contains the field name, type information, static/literal/init-only flags,
+        ///   public visibility, and optional XML documentation.
+        /// </summary>
+        /// <param name="field">The field reflection metadata info.</param>
+        /// <param name="xmlDoc">The dictionary of XML documentation elements mapped by member name.</param>
+        /// <returns>A plist string representation of the field.</returns>
         private static string FormatFieldPlist(FieldInfo field, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(field.Name)}");
@@ -453,6 +469,13 @@ namespace MonoGameLispDemo {
             return "(" + string.Join(" ", parts) + ")";
         }
 
+        /// <summary>
+        ///   Formats the metadata of a constructor as a Common Lisp constructor plist string.
+        ///   The plist contains visibility details, parameter specifications, and optional XML documentation.
+        /// </summary>
+        /// <param name="ctor">The constructor reflection metadata info.</param>
+        /// <param name="xmlDoc">The dictionary of XML documentation elements mapped by member name.</param>
+        /// <returns>A plist string representation of the constructor.</returns>
         private static string FormatConstructorPlist(ConstructorInfo ctor, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             if (ctor.IsPublic) {
@@ -481,6 +504,14 @@ namespace MonoGameLispDemo {
             return "(" + string.Join(" ", parts) + ")";
         }
 
+        /// <summary>
+        ///   Formats the metadata of a method as a Common Lisp method plist string.
+        ///   The plist contains the method's clean and mangled names, static modifier, return type,
+        ///   parameter lists, and optional XML documentation.
+        /// </summary>
+        /// <param name="method">The method reflection metadata info.</param>
+        /// <param name="xmlDoc">The dictionary of XML documentation elements mapped by member name.</param>
+        /// <returns>A plist string representation of the method.</returns>
         private static string FormatMethodPlist(MethodInfo method, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             string cleanName = GetCleanMethodName(method);
@@ -1060,6 +1091,12 @@ namespace MonoGameLispDemo {
             }
         }
 
+        /// <summary>
+        ///   Asserts that the formatted default value of an object matches the expected Lisp literal representation.
+        /// </summary>
+        /// <param name="value">The raw default value object.</param>
+        /// <param name="expected">The expected Lisp literal string representation.</param>
+        /// <exception cref="Exception">Thrown when the formatting does not match the expected value.</exception>
         private static void AssertDefaultValue(object? value, string expected) {
             string actual = AssemblyToLispy.FormatDefaultValue(value);
             if (actual != expected) {
