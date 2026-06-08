@@ -152,23 +152,24 @@ Phase 2 is divided into five sequential sub-phases:
 * **Phase 2D**: Add documentation information
 * **Phase 2E**: Add remaining Phase 2 capabilities (generic constraints, attributes, etc.)
 
----
-
 ### Phase 2A: Add General Metadata
 
 This sub-phase extracts top-level type kind and classification properties:
-* **Kind of Type**: Output a `:kind` key (e.g., `:class`, `:struct`, `:interface`, `:enum`, `:delegate`).
+* **Kind of Type**: Output a `:kind` key (e.g., `:class`, `:struct`, 
+  `:interface`, `:enum`, `:delegate`).
 * **Inheritance**:
   * `:superclass`: Fully qualified name of the base class.
   * `:interfaces`: A list of fully qualified names of implemented interfaces.
-* **Type Flags**: Convert standard boolean reflection checks (`IsSealed`, `IsAbstract`, etc.) to Lisp-friendly keywords, mapped under a `:flags` key, e.g. `(:flags (:sealed :abstract))`.
-* **Kebab-Case Utility**: Implement a `CamelCaseToKebabCase` string helper (converts PascalCase/camelCase to kebab-case keywords, e.g., `:is-value-type`).
-
----
+* **Type Flags**: Convert standard boolean reflection checks (`IsSealed`, `IsAbstract`, 
+  etc.) to Lisp-friendly keywords, mapped under a `:flags` key, e.g. 
+  `(:flags (:sealed :abstract))`.
+* **Kebab-Case Utility**: Implement a `CamelCaseToKebabCase` string helper 
+  (converts PascalCase/camelCase to kebab-case keywords, e.g., `:is-value-type`).
 
 ### Phase 2B: Add Details on Fields and Properties
 
 This sub-phase extracts member variables and metadata accessors:
+
 * **Properties**:
   * Extract using `type.GetProperties()`.
   * Format each property as a plist:
@@ -176,17 +177,21 @@ This sub-phase extracts member variables and metadata accessors:
     * `:type`: Fully qualified property type.
     * `:readable`: `t` or `nil`.
     * `:writeable`: `t` or `nil`.
-    * `:is-static`: `t` or `nil`.
+    * `:static`: `t` or `nil`.
+    * The names of the get and set methods (if any)
+    * Any other relevant information from `PropertyInfo`
 * **Fields**:
   * Extract using `type.GetFields()`.
   * Format each field as a plist:
     * `:name`: Field name.
     * `:type`: Fully qualified type.
-    * `:is-static`: `t` or `nil`.
-    * `:is-literal`: `t` or `nil` (for constants).
-    * `:is-init-only`: `t` or `nil` (for read-only fields).
+    * `:static`: `t` or `nil`.
+    * `:literal`: `t` or `nil` (for constants).
+    * `:init-only`: `t` or `nil` (for read-only fields).
+    * `:public`: `t` or `nil`.
 
----
+Any value that is `nil` should have its key omitted, as `getf` will
+default to `nil` anyway.
 
 ### Phase 2C: Add Details on Methods and Constructors
 
@@ -208,8 +213,6 @@ This sub-phase extracts detailed signatures for methods, constructors, and param
     * `:has-default`: `t` or `nil`.
     * `:default-value`: Formatted default value representation (e.g. string, number, or `:nil`).
 
----
-
 ### Phase 2D: Add Documentation Information
 
 This sub-phase integrates assembly XML documentation comments into the metadata output:
@@ -222,8 +225,6 @@ This sub-phase integrates assembly XML documentation comments into the metadata 
   * Properties: `P:Namespace.TypeName.PropertyName`
   * Fields: `F:Namespace.TypeName.FieldName`
 * **Output**: Build a dictionary lookup of XML comments, and append a `:documentation` key to the corresponding type/member/property plist containing the summary text and parameter descriptions.
-
----
 
 ### Phase 2E: Remaining Phase 2 Capabilities
 
