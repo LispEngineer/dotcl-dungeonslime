@@ -127,8 +127,50 @@ Details to add:
   * Readable, writeable, init-only
 
 Useful functions to implement:
-* `CamelCaseToSnakeCase`: Converts `CamelCase` to `camel-case`
+* `CamelCaseToKebabCase`: Converts `CamelCase` to `camel-case` (sometimes referred to as snake-case in the doc, but technically kebab-case in Lisp conventions).
 
-## Phase TODO:
+### Antigravity/Gemini's Suggestions and Scope Improvements
 
-* List operator overloads (i.e., `op_` methods?)
+To ensure Phase 2 results in metadata comprehensive enough for automatic package generation, we recommend expanding the scope to include:
+1. **XML Documentation Integration**: Parse the associated `.xml` documentation file generated with the assembly to attach `:documentation` strings to types, methods, fields, and properties.
+2. **Method Parameter Details**: Capture parameter names, fully qualified types, and default values to allow generation of correct Lisp function signatures and dynamic argument checking.
+3. **Generic Constraints**: Capture constraints on generic parameters (e.g., class, struct, new(), base-type) to support type-dispatching constraints.
+4. **Attribute Recognition**: Detect custom attributes such as `[Obsolete]` or `[Extension]` (crucial for identifying extension methods).
+
+### Phase 2: Implementation Plan (by Antigravity/Gemini)
+
+#### 1. Kebab-Case Keyword Translation
+Convert C# PascalCase/camelCase type and member properties to Lisp-friendly kebab-case keywords.
+* Implement a `ToKebabCase` string helper.
+* Map type-boolean checks (e.g., `IsSealed`, `IsAbstract`, `IsValueType`) into a list of keywords under a `:flags` key, e.g., `(:flags (:sealed :value-type))`.
+
+#### 2. Detailed Member Metadata Plists
+Extend output serialization to capture detailed structures:
+* **Constructors**:
+  * Extract using `type.GetConstructors()`.
+  * Format under a `:constructors` list as a plist containing `:parameters` (ordered list of parameter plists).
+* **Methods (including Operator Overloads)**:
+  * Group methods by clean name under `:methods`. For each overload, generate a plist:
+    * `:name`: Clean name.
+    * `:mangled-name`: Real CIL name (e.g., `op_Addition` for operator overloads).
+    * `:is-static`: `t` or `nil`.
+    * `:return-type`: Fully qualified name of the return type.
+    * `:parameters`: List of parameter plists: `(:name "argName" :type "System.String" :has-default t :default-value "defaultVal")`.
+* **Properties**:
+  * Extract using `type.GetProperties()`.
+  * Format as: `(:name "PropName" :type "System.Int32" :readable t :writeable t :is-static nil)`.
+* **Fields**:
+  * Extract using `type.GetFields()`.
+  * Format as: `(:name "FieldName" :type "System.String" :is-static t :is-literal t :is-init-only nil)`.
+
+#### 3. XML Documentation Integration
+If a matching documentation `.xml` file exists in the same directory as the target `.dll`:
+* Load and parse the file using `System.Xml.Linq.XDocument`.
+* Build a lookup dictionary matching XML member IDs (e.g., `T:System.Collections.ArrayList`, `M:System.Collections.ArrayList.Add(System.Object)`) to their `<summary>` and `<param>` summaries.
+* Append a `:documentation` key with the retrieved string to the corresponding type/member/property plist.
+
+## Phase N: Future
+
+* Handle Extension Methods
+  * Even if they're defined in other assemblies
+  * How to find and enumerate them?
