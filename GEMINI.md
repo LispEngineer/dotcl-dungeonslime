@@ -79,9 +79,12 @@ All new code must have tests. However:
      that is necessary
 2. Wrap markdown lines between 80 and 100 characters long except when
    not syntactically possible.
-3. If you are backtick-quoting something that contains a backtick,
-   you must use two leading and trailing backticks.
+3. If you are backtick-quoting something that contains a (single) backtick,
+   you must use two leading and trailing backticks. Then, the single
+   backtick can be left alone (that is, unduplicated).
    * Example: ``List`1``
+   * If the backtick is the first item that is in the backtick-quoted
+     expression, just add a preceeding space for now.
 
 
 # Language

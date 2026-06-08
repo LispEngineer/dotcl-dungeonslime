@@ -82,6 +82,8 @@ Each type entry plist contains the following entries, by key:
   * `:interface` (an interface type)
   * `:enum` (an enumeration type)
   * `:delegate` (a delegate type)
+* `:documentation` (Documentation Plist or omitted): A plist containing the type-level XML
+  documentation summary. Omitted if no documentation is found.
 * `:superclass` (String or `nil`): The fully qualified name of the base class. 
   If there is no base class (such as for interfaces or `System.Object`), 
   this value is `nil`.
@@ -116,6 +118,8 @@ Each type entry plist contains the following entries, by key:
     otherwise the name of the getter method.
   * `:set-method` (String or omitted): Omitted if there is no visible setter;
     otherwise the name of the setter method.
+  * `:documentation` (Documentation Plist or omitted): Omitted if no documentation is
+    found; otherwise a plist containing property documentation.
 * `:fields` (List of Field Plists or omitted): A list of plists containing
   details of public or protected fields declared directly on the type. If no
   fields are declared, this key is omitted. Each field plist contains:
@@ -132,6 +136,8 @@ Each type entry plist contains the following entries, by key:
     read-only; otherwise `t`.
   * `:public` (Keyword `t` or omitted): Omitted if the field is not public;
     otherwise `t`.
+  * `:documentation` (Documentation Plist or omitted): Omitted if no documentation is
+    found; otherwise a plist containing field documentation.
 * `:constructors` (List of Constructor Plists or omitted): A list of plists containing
   details of public or protected constructors declared directly on the type. If no
   constructors are declared, this key is omitted. Each constructor plist contains:
@@ -143,6 +149,8 @@ Each type entry plist contains the following entries, by key:
     not protected internal; otherwise `t`.
   * `:parameters` (List of Parameter Plists or omitted): An ordered list of plists
     for each parameter. If the constructor takes no parameters, this key is omitted.
+  * `:documentation` (Documentation Plist or omitted): Omitted if no documentation is
+    found; otherwise a plist containing constructor documentation.
 * `:methods` (List of Method Plists or omitted): A list of plists containing
   details of public or protected methods declared directly on the type. If no
   methods are declared, this key is omitted. Each method plist contains:
@@ -158,6 +166,8 @@ Each type entry plist contains the following entries, by key:
     name of the return type. Omitted unless the type is assembly-qualified.
   * `:parameters` (List of Parameter Plists or omitted): An ordered list of plists
     for each parameter. If the method takes no parameters, this key is omitted.
+  * `:documentation` (Documentation Plist or omitted): Omitted if no documentation is
+    found; otherwise a plist containing method documentation.
 
 ### Parameter Plist Details
 
@@ -171,6 +181,19 @@ Each parameter plist contains:
   default value; otherwise `t`.
 * `:default-value` (Lisp value or omitted): Omitted if `:has-default` is omitted;
   otherwise the formatted default value as a valid Common Lisp literal.
+
+
+### Documentation Plist Details
+
+Each documentation plist contains:
+* `:summary` (String or omitted): The cleaned description of the entity.
+* `:returns` (String or omitted): The cleaned description of the returned value (for
+  properties and methods).
+* `:parameters` (List of Parameter Doc Plists or omitted): A list of plists for each
+  documented parameter. If there are no parameters, this key is omitted.
+  Each parameter doc plist contains:
+  * `:name` (String): The name of the parameter.
+  * `:description` (String): The description text for the parameter.
 
 
 # Implementation Phases
@@ -352,14 +375,42 @@ Continue the "omit `nil`s" convention from Phase 2B.
 
 This sub-phase integrates assembly XML documentation comments into the metadata output:
 * **Parsing Options**:
-  * **Option A (Direct Parsing)**: Load and parse the associated `.xml` file directly using `System.Xml.Linq.XDocument`. This is self-contained and lightweight.
-  * **Option B (Roslyn Provider)**: Use `Microsoft.CodeAnalysis.XmlDocumentationProvider.CreateFromFile(xmlPath)` to obtain the documentation. Note that while this manages file loading/caching, it still returns raw XML strings (e.g., `<member name="...">...</member>`), requiring custom XML parsing to extract clean text. It also adds a dependency on the `Microsoft.CodeAnalysis` NuGet package.
+  * **Option A (Direct Parsing)**: Load and parse the associated `.xml` file directly using
+    `System.Xml.Linq.XDocument`. This is self-contained and lightweight.
+    * *Implementation Choice*: Option A was chosen to avoid taking a dependency on the heavy
+      `Microsoft.CodeAnalysis` library for XML document loading. The target assembly path has its
+      extension changed to `.xml` (e.g. `System.Runtime.xml`), which is then loaded via
+      `XDocument.Load()`.
+  * **Option B (Roslyn Provider)**: Use
+    `Microsoft.CodeAnalysis.XmlDocumentationProvider.CreateFromFile(xmlPath)` to obtain the
+    documentation. Note that while this manages file loading/caching, it still returns raw XML
+    strings (e.g., `<member name="...">...</member>`), requiring custom XML parsing to extract clean
+    text. It also adds a dependency on the `Microsoft.CodeAnalysis` NuGet package.
 * **Signature Mapping**: Match reflection signatures to XML documentation keys:
   * Types: `T:Namespace.TypeName`
+    * Replacing inner class nested separator `+` with `.`.
   * Methods: `M:Namespace.TypeName.MethodName(Args...)`
+    * Generic methods use `` `generic_count`` suffix (e.g., `` `1``).
+    * If generic arguments are nested or parameter types are generic, they 
+      are mapped to `` `index``
+      (declaring class generic parameters) or `` `index`` (declaring method generic parameters).
+    * Array parameter types use suffix brackets `[]`.
+    * By-ref parameter types append a `@` decorator.
+    * Pointer parameter types append a `*` decorator.
+    * Closed generic parameters use curly braces `{}` (e.g.,
+      `System.Collections.Generic.List{System.Int32}`).
   * Properties: `P:Namespace.TypeName.PropertyName`
   * Fields: `F:Namespace.TypeName.FieldName`
-* **Output**: Build a dictionary lookup of XML comments, and append a `:documentation` key to the corresponding type/member/property plist containing the summary text and parameter descriptions.
+* **Text Cleaning**:
+  * Inline XML tags like `<see cref="..."/>` and `<paramref name="..."/>` are parsed and
+    replaced with their plain text name.
+  * Extraneous and multiple whitespaces/newlines are consolidated into single space characters,
+    with trailing spaces trimmed.
+* **Output**: Build a dictionary lookup of XML comments, and append a `:documentation` key to the
+  corresponding type/member/property plist containing the summary text and parameter descriptions.
+  * Note: For property, field, constructor, and method plists, the `:documentation` key is
+    appended at the very end of their respective plist to preserve backwards compatibility of
+    prefix substring checking in tests.
 
 ### Phase 2E: Remaining Phase 2 Capabilities
 

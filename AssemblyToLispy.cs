@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 
 // Douglas P. Fields, Jr. - symbolics@lisp.engineer
 // Created: 2026-06-08
@@ -64,6 +65,10 @@ namespace MonoGameLispDemo {
             }
 
             Console.WriteLine($"[AssemblyToLispy] Starting metadata extraction for: {assemblyPath}");
+
+            // Load XML documentation if available (Phase 2D)
+            string xmlPath = Path.ChangeExtension(assemblyPath, ".xml");
+            var xmlDocDict = LoadXmlDocumentation(xmlPath);
 
             // Set up custom resolver to find dependencies in the same directory
             ResolveEventHandler resolver = (sender, args) => {
@@ -126,7 +131,7 @@ namespace MonoGameLispDemo {
                     var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                         .Where(c => c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly)
                         .OrderBy(c => c.GetParameters().Length)
-                        .Select(FormatConstructorPlist)
+                        .Select(c => FormatConstructorPlist(c, xmlDocDict))
                         .ToList();
 
                     // Phase 2C: Retrieve methods
@@ -136,7 +141,7 @@ namespace MonoGameLispDemo {
                                     && !m.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false))
                         .OrderBy(m => GetCleanMethodName(m))
                         .ThenBy(m => m.GetParameters().Length)
-                        .Select(FormatMethodPlist)
+                        .Select(m => FormatMethodPlist(m, xmlDocDict))
                         .ToList();
 
                     // Phase 2A: Retrieve type kind, superclass, interfaces, and flags
@@ -155,7 +160,7 @@ namespace MonoGameLispDemo {
                             return hasVisibleAccessor && !p.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false);
                         })
                         .OrderBy(p => p.Name)
-                        .Select(FormatPropertyPlist)
+                        .Select(p => FormatPropertyPlist(p, xmlDocDict))
                         .ToList();
 
                     var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
@@ -163,7 +168,7 @@ namespace MonoGameLispDemo {
                                     && !f.IsDefined(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false)
                                     && !f.Name.StartsWith("<"))
                         .OrderBy(f => f.Name)
-                        .Select(FormatFieldPlist)
+                        .Select(f => FormatFieldPlist(f, xmlDocDict))
                         .ToList();
 
                     // Build plist dynamically to omit keys with nil values
@@ -174,6 +179,15 @@ namespace MonoGameLispDemo {
                         parts.Add($":namespace {EscapeLispString(ns)}");
                     }
                     parts.Add($":kind {kindStr}");
+
+                    // Phase 2D: Retrieve type documentation
+                    string typeDocKey = GetXmlDocMemberName(type);
+                    if (xmlDocDict.TryGetValue(typeDocKey, out var typeElement)) {
+                        string docPlist = FormatDocumentationPlist(typeElement);
+                        if (docPlist != "nil") {
+                            parts.Add($":documentation {docPlist}");
+                        }
+                    }
 
                     if (superclassStr != "nil") {
                         parts.Add($":superclass {superclassStr}");
@@ -367,12 +381,7 @@ namespace MonoGameLispDemo {
             return "(" + string.Join(" ", flags) + ")";
         }
 
-        /// <summary>
-        ///   Formats a property as a plist with accessible characteristics.
-        /// </summary>
-        /// <param name="prop">The property info.</param>
-        /// <returns>A plist string representation of the property.</returns>
-        private static string FormatPropertyPlist(PropertyInfo prop) {
+        private static string FormatPropertyPlist(PropertyInfo prop, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(prop.Name)}");
             parts.Add(FormatTypeField(":type", prop.PropertyType));
@@ -402,15 +411,19 @@ namespace MonoGameLispDemo {
                 parts.Add($":set-method {EscapeLispString(setMethod!.Name)}");
             }
 
+            // Phase 2D: Retrieve property documentation (moved to end of plist)
+            string docKey = GetXmlDocMemberName(prop);
+            if (xmlDoc.TryGetValue(docKey, out var memberElement)) {
+                string docPlist = FormatDocumentationPlist(memberElement);
+                if (docPlist != "nil") {
+                    parts.Add($":documentation {docPlist}");
+                }
+            }
+
             return "(" + string.Join(" ", parts) + ")";
         }
 
-        /// <summary>
-        ///   Formats a field as a plist with accessible characteristics.
-        /// </summary>
-        /// <param name="field">The field info.</param>
-        /// <returns>A plist string representation of the field.</returns>
-        private static string FormatFieldPlist(FieldInfo field) {
+        private static string FormatFieldPlist(FieldInfo field, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(field.Name)}");
             parts.Add(FormatTypeField(":type", field.FieldType));
@@ -428,15 +441,19 @@ namespace MonoGameLispDemo {
                 parts.Add(":public t");
             }
 
+            // Phase 2D: Retrieve field documentation (moved to end of plist)
+            string docKey = GetXmlDocMemberName(field);
+            if (xmlDoc.TryGetValue(docKey, out var memberElement)) {
+                string docPlist = FormatDocumentationPlist(memberElement);
+                if (docPlist != "nil") {
+                    parts.Add($":documentation {docPlist}");
+                }
+            }
+
             return "(" + string.Join(" ", parts) + ")";
         }
 
-        /// <summary>
-        ///   Formats a constructor as a plist containing its parameters.
-        /// </summary>
-        /// <param name="ctor">The constructor info.</param>
-        /// <returns>A plist string representation of the constructor.</returns>
-        private static string FormatConstructorPlist(ConstructorInfo ctor) {
+        private static string FormatConstructorPlist(ConstructorInfo ctor, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             if (ctor.IsPublic) {
                 parts.Add(":public t");
@@ -452,15 +469,19 @@ namespace MonoGameLispDemo {
                 parts.Add($":parameters ({string.Join(" ", paramPlists)})");
             }
 
+            // Phase 2D: Retrieve constructor documentation (moved to end of plist)
+            string docKey = GetXmlDocMemberName(ctor);
+            if (xmlDoc.TryGetValue(docKey, out var memberElement)) {
+                string docPlist = FormatDocumentationPlist(memberElement);
+                if (docPlist != "nil") {
+                    parts.Add($":documentation {docPlist}");
+                }
+            }
+
             return "(" + string.Join(" ", parts) + ")";
         }
 
-        /// <summary>
-        ///   Formats a method as a plist including its clean/mangled name, static status, return type, and parameters.
-        /// </summary>
-        /// <param name="method">The method info.</param>
-        /// <returns>A plist string representation of the method.</returns>
-        private static string FormatMethodPlist(MethodInfo method) {
+        private static string FormatMethodPlist(MethodInfo method, Dictionary<string, XElement> xmlDoc) {
             var parts = new List<string>();
             string cleanName = GetCleanMethodName(method);
             parts.Add($":name {EscapeLispString(cleanName)}");
@@ -478,6 +499,15 @@ namespace MonoGameLispDemo {
             if (parameters.Length > 0) {
                 var paramPlists = parameters.Select(FormatParameterPlist).ToList();
                 parts.Add($":parameters ({string.Join(" ", paramPlists)})");
+            }
+
+            // Phase 2D: Retrieve method documentation (moved to end of plist)
+            string docKey = GetXmlDocMemberName(method);
+            if (xmlDoc.TryGetValue(docKey, out var memberElement)) {
+                string docPlist = FormatDocumentationPlist(memberElement);
+                if (docPlist != "nil") {
+                    parts.Add($":documentation {docPlist}");
+                }
             }
 
             return "(" + string.Join(" ", parts) + ")";
@@ -668,6 +698,211 @@ namespace MonoGameLispDemo {
             }
             return result;
         }
+
+        /// <summary>
+        ///   Loads and parses the XML documentation file into a dictionary of member elements.
+        /// </summary>
+        /// <param name="xmlPath">The path to the XML documentation file.</param>
+        /// <returns>A dictionary mapping member names to their XML elements.</returns>
+        private static Dictionary<string, XElement> LoadXmlDocumentation(string xmlPath) {
+            var dict = new Dictionary<string, XElement>();
+            if (!File.Exists(xmlPath)) {
+                Console.WriteLine($"[AssemblyToLispy] Warning: XML documentation file not found: {xmlPath}");
+                return dict;
+            }
+
+            try {
+                XDocument doc = XDocument.Load(xmlPath);
+                var members = doc.Root?.Element("members")?.Elements("member");
+                if (members != null) {
+                    foreach (var member in members) {
+                        string? nameAttr = member.Attribute("name")?.Value;
+                        if (nameAttr != null) {
+                            dict[nameAttr] = member;
+                        }
+                    }
+                }
+                Console.WriteLine($"[AssemblyToLispy] Successfully loaded XML documentation: {xmlPath}");
+            } catch (Exception ex) {
+                Console.WriteLine($"[AssemblyToLispy] Warning: Failed to parse XML documentation: {ex.Message}");
+            }
+            return dict;
+        }
+
+        /// <summary>
+        ///   Computes the XML documentation member name for a given reflection member.
+        /// </summary>
+        /// <param name="member">The reflection member.</param>
+        /// <returns>The XML documentation key string.</returns>
+        private static string GetXmlDocMemberName(MemberInfo member) {
+            if (member is Type t) {
+                return "T:" + GetXmlDocTypeName(t);
+            }
+            if (member is FieldInfo f) {
+                return "F:" + GetXmlDocTypeName(f.DeclaringType!) + "." + f.Name;
+            }
+            if (member is PropertyInfo p) {
+                return "P:" + GetXmlDocTypeName(p.DeclaringType!) + "." + p.Name;
+            }
+            if (member is ConstructorInfo c) {
+                string baseName = "M:" + GetXmlDocTypeName(c.DeclaringType!) + ".#ctor";
+                var parameters = c.GetParameters();
+                if (parameters.Length > 0) {
+                    var paramTypes = parameters.Select(p => GetXmlDocParameterTypeName(p.ParameterType)).ToArray();
+                    return baseName + "(" + string.Join(",", paramTypes) + ")";
+                }
+                return baseName;
+            }
+            if (member is MethodInfo m) {
+                string baseName = "M:" + GetXmlDocTypeName(m.DeclaringType!) + "." + m.Name;
+                if (m.IsGenericMethod) {
+                    baseName += "``" + m.GetGenericArguments().Length;
+                }
+                var parameters = m.GetParameters();
+                if (parameters.Length > 0) {
+                    var paramTypes = parameters.Select(p => GetXmlDocParameterTypeName(p.ParameterType)).ToArray();
+                    return baseName + "(" + string.Join(",", paramTypes) + ")";
+                }
+                return baseName;
+            }
+            return "";
+        }
+
+        /// <summary>
+        ///   Formats a type name for XML documentation keys, replacing inner class pluses with dots.
+        /// </summary>
+        /// <param name="type">The type to format.</param>
+        /// <returns>A formatted type name string.</returns>
+        private static string GetXmlDocTypeName(Type type) {
+            string fullName = type.FullName ?? type.Name;
+            return fullName.Replace('+', '.');
+        }
+
+        /// <summary>
+        ///   Recursively formats a parameter type name for XML documentation keys.
+        /// </summary>
+        /// <param name="type">The parameter type.</param>
+        /// <returns>A formatted type string.</returns>
+        private static string GetXmlDocParameterTypeName(Type type) {
+            if (type.IsGenericParameter) {
+                if (type.DeclaringMethod != null) {
+                    int index = Array.IndexOf(type.DeclaringMethod.GetGenericArguments(), type);
+                    return "``" + index;
+                } else {
+                    int index = Array.IndexOf(type.DeclaringType!.GetGenericArguments(), type);
+                    return "`" + index;
+                }
+            }
+
+            if (type.HasElementType) {
+                string elementTypeName = GetXmlDocParameterTypeName(type.GetElementType()!);
+                if (type.IsArray) {
+                    int rank = type.GetArrayRank();
+                    string brackets = "[" + new string(',', rank - 1) + "]";
+                    return elementTypeName + brackets;
+                }
+                if (type.IsByRef) {
+                    return elementTypeName + "@";
+                }
+                if (type.IsPointer) {
+                    return elementTypeName + "*";
+                }
+            }
+
+            if (type.IsGenericType) {
+                string baseName = type.GetGenericTypeDefinition().FullName ?? type.GetGenericTypeDefinition().Name;
+                int backtickIndex = baseName.IndexOf('`');
+                if (backtickIndex >= 0) {
+                    baseName = baseName.Substring(0, backtickIndex);
+                }
+                baseName = baseName.Replace('+', '.');
+                var argNames = type.GetGenericArguments().Select(GetXmlDocParameterTypeName);
+                return $"{baseName}{{{string.Join(",", argNames)}}}";
+            }
+
+            string fullName = type.FullName ?? type.Name;
+            return fullName.Replace('+', '.');
+        }
+
+        /// <summary>
+        ///   Cleans and normalizes text from XML nodes, replacing inline see and paramref tags.
+        /// </summary>
+        /// <param name="xml">The raw XML inner text.</param>
+        /// <returns>A cleaned and normalized text string.</returns>
+        private static string CleanXmlText(string xml) {
+            if (string.IsNullOrEmpty(xml)) {
+                return string.Empty;
+            }
+            try {
+                var element = XElement.Parse("<root>" + xml + "</root>");
+                foreach (var see in element.Descendants("see").ToList()) {
+                    string? cref = see.Attribute("cref")?.Value;
+                    if (cref != null) {
+                        int colonIdx = cref.IndexOf(':');
+                        see.ReplaceWith(new XText(colonIdx >= 0 ? cref.Substring(colonIdx + 1) : cref));
+                    }
+                }
+                foreach (var paramref in element.Descendants("paramref").ToList()) {
+                    string? name = paramref.Attribute("name")?.Value;
+                    if (name != null) {
+                        paramref.ReplaceWith(new XText(name));
+                    }
+                }
+                return System.Text.RegularExpressions.Regex.Replace(element.Value, @"\s+", " ").Trim();
+            } catch {
+                return System.Text.RegularExpressions.Regex.Replace(xml, @"\s+", " ").Trim();
+            }
+        }
+
+        /// <summary>
+        ///   Formats XML member node content into a Common Lisp documentation plist.
+        /// </summary>
+        /// <param name="memberElement">The XML member element.</param>
+        /// <returns>A formatted documentation plist string, or "nil" if empty.</returns>
+        private static string FormatDocumentationPlist(XElement memberElement) {
+            var parts = new List<string>();
+
+            // Extract summary node
+            var summaryElement = memberElement.Element("summary");
+            if (summaryElement != null) {
+                string summaryRaw = summaryElement.Nodes().Aggregate("", (s, n) => s + n.ToString());
+                string summaryClean = CleanXmlText(summaryRaw);
+                if (!string.IsNullOrEmpty(summaryClean)) {
+                    parts.Add($":summary {EscapeLispString(summaryClean)}");
+                }
+            }
+
+            // Extract returns node
+            var returnsElement = memberElement.Element("returns");
+            if (returnsElement != null) {
+                string returnsRaw = returnsElement.Nodes().Aggregate("", (s, n) => s + n.ToString());
+                string returnsClean = CleanXmlText(returnsRaw);
+                if (!string.IsNullOrEmpty(returnsClean)) {
+                    parts.Add($":returns {EscapeLispString(returnsClean)}");
+                }
+            }
+
+            // Extract parameter descriptions
+            var paramsElements = memberElement.Elements("param").ToList();
+            if (paramsElements.Any()) {
+                var paramPlists = new List<string>();
+                foreach (var p in paramsElements) {
+                    string? name = p.Attribute("name")?.Value;
+                    string desc = CleanXmlText(p.Nodes().Aggregate("", (s, n) => s + n.ToString()));
+                    if (!string.IsNullOrEmpty(name)) {
+                        paramPlists.Add($"(:name {EscapeLispString(name)} :description {EscapeLispString(desc)})");
+                    }
+                }
+                if (paramPlists.Any()) {
+                    parts.Add($":parameters ({string.Join(" ", paramPlists)})");
+                }
+            }
+
+            if (parts.Count == 0) {
+                return "nil";
+            }
+            return "(" + string.Join(" ", parts) + ")";
+        }
     }
 
     /// <summary>
@@ -747,7 +982,7 @@ namespace MonoGameLispDemo {
                 if (!content.Contains(":constructors")) {
                     throw new Exception("Test failed: ArrayList does not contain :constructors.");
                 }
-                if (!content.Contains("(:public t :parameters ((:name \"capacity\" :type \"System.Int32\")))")) {
+                if (!content.Contains("(:public t :parameters ((:name \"capacity\" :type \"System.Int32\"))")) {
                     throw new Exception("Test failed: ArrayList capacity constructor is not correctly formatted.");
                 }
 
@@ -780,8 +1015,16 @@ namespace MonoGameLispDemo {
                 if (!content.Contains("\"System.Attribute\"")) {
                     throw new Exception("Test failed: Output does not contain System.Attribute.");
                 }
-                if (!content.Contains(":constructors ((:protected t))")) {
+                if (!content.Contains(":constructors ((:protected t")) {
                     throw new Exception("Test failed: Attribute protected constructor is not correctly formatted.");
+                }
+
+                // Verify Phase 2D: XML Documentation serialization (using System.Collections.ArrayList)
+                if (!content.Contains(":documentation (:summary \"Implements the System.Collections.IList interface using an array whose size is dynamically increased as required.\")")) {
+                    throw new Exception("Test failed: ArrayList type documentation summary is missing or incorrect.");
+                }
+                if (!content.Contains("(:public t :documentation (:summary \"Initializes a new instance of the System.Collections.ArrayList class that is empty and has the default initial capacity.\"))")) {
+                    throw new Exception("Test failed: ArrayList parameterless constructor documentation summary is missing or incorrect.");
                 }
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types
