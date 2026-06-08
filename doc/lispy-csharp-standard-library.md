@@ -218,6 +218,8 @@ C# source and assemblies:
   * A Lisp library like [Yamson](https://github.com/bohonghuang/yamson)
     can read YAML (and might even work in DotCL, but it relies on several
     other libraries transitively)
+  * [docfx JSON](https://github.com/dotnet/docfx/blob/main/docs/reference/docfx-json-reference.md/)
+    input file format
 
 C# documentation XML files:
 * [NuDoq](https://github.com/devlooped/NuDoq)
