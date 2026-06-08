@@ -82,7 +82,14 @@ Or manually run the steps:
    * To run in test mode, add `--test` to the command line, and it will
      not invoke the game.
 
-3. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
+3. To generate assembly metadata:
+   `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --assembly <path-to-dll> [--output <output-path>]`
+   * `--assembly <filename>`: Resolves the assembly and computes its input directory automatically.
+   * `--output <filename>`: The destination filepath for the generated S-expression plist.
+     If set to `-`, or if the parameter is omitted entirely, it defaults to standard output
+     (stdout), with diagnostic logs routed to standard error (stderr) to keep the payload clean.
+
+4. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
 
 ### How to Load in REPL
 

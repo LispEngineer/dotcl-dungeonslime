@@ -6,6 +6,46 @@
 
 using DotCL;
 
+string? assemblyFile = null;
+string? outputFile = null;
+bool hasAssembly = false;
+bool hasOutput = false;
+
+for (int i = 0; i < args.Length; i++) {
+    if (args[i] == "--assembly" && i + 1 < args.Length) {
+        assemblyFile = args[i + 1];
+        hasAssembly = true;
+        i++;
+    } else if (args[i] == "--output" && i + 1 < args.Length) {
+        outputFile = args[i + 1];
+        hasOutput = true;
+        i++;
+    } else if (args[i] == "--output") {
+        outputFile = "-";
+        hasOutput = true;
+    }
+}
+
+if (hasAssembly && !string.IsNullOrEmpty(assemblyFile)) {
+    if (!hasOutput || string.IsNullOrEmpty(outputFile)) {
+        outputFile = "-";
+    }
+    if (outputFile == "-") {
+        MonoGameLispDemo.AssemblyToLispy.RedirectLogsToError = true;
+    }
+    try {
+        string fullAssemblyPath = Path.GetFullPath(assemblyFile);
+        string inputDir = Path.GetDirectoryName(fullAssemblyPath) ?? Directory.GetCurrentDirectory();
+        string inputAssemblyFile = Path.GetFileName(fullAssemblyPath);
+        MonoGameLispDemo.AssemblyToLispy.GenerateLispyMetadata(inputDir, inputAssemblyFile, outputFile);
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[Program.cs] Error generating metadata: {ex.Message}");
+        Console.Error.WriteLine(ex.StackTrace);
+        Environment.Exit(1);
+    }
+    return;
+}
+
 // Quick sanity check: a pure C# Game subclass that clears to red. If this
 // shows red, MonoGame works in this project; the issue is dotcl interop
 // passing struct args to .NET methods.

@@ -64,7 +64,7 @@ namespace MonoGameLispDemo {
                 throw new FileNotFoundException($"Target assembly file not found: {assemblyPath}");
             }
 
-            Console.WriteLine($"[AssemblyToLispy] Starting metadata extraction for: {assemblyPath}");
+            WriteLog($"[AssemblyToLispy] Starting metadata extraction for: {assemblyPath}");
 
             // Load XML documentation if available (Phase 2D)
             string xmlPath = Path.ChangeExtension(assemblyPath, ".xml");
@@ -75,7 +75,7 @@ namespace MonoGameLispDemo {
                 var assemblyName = new AssemblyName(args.Name).Name;
                 var dependencyPath = Path.Combine(inputDirectory, assemblyName + ".dll");
                 if (File.Exists(dependencyPath)) {
-                    Console.WriteLine($"[AssemblyResolver] Resolving dependency: {assemblyName} from {dependencyPath}");
+                    WriteLog($"[AssemblyResolver] Resolving dependency: {assemblyName} from {dependencyPath}");
                     return Assembly.LoadFrom(dependencyPath);
                 }
                 return null;
@@ -91,10 +91,10 @@ namespace MonoGameLispDemo {
                 try {
                     allTypes.AddRange(assembly.GetExportedTypes());
                 } catch (ReflectionTypeLoadException ex) {
-                    Console.WriteLine("[AssemblyToLispy] ReflectionTypeLoadException encountered. Retrieving successfully loaded types.");
+                    WriteLog("[AssemblyToLispy] ReflectionTypeLoadException encountered. Retrieving successfully loaded types.");
                     foreach (var loaderEx in ex.LoaderExceptions) {
                         if (loaderEx != null) {
-                            Console.WriteLine($"[AssemblyToLispy] Loader Exception: {loaderEx.Message}");
+                            WriteLog($"[AssemblyToLispy] Loader Exception: {loaderEx.Message}");
                         }
                     }
                     allTypes.AddRange(ex.Types.OfType<Type>());
@@ -107,7 +107,7 @@ namespace MonoGameLispDemo {
                         allTypes.AddRange(forwarded);
                     }
                 } catch (Exception ex) {
-                    Console.WriteLine($"[AssemblyToLispy] Warning: Could not retrieve forwarded types: {ex.Message}");
+                    WriteLog($"[AssemblyToLispy] Warning: Could not retrieve forwarded types: {ex.Message}");
                 }
 
                 // Filter and sort the unique list of public types
@@ -125,7 +125,7 @@ namespace MonoGameLispDemo {
                     string fullName = type.FullName ?? typeName;
                     string ns = type.Namespace ?? "";
 
-                    Console.WriteLine($"[OutputClass] Processing class: {fullName}");
+                    WriteLog($"[OutputClass] Processing class: {fullName}");
 
                     // Phase 2C: Retrieve constructors
                     var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
@@ -222,16 +222,20 @@ namespace MonoGameLispDemo {
                 }
                 sb.AppendLine(")");
 
-                string? outputDirectory = Path.GetDirectoryName(outputFile);
-                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory)) {
-                    Directory.CreateDirectory(outputDirectory);
-                }
+                if (outputFile == "-") {
+                    Console.Write(sb.ToString());
+                } else {
+                    string? outputDirectory = Path.GetDirectoryName(outputFile);
+                    if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory)) {
+                        Directory.CreateDirectory(outputDirectory);
+                    }
 
-                // Write the output file using a UTF-8 encoding without a Byte Order Mark (BOM),
-                // as some Common Lisp readers and environments cannot process leading BOM characters.
-                var utf8WithoutBom = new UTF8Encoding(false);
-                File.WriteAllText(outputFile, sb.ToString(), utf8WithoutBom);
-                Console.WriteLine($"[AssemblyToLispy] Successfully wrote metadata to {outputFile}");
+                    // Write the output file using a UTF-8 encoding without a Byte Order Mark (BOM),
+                    // as some Common Lisp readers and environments cannot process leading BOM characters.
+                    var utf8WithoutBom = new UTF8Encoding(false);
+                    File.WriteAllText(outputFile, sb.ToString(), utf8WithoutBom);
+                    WriteLog($"[AssemblyToLispy] Successfully wrote metadata to {outputFile}");
+                }
 
             } finally {
                 AppDomain.CurrentDomain.AssemblyResolve -= resolver;
@@ -738,7 +742,7 @@ namespace MonoGameLispDemo {
         private static Dictionary<string, XElement> LoadXmlDocumentation(string xmlPath) {
             var dict = new Dictionary<string, XElement>();
             if (!File.Exists(xmlPath)) {
-                Console.WriteLine($"[AssemblyToLispy] Warning: XML documentation file not found: {xmlPath}");
+                WriteLog($"[AssemblyToLispy] Warning: XML documentation file not found: {xmlPath}");
                 return dict;
             }
 
@@ -753,9 +757,9 @@ namespace MonoGameLispDemo {
                         }
                     }
                 }
-                Console.WriteLine($"[AssemblyToLispy] Successfully loaded XML documentation: {xmlPath}");
+                WriteLog($"[AssemblyToLispy] Successfully loaded XML documentation: {xmlPath}");
             } catch (Exception ex) {
-                Console.WriteLine($"[AssemblyToLispy] Warning: Failed to parse XML documentation: {ex.Message}");
+                WriteLog($"[AssemblyToLispy] Warning: Failed to parse XML documentation: {ex.Message}");
             }
             return dict;
         }
@@ -933,6 +937,24 @@ namespace MonoGameLispDemo {
                 return "nil";
             }
             return "(" + string.Join(" ", parts) + ")";
+        }
+
+        /// <summary>
+        ///   Gets or sets a value indicating whether diagnostic logs should be redirected to standard error.
+        ///   This is useful when standard output is used for the metadata payload.
+        /// </summary>
+        public static bool RedirectLogsToError { get; set; }
+
+        /// <summary>
+        ///   Writes a log message to either standard output or standard error depending on RedirectLogsToError.
+        /// </summary>
+        /// <param name="message">The log message to write.</param>
+        private static void WriteLog(string message) {
+            if (RedirectLogsToError) {
+                Console.Error.WriteLine(message);
+            } else {
+                Console.WriteLine(message);
+            }
         }
     }
 
