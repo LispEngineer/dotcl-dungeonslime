@@ -82,12 +82,13 @@ Or manually run the steps:
    * To run in test mode, add `--test` to the command line, and it will
      not invoke the game.
 
-3. To generate assembly metadata:
+3. To generate assembly metadata (work in progress):
    `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --assembly <path-to-dll> [--output <output-path>]`
    * `--assembly <filename>`: Resolves the assembly and computes its input directory automatically.
    * `--output <filename>`: The destination filepath for the generated S-expression plist.
      If set to `-`, or if the parameter is omitted entirely, it defaults to standard output
      (stdout), with diagnostic logs routed to standard error (stderr) to keep the payload clean.
+   * Example: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --assembly /home/dfields/.nuget/packages/monogame.framework.desktopgl/3.8.4.1/lib/net8.0/MonoGame.Framework.dll --output /tmp/mg.lisp`
 
 4. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
 
@@ -176,7 +177,7 @@ In my case, it shows the game window and then segfaults out.
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
   (formerly called Gemini CLI)
-  which the author sometimes uses with Gemini to figure things out.
+  which the author uses with Gemini.
   (See below for notes on the author's use of ML assistance.)
 
 ## Lisp
@@ -353,7 +354,7 @@ including this project. I also use the Gemini Code Assist plug-in for VS
 Code, my primary IDE. (I also use vi (vim), IntelliJ, Rider, and Emacs on
 occasion.)
 
-Almost none of the code herein is written by AI/ML tools. I enjoy the act
+Most of the code herein is written by myself. I enjoy the act
 of writing code (and especially documentation) and knowing how everything 
 is put together, so I like it this way, for now.
 
@@ -382,6 +383,17 @@ Where I have found the tools to be extremely useful are in several cases:
 I do not submit ML-developed CLs / PRs (Change Lists / Pull Requests) to
 others in general. In the rare case if I would include tool-generated code, I
 have fully vetted it and would vouch for it as if I wrote it myself. 
+
+As an experiment in highly agentic coding, which so far has been interesting, 
+I have worked with Antigravity closely and had it write nearly 100% of the code of
+the `AssemblyToLispy.cs`. I wrote detailed documentation as to what the goals
+were in `assembly-to-lispy.md` first, and then refined that with Antigravity
+over time and had Antigravity update the document with various implementation
+choices and details as we worked together. It's written (as of this update)
+over 1,100 lines of C# code that is pretty reasonable, with the exception of
+extremely fragile tests. (As this is not production code, I've left addressing
+that for later, but I also do my own tests and load the output in the DotCL
+and SBCL REPLs as well and look through the output using regular CL forms.)
 
 
 # Functionality Implemented
