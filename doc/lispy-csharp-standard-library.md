@@ -18,6 +18,16 @@ suffix. (The latter is my preferred, but that is probably because of recent
 usage of Clojure.) Things like "to" or "from" methods, type conversions,
 could use things like `->` and `<-`.
 
+## References
+
+* [assembly-to-lispy.md](assembly-to-lispy.md): Documents the mechanism by which
+  C# Assembly information is turned into a Lispy s-expression format for processing
+  by Common Lisp code.
+  * `AssemblyToLispy.cs` implements this specification.
+
+* [lisp-assemblies.md](lisp-assemblies.md): Documents how the above metadata is
+  used to generate Lisp packages for these assemblies.
+
 
 # Implementation Options
 

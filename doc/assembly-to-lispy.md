@@ -412,7 +412,23 @@ This sub-phase integrates assembly XML documentation comments into the metadata 
     appended at the very end of their respective plist to preserve backwards compatibility of
     prefix substring checking in tests.
 
-### Phase 2E: Remaining Phase 2 Capabilities
+### Phase 2E: Parameter types & extension methods
+
+This phase adds information about each parameter as to whether or not
+any of these parameter modifiers apply:
+* `ref`
+* `out`
+* `ref readonly`
+* `in`
+* `scoped`
+* `params`
+
+This phase also adds information as to whether a given method is
+an Extension Method. If it is an extension method, the first
+parameter is clearly labeled as the `this` object of an extension
+method.
+
+### Phase 3: Remaining Capabilities
 
 This sub-phase implements advanced type-system characteristics:
 * **Generic Constraints**:
