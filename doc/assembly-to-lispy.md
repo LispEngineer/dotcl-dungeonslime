@@ -472,7 +472,7 @@ Since this is are running in a DotCL environment, for tests, implement them in t
 * **C# Test Runner Interop**: Modify the test runner in `AssemblyToLispy.cs` 
   to execute the Lisp script and accurately bubble up success/failure status to C#.
 
-#### Phase 3B: Synthetic Test Assembly Target
+#### Phase 3B: Synthetic Test Assembly Target (DONE)
 
 * **Dedicated Test Assembly**: Instead of hoping to find every edge case 
   in `System.Runtime.dll`, create a minimal C# project (e.g., 

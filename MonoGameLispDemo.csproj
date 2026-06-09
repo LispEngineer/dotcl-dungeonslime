@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
+    <ProjectReference Include="..\AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
   </ItemGroup>
 
   <ItemGroup>

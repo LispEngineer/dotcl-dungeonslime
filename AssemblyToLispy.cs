@@ -179,6 +179,9 @@ namespace MonoGameLispDemo {
                         parts.Add($":namespace {EscapeLispString(ns)}");
                     }
                     parts.Add($":kind {kindStr}");
+                    if (type.IsEnum) {
+                        parts.Add($":enum-underlying-type {EscapeLispString(Enum.GetUnderlyingType(type).FullName)}");
+                    }
 
                     // Phase 2D: Retrieve type documentation
                     string typeDocKey = GetXmlDocMemberName(type);
@@ -998,47 +1001,13 @@ namespace MonoGameLispDemo {
         /// </summary>
         /// <exception cref="Exception">Thrown when a test assertion fails.</exception>
         public static void RunTests() {
-            string inputDir = "/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/";
-            string assemblyName = "System.Runtime.dll";
-            string tempOutputFile = Path.Combine(Path.GetTempPath(), "System.Runtime.lispy.metadata.tmp");
-
             try {
-                Console.WriteLine("[AssemblyToLispyTest] Starting test run on System.Runtime.dll...");
-                AssemblyToLispy.GenerateLispyMetadata(inputDir, assemblyName, tempOutputFile);
+                // Test the system runtime assembly
+                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/", "System.Runtime.dll");
 
-                if (!File.Exists(tempOutputFile)) {
-                    throw new Exception($"Test failed: Output file was not created at {tempOutputFile}");
-                }
-
-                // Verify that the file does not begin with a UTF-8 Byte Order Mark (BOM)
-                byte[] fileBytes = File.ReadAllBytes(tempOutputFile);
-                if (fileBytes.Length >= 3 && fileBytes[0] == 0xEF && fileBytes[1] == 0xBB && fileBytes[2] == 0xBF) {
-                    throw new Exception("Test failed: Output file starts with a UTF-8 Byte Order Mark (BOM).");
-                }
-
-                string content = File.ReadAllText(tempOutputFile);
-
-                // Execute the Lisp-native test suite
-                Console.WriteLine("[AssemblyToLispyTest] Executing Lisp-native test suite...");
-                string testScriptFile = Path.GetFullPath("assembly-to-lispy-tests.lisp");
-                
-                string lispLoadCommand = $"(load \"{testScriptFile.Replace("\\", "/")}\")";
-                DotCL.DotclHost.EvalString(lispLoadCommand);
-                object result = DotCL.DotclHost.Call("RUN-ALL-ASSEMBLY-TESTS", tempOutputFile);
-
-                bool success = false;
-                if (result is bool b) {
-                    success = b;
-                } else if (result != null) {
-                    string resStr = result.ToString() ?? "";
-                    if (resStr.Equals("T", StringComparison.OrdinalIgnoreCase)) {
-                        success = true;
-                    }
-                }
-
-                if (!success) {
-                    throw new Exception("Test failed: Lisp-native test suite reported failures.");
-                }
+                // Test our synthetic edge cases target.
+                // The built DLL will reside in the output folder alongside MonoGameLispDemo
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "AssemblyToLispyTestTarget.dll");
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types
                 AssertDefaultValue(null, "nil");
@@ -1065,6 +1034,50 @@ namespace MonoGameLispDemo {
                 Console.Error.WriteLine($"[AssemblyToLispyTest] TEST FAILED: {ex.Message}");
                 Console.Error.WriteLine(ex.StackTrace);
                 throw;
+            }
+        }
+
+        private static void RunTestOnAssembly(string inputDir, string assemblyName) {
+            string tempOutputFile = Path.Combine(Path.GetTempPath(), $"{assemblyName}.lispy.metadata.tmp");
+
+            try {
+                Console.WriteLine($"[AssemblyToLispyTest] Starting test run on {assemblyName}...");
+                AssemblyToLispy.GenerateLispyMetadata(inputDir, assemblyName, tempOutputFile);
+
+                if (!File.Exists(tempOutputFile)) {
+                    throw new Exception($"Test failed: Output file was not created at {tempOutputFile}");
+                }
+
+                // Verify that the file does not begin with a UTF-8 Byte Order Mark (BOM)
+                byte[] fileBytes = File.ReadAllBytes(tempOutputFile);
+                if (fileBytes.Length >= 3 && fileBytes[0] == 0xEF && fileBytes[1] == 0xBB && fileBytes[2] == 0xBF) {
+                    throw new Exception("Test failed: Output file starts with a UTF-8 Byte Order Mark (BOM).");
+                }
+
+                string content = File.ReadAllText(tempOutputFile);
+
+                // Execute the Lisp-native test suite
+                Console.WriteLine($"[AssemblyToLispyTest] Executing Lisp-native test suite for {assemblyName}...");
+                string testScriptFile = Path.GetFullPath("assembly-to-lispy-tests.lisp");
+                
+                string lispLoadCommand = $"(load \"{testScriptFile.Replace("\\", "/")}\")";
+                DotCL.DotclHost.EvalString(lispLoadCommand);
+                object result = DotCL.DotclHost.Call("RUN-ALL-ASSEMBLY-TESTS", tempOutputFile, assemblyName);
+
+                bool success = false;
+                if (result is bool b) {
+                    success = b;
+                } else if (result != null) {
+                    string resStr = result.ToString() ?? "";
+                    if (resStr.Equals("T", StringComparison.OrdinalIgnoreCase)) {
+                        success = true;
+                    }
+                }
+
+                if (!success) {
+                    throw new Exception($"Test failed: Lisp-native test suite reported failures for {assemblyName}.");
+                }
+
             } finally {
                 if (File.Exists(tempOutputFile)) {
                     Console.WriteLine($"[AssemblyToLispyTest] Test output file: {tempOutputFile}");
