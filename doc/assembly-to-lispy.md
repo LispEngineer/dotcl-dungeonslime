@@ -442,28 +442,67 @@ method.
   * **in / ref readonly**: In .NET reflection, both `in` and `ref readonly` parameters are represented identically (as by-reference types with `IsReadOnlyAttribute`). Therefore, both are mapped to a single identical keyword `:ref-readonly t` with no distinction made between them.
   * **Extension Methods**: The method's plist receives an `:extension-method t` flag based on the presence of `ExtensionAttribute`. The first parameter of such a method is explicitly labeled with `:extension-this t`.
 
-### Phase 3A: Improved Tests
+### Phase 3: Testing Infrastructure Improvements
 
-Since we are running in a DotCL environment, for tests, we should implement
-them in this way:
-* Create an `assembly-to-lispy-tests.lisp` DotCL Common Lisp file
-* In the C# `AssemblyToLispy.cs`, build a test that loads the
-  `.lisp` file above and executes the tests in there. They should
-  take the filename of the generated output file as input.
-* The tests in the `.lisp` file should **safely** load the output file and
-  ensure it is properly formatted (i.e., a list of plists).
-* The tests should look for the correct class's entry, and look
-  for the proper items, using the usual Common Lisp tools like
-  `find-if`, `mapcar`, `getf`, and so forth.
-* Many more tests should be made to cover every single possible
-  output case.
-  * Examine the example C# assembly for test cases and pick
-    classes, methods, parameters, etc., that represent every
-    case.
-  * If there is a case that is possible in the code but is
-    not possible to test using `System.Runtime.dll` as an
-    example, Antigravity should inform me of this inability
-    to test that (or those) case(s).
+Phase 3 is dedicated to replacing the fragile string-based tests with
+a robust, native Lisp testing framework that validates the S-expression output.
+
+#### Phase 3A: Improved Tests & Lisp Utilities
+
+*Original Plan (Option considered but refined):*
+Since this is are running in a DotCL environment, for tests, implement them in this way:
+* Create an `assembly-to-lispy-tests.lisp` DotCL Common Lisp file.
+* In the C# `AssemblyToLispy.cs`, build a test that loads the `.lisp` file
+  above and executes the tests in there, passing the filename of the generated output file.
+* The tests safely load the output file and ensure it is properly formatted. Look for 
+  correct class entries using `find-if`, `getf`, etc.
+* Many more tests should be made to cover every single possible output case by picking 
+  classes from the C# assembly. If an edge case isn't found in `System.Runtime.dll`, 
+  Antigravity should inform the user.
+
+*Revised Plan (To be implemented):*
+* **Utility Extraction**: Extract the existing `safe-read-form-from-file` and
+  `file-exists-and-readable-p` functions from `texture-atlas.lisp` into a new
+  `utils.lisp` file. Create a new `utils` package in `packages.lisp` and 
+  register it in the `.asd` file. This makes safe loading globally accessible.
+* **Lisp Testing Script**: Create `assembly-to-lispy-tests.lisp` using
+   `utils:safe-read-form-from-file`. Implement a minimal testing DSL (e.g., 
+   `deftest`, `assert-equal`) to cleanly report failures.
+* **Spot Checks**: Reimplement the spot-checks for `System.Runtime.dll` using Lisp.
+* **C# Test Runner Interop**: Modify the test runner in `AssemblyToLispy.cs` 
+  to execute the Lisp script and accurately bubble up success/failure status to C#.
+
+#### Phase 3B: Synthetic Test Assembly Target
+
+* **Dedicated Test Assembly**: Instead of hoping to find every edge case 
+  in `System.Runtime.dll`, create a minimal C# project (e.g., 
+  `MGLD.AssemblyTestTarget.csproj`) explicitly authored to contain every
+  single metadata edge case (`scoped`, `ref readonly`, complex generic constraints).
+* Generating metadata for this synthetic assembly guarantees 100% test coverage 
+  for complex reflections.
+
+#### Phase 3C: Comprehensive Schema Validation
+
+* **Schema Enforcement**: Write a strict, recursive Lisp function that walks 
+  the *entire* generated metadata file. It will verify that every single 
+  plist entry perfectly adheres to the structural rules defined in 
+  this document (checking for stray keys, missing mandatory fields, 
+  or incorrect value types), rather than just spot-checking isolated classes.
+
+#### Phase 3D: Modular Test Discovery
+
+* **Extensible Test Runner**: Rather than keeping all tests in a single
+  file, modify the C# runner to discover and execute all `*.test.lisp` files 
+  within a dedicated `tests/` directory to modularize the test suite.
+
+#### Phase 3E: Test Real-World Assemblies
+
+* **Validate Actual Dependencies**: Expand testing beyond standard libraries to run 
+  against the exact assemblies this project actively uses, starting with 
+  `MonoGame.Framework` and other linked C# libraries (including other assemblies
+  of the standard DotNet distribution such as `System.Console`).
+* This ensures our generator gracefully handles the real-world architectures and
+  attributes that are relied on regularly.
 
 ### Phase 4: Remaining Capabilities
 
@@ -486,7 +525,7 @@ This sub-phase implements advanced type-system characteristics:
     * Parse the S-expression in C# and check the results that way?
     * Load the S-expression in a Lisp session and check results that way?
       * `(defparameter x (with-open-file (stream "/tmp/System.Runtime.lispy.metadata.tmp" :direction :input) (let ((*read-eval* nil)(*readtable* (copy-readtable nil))(*package* (find-package :cl-user)))(read stream nil :eof))))` loads the test output file into a Lisp REPL as `x`
-      * Regular Lisp expressions can then find what we want to check, e.g.,
+      * Regular Lisp expressions can then find what should be checked, e.g.,
         `(find-if (lambda (item) (string= (getf item :name) "ArrayList")) x)` grabs the
         `ArrayList` entry.
   * Identify the location of the System.Runtime.dll programmatically and
