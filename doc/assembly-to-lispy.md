@@ -160,6 +160,8 @@ Each type entry plist contains the following entries, by key:
     if the clean name is identical to the mangled name.
   * `:is-static` (Keyword `t` or omitted): Omitted if the method is not static;
     otherwise `t`.
+  * `:extension-method` (Keyword `t` or omitted): Omitted if the method is not an extension
+    method; otherwise `t`.
   * `:return-type` (String): The fully qualified return type of the method (using
     simplified backtick notation for generic types).
   * `:assembly-qualified-return-type` (String or omitted): The full assembly-qualified
@@ -177,6 +179,13 @@ Each parameter plist contains:
   backtick notation for generic types).
 * `:assembly-qualified-type` (String or omitted): The full assembly-qualified
   name of the parameter type. Omitted unless the type is assembly-qualified.
+* `:extension-this` (Keyword `t` or omitted): Omitted if this is not the `this` parameter
+  of an extension method; otherwise `t`.
+* `:out` (Keyword `t` or omitted): Omitted if the parameter is not an `out` parameter; otherwise `t`.
+* `:ref` (Keyword `t` or omitted): Omitted if the parameter is not a `ref` parameter; otherwise `t`.
+* `:ref-readonly` (Keyword `t` or omitted): Omitted if the parameter is not an `in` or `ref readonly` parameter; otherwise `t`. Both C# `in` and `ref readonly` map to this identical keyword.
+* `:scoped` (Keyword `t` or omitted): Omitted if the parameter is not a `scoped` parameter; otherwise `t`.
+* `:params` (Keyword `t` or omitted): Omitted if the parameter is not a `params` array; otherwise `t`.
 * `:has-default` (Keyword `t` or omitted): Omitted if the parameter has no
   default value; otherwise `t`.
 * `:default-value` (Lisp value or omitted): Omitted if `:has-default` is omitted;
@@ -427,6 +436,11 @@ This phase also adds information as to whether a given method is
 an Extension Method. If it is an extension method, the first
 parameter is clearly labeled as the `this` object of an extension
 method.
+
+* **Implementation Choices for Phase 2E**:
+  * **Parameter Modifiers**: Reflection attributes are converted to boolean Lisp keywords (`:out t`, `:ref t`, `:scoped t`, `:params t`) added to the parameter's plist.
+  * **in / ref readonly**: In .NET reflection, both `in` and `ref readonly` parameters are represented identically (as by-reference types with `IsReadOnlyAttribute`). Therefore, both are mapped to a single identical keyword `:ref-readonly t` with no distinction made between them.
+  * **Extension Methods**: The method's plist receives an `:extension-method t` flag based on the presence of `ExtensionAttribute`. The first parameter of such a method is explicitly labeled with `:extension-this t`.
 
 ### Phase 3: Remaining Capabilities
 

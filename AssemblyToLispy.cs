@@ -492,7 +492,7 @@ namespace MonoGameLispDemo {
 
             var parameters = ctor.GetParameters();
             if (parameters.Length > 0) {
-                var paramPlists = parameters.Select(FormatParameterPlist).ToList();
+                var paramPlists = parameters.Select(p => FormatParameterPlist(p)).ToList();
                 parts.Add($":parameters ({string.Join(" ", paramPlists)})");
             }
 
@@ -528,11 +528,17 @@ namespace MonoGameLispDemo {
             if (method.IsStatic) {
                 parts.Add(":is-static t");
             }
+
+            bool isExtensionMethod = method.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), false);
+            if (isExtensionMethod) {
+                parts.Add(":extension-method t");
+            }
+
             parts.Add(FormatTypeField(":return-type", method.ReturnType));
 
             var parameters = method.GetParameters();
             if (parameters.Length > 0) {
-                var paramPlists = parameters.Select(FormatParameterPlist).ToList();
+                var paramPlists = parameters.Select((p, i) => FormatParameterPlist(p, isExtensionMethod && i == 0)).ToList();
                 parts.Add($":parameters ({string.Join(" ", paramPlists)})");
             }
 
@@ -552,11 +558,35 @@ namespace MonoGameLispDemo {
         ///   Formats a parameter as a plist including name, type, and default value.
         /// </summary>
         /// <param name="param">The parameter info.</param>
+        /// <param name="extensionThis">Whether this is the 'this' parameter of an extension method.</param>
         /// <returns>A plist string representation of the parameter.</returns>
-        private static string FormatParameterPlist(ParameterInfo param) {
+        private static string FormatParameterPlist(ParameterInfo param, bool extensionThis = false) {
             var parts = new List<string>();
             parts.Add($":name {EscapeLispString(param.Name ?? "")}");
             parts.Add(FormatTypeField(":type", param.ParameterType));
+
+            if (extensionThis) {
+                parts.Add(":extension-this t");
+            }
+
+            if (param.IsOut) {
+                parts.Add(":out t");
+            } else if (param.ParameterType.IsByRef) {
+                bool isReadOnly = param.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute");
+                if (isReadOnly) {
+                    parts.Add(":ref-readonly t");
+                } else {
+                    parts.Add(":ref t");
+                }
+            }
+
+            if (param.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.ScopedRefAttribute")) {
+                parts.Add(":scoped t");
+            }
+
+            if (param.IsDefined(typeof(ParamArrayAttribute), false)) {
+                parts.Add(":params t");
+            }
 
             if (param.HasDefaultValue) {
                 parts.Add(":has-default t");
