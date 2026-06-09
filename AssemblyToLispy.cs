@@ -180,7 +180,8 @@ namespace MonoGameLispDemo {
                     }
                     parts.Add($":kind {kindStr}");
                     if (type.IsEnum) {
-                        parts.Add($":enum-underlying-type {EscapeLispString(Enum.GetUnderlyingType(type).FullName)}");
+                        string underlyingTypeName = Enum.GetUnderlyingType(type).FullName ?? Enum.GetUnderlyingType(type).Name;
+                        parts.Add($":enum-underlying-type {EscapeLispString(underlyingTypeName)}");
                     }
 
                     // Phase 2D: Retrieve type documentation
