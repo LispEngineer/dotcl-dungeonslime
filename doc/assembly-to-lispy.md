@@ -499,20 +499,38 @@ schema validation and semantic CLR reflection verification.
     that every property, field, method, and constructor documented in the metadata
     actually exists on the C# type.
 
-#### Phase 3D: Test Real-World Assemblies
+#### Phase 3D: Test Real-World Assemblies (DONE)
 
-* **Validate Actual Dependencies**: Expand testing beyond standard libraries to run 
-  against the exact assemblies this project actively uses, starting with 
-  `MonoGame.Framework` and other linked C# libraries (including other assemblies
-  of the standard DotNet distribution such as `System.Console`).
-* This ensures our generator gracefully handles the real-world architectures and
-  attributes that are relied on regularly.
+Testing has been expanded beyond standard libraries to run full schema validation
+and semantic reflection checks against the exact assemblies this project actively uses:
 
-#### Phase 3E: Modular Test Discovery
+*   **Target Assemblies**: The test pipeline generates and validates metadata for:
+    *   `System.Runtime.dll`
+    *   `System.Console.dll`
+    *   `AssemblyToLispyTestTarget.dll`
+    *   `MonoGame.Framework.dll`
+    *   `DotCL.Runtime.dll`
+    *   `MonoGameLispDemo.dll`
+    *   `NVorbis.dll`
+*   **Recursive Schema and Semantic Validation**: All generated metadata files are parsed
+    in Common Lisp, recursively validated against the structural schema, and checked via
+    CLR reflection for type and member existence.
+*   **Targeted Spot Checks**: Native Lisp spot checks verify key classes and methods (e.g.
+    `System.Console.WriteLine`, `Microsoft.Xna.Framework.Game.Run`) are correctly represented
+    in the metadata.
 
-* **Extensible Test Runner**: Rather than keeping all tests in a single
-  file, modify the C# runner to discover and execute all `*.test.lisp` files 
-  within a dedicated `tests/` directory to modularize the test suite.
+#### Phase 3E: Modular Test Discovery (DONE)
+
+*   **Extensible Test Runner**: The monolithic test suite has been split and moved to a dedicated
+    `tests/` directory:
+    *   `tests/framework.lisp`: Hosts the common testing DSL (`deftest`, `assert-equal`, etc.),
+        the recursive schema and CLR semantic validation engines, and the registry mechanism.
+    *   `tests/*.test.lisp`: Individual test files mapping to target assemblies (e.g.,
+        `tests/system-runtime.test.lisp`, `tests/nvorbis.test.lisp`) that use
+        `def-assembly-test` to self-register under their target assembly names.
+*   **Dynamic Test Discovery**: Modified the C# runner in `AssemblyToLispy.cs` to dynamically
+    load `tests/framework.lisp` first, then locate all `*.test.lisp` files in the `tests/`
+    directory, evaluating them dynamically before running the test dispatcher.
 
 
 ### Phase 4: Remaining Capabilities

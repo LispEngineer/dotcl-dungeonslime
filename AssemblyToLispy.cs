@@ -1006,9 +1006,24 @@ namespace MonoGameLispDemo {
                 // Test the system runtime assembly
                 RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/", "System.Runtime.dll");
 
+                // Test the system console assembly
+                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/", "System.Console.dll");
+
                 // Test our synthetic edge cases target.
                 // The built DLL will reside in the output folder alongside MonoGameLispDemo
                 RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "AssemblyToLispyTestTarget.dll");
+
+                // Test the MonoGame.Framework assembly
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "MonoGame.Framework.dll");
+
+                // Test the DotCL runtime assembly
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "DotCL.Runtime.dll");
+
+                // Test the main MonoGameLispDemo game assembly
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "MonoGameLispDemo.dll");
+
+                // Test the NVorbis assembly dependency
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "NVorbis.dll");
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types
                 AssertDefaultValue(null, "nil");
@@ -1059,10 +1074,19 @@ namespace MonoGameLispDemo {
 
                 // Execute the Lisp-native test suite
                 Console.WriteLine($"[AssemblyToLispyTest] Executing Lisp-native test suite for {assemblyName}...");
-                string testScriptFile = Path.GetFullPath("assembly-to-lispy-tests.lisp");
-                
-                string lispLoadCommand = $"(load \"{testScriptFile.Replace("\\", "/")}\")";
-                DotCL.DotclHost.EvalString(lispLoadCommand);
+                string testsDir = Path.GetFullPath("tests");
+                string frameworkFile = Path.Combine(testsDir, "framework.lisp");
+
+                string lispLoadFramework = $"(load \"{frameworkFile.Replace("\\", "/")}\")";
+                DotCL.DotclHost.EvalString(lispLoadFramework);
+
+                // Discover all *.test.lisp files and load them into the environment
+                string[] testFiles = Directory.GetFiles(testsDir, "*.test.lisp");
+                foreach (string testFile in testFiles) {
+                    string lispLoadTest = $"(load \"{testFile.Replace("\\", "/")}\")";
+                    DotCL.DotclHost.EvalString(lispLoadTest);
+                }
+
                 object result = DotCL.DotclHost.Call("RUN-ALL-ASSEMBLY-TESTS", tempOutputFile, assemblyName);
 
                 bool success = false;

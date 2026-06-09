@@ -292,8 +292,10 @@ In my case, it shows the game window and then segfaults out.
   * Serializes parameter default values into valid Common Lisp literals (e.g., `nil`,
     `t`, ratio literals for decimals, `f`/`d` exponent indicators for floats/doubles,
     and `#\character` syntax for characters).
-  * Includes a verification test suite checking type structures, properties, constructors,
-    default value formatting, and XML documentation parsing.
+  * Includes a modularized verification test suite located in the `tests/` directory:
+    * `tests/framework.lisp`: Defines the test framework, validation DSL, and general schema/semantic validations.
+    * `tests/*.test.lisp`: Individual test files containing spot-checks mapping to target assemblies (e.g., `tests/system-runtime.test.lisp`).
+    * The test runner dynamically discovers and loads all test files under `tests/` at runtime.
 
 ### Deprecated C# Files
 
@@ -385,19 +387,17 @@ others in general. In the rare case if I would include tool-generated code, I
 have fully vetted it and would vouch for it as if I wrote it myself. 
 
 As an experiment in highly agentic coding, which so far has been interesting, 
-I have worked with Antigravity closely and had it write nearly 100% of the code of
-the `AssemblyToLispy.cs`. I wrote detailed documentation as to what the goals
-were in `assembly-to-lispy.md` first, and then refined that with Antigravity
-over time and had Antigravity update the document with various implementation
-choices and details as we worked together. It's written (as of this update)
-over 1,100 lines of C# code that is pretty reasonable, with the exception of
-extremely fragile tests. (As this is not production code, I've left addressing
-that for later, but I also do my own tests and load the output in the DotCL
-and SBCL REPLs as well and look through the output using regular CL forms.)
+nearly 100% of the code of `AssemblyToLispy.cs` has been authored by the AI assistant. 
+Detailed documentation was established in `assembly-to-lispy.md` first, and then refined 
+with implementation choices and details as work progressed. It contains over 1,100 lines 
+of C# code, backed by a robust native Common Lisp test suite that performs recursive schema 
+and live CLR semantic reflection validation across `System.Runtime.dll`, `System.Console.dll`, 
+`AssemblyToLispyTestTarget.dll`, `MonoGame.Framework.dll`, `DotCL.Runtime.dll`, 
+`MonoGameLispDemo.dll`, and `NVorbis.dll`.
 
-I've extended this to the `assembly-to-lispy-tests.lisp` file (for testing the
-capabilities) and will likely also use Antigravity for the Lisp stub/package
-generator for C# assemblies in the near future.
+This development approach has been extended to the modular test framework under the `tests/`
+directory (for testing capabilities), with plans to also use the AI assistant for
+the Lisp stub/package generator for C# assemblies.
 
 
 # Functionality Implemented
