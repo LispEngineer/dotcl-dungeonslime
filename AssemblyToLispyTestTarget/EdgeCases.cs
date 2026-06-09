@@ -118,7 +118,7 @@ namespace AssemblyToLispyTestTarget
         /// <param name="intVal">An int default.</param>
         /// <param name="nullVal">A null object default.</param>
         /// <param name="charVal">A char default.</param>
-        public void DefaultsMethod(string strVal = "hello", int intVal = 42, object nullVal = null, char charVal = 'A')
+        public void DefaultsMethod(string strVal = "hello", int intVal = 42, object? nullVal = null, char charVal = 'A')
         {
         }
     }
