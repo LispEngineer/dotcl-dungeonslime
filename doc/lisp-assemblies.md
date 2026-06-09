@@ -121,60 +121,76 @@ TODO
 
 # Implementation Phases
 
-## Phase 1
+## Phase 1: Basic Package Infrastructure & Simplest Member Translation
 
-This is all written in DotCL Common Lisp.
+This phase establishes the core generator infrastructure in DotCL Common Lisp.
 
 Infrastructure:
-* Create the initial framework in the Lisp package
-  `assembly-package-generator` in a similarly named
-  `.lisp` file
-* Create the initial version as an increasing integer
-  starting at 1.
-* Integrate this package into `packages.lisp` and the
-  `.asd` file as necessary.
+*   Create the initial framework in the Lisp package `assembly-package-generator`
+    in a similarly named `.lisp` file.
+*   Create the initial version as an increasing integer starting at 1.
+*   Integrate this package into `packages.lisp` and the `.asd` file.
 
 Invocation from command line:
-* Take these parameters:
-  * `--assembly-metadata` points to the s-expression
-    file to use as one input
-  * `--class` says which classes to process,
-    delimited by semicolons. Exact string match is used
-    on the class names.
-    * If omitted, all classes in the assembly metadata
-      will be processed.
-  * `--output` points to the output directory
-* Call the generator with:
-  * The loaded assembly metadata
-  * A CL list of strings of the classes
-  * The output directory
+*   Take these parameters:
+    *   `--assembly-metadata` points to the s-expression metadata file.
+    *   `--class` says which classes to process, delimited by semicolons. If omitted,
+        all classes in the assembly metadata will be processed.
+    *   `--output` points to the output directory.
+*   Call the generator with:
+    *   The loaded assembly metadata.
+    *   A list of strings of the classes to process.
+    *   The output directory.
 
 Assembly Package Generator Capabilities:
-* Conversion from PascalCase/camelCase to kebab-case
-* Create the output directory, if not already there
-* Check if all provided classes are available in the
-  metadata, and gives an error if not and does nothing
-* Builds the generated pacakges
+*   Conversion from PascalCase/camelCase to kebab-case.
+*   Create the output directory if it does not already exist.
+*   Check if all provided classes are available in the metadata, and raise an error
+    and abort if any are missing.
+*   Build the generated packages.
 
 Generator Outputs:
-* The preamble as defined above
-* Skip classes with generic arguments
-* Only output constants (static, read-only/final, un-settable fields)
-* Only output public methods with:
-  * No overloads
-  * No generic types
-  * No default parameters
-  * No special parameters (e.g., `out`, `ref`, etc.)
-  * Not operator overloads
-  * Not property getters/setters
-  * (In other words, the simplest possible case for a method.)
+*   The standard preamble defining `<type>`, `<type-str>`, `<creation>`, and `<version>`.
+*   Skip classes with generic arguments.
+*   Only output constants (static, read-only/final, un-settable fields and properties).
+*   Only output public methods with:
+    *   No overloads.
+    *   No generic types.
+    *   No default parameters.
+    *   No special parameters (e.g., `out`, `ref`, etc.).
+    *   No operator overloads.
+    *   No property getters/setters.
+    *   (The simplest possible case for a method).
+*   Docstrings included with every definition according to the `:documentation` plist in
+    the metadata. For methods, the docstrings should include documentation and expected
+    type of each parameter.
 
-Docstrings should be included with every definition, according to
-the `:documentation` in the metadata. For methods, the docstrings
-should also include the documentation of each parameter, including
-the expected type of the parameter.
+## Phase 2: Property & Non-Constant Field Accessors
 
-Not implemented:
-* Constructors
-* Field & property getters or setters
-* Anything Generic
+This phase adds support for read-write properties and fields:
+*   Generate Lisp getter and setter functions.
+*   Implement `setf` expansions (`defsetf` or `(setf ...)` definitions) for settable
+    properties and non-read-only fields.
+
+## Phase 3: Constructors & Overload Dispatch
+
+This phase adds object instantiation and signature overloading:
+*   Translate C# constructors into instantiation wrapper functions (e.g., `make-classname`
+    or `new-classname`).
+*   Implement overload-resolution logic for C# methods. Generate optional arguments
+    with `supplied-p` checks for overloads with identical parameter structures to a point,
+    or generate specialized type-checking/arity dispatch forms for distinct overloads.
+
+## Phase 4: Parameter Modifiers & Operator Overloads
+
+This phase adds support for special signatures and parameters:
+*   Support parameter modifiers such as `out`, `ref`, `in` (ref readonly), and `params`
+    arrays by generating necessary boxing/unboxing or marshalling wrappers.
+*   Handle operator overloads, mapping from C# mangled names (like `op_Addition`) to
+    standard Lisp operators.
+
+## Phase 5: Generics Support
+
+This phase adds support for C# generics:
+*   Generate packages and wrappers for open and closed generic classes.
+*   Support open and closed generic method signatures.
