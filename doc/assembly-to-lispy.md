@@ -520,7 +520,9 @@ This sub-phase implements advanced type-system characteristics:
   * Even if they're defined in other assemblies
   * How to find and enumerate them?
 
-* Antigravity's tests are extremely fragile
+* Handle the `implicit` keyword in C#
+
+* (done) Antigravity's tests are extremely fragile
   * Checking string output in the manner it does can find spurious matches
     * Parse the S-expression in C# and check the results that way?
     * Load the S-expression in a Lisp session and check results that way?
