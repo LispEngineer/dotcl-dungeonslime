@@ -395,6 +395,10 @@ extremely fragile tests. (As this is not production code, I've left addressing
 that for later, but I also do my own tests and load the output in the DotCL
 and SBCL REPLs as well and look through the output using regular CL forms.)
 
+I've extended this to the `assembly-to-lispy-tests.lisp` file (for testing the
+capabilities) and will likely also use Antigravity for the Lisp stub/package
+generator for C# assemblies in the near future.
+
 
 # Functionality Implemented
 

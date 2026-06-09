@@ -481,13 +481,23 @@ Since this is are running in a DotCL environment, for tests, implement them in t
 * Generating metadata for this synthetic assembly guarantees 100% test coverage 
   for complex reflections.
 
-#### Phase 3C: Comprehensive Schema Validation
+#### Phase 3C: Comprehensive Schema Validation (DONE)
 
-* **Schema Enforcement**: Write a strict, recursive Lisp function that walks 
-  the *entire* generated metadata file. It will verify that every single 
-  plist entry perfectly adheres to the structural rules defined in 
-  this document (checking for stray keys, missing mandatory fields, 
-  or incorrect value types), rather than just spot-checking isolated classes.
+A strict, recursive Lisp validation engine has been implemented in
+[assembly-to-lispy-tests.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/assembly-to-lispy-tests.lisp)
+that walks the entire generated metadata tree to perform both structural
+schema validation and semantic CLR reflection verification.
+
+*   **Structural Schema Checks**: Every plist level (types, properties, fields,
+    constructors, methods, parameters, and documentation elements) is recursively
+    validated to ensure all mandatory keys are present, no unknown keys are included,
+    and all values have the correct data types.
+*   **Semantic CLR Verification**: For every type entry, the validator attempts to resolve
+    its `:fully-qualified-name` inside the live AppDomain using `monoutils:get-type`.
+    If resolved, it queries the loaded type's members (using C# helper methods exposed
+    in `MonoUtils.cs` to bypass dynamic invocation type casting issues) and confirms
+    that every property, field, method, and constructor documented in the metadata
+    actually exists on the C# type.
 
 #### Phase 3D: Modular Test Discovery
 
