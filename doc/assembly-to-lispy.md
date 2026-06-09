@@ -442,7 +442,30 @@ method.
   * **in / ref readonly**: In .NET reflection, both `in` and `ref readonly` parameters are represented identically (as by-reference types with `IsReadOnlyAttribute`). Therefore, both are mapped to a single identical keyword `:ref-readonly t` with no distinction made between them.
   * **Extension Methods**: The method's plist receives an `:extension-method t` flag based on the presence of `ExtensionAttribute`. The first parameter of such a method is explicitly labeled with `:extension-this t`.
 
-### Phase 3: Remaining Capabilities
+### Phase 3A: Improved Tests
+
+Since we are running in a DotCL environment, for tests, we should implement
+them in this way:
+* Create an `assembly-to-lispy-tests.lisp` DotCL Common Lisp file
+* In the C# `AssemblyToLispy.cs`, build a test that loads the
+  `.lisp` file above and executes the tests in there. They should
+  take the filename of the generated output file as input.
+* The tests in the `.lisp` file should **safely** load the output file and
+  ensure it is properly formatted (i.e., a list of plists).
+* The tests should look for the correct class's entry, and look
+  for the proper items, using the usual Common Lisp tools like
+  `find-if`, `mapcar`, `getf`, and so forth.
+* Many more tests should be made to cover every single possible
+  output case.
+  * Examine the example C# assembly for test cases and pick
+    classes, methods, parameters, etc., that represent every
+    case.
+  * If there is a case that is possible in the code but is
+    not possible to test using `System.Runtime.dll` as an
+    example, Antigravity should inform me of this inability
+    to test that (or those) case(s).
+
+### Phase 4: Remaining Capabilities
 
 This sub-phase implements advanced type-system characteristics:
 * **Generic Constraints**:
