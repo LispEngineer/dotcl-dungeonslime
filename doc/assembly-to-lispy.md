@@ -499,13 +499,7 @@ schema validation and semantic CLR reflection verification.
     that every property, field, method, and constructor documented in the metadata
     actually exists on the C# type.
 
-#### Phase 3D: Modular Test Discovery
-
-* **Extensible Test Runner**: Rather than keeping all tests in a single
-  file, modify the C# runner to discover and execute all `*.test.lisp` files 
-  within a dedicated `tests/` directory to modularize the test suite.
-
-#### Phase 3E: Test Real-World Assemblies
+#### Phase 3D: Test Real-World Assemblies
 
 * **Validate Actual Dependencies**: Expand testing beyond standard libraries to run 
   against the exact assemblies this project actively uses, starting with 
@@ -513,6 +507,13 @@ schema validation and semantic CLR reflection verification.
   of the standard DotNet distribution such as `System.Console`).
 * This ensures our generator gracefully handles the real-world architectures and
   attributes that are relied on regularly.
+
+#### Phase 3E: Modular Test Discovery
+
+* **Extensible Test Runner**: Rather than keeping all tests in a single
+  file, modify the C# runner to discover and execute all `*.test.lisp` files 
+  within a dedicated `tests/` directory to modularize the test suite.
+
 
 ### Phase 4: Remaining Capabilities
 
