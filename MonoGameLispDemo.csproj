@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RollForward>Major</RollForward>
+    <DefaultItemExcludes>$(DefaultItemExcludes);AssemblyToLispyTestTarget\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <!-- Platform-conditional TFM and RID. -->
@@ -53,7 +54,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
-    <ProjectReference Include="..\AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
+    <ProjectReference Include="AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
   </ItemGroup>
 
   <ItemGroup>
