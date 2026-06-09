@@ -1018,96 +1018,26 @@ namespace MonoGameLispDemo {
 
                 string content = File.ReadAllText(tempOutputFile);
 
-                // Basic structure assertions
-                if (!content.StartsWith("(") || !content.TrimEnd().EndsWith(")")) {
-                    throw new Exception("Test failed: Output is not wrapped in outer parentheses.");
+                // Execute the Lisp-native test suite
+                Console.WriteLine("[AssemblyToLispyTest] Executing Lisp-native test suite...");
+                string testScriptFile = Path.GetFullPath("assembly-to-lispy-tests.lisp");
+                
+                string lispLoadCommand = $"(load \"{testScriptFile.Replace("\\", "/")}\")";
+                DotCL.DotclHost.EvalString(lispLoadCommand);
+                object result = DotCL.DotclHost.Call("RUN-ALL-ASSEMBLY-TESTS", tempOutputFile);
+
+                bool success = false;
+                if (result is bool b) {
+                    success = b;
+                } else if (result != null) {
+                    string resStr = result.ToString() ?? "";
+                    if (resStr.Equals("T", StringComparison.OrdinalIgnoreCase)) {
+                        success = true;
+                    }
                 }
 
-                // Check for System.Collections.ArrayList
-                if (!content.Contains("\"System.Collections.ArrayList\"")) {
-                    throw new Exception("Test failed: Output does not contain System.Collections.ArrayList.");
-                }
-
-                // Verify Phase 2A metadata fields for ArrayList
-                if (!content.Contains(":kind :class")) {
-                    throw new Exception("Test failed: ArrayList kind is not marked as :class.");
-                }
-                if (!content.Contains(":superclass \"System.Object\"")) {
-                    throw new Exception("Test failed: ArrayList superclass is not marked as \"System.Object\".");
-                }
-                if (!content.Contains("\"System.Collections.IList\"")) {
-                    throw new Exception("Test failed: ArrayList interfaces does not contain \"System.Collections.IList\".");
-                }
-                if (!content.Contains(":serializable")) {
-                    throw new Exception("Test failed: ArrayList flags does not contain :serializable.");
-                }
-
-                // Verify Phase 2B properties for ArrayList
-                if (!content.Contains(":properties")) {
-                    throw new Exception("Test failed: ArrayList does not contain :properties.");
-                }
-                if (!content.Contains(":name \"Capacity\" :type \"System.Int32\" :readable t :writeable t :get-method \"get_Capacity\" :set-method \"set_Capacity\"")) {
-                    throw new Exception("Test failed: ArrayList capacity property is not correctly formatted.");
-                }
-                if (!content.Contains(":name \"Count\" :type \"System.Int32\" :readable t :get-method \"get_Count\"")) {
-                    throw new Exception("Test failed: ArrayList count property is not correctly formatted.");
-                }
-
-                // Verify Phase 2B fields (using System.EventArgs.Empty)
-                if (!content.Contains("\"System.EventArgs\"")) {
-                    throw new Exception("Test failed: Output does not contain System.EventArgs.");
-                }
-                if (!content.Contains(":name \"Empty\" :type \"System.EventArgs\" :static t :init-only t :public t")) {
-                    throw new Exception("Test failed: EventArgs.Empty field is not correctly formatted.");
-                }
-
-                // Verify Phase 2C constructors (for ArrayList)
-                if (!content.Contains(":constructors")) {
-                    throw new Exception("Test failed: ArrayList does not contain :constructors.");
-                }
-                if (!content.Contains("(:public t :parameters ((:name \"capacity\" :type \"System.Int32\"))")) {
-                    throw new Exception("Test failed: ArrayList capacity constructor is not correctly formatted.");
-                }
-
-                // Verify Phase 2C methods and parameters (using System.Decimal operator +)
-                if (!content.Contains("\"System.Decimal\"")) {
-                    throw new Exception("Test failed: Output does not contain System.Decimal.");
-                }
-                if (!content.Contains(":name \"+\" :mangled-name \"op_Addition\" :is-static t :return-type \"System.Decimal\"")) {
-                    throw new Exception("Test failed: Decimal addition operator is not correctly formatted.");
-                }
-
-                // Check for some expected methods of ArrayList (now as plists under :methods)
-                if (!content.Contains(":name \"Add\" :return-type \"System.Int32\" :parameters ((:name \"value\" :type \"System.Object\"))")) {
-                    throw new Exception("Test failed: ArrayList.Add method is not correctly formatted.");
-                }
-                if (!content.Contains(":name \"Clear\" :return-type \"System.Void\"")) {
-                    throw new Exception("Test failed: ArrayList.Clear method is not correctly formatted.");
-                }
-
-                // Verify that closed generic types are formatted using simplified backtick syntax (Option 2)
-                // and include the sibling :assembly-qualified-type field.
-                if (!content.Contains(":type \"System.Collections.ObjectModel.ReadOnlyCollection`1[System.Exception]\"")) {
-                    throw new Exception("Test failed: Generic ReadOnlyCollection type is not formatted using simplified backtick syntax.");
-                }
-                if (!content.Contains(":assembly-qualified-type \"System.Collections.ObjectModel.ReadOnlyCollection`1[[System.Exception, System.Private.CoreLib,")) {
-                    throw new Exception("Test failed: Sibling :assembly-qualified-type is missing or incorrect.");
-                }
-
-                // Verify that abstract classes with protected constructors output (:protected t)
-                if (!content.Contains("\"System.Attribute\"")) {
-                    throw new Exception("Test failed: Output does not contain System.Attribute.");
-                }
-                if (!content.Contains(":constructors ((:protected t")) {
-                    throw new Exception("Test failed: Attribute protected constructor is not correctly formatted.");
-                }
-
-                // Verify Phase 2D: XML Documentation serialization (using System.Collections.ArrayList)
-                if (!content.Contains(":documentation (:summary \"Implements the System.Collections.IList interface using an array whose size is dynamically increased as required.\")")) {
-                    throw new Exception("Test failed: ArrayList type documentation summary is missing or incorrect.");
-                }
-                if (!content.Contains("(:public t :documentation (:summary \"Initializes a new instance of the System.Collections.ArrayList class that is empty and has the default initial capacity.\"))")) {
-                    throw new Exception("Test failed: ArrayList parameterless constructor documentation summary is missing or incorrect.");
+                if (!success) {
+                    throw new Exception("Test failed: Lisp-native test suite reported failures.");
                 }
 
                 // Verify FormatDefaultValue behavior directly for different Common Lisp types

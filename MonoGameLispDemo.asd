@@ -9,6 +9,7 @@
   ;; clauses in the components!
   :components ((:file "settings") ;; Load this file first, it contains declaims
                (:file "packages")
+               (:file "utils" :depends-on ("packages"))
                (:file "monoutils" :depends-on ("packages"))
                (:file "constants")
                (:file "type-aliases")
@@ -24,7 +25,7 @@
                (:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
                (:file "sprite" :depends-on ("mg-classes" "texture-region"))
                (:file "animation" :depends-on ("csharp" "texture-region"))
-               (:file "texture-atlas" :depends-on ("texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
+               (:file "texture-atlas" :depends-on ("utils" "texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
                (:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                (:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                (:file "main" :depends-on

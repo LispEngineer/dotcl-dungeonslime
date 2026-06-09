@@ -12,6 +12,14 @@
 ;; This seems to be important for DotCL's build system.
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
+  (defpackage :utils
+    (:use :cl)
+    (:export #:safe-read-form-from-file
+             #:+base-directory+
+             #:path-combine
+             #:file-exists-and-readable-p
+             #:qualify-path))
+
   (defpackage :monoutils
     (:use :cl)
     (:export #:add3
