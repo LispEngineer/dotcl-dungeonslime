@@ -121,49 +121,96 @@ TODO
 
 # Implementation Phases
 
-## Phase 1: Basic Package Infrastructure & Simplest Member Translation
+## Phase 1: Basic Package Infrastructure & Simplest Member Translation (Implementation Plan)
 
-This phase establishes the core generator infrastructure in DotCL Common Lisp.
+This phase establishes the core generator infrastructure in DotCL Common Lisp, integrating
+the C# argument parsing layer and generating packages for simple, non-overloaded class
+members.
 
-Infrastructure:
-*   Create the initial framework in the Lisp package `assembly-package-generator`
-    in a similarly named `.lisp` file.
-*   Create the initial version as an increasing integer starting at 1.
-*   Integrate this package into `packages.lisp` and the `.asd` file.
+### User Review Required
 
-Invocation from command line:
-*   Take these parameters:
-    *   `--assembly-metadata` points to the s-expression metadata file.
-    *   `--class` says which classes to process, delimited by semicolons. If omitted,
-        all classes in the assembly metadata will be processed.
-    *   `--output` points to the output directory.
-*   Call the generator with:
-    *   The loaded assembly metadata.
-    *   A list of strings of the classes to process.
-    *   The output directory.
+> [!IMPORTANT]
+> The package names and file paths will be converted to kebab-case (e.g.,
+> `System.Collections.ArrayList` becomes package `system-collections-array-list` and file
+> `system-collections-array-list.lisp`). Please confirm if this is the desired naming
+> convention.
 
-Assembly Package Generator Capabilities:
-*   Conversion from PascalCase/camelCase to kebab-case.
-*   Create the output directory if it does not already exist.
-*   Check if all provided classes are available in the metadata, and raise an error
-    and abort if any are missing.
-*   Build the generated packages.
+### Proposed Changes
 
-Generator Outputs:
-*   The standard preamble defining `<type>`, `<type-str>`, `<creation>`, and `<version>`.
-*   Skip classes with generic arguments.
-*   Only output constants (static, read-only/final, un-settable fields and properties).
-*   Only output public methods with:
-    *   No overloads.
-    *   No generic types.
-    *   No default parameters.
-    *   No special parameters (e.g., `out`, `ref`, etc.).
+#### C# CLI Integration
+
+*   **[Program.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs)**:
+    *   Parse `--assembly-metadata`, `--class`, and `--output` command-line flags.
+    *   If `--assembly-metadata` is detected:
+        1. Initialize DotCL and load manifest FASLs.
+        2. Call `ASSEMBLY-PACKAGE-GENERATOR:RUN-FROM-CLI` passing the parsed metadata file,
+           class filter, and output path.
+        3. Exit the application immediately (skipping game loop initialization).
+
+#### Lisp Generator Infrastructure
+
+*   **[packages.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/packages.lisp)**:
+    *   Define the package `:assembly-package-generator` within the load-time `eval-when`
+        block.
+    *   Export the functions `run-from-cli` and `generate-assembly-packages`.
+*   **[MonoGameLispDemo.asd](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd)**:
+    *   Add `assembly-package-generator` as a component depending on `packages` and `utils`.
+*   **[NEW] [assembly-package-generator.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/assembly-package-generator.lisp)**:
+    Create the main generator file implementing:
+    *   `camel-to-kebab`: A string utility that maps PascalCase/camelCase C# names to Lisp
+        kebab-case.
+    *   `split-string`: A self-contained utility to split the class filter string by
+        semicolons.
+    *   `run-from-cli`: CLI handler that loads the s-expression metadata file using
+        `utils:safe-read-form-from-file`, parses class filters, and invokes the generator.
+    *   `generate-assembly-packages`: Reads the parsed metadata, validates that all requested
+        classes exist, creates the output directory, and outputs a `.lisp` file for each
+        type.
+
+#### Lisp Code Generation Template
+
+For each C# class, the generator will output a Lisp file containing:
+*   **Preamble**: Comments (generator version, creation date, source type) and a
+    `defpackage` form exporting all mapped constants and methods, followed by `in-package`.
+*   **Type Constants**:
+    *   `<type>`: The C# `System.Type` object (via `monoutils:get-type`).
+    *   `<type-str>`: The C# type name as a string.
+    *   `<creation>`: Generation timestamp in ISO 8601 format.
+    *   `<version>`: The package generator integer version.
+*   **Constants**: Static, read-only, or literal fields and properties mapped to Lisp
+    constants with `+` earmuffs (e.g., `+zero+`).
+*   **Methods**: Wrappers calling `dotnet:static` (for static methods) or `dotnet:invoke`
+    (for instance methods). For Phase 1, only methods meeting the following criteria are
+    mapped:
+    *   No overloads (exactly one method signature with that name).
+    *   No generic types or generic return parameters.
+    *   No default parameter values.
+    *   No special parameter modifiers (`ref`, `out`, `in`, `params`).
     *   No operator overloads.
     *   No property getters/setters.
-    *   (The simplest possible case for a method).
-*   Docstrings included with every definition according to the `:documentation` plist in
-    the metadata. For methods, the docstrings should include documentation and expected
-    type of each parameter.
+*   **Docstrings**: All definitions will include docstrings built from metadata summaries.
+    Method docstrings will list parameter descriptions and expected types.
+
+### Verification Plan
+
+#### Automated Tests
+*   Add unit tests in Lisp to assert correct behavior of `camel-to-kebab` string
+    conversions and `split-string` parsing.
+*   Hook tests into the `--test` execution run.
+
+#### Manual Verification
+1. Rebuild the project using `make build`.
+2. Generate metadata for `System.Console.dll`:
+   ```bash
+   dotnet run --project MonoGameLispDemo.csproj -- --assembly /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/System.Console.dll --output obj/System.Console.lispy.metadata
+   ```
+3. Run the package generator:
+   ```bash
+   dotnet run --project MonoGameLispDemo.csproj -- --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output obj/gen-packages
+   ```
+4. Verify that `obj/gen-packages/system-console.lisp` is created and correctly structures
+   `system-console` package, constants (`<type>`, `<type-str>`, etc.), simplest methods
+   (`write-line`, `beep`, etc.), and docstrings.
 
 ## Phase 2: Property & Non-Constant Field Accessors
 
