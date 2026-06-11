@@ -12,7 +12,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 1
+(defparameter *generator-version* 2
   "The version of this package generator software.")
 
 (defun camel-to-kebab (name)
@@ -76,11 +76,16 @@
     (format nil "~4,'0D-~2,'0D-~2,'0DT~2,'0D:~2,'0D:~2,'0DZ"
             year month date hour minute second)))
 
-(defun constant-field-p (field)
-  "Checks if a field plist defines a static constant/init-only field."
+(defun literal-field-p (field)
+  "Checks if a field plist defines a static literal/constant field."
   (and (getf field :static)
-       (or (getf field :literal)
-           (getf field :init-only))))
+       (getf field :literal)))
+
+(defun runtime-readonly-field-p (field)
+  "Checks if a field plist defines a static init-only field that is not literal."
+  (and (getf field :static)
+       (getf field :init-only)
+       (not (getf field :literal))))
 
 (defun constant-property-p (prop)
   "Checks if a property plist defines a static read-only property."
@@ -158,7 +163,8 @@
     (ensure-directories-exist output-file :verbose t)
     
     ;; 1. Analyze and extract valid Phase 1 members
-    (let ((const-fields (remove-if-not #'constant-field-p fields))
+    (let ((literal-fields (remove-if-not #'literal-field-p fields))
+          (runtime-fields (remove-if-not #'runtime-readonly-field-p fields))
           (const-props (remove-if-not #'constant-property-p properties))
           (simple-methods (remove-if-not (lambda (m) (simple-method-p m methods)) methods))
           (exports nil)
@@ -170,10 +176,12 @@
       (push "<creation>" exports)
       (push "<version>" exports)
       
-      (dolist (f const-fields)
+      (dolist (f literal-fields)
         (push (format nil "+~A+" (camel-to-kebab (getf f :name))) exports))
+      (dolist (f runtime-fields)
+        (push (camel-to-kebab (getf f :name)) exports))
       (dolist (p const-props)
-        (push (format nil "+~A+" (camel-to-kebab (getf p :name))) exports))
+        (push (camel-to-kebab (getf p :name)) exports))
       (dolist (m simple-methods)
         (push (camel-to-kebab (getf m :name)) exports))
       
@@ -216,9 +224,19 @@
         (format stream "(defconstant <creation> \"~A\")~%" creation-time)
         (format stream "(defconstant <version> ~D)~%~%" *generator-version*)
         
-        ;; Constants (Fields)
-        (dolist (f const-fields)
+        ;; Compile-Time Constants (Literal Fields)
+        (dolist (f literal-fields)
           (let* ((cname (format nil "+~A+" (camel-to-kebab (getf f :name))))
+                 (f-doc (getf (getf f :documentation) :summary))
+                 (doc-str (if f-doc (escape-lisp-string f-doc) "")))
+            (format stream "(defconstant ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf f :name))
+            (if (> (length doc-str) 0)
+                (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
+                (format stream "~%"))))
+        
+        ;; Runtime Read-Only Fields
+        (dolist (f runtime-fields)
+          (let* ((cname (camel-to-kebab (getf f :name)))
                  (f-doc (getf (getf f :documentation) :summary))
                  (doc-str (if f-doc (escape-lisp-string f-doc) "")))
             (format stream "(define-symbol-macro ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf f :name))
@@ -226,9 +244,9 @@
                 (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
                 (format stream "~%"))))
         
-        ;; Constants (Properties)
+        ;; Runtime Read-Only Properties
         (dolist (p const-props)
-          (let* ((cname (format nil "+~A+" (camel-to-kebab (getf p :name))))
+          (let* ((cname (camel-to-kebab (getf p :name)))
                  (p-doc (getf (getf p :documentation) :summary))
                  (doc-str (if p-doc (escape-lisp-string p-doc) "")))
             (format stream "(define-symbol-macro ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf p :name))

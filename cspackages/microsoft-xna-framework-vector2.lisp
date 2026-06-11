@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 1
-;;; Creation Date: 2026-06-11T12:15:16Z
+;;; Generator Version: 2
+;;; Creation Date: 2026-06-11T14:21:57Z
 
 (in-package :cl-user)
 
@@ -18,10 +18,10 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:+one+
-   #:+unit-x+
-   #:+unit-y+
-   #:+zero+
+   #:one
+   #:unit-x
+   #:unit-y
+   #:zero
    #:/=
    #:+
    #:=
@@ -37,16 +37,16 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-11T12:15:16Z")
-(defconstant <version> 1)
+(defconstant <creation> "2026-06-11T14:21:57Z")
+(defconstant <version> 2)
 
-(define-symbol-macro +one+ (dotnet:static <type-str> "One"))
+(define-symbol-macro one (dotnet:static <type-str> "One"))
 
-(define-symbol-macro +unit-x+ (dotnet:static <type-str> "UnitX"))
+(define-symbol-macro unit-x (dotnet:static <type-str> "UnitX"))
 
-(define-symbol-macro +unit-y+ (dotnet:static <type-str> "UnitY"))
+(define-symbol-macro unit-y (dotnet:static <type-str> "UnitY"))
 
-(define-symbol-macro +zero+ (dotnet:static <type-str> "Zero"))
+(define-symbol-macro zero (dotnet:static <type-str> "Zero"))
 
 (defun /= (value1 value2)
   (dotnet:static <type-str> "/=" value1 value2))

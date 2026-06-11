@@ -13,9 +13,9 @@
 (defmacro assert-test (form expected-value description)
   `(let ((result ,form))
      (if (equal result ,expected-value)
-         (format *error-output* "[PASS] ~A: ~S -> ~S~%" ,description result result)
+         (format *error-output* "[package-generator-tests] PASS ~A: ~S -> ~S~%" ,description result result)
          (progn
-           (format *error-output* "[FAIL] ~A: Expected ~S but got ~S~%" ,description ,expected-value result)
+           (format *error-output* "[package-generator-tests] FAIL ~A: Expected ~S but got ~S~%" ,description ,expected-value result)
            (error "Test failure: ~A" ,description)))))
 
 ;; 1. Test camel-to-kebab

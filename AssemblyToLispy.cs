@@ -125,7 +125,7 @@ namespace MonoGameLispDemo {
                     string fullName = type.FullName ?? typeName;
                     string ns = type.Namespace ?? "";
 
-                    WriteLog($"[OutputClass] Processing class: {fullName}");
+                    // WriteLog($"[OutputClass] Processing class: {fullName}");
 
                     // Phase 2C: Retrieve constructors
                     var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)

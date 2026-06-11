@@ -1,13 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 1
-;;; Creation Date: 2026-06-11T12:15:03Z
+;;; Generator Version: 2
+;;; Creation Date: 2026-06-11T14:21:41Z
 
 (in-package :cl-user)
 
 (defpackage :system-console
   (:use :cl)
   (:shadow
+   #:error
    #:read
    #:read-line
   )
@@ -16,17 +17,17 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:+caps-lock+
-   #:+error+
-   #:+in+
-   #:+is-error-redirected+
-   #:+is-input-redirected+
-   #:+is-output-redirected+
-   #:+key-available+
-   #:+largest-window-height+
-   #:+largest-window-width+
-   #:+number-lock+
-   #:+out+
+   #:caps-lock
+   #:error
+   #:in
+   #:is-error-redirected
+   #:is-input-redirected
+   #:is-output-redirected
+   #:key-available
+   #:largest-window-height
+   #:largest-window-width
+   #:number-lock
+   #:out
    #:clear
    #:read
    #:read-line
@@ -44,41 +45,41 @@
 
 (defconstant <type> (monoutils:get-type "System.Console"))
 (defconstant <type-str> "System.Console")
-(defconstant <creation> "2026-06-11T12:15:03Z")
-(defconstant <version> 1)
+(defconstant <creation> "2026-06-11T14:21:41Z")
+(defconstant <version> 2)
 
-(define-symbol-macro +caps-lock+ (dotnet:static <type-str> "CapsLock"))
-(setf (documentation '+caps-lock+ 'variable) "Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.")
+(define-symbol-macro caps-lock (dotnet:static <type-str> "CapsLock"))
+(setf (documentation 'caps-lock 'variable) "Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.")
 
-(define-symbol-macro +error+ (dotnet:static <type-str> "Error"))
-(setf (documentation '+error+ 'variable) "Gets the standard error output stream.")
+(define-symbol-macro error (dotnet:static <type-str> "Error"))
+(setf (documentation 'error 'variable) "Gets the standard error output stream.")
 
-(define-symbol-macro +in+ (dotnet:static <type-str> "In"))
-(setf (documentation '+in+ 'variable) "Gets the standard input stream.")
+(define-symbol-macro in (dotnet:static <type-str> "In"))
+(setf (documentation 'in 'variable) "Gets the standard input stream.")
 
-(define-symbol-macro +is-error-redirected+ (dotnet:static <type-str> "IsErrorRedirected"))
-(setf (documentation '+is-error-redirected+ 'variable) "Gets a value that indicates whether the error output stream has been redirected from the standard error stream.")
+(define-symbol-macro is-error-redirected (dotnet:static <type-str> "IsErrorRedirected"))
+(setf (documentation 'is-error-redirected 'variable) "Gets a value that indicates whether the error output stream has been redirected from the standard error stream.")
 
-(define-symbol-macro +is-input-redirected+ (dotnet:static <type-str> "IsInputRedirected"))
-(setf (documentation '+is-input-redirected+ 'variable) "Gets a value that indicates whether input has been redirected from the standard input stream.")
+(define-symbol-macro is-input-redirected (dotnet:static <type-str> "IsInputRedirected"))
+(setf (documentation 'is-input-redirected 'variable) "Gets a value that indicates whether input has been redirected from the standard input stream.")
 
-(define-symbol-macro +is-output-redirected+ (dotnet:static <type-str> "IsOutputRedirected"))
-(setf (documentation '+is-output-redirected+ 'variable) "Gets a value that indicates whether output has been redirected from the standard output stream.")
+(define-symbol-macro is-output-redirected (dotnet:static <type-str> "IsOutputRedirected"))
+(setf (documentation 'is-output-redirected 'variable) "Gets a value that indicates whether output has been redirected from the standard output stream.")
 
-(define-symbol-macro +key-available+ (dotnet:static <type-str> "KeyAvailable"))
-(setf (documentation '+key-available+ 'variable) "Gets a value indicating whether a key press is available in the input stream.")
+(define-symbol-macro key-available (dotnet:static <type-str> "KeyAvailable"))
+(setf (documentation 'key-available 'variable) "Gets a value indicating whether a key press is available in the input stream.")
 
-(define-symbol-macro +largest-window-height+ (dotnet:static <type-str> "LargestWindowHeight"))
-(setf (documentation '+largest-window-height+ 'variable) "Gets the largest possible number of console window rows, based on the current font and screen resolution.")
+(define-symbol-macro largest-window-height (dotnet:static <type-str> "LargestWindowHeight"))
+(setf (documentation 'largest-window-height 'variable) "Gets the largest possible number of console window rows, based on the current font and screen resolution.")
 
-(define-symbol-macro +largest-window-width+ (dotnet:static <type-str> "LargestWindowWidth"))
-(setf (documentation '+largest-window-width+ 'variable) "Gets the largest possible number of console window columns, based on the current font and screen resolution.")
+(define-symbol-macro largest-window-width (dotnet:static <type-str> "LargestWindowWidth"))
+(setf (documentation 'largest-window-width 'variable) "Gets the largest possible number of console window columns, based on the current font and screen resolution.")
 
-(define-symbol-macro +number-lock+ (dotnet:static <type-str> "NumberLock"))
-(setf (documentation '+number-lock+ 'variable) "Gets a value indicating whether the NUM LOCK keyboard toggle is turned on or turned off.")
+(define-symbol-macro number-lock (dotnet:static <type-str> "NumberLock"))
+(setf (documentation 'number-lock 'variable) "Gets a value indicating whether the NUM LOCK keyboard toggle is turned on or turned off.")
 
-(define-symbol-macro +out+ (dotnet:static <type-str> "Out"))
-(setf (documentation '+out+ 'variable) "Gets the standard output stream.")
+(define-symbol-macro out (dotnet:static <type-str> "Out"))
+(setf (documentation 'out 'variable) "Gets the standard output stream.")
 
 (defun clear ()
   "Summary: Clears the console buffer and corresponding console window of display information.

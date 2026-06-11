@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 1
-;;; Creation Date: 2026-06-11T12:15:10Z
+;;; Generator Version: 2
+;;; Creation Date: 2026-06-11T14:21:49Z
 
 (in-package :cl-user)
 
@@ -21,7 +21,6 @@
    #:<creation>
    #:<version>
    #:+hours-per-day+
-   #:+max-value+
    #:+microseconds-per-day+
    #:+microseconds-per-hour+
    #:+microseconds-per-millisecond+
@@ -33,7 +32,6 @@
    #:+milliseconds-per-second+
    #:+minutes-per-day+
    #:+minutes-per-hour+
-   #:+min-value+
    #:+nanoseconds-per-tick+
    #:+seconds-per-day+
    #:+seconds-per-hour+
@@ -44,7 +42,9 @@
    #:+ticks-per-millisecond+
    #:+ticks-per-minute+
    #:+ticks-per-second+
-   #:+zero+
+   #:max-value
+   #:min-value
+   #:zero
    #:/=
    #:<
    #:<=
@@ -65,83 +65,83 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-11T12:15:10Z")
-(defconstant <version> 1)
+(defconstant <creation> "2026-06-11T14:21:49Z")
+(defconstant <version> 2)
 
-(define-symbol-macro +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))
+(defconstant +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))
 (setf (documentation '+hours-per-day+ 'variable) "Represents the number of hours in 1 day. This field is constant.")
 
-(define-symbol-macro +max-value+ (dotnet:static <type-str> "MaxValue"))
-(setf (documentation '+max-value+ 'variable) "Represents the maximum System.TimeSpan value. This field is read-only.")
-
-(define-symbol-macro +microseconds-per-day+ (dotnet:static <type-str> "MicrosecondsPerDay"))
+(defconstant +microseconds-per-day+ (dotnet:static <type-str> "MicrosecondsPerDay"))
 (setf (documentation '+microseconds-per-day+ 'variable) "Represents the number of microseconds in 1 day. This field is constant.")
 
-(define-symbol-macro +microseconds-per-hour+ (dotnet:static <type-str> "MicrosecondsPerHour"))
+(defconstant +microseconds-per-hour+ (dotnet:static <type-str> "MicrosecondsPerHour"))
 (setf (documentation '+microseconds-per-hour+ 'variable) "Represents the number of microseconds in 1 hour. This field is constant.")
 
-(define-symbol-macro +microseconds-per-millisecond+ (dotnet:static <type-str> "MicrosecondsPerMillisecond"))
+(defconstant +microseconds-per-millisecond+ (dotnet:static <type-str> "MicrosecondsPerMillisecond"))
 (setf (documentation '+microseconds-per-millisecond+ 'variable) "Represents the number of microseconds in 1 millisecond. This field is constant.")
 
-(define-symbol-macro +microseconds-per-minute+ (dotnet:static <type-str> "MicrosecondsPerMinute"))
+(defconstant +microseconds-per-minute+ (dotnet:static <type-str> "MicrosecondsPerMinute"))
 (setf (documentation '+microseconds-per-minute+ 'variable) "Represents the number of microseconds in 1 minute. This field is constant.")
 
-(define-symbol-macro +microseconds-per-second+ (dotnet:static <type-str> "MicrosecondsPerSecond"))
+(defconstant +microseconds-per-second+ (dotnet:static <type-str> "MicrosecondsPerSecond"))
 (setf (documentation '+microseconds-per-second+ 'variable) "Represents the number of microseconds in 1 second. This field is constant.")
 
-(define-symbol-macro +milliseconds-per-day+ (dotnet:static <type-str> "MillisecondsPerDay"))
+(defconstant +milliseconds-per-day+ (dotnet:static <type-str> "MillisecondsPerDay"))
 (setf (documentation '+milliseconds-per-day+ 'variable) "Represents the number of milliseconds in 1 day. This field is constant.")
 
-(define-symbol-macro +milliseconds-per-hour+ (dotnet:static <type-str> "MillisecondsPerHour"))
+(defconstant +milliseconds-per-hour+ (dotnet:static <type-str> "MillisecondsPerHour"))
 (setf (documentation '+milliseconds-per-hour+ 'variable) "Represents the number of milliseconds in 1 hour. This field is constant.")
 
-(define-symbol-macro +milliseconds-per-minute+ (dotnet:static <type-str> "MillisecondsPerMinute"))
+(defconstant +milliseconds-per-minute+ (dotnet:static <type-str> "MillisecondsPerMinute"))
 (setf (documentation '+milliseconds-per-minute+ 'variable) "Represents the number of milliseconds in 1 minute. This field is constant.")
 
-(define-symbol-macro +milliseconds-per-second+ (dotnet:static <type-str> "MillisecondsPerSecond"))
+(defconstant +milliseconds-per-second+ (dotnet:static <type-str> "MillisecondsPerSecond"))
 (setf (documentation '+milliseconds-per-second+ 'variable) "Represents the number of milliseconds in 1 second. This field is constant.")
 
-(define-symbol-macro +minutes-per-day+ (dotnet:static <type-str> "MinutesPerDay"))
+(defconstant +minutes-per-day+ (dotnet:static <type-str> "MinutesPerDay"))
 (setf (documentation '+minutes-per-day+ 'variable) "Represents the number of minutes in 1 day. This field is constant.")
 
-(define-symbol-macro +minutes-per-hour+ (dotnet:static <type-str> "MinutesPerHour"))
+(defconstant +minutes-per-hour+ (dotnet:static <type-str> "MinutesPerHour"))
 (setf (documentation '+minutes-per-hour+ 'variable) "Represents the number of minutes in 1 hour. This field is constant.")
 
-(define-symbol-macro +min-value+ (dotnet:static <type-str> "MinValue"))
-(setf (documentation '+min-value+ 'variable) "Represents the minimum System.TimeSpan value. This field is read-only.")
-
-(define-symbol-macro +nanoseconds-per-tick+ (dotnet:static <type-str> "NanosecondsPerTick"))
+(defconstant +nanoseconds-per-tick+ (dotnet:static <type-str> "NanosecondsPerTick"))
 (setf (documentation '+nanoseconds-per-tick+ 'variable) "Represents the number of nanoseconds per tick. This field is constant.")
 
-(define-symbol-macro +seconds-per-day+ (dotnet:static <type-str> "SecondsPerDay"))
+(defconstant +seconds-per-day+ (dotnet:static <type-str> "SecondsPerDay"))
 (setf (documentation '+seconds-per-day+ 'variable) "Represents the number of seconds in 1 day. This field is constant.")
 
-(define-symbol-macro +seconds-per-hour+ (dotnet:static <type-str> "SecondsPerHour"))
+(defconstant +seconds-per-hour+ (dotnet:static <type-str> "SecondsPerHour"))
 (setf (documentation '+seconds-per-hour+ 'variable) "Represents the number of seconds in 1 hour. This field is constant.")
 
-(define-symbol-macro +seconds-per-minute+ (dotnet:static <type-str> "SecondsPerMinute"))
+(defconstant +seconds-per-minute+ (dotnet:static <type-str> "SecondsPerMinute"))
 (setf (documentation '+seconds-per-minute+ 'variable) "Represents the number of seconds in 1 minute. This field is constant.")
 
-(define-symbol-macro +ticks-per-day+ (dotnet:static <type-str> "TicksPerDay"))
+(defconstant +ticks-per-day+ (dotnet:static <type-str> "TicksPerDay"))
 (setf (documentation '+ticks-per-day+ 'variable) "Represents the number of ticks in 1 day. This field is constant.")
 
-(define-symbol-macro +ticks-per-hour+ (dotnet:static <type-str> "TicksPerHour"))
+(defconstant +ticks-per-hour+ (dotnet:static <type-str> "TicksPerHour"))
 (setf (documentation '+ticks-per-hour+ 'variable) "Represents the number of ticks in 1 hour. This field is constant.")
 
-(define-symbol-macro +ticks-per-microsecond+ (dotnet:static <type-str> "TicksPerMicrosecond"))
+(defconstant +ticks-per-microsecond+ (dotnet:static <type-str> "TicksPerMicrosecond"))
 (setf (documentation '+ticks-per-microsecond+ 'variable) "Represents the number of ticks in 1 microsecond. This field is constant.")
 
-(define-symbol-macro +ticks-per-millisecond+ (dotnet:static <type-str> "TicksPerMillisecond"))
+(defconstant +ticks-per-millisecond+ (dotnet:static <type-str> "TicksPerMillisecond"))
 (setf (documentation '+ticks-per-millisecond+ 'variable) "Represents the number of ticks in 1 millisecond. This field is constant.")
 
-(define-symbol-macro +ticks-per-minute+ (dotnet:static <type-str> "TicksPerMinute"))
+(defconstant +ticks-per-minute+ (dotnet:static <type-str> "TicksPerMinute"))
 (setf (documentation '+ticks-per-minute+ 'variable) "Represents the number of ticks in 1 minute. This field is constant.")
 
-(define-symbol-macro +ticks-per-second+ (dotnet:static <type-str> "TicksPerSecond"))
+(defconstant +ticks-per-second+ (dotnet:static <type-str> "TicksPerSecond"))
 (setf (documentation '+ticks-per-second+ 'variable) "Represents the number of ticks in 1 second.")
 
-(define-symbol-macro +zero+ (dotnet:static <type-str> "Zero"))
-(setf (documentation '+zero+ 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
+(define-symbol-macro max-value (dotnet:static <type-str> "MaxValue"))
+(setf (documentation 'max-value 'variable) "Represents the maximum System.TimeSpan value. This field is read-only.")
+
+(define-symbol-macro min-value (dotnet:static <type-str> "MinValue"))
+(setf (documentation 'min-value 'variable) "Represents the minimum System.TimeSpan value. This field is read-only.")
+
+(define-symbol-macro zero (dotnet:static <type-str> "Zero"))
+(setf (documentation 'zero 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
 
 (defun /= (t1 t2)
   "Summary: Indicates whether two System.TimeSpan instances are not equal.

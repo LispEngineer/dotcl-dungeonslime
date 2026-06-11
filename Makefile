@@ -4,18 +4,18 @@ REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/
 BIN_DIR = bin/Debug/net10.0/ubuntu.24.04-x64/
 OUT_DIR = cspackages
 
-.PHONY: all build test run clean generate-cspackages
+.PHONY: all build test run clean cspackages
 
 all: build test
 
-build: build-actual # generate-cspackages build-actual
+build: build-actual # cspackages build-actual
 
 build-actual:
 	# Build the base project, which may or may not have any of the
 	# cspackages/ files
 	dotnet build MonoGameLispDemo.csproj -v d -c Debug
 
-generate-cspackages:
+cspackages:
 	mkdir -p obj $(OUT_DIR)
 	dotnet run --project MonoGameLispDemo.csproj -- --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
 	dotnet run --project MonoGameLispDemo.csproj -- --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
