@@ -92,5 +92,61 @@
 
 (format *error-output* "--- C# Reader Macro Tests Completed ---~%")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; C# Package Generator Integration Tests
+
+(format *error-output* "--- Running C# Package Generator Integration Tests ---~%")
+
+(let ((sc-pkg (find-package "SYSTEM-CONSOLE"))
+      (sts-pkg (find-package "SYSTEM-TIME-SPAN"))
+      (mv2-pkg (find-package "MICROSOFT-XNA-FRAMEWORK-VECTOR2")))
+  (if (and sc-pkg sts-pkg mv2-pkg)
+      (progn
+        ;; 1. System.Console Tests
+        (let* ((console-type-sym (find-symbol "<TYPE>" sc-pkg))
+               (console-type (and console-type-sym (symbol-value console-type-sym)))
+               (type-name (and console-type (dotnet:invoke console-type "FullName"))))
+          (if (equal type-name "System.Console")
+              (format *error-output* "[PASS] system-console:<type> returned System.Console~%")
+              (format *error-output* "[FAIL] system-console:<type> returned ~S~%" type-name)))
+
+        (handler-case
+            (let ((reset-color-sym (find-symbol "RESET-COLOR" sc-pkg)))
+              (if reset-color-sym
+                  (progn
+                    (funcall reset-color-sym)
+                    (format *error-output* "[PASS] system-console:reset-color called successfully~%"))
+                  (format *error-output* "[FAIL] system-console:reset-color symbol not found~%")))
+          (error (e)
+            (format *error-output* "[FAIL] system-console:reset-color threw error: ~A~%" e)))
+
+        ;; 2. System.TimeSpan Tests
+        (let* ((ts-type-sym (find-symbol "<TYPE>" sts-pkg))
+               (ts-type (and ts-type-sym (symbol-value ts-type-sym)))
+               (type-name (and ts-type (dotnet:invoke ts-type "FullName"))))
+          (if (equal type-name "System.TimeSpan")
+              (format *error-output* "[PASS] system-time-span:<type> returned System.TimeSpan~%")
+              (format *error-output* "[FAIL] system-time-span:<type> returned ~S~%" type-name)))
+
+        ;; 3. Microsoft.Xna.Framework.Vector2 Tests
+        (let* ((vec-type-sym (find-symbol "<TYPE>" mv2-pkg))
+               (vec-type (and vec-type-sym (symbol-value vec-type-sym)))
+               (type-name (and vec-type (dotnet:invoke vec-type "FullName"))))
+          (if (equal type-name "Microsoft.Xna.Framework.Vector2")
+              (format *error-output* "[PASS] microsoft-xna-framework-vector2:<type> returned Microsoft.Xna.Framework.Vector2~%")
+              (format *error-output* "[FAIL] microsoft-xna-framework-vector2:<type> returned ~S~%" type-name)))
+
+        ;; Test +zero+ static constant
+        (let* ((zero-sym (find-symbol "+ZERO+" mv2-pkg))
+               (zero-vec (and zero-sym (eval zero-sym)))
+               (x-val (and zero-vec (dotnet:invoke zero-vec "X")))
+               (y-val (and zero-vec (dotnet:invoke zero-vec "Y"))))
+          (if (and x-val y-val (= x-val 0.0) (= y-val 0.0))
+              (format *error-output* "[PASS] microsoft-xna-framework-vector2:+zero+ is zero vector~%")
+              (format *error-output* "[FAIL] microsoft-xna-framework-vector2:+zero+ has values X=~A, Y=~A~%" x-val y-val))))
+      (format *error-output* "[SKIP] C# Package Generator Integration Tests skipped (packages not loaded)~%")))
+
+(format *error-output* "--- C# Package Generator Integration Tests Completed ---~%")
+
 (format *error-output* "[poc-test.lisp] Loaded.~%")
 

@@ -218,7 +218,19 @@ For each C# class, the generator will output a Lisp file containing:
   `cspackages` for a given set of assemblies and classes.
   * Initial choices: System.Console, MonoGame Vector2, System.TimeSpan
 * Enhance the `.asd` file to include all these packages as part of the
-  system, identified and loaded dynamically.
+  system, identified and loaded according to the `.lisp` files in the
+  `cspackages/` directory. Load these early on the system definition.
+* Add tests for a few calls using the Vector2 and TimeSpan Lisp packages
+  to prove they are correctly functioning in `poc-tests.lisp`.
+
+## Phase 1B: Minor Readability Enhancements
+
+* Add documentation strings to the `<>` `defconstants` in the preamble of
+  each generated package.
+* Add a convention that any method/field/parameter named in the C# manner
+  starting with `Is`, such as `IsErrorRedirected`, will become
+  kebab-cased with a suffix of `?`, such as `error-redirected?`.
+  * This will result in things like `+error-redirected?+` for constants.
 
 ## Phase 2: Property & Non-Constant Field Accessors
 

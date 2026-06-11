@@ -161,7 +161,8 @@
     (let ((const-fields (remove-if-not #'constant-field-p fields))
           (const-props (remove-if-not #'constant-property-p properties))
           (simple-methods (remove-if-not (lambda (m) (simple-method-p m methods)) methods))
-          (exports nil))
+          (exports nil)
+          (shadows nil))
       
       ;; Collect all exports
       (push "<type>" exports)
@@ -178,6 +179,13 @@
       
       (setf exports (nreverse exports))
       
+      ;; Identify exported symbols that conflict with CL and must be shadowed
+      (dolist (exp exports)
+        (multiple-value-bind (sym status) (find-symbol (string-upcase exp) :common-lisp)
+          (when (and sym (eq status :external))
+            (push exp shadows))))
+      (setf shadows (nreverse shadows))
+      
       ;; 2. Write to the Lisp output file
       (with-open-file (stream output-file :direction :output :if-exists :supersede :if-does-not-exist :create)
         ;; Comments
@@ -190,6 +198,11 @@
         (format stream "(in-package :cl-user)~%~%")
         (format stream "(defpackage :~A~%" pkg-name)
         (format stream "  (:use :cl)~%")
+        (when shadows
+          (format stream "  (:shadow~%")
+          (dolist (shad shadows)
+            (format stream "   #:~A~%" shad))
+          (format stream "  )~%"))
         (format stream "  (:export~%")
         (dolist (exp exports)
           (format stream "   #:~A~%" exp))
@@ -208,22 +221,20 @@
           (let* ((cname (format nil "+~A+" (camel-to-kebab (getf f :name))))
                  (f-doc (getf (getf f :documentation) :summary))
                  (doc-str (if f-doc (escape-lisp-string f-doc) "")))
-            (format stream "(defconstant ~A~%" cname)
-            (format stream "  (dotnet:static <type-str> \"~A\")~%" (getf f :name))
-            (when (> (length doc-str) 0)
-              (format stream "  \"~A\"" doc-str))
-            (format stream "  )~%~%")))
+            (format stream "(define-symbol-macro ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf f :name))
+            (if (> (length doc-str) 0)
+                (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
+                (format stream "~%"))))
         
         ;; Constants (Properties)
         (dolist (p const-props)
           (let* ((cname (format nil "+~A+" (camel-to-kebab (getf p :name))))
                  (p-doc (getf (getf p :documentation) :summary))
                  (doc-str (if p-doc (escape-lisp-string p-doc) "")))
-            (format stream "(defconstant ~A~%" cname)
-            (format stream "  (dotnet:static <type-str> \"~A\")~%" (getf p :name))
-            (when (> (length doc-str) 0)
-              (format stream "  \"~A\"" doc-str))
-            (format stream "  )~%~%")))
+            (format stream "(define-symbol-macro ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf p :name))
+            (if (> (length doc-str) 0)
+                (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
+                (format stream "~%"))))
         
         ;; Methods
         (dolist (m simple-methods)
