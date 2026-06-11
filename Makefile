@@ -3,6 +3,7 @@
 REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/
 BIN_DIR = bin/Debug/net10.0/ubuntu.24.04-x64/
 OUT_DIR = cspackages
+EXECUTABLE = bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo
 
 .PHONY: all build test run clean cspackages
 
@@ -17,12 +18,12 @@ build-actual:
 
 cspackages:
 	mkdir -p obj $(OUT_DIR)
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output $(OUT_DIR)
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly-metadata obj/System.Runtime.lispy.metadata --class System.TimeSpan --output $(OUT_DIR)
-	dotnet run --project MonoGameLispDemo.csproj -- --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
+	$(EXECUTABLE)  --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
+	$(EXECUTABLE)  --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata
+	$(EXECUTABLE)  --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.TimeSpan --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR)
 
 test:
 	bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --test

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
 ;;; Generator Version: 3
-;;; Creation Date: 2026-06-11T15:25:26Z
+;;; Creation Date: 2026-06-11T15:30:40Z
 
 (in-package :cl-user)
 
@@ -65,7 +65,7 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-11T15:25:26Z")
+(defconstant <creation> "2026-06-11T15:30:40Z")
 (defconstant <version> 3)
 
 (defconstant +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))

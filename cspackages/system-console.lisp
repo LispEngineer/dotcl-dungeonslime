@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
 ;;; Generator Version: 3
-;;; Creation Date: 2026-06-11T15:25:19Z
+;;; Creation Date: 2026-06-11T15:30:38Z
 
 (in-package :cl-user)
 
@@ -45,7 +45,7 @@
 
 (defconstant <type> (monoutils:get-type "System.Console"))
 (defconstant <type-str> "System.Console")
-(defconstant <creation> "2026-06-11T15:25:19Z")
+(defconstant <creation> "2026-06-11T15:30:38Z")
 (defconstant <version> 3)
 
 (define-symbol-macro caps-lock (dotnet:static <type-str> "CapsLock"))
