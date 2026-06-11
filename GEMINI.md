@@ -1,5 +1,8 @@
 # Gemini and Antigravity Instructions
 
+* Review `README.md` for general overview of this repository.
+
+
 # General Instructions
 
 * You will **never** use git to stage or commit any changes.
