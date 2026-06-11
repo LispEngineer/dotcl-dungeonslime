@@ -261,6 +261,16 @@ In my case, it shows the game window and then segfaults out.
   the areas of DotCL.
 
 * `csharp.lisp`: Useful utilities for calling into C# library classes.
+  Includes the `#!` (instance call) and `#!!` (static call) reader macros.
+  - Prefix Shorthand Mode:
+    - `(#!MethodName obj ...)` expands to a method invocation of `MethodName` on `obj`.
+    - `(#!!Class.Method ...)` expands to a static method invocation of `Method` on `Class`.
+  - List-Call Mode:
+    - `(#! obj "StringMethod" ...)` and `(#! obj SymbolMethod ...)` expand to method invocations of the specified method name (case-sensitive) on `obj`.
+    - `(#!! "Class" "Method" ...)` and `(#!! Class Method ...)` expand to static method invocations on the specified class and method names (case-sensitive).
+  - Synonym Mode:
+    - `#!` and `#!!` resolve directly to the symbols `dotnet:invoke` and `dotnet:static` when followed by no arguments or closing parenthesis.
+
 
 ## C#
 

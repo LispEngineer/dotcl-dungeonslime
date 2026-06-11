@@ -17,7 +17,7 @@
                (:file "csharp" :depends-on ("packages"))
                (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
-               (:file "poc-test" :depends-on ("monoutils" "constants" "settings"))
+               (:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp"))
                (:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
                ;; End tests to uncomment
                (:file "game-repl" :depends-on ("packages"))

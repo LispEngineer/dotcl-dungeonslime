@@ -2,6 +2,8 @@
 
 # General Instructions
 
+* You will **never** use git to stage or commit any changes.
+  You must **only** use git for read-only commands.
 * Do include detailed comments with any code written,
   or changes to code made.
 * Update the `README.md` file with documentation on new features.
