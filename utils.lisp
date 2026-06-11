@@ -88,3 +88,13 @@
       (t
        (format *error-output* "[qualify-path] neither~A")
        filename))))
+
+(defun format-red (destination control-string &rest args)
+  "Formats output wrapped in ANSI RED color escape sequences."
+  (if (null destination)
+    (let ((formatted (apply #'format nil control-string args)))
+      (format nil "~C[31m~A~C[0m" #\Esc formatted #\Esc))
+    (progn
+      (format destination "~C[31m" #\Esc)
+      (apply #'format destination control-string args)
+      (format destination "~C[0m" #\Esc))))

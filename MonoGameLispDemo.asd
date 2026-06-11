@@ -10,7 +10,7 @@
                     (let ((name (pathname-name file)))
                       (list :file (concatenate 'string "cspackages/" name)
                             :pathname (uiop:subpathname cspackages-dir (concatenate 'string name ".lisp"))
-                            :depends-on '("packages" "monoutils"))))
+                            :depends-on '("packages" "utils" "monoutils"))))
                   (remove-if-not (lambda (file)
                                    (string-equal (pathname-type file) "lisp"))
                                  (uiop:directory-files cspackages-dir)))
@@ -35,12 +35,12 @@
                    (:file "load-system-test")
                    (:file "csharp" :depends-on ("packages"))
                    (:file "assembly-package-generator" :depends-on ("packages" "utils"))
-                   (:file "package-generator-tests" :depends-on ("assembly-package-generator")))
+                   (:file "package-generator-tests" :depends-on ("utils" "assembly-package-generator")))
                  *cspackages-components*
                  (list
                   '(:file "clr-generic" :depends-on ("monoutils"))
                   ;; Uncomment the below to run the Proof of Concepts & Tests
-                  `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp"
+                  `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp" "utils"
                                                   ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
                   ;; End tests to uncomment

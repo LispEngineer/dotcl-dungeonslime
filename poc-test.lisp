@@ -44,51 +44,51 @@
        (guid-str (#!ToString guid)))
   (if (and (stringp guid-str) (> (length guid-str) 0))
       (format *error-output* "[PASS] (#!ToString guid) returned ~S~%" guid-str)
-      (format *error-output* "[FAIL] (#!ToString guid) returned ~S~%" guid-str)))
+      (utils:format-red *error-output* "[FAIL] (#!ToString guid) returned ~S~%" guid-str)))
 
 ;; 2. Prefix Shorthand Static: (#!!System.Math.Max 10 20)
 (let ((max-val (#!!System.Math.Max 10 20)))
   (if (= max-val 20)
       (format *error-output* "[PASS] (#!!System.Math.Max 10 20) returned 20~%")
-      (format *error-output* "[FAIL] (#!!System.Math.Max 10 20) returned ~A (expected 20)~%" max-val)))
+      (utils:format-red *error-output* "[FAIL] (#!!System.Math.Max 10 20) returned ~A (expected 20)~%" max-val)))
 
 ;; 3. List-Call Instance with String: (#! obj "ToString")
 (let* ((guid (dotnet:static "System.Guid" "NewGuid"))
        (guid-str (#! guid "ToString")))
   (if (and (stringp guid-str) (> (length guid-str) 0))
       (format *error-output* "[PASS] (#! guid \"ToString\") returned ~S~%" guid-str)
-      (format *error-output* "[FAIL] (#! guid \"ToString\") returned ~S~%" guid-str)))
+      (utils:format-red *error-output* "[FAIL] (#! guid \"ToString\") returned ~S~%" guid-str)))
 
 ;; 4. List-Call Instance with Symbol: (#! obj ToString)
 (let* ((guid (dotnet:static "System.Guid" "NewGuid"))
        (guid-str (#! guid ToString)))
   (if (and (stringp guid-str) (> (length guid-str) 0))
       (format *error-output* "[PASS] (#! guid ToString) returned ~S~%" guid-str)
-      (format *error-output* "[FAIL] (#! guid ToString) returned ~S~%" guid-str)))
+      (utils:format-red *error-output* "[FAIL] (#! guid ToString) returned ~S~%" guid-str)))
 
 ;; 5. List-Call Static with Strings: (#!! "System.Math" "Max" 10 20)
 (let ((max-val (#!! "System.Math" "Max" 10 20)))
   (if (= max-val 20)
       (format *error-output* "[PASS] (#!! \"System.Math\" \"Max\" 10 20) returned 20~%")
-      (format *error-output* "[FAIL] (#!! \"System.Math\" \"Max\" 10 20) returned ~A (expected 20)~%" max-val)))
+      (utils:format-red *error-output* "[FAIL] (#!! \"System.Math\" \"Max\" 10 20) returned ~A (expected 20)~%" max-val)))
 
 ;; 6. List-Call Static with Symbols: (#!! System.Math Max 10 20)
 (let ((max-val (#!! System.Math Max 10 20)))
   (if (= max-val 20)
       (format *error-output* "[PASS] (#!! System.Math Max 10 20) returned 20~%")
-      (format *error-output* "[FAIL] (#!! System.Math Max 10 20) returned ~A (expected 20)~%" max-val)))
+      (utils:format-red *error-output* "[FAIL] (#!! System.Math Max 10 20) returned ~A (expected 20)~%" max-val)))
 
 ;; 7. List-Call Static with Mixed (String Class, Symbol Method): (#!! "System.Math" Max 10 20)
 (let ((max-val (#!! "System.Math" Max 10 20)))
   (if (= max-val 20)
       (format *error-output* "[PASS] (#!! \"System.Math\" Max 10 20) returned 20~%")
-      (format *error-output* "[FAIL] (#!! \"System.Math\" Max 10 20) returned ~A (expected 20)~%" max-val)))
+      (utils:format-red *error-output* "[FAIL] (#!! \"System.Math\" Max 10 20) returned ~A (expected 20)~%" max-val)))
 
 ;; 8. List-Call Static with Mixed (Symbol Class, String Method): (#!! System.Math "Max" 10 20)
 (let ((max-val (#!! System.Math "Max" 10 20)))
   (if (= max-val 20)
       (format *error-output* "[PASS] (#!! System.Math \"Max\" 10 20) returned 20~%")
-      (format *error-output* "[FAIL] (#!! System.Math \"Max\" 10 20) returned ~A (expected 20)~%" max-val)))
+      (utils:format-red *error-output* "[FAIL] (#!! System.Math \"Max\" 10 20) returned ~A (expected 20)~%" max-val)))
 
 (format *error-output* "--- C# Reader Macro Tests Completed ---~%")
 
@@ -108,7 +108,7 @@
                (type-name (and console-type (dotnet:invoke console-type "FullName"))))
           (if (equal type-name "System.Console")
               (format *error-output* "[PASS] system-console:<type> returned System.Console~%")
-              (format *error-output* "[FAIL] system-console:<type> returned ~S~%" type-name)))
+              (utils:format-red *error-output* "[FAIL] system-console:<type> returned ~S~%" type-name)))
 
         (handler-case
             (let ((reset-color-sym (find-symbol "RESET-COLOR" sc-pkg)))
@@ -116,7 +116,7 @@
                   (progn
                     (funcall reset-color-sym)
                     (format *error-output* "[PASS] system-console:reset-color called successfully~%"))
-                  (format *error-output* "[FAIL] system-console:reset-color symbol not found~%")))
+                  (utils:format-red *error-output* "[FAIL] system-console:reset-color symbol not found~%")))
           (error (e)
             (format *error-output* "[FAIL] system-console:reset-color threw error: ~A~%" e)))
 
@@ -126,7 +126,7 @@
                (type-name (and ts-type (dotnet:invoke ts-type "FullName"))))
           (if (equal type-name "System.TimeSpan")
               (format *error-output* "[PASS] system-time-span:<type> returned System.TimeSpan~%")
-              (format *error-output* "[FAIL] system-time-span:<type> returned ~S~%" type-name)))
+              (utils:format-red *error-output* "[FAIL] system-time-span:<type> returned ~S~%" type-name)))
 
         ;; 3. Microsoft.Xna.Framework.Vector2 Tests
         (let* ((vec-type-sym (find-symbol "<TYPE>" mv2-pkg))
@@ -134,16 +134,20 @@
                (type-name (and vec-type (dotnet:invoke vec-type "FullName"))))
           (if (equal type-name "Microsoft.Xna.Framework.Vector2")
               (format *error-output* "[PASS] microsoft-xna-framework-vector2:<type> returned Microsoft.Xna.Framework.Vector2~%")
-              (format *error-output* "[FAIL] microsoft-xna-framework-vector2:<type> returned ~S~%" type-name)))
+              (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:<type> returned ~S~%" type-name)))
 
-        ;; Test +zero+ static constant
-        (let* ((zero-sym (find-symbol "+ZERO+" mv2-pkg))
-               (zero-vec (and zero-sym (eval zero-sym)))
-               (x-val (and zero-vec (dotnet:invoke zero-vec "X")))
-               (y-val (and zero-vec (dotnet:invoke zero-vec "Y"))))
-          (if (and x-val y-val (= x-val 0.0) (= y-val 0.0))
-              (format *error-output* "[PASS] microsoft-xna-framework-vector2:+zero+ is zero vector~%")
-              (format *error-output* "[FAIL] microsoft-xna-framework-vector2:+zero+ has values X=~A, Y=~A~%" x-val y-val))))
+        ;; Test zero static constant
+        (let* ((zero-sym (find-symbol "ZERO" mv2-pkg)))
+          (format *error-output* "zero-sym found: ~S~%" zero-sym)
+          (multiple-value-bind (expansion expanded-p) (macroexpand-1 zero-sym)
+            (format *error-output* "macroexpand-1: expansion=~S, expanded-p=~S~%" expansion expanded-p))
+          (let* ((zero-vec (and zero-sym (eval zero-sym)))
+                 (x-val (and zero-vec (dotnet:invoke zero-vec "X")))
+                 (y-val (and zero-vec (dotnet:invoke zero-vec "Y"))))
+            (format *error-output* "zero-vec value: ~S~%" zero-vec)
+            (if (and x-val y-val (= x-val 0.0) (= y-val 0.0))
+                (format *error-output* "[PASS] microsoft-xna-framework-vector2:zero is zero vector~%")
+                (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:zero has values X=~A, Y=~A~%" x-val y-val)))))
       (format *error-output* "[SKIP] C# Package Generator Integration Tests skipped (packages not loaded)~%")))
 
 (format *error-output* "--- C# Package Generator Integration Tests Completed ---~%")

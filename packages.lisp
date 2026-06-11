@@ -16,6 +16,7 @@
     (:use :cl)
     (:export #:safe-read-form-from-file
              #:+base-directory+
+             #:format-red
              #:path-combine
              #:file-exists-and-readable-p
              #:qualify-path))
