@@ -3,8 +3,11 @@
 ;;; Background console REPL for a game
 
 (in-package :game-repl)
-(require "dotcl-thread")
-(require "dotcl-repl")
+
+;; Usual DotCL hack for its compilation/build process
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (require "dotcl-thread")
+  (require "dotcl-repl"))
 
 (format *error-output* "[game-repl.lisp] Loading in package ~S~%" *package*)
 
