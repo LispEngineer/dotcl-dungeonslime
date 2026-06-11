@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 2
-;;; Creation Date: 2026-06-11T14:21:57Z
+;;; Generator Version: 3
+;;; Creation Date: 2026-06-11T15:25:33Z
 
 (in-package :cl-user)
 
@@ -37,8 +37,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-11T14:21:57Z")
-(defconstant <version> 2)
+(defconstant <creation> "2026-06-11T15:25:33Z")
+(defconstant <version> 3)
 
 (define-symbol-macro one (dotnet:static <type-str> "One"))
 
@@ -49,13 +49,13 @@
 (define-symbol-macro zero (dotnet:static <type-str> "Zero"))
 
 (defun /= (value1 value2)
-  (dotnet:static <type-str> "/=" value1 value2))
+  (dotnet:static <type-str> "op_Inequality" value1 value2))
 
 (defun + (value1 value2)
-  (dotnet:static <type-str> "+" value1 value2))
+  (dotnet:static <type-str> "op_Addition" value1 value2))
 
 (defun = (value1 value2)
-  (dotnet:static <type-str> "=" value1 value2))
+  (dotnet:static <type-str> "op_Equality" value1 value2))
 
 (defun get-hash-code (obj)
   (dotnet:invoke obj "GetHashCode"))

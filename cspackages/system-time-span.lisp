@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 2
-;;; Creation Date: 2026-06-11T14:21:49Z
+;;; Generator Version: 3
+;;; Creation Date: 2026-06-11T15:25:26Z
 
 (in-package :cl-user)
 
@@ -65,8 +65,8 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-11T14:21:49Z")
-(defconstant <version> 2)
+(defconstant <creation> "2026-06-11T15:25:26Z")
+(defconstant <version> 3)
 
 (defconstant +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))
 (setf (documentation '+hours-per-day+ 'variable) "Represents the number of hours in 1 day. This field is constant.")
@@ -150,7 +150,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> "/=" t1 t2))
+  (dotnet:static <type-str> "op_Inequality" t1 t2))
 
 (defun < (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is less than another specified System.TimeSpan.
@@ -159,7 +159,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> "<" t1 t2))
+  (dotnet:static <type-str> "op_LessThan" t1 t2))
 
 (defun <= (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is less than or equal to another specified System.TimeSpan.
@@ -168,7 +168,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> "<=" t1 t2))
+  (dotnet:static <type-str> "op_LessThanOrEqual" t1 t2))
 
 (defun = (t1 t2)
   "Summary: Indicates whether two System.TimeSpan instances are equal.
@@ -177,7 +177,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> "=" t1 t2))
+  (dotnet:static <type-str> "op_Equality" t1 t2))
 
 (defun > (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is greater than another specified System.TimeSpan.
@@ -186,7 +186,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> ">" t1 t2))
+  (dotnet:static <type-str> "op_GreaterThan" t1 t2))
 
 (defun >= (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is greater than or equal to another specified System.TimeSpan.
@@ -195,7 +195,7 @@ Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:static <type-str> ">=" t1 t2))
+  (dotnet:static <type-str> "op_GreaterThanOrEqual" t1 t2))
 
 (defun add (obj ts)
   "Summary: Returns a new System.TimeSpan object whose value is the sum of the specified System.TimeSpan object and this instance.

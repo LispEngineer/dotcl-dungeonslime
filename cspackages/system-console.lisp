@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 2
-;;; Creation Date: 2026-06-11T14:21:41Z
+;;; Generator Version: 3
+;;; Creation Date: 2026-06-11T15:25:19Z
 
 (in-package :cl-user)
 
@@ -45,8 +45,8 @@
 
 (defconstant <type> (monoutils:get-type "System.Console"))
 (defconstant <type-str> "System.Console")
-(defconstant <creation> "2026-06-11T14:21:41Z")
-(defconstant <version> 2)
+(defconstant <creation> "2026-06-11T15:25:19Z")
+(defconstant <version> 3)
 
 (define-symbol-macro caps-lock (dotnet:static <type-str> "CapsLock"))
 (setf (documentation 'caps-lock 'variable) "Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.")

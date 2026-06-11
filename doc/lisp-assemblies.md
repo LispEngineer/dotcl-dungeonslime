@@ -223,7 +223,14 @@ For each C# class, the generator will output a Lisp file containing:
 * Add tests for a few calls using the Vector2 and TimeSpan Lisp packages
   to prove they are correctly functioning in `poc-tests.lisp`.
 
-## Phase 1B: Minor Readability Enhancements
+## Phase 1B: Documentation Bugs
+
+There is a bug in the doc string generation. For example, the `/=` doc string
+returns shows `if the values of t1 and t2 are not equal; otherwise, .`
+This is clearly missing the underlying information. I suspect a bug
+is in the XML-to-string conversion in the `AssemblyToLispy` code.
+
+## Phase 1C: Minor Readability Enhancements
 
 * Add documentation strings to the `<>` `defconstants` in the preamble of
   each generated package.
@@ -231,6 +238,14 @@ For each C# class, the generator will output a Lisp file containing:
   starting with `Is`, such as `IsErrorRedirected`, will become
   kebab-cased with a suffix of `?`, such as `error-redirected?`.
   * This will result in things like `+error-redirected?+` for constants.
+* Add a convention on C# operator overloads:
+  * `==` becomes a Lisp `=`
+  * `!=` becomes a Lisp `not=`
+* Change the package convention to use the acutal C# namespace & class
+  name instead, so `System.TimeSpan` would be in the package named
+  (appropriately) `System.TimeSpan`. However, let the Lisp package system
+  mangle (change case) the names however it wants, but use the C# capitalization
+  style in our source code. This way it will look more C#-ish.
 
 ## Phase 2: Property & Non-Constant Field Accessors
 

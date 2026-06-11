@@ -76,7 +76,7 @@ All new code must have tests. However:
   (when (and arg-type spec-type)
     (dotnet:invoke spec-type "IsAssignableFrom" arg-type))
   ```
-# Markdown
+## Markdown
 
 1. Don't put gratuitous spaces in markdown files; use the minimal 
    synctactally correct whitespace
@@ -90,6 +90,22 @@ All new code must have tests. However:
    * Example: ``List`1``
    * If the backtick is the first item that is in the backtick-quoted
      expression, just add a preceeding space for now.
+
+
+# Build Problems
+
+## Lisp Build Problems
+
+When parentheses are mismatched, the build will break with errors that often have
+nothing to do with the problem (of mismatched parentheses). If the DotCL portion
+fails with an output similar to this:
+
+```
+/home/dfields/src/cl/dotcl/runtime/build/Dotcl.targets(143,5): error MSB3073: The command "dotnet run --project "/home/dfields/src/cl/MonoGameLispDemo-standalone/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"" exited with code 134.
+```
+
+then always double (or even triple) check any changes to Lisp code for mismatched
+parentheses.
 
 
 # Language

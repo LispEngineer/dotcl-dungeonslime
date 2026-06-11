@@ -12,7 +12,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 2
+(defparameter *generator-version* 3
   "The version of this package generator software.")
 
 (defun camel-to-kebab (name)
@@ -269,12 +269,15 @@
                  (docstring (build-docstring summary returns params m-doc))
                  (escaped-docstring (escape-lisp-string docstring)))
             
-            (format stream "(defun ~A (~A)~%" mname args-str)
-            (when (> (length escaped-docstring) 0)
-              (format stream "  \"~A\"~%" escaped-docstring))
-            (if static-p
-                (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" (getf m :name) param-names)
-                (format stream "  (dotnet:invoke obj \"~A\"~@[ ~{~A~^ ~}~]))~%~%" (getf m :name) param-names))))))))
+            ;; Retrieve the C# side method name. If a mangled-name exists (e.g. for operators),
+            ;; it is used; otherwise the standard method name is used.
+            (let ((dotnet-method-name (or (getf m :mangled-name) (getf m :name))))
+              (format stream "(defun ~A (~A)~%" mname args-str)
+              (when (> (length escaped-docstring) 0)
+                (format stream "  \"~A\"~%" escaped-docstring))
+              (if static-p
+                  (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)
+                  (format stream "  (dotnet:invoke obj \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))))))))
 
 (defun generate-assembly-packages (metadata-file class-filter output-dir)
   "Loads the metadata-file, filters classes by class-filter, and generates output Lisp files."

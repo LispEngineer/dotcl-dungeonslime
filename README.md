@@ -279,6 +279,9 @@ In my case, it shows the game window and then segfaults out.
     shadowing conflicting standard Common Lisp symbols (e.g. `read`, `+`, `length`).
   * Resolves platform-compatibility exceptions by utilizing `define-symbol-macro`
     to lazily evaluate C# static fields/properties at reference-time rather than load-time.
+  * Supports operator overloads (such as `/=`, `=`, `>`, etc.) by mapping the clean Lisp names
+    back to their original C# mangled names (such as `"op_Inequality"`, `"op_Equality"`, etc.)
+    in the generated `dotnet:static` or `dotnet:invoke` calls.
   * `package-generator-tests.lisp`: Unit test suite verifying the naming
     conversion, string splitting, and member filtering behaviors of
     the assembly package generator.
