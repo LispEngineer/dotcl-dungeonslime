@@ -11,19 +11,47 @@ string? outputFile = null;
 bool hasAssembly = false;
 bool hasOutput = false;
 
+string? assemblyMetadataFile = null;
+string? classFilter = null;
+string? outputDir = null;
+bool hasAssemblyMetadata = false;
+
 for (int i = 0; i < args.Length; i++) {
     if (args[i] == "--assembly" && i + 1 < args.Length) {
         assemblyFile = args[i + 1];
         hasAssembly = true;
         i++;
+    } else if (args[i] == "--assembly-metadata" && i + 1 < args.Length) {
+        assemblyMetadataFile = args[i + 1];
+        hasAssemblyMetadata = true;
+        i++;
+    } else if (args[i] == "--class" && i + 1 < args.Length) {
+        classFilter = args[i + 1];
+        i++;
     } else if (args[i] == "--output" && i + 1 < args.Length) {
         outputFile = args[i + 1];
+        outputDir = args[i + 1];
         hasOutput = true;
         i++;
     } else if (args[i] == "--output") {
         outputFile = "-";
         hasOutput = true;
     }
+}
+
+if (hasAssemblyMetadata && !string.IsNullOrEmpty(assemblyMetadataFile)) {
+    try {
+        DotclHost.Initialize();
+        MonoUtilsRegistrar.Initialize();
+        var generatorManifestPath = Path.Combine(AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
+        DotclHost.LoadFromManifest(generatorManifestPath);
+        DotclHost.Call("RUN-ASSEMBLY-PACKAGE-GENERATOR", assemblyMetadataFile, classFilter ?? "", outputDir ?? "");
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[Program.cs] Error in assembly package generator: {ex.Message}");
+        Console.Error.WriteLine(ex.StackTrace);
+        Environment.Exit(1);
+    }
+    return;
 }
 
 if (hasAssembly && !string.IsNullOrEmpty(assemblyFile)) {

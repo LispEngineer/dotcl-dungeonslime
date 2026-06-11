@@ -65,4 +65,11 @@
              #:start-background-repl
              #:kill-background-repl
              #:*no-lisp-repl*
-             #:*background-repl*)))
+             #:*background-repl*))
+
+  (defpackage :assembly-package-generator
+    (:use :cl)
+    (:export #:run-assembly-package-generator
+             #:generate-assembly-packages
+             #:camel-to-kebab
+             #:split-string)))

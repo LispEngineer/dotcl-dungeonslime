@@ -15,6 +15,8 @@
                (:file "type-aliases")
                (:file "load-system-test")
                (:file "csharp" :depends-on ("packages"))
+               (:file "assembly-package-generator" :depends-on ("packages" "utils"))
+               (:file "package-generator-tests" :depends-on ("assembly-package-generator"))
                (:file "clr-generic" :depends-on ("monoutils"))
                ;; Uncomment the below to run the Proof of Concepts & Tests
                (:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp"))

@@ -212,6 +212,14 @@ For each C# class, the generator will output a Lisp file containing:
    `system-console` package, constants (`<type>`, `<type-str>`, etc.), simplest methods
    (`write-line`, `beep`, etc.), and docstrings.
 
+## Phase 1A: Tooling
+
+* Add a Makefile section which creates Lisp packages in a directory
+  `cspackages` for a given set of assemblies and classes.
+  * Initial choices: System.Console, MonoGame Vector2, System.TimeSpan
+* Enhance the `.asd` file to include all these packages as part of the
+  system, identified and loaded dynamically.
+
 ## Phase 2: Property & Non-Constant Field Accessors
 
 This phase adds support for read-write properties and fields:
