@@ -8,7 +8,7 @@ OUT_DIR = cspackages
 
 all: build test
 
-build: build-actual generate-cspackages build-actual
+build: build-actual # generate-cspackages build-actual
 
 build-actual:
 	# Build the base project, which may or may not have any of the
