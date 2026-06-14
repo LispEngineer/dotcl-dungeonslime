@@ -1,6 +1,34 @@
 ;; REPL loader for simplicity
 ;; (load "load-repl.lisp")
 
+;; Figure out where the various assemblies are programmatically so we can use them.
+;; This says: 
+;; "/home/dfields/.dotnet/tools/.store/dotcl/0.1.9/dotcl.linux-x64/0.1.9/tools/net10.0/linux-x64/"
+;; So it's not correct/useful.
+(format *error-output* "[load-repl.lisp] AppContext.BaseDirectory: ~S~%"
+  (dotnet:static "System.AppContext" "BaseDirectory"))
+
+(format *error-output* "[load-repl.lisp] Requiring ASDF...~%")
+(require "asdf")
+
+(format *error-output* "[load-repl.lisp] Checking OutputPath...~%")
+(let* ((out-path
+        (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
+                          :output :string
+                          :ignore-error-status t))
+        ;; Trim trailing newlines and whitespace
+        (bin-dir (string-trim '(#\Space #\Tab #\Newline) out-path))
+        ;; Parse and merge the absolute path to the DLL
+        (dll-path (merge-pathnames 
+                    (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                    ;; This next call fails at the REPL or when loading with
+                    ;; #<MISSING-COMPONENT>
+                    (asdf:system-source-directory "dungeon-slime"))))
+  (format *error-output* 
+    "[load-repl.lisp] [dotnet-build] Compile time info:~%  out-path: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
+    out-path bin-dir dll-path))
+
+
 ;; Load MonoGame first
 (format *error-output* "[load-repl.lisp] Loading MonoGame...~%")
 (dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
