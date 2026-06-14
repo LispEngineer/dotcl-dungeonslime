@@ -37,7 +37,6 @@
 
 (defconstant +atlas-filename+ (uiop:subpathname* +content-default+ "atlas-definition.lisp")
   "The filename of our Texture Atlas. Within the Content directory.")
-(format *error-output* "[game-1.lisp] +atlas-filename+ = ~A~%" +atlas-filename+)
 
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 (core)

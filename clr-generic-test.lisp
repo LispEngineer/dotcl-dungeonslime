@@ -4,7 +4,7 @@
 
 (in-package :dungeon-slime-tests)
 
-(format *error-output* "[clr-generic-test.lisp] Starting tests...~%")
+(format *error-output* "[clr-generic-test.lisp] Loading in package ~S...~%" *package*)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Test 1: Basic dispatch on C# class type and fallback

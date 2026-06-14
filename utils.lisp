@@ -75,18 +75,18 @@
   ;; +base-directory+ to a reasonable setting:
   ;; [texture-atlas.lisp] +base-directory+ =
   ;;   /home/dfields/.dotnet/tools/.store/dotcl/0.1.8/dotcl.linux-x64/0.1.8/tools/net10.0/linux-x64/
-  (format *error-output* "[qualify-path] filename = ~A, +base-directory+ = ~A~%" filename +base-directory+)
+  ; (format *error-output* "[qualify-path] filename = ~A, +base-directory+ = ~A~%" filename +base-directory+)
   (let ((combined (path-combine +base-directory+ filename)))
-    (format *error-output* "[qualify-path] combined = ~A~%" combined)
+    ; (format *error-output* "[qualify-path] combined = ~A~%" combined)
     (cond
       ((file-exists-and-readable-p filename)
-       (format *error-output* "[qualify-path] exists~A")
+      ;  (format *error-output* "[qualify-path] exists~A")
        filename)
       ((file-exists-and-readable-p combined)
-       (format *error-output* "[qualify-path] exists with +base-directory+ = ~S~A" combined)
+      ;  (format *error-output* "[qualify-path] exists with +base-directory+ = ~S~A" combined)
        combined)
       (t
-       (format *error-output* "[qualify-path] neither~A")
+      ;  (format *error-output* "[qualify-path] neither~A")
        filename))))
 
 (defun format-red (destination control-string &rest args)
@@ -98,3 +98,31 @@
       (format destination "~C[31m" #\Esc)
       (apply #'format destination control-string args)
       (format destination "~C[0m" #\Esc))))
+
+(defun print-gf-methods (gf-name)
+  "Prints information about a DotCL Generic Function, including docstrings."
+
+  (when (not (fboundp gf-name))
+    (format *error-output* "~&Generic Function ~S not yet defined.~%" gf-name)
+    (return-from print-gf-methods))
+
+  (let* ((gf (symbol-function gf-name))
+         ;; Retrieve the documentation string of the generic function if it exists.
+         (gf-doc (documentation gf 'function))
+         (methods (dotcl-mop:generic-function-methods gf)))
+    (format *error-output* "~&Generic Function ~S has ~D method(s):~%" gf-name (length methods))
+    (when gf-doc
+      (format *error-output* "  Docstring: ~S~%" gf-doc))
+    (dolist (m methods)
+      (let ((qualifiers (dotcl-mop:method-qualifiers m))
+            (specializers (mapcar (lambda (spec)
+                                    (if (typep spec 'class)
+                                        (class-name spec)
+                                        spec))
+                                  (dotcl-mop:method-specializers m)))
+            ;; Retrieve the documentation string of the method object.
+            (m-doc (documentation m t)))
+        (format *error-output* "  Method qualifiers: ~A, Specializers: ~A~%" 
+                qualifiers specializers)
+        (when m-doc
+          (format *error-output* "    Doc: ~S~%" m-doc))))))

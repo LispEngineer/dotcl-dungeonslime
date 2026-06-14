@@ -98,22 +98,6 @@
 
 
 
-(format *error-output* "[texture-atlas.lisp] +base-directory+ = ~A~%" utils:+base-directory+)
-(format *error-output* "[texture-atlas.lisp] combined = ~A~%" (utils:qualify-path "Content/test-atlas.lisp"))
-
-(defvar ta-example-atlas
-  '(:texture "SomeTexture.png"
-    :regions (:first  (:x 0   :y 0 :w 128 :h 128)
-              :second (:x 128 :y 0 :w 128 :h 128)))
-  "Example texture atlas. Note that the keys of the regions are converted from
-   symbols to strings.")
-
-(format *error-output* "[texture-atlas.lisp] example atlas texture: ~S~%" (getf ta-example-atlas :texture))
-
-(setf ta-example-atlas (utils:safe-read-form-from-file (utils:qualify-path "Content/test-atlas.lisp")))
-
-(format *error-output* "[texture-atlas.lisp] example file atlas: ~S~%" ta-example-atlas)
-
 (defun string-suffix-p (filename suffix)
   "Implementation of uiop:string-suffix-p"
   (null (mismatch suffix filename :from-end t :start2 (- (length filename) (length suffix)))))
@@ -174,32 +158,37 @@
       atlas)))
 
 ;; Test to ensure that the example test-atlas.lisp file can be read correctly.
-(let ((test-atlas (ta-from-file (qualify-path "Content/test-atlas.lisp"))))
-  (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
-  (assert (typep test-atlas 'texture-atlas))
-  (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
-  (let ((reg-a (ta-get-region test-atlas "a"))
-        (reg-b (ta-get-region test-atlas "b"))
-        (ani-ab (ta-get-animation test-atlas "ab")))
-    (assert reg-a)
-    (assert reg-b)
-    (assert (monoutils:dotnet-p (source-rect reg-a)))
-    (assert (equal (x      reg-a) 0))
-    (assert (equal (y      reg-a) 0))
-    (assert (equal (width  reg-a) 64))
-    (assert (equal (height reg-a) 64))
-    (assert (equal (x      reg-b) 64))
-    (assert (equal (y      reg-b) 0))
-    (assert (equal (width  reg-b) 64))
-    (assert (equal (height reg-b) 64))
-    ;; Animation tests
-    (let* ((delay-ts (delay ani-ab))
-           (delay-ms (csharp:timespan->milliseconds delay-ts)))
-      (format *error-output* "[texture-atlas.lisp] delay-ts = ~A, delay-ms = ~A~%" delay-ts delay-ms)
-      ;; Use = instead of equal for numeric comparison to handle type differences (double-float vs integer)
-      (assert (= delay-ms 234)))
-    ;; TODO: Check the values of the frames
-    (assert (equal (length (frames ani-ab)) 5)))
-  (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%"))
+(defun test-texture-atlas-from-file ()
+
+  (format *error-output* "[texture-atlas.lisp] +base-directory+ = ~A~%" utils:+base-directory+)
+  (format *error-output* "[texture-atlas.lisp] combined = ~A~%" (utils:qualify-path "Content/test-atlas.lisp"))
+
+  (let ((test-atlas (ta-from-file (qualify-path "Content/test-atlas.lisp"))))
+    (format *error-output* "[texture-atlas.lisp] Testing ta-from-file...~%")
+    (assert (typep test-atlas 'texture-atlas))
+    (assert (equal (texture test-atlas) "AnotherTexture")) ;; It removes the .png suffix
+    (let ((reg-a (ta-get-region test-atlas "a"))
+          (reg-b (ta-get-region test-atlas "b"))
+          (ani-ab (ta-get-animation test-atlas "ab")))
+      (assert reg-a)
+      (assert reg-b)
+      (assert (monoutils:dotnet-p (source-rect reg-a)))
+      (assert (equal (x      reg-a) 0))
+      (assert (equal (y      reg-a) 0))
+      (assert (equal (width  reg-a) 64))
+      (assert (equal (height reg-a) 64))
+      (assert (equal (x      reg-b) 64))
+      (assert (equal (y      reg-b) 0))
+      (assert (equal (width  reg-b) 64))
+      (assert (equal (height reg-b) 64))
+      ;; Animation tests
+      (let* ((delay-ts (delay ani-ab))
+            (delay-ms (csharp:timespan->milliseconds delay-ts)))
+        (format *error-output* "[texture-atlas.lisp] delay-ts = ~A, delay-ms = ~A~%" delay-ts delay-ms)
+        ;; Use = instead of equal for numeric comparison to handle type differences (double-float vs integer)
+        (assert (= delay-ms 234)))
+      ;; TODO: Check the values of the frames
+      (assert (equal (length (frames ani-ab)) 5)))
+    (format *error-output* "[texture-atlas.lisp] ta-from-file test passed!~%")))
 
 (format *error-output* "[texture-atlas.lisp] Loading complete.~%")
