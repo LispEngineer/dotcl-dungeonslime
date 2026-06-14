@@ -46,7 +46,9 @@
   * Linux: `dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/dungeon-slime.fasl"`
   * (This can be found in the `.csproj` file.)
 * Run the game: `make run`
+  * Important: This does **not** first build the project. So, consider `make build run`
 * Run the tests: `make test`
+  * Important: This does **not** first build the project. So, consider `make build test`
 
 
 # Code Style Instructions
