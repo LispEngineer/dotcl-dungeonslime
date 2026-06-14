@@ -58,9 +58,6 @@ due to a combination of two issues:
 
 # Open Questions
 
-* How do I make a multimethod `defmethod` which can specialize on the class of a
-  C# class?
-
 * How do I pass a boolean "False" to a C# function with `dotnet:invoke`?
   * Do I just send in `nil`?
   * Try `(dotnet:box nil "BOOL")` as in 
@@ -133,3 +130,46 @@ due to a combination of two issues:
   * Use `(dotnet:box nil "BOOL")` as in 
     `(dotnet:invoke an-object "AMethod" (dotnet:box nil "BOOL"))`
     if the type cannot be inferred by the DotCL Compiler/Runtime
+
+# .NET CLOS Integration in DotCL 0.1.9
+
+DotCL 0.1.9 introduces the ability for CLOS generic functions (`defgeneric`) to dispatch natively on instances of C# classes created via `dotnet:define-class` as well as raw C# framework types (e.g., `Microsoft.Xna.Framework.Vector2`).
+
+## Class Registration and Naming
+When DotCL encounters a native C# object for the first time, or when `(class-of obj)` is explicitly called on it, DotCL lazily creates a CLOS wrapper class for the .NET type. This wrapper is placed in the `dotcl-internal` package and named after the short name of the C# class. 
+For example, `Microsoft.Xna.Framework.Vector2` becomes `dotcl-internal::|Vector2|`.
+
+To specialize a `defmethod` on a raw C# type, you use this internal symbol as the class specializer:
+```lisp
+(defmethod get-x ((obj dotcl-internal::|Vector2|))
+  (dotnet:invoke obj "X"))
+```
+
+## The Compile-Time Constraint
+In Common Lisp, `defmethod` is a macro that expands at compile time. During this expansion, it calls `find-class` to verify the existence of the class you are specializing on.
+
+In this project, `make build` compiles the code using the standalone DotCL compiler. The compiler process only loads standard .NET runtime libraries; it **does not** load our application-specific assemblies, such as `MonoGame.Framework.dll`. 
+If you write a top-level `(defmethod ... ((obj dotcl-internal::|Vector2|)) ...)` statically in your code, the compiler will attempt to resolve `Vector2`, fail to find the MonoGame assembly, and hard-crash the compilation with `FIND-CLASS: no class named Vector2` or `DOTNET: type not found: Microsoft.Xna.Framework.Vector2`.
+
+## The `eval` Workaround
+To resolve the compile-time failure, we must defer the macro-expansion of `defmethod` until *runtime*, when the MonoGame assembly is fully loaded by the `Program.cs` host.
+
+We achieve this by quoting the method definition and passing it to `eval` inside a function:
+```lisp
+(defun register-clr-methods ()
+  ;; 1. Force the lazy registration of the CLOS wrapper class.
+  ;; Instantiating a dummy Vector2 and calling class-of guarantees 
+  ;; that dotcl-internal::|Vector2| exists.
+  (class-of (dotnet:new "Microsoft.Xna.Framework.Vector2" 0.0f0 0.0f0))
+  
+  ;; 2. Dynamically evaluate the defmethod at runtime.
+  ;; The compiler skips expanding this because it's just data.
+  (eval '(defmethod get-x ((obj dotcl-internal::|Vector2|)) 
+           (dotnet:invoke obj "X"))))
+```
+By executing this function at program startup, we bypass the compiler's strict type verification while fully preserving standard CLOS method dispatch performance at runtime.
+
+## Defining C# Types from Lisp
+When defining new C# proxy classes from Lisp using `dotnet:define-class` (or its underlying components), always pass parameter and field types as fully-qualified strings (e.g., `"System.Double"`) instead of unquoted symbols (e.g., `System.Double`). 
+Symbols without string qualification might fail to resolve during macro expansion if the namespace environment isn't strictly controlled, whereas explicit string declarations correctly guide DotCL's internal reflection (`dotnet:resolve-type`).
+

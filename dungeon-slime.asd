@@ -51,6 +51,7 @@
                   '(:file "texture-atlas" :depends-on ("utils" "texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
                   '(:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                   '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
-                  '(:file "test-harness" :depends-on ("poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1"))
+                  '(:file "clr-defmethod-test" :depends-on ("packages" "utils"))
+                  '(:file "test-harness" :depends-on ("clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1"))
                   '(:file "main" :depends-on
                     ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings")))))

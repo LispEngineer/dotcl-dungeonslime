@@ -17,6 +17,7 @@
   (test-basic-dispatch)
   (test-inheritance-precedence)
   (test-alias-resolution)
+  (test-clr-defmethods)
 
   (format *error-output* "[test-harness.lisp] Running Package Generator tests...~%")
   (run-package-generator-tests)

@@ -110,4 +110,5 @@
   (defpackage :dungeon-slime-tests
     (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
     (:export
-      #:run-all-tests)))
+      #:run-all-tests
+      #:test-clr-defmethods)))
