@@ -49,7 +49,7 @@
 ;;     [type-aliases.lisp] Compile time: AppDomain.CurrentDomain.BaseDirectory: "/home/dfields/src/cl/dotcl/runtime/bin/Debug/net10.0/"
 
 (eval-when (:compile-toplevel)
-  (let* ((out-path 
+  (let* ((out-path
           (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
                             :output :string
                             :ignore-error-status t))
