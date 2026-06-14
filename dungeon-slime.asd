@@ -43,7 +43,6 @@
                   `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp" "utils"
                                                   ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
-                  '(:file "test-harness" :depends-on ("poc-test"))
                   '(:file "game-repl" :depends-on ("packages"))
                   '(:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants" "packages"))
                   '(:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
@@ -52,5 +51,6 @@
                   '(:file "texture-atlas" :depends-on ("utils" "texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
                   '(:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                   '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
+                  '(:file "test-harness" :depends-on ("poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1"))
                   '(:file "main" :depends-on
                     ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings")))))

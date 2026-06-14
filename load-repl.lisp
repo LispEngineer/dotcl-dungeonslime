@@ -66,7 +66,7 @@
 (format t "[load-repl.lisp] (dotnet:invoke *mg-game* \"Dispose\")~%")
 
 ;; You can also do:
-(format t "[load-repl.lisp] (safe-read-form-from-file \"/tmp/System.Runtime.lispy.metadata.tmp\")")
+(format t "[load-repl.lisp] (safe-read-form-from-file \"/tmp/System.Runtime.lispy.metadata.tmp\")~%")
 
 #|
 (defvar x (safe-read-form-from-file "/tmp/System.Runtime.lispy.metadata.tmp"))
@@ -75,3 +75,5 @@
 (remove-if-not (lambda (str) (find #\` str))  (mapcar (lambda (item) (getf item :name)) x))
 ;; All the generic methods: (none)
 |#
+
+(format t "~%")
