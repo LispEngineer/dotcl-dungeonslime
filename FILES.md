@@ -79,6 +79,9 @@ and files in this repository.
 
 * `packages.lisp`: Defines the Lisp packages used across the project.
 
+* `test-harness.lisp`: Runs all the other tests sprinkled all throughout
+  the Lisp code.
+
 * `utils.lisp`: Contains general utility functions (like path qualification and safe reading).
 
 * `settings.lisp`: Defines system-wide Lisp settings (e.g., `declaim`).

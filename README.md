@@ -123,6 +123,9 @@ sorry!
 ;; After the game executes and returns to the REPL, clean up with this:
 (dotnet:invoke *mg-game* "Dispose")
 ;; otherwise the game window will just sit there and cause grief.
+
+;; To run the tests from the REPL:
+(dungeon-slime-tests::run-all-tests)
 ```
 
 It is not possible to run the game a second time after it exits

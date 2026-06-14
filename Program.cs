@@ -136,6 +136,8 @@ if (isTestMode) {
     Console.WriteLine(DynamicBaseCaller.CallFunc(func, Calc, 7, "eight"));
 
     Console.WriteLine($"[Program.cs] Running Lisp tests...");
+    // FIXME: Not sure why this actually works without being specified in the
+    // dungeon-slime-tests package
     DotclHost.Call("RUN-ALL-TESTS");
 
     Console.WriteLine($"[Program.cs] Running assembly-to-lispy tests...");
