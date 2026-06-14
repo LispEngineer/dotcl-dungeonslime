@@ -81,7 +81,32 @@
              #:defc#method))
 
   (defpackage :dungeon-slime
-    (:use :cl :utils :mg-classes :monoutils :csharp :game-repl :clr-generic))
+    (:use :cl :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
+    (:export 
+     ;; Constants
+     #:+window-defaults+ #:+content-default+ #:+false+
+     #:+key-esc+ #:+key-left+ #:+color-white+
+     #:+sprite-effects-none+ #:+sprite-effects-flip-horizontally+ #:+sprite-effects-flip-vertically+
+     #:+sprite-sort-mode-back-to-front+ #:+sprite-sort-mode-deferred+ #:+sprite-sort-mode-front-to-back+
+     #:+sprite-sort-mode-immediate+ #:+sprite-sort-mode-texture+
+     #:+sampler-state-point-clamp+
+     #:+atlas-texture+ #:+atlas-filename+
+     ;; Globals
+     #:*core* #:*game* #:*cs-game*
+     #:color-cycle-period
+     ;; Make Game
+     #:make-game
+     ;; Classes and Methods
+     #:core #:monogame #:window-info #:graphics #:graphics-device #:sprite-batch #:content
+     #:initialize #:load-content #:update #:draw #:dispose #:begin-run #:end-run #:run
+     #:game-1 #:slime #:bat
+     #:pulse-color
+     #:animation #:animated-sprite
+     #:sprite #:sprite-center-origin #:sprite-draw
+     #:texture-atlas #:ta-add-region #:ta-get-region #:ta-remove-region #:ta-clear
+     #:ta-create-sprite #:ta-create-animated-sprite #:ta-add-animation #:ta-get-animation
+     #:ta-remove-animation #:ta-from-file
+     #:texture-region #:tr-draw))
 
   (defpackage :dungeon-slime-tests
     (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)))
