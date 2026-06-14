@@ -24,7 +24,6 @@
   (defpackage :monoutils
     (:use :cl)
     (:export #:add3
-             #:invoke-generic
              #:dotnet-p
              #:boxed-dotnet-p
              #:get-type

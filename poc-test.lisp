@@ -16,9 +16,6 @@
     (type-error (c)
       (format t "Caught expected type error: ~A~%" c)))
 
-  (format *error-output* "invoke-generic docs: ~A~%"
-    (documentation 'monoutils:invoke-generic 'function))
-
   ;; Test call-base functionality
   (let ((child (dotnet:new "Child")))
     (dotnet:invoke child "Speak")

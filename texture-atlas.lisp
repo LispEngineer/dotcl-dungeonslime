@@ -125,7 +125,7 @@
            ;; For test purposes, we allow content-manager to be nil and just set
            ;; the texture to the clean name
            (tex (if content-manager
-                  (monoutils:invoke-generic content-manager "Load" '("TEXTURE2D") clean-name)
+                  (dotnet:invoke-generic content-manager "Load" '("Microsoft.Xna.Framework.Graphics.Texture2D") clean-name)
                   clean-name))
            ;; Create the texture-atlas instance
            (atlas (make-instance 'texture-atlas :texture tex)))

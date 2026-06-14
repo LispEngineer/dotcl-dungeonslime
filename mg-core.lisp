@@ -181,7 +181,7 @@
       (format *error-output* "[core:run] describe:~%")
       (describe e)
       (format *error-output* "[core:run] backtrace:~%")
-      (uiop:print-backtrace :stream *error-output* :condition e)
+      (dotcl:print-backtrace :stream *error-output* :condition e)
       ;; There is nothing useful that the debugger can do; all the
       ;; choices seem to result in the program crashing with:
       ;; [Program.cs] Got exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.

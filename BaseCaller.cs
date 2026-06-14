@@ -153,33 +153,6 @@ public static class DynamicBaseCaller {
         return invokeBase(target, args);
     } // CallBaseMethod
 
-    /** Helper function to find a Type by name across all loaded assemblies.
-     * This is more robust than System.Type.GetType, which often fails for
-     * types in external assemblies like MonoGame.Framework.
-     * Returns null if nothing is found.
-     */
-    public static Type? GetType(string typeName) {
-        if (string.IsNullOrEmpty(typeName)) {
-            return null;
-        }
-
-        // 1. Try the standard way
-        Type? t = Type.GetType(typeName);
-        if (t != null) {
-            return t;
-        }
-
-        // 2. Search all loaded assemblies
-        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
-            t = assembly.GetType(typeName);
-            if (t != null) {
-                return t;
-            }
-        }
-
-        return null;
-    } // GetType
-
     /** Helper function to call a Func on a target object.
      * This is to make it easy to call a cached/stored Func from dotcl Lisp. */
     public static object CallFunc(Func<object, object[], object> func, object target, params object[] args) {
