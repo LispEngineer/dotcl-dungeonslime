@@ -376,3 +376,29 @@ the DotCL compilation task runs:
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" 
     (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
 ```
+
+# DotCL Compilation Caching (`DotclCompileRoot`)
+
+When integrating DotCL with MSBuild via `Dotcl.targets`, the actual execution of the Lisp compiler is
+managed by the `DotclCompileRoot` MSBuild target.
+
+This target is configured with specific `Inputs` (all the `.lisp` files in the project and the
+`.asd` file) and `Outputs` (the compiled `.fasl` file). This enables MSBuild's native incremental
+build caching mechanisms. 
+
+When running `make build` or `dotnet build` multiple times in a row without making any modifications
+to the source files, MSBuild detects that the `.fasl` output file is already newer than all of the
+`.lisp` input files. When this happens, MSBuild prints a message stating:
+`Skipping target "DotclCompileRoot" because all output files are up-to-date with respect to the input files.`
+
+Because the compilation target is completely skipped, the DotCL compiler process is never launched.
+Consequently, any code inside `eval-when (:compile-toplevel)` blocks (such as `format` diagnostic prints, 
+programmatic assembly loads, or macro expansions) will **not** be executed again, and no compile-time output 
+will be printed to the console.
+
+When debugging compile-time macros or `eval-when` logic and want to force the compiler to run so as to 
+see the outputs, the MSBuild cache must be invalidated by either:
+
+1. Making a modification to any `.lisp` file or the `.asd` file (e.g., adding a space and saving it).
+2. Running `make clean` (or `dotnet clean`) to delete the `obj/` and `bin/` directories, forcing MSBuild to 
+   rebuild the `.fasl` from scratch on the next build.

@@ -30,6 +30,7 @@
   * For example, instead of saying
     "We still capture this metadata for our Lisp packaging..."
     say instead "This metadata is still captured for the Lisp packaging..."
+  * It is fine to use the passive voice to avoid using personal pronouns.
 * Any command that is run regularly should be built into a `Makefile`
   target.
   * Any capability provided by `Makefile` targets should be used over
