@@ -546,6 +546,14 @@ the `--base` argument to see it work (in C#).
 
 # TO DO
 
+* Migrate to DotCL 0.1.9
+  * Use the new `invoke-generic`
+  * Use the new C# `defmethod` dispatching
+
+* Make the `AssemblyToLispy` tests less fragile
+  * I upgraded from 10.0.8 to 10.0.9 DotNet and the tests broke.
+  * Remove hardcoded paths and find the assemblies in some automated fashion?
+
 * Break the code into different packages for everything and get it
   all out of the `:cl-user` namespace.
   * This is made somewhat more complicated by the "concatenate and compile"

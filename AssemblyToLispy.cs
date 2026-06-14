@@ -23,7 +23,7 @@ and the output file.
 There should also be a test class or method that
 takes a well known assembly (e.g., "System.Runtime.dll"
 from the C# runtime, located in directory
-"/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/")
+"/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/")
 and ensures that the output is correct for a few items,
 such as "System.Collections.ArrayList".
 
@@ -1004,10 +1004,10 @@ namespace MonoGameLispDemo {
         public static void RunTests() {
             try {
                 // Test the system runtime assembly
-                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/", "System.Runtime.dll");
+                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/", "System.Runtime.dll");
 
                 // Test the system console assembly
-                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/", "System.Console.dll");
+                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/", "System.Console.dll");
 
                 // Test our synthetic edge cases target.
                 // The built DLL will reside in the output folder alongside MonoGameLispDemo
