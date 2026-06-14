@@ -8,34 +8,37 @@
 (format *error-output* "[load-repl.lisp] AppContext.BaseDirectory: ~S~%"
   (dotnet:static "System.AppContext" "BaseDirectory"))
 
-(format *error-output* "[load-repl.lisp] Requiring ASDF...~%")
+(format *error-output* "[load-repl.lisp] Requiring ASDF/UIOP...~%")
 (require "asdf")
 
-(format *error-output* "[load-repl.lisp] Checking OutputPath...~%")
-(let* ((out-path
-        (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
-                          :output :string
-                          :ignore-error-status t))
-        ;; Trim trailing newlines and whitespace
-        (bin-dir (string-trim '(#\Space #\Tab #\Newline) out-path))
-        ;; Parse and merge the absolute path to the DLL
-        (dll-path (merge-pathnames 
-                    (concatenate 'string bin-dir "MonoGame.Framework.dll")
-                    ;; This next call fails at the REPL or when loading with
-                    ;; #<MISSING-COMPONENT>
-                    (asdf:system-source-directory "dungeon-slime"))))
-  (format *error-output* 
-    "[load-repl.lisp] [dotnet-build] Compile time info:~%  out-path: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
-    out-path bin-dir dll-path))
-
+(format *error-output* "[load-repl.lisp] Calculating paths...~%")
+(defvar out-path
+  (let* ((out-path
+          (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
+                            :output :string
+                            :ignore-error-status t))
+          ;; Trim trailing newlines and whitespace
+          (bin-dir (string-trim '(#\Space #\Tab #\Newline) out-path)))
+    bin-dir))
+(defvar monogame-path
+  ;; Parse and merge the absolute path to the DLL
+  (merge-pathnames 
+    (concatenate 'string out-path "MonoGame.Framework.dll")
+    *default-pathname-defaults*))
+(defvar dungeonslime-path
+  ;; Parse and merge the absolute path to the DLL
+  (merge-pathnames 
+    (concatenate 'string out-path "DungeonSlime.dll")
+    *default-pathname-defaults*))
+(format *error-output* "  ~S~%  ~S~%" monogame-path dungeonslime-path)
 
 ;; Load MonoGame first
 (format *error-output* "[load-repl.lisp] Loading MonoGame...~%")
-(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
+(dotnet:load-assembly (namestring monogame-path))
 
 ;; Load the C# project assembly
 (format *error-output* "[load-repl.lisp] Loading DungeonSlime C# assembly...~%")
-(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime.dll")
+(dotnet:load-assembly (namestring dungeonslime-path))
 
 ;; Run the C# Registrar - this creates the "MONOUTILS" package and adds
 ;; the C#-impleemnted functions to it
