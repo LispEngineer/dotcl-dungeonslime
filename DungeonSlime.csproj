@@ -80,6 +80,12 @@
     </None>
   </ItemGroup>
 
+  <!-- Write the MSBuild $(OutDir) out to a file so DotCL's compile-file process can reliably locate the 
+       target bin/ directory during Lisp macro expansion, avoiding brittle hardcoded paths. -->
+  <Target Name="WriteOutDirForLisp" BeforeTargets="DotclCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
+    <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
+  </Target>
+
   <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
 
 </Project>

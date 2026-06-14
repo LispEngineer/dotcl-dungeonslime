@@ -12,8 +12,11 @@
 ;; FIXME: Make this more generic - there has to be a way to find out where the .dll is from
 ;; build information or .csproj or something.
 (eval-when (:compile-toplevel)
-  (dotnet:load-assembly (namestring (merge-pathnames "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll" 
-                                                     (asdf:system-source-directory "dungeon-slime"))))
+  (let* ((outdir-file (merge-pathnames "obj/dotcl-outdir.txt" (asdf:system-source-directory "dungeon-slime")))
+         (bin-dir (with-open-file (s outdir-file) (read-line s)))
+         (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                                    (asdf:system-source-directory "dungeon-slime"))))
+    (dotnet:load-assembly (namestring dll-path)))
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle")))
 

@@ -234,10 +234,11 @@ necessary assembly `.dll` and forcefully register the types during both the
 ;; Because the compiler runs from a different working directory, we must supply the
 ;; absolute path to the MonoGame.Framework.dll to ensure it loads successfully.
 (eval-when (:compile-toplevel)
-  (dotnet:load-assembly
-    (namestring
-      (merge-pathnames "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll"
-                       (asdf:system-source-directory "dungeon-slime"))))
+  (let* ((outdir-file (merge-pathnames "obj/dotcl-outdir.txt" (asdf:system-source-directory "dungeon-slime")))
+         (bin-dir (with-open-file (s outdir-file) (read-line s)))
+         (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                                    (asdf:system-source-directory "dungeon-slime"))))
+    (dotnet:load-assembly (namestring dll-path)))
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
     (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
 
@@ -333,18 +334,40 @@ Because `System.AppContext.BaseDirectory` points to the DotCL compiler process' 
 rather than the target project's directory during macro expansion, it cannot natively 
 resolve the target `bin/` path purely through reflection.
 
-Instead, execute the `dotnet build` command as a subprocess using `uiop:run-program`, 
-capture its output, and merge the result with the ASDF root source path:
+It is possible to invoke a nested MSBuild process using `uiop:run-program` during Lisp
+compilation. It is possible for this to fail silently due to MSBuild node-reuse
+locks and inherited environment variables. However, this seems to work in tests: 
+see `type-aliases.lisp`.
 
 ```lisp
-(eval-when (:compile-toplevel)
-  (let* ((out-path 
+  (let* ((out-path
           (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
                             :output :string
                             :ignore-error-status t))
          ;; Trim trailing newlines and whitespace
          (bin-dir (string-trim '(#\Space #\Tab #\Newline) out-path))
          ;; Parse and merge the absolute path to the DLL
+         (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                                    (asdf:system-source-directory "dungeon-slime"))))
+    ...more-code...)
+```
+
+A more robust solution is to add a custom MSBuild target to the `.csproj` file that
+writes `$(OutDir)` to a standard file location (like `obj/dotcl-outdir.txt`) right before
+the DotCL compilation task runs:
+
+**In DungeonSlime.csproj:**
+```xml
+<Target Name="WriteOutDirForLisp" BeforeTargets="DotclCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
+  <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
+</Target>
+```
+
+**In Lisp (eval-when block):**
+```lisp
+(eval-when (:compile-toplevel)
+  (let* ((outdir-file (merge-pathnames "obj/dotcl-outdir.txt" (asdf:system-source-directory "dungeon-slime")))
+         (bin-dir (with-open-file (s outdir-file) (read-line s)))
          (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
                                     (asdf:system-source-directory "dungeon-slime"))))
     (dotnet:load-assembly (namestring dll-path)))

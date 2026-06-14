@@ -49,6 +49,8 @@
 ;;     [type-aliases.lisp] Compile time: AppDomain.CurrentDomain.BaseDirectory: "/home/dfields/src/cl/dotcl/runtime/bin/Debug/net10.0/"
 
 (eval-when (:compile-toplevel)
+
+  ;; Old, non-working way:
   (let* ((out-path
           (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
                             :output :string
@@ -58,6 +60,19 @@
          ;; Parse and merge the absolute path to the DLL
          (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
                                     (asdf:system-source-directory "dungeon-slime"))))
-    (format *error-output* "[type-aliases.lisp] Compile time info:~%  out-path: ~S~%  bin-dir: ~S~%  dll-path: ~S~%")))
+    (format *error-output* 
+      "[type-aliases.lisp] [dotnet-build] Compile time info:~%  out-path: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
+      out-path bin-dir dll-path))
+
+  ;; New working way:
+  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
+         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
+         (bin-dir (with-open-file (s outdir-file) (read-line s)))
+         (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                                    (asdf:system-source-directory "dungeon-slime"))))
+    (format *error-output* 
+      "[type-aliases.lisp] [dotcl-outdir] Compile time info:~%  sys-dir: ~S~%  outdir-file: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
+      sys-dir outdir-file bin-dir dll-path)))
+
 
 
