@@ -35,6 +35,12 @@
   * Any capability provided by `Makefile` targets should be used over
     building custom commands.
 
+## Temporary Files
+
+* Use the `scratch/` directory to store temporary files, such as to explore
+  how things work. These are not committed to Git so do not put anything
+  important or durable in there!
+
 
 # Useful Commands
 
