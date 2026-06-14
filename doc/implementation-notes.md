@@ -259,21 +259,21 @@ necessary assembly `.dll` and forcefully register the types during both the
 
 ### MSBuild Dependency Timing Issue
 
-When using **Option 2**'s `eval-when` mechanism, the Lisp compiler explicitly reads 
-`MonoGame.Framework.dll` from the output `bin/` directory. However, the custom MSBuild 
-target that triggers DotCL compilation (`DotclCompileRoot`) runs during the `BeforeBuild` phase. 
+When using **Option 2**'s `eval-when` mechanism, the Lisp compiler explicitly reads
+`MonoGame.Framework.dll` from the output `bin/` directory. However, the custom MSBuild
+target that triggers DotCL compilation (`DotclCompileRoot`) runs during the `BeforeBuild` phase.
 
-This happens *before* the standard C# target `CopyFilesToOutputDirectory` has had a chance 
-to extract NuGet dependencies and place them into `bin/`. Consequently, if a 
+This happens *before* the standard C# target `CopyFilesToOutputDirectory` has had a chance
+to extract NuGet dependencies and place them into `bin/`. Consequently, if a
 fresh build is run after a `make clean`, the Lisp compiler will immediately crash with a
 `FileNotFoundException` because the `.dll` has not yet been extracted.
 
-To bypass this timing issue without rewriting DotCL's internal `Dotcl.targets`, 
+To bypass this timing issue without rewriting DotCL's internal `Dotcl.targets`,
 a **Two-Stage Build** is used in the `Makefile`:
 
 ```makefile
 build-actual:
-	# 1. Build without DotCL targets (-p:DotclProjectAsd="") 
+	# 1. Build without DotCL targets (-p:DotclProjectAsd="")
 	#    This forces MSBuild to resolve NuGet packages and fully populate bin/
 	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
 	
@@ -290,3 +290,66 @@ Symbols without string qualification might fail to resolve during macro expansio
 namespace environment isn't strictly controlled, whereas explicit string declarations
 correctly guide DotCL's internal reflection (`dotnet:resolve-type`).
 
+
+# Resolving Build Output Paths Programmatically
+
+Avoid hardcoding the exact output binary path (e.g., `bin/Debug/net10.0/ubuntu.24.04-x64/`)
+into scripts, Makefiles, or Lisp code. The path is inherently brittle since it changes based
+on OS, target framework, or build configuration (e.g. `-c Release`).
+
+There are robust ways to resolve this dynamically depending on context:
+
+## 1. In the Makefile (Via MSBuild)
+
+The `.csproj` file naturally computes the output directory dynamically. It can be extracted
+directly from the MSBuild evaluation engine without actually building the code by
+querying the `OutputPath` property:
+
+```makefile
+BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
+```
+
+## 2. At Runtime (C# / Lisp Execution)
+
+(This needs to be tested: what will the environment be when things are running?
+
+If the project is actually running via `make run` or `make test`, it is possible to query the 
+.NET Core `System.AppContext.BaseDirectory` property. It will always return the absolute.
+path of the directory containing the currently executing host application:
+
+**In C#:**
+```csharp
+string outputDir = System.AppContext.BaseDirectory;
+```
+
+**In Lisp (via Interop):**
+```lisp
+(dotnet:static "System.AppContext" "BaseDirectory")
+```
+
+## 3. At Compile-Time (Inside Lisp `eval-when` Blocks)
+
+Because `System.AppContext.BaseDirectory` points to the DotCL compiler process' directory 
+rather than the target project's directory during macro expansion, it cannot natively 
+resolve the target `bin/` path purely through reflection.
+
+Instead, execute the `dotnet build` command as a subprocess using `uiop:run-program`, 
+capture its output, and merge the result with the ASDF root source path:
+
+```lisp
+(eval-when (:compile-toplevel)
+  (let* ((out-path 
+          (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
+                            :output :string
+                            :ignore-error-status t))
+         ;; Trim trailing newlines and whitespace
+         (bin-dir (string-trim '(#\Space #\Tab #\Newline) out-path))
+         ;; Parse and merge the absolute path to the DLL
+         (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
+                                    (asdf:system-source-directory "dungeon-slime"))))
+    (dotnet:load-assembly (namestring dll-path)))
+  
+  ;; Proceed with class registration safely!
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" 
+    (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
+```
