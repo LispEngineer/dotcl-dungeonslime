@@ -38,7 +38,7 @@ You will need to check out [dotcl](https://github.com/dotcl/dotcl)
 in a sibling directory to this one
 and build and install the `dotcl` tool. This demo uses various files
 assuming they are in that sibling directory. These references are
-in the `MonoGameLispDemo.csproj` file.
+in the `DungeonSlime.csproj` file.
 
 ## DotCL Version
 
@@ -80,22 +80,22 @@ You can then use the provided `Makefile` to build, test, and run the project:
 
 Or manually run the steps:
 
-1. To build: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
+1. To build: `dotnet build DungeonSlime.csproj -v d -c Debug`
    * `-v n` makes Lisp compilation errors be shown.
    * `-v d` shows more details.
    * `-v diag` shows the most, but I haven't really noticed a difference.
 
-2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
+2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime`
    * To run in test mode, add `--test` to the command line, and it will
      not invoke the game.
 
 3. To generate assembly metadata (work in progress):
-   `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --assembly <path-to-dll> [--output <output-path>]`
+   `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime --assembly <path-to-dll> [--output <output-path>]`
    * `--assembly <filename>`: Resolves the assembly and computes its input directory automatically.
    * `--output <filename>`: The destination filepath for the generated S-expression plist.
      If set to `-`, or if the parameter is omitted entirely, it defaults to standard output
      (stdout), with diagnostic logs routed to standard error (stderr) to keep the payload clean.
-   * Example: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --assembly /home/dfields/.nuget/packages/monogame.framework.desktopgl/3.8.4.1/lib/net8.0/MonoGame.Framework.dll --output /tmp/mg.lisp`
+   * Example: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime --assembly /home/dfields/.nuget/packages/monogame.framework.desktopgl/3.8.4.1/lib/net8.0/MonoGame.Framework.dll --output /tmp/mg.lisp`
 
 4. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
 
@@ -178,7 +178,7 @@ with implementation choices and details as work progressed. It contains over 1,1
 of C# code, backed by a robust native Common Lisp test suite that performs recursive schema 
 and live CLR semantic reflection validation across `System.Runtime.dll`, `System.Console.dll`, 
 `AssemblyToLispyTestTarget.dll`, `MonoGame.Framework.dll`, `DotCL.Runtime.dll`, 
-`MonoGameLispDemo.dll`, and `NVorbis.dll`.
+`DungeonSlime.dll`, and `NVorbis.dll`.
 
 This development approach has been extended to the modular test framework under the `tests/`
 directory (for testing capabilities), with plans to also use the AI assistant for

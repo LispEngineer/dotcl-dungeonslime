@@ -1,9 +1,9 @@
-# Makefile for MonoGameLispDemo
+# Makefile for DungeonSlime
 
 REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/
 BIN_DIR = bin/Debug/net10.0/ubuntu.24.04-x64/
 OUT_DIR = cspackages
-EXECUTABLE = bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo
+EXECUTABLE = bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime
 
 .PHONY: all build test run clean cspackages
 
@@ -14,7 +14,7 @@ build: build-actual # cspackages build-actual
 build-actual:
 	# Build the base project, which may or may not have any of the
 	# cspackages/ files
-	dotnet build MonoGameLispDemo.csproj -v d -c Debug
+	dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:
 	mkdir -p obj $(OUT_DIR)
@@ -26,13 +26,13 @@ cspackages:
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR)
 
 test:
-	bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --test
+	bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime --test
 
 run:
-	bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo
+	bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime
 
 clean:
-	dotnet clean MonoGameLispDemo.csproj
+	dotnet clean DungeonSlime.csproj
 	# Keep our "vendored" cspackages that we previously created intentionally
 	# rm -rf $(OUT_DIR)
 

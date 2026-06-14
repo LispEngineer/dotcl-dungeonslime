@@ -137,7 +137,7 @@ and files in this repository.
 * `type-aliases.lisp`: Provides MonoGame-specific and other C# type aliases
   into `dotnet::*type-aliases*` mostly for ease of reading the code.
 
-* `MonoGameLispDemo.asd`: ASDF system definition file for this game.
+* `dungeon-slime.asd`: ASDF system definition file for this game.
 
 * `explore.lisp`: Just some functions I load into the REPL to explore
   the areas of DotCL.
@@ -232,7 +232,7 @@ and files in this repository.
 
 # Project Files
 
-* `MonoGameLispDemo.csproj`: This is the C# Project file for the game. Its
+* `DungeonSlime.csproj`: This is the C# Project file for the game. Its
   mystical incantations produce the final standalone binary. For more
   details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
 

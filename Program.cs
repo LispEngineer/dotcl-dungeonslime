@@ -59,13 +59,13 @@ if (hasAssembly && !string.IsNullOrEmpty(assemblyFile)) {
         outputFile = "-";
     }
     if (outputFile == "-") {
-        MonoGameLispDemo.AssemblyToLispy.RedirectLogsToError = true;
+        DungeonSlime.AssemblyToLispy.RedirectLogsToError = true;
     }
     try {
         string fullAssemblyPath = Path.GetFullPath(assemblyFile);
         string inputDir = Path.GetDirectoryName(fullAssemblyPath) ?? Directory.GetCurrentDirectory();
         string inputAssemblyFile = Path.GetFileName(fullAssemblyPath);
-        MonoGameLispDemo.AssemblyToLispy.GenerateLispyMetadata(inputDir, inputAssemblyFile, outputFile);
+        DungeonSlime.AssemblyToLispy.GenerateLispyMetadata(inputDir, inputAssemblyFile, outputFile);
     } catch (Exception ex) {
         Console.Error.WriteLine($"[Program.cs] Error generating metadata: {ex.Message}");
         Console.Error.WriteLine(ex.StackTrace);
@@ -146,7 +146,7 @@ var gameObj = DotclHost.Call("MAKE-GAME");
 
 if (IsTestMode) {
     Console.WriteLine($"[Program.cs] Running assembly-to-lispy tests...");
-    MonoGameLispDemo.AssemblyToLispyTest.RunTests();
+    DungeonSlime.AssemblyToLispyTest.RunTests();
     Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
     return;
 }

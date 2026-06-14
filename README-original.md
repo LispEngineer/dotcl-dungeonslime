@@ -1,4 +1,4 @@
-# MonoGameLispDemo — dotcl を C# プロジェクトに組み込むレシピ (MonoGame 版)
+# DungeonSlime — dotcl を C# プロジェクトに組み込むレシピ (MonoGame 版)
 
 dotcl を **既存の .NET プロジェクトのインプロセスランタイムとして埋め込む**
 ための定型を、MonoGame DesktopGL アプリで実演するサンプル。Common Lisp が
@@ -23,15 +23,15 @@ override の中の Lisp コード (`pulse-color` を呼んで `Color` を作る)
 ## 構成
 
 ```
-MonoGameLispDemo/
-├── MonoGameLispDemo.csproj   # net10.0-windows / win-x64 / DesktopGL
-├── MonoGameLispDemo.asd      # ASDF 定義: depends-on dotnet-class
+DungeonSlime/
+├── DungeonSlime.csproj   # net10.0-windows / win-x64 / DesktopGL
+├── dungeon-slime.asd      # ASDF 定義: depends-on dotnet-class
 ├── main.lisp                 # Demo.LispGame を define-class で emit
 ├── Program.cs                # boot + Run() のみ
 └── CsharpSanityGame.cs       # 環境診断用 (--csharp-sanity フラグで起動)
 ```
 
-`MonoGameLispDemo.csproj` 内の `<Import Project=".../Dotcl.targets" />`
+`DungeonSlime.csproj` 内の `<Import Project=".../Dotcl.targets" />`
 が `main.lisp` をビルド時に compile-file → `bin/.../dotcl-fasl/` に
 配置する (#166 project-core flow)。実行時は `DotclHost.LoadFromManifest`
 が manifest を読んでまとめて load する。
@@ -50,7 +50,7 @@ MonoGameLispDemo/
 レンダリングが真っ黒な場合、Lisp 連携か MonoGame 環境かの切り分けに
 
 ```
-MonoGameLispDemo.exe --csharp-sanity
+DungeonSlime.exe --csharp-sanity
 ```
 
 を使う。純 C# の `CsharpSanityGame` (赤一色 Clear) を立ち上げる。これも
@@ -60,8 +60,8 @@ MonoGameLispDemo.exe --csharp-sanity
 ## 実行
 
 ```bash
-dotnet build MonoGameLispDemo.csproj -c Debug
-./bin/Debug/net10.0-windows/win-x64/MonoGameLispDemo.exe
+dotnet build DungeonSlime.csproj -c Debug
+./bin/Debug/net10.0-windows/win-x64/DungeonSlime.exe
 ```
 
 `net10.0-windows` ターゲット + `win-x64` RID なので、x64 版の

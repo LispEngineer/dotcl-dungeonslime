@@ -32,7 +32,7 @@ and well documented with comments and complete triple-slash
 comments on the classes.
 */
 
-namespace MonoGameLispDemo {
+namespace DungeonSlime {
 
     /// <summary>
     ///   Provides functionality to extract metadata from .NET assemblies and export it in Common Lisp S-expression format.
@@ -1010,7 +1010,7 @@ namespace MonoGameLispDemo {
                 RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/", "System.Console.dll");
 
                 // Test our synthetic edge cases target.
-                // The built DLL will reside in the output folder alongside MonoGameLispDemo
+                // The built DLL will reside in the output folder alongside DungeonSlime
                 RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "AssemblyToLispyTestTarget.dll");
 
                 // Test the MonoGame.Framework assembly
@@ -1019,8 +1019,8 @@ namespace MonoGameLispDemo {
                 // Test the DotCL runtime assembly
                 RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "DotCL.Runtime.dll");
 
-                // Test the main MonoGameLispDemo game assembly
-                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "MonoGameLispDemo.dll");
+                // Test the main DungeonSlime game assembly
+                RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "DungeonSlime.dll");
 
                 // Test the NVorbis assembly dependency
                 RunTestOnAssembly(AppDomain.CurrentDomain.BaseDirectory, "NVorbis.dll");

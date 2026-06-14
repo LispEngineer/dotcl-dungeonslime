@@ -6,8 +6,8 @@
 (dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGame.Framework.dll")
 
 ;; Load the C# project assembly
-(format *error-output* "[load-repl.lisp] Loading MonoGameLispDemo C# assembly...~%")
-(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo.dll")
+(format *error-output* "[load-repl.lisp] Loading DungeonSlime C# assembly...~%")
+(dotnet:load-assembly "bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime.dll")
 
 ;; Run the C# Registrar - this creates the "MONOUTILS" package and adds
 ;; the C#-impleemnted functions to it
@@ -21,10 +21,10 @@
 ;; long output due to my use of Roswell so I truncate it.
 (length (push '*default-pathname-defaults* asdf:*central-registry*))
 
-(format *error-output* "[load-repl.lisp] Loading MonoGameLispDemo ASDF system...~%")
-(asdf:load-system "MonoGameLispDemo")
+(format *error-output* "[load-repl.lisp] Loading dungeon-slime ASDF system...~%")
+(asdf:load-system "dungeon-slime")
 ; Load a system super verbosely
-; (let ((*load-verbose* t)(*compile-verbose* t)(*compile-print* t))  (asdf:load-system "MonoGameLispDemo"))
+; (let ((*load-verbose* t)(*compile-verbose* t)(*compile-print* t))  (asdf:load-system "dungeon-slime"))
 
 ;; Prevent the game's background REPL from spawning if desired
 ;; (setf game-repl:*no-lisp-repl* t)
@@ -47,6 +47,15 @@
 ;; (dotnet:invoke *mg-game* "Run")
 (format t "[load-repl.lisp] Example usage:~%")
 (format t "[load-repl.lisp] (dotnet:invoke *mg-game* \"Run\")~%")
+
+;; NOTE: Sometimes when I run the above I am now getting an exception:
+;; [game-1:load-content]   Key: slime-1, Value: #<TEXTURE-REGION>
+;; [sprite:initialize-instance:after] Initializing sprite...
+;; ; #<ERROR: DOTNET:INVOKE MonoGameCLOSProxy.Run: Exception has been thrown by the target of an invocation.>
+;; I haven't figured out why yet, and then just redoing the load of this file
+;; and then the command above will work fine. I don't know how to get the system
+;; to give me a better error message. :(
+(format t "[load-repl.lisp] NOTE: The above sometimes fails for unknown reasons; reload the REPL and rety if that happens~%")
 
 ;; To clean up after running the game:
 ;; (dotnet:invoke *mg-game* "Dispose")

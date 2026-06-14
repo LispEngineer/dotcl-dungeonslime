@@ -106,7 +106,7 @@ due to a combination of two issues:
   Quicklisp does not load in DotCL (there are DotCL language issues
   and also needs a DotCL-specific socket implementation). However,
   once loaded in SBCL, you can use DotCL's ASDF to load those systems,
-  e.g., `(asdf:load-system "MonoGameLispDemo")`.
+  e.g., `(asdf:load-system "dungeon-slime")`.
   * I may work on the Quicklisp DotCL implementation at some point.
 
 * MGCB: To copy the `test-atlas.lisp` file to the output Content directory,
@@ -117,7 +117,7 @@ due to a combination of two issues:
   * `xhost +si:localuser:dummy`
   * `su - dummy` (or any other user)
   * `export DISPLAY=:0` (use X11)
-  * `/tmp/ubuntu.24.04-x64/MonoGameLispDemo` (optionally add `--test`)
+  * `/tmp/ubuntu.24.04-x64/DungeonSlime` (optionally add `--test`)
 
 * DotCL compiles the root system by concatenating
   all source files in the system (in the order defined in the `.asd`file)

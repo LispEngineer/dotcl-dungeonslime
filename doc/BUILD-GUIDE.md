@@ -4,15 +4,15 @@ This document was written by Antigravity CLI on 2026-05-20.
 Gemini's document starts with the next section.
 
 
-# MonoGameLispDemo Project & Build Explanation
+# DungeonSlime Project & Build Explanation
 
-This document provides a detailed breakdown of the `MonoGameLispDemo.csproj` project file, the overall build pipeline, and the referenced files from both this project and the sibling `dotcl` repository.
+This document provides a detailed breakdown of the `DungeonSlime.csproj` project file, the overall build pipeline, and the referenced files from both this project and the sibling `dotcl` repository.
 
 ---
 
-## 1. Line-by-Line Breakdown of `MonoGameLispDemo.csproj`
+## 1. Line-by-Line Breakdown of `DungeonSlime.csproj`
 
-Here is the explanation for every configuration section in [MonoGameLispDemo.csproj](../MonoGameLispDemo.csproj).
+Here is the explanation for every configuration section in [DungeonSlime.csproj](../DungeonSlime.csproj).
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -23,14 +23,14 @@ Here is the explanation for every configuration section in [MonoGameLispDemo.csp
 ```xml
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MonoGameLispDemo</RootNamespace>
+    <RootNamespace>DungeonSlime</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RollForward>Major</RollForward>
   </PropertyGroup>
 ```
 *   **`<OutputType>WinExe</OutputType>`**: Configures the compilation output to be a GUI application. On Windows, this prevents an empty, black cmd window from spawning behind the game window. On Linux, it compiles down to a native graphical binary.
-*   **`<RootNamespace>MonoGameLispDemo</RootNamespace>`**: Defines the base namespace. Any C# classes declared without a namespace wrapper automatically fall under this namespace.
+*   **`<RootNamespace>DungeonSlime</RootNamespace>`**: Defines the base namespace. Any C# classes declared without a namespace wrapper automatically fall under this namespace.
 *   **`<ImplicitUsings>enable</ImplicitUsings>`**: Automatically generates global `using` directives for common namespaces (`System`, `System.IO`, `System.Linq`, etc.) so they don't have to be manually imported at the top of every C# file.
 *   **`<Nullable>enable</Nullable>`**: Activates compiler warnings and diagnostics for C# Nullable Reference Types, helping to prevent runtime `NullReferenceException` bugs.
 *   **`<RollForward>Major</RollForward>`**: Permits the .NET runtime host to run the application on newer major runtime versions (e.g. .NET 11 or 12) if the targeted .NET 10.0 runtime is not present on the system.
@@ -69,7 +69,7 @@ MSBuild uses conditional evaluation to switch configurations between Windows and
 These custom variables define parameters utilized by the imported Lisp build targets.
 ```xml
   <PropertyGroup>
-    <DotclProjectAsd>$(MSBuildProjectDirectory)/MonoGameLispDemo.asd</DotclProjectAsd>
+    <DotclProjectAsd>$(MSBuildProjectDirectory)/dungeon-slime.asd</DotclProjectAsd>
     <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
     <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
   </PropertyGroup>
@@ -85,7 +85,7 @@ These custom variables define parameters utilized by the imported Lisp build tar
 ```xml
   <ItemGroup>
     <None Remove="main.lisp" />
-    <None Remove="MonoGameLispDemo.asd" />
+    <None Remove="dungeon-slime.asd" />
   </ItemGroup>
 ```
 *   **`<None Remove="..." />`**: Excludes these Lisp files from being handled by standard C# copying rules. We remove them here because they are compiled separately by the custom `dotcl` targets and should not be bundled in their raw text forms.
@@ -120,8 +120,8 @@ These custom variables define parameters utilized by the imported Lisp build tar
 When you run `dotnet build`, the build pipeline processes the project in two main stages:
 
 ### Stage 1: The Lisp Build (Custom Targets)
-1.  **Resolve Dependencies:** The `DotclResolveDeps` target invokes the local `dotcl` runtime binary on `MonoGameLispDemo.asd` with `--resolve-deps`. This analyzes dependencies (like `dotnet-class`, `dotcl-thread`, and `dotcl-repl`) and produces manifests of these dependencies and core source files.
-2.  **Lisp Compilation:** The `DotclCompileRoot` target runs `dotcl` with `--compile-project` on the `.asd` file. It concatenates `main.lisp` and compiles it into `MonoGameLispDemo.fasl` (a compiled .NET IL assembly representing your Lisp code).
+1.  **Resolve Dependencies:** The `DotclResolveDeps` target invokes the local `dotcl` runtime binary on `dungeon-slime.asd` with `--resolve-deps`. This analyzes dependencies (like `dotnet-class`, `dotcl-thread`, and `dotcl-repl`) and produces manifests of these dependencies and core source files.
+2.  **Lisp Compilation:** The `DotclCompileRoot` target runs `dotcl` with `--compile-project` on the `.asd` file. It concatenates `main.lisp` and compiles it into `dungeon-slime.fasl` (a compiled .NET IL assembly representing your Lisp code).
 3.  **Asset Bundling:** The standard compiler core (`dotcl.core`) along with dependency `.fasl` assemblies and the manifest are bundled together inside the build output directory `dotcl-fasl/`.
 
 ### Stage 2: The C# Build (SDK Compiler)
@@ -137,7 +137,7 @@ When you run `dotnet build`, the build pipeline processes the project in two mai
 ## 3. Sibling Files and Dependency Breakdown
 
 ### Project Files
-*   **[MonoGameLispDemo.asd](../MonoGameLispDemo.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
+*   **[dungeon-slime.asd](../dungeon-slime.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
 *   **[main.lisp](../main.lisp)**: The Lisp application file. It uses `dotnet:define-class` to create class definitions recognized by C# (inheriting from MonoGame's `Game`), defines update loops, and color cycle logic.
 *   **[Program.cs](../Program.cs)**: The C# host program. It boots `dotcl`, loads manifest assets, resolves the Lisp game class instance, and triggers MonoGame's main loop.
 *   **[BaseCaller.cs](../BaseCaller.cs)**: Workaround utilities to allow Lisp classes to invoke parent class methods (e.g. `base.Update()` or `base.Draw()`).

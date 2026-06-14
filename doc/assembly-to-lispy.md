@@ -512,7 +512,7 @@ and semantic reflection checks against the exact assemblies this project activel
     *   `AssemblyToLispyTestTarget.dll`
     *   `MonoGame.Framework.dll`
     *   `DotCL.Runtime.dll`
-    *   `MonoGameLispDemo.dll`
+    *   `DungeonSlime.dll`
     *   `NVorbis.dll`
 *   **Recursive Schema and Semantic Validation**: All generated metadata files are parsed
     in Common Lisp, recursively validated against the structural schema, and checked via

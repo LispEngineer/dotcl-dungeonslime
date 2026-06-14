@@ -153,7 +153,7 @@ members.
     *   Define the package `:assembly-package-generator` within the load-time `eval-when`
         block.
     *   Export the functions `run-from-cli` and `generate-assembly-packages`.
-*   **[MonoGameLispDemo.asd](../MonoGameLispDemo.asd)**:
+*   **[dungeon-slime.asd](../dungeon-slime.asd)**:
     *   Add `assembly-package-generator` as a component depending on `packages` and `utils`.
 *   **[NEW] [assembly-package-generator.lisp](../assembly-package-generator.lisp)**:
     Create the main generator file implementing:
@@ -202,11 +202,11 @@ For each C# class, the generator will output a Lisp file containing:
 1. Rebuild the project using `make build`.
 2. Generate metadata for `System.Console.dll`:
    ```bash
-   dotnet run --project MonoGameLispDemo.csproj -- --assembly /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/System.Console.dll --output obj/System.Console.lispy.metadata
+   dotnet run --project DungeonSlime.csproj -- --assembly /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/System.Console.dll --output obj/System.Console.lispy.metadata
    ```
 3. Run the package generator:
    ```bash
-   dotnet run --project MonoGameLispDemo.csproj -- --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output obj/gen-packages
+   dotnet run --project DungeonSlime.csproj -- --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output obj/gen-packages
    ```
 4. Verify that `obj/gen-packages/system-console.lisp` is created and correctly structures
    `system-console` package, constants (`<type>`, `<type-str>`, etc.), simplest methods

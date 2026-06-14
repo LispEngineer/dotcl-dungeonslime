@@ -644,11 +644,11 @@
       (assert-true (find-if (lambda (m) (string= (getf m :name) "Load")) (getf rt :methods))
                    "Runtime should contain Load method"))))
 
-(deftest test-monogame-lisp-demo
-  "Spot checks MonoGameLispDemo.dll metadata to verify that MonoGameLispDemo.AssemblyToLispy
+(deftest test-dungeon-slime
+  "Spot checks DungeonSlime.dll metadata to verify that DungeonSlime.AssemblyToLispy
    exists and has the GenerateLispyMetadata method."
-  (let ((atl (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "MonoGameLispDemo.AssemblyToLispy")) *metadata*)))
-    (assert-not-null atl "Should find MonoGameLispDemo.AssemblyToLispy type")
+  (let ((atl (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "DungeonSlime.AssemblyToLispy")) *metadata*)))
+    (assert-not-null atl "Should find DungeonSlime.AssemblyToLispy type")
     (when atl
       (assert-equal :class (getf atl :kind) "AssemblyToLispy is a class")
       (assert-true (find-if (lambda (m) (string= (getf m :name) "GenerateLispyMetadata")) (getf atl :methods))
@@ -688,8 +688,8 @@
      (test-monogame-framework))
     ((string= assembly-name "DotCL.Runtime.dll")
      (test-dotcl-runtime))
-    ((string= assembly-name "MonoGameLispDemo.dll")
-     (test-monogame-lisp-demo))
+    ((string= assembly-name "DungeonSlime.dll")
+     (test-dungeon-slime))
     ((string= assembly-name "NVorbis.dll")
      (test-nvorbis)))
   

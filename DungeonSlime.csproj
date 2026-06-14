@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MonoGameLispDemo</RootNamespace>
+    <RootNamespace>DungeonSlime</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RollForward>Major</RollForward>
@@ -33,14 +33,14 @@
 
     <!-- #166 project-core flow: Dotcl.targets walks .asd, compiles main.lisp,
          writes manifest. Runtime side just calls Initialize + LoadFromManifest. -->
-    <DotclProjectAsd>$(MSBuildProjectDirectory)/MonoGameLispDemo.asd</DotclProjectAsd>
+    <DotclProjectAsd>$(MSBuildProjectDirectory)/dungeon-slime.asd</DotclProjectAsd>
     <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
     <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="main.lisp" />
-    <None Remove="MonoGameLispDemo.asd" />
+    <None Remove="dungeon-slime.asd" />
   </ItemGroup>
 
   <ItemGroup>

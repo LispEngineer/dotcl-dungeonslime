@@ -16,7 +16,7 @@
                                  (uiop:directory-files cspackages-dir)))
           nil))))
 
-(defsystem "MonoGameLispDemo"
+(defsystem "dungeon-slime"
   :description "dotcl Common Lisp implementation of the MonoGame Dungeon Slime demo"
   :version "0.2"
   :depends-on ("dotnet-class"
