@@ -193,9 +193,6 @@ and files in this repository.
 
 # C#
 
-* `CsharpSanityGame.cs`: A MonoGame instance fully in C# to prove that
-  MonoGame has loaded correctly.
-
 * `MonoUtils.cs`: Containts the C# implementation of an `invoke-generic`
   function that is akin to `dotnet:static-generic`. Also has a
   `MonoUtilsRegistrar` class which will register the functions in the
@@ -205,9 +202,12 @@ and files in this repository.
 
 * `Program.cs`: Main launcher for the stand-alone executable. 
   Optional arguments:
-  * `--csharp-sanity`
-  * `--base`
-  * `--test` will prevent the actual MonoGame from running and will run the assembly-to-lispy test suite.
+  * `--test` will prevent the actual MonoGame from running and will run the test suite
+  * TODO: Document the rest of these
+  * `--assembly`
+  * `--assembly-metadata`
+  * `--class`
+  * `--output`
 
 * `AssemblyToLispy.cs`: The `assembly-to-lispy` specification.
   * Extracts metadata (types, properties, fields, constructors, methods, parameter

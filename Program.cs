@@ -15,6 +15,8 @@ string? assemblyMetadataFile = null;
 string? classFilter = null;
 string? outputDir = null;
 bool hasAssemblyMetadata = false;
+var isTestMode = false;
+
 
 for (int i = 0; i < args.Length; i++) {
     if (args[i] == "--assembly" && i + 1 < args.Length) {
@@ -36,25 +38,13 @@ for (int i = 0; i < args.Length; i++) {
     } else if (args[i] == "--output") {
         outputFile = "-";
         hasOutput = true;
+    } else if (args[i] == "--test") {
+        isTestMode = true;
     }
-}
-
-if (hasAssemblyMetadata && !string.IsNullOrEmpty(assemblyMetadataFile)) {
-    try {
-        DotclHost.Initialize();
-        MonoUtilsRegistrar.Initialize();
-        var generatorManifestPath = Path.Combine(AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
-        DotclHost.LoadFromManifest(generatorManifestPath);
-        DotclHost.Call("RUN-ASSEMBLY-PACKAGE-GENERATOR", assemblyMetadataFile, classFilter ?? "", outputDir ?? "");
-    } catch (Exception ex) {
-        Console.Error.WriteLine($"[Program.cs] Error in assembly package generator: {ex.Message}");
-        Console.Error.WriteLine(ex.StackTrace);
-        Environment.Exit(1);
-    }
-    return;
 }
 
 if (hasAssembly && !string.IsNullOrEmpty(assemblyFile)) {
+    Console.Error.WriteLine($"[Program.cs] Generating assembly metadata...");
     if (!hasOutput || string.IsNullOrEmpty(outputFile)) {
         outputFile = "-";
     }
@@ -71,21 +61,50 @@ if (hasAssembly && !string.IsNullOrEmpty(assemblyFile)) {
         Console.Error.WriteLine(ex.StackTrace);
         Environment.Exit(1);
     }
+    Console.Error.WriteLine($"[Program.cs] ...assembly metadata generation complete.");
     return;
 }
 
-// Quick sanity check: a pure C# Game subclass that clears to red. If this
-// shows red, MonoGame works in this project; the issue is dotcl interop
-// passing struct args to .NET methods.
-if (args.Length > 0 && args[0] == "--csharp-sanity") {
-    using var sanity = new CsharpSanityGame();
-    sanity.Run();
-    sanity.Dispose();
+// Boot dotcl BEFORE constructing the Game so the Lisp side has a chance to
+// (dotnet:define-class "MonoGameCLOSProxy" (Game) ...) and the dynamically
+// emitted assembly is loaded. Then we instantiate the Lisp-defined type
+// via DotclHost.Call("MAKE-GAME") and Run() it on the main thread.
+DotclHost.Initialize();
+
+// Register my Custom C#-implemented Lisp package with DotCL's
+// package registry.
+MonoUtilsRegistrar.Initialize();
+
+// dotcl's ResolveDotNetType does not seem to need the types force
+// previously loaded at this point anymore.
+
+if (hasAssemblyMetadata && !string.IsNullOrEmpty(assemblyMetadataFile)) {
+    Console.WriteLine("[Program.cs] Running assembly package generator...");
+    try {
+        var generatorManifestPath = Path.Combine(AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
+        DotclHost.LoadFromManifest(generatorManifestPath);
+        DotclHost.Call("RUN-ASSEMBLY-PACKAGE-GENERATOR", assemblyMetadataFile, classFilter ?? "", outputDir ?? "");
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[Program.cs] Error in assembly package generator: {ex.Message}");
+        Console.Error.WriteLine(ex.StackTrace);
+        Environment.Exit(1);
+    }
+    Console.WriteLine("[Program.cs] ...assembly package generator complete.");
     return;
 }
 
-// Test our creation to call base classes of random C# objects
-if (args.Length > 0 && args[0] == "--base") {
+var manifestPath = Path.Combine(
+    AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
+Console.WriteLine($"[Program.cs] manifest: {manifestPath}");
+var loaded = DotclHost.LoadFromManifest(manifestPath);
+Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
+
+//////////////////////////////////////////////////////////////////////////////
+// Tests
+
+if (isTestMode) {
+    Console.WriteLine($"[Program.cs] Running Base class tests...");
+    // Test the creation to call base classes of random C# objects
     var Child = new Child();
     Child.Speak();
     Console.WriteLine("The next line should be the parent");
@@ -116,40 +135,23 @@ if (args.Length > 0 && args[0] == "--base") {
     Console.WriteLine(func(Calc, new object[] { 5, "six" }));
     Console.WriteLine(DynamicBaseCaller.CallFunc(func, Calc, 7, "eight"));
 
-    return;
-}
+    Console.WriteLine($"[Program.cs] Running Lisp tests...");
+    DotclHost.Call("RUN-ALL-TESTS");
 
-var IsTestMode = (args.Length > 0 && args[0] == "--test");
-
-// Boot dotcl BEFORE constructing the Game so the Lisp side has a chance to
-// (dotnet:define-class "MonoGameCLOSProxy" (Game) ...) and the dynamically
-// emitted assembly is loaded. Then we instantiate the Lisp-defined type
-// via DotclHost.Call("MAKE-GAME") and Run() it on the main thread.
-
-DotclHost.Initialize();
-
-// Register my Custom C#-implemented Lisp package with DotCL's
-// package registry.
-MonoUtilsRegistrar.Initialize();
-
-// dotcl's ResolveDotNetType does not seem to need the types force
-// previously loaded at this point anymore.
-
-var manifestPath = Path.Combine(
-    AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
-Console.WriteLine($"[Program.cs] manifest: {manifestPath}");
-var loaded = DotclHost.LoadFromManifest(manifestPath);
-Console.WriteLine($"[Program.cs] LoadFromManifest loaded {loaded} fasls");
-
-// MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
-var gameObj = DotclHost.Call("MAKE-GAME");
-
-if (IsTestMode) {
     Console.WriteLine($"[Program.cs] Running assembly-to-lispy tests...");
     DungeonSlime.AssemblyToLispyTest.RunTests();
+
     Console.WriteLine($"[Program.cs] Not running game; in --test mode.");
     return;
 }
+
+///////////////////////////////////////////////////////////////////////////
+// Main game
+
+// MAKE-GAME (defined in main.lisp) returns a MonoGameCLOSProxy instance.
+// FIXME: I'm really not sure why this works without being qualified with
+// DUNGEON-SLIME: or ::
+var gameObj = DotclHost.Call("MAKE-GAME");
 
 if (gameObj is LispDotNetObject dno &&
     dno.Value is Microsoft.Xna.Framework.Game game) {

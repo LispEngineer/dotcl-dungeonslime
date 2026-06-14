@@ -109,4 +109,6 @@
      #:texture-region #:tr-draw))
 
   (defpackage :dungeon-slime-tests
-    (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)))
+    (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
+    (:export
+      #:run-all-tests)))

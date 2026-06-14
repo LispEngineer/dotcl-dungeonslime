@@ -40,11 +40,10 @@
                   `(:file "package-generator-tests" :depends-on ("utils" "assembly-package-generator"
                                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic" :depends-on ("monoutils"))
-                  ;; Uncomment the below to run the Proof of Concepts & Tests
                   `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp" "utils"
                                                   ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
-                  ;; End tests to uncomment
+                  '(:file "test-harness" :depends-on ("poc-test"))
                   '(:file "game-repl" :depends-on ("packages"))
                   '(:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants" "packages"))
                   '(:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))

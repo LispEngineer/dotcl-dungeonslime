@@ -29,4 +29,4 @@
     ;; And return our CLR object
     cs))
 
-(format *error-output* "[main.lisp] make-game defined: ~S~%" (fboundp 'make-game))
+(format *error-output* "[main.lisp] make-game defined: ~S in package ~S~%" (fboundp 'make-game) *package*)

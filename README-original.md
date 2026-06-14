@@ -31,6 +31,9 @@ DungeonSlime/
 └── CsharpSanityGame.cs       # 環境診断用 (--csharp-sanity フラグで起動)
 ```
 
+(NOTE by Douglas P. Fields, Jr: `--csharp-sanity` and `CSharpSanityGame.cs`
+have both been removed.)
+
 `DungeonSlime.csproj` 内の `<Import Project=".../Dotcl.targets" />`
 が `main.lisp` をビルド時に compile-file → `bin/.../dotcl-fasl/` に
 配置する (#166 project-core flow)。実行時は `DotclHost.LoadFromManifest`
