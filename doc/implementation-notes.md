@@ -131,6 +131,7 @@ due to a combination of two issues:
     `(dotnet:invoke an-object "AMethod" (dotnet:box nil "BOOL"))`
     if the type cannot be inferred by the DotCL Compiler/Runtime
 
+
 # .NET CLOS Integration in DotCL 0.1.9
 
 DotCL 0.1.9 introduces the ability for CLOS generic functions (`defgeneric`)
@@ -290,6 +291,15 @@ underlying components), always pass parameter and field types as fully-qualified
 Symbols without string qualification might fail to resolve during macro expansion if the
 namespace environment isn't strictly controlled, whereas explicit string declarations
 correctly guide DotCL's internal reflection (`dotnet:resolve-type`).
+
+## **Final Solution**
+
+The file `type-aliases.lisp` has a list of assemblies and classes.
+These assemblies are loaded at compile time, and the classes are registered
+with DotCL for generic method dispatch.
+
+This needs to be updated with all the classes being used for dispatch prior
+to adding generic methods using those classes.
 
 
 # Resolving Build Output Paths Programmatically

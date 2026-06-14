@@ -44,13 +44,9 @@
   (format *error-output* "[type-aliases.lisp] Execute time: AppDomain.CurrentDomain.BaseDirectory: ~S~%"
      (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")))
 
-;; Compile time will generally show something we don't care about.
-;;     [type-aliases.lisp] Compile time: AppContext.BaseDirectory:              "/home/dfields/src/cl/dotcl/runtime/bin/Debug/net10.0/"
-;;     [type-aliases.lisp] Compile time: AppDomain.CurrentDomain.BaseDirectory: "/home/dfields/src/cl/dotcl/runtime/bin/Debug/net10.0/"
-
 (eval-when (:compile-toplevel)
 
-  ;; Old, non-working way:
+  ;; dotnet-build way
   (let* ((out-path
           (uiop:run-program '("dotnet" "build" "DungeonSlime.csproj" "-getProperty:OutputPath")
                             :output :string
@@ -64,7 +60,7 @@
       "[type-aliases.lisp] [dotnet-build] Compile time info:~%  out-path: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
       out-path bin-dir dll-path))
 
-  ;; New working way:
+  ;; ASDF way:
   (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
          (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
          (bin-dir (with-open-file (s outdir-file) (read-line s)))
@@ -74,5 +70,38 @@
       "[type-aliases.lisp] [dotcl-outdir] Compile time info:~%  sys-dir: ~S~%  outdir-file: ~S~%  bin-dir: ~S~%  dll-path: ~S~%"
       sys-dir outdir-file bin-dir dll-path)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Register classes for CLOS C# Class integration
+;; 1. First load all the necessary assemblies
+;; 2. Then register the classes with the CLOS type system
+
+(eval-when (:compile-toplevel)
+  (defparameter dotnet-assemblies
+    '("MonoGame.Framework.dll"
+      "DungeonSlime.dll")
+    "These are all the assemblies we will load so we can get their classes
+    registered for the method dispatch")
+  (format *error-output* "[type-aliases.lisp] Loading compile-time assemblies...~%")
+
+  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
+         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
+         (bin-dir (with-open-file (s outdir-file) (read-line s))))
+    (dolist (assembly dotnet-assemblies)
+      (format *error-output* "[type-aliases.lisp] Loading compile-time assembly: ~S~%" assembly)
+      (dotnet:load-assembly
+        (namestring
+          (merge-pathnames 
+            (concatenate 'string bin-dir assembly)
+            (asdf:system-source-directory "dungeon-slime")))))))
+
+(eval-when (:load-toplevel :execute)
+  (defparameter csharp-classes
+    '("Microsoft.Xna.Framework.Vector2"
+      "Microsoft.Xna.Framework.Rectangle")
+    "Classes to be used for C# CLOS generic dispatch methods")
+
+  (dolist (cls csharp-classes)
+    (format *error-output* "[type-aliases.lisp] Registering class: ~S~%" cls)
+    (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type cls))))
 
 
