@@ -9,14 +9,19 @@
   You must **only** use git for read-only commands.
 * Do include detailed comments with any code written,
   or changes to code made.
-* Update the `README.md` file with documentation on new features.
-* Update `antigravity-log.md` with any explanation you provide me,
-  and a log of any changes you make to any files.
-  * Create this file if it does not exist
+* Update documentation with any changes, especially these files:
+  * Update the `README.md` file with documentation on new features.
+  * Update `implementation-notes.md` with anything that may be a bit
+    tricky to understand or reimplement/reuse later.
+  * Update `FILES.md` with a brief description of any new files,
+    or significant changes to the content of files.
+  * Update `antigravity-log.md` with any explanation you provide me,
+    and a log of any changes you make to any files.
+    * Create this file if it does not exist
 * Do NOT make any changes to DotCL source code unless explicitly
   directed by the user. All the work for this project is to be done
   on this MonoGameLispDemo code only.
-* Any question about *how* to do something should be answered with
+* Questions about *how* to do something should be answered with
   an explanation on how to accomplish the thing requested, without
   you making any changes to any files or executing any commands that
   could change files.
@@ -25,19 +30,23 @@
   * For example, instead of saying
     "We still capture this metadata for our Lisp packaging..."
     say instead "This metadata is still captured for the Lisp packaging..."
+* Any command that is run regularly should be built into a `Makefile`
+  target.
+  * Any capability provided by `Makefile` targets should be used over
+    building custom commands.
 
 
 # Useful Commands
 
-* Run a dotcl REPL: `dotcl`
-* Build the project: `dotnet build MonoGameLispDemo.csproj -v d -c Debug`
+* Run a blank dotcl REPL: `dotcl`
+* Build the project: `make build`
 * Compile the lisp parts of the project:
+  * Note: This may change with different DotCL versions! This command is current
+    as of 0.1.8.
   * Linux: `dotnet run --project "/home/dfields/src/cl/MonoGameLispDemo-standalone/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"`
-  * (This can be found in the .csproj file.)
-* Run the game:
-  * Linux: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo`
-* Run the game in test mode (no GUI launched):
-  * Linux: `bin/Debug/net10.0/ubuntu.24.04-x64/MonoGameLispDemo --test`
+  * (This can be found in the `.csproj` file.)
+* Run the game: `make run`
+* Run the tests: `make test`
 
 
 # Code Style Instructions
