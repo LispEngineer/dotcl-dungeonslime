@@ -12,8 +12,11 @@ all: build test
 build: build-actual # cspackages build-actual
 
 build-actual:
-	# Build the base project, which may or may not have any of the
-	# cspackages/ files
+	# First, build the C# project without DotCL targets to ensure all NuGet
+	# dependencies (like MonoGame.Framework.dll) are fully copied to the bin/ directory.
+	# This prevents the Lisp compiler from crashing during compile-time assembly loading.
+	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
+	# Then, perform the actual build including the DotCL Lisp compilation targets.
 	dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:

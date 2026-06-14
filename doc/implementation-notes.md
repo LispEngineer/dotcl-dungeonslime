@@ -256,6 +256,31 @@ necessary assembly `.dll` and forcefully register the types during both the
 (defmethod get-x ((obj dotcl-internal::|Vector2|))
   (dotnet:invoke obj "X"))
 ```
+
+### MSBuild Dependency Timing Issue
+
+When using **Option 2**'s `eval-when` mechanism, the Lisp compiler explicitly reads 
+`MonoGame.Framework.dll` from the output `bin/` directory. However, the custom MSBuild 
+target that triggers DotCL compilation (`DotclCompileRoot`) runs during the `BeforeBuild` phase. 
+
+This happens *before* the standard C# target `CopyFilesToOutputDirectory` has had a chance 
+to extract NuGet dependencies and place them into `bin/`. Consequently, if a 
+fresh build is run after a `make clean`, the Lisp compiler will immediately crash with a
+`FileNotFoundException` because the `.dll` has not yet been extracted.
+
+To bypass this timing issue without rewriting DotCL's internal `Dotcl.targets`, 
+a **Two-Stage Build** is used in the `Makefile`:
+
+```makefile
+build-actual:
+	# 1. Build without DotCL targets (-p:DotclProjectAsd="") 
+	#    This forces MSBuild to resolve NuGet packages and fully populate bin/
+	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
+	
+	# 2. Build normally. The DLLs are now present for DotCL to safely load during compile-time.
+	dotnet build DungeonSlime.csproj -v d -c Debug
+```
+
 ## Defining C# Types from Lisp
 
 When defining new C# proxy classes from Lisp using `dotnet:define-class` (or its
