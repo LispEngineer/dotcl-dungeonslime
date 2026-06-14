@@ -34,7 +34,10 @@
 (defparameter *mg-game* (make-game))
 ;; Tell MonoGame where to load content assets from
 ;; (change this for your local installation)
-(setf (dotnet:invoke (content *game*) "RootDirectory") "/home/dfields/src/cl/MonoGameLispDemo-standalone/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
+;; FIXME: Use a DotCL-provided way to get the current directory's
+;; subdirectory of the build target, if ever possible
+(setf (dotnet:invoke (content *game*) "RootDirectory") 
+  "/home/dfields/src/cl/dotcl-dungeonslime/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
 
 (format t "[load-repl.lisp] *mg-game* is now available from (make-game).~%")
 

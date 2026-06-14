@@ -201,7 +201,7 @@
    at DotCL.Debugger.Enter(LispObject condition) in /home/dfields/src/cl/dotcl/runtime/Debugger.cs:line 50
 ...
 Unhandled exception. DotCL.RestartInvocationException: Restart invoked
-   at Program.<Main>$(String[] args) in /home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs:line 98
+   at Program.<Main>$(String[] args) in Program.cs:line 98
       |#
       |#
       (format *error-output* "[core:run] End error handling and run.~%"))

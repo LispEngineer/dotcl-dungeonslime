@@ -484,7 +484,9 @@ Since this is are running in a DotCL environment, for tests, implement them in t
 #### Phase 3C: Comprehensive Schema Validation (DONE)
 
 A strict, recursive Lisp validation engine has been implemented in
-[assembly-to-lispy-tests.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/assembly-to-lispy-tests.lisp)
+[assembly-to-lispy-tests.lisp](../assembly-to-lispy-tests.lisp) -
+may have been renamed to
+[assembly-to-lispy-tests-final.lisp](../assembly-to-lispy-tests-final.lisp) -
 that walks the entire generated metadata tree to perform both structural
 schema validation and semantic CLR reflection verification.
 

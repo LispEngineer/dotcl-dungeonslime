@@ -139,7 +139,7 @@ members.
 
 #### C# CLI Integration
 
-*   **[Program.cs](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/Program.cs)**:
+*   **[Program.cs](../Program.cs)**:
     *   Parse `--assembly-metadata`, `--class`, and `--output` command-line flags.
     *   If `--assembly-metadata` is detected:
         1. Initialize DotCL and load manifest FASLs.
@@ -149,13 +149,13 @@ members.
 
 #### Lisp Generator Infrastructure
 
-*   **[packages.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/packages.lisp)**:
+*   **[packages.lisp](../packages.lisp)**:
     *   Define the package `:assembly-package-generator` within the load-time `eval-when`
         block.
     *   Export the functions `run-from-cli` and `generate-assembly-packages`.
-*   **[MonoGameLispDemo.asd](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd)**:
+*   **[MonoGameLispDemo.asd](../MonoGameLispDemo.asd)**:
     *   Add `assembly-package-generator` as a component depending on `packages` and `utils`.
-*   **[NEW] [assembly-package-generator.lisp](file:///home/dfields/src/cl/MonoGameLispDemo-standalone/assembly-package-generator.lisp)**:
+*   **[NEW] [assembly-package-generator.lisp](../assembly-package-generator.lisp)**:
     Create the main generator file implementing:
     *   `camel-to-kebab`: A string utility that maps PascalCase/camelCase C# names to Lisp
         kebab-case.

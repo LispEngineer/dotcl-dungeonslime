@@ -124,15 +124,8 @@ sorry!
 ;; otherwise the game window will just sit there and cause grief.
 ```
 
-To run the game a second time: (**NOT** working)
-
-```lisp
-(setf *mg-game* (make-game))
-(setf (dotnet:invoke (content *game*) "RootDirectory") "/home/dfields/src/cl/MonoGameLispDemo-standalone/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
-(dotnet:invoke *mg-game* "Run")
-```
-
-Note that this currently does **NOT** work.
+It is not possible to run the game a second time after it exits
+under the current MonoGame system.
 It seems others have tried;
 [see this issue](https://github.com/MonoGame/MonoGame/issues/7816).
 In my case, it shows the game window and then segfaults out.

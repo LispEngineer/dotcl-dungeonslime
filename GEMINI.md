@@ -43,7 +43,7 @@
 * Compile the lisp parts of the project:
   * Note: This may change with different DotCL versions! This command is current
     as of 0.1.8.
-  * Linux: `dotnet run --project "/home/dfields/src/cl/MonoGameLispDemo-standalone/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"`
+  * Linux: `dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"`
   * (This can be found in the `.csproj` file.)
 * Run the game: `make run`
 * Run the tests: `make test`
@@ -107,10 +107,10 @@ All new code must have tests. However:
 
 When parentheses are mismatched, the build will break with errors that often have
 nothing to do with the problem (of mismatched parentheses). If the DotCL portion
-fails with an output similar to this:
+fails with an output similar to this: (from DotCL 0.1.8)
 
 ```
-/home/dfields/src/cl/dotcl/runtime/build/Dotcl.targets(143,5): error MSB3073: The command "dotnet run --project "/home/dfields/src/cl/MonoGameLispDemo-standalone/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/MonoGameLispDemo-standalone/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"" exited with code 134.
+/home/dfields/src/cl/dotcl/runtime/build/Dotcl.targets(143,5): error MSB3073: The command "dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/MonoGameLispDemo.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/MonoGameLispDemo.fasl"" exited with code 134.
 ```
 
 then always double (or even triple) check any changes to Lisp code for mismatched
