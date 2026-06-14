@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Base framework and schema/semantic validation for AssemblyToLispy tests
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (defvar *test-failures* 0)
 (defvar *test-count* 0)

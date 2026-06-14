@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for AssemblyToLispyTestTarget.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "AssemblyToLispyTestTarget.dll" test-synthetic-target
   ;; Test ByteEnum

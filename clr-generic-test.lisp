@@ -2,7 +2,7 @@
 ;;;
 ;;; Comprehensive tests for Version 1 of C# Class-Aware Generic Functions.
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (format *error-output* "[clr-generic-test.lisp] Starting tests...~%")
 

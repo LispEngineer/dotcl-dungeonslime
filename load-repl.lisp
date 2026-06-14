@@ -29,6 +29,10 @@
 ;; Prevent the game's background REPL from spawning if desired
 ;; (setf game-repl:*no-lisp-repl* t)
 
+;; Switch to our game package
+(format *error-output* "[load-repl.lisp] Changing package to dungeon-slime...~%")
+(in-package :dungeon-slime)
+
 ;; Create the game objects
 (format *error-output* "[load-repl.lisp] Creating game objects...~%")
 (defparameter *mg-game* (make-game))

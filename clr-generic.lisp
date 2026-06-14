@@ -7,7 +7,7 @@
 ;;; * Consider memoizing these "IsAssignableFrom" calls
 
 
-(in-package :cl-user)
+(in-package :clr-generic)
 (require :dotnet-class)
 
 (format *error-output* "[clr-generic.lisp] Loading in package ~S~%" *package*)

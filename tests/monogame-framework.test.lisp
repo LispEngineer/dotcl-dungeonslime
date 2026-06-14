@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for MonoGame.Framework.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "MonoGame.Framework.dll" test-monogame-framework
   (let ((game (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "Microsoft.Xna.Framework.Game")) *metadata*)))

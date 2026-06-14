@@ -193,12 +193,12 @@
                                       effect transform-matrix))
 |#
 
-(format *error-output* "[mg-classes.lisp] cl-user::+sprite-sort-mode-deferred+ = ~A~%"
-        cl-user::+sprite-sort-mode-deferred+)
+(format *error-output* "[mg-classes.lisp] dungeon-slime::+sprite-sort-mode-deferred+ = ~A~%"
+        dungeon-slime::+sprite-sort-mode-deferred+)
 
 ;; Ease of use function for Sprite Batch Begin using keyword arguments
 (defun sprite-batch-begin (sprite-batch
-                            &key (sort-mode cl-user::+sprite-sort-mode-deferred+)
+                            &key (sort-mode dungeon-slime::+sprite-sort-mode-deferred+)
                             (blend-state nil)
                             (sampler-state nil)
                             (depth-stencil-state nil)

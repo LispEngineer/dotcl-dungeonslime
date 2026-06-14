@@ -1,11 +1,11 @@
 # Makefile for DungeonSlime
 
-REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/
+REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
 BIN_DIR = bin/Debug/net10.0/ubuntu.24.04-x64/
 OUT_DIR = cspackages
 EXECUTABLE = bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime
 
-.PHONY: all build test run clean cspackages
+.PHONY: all build test run clean cspackages repl
 
 all: build test
 
@@ -40,4 +40,5 @@ mgcb:
 	dotnet tool restore
 	dotnet tool run mgcb-editor-linux
 
-
+repl:
+	dotcl --eval '(load "load-repl.lisp")' --eval '(in-package :dungeon-slime)' repl

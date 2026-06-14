@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for System.Console.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "System.Console.dll" test-system-console
   (let ((con (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "System.Console")) *metadata*)))

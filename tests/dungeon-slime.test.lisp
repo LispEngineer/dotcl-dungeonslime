@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for DungeonSlime.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "DungeonSlime.dll" test-dungeon-slime
   (let ((atl (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "DungeonSlime.AssemblyToLispy")) *metadata*)))

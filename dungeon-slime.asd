@@ -26,8 +26,8 @@
   ;; Do not include any of the "depends-on" stuff above in the "depends-on"
   ;; clauses in the components!
   :components #.(append
-                 '((:file "settings") ;; Load this file first, it contains declaims
-                   (:file "packages")
+                 '((:file "packages")
+                   (:file "settings" :depends-on ("packages")) ;; Load this file early, it contains declaims
                    (:file "utils" :depends-on ("packages"))
                    (:file "monoutils" :depends-on ("packages"))
                    (:file "constants")

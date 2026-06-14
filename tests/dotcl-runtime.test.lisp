@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for DotCL.Runtime.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "DotCL.Runtime.dll" test-dotcl-runtime
   (let ((rt (find-if (lambda (cls) (string= (getf cls :fully-qualified-name) "DotCL.Runtime")) *metadata*)))

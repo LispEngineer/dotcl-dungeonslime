@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for System.Runtime.dll metadata
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (def-assembly-test "System.Runtime.dll" test-array-list
   (let ((al (find-if (lambda (cls) (string= (getf cls :name) "ArrayList")) *metadata*)))

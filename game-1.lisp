@@ -4,7 +4,7 @@
 ;;; Ultimately this will implement the MonoGame's Dungeon Slime tutorial
 ;;; project in DotCL-flavored ANSI Common Lisp.
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (use-package :mg-classes)
 (require :dotnet-class)
 

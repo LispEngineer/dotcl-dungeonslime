@@ -2,7 +2,7 @@
 ;;;
 ;;; MonoGame Tutorial Chapter 7: TextureAtlas as a CLOS class.
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (require "asdf") ;; Load uiop library
 ; (require "anaphora") ; This doesn't work, but should have been loaded earlier
 

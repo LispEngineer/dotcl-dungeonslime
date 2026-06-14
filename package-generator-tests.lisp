@@ -5,7 +5,7 @@
 ;;; This file contains unit tests for the assembly-package-generator.
 ;;; Tests are run when this file is loaded.
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (format *error-output* "--- Running Package Generator Tests ---~%")
 

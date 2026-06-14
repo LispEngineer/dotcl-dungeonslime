@@ -1,6 +1,6 @@
 ;;; Project-wide settings
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 
 (format *error-output* "[settings.lisp] Loading in package ~S~%" *package*)
 

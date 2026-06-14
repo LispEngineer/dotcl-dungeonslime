@@ -3,7 +3,7 @@
 ;;; These are focused around basic functionality rather
 ;;; than any game specific functionality.
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (require :dotnet-class)
 
 (format *error-output* "[mg-core.lisp] Loading in package ~S~%" *package*)

@@ -1,6 +1,6 @@
 ;; Game Constants
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (require :dotnet-class)
 
 (format *error-output* "[constants.lisp] Loading in package ~S~%" *package*)

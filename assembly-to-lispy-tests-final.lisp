@@ -1,7 +1,7 @@
 ;;; Douglas P. Fields, Jr. - symbolics@lisp.engineer
 ;;; Tests for AssemblyToLispy metadata extraction
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (defvar *test-failures* 0)
 (defvar *test-count* 0)

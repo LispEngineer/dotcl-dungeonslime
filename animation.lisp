@@ -6,7 +6,7 @@
 ;;; As a CLOS class.
 
 (format *error-output* "[animation.lisp] Loading beginning.~%" *package*)
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (format *error-output* "[animation.lisp] Loading in package ~S~%" *package*)
 
 

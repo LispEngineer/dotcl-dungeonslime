@@ -73,4 +73,15 @@
     (:export #:run-assembly-package-generator
              #:generate-assembly-packages
              #:camel-to-kebab
-             #:split-string)))
+             #:split-string))
+
+  (defpackage :clr-generic
+    (:use :cl)
+    (:export #:defc#generic
+             #:defc#method))
+
+  (defpackage :dungeon-slime
+    (:use :cl :utils :mg-classes :monoutils :csharp :game-repl :clr-generic))
+
+  (defpackage :dungeon-slime-tests
+    (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)))

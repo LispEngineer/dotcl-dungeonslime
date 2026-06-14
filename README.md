@@ -113,8 +113,9 @@ sorry!
 
 ```lisp
 ;; Load all the necessary dependencies and make a game instance as
-;; cl-user::*mg-game*
+;; dungeon-slime::*mg-game*
 (load "load-repl.lisp")
+(in-package :dungeon-slime)
 
 ;; Execute the game then, with this:
 (dotnet:invoke *mg-game* "Run")

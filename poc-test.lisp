@@ -1,6 +1,6 @@
 ;;; Proofs of concept & functionality tests
 
-(in-package :cl-user)
+(in-package :dungeon-slime-tests)
 
 (format *error-output* "[poc-test.lisp] Loading in package ~S~%" *package*)
 
@@ -32,8 +32,8 @@
   (format *error-output* "boxed-dotnet-p x = ~A~%" (monoutils:boxed-dotnet-p))
   (format *error-output* "get-type x = ~A~%" (monoutils:get-type x))
   (format *error-output* "get-type-full-name x = ~A~%" (monoutils:get-type-full-name x))
-  (format *error-output* "dotnet-p +false+ = ~A~%" (monoutils:dotnet-p +false+))
-  (format *error-output* "boxed-dotnet-p +false+ = ~A~%" (monoutils:boxed-dotnet-p +false+)))
+  (format *error-output* "dotnet-p +false+ = ~A~%" (monoutils:dotnet-p dungeon-slime::+false+))
+  (format *error-output* "boxed-dotnet-p +false+ = ~A~%" (monoutils:boxed-dotnet-p dungeon-slime::+false+)))
 
 
 ;; Test Case-Sensitive C# Reader Macros (#!! and #!)

@@ -5,7 +5,7 @@
 ;;; When the game is made, save the C# class as *cs-game* and
 ;;; the CLOS class as *game*.
 
-(in-package :cl-user)
+(in-package :dungeon-slime)
 (require :dotnet-class)
 
 (format *error-output* "[main.lisp] Loading in package ~S~%" *package*)
