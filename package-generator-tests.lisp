@@ -117,13 +117,13 @@
                 nil
                 "TimeSpan = operator (false case)")
 
-    (assert-test (system-time-span:/= t1 t2)
+    (assert-test (system-time-span:not= t1 t2)
                 t
-                "TimeSpan /= operator (true case)")
+                "TimeSpan not= operator (true case)")
 
-    (assert-test (system-time-span:/= t1 t3)
+    (assert-test (system-time-span:not= t1 t3)
                 nil
-                "TimeSpan /= operator (false case)")
+                "TimeSpan not= operator (false case)")
 
     (assert-test (system-time-span:< t1 t2)
                 t
@@ -171,13 +171,13 @@
                 nil
                 "Vector2 = operator (false case)")
 
-    (assert-test (microsoft-xna-framework-vector2:/= v-zero v-one)
+    (assert-test (microsoft-xna-framework-vector2:not= v-zero v-one)
                 t
-                "Vector2 /= operator (true case)")
+                "Vector2 not= operator (true case)")
 
-    (assert-test (microsoft-xna-framework-vector2:/= v-zero v-zero)
+    (assert-test (microsoft-xna-framework-vector2:not= v-zero v-zero)
                 nil
-                "Vector2 /= operator (false case)")
+                "Vector2 not= operator (false case)")
 
     ;; UnitX (1,0) + UnitY (0,1) = One (1,1)
     (let ((v-sum (microsoft-xna-framework-vector2:+ v-x v-y)))

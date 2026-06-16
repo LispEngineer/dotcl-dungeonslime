@@ -1,14 +1,13 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 3
-;;; Creation Date: 2026-06-16T12:41:30Z
+;;; Generator Version: 5
+;;; Creation Date: 2026-06-16T13:33:59Z
 
 (in-package :cl-user)
 
 (defpackage :system-time-span
   (:use :cl)
   (:shadow
-   #:/=
    #:<
    #:<=
    #:=
@@ -45,7 +44,6 @@
    #:max-value
    #:min-value
    #:zero
-   #:/=
    #:<
    #:<=
    #:=
@@ -58,6 +56,7 @@
    #:get-hash-code
    #:multiply
    #:negate
+   #:not=
    #:subtract
   ))
 
@@ -65,8 +64,13 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-16T12:41:30Z")
-(defconstant <version> 3)
+(defconstant <creation> "2026-06-16T13:33:59Z")
+(defconstant <version> 5)
+
+;; Register C# Type with CLOS
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.TimeSpan")))
 
 (defconstant +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))
 (setf (documentation '+hours-per-day+ 'variable) "Represents the number of hours in 1 day. This field is constant.")
@@ -142,15 +146,6 @@
 
 (define-symbol-macro zero (dotnet:static <type-str> "Zero"))
 (setf (documentation 'zero 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
-
-(defun /= (t1 t2)
-  "Summary: Indicates whether two System.TimeSpan instances are not equal.
-Returns: if the values of t1 and t2 are not equal; otherwise, .
-Parameters:
-  - t1 (System.TimeSpan): The first time interval to compare.
-  - t2 (System.TimeSpan): The second time interval to compare.
-"
-  (dotnet:static <type-str> "op_Inequality" t1 t2))
 
 (defun < (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is less than another specified System.TimeSpan.
@@ -247,6 +242,15 @@ Parameters:
 Returns: A new object with the same numeric value as this instance, but with the opposite sign.
 "
   (dotnet:invoke obj "Negate"))
+
+(defun not= (t1 t2)
+  "Summary: Indicates whether two System.TimeSpan instances are not equal.
+Returns: if the values of t1 and t2 are not equal; otherwise, .
+Parameters:
+  - t1 (System.TimeSpan): The first time interval to compare.
+  - t2 (System.TimeSpan): The second time interval to compare.
+"
+  (dotnet:static <type-str> "op_Inequality" t1 t2))
 
 (defun subtract (obj ts)
   "Summary: Returns a new System.TimeSpan object whose value is the difference between the specified System.TimeSpan object and this instance.

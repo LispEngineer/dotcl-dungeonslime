@@ -32,6 +32,7 @@ cspackages:
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keyboard --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.KeyboardState --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keys --output $(OUT_DIR)
 	#
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Mouse --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.MouseState --output $(OUT_DIR)
@@ -48,6 +49,15 @@ cspackages:
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.TouchCollection --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.TouchLocation --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GestureSample --output $(OUT_DIR)
+	#
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Color --output $(OUT_DIR)
+	#
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteEffects --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteSortMode --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SamplerState --output $(OUT_DIR)
+	#
+	# $(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class X --output $(OUT_DIR)
+
 
 test:
 	$(EXECUTABLE) --test

@@ -12,7 +12,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 3
+(defparameter *generator-version* 5
   "The version of this package generator software.")
 
 (defun camel-to-kebab (name)
@@ -223,6 +223,12 @@
         (format stream "(defconstant <type-str> \"~A\")~%" fq-name)
         (format stream "(defconstant <creation> \"~A\")~%" creation-time)
         (format stream "(defconstant <version> ~D)~%~%" *generator-version*)
+        
+        ;; CLOS Type Registration
+        (format stream ";; Register C# Type with CLOS~%")
+        (format stream "(eval-when (:compile-toplevel :load-toplevel :execute)~%")
+        (format stream "  (dotnet:static \"DotCL.Runtime\" \"EnsureDotNetTypeClass\"~%")
+        (format stream "                 (dotnet:resolve-type \"~A\")))~%~%" fq-name)
         
         ;; Compile-Time Constants (Literal Fields)
         (dolist (f literal-fields)

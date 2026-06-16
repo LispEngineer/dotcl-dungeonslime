@@ -22,9 +22,8 @@ to do with this game & framework.
 # Miscellaneous
 
 * Improve C# class package generator:
-  * Change `/=` to `not=` in the Lispy style
+  * **DONE** Change `/=` to `not=` in the Lispy style
   * Change `ToSomething` methods to `->something`
-  * Handle Enumerations
   * Handle multiple classes at a time for a single assembly
   * Register classes/types with DotCL's CLOS dispatch system
   * Add the assembly version (and other versions?) from which the class package was made

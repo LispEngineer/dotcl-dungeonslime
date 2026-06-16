@@ -1,14 +1,13 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 3
-;;; Creation Date: 2026-06-16T12:41:34Z
+;;; Generator Version: 5
+;;; Creation Date: 2026-06-16T13:34:03Z
 
 (in-package :cl-user)
 
 (defpackage :microsoft-xna-framework-input-keyboard-state
   (:use :cl)
   (:shadow
-   #:/=
    #:=
   )
   (:export
@@ -16,24 +15,26 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:/=
    #:=
    #:equals
    #:get-hash-code
    #:get-pressed-key-count
    #:is-key-down
    #:is-key-up
+   #:not=
   ))
 
 (in-package :microsoft-xna-framework-input-keyboard-state)
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(defconstant <creation> "2026-06-16T12:41:34Z")
-(defconstant <version> 3)
+(defconstant <creation> "2026-06-16T13:34:03Z")
+(defconstant <version> 5)
 
-(defun /= (a b)
-  (dotnet:static <type-str> "op_Inequality" a b))
+;; Register C# Type with CLOS
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState")))
 
 (defun = (a b)
   (dotnet:static <type-str> "op_Equality" a b))
@@ -52,4 +53,7 @@
 
 (defun is-key-up (obj key)
   (dotnet:invoke obj "IsKeyUp" key))
+
+(defun not= (a b)
+  (dotnet:static <type-str> "op_Inequality" a b))
 

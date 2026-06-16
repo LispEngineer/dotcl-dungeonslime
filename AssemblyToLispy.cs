@@ -697,7 +697,7 @@ namespace DungeonSlime {
                     case "op_Multiply": return "*";
                     case "op_Division": return "/";
                     case "op_Equality": return "=";
-                    case "op_Inequality": return "/=";
+                    case "op_Inequality": return "not=";
                     case "op_LessThan": return "<";
                     case "op_GreaterThan": return ">";
                     case "op_LessThanOrEqual": return "<=";
