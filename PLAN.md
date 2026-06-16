@@ -21,6 +21,17 @@ to do with this game & framework.
 
 # Miscellaneous
 
+* Improve C# class package generator:
+  * Change `/=` to `not=` in the Lispy style
+  * Change `ToSomething` methods to `->something`
+  * Handle Enumerations
+  * Handle multiple classes at a time for a single assembly
+  * Register classes/types with DotCL's CLOS dispatch system
+  * Add the assembly version (and other versions?) from which the class package was made
+  * Change `GetSomething` methods to ???
+  * Make operator overloads take N parameters - assuming they are all the same type
+    * This needs more consideration
+
 * Add a Slynk server & `icl` connection `Makefile` target
 
 * Migrate to DotCL 0.1.9

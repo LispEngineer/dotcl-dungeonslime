@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
 ;;; Generator Version: 3
-;;; Creation Date: 2026-06-14T19:02:52Z
+;;; Creation Date: 2026-06-16T12:41:31Z
 
 (in-package :cl-user)
 
@@ -37,7 +37,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-14T19:02:52Z")
+(defconstant <creation> "2026-06-16T12:41:31Z")
 (defconstant <version> 3)
 
 (define-symbol-macro one (dotnet:static <type-str> "One"))
