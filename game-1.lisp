@@ -38,11 +38,18 @@
 (defconstant +atlas-filename+ (uiop:subpathname* +content-default+ "atlas-definition.lisp")
   "The filename of our Texture Atlas. Within the Content directory.")
 
+(defconstant +movement-speed+ 5.0f0
+  "Speed multiplier when moving")
+
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 (core)
   ((slime
     :accessor slime
     :documentation "An Animated Sprite of a slime")
+   (slime-pos
+    :accessor slime-pos
+    :initform v2:+zero+
+    :documentation "Tracks position of the slime")
    (bat
     :accessor bat
     :documentation "An Animated Sprite of a bat")))
@@ -74,12 +81,12 @@
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
-  "Quit the game if ESC key is pressed. Cause intentional error if left is pressed.
+  "Quit the game if ESC key is pressed. Cause intentional error if F7 is pressed.
    Updates the animated sprites."
   (let* ((kb-state (keyboard-state))
          ;; This will return nil or t
          (esc-down  (key-down? kb-state key:+escape+))
-         (left-down (key-down? kb-state key:+left+)))
+         (left-down (key-down? kb-state key:+f7+)))
     (when esc-down
       (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
       (force-output *error-output*) ;; finish-output alternatively
@@ -94,6 +101,9 @@
   ;; Send our updates to our other objects
   (update (slime game) gt)
   (update (bat game)   gt)
+  ;; Chapter 10 additions
+  (check-keyboard-input game)
+  (check-gamepad-input game)
   (call-next-method game gt))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
@@ -111,10 +121,78 @@
     ;; Prepare for rendering
     (sprite-batch-begin sb :sampler-state sampler-state:+point-clamp+)
 
-    ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
-    (sprite-draw (slime game) sb +v2-0+)
+    ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime's starting point
+    (sprite-draw (slime game) sb (slime-pos game))
     (sprite-draw (bat game)   sb (vector2 (+ 10 (width (slime game)) 4) 0.0e0))
 
     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Non-method functions
+
+#|
+    private void CheckKeyboardInput()
+    {
+        // Get the state of keyboard input
+        KeyboardState keyboardState = Keyboard.GetState();
+
+        // If the space key is held down, the movement speed increases by 1.5
+        float speed = MOVEMENT_SPEED;
+        if (keyboardState.IsKeyDown(Keys.Space))
+        {
+            speed *= 1.5f;
+        }
+
+        // If the W or Up keys are down, move the slime up on the screen.
+        if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+        {
+            _slimePosition.Y -= speed;
+        }
+
+        // if the S or Down keys are down, move the slime down on the screen.
+        if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+        {
+            _slimePosition.Y += speed;
+        }
+
+        // If the A or Left keys are down, move the slime left on the screen.
+        if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+        {
+            _slimePosition.X -= speed;
+        }
+
+        // If the D or Right keys are down, move the slime right on the screen.
+        if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+        {
+            _slimePosition.X += speed;
+        }
+    }
+|#
+
+(defun check-keyboard-input (game)
+  "Handles keyboard input for moving the slime around"
+  (let ((kb-state (#!!Microsoft.Xna.Framework.Input.Keyboard.GetState))
+        (speed +movement-speed+))
+    ;; 50% faster when space held
+    (when (kb-state:is-key-down kb-state key:+space+)
+      (setf speed (* speed 1.5f0)))
+    ;; Move in direction(s) pressed
+    (when (or (kb-state:is-key-down kb-state key:+w+) (kb-state:is-key-down kb-state key:+up+))
+      (setf (slime-pos game) (vector2    (x (slime-pos game))
+                                      (- (y (slime-pos game)) speed))))
+    (when (or (kb-state:is-key-down kb-state key:+s+) (kb-state:is-key-down kb-state key:+down+))
+      (setf (slime-pos game) (vector2    (x (slime-pos game))
+                                      (+ (y (slime-pos game)) speed))))
+    (when (or (kb-state:is-key-down kb-state key:+a+) (kb-state:is-key-down kb-state key:+left+))
+      (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
+                                         (y (slime-pos game)))))
+    (when (or (kb-state:is-key-down kb-state key:+d+) (kb-state:is-key-down kb-state key:+right+))
+      (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
+                                         (y (slime-pos game)))))))
+
+(defun check-gamepad-input (game)
+  "Handles gamepad input for moving the slime around"
+  ;; TODO: CODE ME
+  nil)
