@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SamplerState
 ;;; Generator Version: 5
-;;; Creation Date: 2026-06-16T13:34:25Z
+;;; Creation Date: 2026-06-16T22:31:24Z
 
 (in-package :cl-user)
 
@@ -25,7 +25,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SamplerState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SamplerState")
-(defconstant <creation> "2026-06-16T13:34:25Z")
+(defconstant <creation> "2026-06-16T22:31:24Z")
 (defconstant <version> 5)
 
 ;; Register C# Type with CLOS

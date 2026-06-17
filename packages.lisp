@@ -79,8 +79,14 @@
     (:export #:defc#generic
              #:defc#method))
 
+  ;; Pre-declare empty C# packages so local-nicknames doesn't crash
+  (defpackage :microsoft-xna-framework-vector2)
+  (defpackage :system-time-span)
+
   (defpackage :dungeon-slime
     (:use :cl :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
+    (:local-nicknames (:v2 :microsoft-xna-framework-vector2)
+                      (:ts :system-time-span))
     (:export 
      ;; Constants
      #:+window-defaults+ #:+content-default+ #:+false+

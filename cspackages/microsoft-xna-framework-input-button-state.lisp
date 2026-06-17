@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.ButtonState
 ;;; Generator Version: 5
-;;; Creation Date: 2026-06-16T13:34:08Z
+;;; Creation Date: 2026-06-16T22:31:07Z
 
 (in-package :cl-user)
 
@@ -20,7 +20,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.ButtonState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.ButtonState")
-(defconstant <creation> "2026-06-16T13:34:08Z")
+(defconstant <creation> "2026-06-16T22:31:07Z")
 (defconstant <version> 5)
 
 ;; Register C# Type with CLOS
