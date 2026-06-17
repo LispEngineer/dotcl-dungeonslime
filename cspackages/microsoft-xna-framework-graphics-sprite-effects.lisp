@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteEffects
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:38:43Z
+;;; Creation Date: 2026-06-17T03:51:49Z
 
 (in-package :cl-user)
 
@@ -21,7 +21,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteEffects"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteEffects")
-(defconstant <creation> "2026-06-17T03:38:43Z")
+(defconstant <creation> "2026-06-17T03:51:49Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS

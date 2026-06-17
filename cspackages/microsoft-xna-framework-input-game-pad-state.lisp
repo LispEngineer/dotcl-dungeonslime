@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:38:31Z
+;;; Creation Date: 2026-06-17T03:51:37Z
 
 (in-package :cl-user)
 
@@ -15,7 +15,7 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:default
+   #:+default+
    #:=
    #:equals
    #:get-hash-code
@@ -29,7 +29,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(defconstant <creation> "2026-06-17T03:38:31Z")
+(defconstant <creation> "2026-06-17T03:51:37Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS
@@ -37,7 +37,7 @@
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState")))
 
-(define-symbol-macro default (dotnet:static <type-str> "Default"))
+(defconstant +default+ (dotnet:static <type-str> "Default"))
 
 (defun = (left right)
   (dotnet:static <type-str> "op_Equality" left right))

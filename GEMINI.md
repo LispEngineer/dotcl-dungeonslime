@@ -171,6 +171,7 @@ MonoGame information:
 * [C# Language Reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/)
 * [CLR Introduction](https://github.com/dotnet/runtime/blob/main/docs/design/coreclr/botr/intro-to-clr.md)
 * [.NET Runtime GitHub Repo](https://github.com/dotnet/runtime)
+* [Local DotNet Runtime Source](../dotnet-runtime) - sibling to this directory
 
 dotcl information:
 * [dotcl GitHub Repo](https://github.com/dotcl/dotcl)

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteSortMode
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:38:44Z
+;;; Creation Date: 2026-06-17T03:51:50Z
 
 (in-package :cl-user)
 
@@ -23,7 +23,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteSortMode")
-(defconstant <creation> "2026-06-17T03:38:44Z")
+(defconstant <creation> "2026-06-17T03:51:50Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS

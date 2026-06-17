@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:38:21Z
+;;; Creation Date: 2026-06-17T03:51:28Z
 
 (in-package :cl-user)
 
@@ -36,7 +36,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-17T03:38:21Z")
+(defconstant <creation> "2026-06-17T03:51:28Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS

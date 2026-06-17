@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:38:20Z
+;;; Creation Date: 2026-06-17T03:51:27Z
 
 (in-package :cl-user)
 
@@ -41,9 +41,9 @@
    #:+ticks-per-millisecond+
    #:+ticks-per-minute+
    #:+ticks-per-second+
-   #:max-value
-   #:min-value
-   #:zero
+   #:+max-value+
+   #:+min-value+
+   #:+zero+
    #:<
    #:<=
    #:=
@@ -64,7 +64,7 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-17T03:38:20Z")
+(defconstant <creation> "2026-06-17T03:51:27Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS
@@ -138,14 +138,14 @@
 (defconstant +ticks-per-second+ (dotnet:static <type-str> "TicksPerSecond"))
 (setf (documentation '+ticks-per-second+ 'variable) "Represents the number of ticks in 1 second.")
 
-(define-symbol-macro max-value (dotnet:static <type-str> "MaxValue"))
-(setf (documentation 'max-value 'variable) "Represents the maximum System.TimeSpan value. This field is read-only.")
+(defconstant +max-value+ (dotnet:static <type-str> "MaxValue"))
+(setf (documentation '+max-value+ 'variable) "Represents the maximum System.TimeSpan value. This field is read-only.")
 
-(define-symbol-macro min-value (dotnet:static <type-str> "MinValue"))
-(setf (documentation 'min-value 'variable) "Represents the minimum System.TimeSpan value. This field is read-only.")
+(defconstant +min-value+ (dotnet:static <type-str> "MinValue"))
+(setf (documentation '+min-value+ 'variable) "Represents the minimum System.TimeSpan value. This field is read-only.")
 
-(define-symbol-macro zero (dotnet:static <type-str> "Zero"))
-(setf (documentation 'zero 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
+(defconstant +zero+ (dotnet:static <type-str> "Zero"))
+(setf (documentation '+zero+ 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
 
 (defun < (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is less than another specified System.TimeSpan.
