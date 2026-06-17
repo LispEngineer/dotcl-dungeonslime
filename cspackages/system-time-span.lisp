@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
 ;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T03:51:27Z
+;;; Creation Date: 2026-06-17T18:02:30Z
 
 (in-package :cl-user)
 
@@ -64,7 +64,7 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-17T03:51:27Z")
+(defconstant <creation> "2026-06-17T18:02:30Z")
 (defconstant <version> 6)
 
 ;; Register C# Type with CLOS

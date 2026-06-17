@@ -21,6 +21,8 @@ to do with this game & framework.
 
 # Miscellaneous
 
+* Remove my custom `Vector2` code and use the package generator's code 
+
 * Improve C# class package generator:
   * **DONE** Change `/=` to `not=` in the Lispy style
   * Change `ToSomething` methods to `->something`
@@ -31,7 +33,7 @@ to do with this game & framework.
   * Make operator overloads take N parameters - assuming they are all the same type
     * This needs more consideration
 
-* Package generator for `Color` has non-static constants.
+* **DONE** Package generator for `Color` has non-static constants.
   * Consider forcing them to be made as defconstant, forcing the
     C# assembly and class/struct to be loaded before the constants
     are defined?
