@@ -7,6 +7,32 @@ how various implementation challenges were met (or not), and
 notes about how to do things in the future.
 
 
+# Lisp Packages for C# Classes
+
+## Generating Constants for Static Properties
+
+The `assembly-package-generator.lisp` tool generates Lisp bindings for .NET assemblies.
+By default, it generates static properties (like `Vector2.Zero` or `Color.White`) as dynamic
+symbol macros via `(define-symbol-macro ...)` since they are technically properties, not
+constant fields, and reflection cannot distinguish whether a static read-only property's
+value could change.
+
+However, many types like `Microsoft.Xna.Framework.Vector2` and `Microsoft.Xna.Framework.Color`
+have properties that act identically to constants. To optimize these, the `--constant-properties`
+command-line flag was added to the generator. It accepts a comma-separated list of properties
+to treat as compile-time constants (evaluated at macro-expansion load-time in Lisp using
+`defconstant`). Passing `*` (e.g., `--constant-properties "*"`) marks all read-only
+static properties of the class as constants.
+
+Example Usage:
+```bash
+bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Color --output cspackages --constant-properties "*"
+```
+This forces properties like `Color.White` to be emitted as `(defconstant +white+ ...)`
+instead of `(define-symbol-macro white ...)` improving performance and avoiding repeated
+reflection evaluations.
+
+
 # Including Lisp Libraries
 
 It's very complicated to use a third party library right now in DotCL and

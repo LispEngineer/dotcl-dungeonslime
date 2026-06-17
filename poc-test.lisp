@@ -145,8 +145,8 @@
                   (y-val (and zero-vec (dotnet:invoke zero-vec "Y"))))
               (format *error-output* "zero-vec value: ~S~%" zero-vec)
               (if (and x-val y-val (= x-val 0.0) (= y-val 0.0))
-                  (format *error-output* "[PASS] microsoft-xna-framework-vector2:zero is zero vector~%")
-                  (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:zero has values X=~A, Y=~A~%" x-val y-val)))))
+                  (format *error-output* "[PASS] microsoft-xna-framework-vector2:+zero+ is zero vector~%")
+                  (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:+zero+ has values X=~A, Y=~A~%" x-val y-val)))))
         (format *error-output* "[SKIP] C# Package Generator Integration Tests skipped (packages not loaded)~%")))
 
   (format *error-output* "--- C# Package Generator Integration Tests Completed ---~%")

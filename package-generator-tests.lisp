@@ -158,10 +158,10 @@
                 "TimeSpan >= operator (equal case)"))
 
   ;; Vector2 Operator Tests
-  (let ((v-zero microsoft-xna-framework-vector2:zero)
-        (v-one microsoft-xna-framework-vector2:one)
-        (v-x microsoft-xna-framework-vector2:unit-x)
-        (v-y microsoft-xna-framework-vector2:unit-y))
+  (let ((v-zero microsoft-xna-framework-vector2:+zero+)
+        (v-one microsoft-xna-framework-vector2:+one+)
+        (v-x microsoft-xna-framework-vector2:+unit-x+)
+        (v-y microsoft-xna-framework-vector2:+unit-y+))
 
     (assert-test (microsoft-xna-framework-vector2:= v-zero v-zero)
                 t

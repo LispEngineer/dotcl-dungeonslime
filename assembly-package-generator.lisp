@@ -12,8 +12,8 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 5
-  "The version of this package generator software.")
+(defparameter *generator-version* 6
+  "Integer version number for the generated Lisp source files.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
@@ -149,7 +149,7 @@
                     ptype
                     pdesc)))))))
 
-(defun generate-class-file (class-plist output-dir)
+(defun generate-class-file (class-plist output-dir &optional constant-properties-list)
   "Generates the Lisp source file for a single class plist."
   (let* ((fq-name (getf class-plist :fully-qualified-name))
          (pkg-name (camel-to-kebab fq-name))
@@ -163,12 +163,16 @@
     (ensure-directories-exist output-file :verbose t)
     
     ;; 1. Analyze and extract valid Phase 1 members
-    (let ((literal-fields (remove-if-not #'literal-field-p fields))
-          (runtime-fields (remove-if-not #'runtime-readonly-field-p fields))
-          (const-props (remove-if-not #'constant-property-p properties))
-          (simple-methods (remove-if-not (lambda (m) (simple-method-p m methods)) methods))
-          (exports nil)
-          (shadows nil))
+    (let* ((literal-fields (remove-if-not #'literal-field-p fields))
+           (runtime-fields-all (remove-if-not #'runtime-readonly-field-p fields))
+           (pure-const-fields (remove-if-not (lambda (f) (or (member "*" constant-properties-list :test #'string=) (member (getf f :name) constant-properties-list :test #'string-equal))) runtime-fields-all))
+           (dynamic-const-fields (remove-if (lambda (f) (or (member "*" constant-properties-list :test #'string=) (member (getf f :name) constant-properties-list :test #'string-equal))) runtime-fields-all))
+           (const-props (remove-if-not #'constant-property-p properties))
+           (pure-const-props (remove-if-not (lambda (p) (or (member "*" constant-properties-list :test #'string=) (member (getf p :name) constant-properties-list :test #'string-equal))) const-props))
+           (dynamic-const-props (remove-if (lambda (p) (or (member "*" constant-properties-list :test #'string=) (member (getf p :name) constant-properties-list :test #'string-equal))) const-props))
+           (simple-methods (remove-if-not (lambda (m) (simple-method-p m methods)) methods))
+           (exports nil)
+           (shadows nil))
       
       ;; Collect all exports
       (push "<type>" exports)
@@ -178,9 +182,13 @@
       
       (dolist (f literal-fields)
         (push (format nil "+~A+" (camel-to-kebab (getf f :name))) exports))
-      (dolist (f runtime-fields)
+      (dolist (f pure-const-fields)
+        (push (format nil "+~A+" (camel-to-kebab (getf f :name))) exports))
+      (dolist (f dynamic-const-fields)
         (push (camel-to-kebab (getf f :name)) exports))
-      (dolist (p const-props)
+      (dolist (p pure-const-props)
+        (push (format nil "+~A+" (camel-to-kebab (getf p :name))) exports))
+      (dolist (p dynamic-const-props)
         (push (camel-to-kebab (getf p :name)) exports))
       (dolist (m simple-methods)
         (push (camel-to-kebab (getf m :name)) exports))
@@ -240,8 +248,18 @@
                 (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
                 (format stream "~%"))))
         
-        ;; Runtime Read-Only Fields
-        (dolist (f runtime-fields)
+        ;; Runtime Read-Only Fields (Constants)
+        (dolist (f pure-const-fields)
+          (let* ((cname (format nil "+~A+" (camel-to-kebab (getf f :name))))
+                 (f-doc (getf (getf f :documentation) :summary))
+                 (doc-str (if f-doc (escape-lisp-string f-doc) "")))
+            (format stream "(defconstant ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf f :name))
+            (if (> (length doc-str) 0)
+                (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
+                (format stream "~%"))))
+
+        ;; Runtime Read-Only Fields (Dynamic)
+        (dolist (f dynamic-const-fields)
           (let* ((cname (camel-to-kebab (getf f :name)))
                  (f-doc (getf (getf f :documentation) :summary))
                  (doc-str (if f-doc (escape-lisp-string f-doc) "")))
@@ -251,7 +269,18 @@
                 (format stream "~%"))))
         
         ;; Runtime Read-Only Properties
-        (dolist (p const-props)
+        ;; Pure Constant Properties
+        (dolist (p pure-const-props)
+          (let* ((cname (format nil "+~A+" (camel-to-kebab (getf p :name))))
+                 (p-doc (getf (getf p :documentation) :summary))
+                 (doc-str (if p-doc (escape-lisp-string p-doc) "")))
+            (format stream "(defconstant ~A (dotnet:static <type-str> \"~A\"))~%" cname (getf p :name))
+            (if (> (length doc-str) 0)
+                (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
+                (format stream "~%"))))
+
+        ;; Runtime Read-Only Properties
+        (dolist (p dynamic-const-props)
           (let* ((cname (camel-to-kebab (getf p :name)))
                  (p-doc (getf (getf p :documentation) :summary))
                  (doc-str (if p-doc (escape-lisp-string p-doc) "")))
@@ -285,7 +314,7 @@
                   (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)
                   (format stream "  (dotnet:invoke obj \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))))))))
 
-(defun generate-assembly-packages (metadata-file class-filter output-dir)
+(defun generate-assembly-packages (metadata-file class-filter output-dir &optional constant-properties-list)
   "Loads the metadata-file, filters classes by class-filter, and generates output Lisp files."
   (unless (probe-file metadata-file)
     (error "Metadata file not found: ~A" metadata-file))
@@ -304,17 +333,18 @@
     
     (dolist (cls classes-to-gen)
       (format *error-output* "Generating package for C# Class: ~A~%" (getf cls :fully-qualified-name))
-      (generate-class-file cls output-dir))
+      (generate-class-file cls output-dir constant-properties-list))
     
     t))
 
-(defun run-assembly-package-generator (metadata-file class-filter output-dir)
+(defun run-assembly-package-generator (metadata-file class-filter output-dir &optional constant-properties-str)
   "CLI entry point called by DotclHost.Call. Maps string parameters safely."
   (let ((mfile (and metadata-file (> (length metadata-file) 0) metadata-file))
         (cfilter (and class-filter (> (length class-filter) 0) class-filter))
-        (odir (and output-dir (> (length output-dir) 0) output-dir)))
+        (odir (and output-dir (> (length output-dir) 0) output-dir))
+        (cprops (and constant-properties-str (> (length constant-properties-str) 0) (split-string constant-properties-str #\,))))
     (unless mfile
       (error "Metadata file path is required."))
     (unless odir
       (error "Output directory path is required."))
-    (generate-assembly-packages mfile cfilter odir)))
+    (generate-assembly-packages mfile cfilter odir cprops)))

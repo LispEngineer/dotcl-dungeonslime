@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 5
-;;; Creation Date: 2026-06-16T22:31:00Z
+;;; Generator Version: 6
+;;; Creation Date: 2026-06-17T03:38:21Z
 
 (in-package :cl-user)
 
@@ -17,10 +17,10 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:one
-   #:unit-x
-   #:unit-y
-   #:zero
+   #:+one+
+   #:+unit-x+
+   #:+unit-y+
+   #:+zero+
    #:+
    #:=
    #:get-hash-code
@@ -36,21 +36,21 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-16T22:31:00Z")
-(defconstant <version> 5)
+(defconstant <creation> "2026-06-17T03:38:21Z")
+(defconstant <version> 6)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
 
-(define-symbol-macro one (dotnet:static <type-str> "One"))
+(defconstant +one+ (dotnet:static <type-str> "One"))
 
-(define-symbol-macro unit-x (dotnet:static <type-str> "UnitX"))
+(defconstant +unit-x+ (dotnet:static <type-str> "UnitX"))
 
-(define-symbol-macro unit-y (dotnet:static <type-str> "UnitY"))
+(defconstant +unit-y+ (dotnet:static <type-str> "UnitY"))
 
-(define-symbol-macro zero (dotnet:static <type-str> "Zero"))
+(defconstant +zero+ (dotnet:static <type-str> "Zero"))
 
 (defun + (value1 value2)
   (dotnet:static <type-str> "op_Addition" value1 value2))

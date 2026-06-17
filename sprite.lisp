@@ -24,7 +24,7 @@
                     at make-instance time with :texture-region keyword argument.")
    (color
     :accessor color
-    :documentation "The (C#) Color of this sprite; defaults to color:white")
+    :documentation "The (C#) Color of this sprite; defaults to color:+white+")
    (rotation
     :accessor rotation
     :documentation "Rotation to apply (in radians); default 0.0e0")
@@ -51,7 +51,7 @@
   "Sets the default value of any unbound slot. Does not touch the region."
   (format *error-output* "[sprite:initialize-instance:after] Initializing sprite...~%")
   (unless (slot-boundp spr 'color)
-    (setf (color spr) color:white))
+    (setf (color spr) color:+white+))
   (unless (slot-boundp spr 'rotation)
     (setf (rotation spr) 0.0e0))
   (unless (slot-boundp spr 'scale)

@@ -15,6 +15,7 @@ string? assemblyMetadataFile = null;
 string? classFilter = null;
 string? outputDir = null;
 bool hasAssemblyMetadata = false;
+string? constantProperties = null;
 var isTestMode = false;
 
 
@@ -38,6 +39,9 @@ for (int i = 0; i < args.Length; i++) {
     } else if (args[i] == "--output") {
         outputFile = "-";
         hasOutput = true;
+    } else if (args[i] == "--constant-properties" && i + 1 < args.Length) {
+        constantProperties = args[i + 1];
+        i++;
     } else if (args[i] == "--test") {
         isTestMode = true;
     }
@@ -83,7 +87,7 @@ if (hasAssemblyMetadata && !string.IsNullOrEmpty(assemblyMetadataFile)) {
     try {
         var generatorManifestPath = Path.Combine(AppContext.BaseDirectory, "dotcl-fasl", "dotcl-deps.txt");
         DotclHost.LoadFromManifest(generatorManifestPath);
-        DotclHost.Call("RUN-ASSEMBLY-PACKAGE-GENERATOR", assemblyMetadataFile, classFilter ?? "", outputDir ?? "");
+        DotclHost.Call("RUN-ASSEMBLY-PACKAGE-GENERATOR", assemblyMetadataFile, classFilter ?? "", outputDir ?? "", constantProperties ?? "");
     } catch (Exception ex) {
         Console.Error.WriteLine($"[Program.cs] Error in assembly package generator: {ex.Message}");
         Console.Error.WriteLine(ex.StackTrace);
