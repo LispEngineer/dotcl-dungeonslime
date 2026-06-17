@@ -24,7 +24,7 @@
                     at make-instance time with :texture-region keyword argument.")
    (color
     :accessor color
-    :documentation "The (C#) Color of this sprite; defaults to +color-white+")
+    :documentation "The (C#) Color of this sprite; defaults to color:+white+")
    (rotation
     :accessor rotation
     :documentation "Rotation to apply (in radians); default 0.0e0")
@@ -39,7 +39,7 @@
     :accessor effects
     :documentation "The sprite effects to apply when rendering this sprite,
                     as a C# value from SpriteEffects enumeration.
-                    Default +sprite-effects-none+")
+                    Default sprite-effects:+none+")
    (layer-depth
     :accessor layer-depth
     :documentation "The layer depth to apply when rendering this sprite,
@@ -51,7 +51,7 @@
   "Sets the default value of any unbound slot. Does not touch the region."
   (format *error-output* "[sprite:initialize-instance:after] Initializing sprite...~%")
   (unless (slot-boundp spr 'color)
-    (setf (color spr) +color-white+))
+    (setf (color spr) color:+white+))
   (unless (slot-boundp spr 'rotation)
     (setf (rotation spr) 0.0e0))
   (unless (slot-boundp spr 'scale)
@@ -59,7 +59,7 @@
   (unless (slot-boundp spr 'origin)
     (setf (origin spr) +v2-0+))
   (unless (slot-boundp spr 'effects)
-    (setf (effects spr) +sprite-effects-none+))
+    (setf (effects spr) sprite-effects:+none+))
   (unless (slot-boundp spr 'layer-depth)
     (setf (layer-depth spr) 0.0e0))
   (format *error-output* "[sprite:initialize-instance:after] Sprite initialized.~%"))

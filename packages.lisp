@@ -82,19 +82,28 @@
   ;; Pre-declare empty C# packages so local-nicknames doesn't crash
   (defpackage :microsoft-xna-framework-vector2)
   (defpackage :system-time-span)
+  (defpackage :microsoft-xna-framework-input-keys)
+  (defpackage :microsoft-xna-framework-input-keys)
+  (defpackage :microsoft-xna-framework-color)
+  (defpackage :microsoft-xna-framework-graphics-sprite-effects)
+  (defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
+  (defpackage :microsoft-xna-framework-graphics-sampler-state)
 
   (defpackage :dungeon-slime
-    (:use :cl :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
-    (:local-nicknames (:v2 :microsoft-xna-framework-vector2)
-                      (:ts :system-time-span))
+    (:use :cl 
+          :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
+    (:local-nicknames 
+      (:v2 :microsoft-xna-framework-vector2)
+      (:ts :system-time-span)
+      (:key :microsoft-xna-framework-input-keys)
+      (:color :microsoft-xna-framework-color)
+      (:sprite-effects :microsoft-xna-framework-graphics-sprite-effects)
+      (:sprite-sort-mode :microsoft-xna-framework-graphics-sprite-sort-mode)
+      (:sampler-state :microsoft-xna-framework-graphics-sampler-state)
+    )
     (:export 
      ;; Constants
      #:+window-defaults+ #:+content-default+ #:+false+
-     #:+key-esc+ #:+key-left+ #:+color-white+
-     #:+sprite-effects-none+ #:+sprite-effects-flip-horizontally+ #:+sprite-effects-flip-vertically+
-     #:+sprite-sort-mode-back-to-front+ #:+sprite-sort-mode-deferred+ #:+sprite-sort-mode-front-to-back+
-     #:+sprite-sort-mode-immediate+ #:+sprite-sort-mode-texture+
-     #:+sampler-state-point-clamp+
      #:+atlas-texture+ #:+atlas-filename+
      ;; Globals
      #:*core* #:*game* #:*cs-game*

@@ -78,8 +78,8 @@
    Updates the animated sprites."
   (let* ((kb-state (keyboard-state))
          ;; This will return nil or t
-         (esc-down  (key-down? kb-state +key-esc+))
-         (left-down (key-down? kb-state +key-left+)))
+         (esc-down  (key-down? kb-state key:+escape+))
+         (left-down (key-down? kb-state key:+left+)))
     (when esc-down
       (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
       (force-output *error-output*) ;; finish-output alternatively
@@ -109,7 +109,7 @@
     (dotnet:invoke gd "Clear" c)
 
     ;; Prepare for rendering
-    (sprite-batch-begin sb :sampler-state +sampler-state-point-clamp+)
+    (sprite-batch-begin sb :sampler-state sampler-state:+point-clamp+)
 
     ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
     (sprite-draw (slime game) sb +v2-0+)

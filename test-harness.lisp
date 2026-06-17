@@ -29,8 +29,6 @@
   (dungeon-slime::test-texture-atlas-from-file)
 
   (format *error-output* "[test-harness.lisp] Misc prints...~%")
-  (format *error-output* "[From mg-classes.lisp] dungeon-slime::+sprite-sort-mode-deferred+ = ~A~%"
-          dungeon-slime::+sprite-sort-mode-deferred+)
   (format *error-output* "[From game-1.lisp] +atlas-filename+ = ~A~%" dungeon-slime::+atlas-filename+)
 
   (format *error-output* "[test-harness.lisp] ...tests complete.~%"))

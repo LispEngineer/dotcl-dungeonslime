@@ -65,7 +65,7 @@
 
 (defun tr-draw (tr sb pos color 
                 &optional (rotation 0.0e0) (origin nil) (scale +v2-1+)
-                (effects +sprite-effects-none+) (layer-depth 0.0e0))
+                (effects sprite-effects:+none+) (layer-depth 0.0e0))
   "Submit this texture region for drawing in the current batch.
    tr: the texture-region
    sb: The spritebatch instance used for batching draw calls.
