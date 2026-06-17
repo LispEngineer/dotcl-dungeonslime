@@ -31,6 +31,19 @@ to do with this game & framework.
   * Make operator overloads take N parameters - assuming they are all the same type
     * This needs more consideration
 
+* Package generator for `Color` has non-static constants.
+  * Consider forcing them to be made as defconstant, forcing the
+    C# assembly and class/struct to be loaded before the constants
+    are defined?
+  * Same with `SamplerState` but these are static readonly non-constants,
+    which probably can be treated as constants?
+  * Maybe make two symbols for each of these sorts of things, one which is
+    treated as a constant and another that is re-evaluated. Maybe make the
+    re-evaluated one have a `!` at the end so it's always re-evaluated?
+  * The problem is there is no semantic difference in the code between something
+    that just has a getter that will never change, vs. one that can (like
+    `CapsLock`).
+
 * Add a Slynk server & `icl` connection `Makefile` target
 
 * Migrate to DotCL 0.1.9

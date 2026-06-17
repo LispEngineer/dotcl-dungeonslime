@@ -109,7 +109,7 @@
     (dotnet:invoke gd "Clear" c)
 
     ;; Prepare for rendering
-    (sprite-batch-begin sb :sampler-state sampler-state:+point-clamp+)
+    (sprite-batch-begin sb :sampler-state sampler-state:point-clamp)
 
     ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime
     (sprite-draw (slime game) sb +v2-0+)
