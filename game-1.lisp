@@ -133,42 +133,39 @@
 ;; Non-method functions
 
 #|
-    private void CheckKeyboardInput()
-    {
-        // Get the state of keyboard input
-        KeyboardState keyboardState = Keyboard.GetState();
+// Get the state of keyboard input
+KeyboardState keyboardState = Keyboard.GetState();
 
-        // If the space key is held down, the movement speed increases by 1.5
-        float speed = MOVEMENT_SPEED;
-        if (keyboardState.IsKeyDown(Keys.Space))
-        {
-            speed *= 1.5f;
-        }
+// If the space key is held down, the movement speed increases by 1.5
+float speed = MOVEMENT_SPEED;
+if (keyboardState.IsKeyDown(Keys.Space))
+{
+    speed *= 1.5f;
+}
 
-        // If the W or Up keys are down, move the slime up on the screen.
-        if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
-        {
-            _slimePosition.Y -= speed;
-        }
+// If the W or Up keys are down, move the slime up on the screen.
+if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+{
+    _slimePosition.Y -= speed;
+}
 
-        // if the S or Down keys are down, move the slime down on the screen.
-        if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-        {
-            _slimePosition.Y += speed;
-        }
+// if the S or Down keys are down, move the slime down on the screen.
+if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+{
+    _slimePosition.Y += speed;
+}
 
-        // If the A or Left keys are down, move the slime left on the screen.
-        if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-        {
-            _slimePosition.X -= speed;
-        }
+// If the A or Left keys are down, move the slime left on the screen.
+if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+{
+    _slimePosition.X -= speed;
+}
 
-        // If the D or Right keys are down, move the slime right on the screen.
-        if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-        {
-            _slimePosition.X += speed;
-        }
-    }
+// If the D or Right keys are down, move the slime right on the screen.
+if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+{
+    _slimePosition.X += speed;
+}
 |#
 
 (defun check-keyboard-input (game)
@@ -192,7 +189,81 @@
       (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
                                          (y (slime-pos game)))))))
 
+#|
+
+GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+// If the A button is held down, the movement speed increases by 1.5
+// and the gamepad vibrates as feedback to the player.
+float speed = MOVEMENT_SPEED;
+if (gamePadState.IsButtonDown(Buttons.A))
+{
+    speed *= 1.5f;
+    GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+}
+else
+{
+    GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
+}
+
+
+// Check thumbstick first since it has priority over which gamepad input
+// is movement.  It has priority since the thumbstick values provide a
+// more granular analog value that can be used for movement.
+if (gamePadState.ThumbSticks.Left != Vector2.Zero)
+{
+    _slimePosition.X += gamePadState.ThumbSticks.Left.X * speed;
+    _slimePosition.Y -= gamePadState.ThumbSticks.Left.Y * speed;
+}
+else
+{
+    // If DPadUp is down, move the slime up on the screen.
+    if (gamePadState.IsButtonDown(Buttons.DPadUp))
+    {
+        _slimePosition.Y -= speed;
+    }
+
+    // If DPadDown is down, move the slime down on the screen.
+    if (gamePadState.IsButtonDown(Buttons.DPadDown))
+    {
+        _slimePosition.Y += speed;
+    }
+
+    // If DPapLeft is down, move the slime left on the screen.
+    if (gamePadState.IsButtonDown(Buttons.DPadLeft))
+    {
+        _slimePosition.X -= speed;
+    }
+
+    // If DPadRight is down, move the slime right on the screen.
+    if (gamePadState.IsButtonDown(Buttons.DPadRight))
+    {
+        _slimePosition.X += speed;
+    }
+}
+|#
+
 (defun check-gamepad-input (game)
   "Handles gamepad input for moving the slime around"
-  ;; TODO: CODE ME
   nil)
+
+#|
+;; Partially implemented - need to add package generator capabilities
+(defun check-gamepad-input (game)
+  "Handles gamepad input for moving the slime around"
+  ;; Check thumbstick first since it has priority over which gamepad input
+  ;; is movement.  It has priority since the thumbstick values provide a
+  ;; more granular analog value that can be used for movement.
+  (let ((gps (#!!Microsoft.Xna.Framework.Input.GamePad.GetState pi:+one+))
+        (speed +movement-speed+))
+    ;; Double speed and turn on vibration if A is pressed
+    (if (gp-state:is-button-down buttons:+a+)
+      (progn
+        (setf speed (* speed 1.5f0))
+        (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 1.0f0 1.0f0))
+      (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 0.0f0 0.0f0))
+    ;; Check thumpad then D-pad
+    (if (not= (gp-state:thumb-sticks gps) vector2:+zero+)
+      (progn
+|#
+

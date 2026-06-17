@@ -85,10 +85,15 @@
   (defpackage :microsoft-xna-framework-input-keys)
   (defpackage :microsoft-xna-framework-input-keyboard)
   (defpackage :microsoft-xna-framework-input-keyboard-state)
+  (defpackage :microsoft-xna-framework-input-game-pad)
+  (defpackage :microsoft-xna-framework-input-game-pad-state)
+  (defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks)
+    (defpackage :microsoft-xna-framework-input-buttons)
   (defpackage :microsoft-xna-framework-color)
   (defpackage :microsoft-xna-framework-graphics-sprite-effects)
   (defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
   (defpackage :microsoft-xna-framework-graphics-sampler-state)
+  (defpackage :microsoft-xna-framework-player-index)
 
   (defpackage :dungeon-slime
     (:use :cl 
@@ -99,6 +104,11 @@
       (:key :microsoft-xna-framework-input-keys)
       (:kb :microsoft-xna-framework-input-keyboard)
       (:kb-state :microsoft-xna-framework-input-keyboard-state)
+      (:gp :microsoft-xna-framework-input-game-pad)
+      (:ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
+      (:gp-state :microsoft-xna-framework-input-game-pad-state)
+      (:button :microsoft-xna-framework-input-buttons)
+      (:pi :microsoft-xna-framework-player-index)
       (:color :microsoft-xna-framework-color)
       (:sprite-effects :microsoft-xna-framework-graphics-sprite-effects)
       (:sprite-sort-mode :microsoft-xna-framework-graphics-sprite-sort-mode)
