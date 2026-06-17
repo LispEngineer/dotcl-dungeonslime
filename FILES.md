@@ -95,6 +95,9 @@ and files in this repository.
 * `clr-generic-test.lisp`: Startup test suite verifying C# generic function 
   dispatching, interface specificity, and alias resolution.
 
+* `typed-calls-test.lisp`: Test suite verifying that type-declared direct method calls
+  work correctly under DotCL 0.1.11, and that invalid cast exceptions are handled correctly.
+
 * `mg-classes.lisp`: Defines basic MonoGame classes and functions in a Lisp-friendly way 
   (e.g. `vector2`, `rect`, accessors `x`, `y`, `width`, `height`, and `sprite-batch-begin` helpers).
 

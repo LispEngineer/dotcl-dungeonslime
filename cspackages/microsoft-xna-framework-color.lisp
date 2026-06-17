@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T18:02:50Z
+;;; Generator Version: 8
+;;; Creation Date: 2026-06-17T20:34:17Z
 
 (in-package :cl-user)
 
@@ -159,6 +159,7 @@
    #:+yellow-green+
    #:=
    #:get-hash-code
+   #:implicit-cast
    #:lerp
    #:lerp-precise
    #:multiply
@@ -173,8 +174,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-17T18:02:50Z")
-(defconstant <version> 6)
+(defconstant <creation> "2026-06-17T20:34:17Z")
+(defconstant <version> 8)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -470,6 +471,9 @@
 
 (defun get-hash-code (obj)
   (dotnet:invoke obj "GetHashCode"))
+
+(defun implicit-cast (value)
+  (dotnet:static <type-str> "op_Implicit" value))
 
 (defun lerp (value1 value2 amount)
   (dotnet:static <type-str> "Lerp" value1 value2 amount))

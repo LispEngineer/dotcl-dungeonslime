@@ -32,6 +32,30 @@ This forces properties like `Color.White` to be emitted as `(defconstant +white+
 instead of `(define-symbol-macro white ...)` improving performance and avoiding repeated
 reflection evaluations.
 
+## Direct Method Calls via Type Declarations
+
+Starting in DotCL 0.1.11, method calls on C# instances can be optimized to direct
+calls (avoiding runtime reflection and boxing/unboxing overhead, resulting in an
+approximate 3.5x performance increase) by wrapping the receiver object in a
+type declaration using the `the` operator.
+
+The syntax for declaring a .NET type for a receiver is:
+```lisp
+(the (dotnet "Fully.Qualified.TypeName") receiver-form)
+```
+
+For instance, in `assembly-package-generator.lisp`, instance method stubs are
+automatically optimized for reference types (classes/interfaces, excluding
+structs and enums which are value types and not yet supported by `the` casting)
+like so:
+```lisp
+(defun dispose (obj)
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SamplerState") obj) "Dispose"))
+```
+
+If the actual object passed at runtime does not match the declared type, DotCL
+will raise a `DotCL.LispErrorException` indicating the invalid cast.
+
 
 # Including Lisp Libraries
 
@@ -93,6 +117,7 @@ due to a combination of two issues:
   introspection? I.e., a way to say "save the method call to X(a1, a2, a3)"
   and then invoke that method call on an object quickly with minimal overhead,
   preferably as if it were being directly invoked?
+  * RESOLVED: DotCL 0.1.11 introduced direct method calls via the `(the (dotnet "Type") obj)` type declaration syntax.
 
 * In `dotnet:define-class`, how would I specify a field of class
   `Func<object, object[], object>`?
@@ -439,3 +464,66 @@ see the outputs, the MSBuild cache must be invalidated by either:
 1. Making a modification to any `.lisp` file or the `.asd` file (e.g., adding a space and saving it).
 2. Running `make clean` (or `dotnet clean`) to delete the `obj/` and `bin/` directories, forcing MSBuild to 
    rebuild the `.fasl` from scratch on the next build.
+
+
+# Mismatched Parentheses in Common Lisp
+
+Mismatched parentheses in Common Lisp can lead to extremely confusing compilation
+errors, such as package lookup failures or symbols being reported as not external.
+This occurs because an extra or missing parenthesis can cause the Lisp reader
+to exit a macro definition or top-level form prematurely, causing subsequent forms
+to be parsed in the wrong context or skipped entirely.
+
+## Diagnosing Parentheses Mismatches
+
+Several methods can be used to locate mismatched parentheses:
+
+1. **Detailed MSBuild Diagnostic Verbosity**:
+   Run `dotnet build -v d` or `make build` to inspect the exact command executed,
+   and locate the concatenated source file (e.g.,
+   `obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/DungeonSlime.concat.lisp`).
+   Inspecting the concatenated file helps isolate which original source file
+   contains the mismatched paren.
+
+2. **Automated Parser Script**:
+   A Python script can be used to trace parenthesis matching. The script must
+   carefully ignore strings, single-line comments (starting with `;`), block
+   comments (`#| ... |#`), and character literals (like `#\)` or `#\(` or `#\;`).
+   Such a script maintains a stack of open parentheses and prints the exact line
+   and column where an extra or missing parenthesis is encountered.
+
+   Example check script:
+   ```python
+   def check_parens(filename):
+       with open(filename, "r") as f:
+           content = f.read()
+       stack = []
+       i, n = 0, len(content)
+       while i < n:
+           if content[i:i+2] == "#|":
+               i += 2
+               while i < n and content[i:i+2] != "|#": i += 1
+               i += 2; continue
+           if content[i] == ";":
+               while i < n and content[i] != "\n": i += 1
+               continue
+           if content[i] == "\"":
+               i += 1
+               while i < n:
+                   if content[i] == "\\": i += 2
+                   elif content[i] == "\"": i += 1; break
+                   else: i += 1
+               continue
+           if content[i:i+2] == "#\\":
+               i += 2
+               if i < n: i += 1
+               while i < n and content[i].isalnum(): i += 1
+               continue
+           if content[i] == "(":
+               stack.append(i); i += 1; continue
+           if content[i] == ")":
+               if not stack: return False
+               stack.pop(); i += 1; continue
+           i += 1
+       return len(stack) == 0
+   ```

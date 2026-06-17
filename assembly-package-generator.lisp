@@ -12,7 +12,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 6
+(defparameter *generator-version* 8
   "Integer version number for the generated Lisp source files.")
 
 (defun camel-to-kebab (name)
@@ -93,6 +93,16 @@
        (getf prop :readable)
        (not (getf prop :writeable))))
 
+(defun static-method-p (method)
+  "Checks if a method plist defines a static method."
+  (getf method :is-static))
+
+(defun public-instance-field-p (field)
+  "Checks if a field plist defines a public instance field."
+  (and (not (getf field :static))
+       (getf field :public)))
+
+
 (defun generic-type-p (type-str)
   "Checks if a C# type signature string represents a generic type (contains a backtick or exclamation point)."
   (and type-str (or (find #\` type-str) (find #\! type-str))))
@@ -158,6 +168,8 @@
          (fields (getf class-plist :fields))
          (properties (getf class-plist :properties))
          (methods (getf class-plist :methods))
+         (kind (getf class-plist :kind))
+         (is-value-type-p (or (eq kind :struct) (eq kind :enum)))
          (creation-time (get-iso-8601-time)))
     
     (ensure-directories-exist output-file :verbose t)
@@ -193,14 +205,16 @@
       (dolist (m simple-methods)
         (push (camel-to-kebab (getf m :name)) exports))
       
-      (setf exports (nreverse exports))
+      ;; Remove duplicates from exports while preserving order
+      (setf exports (remove-duplicates (nreverse exports) :test #'string= :from-end t))
       
       ;; Identify exported symbols that conflict with CL and must be shadowed
       (dolist (exp exports)
         (multiple-value-bind (sym status) (find-symbol (string-upcase exp) :common-lisp)
           (when (and sym (eq status :external))
             (push exp shadows))))
-      (setf shadows (nreverse shadows))
+      ;; Remove duplicates from shadows while preserving order
+      (setf shadows (remove-duplicates (nreverse shadows) :test #'string= :from-end t))
       
       ;; 2. Write to the Lisp output file
       (with-open-file (stream output-file :direction :output :if-exists :supersede :if-does-not-exist :create)
@@ -312,7 +326,9 @@
                 (format stream "  \"~A\"~%" escaped-docstring))
               (if static-p
                   (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)
-                  (format stream "  (dotnet:invoke obj \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))))))))
+                  (if is-value-type-p
+                      (format stream "  (dotnet:invoke obj \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)
+                      (format stream "  (dotnet:invoke (the (dotnet \"~A\") obj) \"~A\"~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names))))))))))
 
 (defun generate-assembly-packages (metadata-file class-filter output-dir &optional constant-properties-list)
   "Loads the metadata-file, filters classes by class-filter, and generates output Lisp files."

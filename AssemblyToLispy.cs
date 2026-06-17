@@ -709,6 +709,8 @@ namespace DungeonSlime {
                     case "op_Decrement": return "1-";
                     case "op_True": return "true";
                     case "op_False": return "false";
+                    case "op_Implicit": return "implicit-cast";
+                    case "op_Explicit": return "explicit-cast";
                 }
             }
             return name;

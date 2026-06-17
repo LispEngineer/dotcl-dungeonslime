@@ -136,7 +136,7 @@
                 (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:<type> returned ~S~%" type-name)))
 
           ;; Test zero static constant
-          (let* ((zero-sym (find-symbol "ZERO" mv2-pkg)))
+          (let* ((zero-sym (or (find-symbol "+ZERO+" mv2-pkg) (find-symbol "ZERO" mv2-pkg))))
             (format *error-output* "zero-sym found: ~S~%" zero-sym)
             (multiple-value-bind (expansion expanded-p) (macroexpand-1 zero-sym)
               (format *error-output* "macroexpand-1: expansion=~S, expanded-p=~S~%" expansion expanded-p))

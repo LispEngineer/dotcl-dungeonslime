@@ -21,6 +21,10 @@ to do with this game & framework.
 
 # Miscellaneous
 
+* Update to [DotCL 0.1.11](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#type-declared-net-calls-compile-to-a-direct-call)
+  * Remove the various `eval-when` that are no longer necessary
+  * Change package generator to use the new `(dotnet:invoke (the (...`
+
 * Remove my custom `Vector2` code and use the package generator's code 
 
 * Improve C# class package generator:

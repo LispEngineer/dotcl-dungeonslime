@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 6
-;;; Creation Date: 2026-06-17T18:02:31Z
+;;; Generator Version: 8
+;;; Creation Date: 2026-06-17T20:33:57Z
 
 (in-package :cl-user)
 
@@ -24,6 +24,7 @@
    #:+
    #:=
    #:get-hash-code
+   #:implicit-cast
    #:length
    #:length-squared
    #:not=
@@ -36,8 +37,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-17T18:02:31Z")
-(defconstant <version> 6)
+(defconstant <creation> "2026-06-17T20:33:57Z")
+(defconstant <version> 8)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -60,6 +61,9 @@
 
 (defun get-hash-code (obj)
   (dotnet:invoke obj "GetHashCode"))
+
+(defun implicit-cast (value)
+  (dotnet:static <type-str> "op_Implicit" value))
 
 (defun length (obj)
   (dotnet:invoke obj "Length"))

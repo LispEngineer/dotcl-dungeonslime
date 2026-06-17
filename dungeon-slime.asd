@@ -40,6 +40,7 @@
                   `(:file "package-generator-tests" :depends-on ("utils" "assembly-package-generator"
                                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic" :depends-on ("monoutils"))
+                  `(:file "typed-calls-test" :depends-on ("utils" ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp" "utils"
                                                   ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
@@ -52,6 +53,6 @@
                   '(:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants"))
                   '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils"))
                   '(:file "clr-defmethod-test" :depends-on ("packages" "utils"))
-                  '(:file "test-harness" :depends-on ("clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1"))
+                  '(:file "test-harness" :depends-on ("clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1" "typed-calls-test"))
                   '(:file "main" :depends-on
                     ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings")))))

@@ -267,6 +267,13 @@ C# Class-Aware Generic Function System (Version 1):
   interface precedence specificity (`ArrayList` vs `Hashtable` dispatching 
   to `ICollection` vs `IDictionary`), and type alias resolution.
 
+
+C# Direct Method Call Optimization (DotCL 0.1.11+):
+* Utilizes DotCL 0.1.11 direct-call compilation feature by wrapping C# instance
+  method receivers in type declarations using `(the (dotnet "Type") ...)`.
+* Speeds up method invocation significantly by avoiding runtime reflection and boxing.
+* Handled automatically by the Lisp package generator for generated reference type stubs.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class
