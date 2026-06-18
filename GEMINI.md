@@ -125,6 +125,11 @@ fails with an output similar to this: (from DotCL 0.1.8)
 then always double (or even triple) check any changes to Lisp code for mismatched
 parentheses.
 
+* As soon as any compilation problems or other errors are encountered, check the parentheses 
+  balance of *all* modified files individually.
+* A target `check-parens` in the `Makefile` runs `check_parens.py` against each 
+  `.lisp` file and the `.asd` file. Run `make check-parens` to verify parentheses balance.
+
 
 # Language
 

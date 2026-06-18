@@ -258,9 +258,12 @@ and files in this repository.
 
 * `Makefile`: The make script defining build targets (e.g., `make build`, `make test`).
 
+* `check_parens.py`: Python utility to programmatically verify parentheses balance in Common Lisp source files.
+
 * `AssemblyToLispyTestTarget/`: The directory containing the synthetic C# project used as a test target for `AssemblyToLispy`.
 
 * `DungeonSlime.csproj`: This is the C# Project file for the game. Its
   mystical incantations produce the final standalone binary. For more
   details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
+
 

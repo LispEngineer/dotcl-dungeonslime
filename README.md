@@ -77,6 +77,7 @@ You can then use the provided `Makefile` to build, test, and run the project:
 * **Run the game:** `make run` (runs the GUI game)
 * **Clean build files:** `make clean`
 * **Run MonoGame Content Builder**: `make mgcb`
+* **Check Lisp parentheses balance:** `make check-parens`
 
 Or manually run the steps:
 
@@ -98,6 +99,13 @@ Or manually run the steps:
    * Example: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime --assembly /home/dfields/.nuget/packages/monogame.framework.desktopgl/3.8.4.1/lib/net8.0/MonoGame.Framework.dll --output /tmp/mg.lisp`
 
 4. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
+
+5. To check Lisp parentheses balance manually:
+   `find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py`
+   * Parentheses balance is usually not much of a problem for human coders due to IDE
+     support, but it seems to trip up AI assistance a lot. The problem is compounded
+     due to DotCL's mechanism of concatenating all Lisp files into a single input during
+     compilation phase.
 
 ## How to Load in REPL
 

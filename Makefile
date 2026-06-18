@@ -5,11 +5,15 @@ BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
 OUT_DIR = cspackages
 EXECUTABLE := $(BIN_DIR)DungeonSlime
 
-.PHONY: all build test run clean cspackages repl
+.PHONY: all build test run clean cspackages repl check-parens
 
 all: build test
 
 build: build-actual # cspackages build-actual
+
+check-parens:
+	find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py
+
 
 build-actual:
 	# First, build the C# project without DotCL targets to ensure all NuGet
