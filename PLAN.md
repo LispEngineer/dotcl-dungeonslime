@@ -36,6 +36,8 @@ to do with this game & framework.
   * Consider casting mutator parameters to the correct type, e.g.,
     `(#!!System.Convert.ToByte 37)`, or `(dotnet:box 37 "System.Byte")`
     in the mutator function implementation
+  * Add documentation comments that indicate the return type and
+    expected input type(s) of any parameters.
   * Change IsSomething methods to `something?` methods
   * Change `ToSomething` methods to `->something`
   * Handle multiple classes at a time for a single assembly

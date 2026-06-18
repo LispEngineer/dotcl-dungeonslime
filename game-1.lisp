@@ -243,11 +243,6 @@ else
 }
 |#
 
-(defun check-gamepad-input (game)
-  "Handles gamepad input for moving the slime around"
-  nil)
-
-#|
 ;; Partially implemented - need to add package generator capabilities
 (defun check-gamepad-input (game)
   "Handles gamepad input for moving the slime around"
@@ -257,13 +252,22 @@ else
   (let ((gps (#!!Microsoft.Xna.Framework.Input.GamePad.GetState pi:+one+))
         (speed +movement-speed+))
     ;; Double speed and turn on vibration if A is pressed
-    (if (gp-state:is-button-down buttons:+a+)
+    (if (gp-state:is-button-down gps button:+a+)
       (progn
         (setf speed (* speed 1.5f0))
         (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 1.0f0 1.0f0))
       (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 0.0f0 0.0f0))
-    ;; Check thumpad then D-pad
-    (if (not= (gp-state:thumb-sticks gps) vector2:+zero+)
-      (progn
-|#
+    ;; Check thumbstick then D-pad
+    (if (v2:not= (ts:left (gp-state:thumb-sticks gps)) v2:+zero+)
+      ;; Use the thumbstick
+      ;; _slimePosition.X += gamePadState.ThumbSticks.Left.X * speed;
+      ;; _slimePosition.Y -= gamePadState.ThumbSticks.Left.Y * speed;
+      (setf (slime-position game)
+        (vector2 (+ (x (slime-position game))
+                    (* speed (x (ts:left (gp-state:thumb-sticks gps)))))
+                  (- (y (slime-position game))
+                     (* speed (y (ts:left (gp-state:thumb-sticks gps)))))))
+      ;; Use the d-pad
+      ;; TODO: IMPLEMENT
+      nil)))
 

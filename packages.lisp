@@ -88,7 +88,7 @@
   (defpackage :microsoft-xna-framework-input-game-pad)
   (defpackage :microsoft-xna-framework-input-game-pad-state)
   (defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks)
-    (defpackage :microsoft-xna-framework-input-buttons)
+  (defpackage :microsoft-xna-framework-input-buttons)
   (defpackage :microsoft-xna-framework-color)
   (defpackage :microsoft-xna-framework-graphics-sprite-effects)
   (defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
