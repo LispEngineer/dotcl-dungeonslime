@@ -12,15 +12,15 @@
 (defparameter *generator-version* 9
   "Integer version number for the generated Lisp source files.
    Version history:
-   1 -
-   2 -
-   3 -
-   4 -
-   5 -
-   6 -
-   7 -
-   8 -
-   9 - Add instance property accessors and mutators")
+   1 - Initial generator mapping C# classes to Lisp packages.
+   2 - Added symbol-macro support for C# static properties/fields and Lisp symbol shadowing.
+   3 - Refined constant property determination.
+   4 - Added operator overloading name mapping (e.g. mapping op_Multiply to *).
+   5 - Added CLOS class registration support and mapped C# inequality operator to not=.
+   6 - Added support for treating selected read-only static properties as constants via configuration.
+   7 - Eliminated duplicate exports and shadows in generated package files.
+   8 - Mapped implicit and explicit conversion operators and filtered exports to exclude undefined members.
+   9 - Added instance property accessors and mutators.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
