@@ -265,8 +265,8 @@ else
       (setf (slime-position game)
         (vector2 (+ (x (slime-position game))
                     (* speed (x (ts:left (gp-state:thumb-sticks gps)))))
-                  (- (y (slime-position game))
-                     (* speed (y (ts:left (gp-state:thumb-sticks gps)))))))
+                 (- (y (slime-position game))
+                    (* speed (y (ts:left (gp-state:thumb-sticks gps)))))))
       ;; Use the d-pad
       ;; TODO: IMPLEMENT
       nil)))
