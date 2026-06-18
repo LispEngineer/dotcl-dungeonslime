@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:35:59Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:19Z
 
 (in-package :cl-user)
 
@@ -16,6 +16,12 @@
    #:<creation>
    #:<version>
    #:+default+
+   #:buttons
+   #:d-pad
+   #:is-connected
+   #:packet-number
+   #:thumb-sticks
+   #:triggers
    #:=
    #:equals
    #:get-hash-code
@@ -29,8 +35,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(defconstant <creation> "2026-06-17T21:35:59Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:19Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -38,6 +44,24 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState")))
 
 (defconstant +default+ (dotnet:static <type-str> "Default"))
+
+(defun buttons (obj)
+  (dotnet:invoke obj "get_Buttons"))
+
+(defun d-pad (obj)
+  (dotnet:invoke obj "get_DPad"))
+
+(defun is-connected (obj)
+  (dotnet:invoke obj "get_IsConnected"))
+
+(defun packet-number (obj)
+  (dotnet:invoke obj "get_PacketNumber"))
+
+(defun thumb-sticks (obj)
+  (dotnet:invoke obj "get_ThumbSticks"))
+
+(defun triggers (obj)
+  (dotnet:invoke obj "get_Triggers"))
 
 (defun = (left right)
   (dotnet:static <type-str> "op_Equality" left right))

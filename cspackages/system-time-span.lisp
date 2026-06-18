@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:35:49Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:08Z
 
 (in-package :cl-user)
 
@@ -44,6 +44,21 @@
    #:+max-value+
    #:+min-value+
    #:+zero+
+   #:days
+   #:hours
+   #:microseconds
+   #:milliseconds
+   #:minutes
+   #:nanoseconds
+   #:seconds
+   #:ticks
+   #:total-days
+   #:total-hours
+   #:total-microseconds
+   #:total-milliseconds
+   #:total-minutes
+   #:total-nanoseconds
+   #:total-seconds
    #:<
    #:<=
    #:=
@@ -64,8 +79,8 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-17T21:35:49Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:08Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -146,6 +161,66 @@
 
 (defconstant +zero+ (dotnet:static <type-str> "Zero"))
 (setf (documentation '+zero+ 'variable) "Represents the zero System.TimeSpan value. This field is read-only.")
+
+(defun days (obj)
+  "Gets the days component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Days"))
+
+(defun hours (obj)
+  "Gets the hours component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Hours"))
+
+(defun microseconds (obj)
+  "Gets the microseconds component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Microseconds"))
+
+(defun milliseconds (obj)
+  "Gets the milliseconds component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Milliseconds"))
+
+(defun minutes (obj)
+  "Gets the minutes component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Minutes"))
+
+(defun nanoseconds (obj)
+  "Gets the nanoseconds component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Nanoseconds"))
+
+(defun seconds (obj)
+  "Gets the seconds component of the time interval represented by the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Seconds"))
+
+(defun ticks (obj)
+  "Gets the number of ticks that represent the value of the current System.TimeSpan structure."
+  (dotnet:invoke obj "get_Ticks"))
+
+(defun total-days (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional days."
+  (dotnet:invoke obj "get_TotalDays"))
+
+(defun total-hours (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional hours."
+  (dotnet:invoke obj "get_TotalHours"))
+
+(defun total-microseconds (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional microseconds."
+  (dotnet:invoke obj "get_TotalMicroseconds"))
+
+(defun total-milliseconds (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional milliseconds."
+  (dotnet:invoke obj "get_TotalMilliseconds"))
+
+(defun total-minutes (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional minutes."
+  (dotnet:invoke obj "get_TotalMinutes"))
+
+(defun total-nanoseconds (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional nanoseconds."
+  (dotnet:invoke obj "get_TotalNanoseconds"))
+
+(defun total-seconds (obj)
+  "Gets the value of the current System.TimeSpan structure expressed in whole and fractional seconds."
+  (dotnet:invoke obj "get_TotalSeconds"))
 
 (defun < (t1 t2)
   "Summary: Indicates whether a specified System.TimeSpan is less than another specified System.TimeSpan.

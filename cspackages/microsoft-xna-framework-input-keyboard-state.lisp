@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:35:52Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:11Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:caps-lock
+   #:item
+   #:num-lock
    #:=
    #:equals
    #:get-hash-code
@@ -28,13 +31,22 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(defconstant <creation> "2026-06-17T21:35:52Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:11Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState")))
+
+(defun caps-lock (obj)
+  (dotnet:invoke obj "get_CapsLock"))
+
+(defun item (obj)
+  (dotnet:invoke obj "get_Item"))
+
+(defun num-lock (obj)
+  (dotnet:invoke obj "get_NumLock"))
 
 (defun = (a b)
   (dotnet:static <type-str> "op_Equality" a b))

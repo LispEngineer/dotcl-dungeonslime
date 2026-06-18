@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:36:10Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:30Z
 
 (in-package :cl-user)
 
@@ -157,6 +157,11 @@
    #:+white-smoke+
    #:+yellow+
    #:+yellow-green+
+   #:a
+   #:b
+   #:g
+   #:packed-value
+   #:r
    #:=
    #:get-hash-code
    #:implicit-cast
@@ -174,8 +179,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-17T21:36:10Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:30Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -465,6 +470,46 @@
 (defconstant +yellow+ (dotnet:static <type-str> "Yellow"))
 
 (defconstant +yellow-green+ (dotnet:static <type-str> "YellowGreen"))
+
+(defun a (obj)
+  (dotnet:invoke obj "get_A"))
+
+;; Note: Modifying a property of a value type (struct) via setf may only mutate
+;; a boxed copy, leaving the original unchanged. Use caution with structs.
+(defun (setf a) (new-value obj)
+  (dotnet:invoke obj "set_A" new-value))
+
+(defun b (obj)
+  (dotnet:invoke obj "get_B"))
+
+;; Note: Modifying a property of a value type (struct) via setf may only mutate
+;; a boxed copy, leaving the original unchanged. Use caution with structs.
+(defun (setf b) (new-value obj)
+  (dotnet:invoke obj "set_B" new-value))
+
+(defun g (obj)
+  (dotnet:invoke obj "get_G"))
+
+;; Note: Modifying a property of a value type (struct) via setf may only mutate
+;; a boxed copy, leaving the original unchanged. Use caution with structs.
+(defun (setf g) (new-value obj)
+  (dotnet:invoke obj "set_G" new-value))
+
+(defun packed-value (obj)
+  (dotnet:invoke obj "get_PackedValue"))
+
+;; Note: Modifying a property of a value type (struct) via setf may only mutate
+;; a boxed copy, leaving the original unchanged. Use caution with structs.
+(defun (setf packed-value) (new-value obj)
+  (dotnet:invoke obj "set_PackedValue" new-value))
+
+(defun r (obj)
+  (dotnet:invoke obj "get_R"))
+
+;; Note: Modifying a property of a value type (struct) via setf may only mutate
+;; a boxed copy, leaving the original unchanged. Use caution with structs.
+(defun (setf r) (new-value obj)
+  (dotnet:invoke obj "set_R" new-value))
 
 (defun = (a b)
   (dotnet:static <type-str> "op_Equality" a b))

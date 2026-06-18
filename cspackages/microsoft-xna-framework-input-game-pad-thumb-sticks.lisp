@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:36:02Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:21Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,8 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:left
+   #:right
    #:=
    #:equals
    #:get-hash-code
@@ -26,13 +28,19 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(defconstant <creation> "2026-06-17T21:36:02Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:21Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")))
+
+(defun left (obj)
+  (dotnet:invoke obj "get_Left"))
+
+(defun right (obj)
+  (dotnet:invoke obj "get_Right"))
 
 (defun = (left right)
   (dotnet:static <type-str> "op_Equality" left right))

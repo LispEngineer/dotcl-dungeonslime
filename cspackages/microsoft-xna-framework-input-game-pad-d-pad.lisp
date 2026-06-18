@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 8
-;;; Creation Date: 2026-06-17T21:36:01Z
+;;; Generator Version: 9
+;;; Creation Date: 2026-06-18T02:00:20Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,10 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:down
+   #:left
+   #:right
+   #:up
    #:=
    #:equals
    #:get-hash-code
@@ -26,13 +30,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(defconstant <creation> "2026-06-17T21:36:01Z")
-(defconstant <version> 8)
+(defconstant <creation> "2026-06-18T02:00:20Z")
+(defconstant <version> 9)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad")))
+
+(defun down (obj)
+  (dotnet:invoke obj "get_Down"))
+
+(defun left (obj)
+  (dotnet:invoke obj "get_Left"))
+
+(defun right (obj)
+  (dotnet:invoke obj "get_Right"))
+
+(defun up (obj)
+  (dotnet:invoke obj "get_Up"))
 
 (defun = (left right)
   (dotnet:static <type-str> "op_Equality" left right))

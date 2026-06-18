@@ -474,6 +474,9 @@ This occurs because an extra or missing parenthesis can cause the Lisp reader
 to exit a macro definition or top-level form prematurely, causing subsequent forms
 to be parsed in the wrong context or skipped entirely.
 
+As soon as any compilation problems or other errors are encountered, the parentheses
+balance of all modified files must be checked individually.
+
 ## Diagnosing Parentheses Mismatches
 
 Several methods can be used to locate mismatched parentheses:
@@ -485,50 +488,25 @@ Several methods can be used to locate mismatched parentheses:
    Inspecting the concatenated file helps isolate which original source file
    contains the mismatched paren.
 
-2. **Automated Parser Script**:
-   A Python script can be used to trace parenthesis matching. The script must
-   carefully ignore strings, single-line comments (starting with `;`), block
-   comments (`#| ... |#`), and character literals (like `#\)` or `#\(` or `#\;`).
-   Such a script maintains a stack of open parentheses and prints the exact line
-   and column where an extra or missing parenthesis is encountered.
+2. **Automated Parentheses Validator (`check_parens.py`)**:
+   A Python script [check_parens.py](file:///home/dfields/src/cl/dotcl-dungeonslime/check_parens.py)
+   is located in the repository root directory. The script scans Lisp files, maintaining a stack
+   of open parentheses to locate mismatches, while correctly skipping string literals,
+   character literals (such as `#\(` or `#\;`), single-line comments,
+   and nested multi-line block comments (`#| ... |#`).
 
-   Example check script:
-   ```python
-   def check_parens(filename):
-       with open(filename, "r") as f:
-           content = f.read()
-       stack = []
-       i, n = 0, len(content)
-       while i < n:
-           if content[i:i+2] == "#|":
-               i += 2
-               while i < n and content[i:i+2] != "|#": i += 1
-               i += 2; continue
-           if content[i] == ";":
-               while i < n and content[i] != "\n": i += 1
-               continue
-           if content[i] == "\"":
-               i += 1
-               while i < n:
-                   if content[i] == "\\": i += 2
-                   elif content[i] == "\"": i += 1; break
-                   else: i += 1
-               continue
-           if content[i:i+2] == "#\\":
-               i += 2
-               if i < n: i += 1
-               while i < n and content[i].isalnum(): i += 1
-               continue
-           if content[i] == "(":
-               stack.append(i); i += 1; continue
-           if content[i] == ")":
-               if not stack: return False
-               stack.pop(); i += 1; continue
-           i += 1
-       return len(stack) == 0
+   The check can be executed across all `.lisp` and `.asd` files in the workspace by running:
+   ```bash
+   make check-parens
    ```
 
-## Instance Properties and Struct "Boxing Mutation"
+   Alternatively, it can be run manually on specific files:
+   ```bash
+   python3 check_parens.py file1.lisp file2.lisp
+   ```
+
+
+# Instance Properties and Struct "Boxing Mutation"
 
 The generator (`assembly-package-generator.lisp`) emits accessor (`property-name`)
 and mutator (`(setf property-name)`) functions for C# instance properties. 
