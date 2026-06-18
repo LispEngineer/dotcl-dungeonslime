@@ -33,10 +33,13 @@ to do with this game & framework.
 
 * Improve C# class package generator:
   * **DONE** Change `/=` to `not=` in the Lispy style
+  * Consider casting mutator parameters to the correct type, e.g.,
+    `(#!!System.Convert.ToByte 37)`, or `(dotnet:box 37 "System.Byte")`
+    in the mutator function implementation
   * Change IsSomething methods to `something?` methods
   * Change `ToSomething` methods to `->something`
   * Handle multiple classes at a time for a single assembly
-  * Register classes/types with DotCL's CLOS dispatch system
+  * **DONE** Register classes/types with DotCL's CLOS dispatch system
   * Add the assembly version (and other versions?) from which the class package was made
   * Change `GetSomething` methods to ???
   * Make operator overloads take N parameters - assuming they are all the same type

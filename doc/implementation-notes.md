@@ -531,3 +531,22 @@ Reference types (classes) do not suffer from this issue.
 In addition, Lisp properties with only a setter (write-only properties) are generated
 with the name `set-propertyname` and accept the receiver as the first argument:
 `(set-propertyname obj new-value)`.
+
+## Example Transcript
+
+```lisp
+DUNGEON-SLIME> (defparameter x color:+white+)
+X
+DUNGEON-SLIME> x
+#<DOTNET Microsoft.Xna.Framework.Color {R:37 G:255 B:255 A:255}>
+DUNGEON-SLIME> (setf (color:r x) (dotnet:box 37 "System.Byte"))
+#<DOTNET-BOXED Byte 37>
+DUNGEON-SLIME> x
+#<DOTNET Microsoft.Xna.Framework.Color {R:37 G:255 B:255 A:255}>
+DUNGEON-SLIME> (setf (color:r x) (#!!System.Convert.ToByte 40))
+#<DOTNET System.Byte 40>
+DUNGEON-SLIME> x
+#<DOTNET Microsoft.Xna.Framework.Color {R:40 G:255 B:255 A:255}>
+DUNGEON-SLIME> (setf (color:r x) (the (dotnet "System.Byte") 55))
+Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
+```
