@@ -49,5 +49,5 @@
   (format *error-output* "[load-system-test.lisp] (length asdf:*central-registry*) = ~A~%" 
           (length asdf:*central-registry*))
 
-  (anaphora:awhen (+ 3 4)
-    (format *error-output* "[load-system-test.lisp] anaphora:it = ~A (should be 7)~%" anaphora:it)))
+  (anaphora::awhen (+ 3 4)
+    (format *error-output* "[load-system-test.lisp] anaphora:it = ~A (should be 7)~%" anaphora::it)))

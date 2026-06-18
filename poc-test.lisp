@@ -132,8 +132,8 @@
                 (vec-type (and vec-type-sym (symbol-value vec-type-sym)))
                 (type-name (and vec-type (dotnet:invoke vec-type "FullName"))))
             (if (equal type-name "Microsoft.Xna.Framework.Vector2")
-                (format *error-output* "[PASS] microsoft-xna-framework-vector2:<type> returned Microsoft.Xna.Framework.Vector2~%")
-                (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:<type> returned ~S~%" type-name)))
+                (format *error-output* "[PASS] microsoft-xna-framework-vector2::<type> returned Microsoft.Xna.Framework.Vector2~%")
+                (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2::<type> returned ~S~%" type-name)))
 
           ;; Test zero static constant
           (let* ((zero-sym (or (find-symbol "+ZERO+" mv2-pkg) (find-symbol "ZERO" mv2-pkg))))
@@ -144,9 +144,9 @@
                   (x-val (and zero-vec (dotnet:invoke zero-vec "X")))
                   (y-val (and zero-vec (dotnet:invoke zero-vec "Y"))))
               (format *error-output* "zero-vec value: ~S~%" zero-vec)
-              (if (and x-val y-val (= x-val 0.0) (= y-val 0.0))
-                  (format *error-output* "[PASS] microsoft-xna-framework-vector2:+zero+ is zero vector~%")
-                  (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2:+zero+ has values X=~A, Y=~A~%" x-val y-val)))))
+              (if (and (equal x-val 0.0) (equal y-val 0.0))
+                  (format *error-output* "[PASS] microsoft-xna-framework-vector2::+zero+ is zero vector~%")
+                  (utils:format-red *error-output* "[FAIL] microsoft-xna-framework-vector2::+zero+ has values X=~A, Y=~A~%" x-val y-val)))))
         (format *error-output* "[SKIP] C# Package Generator Integration Tests skipped (packages not loaded)~%")))
 
   (format *error-output* "--- C# Package Generator Integration Tests Completed ---~%")

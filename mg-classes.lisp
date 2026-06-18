@@ -154,7 +154,7 @@
 ;; Ease of use function for Sprite Batch Begin
 #|
 (defun sprite-batch-begin (sprite-batch
-                           &optional (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode:+deferred+)
+                           &optional (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode::+deferred+)
                            blend-state sampler-state depth-stencil-state
                            rasterizer-state effect transform-matrix)
   "Call the SpriteBatch.Begin() function with the specified arguments."
@@ -167,7 +167,7 @@
 
 ;; Ease of use function for Sprite Batch Begin using keyword arguments
 (defun sprite-batch-begin (sprite-batch
-                            &key (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode:+deferred+)
+                            &key (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode::+deferred+)
                             (blend-state nil)
                             (sampler-state nil)
                             (depth-stencil-state nil)

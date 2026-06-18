@@ -74,7 +74,7 @@
 (defun ta-create-sprite (ta region-name)
   "Creates a sprite for the specified region name. If the region name is not
    found, returns nil."
-  (anaphora:awhen (ta-get-region ta region-name)
+  (anaphora::awhen (ta-get-region ta region-name)
     (make-instance 'sprite :texture-region it)))
 
 (defun ta-create-animated-sprite (ta sprite-name)

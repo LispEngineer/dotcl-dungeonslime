@@ -11,6 +11,11 @@
 ;; Define the packages at load-time/compile-time to isolate REPL symbols.
 ;; This seems to be important for DotCL's build system.
 (eval-when (:compile-toplevel :load-toplevel :execute)
+  ;; Workaround for DotCL compiler: explicitly require dependencies
+  ;; so their packages and exports are available at compile-time.
+  (require "dotcl-thread")
+  (require "dotcl-repl")
+  (require "dotnet-class")
 
   (defpackage :utils
     (:use :cl)
@@ -79,7 +84,8 @@
     (:export #:defc#generic
              #:defc#method))
 
-  ;; Pre-declare empty C# packages so local-nicknames doesn't crash
+  ;; Pre-declare empty packages to avoid reader errors during compilation
+  (defpackage :anaphora)
   (defpackage :microsoft-xna-framework-vector2)
   (defpackage :system-time-span)
   (defpackage :microsoft-xna-framework-input-keys)
@@ -105,7 +111,7 @@
       (:kb :microsoft-xna-framework-input-keyboard)
       (:kb-state :microsoft-xna-framework-input-keyboard-state)
       (:gp :microsoft-xna-framework-input-game-pad)
-      (:ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
+      (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
       (:gp-state :microsoft-xna-framework-input-game-pad-state)
       (:button :microsoft-xna-framework-input-buttons)
       (:pi :microsoft-xna-framework-player-index)

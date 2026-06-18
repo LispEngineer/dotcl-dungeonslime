@@ -105,85 +105,85 @@
   (format *error-output* "--- Running Generated Package Operator Overload Tests ---~%")
 
   ;; TimeSpan Operator Tests
-  (let ((t1 (system-time-span:from-ticks 100))
-        (t2 (system-time-span:from-ticks 200))
-        (t3 (system-time-span:from-ticks 100)))
+  (let ((t1 (system-time-span::from-ticks 100))
+        (t2 (system-time-span::from-ticks 200))
+        (t3 (system-time-span::from-ticks 100)))
 
-    (assert-test (system-time-span:= t1 t3)
+    (assert-test (system-time-span::= t1 t3)
                 t
                 "TimeSpan = operator (true case)")
 
-    (assert-test (system-time-span:= t1 t2)
+    (assert-test (system-time-span::= t1 t2)
                 nil
                 "TimeSpan = operator (false case)")
 
-    (assert-test (system-time-span:not= t1 t2)
+    (assert-test (system-time-span::not= t1 t2)
                 t
-                "TimeSpan not= operator (true case)")
+                "TimeSpan != operator (true case)")
 
-    (assert-test (system-time-span:not= t1 t3)
+    (assert-test (system-time-span::not= t1 t3)
                 nil
-                "TimeSpan not= operator (false case)")
+                "TimeSpan != operator (false case)")
 
-    (assert-test (system-time-span:< t1 t2)
+    (assert-test (system-time-span::< t1 t2)
                 t
                 "TimeSpan < operator (true case)")
 
-    (assert-test (system-time-span:< t2 t1)
+    (assert-test (system-time-span::< t2 t1)
                 nil
                 "TimeSpan < operator (false case)")
 
-    (assert-test (system-time-span:<= t1 t2)
+    (assert-test (system-time-span::<= t1 t2)
                 t
-                "TimeSpan <= operator (less than case)")
+                "TimeSpan <= operator (true case)")
 
-    (assert-test (system-time-span:<= t1 t3)
+    (assert-test (system-time-span::<= t1 t3)
                 t
                 "TimeSpan <= operator (equal case)")
 
-    (assert-test (system-time-span:> t2 t1)
+    (assert-test (system-time-span::> t2 t1)
                 t
                 "TimeSpan > operator (true case)")
 
-    (assert-test (system-time-span:> t1 t2)
+    (assert-test (system-time-span::> t1 t2)
                 nil
                 "TimeSpan > operator (false case)")
 
-    (assert-test (system-time-span:>= t2 t1)
+    (assert-test (system-time-span::>= t2 t1)
                 t
-                "TimeSpan >= operator (greater than case)")
+                "TimeSpan >= operator (true case)")
 
-    (assert-test (system-time-span:>= t1 t3)
+    (assert-test (system-time-span::>= t1 t3)
                 t
                 "TimeSpan >= operator (equal case)"))
 
   ;; Vector2 Operator Tests
-  (let ((v-zero microsoft-xna-framework-vector2:+zero+)
-        (v-one microsoft-xna-framework-vector2:+one+)
-        (v-x microsoft-xna-framework-vector2:+unit-x+)
-        (v-y microsoft-xna-framework-vector2:+unit-y+))
+  (let ((v-zero microsoft-xna-framework-vector2::+zero+)
+        (v-one microsoft-xna-framework-vector2::+one+)
+        (v-x microsoft-xna-framework-vector2::+unit-x+)
+        (v-y microsoft-xna-framework-vector2::+unit-y+))
 
-    (assert-test (microsoft-xna-framework-vector2:= v-zero v-zero)
+    (assert-test (microsoft-xna-framework-vector2::= v-zero v-zero)
                 t
                 "Vector2 = operator (true case)")
 
-    (assert-test (microsoft-xna-framework-vector2:= v-zero v-one)
+    (assert-test (microsoft-xna-framework-vector2::= v-zero v-one)
                 nil
                 "Vector2 = operator (false case)")
 
-    (assert-test (microsoft-xna-framework-vector2:not= v-zero v-one)
+    (assert-test (microsoft-xna-framework-vector2::not= v-zero v-one)
                 t
-                "Vector2 not= operator (true case)")
+                "Vector2 != operator (true case)")
 
-    (assert-test (microsoft-xna-framework-vector2:not= v-zero v-zero)
+    (assert-test (microsoft-xna-framework-vector2::not= v-zero v-zero)
                 nil
-                "Vector2 not= operator (false case)")
+                "Vector2 != operator (false case)")
 
     ;; UnitX (1,0) + UnitY (0,1) = One (1,1)
-    (let ((v-sum (microsoft-xna-framework-vector2:+ v-x v-y)))
-      (assert-test (microsoft-xna-framework-vector2:= v-sum v-one)
+    (let ((v-sum (microsoft-xna-framework-vector2::+ v-x v-y)))
+      (assert-test (microsoft-xna-framework-vector2::= v-sum v-one)
                   t
-                  "Vector2 + operator (UnitX + UnitY = One)")))
+                  "Vector2 + operator (true case)")))
 
   (format *error-output* "--- Generated Package Operator Overload Tests Completed ---~%")
 

@@ -27,7 +27,7 @@
   (format *error-output* "~%--- MonoGame Lisp REPL started ---~%")
   (loop
     ;; TODO: Figure out a graceful way to exit the background REPL
-    (let ((line (dotcl-repl:readline "MONOGAME-LISP> ")))
+    (let ((line (funcall (find-symbol "READLINE" "DOTCL-REPL") "MONOGAME-LISP> ")))
       (when (null line) ;; Exit on Ctrl+D; TODO: exit the game after confirmation?
         (format *error-output* "Exiting MONOGAME-LISP REPL.~%")
         ;; TODO: Figure out how to persist the REPL history and reload it.
