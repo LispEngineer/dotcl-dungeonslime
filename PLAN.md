@@ -26,6 +26,8 @@ to do with this game & framework.
 * Update to [DotCL 0.1.11](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#type-declared-net-calls-compile-to-a-direct-call)
   * Remove the various `eval-when` that are no longer necessary
   * **DONE** Change package generator to use the new `(dotnet:invoke (the (...`
+  * Figure out how the 0.1.10 capability to have overloaded class names in
+    the generic dispatch mechanism works - and prove it with tests
 
 * Remove my custom `Vector2` code and use the package generator's code
 

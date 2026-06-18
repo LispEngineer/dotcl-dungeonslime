@@ -93,6 +93,10 @@
        (getf prop :readable)
        (not (getf prop :writeable))))
 
+(defun instance-property-p (prop)
+  "Checks if a property plist defines an instance property."
+  (not (getf prop :static)))
+
 (defun static-method-p (method)
   "Checks if a method plist defines a static method."
   (getf method :is-static))
@@ -182,6 +186,7 @@
            (const-props (remove-if-not #'constant-property-p properties))
            (pure-const-props (remove-if-not (lambda (p) (or (member "*" constant-properties-list :test #'string=) (member (getf p :name) constant-properties-list :test #'string-equal))) const-props))
            (dynamic-const-props (remove-if (lambda (p) (or (member "*" constant-properties-list :test #'string=) (member (getf p :name) constant-properties-list :test #'string-equal))) const-props))
+           (instance-props (remove-if-not #'instance-property-p properties))
            (simple-methods (remove-if-not (lambda (m) (simple-method-p m methods)) methods))
            (exports nil)
            (shadows nil))
@@ -202,6 +207,12 @@
         (push (format nil "+~A+" (camel-to-kebab (getf p :name))) exports))
       (dolist (p dynamic-const-props)
         (push (camel-to-kebab (getf p :name)) exports))
+      (dolist (p instance-props)
+        (let* ((pname (camel-to-kebab (getf p :name)))
+               (readable (getf p :readable)))
+          (if readable
+              (push pname exports)
+              (push (format nil "set-~A" pname) exports))))
       (dolist (m simple-methods)
         (push (camel-to-kebab (getf m :name)) exports))
       
@@ -302,6 +313,45 @@
             (if (> (length doc-str) 0)
                 (format stream "(setf (documentation '~A 'variable) \"~A\")~%~%" cname doc-str)
                 (format stream "~%"))))
+        
+        ;; Instance Properties
+        (dolist (p instance-props)
+          (let* ((pname (camel-to-kebab (getf p :name)))
+                 (readable (getf p :readable))
+                 (writeable (getf p :writeable))
+                 (get-method (getf p :get-method))
+                 (set-method (getf p :set-method))
+                 (p-doc (getf (getf p :documentation) :summary))
+                 (doc-str (if p-doc (escape-lisp-string p-doc) "")))
+            (when readable
+              (format stream "(defun ~A (obj)~%" pname)
+              (when (> (length doc-str) 0)
+                (format stream "  \"~A\"~%" doc-str))
+              (if is-value-type-p
+                  (format stream "  (dotnet:invoke obj \"~A\"))~%~%" get-method)
+                  (format stream "  (dotnet:invoke (the (dotnet \"~A\") obj) \"~A\"))~%~%" fq-name get-method)))
+            (when writeable
+              (if readable
+                  (progn
+                    (when is-value-type-p
+                      (format stream ";; Note: Modifying a property of a value type (struct) via setf may only mutate~%")
+                      (format stream ";; a boxed copy, leaving the original unchanged. Use caution with structs.~%"))
+                    (format stream "(defun (setf ~A) (new-value obj)~%" pname)
+                    (when (> (length doc-str) 0)
+                      (format stream "  \"~A\"~%" doc-str))
+                    (if is-value-type-p
+                        (format stream "  (dotnet:invoke obj \"~A\" new-value))~%~%" set-method)
+                        (format stream "  (dotnet:invoke (the (dotnet \"~A\") obj) \"~A\" new-value))~%~%" fq-name set-method)))
+                  (progn
+                    (when is-value-type-p
+                      (format stream ";; Note: Modifying a property of a value type (struct) via setf may only mutate~%")
+                      (format stream ";; a boxed copy, leaving the original unchanged. Use caution with structs.~%"))
+                    (format stream "(defun set-~A (obj new-value)~%" pname)
+                    (when (> (length doc-str) 0)
+                      (format stream "  \"~A\"~%" doc-str))
+                    (if is-value-type-p
+                        (format stream "  (dotnet:invoke obj \"~A\" new-value))~%~%" set-method)
+                        (format stream "  (dotnet:invoke (the (dotnet \"~A\") obj) \"~A\" new-value))~%~%" fq-name set-method)))))))
         
         ;; Methods
         (dolist (m simple-methods)
