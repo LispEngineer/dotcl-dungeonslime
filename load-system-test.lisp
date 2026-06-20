@@ -30,21 +30,8 @@
   (require "asdf")
   (format *error-output* "[load-system-test.lisp] Required ASDF.~%"))
 
-(eval-when (:compile-toplevel)
-  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
-         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
-         (bin-dir (with-open-file (s outdir-file) (read-line s)))
-         (anaphora-path (merge-pathnames (concatenate 'string bin-dir "contrib/anaphora/") sys-dir)))
-    (pushnew anaphora-path asdf:*central-registry* :test #'equal)))
 
-(eval-when (:load-toplevel :execute)
-  (let ((app-base (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")))
-    (when app-base
-      (let ((anaphora-path (merge-pathnames "contrib/anaphora/" (pathname app-base))))
-        (pushnew anaphora-path asdf:*central-registry* :test #'equal)))))
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (format *error-output* "[load-system-test.lisp] asdf:*central-registry* = ~A~%"
-          asdf:*central-registry*)
+(eval-when (:compile-toplevel)
   (format *error-output* "[load-system-test.lisp] Loading anaphora...~%")
   (asdf:load-system "anaphora")
   (format *error-output* "[load-system-test.lisp] Loaded anaphora.~%"))

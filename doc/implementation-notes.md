@@ -554,31 +554,29 @@ Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
 
 # DotCL 0.1.12 Build Execution Changes and ASDF Loading
 
-In DotCL 0.1.12, the compiler invocation changed from executing within the local project space to running via the runtime project (e.g., `dotnet run --project ../dotcl/runtime/runtime.csproj`).
-This shift alters the behavior of `System.AppDomain.CurrentDomain.BaseDirectory` during compilation:
+In DotCL 0.1.12, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`. 
 
-*   **Compile-time (`:compile-toplevel`):** `BaseDirectory` points to the `dotcl/runtime/bin/...` directory.
-*   **Run-time (`:load-toplevel` and `:execute`):** `BaseDirectory` correctly points to the application's output directory (e.g., `bin/Debug/net10.0/...`).
+Previously, dependencies like `anaphora` required complex `eval-when` workarounds to inject paths into `asdf:*central-registry*` at both compile-time and run-time, and required explicit MSBuild copy targets to bundle the source files into the binary folder.
 
-Because of this discrepancy, any code attempting to dynamically push paths into `asdf:*central-registry*` at compile-time by relying on `System.AppDomain.CurrentDomain.BaseDirectory` (for example, to locate `.csproj` copied artifacts like `contrib/anaphora/`) will fail.
+**The Streamlined Approach:**
+1. **Dependencies via `CL_SOURCE_REGISTRY`**: Instead of manually pushing paths to ASDF in Lisp, pass the `CL_SOURCE_REGISTRY` environment variable directly to `dotnet build` in the `Makefile`.
+   ```makefile
+   CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" dotnet build DungeonSlime.csproj -c Debug
+   ```
+   During the `DotclCompileRoot` MSBuild target, `dotcl build` will naturally resolve `anaphora.asd`, compile it to `anaphora.fasl`, and bundle it seamlessly into `dotcl-deps.txt`.
 
-To correctly resolve paths during both compile-time and run-time, standard `eval-when` separation is required:
+2. **Loading Macros at Compile-Time**: Because `DotclCompileRoot` evaluates dependencies strictly for producing `.fasl` bundles, it does *not* automatically load third-party systems into the compiler's execution environment. If you need to use a macro from a dependency (like `anaphora:awhen`), you still must load the system during `:compile-toplevel`:
+   ```lisp
+   (eval-when (:compile-toplevel)
+     (asdf:load-system "anaphora"))
+   ```
+   At runtime, `DotclHost.LoadFromManifest` loads all dependencies automatically, so `:load-toplevel` and `:execute` are no longer needed for loading systems.
 
-1.  **Compile-time (`:compile-toplevel`)**: Read `obj/dotcl-outdir.txt` (written by the `WriteOutDirForLisp` MSBuild target) to locate the exact output `bin/` directory where dependencies are copied, and push that path to `asdf:*central-registry*`.
-2.  **Run-time (`:load-toplevel` and `:execute`)**: Evaluate `System.AppDomain.CurrentDomain.BaseDirectory` dynamically to locate the `contrib/` directory directly within the executed binary's output location.
+### Broken `DotCL.Runtime` 0.1.12 NuGet Package
 
-Example from `load-system-test.lisp`:
-```lisp
-(eval-when (:compile-toplevel)
-  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
-         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
-         (bin-dir (with-open-file (s outdir-file) (read-line s)))
-         (anaphora-path (merge-pathnames (concatenate 'string bin-dir "contrib/anaphora/") sys-dir)))
-    (pushnew anaphora-path asdf:*central-registry* :test #'equal)))
+DotCL 0.1.12 theoretically supports completely decoupling the Lisp build from a local DotCL source repository checkout by replacing the MSBuild `<ProjectReference>` with `<PackageReference Include="DotCL.Runtime" Version="0.1.12" />`.
 
-(eval-when (:load-toplevel :execute)
-  (let ((app-base (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")))
-    (when app-base
-      (let ((anaphora-path (merge-pathnames "contrib/anaphora/" (pathname app-base))))
-        (pushnew anaphora-path asdf:*central-registry* :test #'equal)))))
-```
+**However, the `0.1.12` NuGet package published by DotCL is broken.** It is missing the `tasks/DotCL.Build.Tasks.dll` assembly inside the `.nupkg` archive. Attempting to build with the `PackageReference` fails with:
+`error MSB4036: The "DotclCompileProject" task was not found.`
+
+Because the MSBuild custom targets in the NuGet package are non-functional, the application must currently remain bound to the `ProjectReference` pointing to a local `../dotcl/runtime/runtime.csproj` build, along with the explicit `Dotcl.targets` `<Import>`. Once the DotCL maintainer fixes the packaging issue to correctly include the `tasks/` directory, the build can be safely transitioned to the `PackageReference`.

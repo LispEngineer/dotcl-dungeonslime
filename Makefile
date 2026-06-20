@@ -17,14 +17,14 @@ build: build-actual # cspackages build-actual
 check-parens:
 	find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py
 
-
 build-actual:
 	# First, build the C# project without DotCL targets to ensure all NuGet
 	# dependencies (like MonoGame.Framework.dll) are fully copied to the bin/ directory.
 	# This prevents the Lisp compiler from crashing during compile-time assembly loading.
 	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
 	# Then, perform the actual build including the DotCL Lisp compilation targets.
-	dotnet build DungeonSlime.csproj -v d -c Debug
+	# dotnet build DungeonSlime.csproj -v d -c Debug
+	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software/" dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:
 	mkdir -p obj $(OUT_DIR)
@@ -84,5 +84,6 @@ mgcb:
 
 repl:
 	#rlwrap --always-readline \ 
+	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software/" \
 	dotcl --eval '(load "load-repl.lisp")' \
 	      --eval '(in-package :dungeon-slime)' repl
