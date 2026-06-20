@@ -83,25 +83,23 @@
 (defmethod update ((game game-1) gt) ;; GameTime
   "Quit the game if ESC key is pressed. Cause intentional error if F7 is pressed.
    Updates the animated sprites."
-  (let* ((kb-state (keyboard-state))
-         ;; This will return nil or t
-         (esc-down  (key-down? kb-state key:+escape+))
-         (left-down (key-down? kb-state key:+f7+)))
-    (when esc-down
-      (format *error-output* "[game-1:update] esc-down = ~A~%" esc-down)
-      (force-output *error-output*) ;; finish-output alternatively
+  (let* ((kb (input:im-keyboard (input-manager game)))
+         (esc-just-pressed (input:was-key-just-pressed kb key:+escape+))
+         (f7-just-pressed (input:was-key-just-pressed kb key:+f7+)))
+    (when esc-just-pressed
+      (format *error-output* "[game-1:update] escape just pressed~%")
+      (force-output *error-output*)
       (dotnet:invoke (monogame game) "Exit"))
     ;; To test error handling in the game, we intentionally cause a Lisp error when
-    ;; the left button is pressed.
-    ;; TODO: Intentionally cause a C# exception when right is pressed.
-    (when left-down
-      (format *error-output* "[game-1:update] left-down = ~A; intentionally causing error~%" left-down)
-      (error "This is a test error in lisp code.")
-      (format *error-output* "[game-1:update] left-down = ~A; error caused~%" left-down)))
+    ;; F7 is pressed.
+    (when f7-just-pressed
+      (format *error-output* "[game-1:update] F7 just pressed; intentionally causing error~%")
+      (force-output *error-output*)
+      (error "This is a test error in lisp code.")))
   ;; Send our updates to our other objects
   (update (slime game) gt)
   (update (bat game)   gt)
-  ;; Chapter 10 additions
+  ;; Use the input manager for movement
   (check-keyboard-input game)
   (check-gamepad-input game)
   (call-next-method game gt))
@@ -170,24 +168,24 @@ if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
 
 (defun check-keyboard-input (game)
   "Handles keyboard input for moving the slime around"
-  (let ((kb-state (#!!Microsoft.Xna.Framework.Input.Keyboard.GetState))
-        (speed +movement-speed+))
+  (let* ((kb (input:im-keyboard (input-manager game)))
+         (speed +movement-speed+))
     ;; 50% faster when space held
-    (when (kb-state:is-key-down kb-state key:+space+)
+    (when (input:is-key-down kb key:+space+)
       (setf speed (* speed 1.5f0)))
     ;; Move in direction(s) pressed
-    (when (or (kb-state:is-key-down kb-state key:+w+) (kb-state:is-key-down kb-state key:+up+))
+    (when (or (input:is-key-down kb key:+w+) (input:is-key-down kb key:+up+))
       (setf (slime-pos game) (vector2    (x (slime-pos game))
-                                      (- (y (slime-pos game)) speed))))
-    (when (or (kb-state:is-key-down kb-state key:+s+) (kb-state:is-key-down kb-state key:+down+))
+                                       (- (y (slime-pos game)) speed))))
+    (when (or (input:is-key-down kb key:+s+) (input:is-key-down kb key:+down+))
       (setf (slime-pos game) (vector2    (x (slime-pos game))
-                                      (+ (y (slime-pos game)) speed))))
-    (when (or (kb-state:is-key-down kb-state key:+a+) (kb-state:is-key-down kb-state key:+left+))
+                                       (+ (y (slime-pos game)) speed))))
+    (when (or (input:is-key-down kb key:+a+) (input:is-key-down kb key:+left+))
       (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
-                                         (y (slime-pos game)))))
-    (when (or (kb-state:is-key-down kb-state key:+d+) (kb-state:is-key-down kb-state key:+right+))
+                                          (y (slime-pos game)))))
+    (when (or (input:is-key-down kb key:+d+) (input:is-key-down kb key:+right+))
       (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
-                                         (y (slime-pos game)))))))
+                                          (y (slime-pos game)))))))
 
 #|
 
@@ -243,42 +241,40 @@ else
 }
 |#
 
-;; Partially implemented - need to add package generator capabilities
 (defun check-gamepad-input (game)
-  "Handles gamepad input for moving the slime around"
-  ;; Check thumbstick first since it has priority over which gamepad input
-  ;; is movement.  It has priority since the thumbstick values provide a
-  ;; more granular analog value that can be used for movement.
-  (let ((gps (#!!Microsoft.Xna.Framework.Input.GamePad.GetState pi:+one+))
-        (speed +movement-speed+))
+  "Handles gamepad input for moving the slime around.
+   Uses the InputManager's GamePadInfo at PlayerIndex.One."
+  (let* ((gp-pad (aref (input:im-game-pads (input-manager game)) 0))
+         (speed +movement-speed+))
     ;; Double speed and turn on vibration if A is pressed
-    (if (gp-state:is-button-down gps button:+a+)
+    (if (input:is-button-down gp-pad button:+a+)
       (progn
         (setf speed (* speed 1.5f0))
-        (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 1.0f0 1.0f0))
-      (#!!Microsoft.Xna.Framework.Input.GamePad.SetVibration pi:+one+ 0.0f0 0.0f0))
-    ;; Check thumbstick then D-pad
-    (if (v2:not= (ts:left (gp-state:thumb-sticks gps)) v2:+zero+)
+        (input:game-pad-set-vibration gp-pad 1.0f0
+                                      (csharp:timespan<-milliseconds 1000)))
+      (input:game-pad-stop-vibration gp-pad))
+    ;; Check thumbstick first since it has priority over which gamepad input
+    ;; is movement.  It has priority since the thumbstick values provide a
+    ;; more granular analog value that can be used for movement.
+    (if (v2:not= (input:game-pad-left-thumb-stick gp-pad) v2:+zero+)
       ;; Use the thumbstick
-      ;; _slimePosition.X += gamePadState.ThumbSticks.Left.X * speed;
-      ;; _slimePosition.Y -= gamePadState.ThumbSticks.Left.Y * speed;
       (setf (slime-pos game)
         (vector2 (+ (x (slime-pos game))
-                    (* speed (x (ts:left (gp-state:thumb-sticks gps)))))
+                    (* speed (x (input:game-pad-left-thumb-stick gp-pad))))
                  (- (y (slime-pos game))
-                    (* speed (y (ts:left (gp-state:thumb-sticks gps)))))))
+                    (* speed (y (input:game-pad-left-thumb-stick gp-pad))))))
       ;; Use the d-pad
       (progn
-        (when (gp-state:is-button-down gps button:+d-pad-up+)
+        (when (input:is-button-down gp-pad button:+d-pad-up+)
           (setf (slime-pos game) (vector2 (x (slime-pos game))
                                          (- (y (slime-pos game)) speed))))
-        (when (gp-state:is-button-down gps button:+d-pad-down+)
+        (when (input:is-button-down gp-pad button:+d-pad-down+)
           (setf (slime-pos game) (vector2 (x (slime-pos game))
                                          (+ (y (slime-pos game)) speed))))
-        (when (gp-state:is-button-down gps button:+d-pad-left+)
+        (when (input:is-button-down gp-pad button:+d-pad-left+)
           (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
                                             (y (slime-pos game)))))
-        (when (gp-state:is-button-down gps button:+d-pad-right+)
+        (when (input:is-button-down gp-pad button:+d-pad-right+)
           (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
                                             (y (slime-pos game)))))))))
 

@@ -28,8 +28,10 @@
   (:export #:timespan<-milliseconds
             #:timespan->milliseconds
             #:ts+
+            #:ts-
             #:ts>
-            #:ts>=))
+            #:ts>=
+            #:ts<=))
 
 (defpackage :mg-classes
   (:use :cl)
@@ -88,6 +90,10 @@
 (defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
 (defpackage :microsoft-xna-framework-graphics-sampler-state)
 (defpackage :microsoft-xna-framework-player-index)
+(defpackage :microsoft-xna-framework-input-mouse-state)
+(defpackage :microsoft-xna-framework-input-game-pad-triggers)
+(defpackage :microsoft-xna-framework-input-button-state)
+(defpackage :dungeon-slime-input)
 
 (defpackage :dungeon-slime
   (:use :cl 
@@ -107,6 +113,7 @@
     (:sprite-effects :microsoft-xna-framework-graphics-sprite-effects)
     (:sprite-sort-mode :microsoft-xna-framework-graphics-sprite-sort-mode)
     (:sampler-state :microsoft-xna-framework-graphics-sampler-state)
+    (:input :dungeon-slime-input)
   )
   (:export 
     ;; Constants
@@ -128,6 +135,74 @@
     #:ta-create-sprite #:ta-create-animated-sprite #:ta-add-animation #:ta-get-animation
     #:ta-remove-animation #:ta-from-file
     #:texture-region #:tr-draw))
+
+(defpackage :dungeon-slime-input
+  (:use :cl :mg-classes :csharp)
+  (:local-nicknames
+    (:kb-state :microsoft-xna-framework-input-keyboard-state)
+    (:gp-state :microsoft-xna-framework-input-game-pad-state)
+    (:ms :microsoft-xna-framework-input-mouse-state)
+    (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
+    (:gp-trig :microsoft-xna-framework-input-game-pad-triggers)
+    (:button :microsoft-xna-framework-input-buttons)
+    (:pi :microsoft-xna-framework-player-index)
+    (:v2 :microsoft-xna-framework-vector2)
+    (:bs :microsoft-xna-framework-input-button-state))
+  (:export
+    ;; KeyboardInfo class and functions
+    #:keyboard-info
+    #:keyboard-previous-state
+    #:keyboard-current-state
+    #:keyboard-update
+    #:is-key-down
+    #:is-key-up
+    #:was-key-just-pressed
+    #:was-key-just-released
+    ;; MouseInfo class and functions
+    #:mouse-info
+    #:mouse-previous-state
+    #:mouse-current-state
+    #:mouse-update
+    #:mouse-set-position
+    #:mouse-button
+    #:is-button-down
+    #:is-button-up
+    #:was-button-just-pressed
+    #:was-button-just-released
+    #:mouse-position
+    #:mouse-x
+    #:mouse-y
+    #:mouse-position-delta
+    #:mouse-x-delta
+    #:mouse-y-delta
+    #:mouse-was-moved
+    #:mouse-scroll-wheel
+    #:mouse-scroll-wheel-delta
+    ;; GamePadInfo class and functions
+    #:game-pad-info
+    #:game-pad-player-index
+    #:game-pad-previous-state
+    #:game-pad-current-state
+    #:game-pad-is-connected
+    #:game-pad-update
+    #:game-pad-left-thumb-stick
+    #:game-pad-right-thumb-stick
+    #:game-pad-left-trigger
+    #:game-pad-right-trigger
+    #:game-pad-set-vibration
+    #:game-pad-stop-vibration
+    ;; InputManager class and functions
+    #:input-manager
+    #:im-keyboard
+    #:im-mouse
+    #:im-game-pads
+    #:input-manager-update
+    ;; MouseButton constants
+    #:+mouse-left+
+    #:+mouse-middle+
+    #:+mouse-right+
+    #:+mouse-x-button1+
+    #:+mouse-x-button2+))
 
 (defpackage :dungeon-slime-tests
   (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)

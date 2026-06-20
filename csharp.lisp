@@ -37,7 +37,17 @@
 (defun ts>= (ts1 ts2)
   "Compares two System.TimeSpan objects, ts1 >= ts2.
    Does not check for nil or correct object types."
-  (dotnet:static "System.TimeSpan" "op_GreaterThan" ts1 ts2))
+  (dotnet:static "System.TimeSpan" "op_GreaterThanOrEqual" ts1 ts2))
+
+(defun ts- (ts1 ts2)
+  "Subtracts two System.TimeSpan objects, ts1 - ts2.
+   Does not check for nil or correct object types."
+  (dotnet:static "System.TimeSpan" "op_Subtraction" ts1 ts2))
+
+(defun ts<= (ts1 ts2)
+  "Compares two System.TimeSpan objects, ts1 <= ts2.
+   Does not check for nil or correct object types."
+  (dotnet:static "System.TimeSpan" "op_LessThanOrEqual" ts1 ts2))
 
 ;; Make calling DotNet functions more convenient.
 ;;

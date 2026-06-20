@@ -25,7 +25,9 @@ build-actual:
 	# Then, perform the actual build including the DotCL Lisp compilation targets.
 	# dotnet build DungeonSlime.csproj -v d -c Debug
 	# The // at the end of CL_SOURCE_REGISTRY is required!! Removing it breaks the build.
-	# TODO: WHY???
+	# In ASDF's CL_SOURCE_REGISTRY:
+	# - A single trailing / means: scan only this directory for .asd files.
+	# - A double trailing // means: recursively scan this directory and all subdirectories for .asd files.
 	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:

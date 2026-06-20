@@ -51,7 +51,12 @@
     ;; This is our ContentManager
     :initarg :content
     :allocation :class
-    :accessor content)))
+    :accessor content)
+   (input-manager
+    ;; This provides centralized input management with state tracking
+    :allocation :class
+    :accessor input-manager
+    :documentation "The InputManager instance providing keyboard, mouse, and gamepad state.")))
 
 (defmethod initialize-instance :after ((game core) &key)
   ;; This code runs immediately after a core object is created
@@ -113,6 +118,8 @@
     (setf (graphics-device game) base-gd)
     (setf (sprite-batch game)
       (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd)))
+  ;; Create the input manager for centralized input handling
+  (setf (input-manager game) (make-instance 'input:input-manager))
 
   (format *error-output* "[core:initialize] complete.~%"))
 
@@ -124,7 +131,9 @@
   (format *error-output* "[core:load-content] Game.LoadContent() complete~%"))
 
 (defmethod update ((game core) gt) ;; GameTime
-  "Just calls the monogame base class equivalent."
+  "Updates the input manager, then calls the monogame base class."
+  ;; Update input states first so they're ready for the current frame
+  (input:input-manager-update (input-manager game) gt)
   (dotnet:call-base (monogame game) "Update" gt))
 
 (defmethod draw ((game core) gt) ;; GameTime

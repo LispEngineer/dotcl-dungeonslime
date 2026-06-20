@@ -580,3 +580,23 @@ DotCL 0.1.12 theoretically supports completely decoupling the Lisp build from a 
 `error MSB4036: The "DotclCompileProject" task was not found.`
 
 Because the MSBuild custom targets in the NuGet package are non-functional, the application must currently remain bound to the `ProjectReference` pointing to a local `../dotcl/runtime/runtime.csproj` build, along with the explicit `Dotcl.targets` `<Import>`. Once the DotCL maintainer fixes the packaging issue to correctly include the `tasks/` directory, the build can be safely transitioned to the `PackageReference`.
+
+# Input Management (MonoGame Chapter 11)
+
+The input management system (`input-manager.lisp`) was implemented following
+the MonoGame Chapter 11 tutorial. See
+[opencode-implementation-notes.md](opencode-implementation-notes.md) for
+full details of the implementation.
+
+Key points:
+
+- The `:dungeon-slime-input` package uses local nicknames to reference
+  the generated C# packages, avoiding symbol conflicts.
+- Each `core` game instance has one `input-manager` (class allocation).
+- The update order follows the C# one-frame-latency pattern: game logic
+  reads input from the previous frame's state update, which happens in
+  `core:update` via `call-next-method`.
+- The generated cspackages must be pre-declared as empty packages in
+  `packages.lisp` (alongside the other pre-declares) so the
+  `:dungeon-slime-input` package's `:local-nicknames` can be resolved
+  at package-definition time before the cspackages are loaded.

@@ -28,6 +28,10 @@ and files in this repository.
 
 * [assembly-to-lispy.md](doc/assembly-to-lispy.md): Detailed specifications for the `AssemblyToLispy` extraction pipeline.
 
+* [opencode-implementation-notes.md](doc/opencode-implementation-notes.md):
+  Notes on the implementation of MonoGame Chapter 11 input management system
+  by OpenCode.
+
 * [lisp-assemblies.md](doc/lisp-assemblies.md): Documentation covering the Lisp Assembly Package Generator.
 
 * [lispy-csharp-standard-library.md](doc/lispy-csharp-standard-library.md): Design thoughts regarding a Lispy C# standard library.
@@ -120,6 +124,12 @@ and files in this repository.
   * Set up the game window size, etc.
   * Save various MonoGame-relevant items in CLOS slots in the
     "constructor" (via `initialize-instance :after`)
+
+* `input-manager.lisp`: Implements the MonoGame Chapter 11 input management
+  system in CLOS. Provides `KeyboardInfo`, `MouseInfo`, `GamePadInfo`, and
+  `InputManager` classes that track previous/current input states for
+  detecting "just pressed" and "just released" transitions. Includes timed
+  vibration management for gamepads.
 
 * `game-1.lisp`: An extension of the `core` class above that actually
   will implement the MonoGame Dungeon Slime logic. For now, it also will
