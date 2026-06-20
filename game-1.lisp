@@ -55,7 +55,13 @@
     :documentation "Tracks position of the slime")
    (bat
     :accessor bat
-    :documentation "An Animated Sprite of a bat")))
+    :documentation "An Animated Sprite of a bat")
+   (bat-pos
+    :accessor bat-pos
+    :documentation "Tracks position of the bat")
+   (bat-vel
+    :accessor bat-vel
+    :documentation "Tracks velocity of the bat")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -64,9 +70,18 @@
   (format *error-output* "[game-1:initialize-instance:after] game-1 booted.~%"))
 
 (defmethod initialize ((game game-1))
-  "Does nothing, for now. Just call the base class's initialize."
+  "Initialize the game. Call-next-method triggers the C# lifecycle
+   (including LoadContent), then sets initial bat position and velocity."
   ;; equivalent to C# base.Initialize()
-  (call-next-method game))
+  ;; This call triggers the C# Game.Initialize() chain, which includes
+  ;; calling LoadContent() — so sprites are available after this returns.
+  (call-next-method game)
+  ;; Set the initial position of the bat to be 10px
+  ;; to the right of the slime's starting position.
+  (setf (bat-pos game)
+    (vector2 (+ 10 (width (slime game))) 0.0e0))
+  ;; Assign the initial random velocity to the bat.
+  (assign-random-bat-velocity game))
 
 (defmethod load-content ((game game-1))
   "Load our atlas textures then pass to base class."
@@ -85,7 +100,8 @@
 
 (defmethod update ((game game-1) gt) ;; GameTime
   "Quit the game if ESC key is pressed. Cause intentional error if F7 is pressed.
-   Updates the animated sprites."
+   Updates the animated sprites. Applies collision detection and response for
+   slime screen boundaries, bat screen bouncing, and slime-vs-bat collisions."
   (let* ((kb (input:im-keyboard (input-manager game)))
          (esc-just-pressed (input:was-key-just-pressed kb key:+escape+))
          (f7-just-pressed (input:was-key-just-pressed kb key:+f7+)))
@@ -102,10 +118,117 @@
   ;; Send our updates to our other objects
   (update (slime game) gt)
   (update (bat game)   gt)
-  ;; Use the input manager for movement
+  ;; Use the input manager for keyboard and gamepad movement
   (check-keyboard-input game)
   (check-gamepad-input game)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Collision detection and response
+  (let* (;; Get the screen bounds from the graphics device
+         (gd (graphics-device game))
+         (pp (gd:presentation-parameters gd))
+         (bb-width (pp:back-buffer-width pp))
+         (bb-height (pp:back-buffer-height pp))
+         (screen-bounds (rect 0 0 bb-width bb-height))
+         ;; Slime sprite dimensions
+         (slime-width (width (slime game)))
+         (slime-height (height (slime game)))
+         ;; Slime position
+         (sp (slime-pos game))
+         ;; Create a bounding circle for the slime centered on the sprite
+         (slime-bounds
+           (make-instance 'circle
+             :x (+ (x sp) (* slime-width 0.5e0))
+             :y (+ (y sp) (* slime-height 0.5e0))
+             :radius (* slime-width 0.5e0))))
+
+    ;; Blocking collision response: keep the slime within screen bounds.
+    ;; Check left edge
+    (when (< (circle-left slime-bounds) 0.0e0)
+      (setf (slime-pos game) (vector2 0.0e0 (y sp))))
+    ;; Check right edge
+    (when (> (circle-right slime-bounds) (rect:right screen-bounds))
+      (setf (slime-pos game) (vector2 (- (rect:right screen-bounds) slime-width) (y sp))))
+    ;; Check top edge
+    (when (< (circle-top slime-bounds) 0.0e0)
+      (setf (slime-pos game) (vector2 (x sp) 0.0e0)))
+    ;; Check bottom edge
+    (when (> (circle-bottom slime-bounds) (rect:bottom screen-bounds))
+      (setf (slime-pos game) (vector2 (x sp) (- (rect:bottom screen-bounds) slime-height))))
+
+    ;; Re-read the slime position after blocking adjustments
+    (let* ((sp-adjusted (slime-pos game))
+           ;; Recalculate slime bounding circle after adjustments (for bat collision)
+           (slime-bounds-adjusted
+             (make-instance 'circle
+               :x (+ (x sp-adjusted) (* slime-width 0.5e0))
+               :y (+ (y sp-adjusted) (* slime-height 0.5e0))
+               :radius (* slime-width 0.5e0)))
+           ;; Calculate the new position of the bat based on the velocity.
+           (new-bat-pos (v2:+ (bat-pos game) (bat-vel game)))
+           ;; Bat sprite dimensions
+           (bat-width (width (bat game)))
+           (bat-height (height (bat game)))
+           ;; Create a bounding circle for the bat.
+           (bat-bounds
+             (make-instance 'circle
+               :x (+ (x new-bat-pos) (* bat-width 0.5e0))
+               :y (+ (y new-bat-pos) (* bat-height 0.5e0))
+               :radius (* bat-width 0.5e0)))
+           ;; Normal vector for reflection (starts at zero)
+           (normal-x 0.0e0)
+           (normal-y 0.0e0))
+
+      ;; Bounce collision response: reflect the bat off screen edges.
+      ;; Check left edge
+      (if (< (circle-left bat-bounds) 0.0e0)
+        (progn
+          (setf normal-x 1.0e0)
+          (setf new-bat-pos (vector2 0.0e0 (y new-bat-pos))))
+        ;; Check right edge
+        (when (> (circle-right bat-bounds) (rect:right screen-bounds))
+          (setf normal-x -1.0e0)
+          (setf new-bat-pos (vector2 (- (rect:right screen-bounds) bat-width) (y new-bat-pos)))))
+      ;; Check top edge
+      (if (< (circle-top bat-bounds) 0.0e0)
+        (progn
+          (setf normal-y 1.0e0)
+          (setf new-bat-pos (vector2 (x new-bat-pos) 0.0e0)))
+        ;; Check bottom edge
+        (when (> (circle-bottom bat-bounds) (rect:bottom screen-bounds))
+          (setf normal-y -1.0e0)
+          (setf new-bat-pos (vector2 (x new-bat-pos) (- (rect:bottom screen-bounds) bat-height)))))
+      ;; If the normal is non-zero, reflect the velocity about the normal.
+      (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
+        (let ((normal (v2-normalize (vector2 normal-x normal-y))))
+          (setf (bat-vel game) (v2-reflect (bat-vel game) normal))))
+      ;; Update the bat position
+      (setf (bat-pos game) new-bat-pos)
+
+      ;; Trigger collision response: slime "eats" the bat.
+      (when (circle-intersects slime-bounds-adjusted bat-bounds)
+        (let* ((total-columns (floor bb-width bat-width))
+               (total-rows (floor bb-height bat-height))
+               (column (random total-columns))
+               (row (random total-rows)))
+          ;; Respawn the bat at a random position
+          (setf (bat-pos game)
+            (vector2 (float (* column bat-width) 0.0e0)
+                     (float (* row bat-height) 0.0e0)))
+          ;; Assign a new random velocity
+           (assign-random-bat-velocity game)))))
   (call-next-method game gt))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Collision helper
+
+(defun assign-random-bat-velocity (game)
+  "Assigns a random velocity to the bat by generating a random angle
+   and converting it to a direction vector scaled by MOVEMENT_SPEED."
+  (let* ((pi2 (coerce (* 2 pi) 'single-float))
+         (angle (random pi2))
+         (x (cos angle))
+         (y (sin angle)))
+    (setf (bat-vel game) (v2* (vector2 x y) +movement-speed+))))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
@@ -122,9 +245,9 @@
     ;; Prepare for rendering
     (sprite-batch-begin sb :sampler-state sampler-state:+point-clamp+)
 
-    ;; Draw the slime and bat at a scale of 4, with the bat 10px right of slime's starting point
+    ;; Draw the slime and bat
     (sprite-draw (slime game) sb (slime-pos game))
-    (sprite-draw (bat game)   sb (vector2 (+ 10 (width (slime game)) 4) 0.0e0))
+    (sprite-draw (bat game)   sb (bat-pos game))
 
     (dotnet:invoke sb "End"))
 

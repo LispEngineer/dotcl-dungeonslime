@@ -42,6 +42,11 @@
             #:+v2-x1+
             #:+v2-y1+
             #:v2*
+            #:v2-distance-squared
+            #:v2-reflect
+            #:v2-normalize
+            #:rect-intersects
+            #:rect-contains-p
             #:print-gf-methods
             #:x
             #:y
@@ -93,6 +98,9 @@
 (defpackage :microsoft-xna-framework-input-mouse-state)
 (defpackage :microsoft-xna-framework-input-game-pad-triggers)
 (defpackage :microsoft-xna-framework-input-button-state)
+(defpackage :microsoft-xna-framework-rectangle)
+(defpackage :microsoft-xna-framework-graphics-graphics-device)
+(defpackage :microsoft-xna-framework-graphics-presentation-parameters)
 (defpackage :dungeon-slime-input)
 
 (defpackage :dungeon-slime
@@ -114,6 +122,9 @@
     (:sprite-sort-mode :microsoft-xna-framework-graphics-sprite-sort-mode)
     (:sampler-state :microsoft-xna-framework-graphics-sampler-state)
     (:input :dungeon-slime-input)
+    (:rect :microsoft-xna-framework-rectangle)
+    (:gd :microsoft-xna-framework-graphics-graphics-device)
+    (:pp :microsoft-xna-framework-graphics-presentation-parameters)
   )
   (:export 
     ;; Constants
@@ -127,7 +138,9 @@
     ;; Classes and Methods
     #:core #:monogame #:window-info #:graphics #:graphics-device #:sprite-batch #:content
     #:initialize #:load-content #:update #:draw #:dispose #:begin-run #:end-run #:run
-    #:game-1 #:slime #:bat
+    #:game-1 #:slime #:bat #:bat-pos #:bat-vel
+    #:circle #:circle-intersects
+    #:circle-left #:circle-right #:circle-top #:circle-bottom
     #:pulse-color
     #:animation #:animated-sprite
     #:sprite #:sprite-center-origin #:sprite-draw

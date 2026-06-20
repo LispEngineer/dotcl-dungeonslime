@@ -25,6 +25,9 @@
   (format *error-output* "[test-harness.lisp] Running Load System tests...~%")
   (run-load-system-tests)
 
+  (format *error-output* "[test-harness.lisp] Running Collision tests...~%")
+  (run-collision-tests)
+
   (format *error-output* "[test-harness.lisp] Running Texture Atlas tests...~%")
   (dungeon-slime::test-texture-atlas-from-file)
 

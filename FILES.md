@@ -30,7 +30,7 @@ and files in this repository.
 
 * [opencode-implementation-notes.md](doc/opencode-implementation-notes.md):
   Notes on the implementation of MonoGame Chapter 11 input management system
-  by OpenCode.
+  and Chapter 12 collision detection system by OpenCode.
 
 * [lisp-assemblies.md](doc/lisp-assemblies.md): Documentation covering the Lisp Assembly Package Generator.
 
@@ -130,6 +130,18 @@ and files in this repository.
   `InputManager` classes that track previous/current input states for
   detecting "just pressed" and "just released" transitions. Includes timed
   vibration management for gamepads.
+
+* `collision.lisp`: Implements the MonoGame Chapter 12 collision detection
+  system in CLOS. Provides the `circle` CLOS class with boundary functions
+  (`circle-left`, `circle-right`, `circle-top`, `circle-bottom`) and
+  `circle-intersects` for circle-circle collision testing. Screen boundary
+  blocking, bouncing, and trigger response logic is integrated into
+  `game-1.lisp`.
+
+* `collision-test.lisp`: Comprehensive test suite for the collision detection
+  system. Covers circle construction, boundary computation, true/false
+  intersection cases, degenerate cases, `v2-distance-squared`, `v2-reflect`,
+  `v2-normalize`, `rect-intersects`, and `rect-contains-p`.
 
 * `game-1.lisp`: An extension of the `core` class above that actually
   will implement the MonoGame Dungeon Slime logic. For now, it also will
