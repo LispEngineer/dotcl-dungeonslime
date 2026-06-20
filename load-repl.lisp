@@ -30,7 +30,12 @@
   (merge-pathnames 
     (concatenate 'string out-path "DungeonSlime.dll")
     *default-pathname-defaults*))
-(format *error-output* "  ~S~%  ~S~%" monogame-path dungeonslime-path)
+(defvar content-path
+  ;; Parse and merge the absolute path to the DLL
+  (merge-pathnames 
+    (concatenate 'string out-path "Content")
+    *default-pathname-defaults*))
+(format *error-output* "  ~S~%  ~S~%  ~S~%" monogame-path dungeonslime-path content-path)
 
 ;; Load MonoGame first
 (format *error-output* "[load-repl.lisp] Loading MonoGame...~%")
@@ -67,12 +72,10 @@
 ;; Create the game objects
 (format *error-output* "[load-repl.lisp] Creating game objects...~%")
 (defparameter *mg-game* (make-game))
-;; Tell MonoGame where to load content assets from
-;; (change this for your local installation)
-;; FIXME: Use a DotCL-provided way to get the current directory's
-;; subdirectory of the build target, if ever possible
-(setf (dotnet:invoke (content *game*) "RootDirectory") 
-  "/home/dfields/src/cl/dotcl-dungeonslime/bin/Debug/net10.0/ubuntu.24.04-x64/Content")
+
+;; Tell MonoGame where to load content assets from - see above for path
+(setf (dotnet:invoke (content *game*) "RootDirectory")
+  (namestring cl-user::content-path))
 
 (format t "[load-repl.lisp] *mg-game* is now available from (make-game).~%")
 

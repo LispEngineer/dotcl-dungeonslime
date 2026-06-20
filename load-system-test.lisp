@@ -26,7 +26,9 @@
 ;; be done separately somehow. So you can't copy the game directory
 ;; to another computer/user and expect it to work, yet.
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (require "asdf"))
+  (format *error-output* "[load-system-test.lisp] Requiring ASDF...~%")
+  (require "asdf")
+  (format *error-output* "[load-system-test.lisp] Required ASDF.~%"))
 
 ;; As the built binary execution includes the directories in the binary output
 ;; directory under contrib in the ASDF Central Registry, something like
@@ -42,9 +44,11 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   ;; If needed, you can push search paths to asdf:*central-registry* here
-  ; (format *error-output* "[load-system-test.lisp] asdf:*central-registry* = ~A~%"
-  ;         asdf:*central-registry*)
-  (asdf:load-system "anaphora"))
+  (format *error-output* "[load-system-test.lisp] asdf:*central-registry* = ~A~%"
+          asdf:*central-registry*)
+  (format *error-output* "[load-system-test.lisp] Loading anaphora...~%")
+  (asdf:load-system "anaphora")
+  (format *error-output* "[load-system-test.lisp] Loaded anaphora.~%"))
 
 (defun run-load-system-tests ()
   (format *error-output* "[load-system-test.lisp] (length asdf:*central-registry*) = ~A~%" 
