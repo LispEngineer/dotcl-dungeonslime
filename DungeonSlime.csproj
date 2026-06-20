@@ -34,8 +34,8 @@
     <!-- #166 project-core flow: Dotcl.targets walks .asd, compiles main.lisp,
          writes manifest. Runtime side just calls Initialize + LoadFromManifest. -->
     <DotclProjectAsd>$(MSBuildProjectDirectory)/dungeon-slime.asd</DotclProjectAsd>
-    <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
-    <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
+    <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl-0.1.11/runtime/runtime.csproj</DotclRuntimeProject>
+    <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl-0.1.11/compiler/dotcl.core</DotclBaseCore>
   </PropertyGroup>
 
   <ItemGroup>
@@ -53,14 +53,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
-    <ProjectReference Include="AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
+    <ProjectReference Include="../dotcl-0.1.11/runtime/DotCL.Runtime.csproj" />
+    <ProjectReference Include="AssemblyToLispyTestTarget/AssemblyToLispyTestTarget.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Copy the entire dotcl contrib directory (ASDF, UIOP, etc.) to the build output folder
          so they can be dynamically resolved at runtime via (require "asdf") -->
-    <None Include="..\dotcl\contrib\**\*">
+    <None Include="../dotcl-0.1.11/contrib/**/*">
       <Link>contrib\%(RecursiveDir)%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -86,6 +86,6 @@
     <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
   </Target>
 
-  <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
+  <Import Project="../dotcl-0.1.11/runtime/build/Dotcl.targets" />
 
 </Project>

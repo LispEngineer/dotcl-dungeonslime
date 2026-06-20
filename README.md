@@ -178,6 +178,14 @@ Note that rlwrap on Arch doesn't work *at all* with dotcl now.
 
 However, the `make build` still fails, no `anaphora`.
 
+## Force Use of 0.1.11
+
+* `dotnet tool uninstall -g dotcl`
+* Build the dotcl as usual with a *clean* clone of tag `v0.1.11`
+* `dotnet tool install -g --add-source out/ dotcl --version 0.1.11`
+* Modify all references in `.csproj` to point to `../dotcl-0.1.11`
+  (or just make the clean 0.1.11 `../dotcl`, but I didn't do that)
+
 
 # A Note on ML/AI & Tooling
 
