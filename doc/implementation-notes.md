@@ -550,3 +550,35 @@ DUNGEON-SLIME> x
 DUNGEON-SLIME> (setf (color:r x) (the (dotnet "System.Byte") 55))
 Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
 ```
+
+
+# DotCL 0.1.12 Build Execution Changes and ASDF Loading
+
+In DotCL 0.1.12, the compiler invocation changed from executing within the local project space to running via the runtime project (e.g., `dotnet run --project ../dotcl/runtime/runtime.csproj`).
+This shift alters the behavior of `System.AppDomain.CurrentDomain.BaseDirectory` during compilation:
+
+*   **Compile-time (`:compile-toplevel`):** `BaseDirectory` points to the `dotcl/runtime/bin/...` directory.
+*   **Run-time (`:load-toplevel` and `:execute`):** `BaseDirectory` correctly points to the application's output directory (e.g., `bin/Debug/net10.0/...`).
+
+Because of this discrepancy, any code attempting to dynamically push paths into `asdf:*central-registry*` at compile-time by relying on `System.AppDomain.CurrentDomain.BaseDirectory` (for example, to locate `.csproj` copied artifacts like `contrib/anaphora/`) will fail.
+
+To correctly resolve paths during both compile-time and run-time, standard `eval-when` separation is required:
+
+1.  **Compile-time (`:compile-toplevel`)**: Read `obj/dotcl-outdir.txt` (written by the `WriteOutDirForLisp` MSBuild target) to locate the exact output `bin/` directory where dependencies are copied, and push that path to `asdf:*central-registry*`.
+2.  **Run-time (`:load-toplevel` and `:execute`)**: Evaluate `System.AppDomain.CurrentDomain.BaseDirectory` dynamically to locate the `contrib/` directory directly within the executed binary's output location.
+
+Example from `load-system-test.lisp`:
+```lisp
+(eval-when (:compile-toplevel)
+  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
+         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
+         (bin-dir (with-open-file (s outdir-file) (read-line s)))
+         (anaphora-path (merge-pathnames (concatenate 'string bin-dir "contrib/anaphora/") sys-dir)))
+    (pushnew anaphora-path asdf:*central-registry* :test #'equal)))
+
+(eval-when (:load-toplevel :execute)
+  (let ((app-base (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")))
+    (when app-base
+      (let ((anaphora-path (merge-pathnames "contrib/anaphora/" (pathname app-base))))
+        (pushnew anaphora-path asdf:*central-registry* :test #'equal)))))
+```
