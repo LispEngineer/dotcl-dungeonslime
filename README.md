@@ -142,6 +142,42 @@ It seems others have tried;
 [see this issue](https://github.com/MonoGame/MonoGame/issues/7816).
 In my case, it shows the game window and then segfaults out.
 
+## Migration to Arch Linux (EndeavorOS)
+
+I moved from Ubuntu 24.04 to Arch EndeavorOS on 2026-06-19. At the same time,
+DotCL 0.1.12 was released.
+
+To compile on the new platform, I needed to do:
+* `dotnet restore`
+* `make clean`
+* `make build`
+
+This build failed because there was no `anaphora`, so:
+
+* `rlwrap /home/dfields/.roswell/impls/x86-64/linux/sbcl-bin/2.6.5/bin/sbcl`
+  ```lisp
+  (load "~/quicklisp/setup.lisp")
+  (ql:quickload "anaphora")
+  ``` 
+
+This didn't help. 
+* Patch my `~/quicklisp` per [DotCL patch](https://github.com/quicklisp/quicklisp-client/pull/245/changes/0ca1ed4412d8b640b5c918bac4c8a7a7630aca2d)
+* Run DotCL: `dotcl`
+  ```lisp
+  (load "~/quicklisp/setup.lisp") 
+  (ql:quickload "anaphora")
+  (anaphora:awhen 37 (format t "It is: ~S~%" it))
+  ;; First mkdir -p ~/.config/dotcl
+  (ql:add-to-init-file)
+  ```
+
+It still does not build. However, this works:
+* `make repl`
+
+Note that rlwrap on Arch doesn't work *at all* with dotcl now.
+
+However, the `make build` still fails, no `anaphora`.
+
 
 # A Note on ML/AI & Tooling
 

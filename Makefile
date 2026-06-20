@@ -80,6 +80,6 @@ mgcb:
 	dotnet tool run mgcb-editor-linux
 
 repl:
-	rlwrap --always-readline \
-	  dotcl --eval '(load "load-repl.lisp")' \
-		      --eval '(in-package :dungeon-slime)' repl
+	#rlwrap --always-readline \ 
+	dotcl --eval '(load "load-repl.lisp")' \
+	      --eval '(in-package :dungeon-slime)' repl

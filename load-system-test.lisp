@@ -11,7 +11,8 @@
 ;;; the final binary?
 
 (in-package :cl-user)
-(format *error-output* "[load-system-test.lisp] Loading in package ~S~%" *package*)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (format *error-output* "[load-system-test.lisp] Loading in package ~S~%" *package*))
 
 ;; To get this effort to work at compile time, need to include this in an
 ;; eval-when. It forces the system to compile the anaphora package and
@@ -51,3 +52,6 @@
 
   (anaphora:awhen (+ 3 4)
     (format *error-output* "[load-system-test.lisp] anaphora:it = ~A (should be 7)~%" anaphora:it)))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (format *error-output* "[load-system-test.lisp] Loaded in package ~S.~%" *package*))

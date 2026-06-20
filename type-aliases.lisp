@@ -92,7 +92,8 @@
         (namestring
           (merge-pathnames 
             (concatenate 'string bin-dir assembly)
-            (asdf:system-source-directory "dungeon-slime")))))))
+            (asdf:system-source-directory "dungeon-slime"))))))
+  (format *error-output* "[type-aliases.lisp] Loaded compile-time assemblies.~%"))
 
 (eval-when (:load-toplevel :execute)
   (defparameter csharp-classes
@@ -104,4 +105,5 @@
     (format *error-output* "[type-aliases.lisp] Registering class: ~S~%" cls)
     (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type cls))))
 
+(format *error-output* "[type-aliases.lisp] Load complete in package ~S.~%" *package*)
 
