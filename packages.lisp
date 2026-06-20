@@ -42,11 +42,7 @@
             #:+v2-x1+
             #:+v2-y1+
             #:v2*
-            #:v2-distance-squared
-            #:v2-reflect
             #:v2-normalize
-            #:rect-intersects
-            #:rect-contains-p
             #:print-gf-methods
             #:x
             #:y
@@ -98,6 +94,7 @@
 (defpackage :microsoft-xna-framework-input-mouse-state)
 (defpackage :microsoft-xna-framework-input-game-pad-triggers)
 (defpackage :microsoft-xna-framework-input-button-state)
+(defpackage :microsoft-xna-framework-point)
 (defpackage :microsoft-xna-framework-rectangle)
 (defpackage :microsoft-xna-framework-graphics-graphics-device)
 (defpackage :microsoft-xna-framework-graphics-presentation-parameters)
@@ -125,6 +122,8 @@
     (:rect :microsoft-xna-framework-rectangle)
     (:gd :microsoft-xna-framework-graphics-graphics-device)
     (:pp :microsoft-xna-framework-graphics-presentation-parameters)
+    (:point :microsoft-xna-framework-point)
+    (:time-span :system-time-span)
   )
   (:export 
     ;; Constants

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
-;;; Generator Version: 9
-;;; Creation Date: 2026-06-20T20:20:23Z
+;;; Generator Version: 10
+;;; Creation Date: 2026-06-20T21:52:42Z
 
 (in-package :cl-user)
 
@@ -37,8 +37,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.MouseState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(defconstant <creation> "2026-06-20T20:20:23Z")
-(defconstant <version> 9)
+(defconstant <creation> "2026-06-20T21:52:42Z")
+(defconstant <version> 10)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -46,47 +46,47 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.MouseState")))
 
 (defun horizontal-scroll-wheel-value (obj)
-  (dotnet:invoke obj "get_HorizontalScrollWheelValue"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_HorizontalScrollWheelValue"))
 
 (defun left-button (obj)
-  (dotnet:invoke obj "get_LeftButton"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_LeftButton"))
 
 (defun middle-button (obj)
-  (dotnet:invoke obj "get_MiddleButton"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_MiddleButton"))
 
 (defun position (obj)
-  (dotnet:invoke obj "get_Position"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_Position"))
 
 (defun right-button (obj)
-  (dotnet:invoke obj "get_RightButton"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_RightButton"))
 
 (defun scroll-wheel-value (obj)
-  (dotnet:invoke obj "get_ScrollWheelValue"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_ScrollWheelValue"))
 
 (defun x (obj)
-  (dotnet:invoke obj "get_X"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_X"))
 
 (defun x-button1 (obj)
-  (dotnet:invoke obj "get_XButton1"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_XButton1"))
 
 (defun x-button2 (obj)
-  (dotnet:invoke obj "get_XButton2"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_XButton2"))
 
 (defun y (obj)
-  (dotnet:invoke obj "get_Y"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_Y"))
 
 (defun = (left right)
-  (dotnet:static <type-str> "op_Equality" left right))
+  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") left) (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") right)))
 
 (defun equals (obj obj)
-  (dotnet:invoke obj "Equals" obj))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "Equals" obj))
 
 (defun get-hash-code (obj)
-  (dotnet:invoke obj "GetHashCode"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "GetHashCode"))
 
 (defun not= (left right)
-  (dotnet:static <type-str> "op_Inequality" left right))
+  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") left) (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") right)))
 
 (defun to-string (obj)
-  (dotnet:invoke obj "ToString"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "ToString"))
 

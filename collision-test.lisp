@@ -114,53 +114,50 @@
     (format *error-output* "  [PASS] Zero-radius circle touching normal circle does NOT intersect~%"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; v2-distance-squared
+  ;; v2-distance-squared (via generated microsoft-xna-framework-vector2 package)
   (format *error-output* "[collision-test.lisp] v2-distance-squared tests...~%")
 
-  ;; 3-4-5 triangle: (0,0) to (3,4) = 25
   (let ((v1 (vector2 0.0e0 0.0e0))
-        (v2 (vector2 3.0e0 4.0e0)))
-    (assert (= (v2-distance-squared v1 v2) 25.0e0))
-    (format *error-output* "  [PASS] v2-distance-squared (0,0)->(3,4) = 25~%"))
-
-  ;; Same point: distance 0
-  (let ((v1 (vector2 10.0e0 20.0e0)))
-    (assert (= (v2-distance-squared v1 v1) 0.0e0))
-    (format *error-output* "  [PASS] v2-distance-squared same point = 0~%"))
-
-  ;; Negative coordinates
-  (let ((v1 (vector2 -3.0e0 -4.0e0))
-        (v2 (vector2 0.0e0 0.0e0)))
-    (assert (= (v2-distance-squared v1 v2) 25.0e0))
-    (format *error-output* "  [PASS] v2-distance-squared negative coords works~%"))
+        (v2 (vector2 3.0e0 4.0e0))
+        (distance-squared (find-symbol "DISTANCE-SQUARED" :microsoft-xna-framework-vector2)))
+    ;; 3-4-5 triangle: (0,0) to (3,4) = 25
+    (assert (= (funcall distance-squared v1 v2) 25.0e0))
+    (format *error-output* "  [PASS] v2-distance-squared (0,0)->(3,4) = 25~%")
+    ;; Same point: distance 0
+    (assert (= (funcall distance-squared v1 v1) 0.0e0))
+    (format *error-output* "  [PASS] v2-distance-squared same point = 0~%")
+    ;; Negative coordinates (distance from (-3,-4) to (0,0) = 5^2 = 25)
+    (let ((v3 (vector2 -3.0e0 -4.0e0)))
+      (assert (= (funcall distance-squared v3 v1) 25.0e0))
+      (format *error-output* "  [PASS] v2-distance-squared negative coords works~%")))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; v2-reflect
+  ;; v2-reflect (via generated microsoft-xna-framework-vector2 package)
   (format *error-output* "[collision-test.lisp] v2-reflect tests...~%")
 
-  ;; Reflect (1, -1) about normal (0, 1) [bottom edge] -> (1, 1)
-  (let* ((v (vector2 1.0e0 -1.0e0))
-         (n (vector2 0.0e0 1.0e0))
-         (r (v2-reflect v n)))
-    (assert (= (x r) 1.0e0))
-    (assert (= (y r) 1.0e0))
-    (format *error-output* "  [PASS] v2-reflect (1,-1) about (0,1) = (1,1)~%"))
-
-  ;; Reflect (1, 1) about normal (1, 0) [right edge] -> (-1, 1)
-  (let* ((v (vector2 1.0e0 1.0e0))
-         (n (vector2 1.0e0 0.0e0))
-         (r (v2-reflect v n)))
-    (assert (= (x r) -1.0e0))
-    (assert (= (y r) 1.0e0))
-    (format *error-output* "  [PASS] v2-reflect (1,1) about (1,0) = (-1,1)~%"))
-
-  ;; Reflect (2, 3) about normal (0, -1) [top edge] -> (2, -3)
-  (let* ((v (vector2 2.0e0 3.0e0))
-         (n (vector2 0.0e0 -1.0e0))
-         (r (v2-reflect v n)))
-    (assert (= (x r) 2.0e0))
-    (assert (= (y r) -3.0e0))
-    (format *error-output* "  [PASS] v2-reflect (2,3) about (0,-1) = (2,-3)~%"))
+  (let ((reflect (find-symbol "REFLECT" :microsoft-xna-framework-vector2))
+        (v2-eq (find-symbol "=" :microsoft-xna-framework-vector2)))
+    ;; Reflect (1, -1) about normal (0, 1) [bottom edge] -> (1, 1)
+    (let* ((v (vector2 1.0e0 -1.0e0))
+           (n (vector2 0.0e0 1.0e0))
+           (r (funcall reflect v n)))
+      (assert (= (x r) 1.0e0))
+      (assert (= (y r) 1.0e0))
+      (format *error-output* "  [PASS] v2-reflect (1,-1) about (0,1) = (1,1)~%"))
+    ;; Reflect (1, 1) about normal (1, 0) [right edge] -> (-1, 1)
+    (let* ((v (vector2 1.0e0 1.0e0))
+           (n (vector2 1.0e0 0.0e0))
+           (r (funcall reflect v n)))
+      (assert (= (x r) -1.0e0))
+      (assert (= (y r) 1.0e0))
+      (format *error-output* "  [PASS] v2-reflect (1,1) about (1,0) = (-1,1)~%"))
+    ;; Reflect (2, 3) about normal (0, -1) [top edge] -> (2, -3)
+    (let* ((v (vector2 2.0e0 3.0e0))
+           (n (vector2 0.0e0 -1.0e0))
+           (r (funcall reflect v n)))
+      (assert (= (x r) 2.0e0))
+      (assert (= (y r) -3.0e0))
+      (format *error-output* "  [PASS] v2-reflect (2,3) about (0,-1) = (2,-3)~%")))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; v2-normalize
@@ -183,77 +180,82 @@
     (format *error-output* "  [PASS] v2-normalize zero vector returns zero~%"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; rect-intersects
+  ;; rect-intersects (via generated microsoft-xna-framework-rectangle package)
   (format *error-output* "[collision-test.lisp] rect-intersects tests...~%")
 
-  ;; Overlapping rectangles: (0,0,32,32) and (16,16,32,32)
-  (let ((r1 (rect 0 0 32 32))
-        (r2 (rect 16 16 32 32)))
-    (assert (rect-intersects r1 r2))
-    (format *error-output* "  [PASS] Overlapping rectangles intersect~%"))
-
-  ;; Non-overlapping: (0,0,32,32) and (100,100,32,32)
-  (let ((r1 (rect 0 0 32 32))
-        (r2 (rect 100 100 32 32)))
-    (assert (not (rect-intersects r1 r2)))
-    (format *error-output* "  [PASS] Non-overlapping rectangles do NOT intersect~%"))
-
-  ;; Identical rectangles
-  (let ((r1 (rect 0 0 32 32))
-        (r2 (rect 0 0 32 32)))
-    (assert (rect-intersects r1 r2))
-    (format *error-output* "  [PASS] Identical rectangles intersect~%"))
-
-  ;; Edge-touching: (0,0,32,32) and (32,0,32,32) - A:right=32, B:left=32, 32<32 is FALSE
-  (let ((r1 (rect 0 0 32 32))
-        (r2 (rect 32 0 32 32)))
-    (assert (not (rect-intersects r1 r2)))
-    (format *error-output* "  [PASS] Edge-touching rectangles do NOT intersect~%"))
-
-  ;; One rectangle contains the other
-  (let ((r1 (rect 0 0 100 100))
-        (r2 (rect 10 10 20 20)))
-    (assert (rect-intersects r1 r2))
-    (format *error-output* "  [PASS] One rectangle containing another intersects~%"))
+  (let ((intersects (find-symbol "INTERSECTS" :microsoft-xna-framework-rectangle)))
+    ;; Overlapping rectangles: (0,0,32,32) and (16,16,32,32)
+    (let ((r1 (rect 0 0 32 32))
+          (r2 (rect 16 16 32 32)))
+      (assert (funcall intersects r1 r2))
+      (format *error-output* "  [PASS] Overlapping rectangles intersect~%"))
+    ;; Non-overlapping: (0,0,32,32) and (100,100,32,32)
+    (let ((r1 (rect 0 0 32 32))
+          (r2 (rect 100 100 32 32)))
+      (assert (not (funcall intersects r1 r2)))
+      (format *error-output* "  [PASS] Non-overlapping rectangles do NOT intersect~%"))
+    ;; Identical rectangles
+    (let ((r1 (rect 0 0 32 32))
+          (r2 (rect 0 0 32 32)))
+      (assert (funcall intersects r1 r2))
+      (format *error-output* "  [PASS] Identical rectangles intersect~%"))
+    ;; Edge-touching: (0,0,32,32) and (32,0,32,32)
+    (let ((r1 (rect 0 0 32 32))
+          (r2 (rect 32 0 32 32)))
+      (assert (not (funcall intersects r1 r2)))
+      (format *error-output* "  [PASS] Edge-touching rectangles do NOT intersect~%"))
+    ;; One rectangle contains the other
+    (let ((r1 (rect 0 0 100 100))
+          (r2 (rect 10 10 20 20)))
+      (assert (funcall intersects r1 r2))
+      (format *error-output* "  [PASS] One rectangle containing another intersects~%")))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; rect-contains-p
-  (format *error-output* "[collision-test.lisp] rect-contains-p tests...~%")
+  ;; rect-contains (via generated microsoft-xna-framework-rectangle package)
+  (format *error-output* "[collision-test.lisp] rect-contains tests...~%")
 
-  ;; Rectangle contains a point at its center
-  (let ((r (rect 0 0 100 100))
-        (v (vector2 50 50)))
-    (assert (rect-contains-p r v))
-    (format *error-output* "  [PASS] Rectangle contains center point~%"))
-
-  ;; Rectangle does not contain point outside
-  (let ((r (rect 0 0 100 100))
-        (v (vector2 200 200)))
-    (assert (not (rect-contains-p r v)))
-    (format *error-output* "  [PASS] Rectangle does NOT contain outside point~%"))
-
-  ;; Rectangle contains another rectangle
-  (let ((r1 (rect 0 0 100 100))
-        (r2 (rect 10 10 20 20)))
-    (assert (rect-contains-p r1 r2))
-    (format *error-output* "  [PASS] Rectangle contains smaller rectangle~%"))
-
-  ;; Rectangle does not contain a larger rectangle
-  (let ((r1 (rect 0 0 50 50))
-        (r2 (rect 0 0 100 100)))
-    (assert (not (rect-contains-p r1 r2)))
-    (format *error-output* "  [PASS] Rectangle does NOT contain larger rectangle~%"))
-
-  ;; Point on the edge - this is at the boundary
-  (let ((r (rect 0 0 100 100))
-        (v (vector2 0 0)))
-    (assert (rect-contains-p r v))
-    (format *error-output* "  [PASS] Rectangle contains point on edge~%"))
-
-  ;; Point just outside the edge
-  (let ((r (rect 0 0 100 100))
-        (v (vector2 -1 50)))
-    (assert (not (rect-contains-p r v)))
-    (format *error-output* "  [PASS] Rectangle does NOT contain point outside left edge~%"))
+  (let ((contains (find-symbol "CONTAINS" :microsoft-xna-framework-rectangle))
+        (contains-rect (find-symbol "CONTAINS-RECTANGLE" :microsoft-xna-framework-rectangle))
+        (contains-v2 (find-symbol "CONTAINS-VECTOR2" :microsoft-xna-framework-rectangle)))
+    ;; Rectangle contains a point at its center
+    (let ((r (rect 0 0 100 100))
+          (v (vector2 50 50)))
+      (assert (funcall contains r v))
+      (format *error-output* "  [PASS] Rectangle contains center point~%"))
+    ;; Rectangle does not contain point outside
+    (let ((r (rect 0 0 100 100))
+          (v (vector2 200 200)))
+      (assert (not (funcall contains r v)))
+      (format *error-output* "  [PASS] Rectangle does NOT contain outside point~%"))
+    ;; Rectangle contains another rectangle
+    (let ((r1 (rect 0 0 100 100))
+          (r2 (rect 10 10 20 20)))
+      (assert (funcall contains r1 r2))
+      (format *error-output* "  [PASS] Rectangle contains smaller rectangle~%"))
+    ;; Rectangle does not contain a larger rectangle
+    (let ((r1 (rect 0 0 50 50))
+          (r2 (rect 0 0 100 100)))
+      (assert (not (funcall contains r1 r2)))
+      (format *error-output* "  [PASS] Rectangle does NOT contain larger rectangle~%"))
+    ;; Point on the edge - this is at the boundary
+    (let ((r (rect 0 0 100 100))
+          (v (vector2 0 0)))
+      (assert (funcall contains r v))
+      (format *error-output* "  [PASS] Rectangle contains point on edge~%"))
+    ;; Point just outside the edge
+    (let ((r (rect 0 0 100 100))
+          (v (vector2 -1 50)))
+      (assert (not (funcall contains r v)))
+      (format *error-output* "  [PASS] Rectangle does NOT contain point outside left edge~%"))
+    ;; Typed overload: Rectangle.Contains(Vector2)
+    (let ((r (rect 0 0 100 100))
+          (v (vector2 50 50)))
+      (assert (funcall contains-v2 r v))
+      (format *error-output* "  [PASS] Rectangle.Contains Vector2 typed overload~%"))
+    ;; Typed overload: Rectangle.Contains(Rectangle)
+    (let ((r1 (rect 0 0 100 100))
+          (r2 (rect 10 10 20 20)))
+      (assert (funcall contains-rect r1 r2))
+      (format *error-output* "  [PASS] Rectangle.Contains Rectangle typed overload~%")))
 
   (format *error-output* "[collision-test.lisp] All collision tests complete.~%"))

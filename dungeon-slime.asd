@@ -56,6 +56,8 @@
                   '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils" "collision"))
                   '(:file "collision-test" :depends-on ("collision" "mg-classes"))
                   '(:file "clr-defmethod-test" :depends-on ("packages" "utils"))
-                  '(:file "test-harness" :depends-on ("collision-test" "clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1" "typed-calls-test"))
+                   `(:file "cspackages-test" :depends-on ("utils" "mg-classes"
+                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
+                   '(:file "test-harness" :depends-on ("collision-test" "clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "cspackages-test" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1" "typed-calls-test"))
                   '(:file "main" :depends-on
                     ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings")))))

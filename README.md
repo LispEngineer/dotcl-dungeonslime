@@ -315,7 +315,21 @@ C# Direct Method Call Optimization (DotCL 0.1.11+):
 * Utilizes DotCL 0.1.11 direct-call compilation feature by wrapping C# instance
   method receivers in type declarations using `(the (dotnet "Type") ...)`.
 * Speeds up method invocation significantly by avoiding runtime reflection and boxing.
-* Handled automatically by the Lisp package generator for generated reference type stubs.
+* Handled automatically by the Lisp package generator for all generated type stubs
+  (both reference types and value types starting in generator v10).
+
+C# Lisp Package Generator v10: Method Overload Support:
+* Automatic classification of methods into clean (no ref/out/params) and dirty (has
+  special parameter modifiers) overloads.
+* Type-suffixed naming for multi-overload methods (e.g., `contains-vector-2`,
+  `contains-rectangle`).
+* Passthrough &rest functions for multi-overload dispatch via DotCL runtime resolver.
+* Dirty overload documentation comments listing skipped overloads.
+* Value-type typed-call optimization for struct receivers.
+* Static method argument type hints for improved DotCL caching.
+* All method wrappers previously hand-written in `mg-classes.lisp` (DistanceSquared,
+  Reflect, Intersects, Contains) are now auto-generated and tested via
+  `cspackages-test.lisp`.
 
 ## Deprecated Functionality
 

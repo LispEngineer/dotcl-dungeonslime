@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadTriggers
-;;; Generator Version: 9
-;;; Creation Date: 2026-06-20T20:20:29Z
+;;; Generator Version: 10
+;;; Creation Date: 2026-06-20T21:52:49Z
 
 (in-package :cl-user)
 
@@ -28,8 +28,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadTriggers"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadTriggers")
-(defconstant <creation> "2026-06-20T20:20:29Z")
-(defconstant <version> 9)
+(defconstant <creation> "2026-06-20T21:52:49Z")
+(defconstant <version> 10)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -37,23 +37,23 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadTriggers")))
 
 (defun left (obj)
-  (dotnet:invoke obj "get_Left"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "get_Left"))
 
 (defun right (obj)
-  (dotnet:invoke obj "get_Right"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "get_Right"))
 
 (defun = (left right)
-  (dotnet:static <type-str> "op_Equality" left right))
+  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") right)))
 
 (defun equals (obj obj)
-  (dotnet:invoke obj "Equals" obj))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "Equals" obj))
 
 (defun get-hash-code (obj)
-  (dotnet:invoke obj "GetHashCode"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "GetHashCode"))
 
 (defun not= (left right)
-  (dotnet:static <type-str> "op_Inequality" left right))
+  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") right)))
 
 (defun to-string (obj)
-  (dotnet:invoke obj "ToString"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "ToString"))
 

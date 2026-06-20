@@ -30,9 +30,14 @@ to do with this game & framework.
   * Figure out how the 0.1.10 capability to have overloaded class names in
     the generic dispatch mechanism works - and prove it with tests
 
-* Remove my custom `Vector2` code and use the package generator's code
+* **DONE** Remove my custom `Vector2` code and use the package generator's code
 
 * Improve C# class package generator:
+  * **DONE** Version 10: Added method overload support with clean/dirty classification,
+    type-suffixed naming, passthrough &rest dispatch, value-type typed-call optimization,
+    and dirty overload documentation.
+  * Handle dirty overloads (ref/out) with -ref suffix naming and
+    out→multiple-values mapping in a future version.
   * Make simple constructors work in the package generator code, using the name `make`
   * **DONE** Change `/=` to `not=` in the Lispy style
   * Consider casting mutator parameters to the correct type, e.g.,

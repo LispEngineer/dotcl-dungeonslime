@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 9
-;;; Creation Date: 2026-06-20T20:20:27Z
+;;; Generator Version: 10
+;;; Creation Date: 2026-06-20T21:52:47Z
 
 (in-package :cl-user)
 
@@ -30,8 +30,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(defconstant <creation> "2026-06-20T20:20:27Z")
-(defconstant <version> 9)
+(defconstant <creation> "2026-06-20T21:52:47Z")
+(defconstant <version> 10)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -39,29 +39,29 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad")))
 
 (defun down (obj)
-  (dotnet:invoke obj "get_Down"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "get_Down"))
 
 (defun left (obj)
-  (dotnet:invoke obj "get_Left"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "get_Left"))
 
 (defun right (obj)
-  (dotnet:invoke obj "get_Right"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "get_Right"))
 
 (defun up (obj)
-  (dotnet:invoke obj "get_Up"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "get_Up"))
 
 (defun = (left right)
-  (dotnet:static <type-str> "op_Equality" left right))
+  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") right)))
 
 (defun equals (obj obj)
-  (dotnet:invoke obj "Equals" obj))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "Equals" obj))
 
 (defun get-hash-code (obj)
-  (dotnet:invoke obj "GetHashCode"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "GetHashCode"))
 
 (defun not= (left right)
-  (dotnet:static <type-str> "op_Inequality" left right))
+  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") right)))
 
 (defun to-string (obj)
-  (dotnet:invoke obj "ToString"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "ToString"))
 

@@ -22,6 +22,9 @@
   (format *error-output* "[test-harness.lisp] Running Package Generator tests...~%")
   (run-package-generator-tests)
 
+  (format *error-output* "[test-harness.lisp] Running C# Packages Integration tests...~%")
+  (run-cspackages-tests)
+
   (format *error-output* "[test-harness.lisp] Running Load System tests...~%")
   (run-load-system-tests)
 

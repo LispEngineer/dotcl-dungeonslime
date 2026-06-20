@@ -1,13 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 9
-;;; Creation Date: 2026-06-20T20:20:36Z
+;;; Generator Version: 10
+;;; Creation Date: 2026-06-20T21:52:55Z
 
 (in-package :cl-user)
 
 (defpackage :microsoft-xna-framework-color
   (:use :cl)
   (:shadow
+   #:*
    #:=
   )
   (:export
@@ -162,7 +163,17 @@
    #:g
    #:packed-value
    #:r
+   #:*
+   #:*-color-single
+   #:*-single-color
+   #:*-color-color
    #:=
+   #:equals
+   #:equals-object
+   #:equals-color
+   #:from-non-premultiplied
+   #:from-non-premultiplied-vector4
+   #:from-non-premultiplied-int32-int32-int32-int32
    #:get-hash-code
    #:implicit-cast
    #:lerp
@@ -179,8 +190,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-20T20:20:36Z")
-(defconstant <version> 9)
+(defconstant <creation> "2026-06-20T21:52:55Z")
+(defconstant <version> 10)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -472,75 +483,122 @@
 (defconstant +yellow-green+ (dotnet:static <type-str> "YellowGreen"))
 
 (defun a (obj)
-  (dotnet:invoke obj "get_A"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "get_A"))
 
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
 (defun (setf a) (new-value obj)
-  (dotnet:invoke obj "set_A" new-value))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "set_A" new-value))
 
 (defun b (obj)
-  (dotnet:invoke obj "get_B"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "get_B"))
 
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
 (defun (setf b) (new-value obj)
-  (dotnet:invoke obj "set_B" new-value))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "set_B" new-value))
 
 (defun g (obj)
-  (dotnet:invoke obj "get_G"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "get_G"))
 
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
 (defun (setf g) (new-value obj)
-  (dotnet:invoke obj "set_G" new-value))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "set_G" new-value))
 
 (defun packed-value (obj)
-  (dotnet:invoke obj "get_PackedValue"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "get_PackedValue"))
 
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
 (defun (setf packed-value) (new-value obj)
-  (dotnet:invoke obj "set_PackedValue" new-value))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "set_PackedValue" new-value))
 
 (defun r (obj)
-  (dotnet:invoke obj "get_R"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "get_R"))
 
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
 (defun (setf r) (new-value obj)
-  (dotnet:invoke obj "set_R" new-value))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "set_R" new-value))
+
+(defun * (&rest args)
+  "Passthrough for Microsoft.Xna.Framework.Color.* overloads. Dispatches at runtime."
+  (apply #'dotnet:static <type-str> "*" args))
+
+(defun *-color-single (value scale)
+  "Calls Microsoft.Xna.Framework.Color.* *(Color, Single) -> Color"
+  (dotnet:static <type-str> "op_Multiply" (the (dotnet "Microsoft.Xna.Framework.Color") value) (the (dotnet "System.Single") scale)))
+
+(defun *-single-color (scale value)
+  "Calls Microsoft.Xna.Framework.Color.* *(Single, Color) -> Color"
+  (dotnet:static <type-str> "op_Multiply" (the (dotnet "System.Single") scale) (the (dotnet "Microsoft.Xna.Framework.Color") value)))
+
+(defun *-color-color (color1 color2)
+  "Calls Microsoft.Xna.Framework.Color.* *(Color, Color) -> Color"
+  (dotnet:static <type-str> "op_Multiply" (the (dotnet "Microsoft.Xna.Framework.Color") color1) (the (dotnet "Microsoft.Xna.Framework.Color") color2)))
 
 (defun = (a b)
-  (dotnet:static <type-str> "op_Equality" a b))
+  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Color") a) (the (dotnet "Microsoft.Xna.Framework.Color") b)))
+
+;; The following C# Microsoft.Xna.Framework.Color.Deconstruct overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   Deconstruct(out Byte&, out Byte&, out Byte&) -> Void
+;;   Deconstruct(out Single&, out Single&, out Single&) -> Void
+;;   Deconstruct(out Byte&, out Byte&, out Byte&, out Byte&) -> Void
+;;   Deconstruct(out Single&, out Single&, out Single&, out Single&) -> Void
+
+(defun equals (obj &rest args)
+  "Passthrough for Microsoft.Xna.Framework.Color.Equals overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "Equals" args))
+
+(defun equals-object (obj obj)
+  "Calls Microsoft.Xna.Framework.Color.Equals Equals(Object) -> Boolean"
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "Equals" obj))
+
+(defun equals-color (obj other)
+  "Calls Microsoft.Xna.Framework.Color.Equals Equals(Color) -> Boolean"
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "Equals" other))
+
+(defun from-non-premultiplied (&rest args)
+  "Passthrough for Microsoft.Xna.Framework.Color.FromNonPremultiplied overloads. Dispatches at runtime."
+  (apply #'dotnet:static <type-str> "FromNonPremultiplied" args))
+
+(defun from-non-premultiplied-vector4 (vector)
+  "Calls Microsoft.Xna.Framework.Color.FromNonPremultiplied FromNonPremultiplied(Vector4) -> Color"
+  (dotnet:static <type-str> "FromNonPremultiplied" (the (dotnet "Microsoft.Xna.Framework.Vector4") vector)))
+
+(defun from-non-premultiplied-int32-int32-int32-int32 (r g b a)
+  "Calls Microsoft.Xna.Framework.Color.FromNonPremultiplied FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color"
+  (dotnet:static <type-str> "FromNonPremultiplied" (the (dotnet "System.Int32") r) (the (dotnet "System.Int32") g) (the (dotnet "System.Int32") b) (the (dotnet "System.Int32") a)))
 
 (defun get-hash-code (obj)
-  (dotnet:invoke obj "GetHashCode"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "GetHashCode"))
 
 (defun implicit-cast (value)
-  (dotnet:static <type-str> "op_Implicit" value))
+  (dotnet:static <type-str> "op_Implicit" (the (dotnet "System.Numerics.Vector4") value)))
 
 (defun lerp (value1 value2 amount)
-  (dotnet:static <type-str> "Lerp" value1 value2 amount))
+  (dotnet:static <type-str> "Lerp" (the (dotnet "Microsoft.Xna.Framework.Color") value1) (the (dotnet "Microsoft.Xna.Framework.Color") value2) (the (dotnet "System.Single") amount)))
 
 (defun lerp-precise (value1 value2 amount)
-  (dotnet:static <type-str> "LerpPrecise" value1 value2 amount))
+  (dotnet:static <type-str> "LerpPrecise" (the (dotnet "Microsoft.Xna.Framework.Color") value1) (the (dotnet "Microsoft.Xna.Framework.Color") value2) (the (dotnet "System.Single") amount)))
 
 (defun multiply (value scale)
-  (dotnet:static <type-str> "Multiply" value scale))
+  (dotnet:static <type-str> "Multiply" (the (dotnet "Microsoft.Xna.Framework.Color") value) (the (dotnet "System.Single") scale)))
 
 (defun multiply-alpha (value scale)
-  (dotnet:static <type-str> "MultiplyAlpha" value scale))
+  (dotnet:static <type-str> "MultiplyAlpha" (the (dotnet "Microsoft.Xna.Framework.Color") value) (the (dotnet "System.Single") scale)))
 
 (defun not= (a b)
-  (dotnet:static <type-str> "op_Inequality" a b))
+  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Color") a) (the (dotnet "Microsoft.Xna.Framework.Color") b)))
 
 (defun to-string (obj)
-  (dotnet:invoke obj "ToString"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "ToString"))
 
 (defun to-vector3 (obj)
-  (dotnet:invoke obj "ToVector3"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "ToVector3"))
 
 (defun to-vector4 (obj)
-  (dotnet:invoke obj "ToVector4"))
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Color") obj) "ToVector4"))
 

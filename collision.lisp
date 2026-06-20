@@ -57,7 +57,7 @@
    Uses the squared-distance comparison for efficiency
    (avoids the sqrt in Euclidean distance)."
   (let* ((radii-squared (expt (+ (circle-radius c1) (circle-radius c2)) 2))
-         (dist-squared (v2-distance-squared
+          (dist-squared (microsoft-xna-framework-vector2:distance-squared
                          (vector2 (float (circle-x c1) 0.0e0)
                                   (float (circle-y c1) 0.0e0))
                          (vector2 (float (circle-x c2) 0.0e0)

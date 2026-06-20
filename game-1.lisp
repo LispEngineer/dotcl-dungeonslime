@@ -200,7 +200,7 @@
       ;; If the normal is non-zero, reflect the velocity about the normal.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
         (let ((normal (v2-normalize (vector2 normal-x normal-y))))
-          (setf (bat-vel game) (v2-reflect (bat-vel game) normal))))
+          (setf (bat-vel game) (v2:reflect (bat-vel game) normal))))
       ;; Update the bat position
       (setf (bat-pos game) new-bat-pos)
 

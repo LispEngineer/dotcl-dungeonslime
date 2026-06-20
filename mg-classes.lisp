@@ -57,20 +57,12 @@
   Vector2, short-float"
   (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Multiply" arg1 arg2))
 
-(defun v2-distance-squared (v1 v2)
-  "Returns the squared distance between two Vector2 points.
-   Uses Vector2.DistanceSquared for efficiency (avoids sqrt)."
-  (dotnet:static "Microsoft.Xna.Framework.Vector2" "DistanceSquared" v1 v2))
-
-(defun v2-reflect (vector normal)
-  "Reflects a vector about a normal. Returns a new Vector2.
-   Uses Vector2.Reflect."
-  (dotnet:static "Microsoft.Xna.Framework.Vector2" "Reflect" vector normal))
-
 (defun v2-normalize (v)
   "Returns a normalized copy of a Vector2 (unit vector in the same direction).
-   If the vector is zero-length, returns Vector2.Zero."
-  (let ((len (dotnet:invoke v "Length")))
+   If the vector is zero-length, returns Vector2.Zero.
+   Uses the generated microsoft-xna-framework-vector2 package for Length
+   and dotnet:static for the division operation."
+  (let ((len (microsoft-xna-framework-vector2:length v)))
     (if (= 0.0e0 len)
       +v2-0+
       (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Division" v len))))
@@ -86,17 +78,6 @@
   "Returns a new C# Rectangle with the specified values. The number types in Vector2
    are float."
   (dotnet:new "Microsoft.Xna.Framework.Rectangle" x y w h))
-
-(defun rect-intersects (rect-a rect-b)
-  "Returns true if two C# Rectangles overlap (AABB collision check).
-   Uses Rectangle.Intersects."
-  (dotnet:invoke rect-a "Intersects" rect-b))
-
-(defun rect-contains-p (rect obj)
-  "Returns true if the C# Rectangle contains the given object.
-   OBJ can be a Rectangle, Point, or Vector2.
-   Uses Rectangle.Contains."
-  (dotnet:invoke rect "Contains" obj))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Generic functions
