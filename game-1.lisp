@@ -262,12 +262,23 @@ else
       ;; Use the thumbstick
       ;; _slimePosition.X += gamePadState.ThumbSticks.Left.X * speed;
       ;; _slimePosition.Y -= gamePadState.ThumbSticks.Left.Y * speed;
-      (setf (slime-position game)
-        (vector2 (+ (x (slime-position game))
+      (setf (slime-pos game)
+        (vector2 (+ (x (slime-pos game))
                     (* speed (x (ts:left (gp-state:thumb-sticks gps)))))
-                 (- (y (slime-position game))
+                 (- (y (slime-pos game))
                     (* speed (y (ts:left (gp-state:thumb-sticks gps)))))))
       ;; Use the d-pad
-      ;; TODO: IMPLEMENT
-      nil)))
+      (progn
+        (when (gp-state:is-button-down gps button:+d-pad-up+)
+          (setf (slime-pos game) (vector2 (x (slime-pos game))
+                                         (- (y (slime-pos game)) speed))))
+        (when (gp-state:is-button-down gps button:+d-pad-down+)
+          (setf (slime-pos game) (vector2 (x (slime-pos game))
+                                         (+ (y (slime-pos game)) speed))))
+        (when (gp-state:is-button-down gps button:+d-pad-left+)
+          (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
+                                            (y (slime-pos game)))))
+        (when (gp-state:is-button-down gps button:+d-pad-right+)
+          (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
+                                            (y (slime-pos game)))))))))
 
