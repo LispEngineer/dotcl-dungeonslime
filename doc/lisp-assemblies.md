@@ -202,7 +202,10 @@ For each C# class, the generator will output a Lisp file containing:
 1. Rebuild the project using `make build`.
 2. Generate metadata for `System.Console.dll`:
    ```bash
+   # Ubuntu
    dotnet run --project DungeonSlime.csproj -- --assembly /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.8/ref/net10.0/System.Console.dll --output obj/System.Console.lispy.metadata
+   # Arch Linux
+   dotnet run --project DungeonSlime.csproj -- --assembly /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/System.Console.dll --output obj/System.Console.lispy.metadata
    ```
 3. Run the package generator:
    ```bash

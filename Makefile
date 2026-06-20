@@ -1,6 +1,9 @@
 # Makefile for DungeonSlime
 
-REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
+# Ubuntu
+#REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
+# Arch
+REF_DIR = /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
 BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
 OUT_DIR = cspackages
 EXECUTABLE := $(BIN_DIR)DungeonSlime

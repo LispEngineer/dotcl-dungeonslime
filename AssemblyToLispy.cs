@@ -23,7 +23,10 @@ and the output file.
 There should also be a test class or method that
 takes a well known assembly (e.g., "System.Runtime.dll"
 from the C# runtime, located in directory
-"/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/")
+"/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/"
+on Ubuntu, but at 
+"/usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/"
+on Arch Linux)
 and ensures that the output is correct for a few items,
 such as "System.Collections.ArrayList".
 
@@ -999,6 +1002,11 @@ namespace DungeonSlime {
     /// </summary>
     public static class AssemblyToLispyTest {
 
+        // FIXME: Have the system tell us where these are somehow?
+        // This is for Arch Linux
+        // Ubuntu is at: /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
+        public const string AssemblyDirectory = "/usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/";
+
         /// <summary>
         ///   Runs the AssemblyToLispy test case on System.Runtime.dll and validates the generated plist data.
         /// </summary>
@@ -1006,10 +1014,10 @@ namespace DungeonSlime {
         public static void RunTests() {
             try {
                 // Test the system runtime assembly
-                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/", "System.Runtime.dll");
+                RunTestOnAssembly(AssemblyDirectory, "System.Runtime.dll");
 
                 // Test the system console assembly
-                RunTestOnAssembly("/usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/", "System.Console.dll");
+                RunTestOnAssembly(AssemblyDirectory, "System.Console.dll");
 
                 // Test our synthetic edge cases target.
                 // The built DLL will reside in the output folder alongside DungeonSlime

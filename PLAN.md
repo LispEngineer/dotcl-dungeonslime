@@ -21,7 +21,8 @@ to do with this game & framework.
 
 # Miscellaneous
 
-* Make simple constructors work in the package generator code, using the name `make`
+* Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
+  new features about building a whole system.
 
 * Update to [DotCL 0.1.11](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#type-declared-net-calls-compile-to-a-direct-call)
   * Remove the various `eval-when` that are no longer necessary
@@ -32,6 +33,7 @@ to do with this game & framework.
 * Remove my custom `Vector2` code and use the package generator's code
 
 * Improve C# class package generator:
+  * Make simple constructors work in the package generator code, using the name `make`
   * **DONE** Change `/=` to `not=` in the Lispy style
   * Consider casting mutator parameters to the correct type, e.g.,
     `(#!!System.Convert.ToByte 37)`, or `(dotnet:box 37 "System.Byte")`
