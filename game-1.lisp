@@ -39,7 +39,10 @@
   "The filename of our Texture Atlas. Within the Content directory.")
 
 (defconstant +movement-speed+ 5.0f0
-  "Speed multiplier when moving")
+  "Speed when moving")
+
+(defconstant +fast-multiplier+ 3.0f0
+  "Speed multiplier when moving fast")
 
 ;; MonoGame Game implemented as a CLOS class
 (defclass game-1 (core)
@@ -172,7 +175,7 @@ if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
          (speed +movement-speed+))
     ;; 50% faster when space held
     (when (input:is-key-down kb key:+space+)
-      (setf speed (* speed 1.5f0)))
+      (setf speed (* speed +fast-multiplier+)))
     ;; Move in direction(s) pressed
     (when (or (input:is-key-down kb key:+w+) (input:is-key-down kb key:+up+))
       (setf (slime-pos game) (vector2    (x (slime-pos game))
@@ -249,7 +252,7 @@ else
     ;; Double speed and turn on vibration if A is pressed
     (if (input:is-button-down gp-pad button:+a+)
       (progn
-        (setf speed (* speed 1.5f0))
+        (setf speed (* speed +fast-multiplier+))
         (input:game-pad-set-vibration gp-pad 1.0f0
                                       (csharp:timespan<-milliseconds 1000)))
       (input:game-pad-stop-vibration gp-pad))
