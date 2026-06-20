@@ -24,7 +24,9 @@ build-actual:
 	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
 	# Then, perform the actual build including the DotCL Lisp compilation targets.
 	# dotnet build DungeonSlime.csproj -v d -c Debug
-	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software/" dotnet build DungeonSlime.csproj -v d -c Debug
+	# The // at the end of CL_SOURCE_REGISTRY is required!! Removing it breaks the build.
+	# TODO: WHY???
+	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:
 	mkdir -p obj $(OUT_DIR)
@@ -83,7 +85,8 @@ mgcb:
 	dotnet tool run mgcb-editor-linux
 
 repl:
+  # The // at the end is required!
 	#rlwrap --always-readline \ 
-	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software/" \
+	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" \
 	dotcl --eval '(load "load-repl.lisp")' \
 	      --eval '(in-package :dungeon-slime)' repl
