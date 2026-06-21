@@ -41,23 +41,27 @@
                                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic" :depends-on ("monoutils"))
                   `(:file "typed-calls-test" :depends-on ("utils" ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
-                  `(:file "poc-test" :depends-on ("monoutils" "constants" "settings" "csharp" "utils"
-                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
+                  `(:file "poc-test" :depends-on 
+                    ("monoutils" "constants" "settings" "csharp" "utils"
+                     ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
                   '(:file "clr-generic-test" :depends-on ("clr-generic" "type-aliases"))
                   '(:file "game-repl" :depends-on ("packages"))
                   '(:file "mg-classes" :depends-on ("type-aliases" "clr-generic" "constants" "packages"))
                   '(:file "texture-region" :depends-on ("monoutils" "constants" "mg-classes" "clr-generic"))
+                  '(:file "tileset" :depends-on ("texture-region" "mg-classes" "constants"))
+                  '(:file "tilemap" :depends-on ("tileset" "texture-region" "mg-classes" "constants" "mg-core"))
                   '(:file "sprite" :depends-on ("mg-classes" "texture-region"))
                   '(:file "animation" :depends-on ("csharp" "texture-region"))
                   '(:file "texture-atlas" :depends-on ("utils" "texture-region" "monoutils" "constants" "mg-classes" "clr-generic" "animation"))
                   '(:file "input-manager" :depends-on ("mg-classes" "csharp"))
                   '(:file "collision" :depends-on ("mg-classes"))
                   '(:file "mg-core" :depends-on ("monoutils" "type-aliases" "constants" "input-manager"))
-                  '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils" "collision"))
+                  '(:file "game-1" :depends-on ("constants" "mg-classes" "type-aliases" "mg-core" "monoutils" "collision" "tilemap" "tileset"))
                   '(:file "collision-test" :depends-on ("collision" "mg-classes"))
                   '(:file "clr-defmethod-test" :depends-on ("packages" "utils"))
-                   `(:file "cspackages-test" :depends-on ("utils" "mg-classes"
-                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
-                   '(:file "test-harness" :depends-on ("collision-test" "clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "cspackages-test" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1" "typed-calls-test"))
+                  '(:file "tilemap-test" :depends-on ("tilemap" "tileset" "mg-classes" "texture-region"))
+                  `(:file "cspackages-test" :depends-on 
+                    ("utils" "mg-classes" ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))
+                  '(:file "test-harness" :depends-on ("collision-test" "tilemap-test" "clr-defmethod-test" "poc-test" "clr-generic-test" "package-generator-tests" "cspackages-test" "load-system-test" "texture-atlas" "utils" "mg-classes" "game-1" "typed-calls-test"))
                   '(:file "main" :depends-on
                     ("mg-core" "game-1" "type-aliases" "constants" "monoutils" "game-repl" "settings")))))

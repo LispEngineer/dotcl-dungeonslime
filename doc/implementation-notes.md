@@ -600,3 +600,26 @@ Key points:
   `packages.lisp` (alongside the other pre-declares) so the
   `:dungeon-slime-input` package's `:local-nicknames` can be resolved
   at package-definition time before the cspackages are loaded.
+
+# Tilemaps (MonoGame Chapter 13)
+
+The tilemap system (`tilemap.lisp`, `tileset.lisp`) implements Chapter 13 of the MonoGame tutorial.
+Instead of using XML for configuration as suggested in the tutorial, the implementation utilizes
+S-expressions for the `tilemap-definition.lisp` file.
+
+Key points:
+- The tilemap relies on the `Content.mgcb` file to copy `tilemap-definition.lisp` into the output directory.
+- `safe-read-form-from-file` is used to load the S-expression configuration securely.
+- S-expression lists specify rows and columns, slicing into a texture atlas's `texture-region`.
+- Room boundaries are computed dynamically based on the tilemap's loaded dimensions and scale, rather than hard-coding the screen bounds, allowing the game physics and collisions (e.g. slime bounding box) to scale naturally with the map.
+- The tilemap definition file is located in the Content directory. The constant
+  `+tilemap-filename+` combines the default content directory prefix (`Content/`)
+  so that `qualify-path` correctly resolves the path at runtime (both relative to
+  the root and in the C# build output folder).
+- To prevent type conversion issues, dimensions used in constructing the room
+  bounds `Rectangle` (e.g. scale * size) must be coerced to integers (using
+  `round`) before calling the `rect` constructor, as the C# `Rectangle`
+  constructor requires `Int32` parameters.
+- Textures are loaded using `content-load-texture2d`, which wraps generic
+  `ContentManager.Load<Texture2D>` calls through DotCL's generic invocation or
+  returns the raw asset name when the manager is `nil` (for CLI testing context).

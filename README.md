@@ -242,6 +242,10 @@ MonoGame Dungeon Slime features:
   * Screen boundary bouncing for the enemy bat via `Vector2.Reflect`
   * Slime-vs-bat trigger response with random respawn
   * Rectangle intersection and containment utilities
+* All Chapter 13 content (tilemaps)
+  * Tilemap loaded via S-expression lists instead of XML
+  * Tilemap and Tileset CLOS classes
+  * Room boundaries scaled according to tilemap
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

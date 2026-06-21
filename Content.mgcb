@@ -55,3 +55,6 @@
 #begin Content/test-atlas.lisp
 /copy:Content/test-atlas.lisp
 
+#begin Content/tilemap-definition.lisp
+/copy:Content/tilemap-definition.lisp
+

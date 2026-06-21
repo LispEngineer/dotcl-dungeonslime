@@ -146,11 +146,27 @@ and files in this repository.
   intersection cases, degenerate cases, `v2-distance-squared`, `v2-reflect`,
   `v2-normalize`, `rect-intersects`, and `rect-contains-p`.
 
+* `tilemap.lisp`: Implements the `tilemap` CLOS class for Chapter 13.
+  Loads a tilemap layout from an S-expression file, mapping grid
+  positions to `texture-region` cells within a tileset. Provides drawing
+  functionality that draws all tiles via SpriteBatch. Defines
+  `content-load-texture2d` to dynamically load texture assets from the
+  `ContentManager`.
+
+* `tileset.lisp`: Implements the `tileset` CLOS class for Chapter 13.
+  Represents a grid of tiles (a tile atlas) from a single `texture-region`.
+  Provides logic for slicing the region into uniform tiles and caching
+  the resulting sub-regions.
+
+* `tilemap-test.lisp`: Tests the tileset splitting and tilemap loading logic.
+
 * `game-1.lisp`: An extension of the `core` class above that actually
   will implement the MonoGame Dungeon Slime logic. For now, it also will
   steadily rotate the background color between black and red, which speed can
   be controlled with `color-cycle-period`. Changing that acts as a good test
-  that the in-game REPL is working.
+  that the in-game REPL is working. Updated to define `+tilemap-filename+`
+  and load tilemap from the Content directory, with coerced integer
+  dimensions for the room bounds rectangle.
 
 * `game-repl.lisp`: Provides functions to launch a background thread which
   operates a Lisp REPL. Sorta klugey for now but works.
@@ -284,6 +300,9 @@ and files in this repository.
 * `Content.mgcb`: MonoGame Content Builder configuration. This references all
   the content that the `ContentManager` can load. I think there is something a
   little off with my configuration, but it works.
+
+* `Content/tilemap-definition.lisp`: Lisp S-expression configuration specifying
+  the layout for the level tilemap, using indices that map into the atlas's tileset.
 
 
 # Project Files
