@@ -98,6 +98,9 @@
 (defpackage :microsoft-xna-framework-rectangle)
 (defpackage :microsoft-xna-framework-graphics-graphics-device)
 (defpackage :microsoft-xna-framework-graphics-presentation-parameters)
+(defpackage :microsoft-xna-framework-audio-sound-effect)
+(defpackage :microsoft-xna-framework-media-media-player)
+(defpackage :microsoft-xna-framework-media-song)
 (defpackage :dungeon-slime-input)
 
 (defpackage :dungeon-slime
@@ -124,6 +127,9 @@
     (:pp :microsoft-xna-framework-graphics-presentation-parameters)
     (:point :microsoft-xna-framework-point)
     (:time-span :system-time-span)
+    (:sound-effect :microsoft-xna-framework-audio-sound-effect)
+    (:media-player :microsoft-xna-framework-media-media-player)
+    (:song :microsoft-xna-framework-media-song)
   )
   (:export 
     ;; Constants

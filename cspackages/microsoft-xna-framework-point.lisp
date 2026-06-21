@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
 ;;; Generator Version: 10
-;;; Creation Date: 2026-06-20T21:52:37Z
+;;; Creation Date: 2026-06-21T22:33:34Z
 
 (in-package :cl-user)
 
@@ -38,7 +38,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Point"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(defconstant <creation> "2026-06-20T21:52:37Z")
+(defconstant <creation> "2026-06-21T22:33:34Z")
 (defconstant <version> 10)
 
 ;; Register C# Type with CLOS

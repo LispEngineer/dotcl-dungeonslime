@@ -16,6 +16,24 @@
 #begin Content/atlas-definition.lisp
 /copy:Content/atlas-definition.lisp
 
+#begin Content/audio/bounce.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Content/audio/bounce.wav
+
+#begin Content/audio/collect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Content/audio/collect.wav
+
+#begin Content/audio/theme.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Content/audio/theme.ogg
+
 #begin Content/images/atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor
