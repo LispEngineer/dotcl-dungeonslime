@@ -375,7 +375,7 @@ BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
 
 (This needs to be tested: what will the environment be when things are running?
 
-If the project is actually running via `make run` or `make test`, it is possible to query the 
+If the project is actually running via `make run` or `make test`, it is possible to query the
 .NET Core `System.AppContext.BaseDirectory` property. It will always return the absolute.
 path of the directory containing the currently executing host application:
 
@@ -391,13 +391,13 @@ string outputDir = System.AppContext.BaseDirectory;
 
 ## 3. At Compile-Time (Inside Lisp `eval-when` Blocks)
 
-Because `System.AppContext.BaseDirectory` points to the DotCL compiler process' directory 
-rather than the target project's directory during macro expansion, it cannot natively 
+Because `System.AppContext.BaseDirectory` points to the DotCL compiler process' directory
+rather than the target project's directory during macro expansion, it cannot natively
 resolve the target `bin/` path purely through reflection.
 
 It is possible to invoke a nested MSBuild process using `uiop:run-program` during Lisp
 compilation. It is possible for this to fail silently due to MSBuild node-reuse
-locks and inherited environment variables. However, this seems to work in tests: 
+locks and inherited environment variables. However, this seems to work in tests:
 see `type-aliases.lisp`.
 
 ```lisp
@@ -432,9 +432,9 @@ the DotCL compilation task runs:
          (dll-path (merge-pathnames (concatenate 'string bin-dir "MonoGame.Framework.dll")
                                     (asdf:system-source-directory "dungeon-slime"))))
     (dotnet:load-assembly (namestring dll-path)))
-  
+
   ;; Proceed with class registration safely!
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" 
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
     (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
 ```
 
@@ -446,7 +446,7 @@ managed by the `DotclCompileRoot` MSBuild target.
 
 This target is configured with specific `Inputs` (all the `.lisp` files in the project and the
 `.asd` file) and `Outputs` (the compiled `.fasl` file). This enables MSBuild's native incremental
-build caching mechanisms. 
+build caching mechanisms.
 
 When running `make build` or `dotnet build` multiple times in a row without making any modifications
 to the source files, MSBuild detects that the `.fasl` output file is already newer than all of the
@@ -454,15 +454,15 @@ to the source files, MSBuild detects that the `.fasl` output file is already new
 `Skipping target "DotclCompileRoot" because all output files are up-to-date with respect to the input files.`
 
 Because the compilation target is completely skipped, the DotCL compiler process is never launched.
-Consequently, any code inside `eval-when (:compile-toplevel)` blocks (such as `format` diagnostic prints, 
-programmatic assembly loads, or macro expansions) will **not** be executed again, and no compile-time output 
+Consequently, any code inside `eval-when (:compile-toplevel)` blocks (such as `format` diagnostic prints,
+programmatic assembly loads, or macro expansions) will **not** be executed again, and no compile-time output
 will be printed to the console.
 
-When debugging compile-time macros or `eval-when` logic and want to force the compiler to run so as to 
+When debugging compile-time macros or `eval-when` logic and want to force the compiler to run so as to
 see the outputs, the MSBuild cache must be invalidated by either:
 
 1. Making a modification to any `.lisp` file or the `.asd` file (e.g., adding a space and saving it).
-2. Running `make clean` (or `dotnet clean`) to delete the `obj/` and `bin/` directories, forcing MSBuild to 
+2. Running `make clean` (or `dotnet clean`) to delete the `obj/` and `bin/` directories, forcing MSBuild to
    rebuild the `.fasl` from scratch on the next build.
 
 
@@ -509,7 +509,7 @@ Several methods can be used to locate mismatched parentheses:
 # Instance Properties and Struct "Boxing Mutation"
 
 The generator (`assembly-package-generator.lisp`) emits accessor (`property-name`)
-and mutator (`(setf property-name)`) functions for C# instance properties. 
+and mutator (`(setf property-name)`) functions for C# instance properties.
 
 When invoking a setter on an instance property of a **value type (struct)** via `dotnet:invoke`,
 DotCL boxes the struct. Modifying a property through the generated Lisp `setf` mutator
@@ -517,12 +517,12 @@ DotCL boxes the struct. Modifying a property through the generated Lisp `setf` m
 the CLR boundary, leaving the original `my-struct` variable in Lisp unmodified.
 
 Therefore, users should exercise caution when mutating properties on C# structs from Lisp.
-A comment 
+A comment
 
 ```lisp
 ;; Note: Modifying a property of a value type (struct) via setf may only mutate
 ;; a boxed copy, leaving the original unchanged. Use caution with structs.
-``` 
+```
 is automatically inserted above property mutators generated for structs to alert users
 of this behavior.
 
@@ -554,7 +554,7 @@ Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
 
 # DotCL 0.1.12 Build Execution Changes and ASDF Loading
 
-In DotCL 0.1.12, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`. 
+In DotCL 0.1.12, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`.
 
 Previously, dependencies like `anaphora` required complex `eval-when` workarounds to inject paths into `asdf:*central-registry*` at both compile-time and run-time, and required explicit MSBuild copy targets to bundle the source files into the binary folder.
 
@@ -623,3 +623,45 @@ Key points:
 - Textures are loaded using `content-load-texture2d`, which wraps generic
   `ContentManager.Load<Texture2D>` calls through DotCL's generic invocation or
   returns the raw asset name when the manager is `nil` (for CLI testing context).
+
+
+# Audio and Music (MonoGame Chapter 14)
+
+The audio system (`audio-test.lisp` and updates to `game-1.lisp`) implements
+Chapter 14 of the MonoGame tutorial. Instead of loading audio via
+`ContentManager.Load<T>`, the implementation uses direct filesystem loading
+via the static methods of `SoundEffect` (`from-file`) and `Song` (`from-uri`).
+
+## Generic Methods in DotCL (`dotnet:generic-method`)
+
+In .NET, generic methods are methods that are defined with type parameters. A
+common example in MonoGame is `ContentManager.Load<T>(string assetName)`.
+
+In DotCL, you cannot invoke a generic method directly using standard member
+invocation because the Lisp runtime needs to know which concrete type signature
+to look up in the .NET metadata.
+To resolve this, DotCL provides the `dotnet:generic-method` function:
+```lisp
+(dotnet:generic-method "MethodName" "TypeArgument1" "TypeArgument2" ...)
+```
+For example, to call `Content.Load<SoundEffect>("audio/bounce")`, you would write:
+```lisp
+(dotnet:invoke content-manager
+               (dotnet:generic-method "Load" "Microsoft.Xna.Framework.Audio.SoundEffect")
+               "audio/bounce")
+```
+This instructs DotCL to perform a generic method instantiation for the `Load`
+method on the `ContentManager` instance, specializing it with the type
+`Microsoft.Xna.Framework.Audio.SoundEffect` before invoking it.
+
+### Avoiding Generic Methods with Static Constructors
+
+While `dotnet:generic-method` works, it relies on runtime reflection to resolve
+the generic signature. Whenever possible, using non-generic static construction
+methods provided by C# classes is preferred as it is cleaner and uses the
+pre-generated C# wrappers.
+
+For instance, `SoundEffect.FromFile(string path)` and
+`Song.FromUri(string name, Uri uri)` are non-generic static methods. They can
+be invoked directly through the Lisp package wrappers `sound-effect:from-file`
+and `song:from-uri`, bypassing `ContentManager` entirely.

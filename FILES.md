@@ -89,6 +89,8 @@ and files in this repository.
 * `test-harness.lisp`: Runs all the other tests sprinkled all throughout
   the Lisp code.
 
+* `audio-test.lisp`: Verifies that audio resources (bounce, collect, theme) load correctly using the pre-generated C# wrappers.
+
 * `utils.lisp`: Contains general utility functions (like path qualification and safe reading).
 
 * `settings.lisp`: Defines system-wide Lisp settings (e.g., `declaim`).
@@ -166,7 +168,8 @@ and files in this repository.
   be controlled with `color-cycle-period`. Changing that acts as a good test
   that the in-game REPL is working. Updated to define `+tilemap-filename+`
   and load tilemap from the Content directory, with coerced integer
-  dimensions for the room bounds rectangle.
+  dimensions for the room bounds rectangle. Also updated to load and trigger
+  bounce/collect sound effects and background theme music.
 
 * `game-repl.lisp`: Provides functions to launch a background thread which
   operates a Lisp REPL. Sorta klugey for now but works.

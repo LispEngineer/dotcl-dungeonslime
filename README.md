@@ -246,6 +246,11 @@ MonoGame Dungeon Slime features:
   * Tilemap loaded via S-expression lists instead of XML
   * Tilemap and Tileset CLOS classes
   * Room boundaries scaled according to tilemap
+* All Chapter 14 content (audio)
+  * Looped background music playback using `media-player` static methods
+  * Bounce sound effects triggered on screen boundary collisions
+  * Collect sound effects triggered on slime-vs-bat collisions
+  * Automated loading verification test suite in `audio-test.lisp`
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

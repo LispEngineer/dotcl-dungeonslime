@@ -70,7 +70,19 @@
     :documentation "The level's tilemap")
    (room-bounds
     :accessor room-bounds
-    :documentation "The bounds of the room based on the tilemap size")))
+    :documentation "The bounds of the room based on the tilemap size")
+   (bounce-sound
+    :accessor bounce-sound
+    :initform nil
+    :documentation "The SoundEffect for bat bounce")
+   (collect-sound
+    :accessor collect-sound
+    :initform nil
+    :documentation "The SoundEffect for slime eating bat")
+   (theme-song
+    :accessor theme-song
+    :initform nil
+    :documentation "The Song for background music")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -112,7 +124,17 @@
       (let* ((ts (tileset tm))
              (tm-width  (round (* (columns tm) (tile-width ts) (x (scale tm)))))
              (tm-height (round (* (rows tm) (tile-height ts) (y (scale tm))))))
-        (setf (room-bounds game) (rect 0 0 tm-width tm-height)))))
+        (setf (room-bounds game) (rect 0 0 tm-width tm-height))))
+    ;; Load audio resources
+    ;; FIXME: Make constants of these filenames
+    (setf (bounce-sound game) (sound-effect:from-file "Content/audio/bounce.wav"))
+    (setf (collect-sound game) (sound-effect:from-file "Content/audio/collect.wav"))
+    (let ((uri (dotnet:new "System.Uri" "Content/audio/theme.ogg" (dotnet:static "System.UriKind" "Relative"))))
+      (setf (theme-song game) (song:from-uri "theme" uri)))
+    ;; Play theme song if not already playing
+    (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+      (media-player:play (theme-song game)))
+    (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
@@ -210,15 +232,17 @@
         (when (> (circle-bottom bat-bounds) (rect:bottom r-bounds))
           (setf normal-y -1.0e0)
           (setf new-bat-pos (vector2 (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
-      ;; If the normal is non-zero, reflect the velocity about the normal.
+      ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
         (let ((normal (v2-normalize (vector2 normal-x normal-y))))
-          (setf (bat-vel game) (v2:reflect (bat-vel game) normal))))
+          (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
+          (sound-effect:play (bounce-sound game))))
       ;; Update the bat position
       (setf (bat-pos game) new-bat-pos)
 
       ;; Trigger collision response: slime "eats" the bat.
       (when (circle-intersects slime-bounds-adjusted bat-bounds)
+        (sound-effect:play (collect-sound game))
         (let* ((tm (tilemap game))
                (ts (tileset tm))
                (total-columns (columns tm))

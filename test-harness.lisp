@@ -19,6 +19,7 @@
   (test-alias-resolution)
   (test-clr-defmethods)
   (test-tilemap-and-tileset)
+  (dungeon-slime::run-audio-tests)
 
   (format *error-output* "[test-harness.lisp] Running Package Generator tests...~%")
   (run-package-generator-tests)
