@@ -132,8 +132,7 @@
     (let ((uri (dotnet:new "System.Uri" "Content/audio/theme.ogg" (dotnet:static "System.UriKind" "Relative"))))
       (setf (theme-song game) (song:from-uri "theme" uri)))
     ;; Play theme song if not already playing
-    (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
-      (media-player:play (theme-song game)))
+    (play-song (audio-controller game) (theme-song game))
     (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t))
   (call-next-method game))
 
@@ -236,13 +235,13 @@
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
         (let ((normal (v2-normalize (vector2 normal-x normal-y))))
           (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
-          (sound-effect:play (bounce-sound game))))
+          (play-sound-effect (audio-controller game) (bounce-sound game))))
       ;; Update the bat position
       (setf (bat-pos game) new-bat-pos)
 
       ;; Trigger collision response: slime "eats" the bat.
       (when (circle-intersects slime-bounds-adjusted bat-bounds)
-        (sound-effect:play (collect-sound game))
+        (play-sound-effect (audio-controller game) (collect-sound game))
         (let* ((tm (tilemap game))
                (ts (tileset tm))
                (total-columns (columns tm))
@@ -338,6 +337,15 @@ if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
   "Handles keyboard input for moving the slime around"
   (let* ((kb (input:im-keyboard (input-manager game)))
          (speed +movement-speed+))
+    ;; Audio Controls
+    (when (input:was-key-just-pressed kb key:+m+)
+      (toggle-mute (audio-controller game)))
+    (when (or (input:was-key-just-pressed kb key:+oem-plus+)
+              (input:was-key-just-pressed kb key:+add+))
+      (adjust-volume (audio-controller game) 0.1f0))
+    (when (or (input:was-key-just-pressed kb key:+oem-minus+)
+              (input:was-key-just-pressed kb key:+subtract+))
+      (adjust-volume (audio-controller game) -0.1f0))
     ;; 50% faster when space held
     (when (input:is-key-down kb key:+space+)
       (setf speed (* speed +fast-multiplier+)))

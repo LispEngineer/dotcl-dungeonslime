@@ -665,3 +665,57 @@ For instance, `SoundEffect.FromFile(string path)` and
 `Song.FromUri(string name, Uri uri)` are non-generic static methods. They can
 be invoked directly through the Lisp package wrappers `sound-effect:from-file`
 and `song:from-uri`, bypassing `ContentManager` entirely.
+
+# Audio Controller (MonoGame Chapter 15)
+
+The audio controller system (`audio-controller.lisp` and updates to `game-1.lisp` and `mg-core.lisp`) implements Chapter 15 of the MonoGame tutorial.
+
+Key points:
+- The `audio-controller` CLOS class provides centralized audio lifecycle management.
+- Because `SoundEffectInstance` objects are limited resources, they must be manually disposed of when they stop playing. The audio controller tracks active instances and cleans them up in `update-audio` when they reach the `Stopped` state.
+- Keyboard bindings for global mute (`M`) and volume adjustment (`+` and `-`) are integrated into the main input polling loop in `game-1.lisp`.
+- The `cspackages` generator is updated to include wrappers for `SoundEffectInstance` and `SoundState`.
+
+## Challenging Type Issues with .NET Reflection (Float vs. DoubleFloat)
+
+A significant challenge arose when adjusting the master volume and media volume
+via `.NET` reflection. In C#, the properties `SoundEffect.MasterVolume` and
+`MediaPlayer.Volume` are defined as C# `float` (single-precision floating-point
+numbers).
+
+### The Mismatch
+
+When Lisp queries a C# `float` property using `dotnet:static` or
+`dotnet:invoke`, the DotCL runtime automatically marshals the return value into
+a Lisp `DoubleFloat` (a double-precision float).
+
+If arithmetic is performed on this value (e.g., adding or subtracting a volume
+delta), the result remains a `DoubleFloat` in Lisp.
+
+### The Reflection Failure
+
+When the updated Lisp `DoubleFloat` value is set back to the C# property using
+`(setf (dotnet:static ...))`, DotCL's underlying binder attempts to find a match.
+Specifically:
+1. DotCL calls the .NET reflection `InvokeMember` API with `BindingFlags.SetProperty`.
+2. Because the Lisp value is marshaled to .NET as a `double` (a 64-bit float),
+   the binder searches for a property setter that accepts a `double`.
+3. The .NET reflection binder does not automatically downcast or narrow a
+   `double` to a `float` (a 32-bit float) for property setters.
+4. Consequently, the member lookup fails completely, throwing a
+   `System.MissingMethodException` with a message indicating the property
+   setter could not be found.
+
+### The Solution
+
+To resolve this reflection binding mismatch, values must be explicitly coerced
+back to Lisp's `single-float` type using `(coerce value 'single-float)` before
+passing them to the C# property setter. This ensures DotCL marshals the value
+as a 32-bit `float`, matching the property signature in the assembly.
+
+Example:
+```lisp
+(defun set-master-volume (vol)
+  (setf (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume")
+        (coerce vol 'single-float)))
+```

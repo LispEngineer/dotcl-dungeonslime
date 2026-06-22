@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
 ;;; Generator Version: 10
-;;; Creation Date: 2026-06-21T22:34:01Z
+;;; Creation Date: 2026-06-21T23:39:58Z
 
 (in-package :cl-user)
 
@@ -29,7 +29,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(defconstant <creation> "2026-06-21T22:34:01Z")
+(defconstant <creation> "2026-06-21T23:39:58Z")
 (defconstant <version> 10)
 
 ;; Register C# Type with CLOS

@@ -27,6 +27,26 @@
           (format *error-output* "  [PASS] Loaded theme.ogg~%")
           (format *error-output* "  [FAIL] Failed to load theme.ogg~%")))
 
+    (format *error-output* "  Testing audio-controller~%")
+    (let ((controller (make-instance 'audio-controller)))
+      ;; Reset global volume for test environment
+      (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume") 1.0f0)
+      (if (not (muted? controller))
+          (format *error-output* "  [PASS] audio-controller defaults~%")
+          (format *error-output* "  [FAIL] audio-controller defaults~%"))
+      (adjust-volume controller 0.5f0)
+      (if (= (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume") 1.0f0)
+          (format *error-output* "  [PASS] adjust-volume upper bound~%")
+          (format *error-output* "  [FAIL] adjust-volume upper bound~%"))
+      (adjust-volume controller -1.5f0)
+      (if (= (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume") 0.0f0)
+          (format *error-output* "  [PASS] adjust-volume lower bound~%")
+          (format *error-output* "  [FAIL] adjust-volume lower bound~%"))
+      (toggle-mute controller)
+      (if (muted? controller)
+          (format *error-output* "  [PASS] toggle-mute~%")
+          (format *error-output* "  [FAIL] toggle-mute~%")))
+
     (format *error-output* "  Audio tests completed.~%")))
 
 (run-audio-tests)

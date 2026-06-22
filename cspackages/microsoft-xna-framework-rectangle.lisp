@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
 ;;; Generator Version: 10
-;;; Creation Date: 2026-06-21T22:33:33Z
+;;; Creation Date: 2026-06-21T23:39:24Z
 
 (in-package :cl-user)
 
@@ -55,7 +55,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Rectangle"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(defconstant <creation> "2026-06-21T22:33:33Z")
+(defconstant <creation> "2026-06-21T23:39:24Z")
 (defconstant <version> 10)
 
 ;; Register C# Type with CLOS

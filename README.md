@@ -251,6 +251,10 @@ MonoGame Dungeon Slime features:
   * Bounce sound effects triggered on screen boundary collisions
   * Collect sound effects triggered on slime-vs-bat collisions
   * Automated loading verification test suite in `audio-test.lisp`
+* All Chapter 15 content (audio controller)
+  * `audio-controller` CLOS class for centralized audio lifecycle management
+  * Tracks and disposes of `SoundEffectInstance` objects automatically
+  * Global mute state (`M` key) and volume controls (`+` / `-` keys)
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

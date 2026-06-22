@@ -148,6 +148,10 @@ and files in this repository.
   intersection cases, degenerate cases, `v2-distance-squared`, `v2-reflect`,
   `v2-normalize`, `rect-intersects`, and `rect-contains-p`.
 
+* `audio-controller.lisp`: Implements the `audio-controller` CLOS class for Chapter 15.
+  Provides centralized audio management, tracks sound effect instances for proper
+  disposal, and handles global mute state and volume adjustments.
+
 * `tilemap.lisp`: Implements the `tilemap` CLOS class for Chapter 13.
   Loads a tilemap layout from an S-expression file, mapping grid
   positions to `texture-region` cells within a tileset. Provides drawing

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
 ;;; Generator Version: 10
-;;; Creation Date: 2026-06-21T22:33:42Z
+;;; Creation Date: 2026-06-21T23:39:34Z
 
 (in-package :cl-user)
 
@@ -35,7 +35,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(defconstant <creation> "2026-06-21T22:33:42Z")
+(defconstant <creation> "2026-06-21T23:39:34Z")
 (defconstant <version> 10)
 
 ;; Register C# Type with CLOS

@@ -56,7 +56,12 @@
     ;; This provides centralized input management with state tracking
     :allocation :class
     :accessor input-manager
-    :documentation "The InputManager instance providing keyboard, mouse, and gamepad state.")))
+    :documentation "The InputManager instance providing keyboard, mouse, and gamepad state.")
+   (audio-controller
+    ;; This provides centralized audio management with tracking
+    :allocation :class
+    :accessor audio-controller
+    :documentation "The AudioController instance providing centralized audio management.")))
 
 (defmethod initialize-instance :after ((game core) &key)
   ;; This code runs immediately after a core object is created
@@ -109,17 +114,19 @@
 
   (format *error-output* "[core:initialize] started...~%")
 
-  (let* ((monogame (monogame game))
-         (base-gd (dotnet:invoke monogame "GraphicsDevice")))
+  (let* ((monogame (monogame game)))
+    ;; Create the input manager and audio controller BEFORE base.Initialize
+    ;; so they are available during LoadContent
+    (setf (input-manager game) (make-instance 'input:input-manager))
+    (setf (audio-controller game) (make-instance 'audio-controller))
 
     ;; Initialize the base class, which in Core is the monogame class
     (dotnet:call-base monogame "Initialize")
 
-    (setf (graphics-device game) base-gd)
-    (setf (sprite-batch game)
-      (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd)))
-  ;; Create the input manager for centralized input handling
-  (setf (input-manager game) (make-instance 'input:input-manager))
+    (let ((base-gd (dotnet:invoke monogame "GraphicsDevice")))
+      (setf (graphics-device game) base-gd)
+      (setf (sprite-batch game)
+        (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd))))
 
   (format *error-output* "[core:initialize] complete.~%"))
 
@@ -134,6 +141,8 @@
   "Updates the input manager, then calls the monogame base class."
   ;; Update input states first so they're ready for the current frame
   (input:input-manager-update (input-manager game) gt)
+  ;; Update audio controller
+  (update-audio (audio-controller game))
   (dotnet:call-base (monogame game) "Update" gt))
 
 (defmethod draw ((game core) gt) ;; GameTime
@@ -147,6 +156,9 @@
   (format *error-output* "[core:dispose] unloading content...~%")
   (dotnet:invoke (content game) "Unload")
   (format *error-output* "[core:dispose] unloading content complete~%")
+  ;; Dispose audio
+  (format *error-output* "[core:dispose] disposing audio controller...~%")
+  (dispose-audio (audio-controller game))
   ;; Delete our *core* so we can recreate a game.
   (format *error-output* "[core:dispose] destroying *core* singleton instance~%")
   (setf *core* nil)
