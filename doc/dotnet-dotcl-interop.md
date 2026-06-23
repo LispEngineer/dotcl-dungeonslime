@@ -246,3 +246,130 @@ public static class EventManager
       (format t "Player died because: ~A~%" reason))))
 ```
 Now, whenever C# executes `EventManager.TriggerDeath(...)`, the Lisp lambda is invoked seamlessly. Unhandled errors crossing this boundary back into C# are caught and gracefully converted into standard .NET Exceptions.
+
+---
+
+# Missing Interoperability Capabilities & Proposed Enhancements
+
+While DotCL provides a robust interoperability layer, several "modern C#" and advanced CLR features are currently cumbersome or impossible to use directly from Lisp. Below is an overview of missing capabilities, their current workarounds, and examples of what a native DotCL API could look like.
+
+## 1. Modern C# Paradigms
+
+### Async / Await (`dotnet:await`)
+Modern .NET APIs heavily rely on `Task` and `Task<T>`. Calling them from Lisp currently requires manually blocking the thread with `(dotnet:invoke task "Wait")` or `(dotnet:invoke task "get_Result")`, which wraps inner errors in an `AggregateException`.
+
+*Proposed Syntax:*
+```lisp
+;; Elegantly unwraps the Task, yields the Lisp thread if supported, 
+;; and throws the actual inner exception if the task faults.
+(let ((result (dotnet:await (dotnet:invoke client "GetAsync" url))))
+  (format t "HTTP Result: ~A~%" result))
+```
+
+### Extension Method Resolution
+Extension methods (like LINQ's `.Where()`) are static methods on static classes (e.g., `Enumerable.Where`). You currently must call them fully-qualified via `dotnet:static-generic`.
+
+*Proposed Syntax:*
+```lisp
+;; Automatically fallback to searching known extension-method classes
+(dotnet:invoke my-list "Where" (lambda (x) (> x 10)))
+```
+
+### `Span<T>` and `Memory<T>` Interoperability
+Because `Span<T>` is a `ref struct`, it cannot be boxed on the managed heap or wrapped in a standard `LispDotNetObject`. Interacting with high-performance APIs requiring spans is currently impossible.
+
+*Proposed Syntax:*
+```lisp
+;; Automatically allocate native memory or pin an array under the hood
+(dotnet:with-span (span my-byte-array)
+  (dotnet:static "SomeHighPerfLib" "ProcessData" span))
+```
+
+## 2. Type & Array Utilities
+
+### Typed Array Creation (`dotnet:make-array`)
+You can get and set array elements via `dotnet:invoke` (which routes internally to `Array.GetValue`/`SetValue`), but creating a new .NET array (especially multi-dimensional ones) currently requires explicit reflection on `System.Array` and calling `CreateInstance`.
+
+*Proposed Syntax:*
+```lisp
+;; Create a 1D array: int[] of length 100
+(defvar *my-array-1d* (dotnet:make-array "System.Int32" 100))
+
+;; Create a 2D multi-dimensional array: float[,] of dimensions 10x20
+(defvar *my-array-2d* (dotnet:make-array "System.Single" 10 20))
+
+;; Accessing multi-dimensional arrays (using existing `invoke` routing)
+;; Set element at [5, 10] to 3.14
+(setf (dotnet:invoke *my-array-2d* "set_Item" 5 10) 3.14)
+(format t "Value at [5, 10]: ~A~%" (dotnet:invoke *my-array-2d* "get_Item" 5 10))
+```
+
+*Proposed Syntax (Native `aref` integration):*
+The native Lisp `aref` function could be updated in the runtime to transparently intercept `LispDotNetObject` instances that wrap a `System.Array`, allowing standard Common Lisp array syntax to work seamlessly on .NET arrays of any dimension:
+```lisp
+;; Clean native array access using standard Lisp `aref`
+(setf (aref *my-array-2d* 5 10) 3.14)
+(format t "Value at [5, 10]: ~A~%" (aref *my-array-2d* 5 10))
+```
+
+### Dynamic Generic Type Construction
+Creating closed generic types (like `Dictionary<string, int>`) requires passing the exact, complex assembly-qualified string to `dotnet:new`.
+
+*Proposed Syntax:*
+```lisp
+;; Dynamically constructs the closed generic System.Type
+(defvar *dict-type* (dotnet:make-generic-type "System.Collections.Generic.Dictionary`2" 
+                                              '("System.String" "System.Int32")))
+(defvar *dict* (dotnet:new *dict-type*))
+```
+
+### Type Checking and Casting (`dotnet:is-a` / `dotnet:cast`)
+To check types, you currently have to manually resolve the type and call `Type.IsAssignableFrom`.
+
+*Proposed Syntax:*
+```lisp
+;; Direct casting and type checking
+(when (dotnet:is-instance-of obj "System.String")
+  (let ((str (dotnet:cast obj "System.String")))
+    (format t "String: ~A~%" str)))
+```
+
+## 3. Advanced Method Invocation
+
+### Generic `out` / `ref` Calls (`dotnet:call-out-generic`)
+`dotnet:call-out` cannot currently resolve open generic method definitions because it lacks a parameter for generic type arguments.
+
+*Proposed Syntax:*
+```lisp
+;; Combined generic type resolution with out/ref parameter handling
+(multiple-value-bind (success result)
+    (dotnet:call-out-generic "SomeClass" "TryParse" '("System.DateTime") "2026-06-23")
+  ...)
+```
+
+### Enum Flag Utilities
+Bitwise OR-ing C# `[Flags]` enums requires manually fetching integer values, applying `logior`, and boxing the result.
+
+*Proposed Syntax:*
+```lisp
+;; Automatically parses, combines, and returns a boxed strongly-typed enum
+(dotnet:enum-or "System.IO.FileMode" "Open" "ReadWrite")
+```
+
+## 4. Exception Handling Boundaries
+
+### Catching Specific .NET Exceptions
+All .NET exceptions thrown during a `dotnet:invoke` are caught by the runtime and wrapped in a generic `LispErrorException` or `LispProgramError`. You cannot easily dispatch Lisp `handler-bind` logic on the specific underlying .NET exception type.
+
+*Possible Syntax:*
+
+Not really happy with this syntax, being a string, and if it would work at all.
+So, some additional thought should be put here.
+
+```lisp
+;; A dedicated macro that unwraps the exception and matches the .NET type
+(dotnet:handler-bind 
+    (("System.IO.FileNotFoundException" (lambda (e) (format t "File missing!~%")))
+     ("System.ArgumentNullException"    (lambda (e) (format t "Null argument!~%"))))
+  (dotnet:new "System.IO.FileStream" ...))
+```
