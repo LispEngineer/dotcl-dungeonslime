@@ -27,6 +27,8 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 * [`DOTCL:ALL-THREADS`](#dotclall-threads)
 * [`DOTCL:ALLOC-REPORT`](#dotclalloc-report)
 * [`DOTCL:ALLOC-RESET`](#dotclalloc-reset)
+* [`DOTCL:BACKTRACE`](#dotclbacktrace)
+* [`DOTCL:BACKTRACE-WITH-ARGS`](#dotclbacktrace-with-args)
 * [`DOTCL:COMMAND-LINE-ARGUMENTS`](#dotclcommand-line-arguments)
 * [`DOTCL:CONDITION-BROADCAST`](#dotclcondition-broadcast)
 * [`DOTCL:CONDITION-NOTIFY`](#dotclcondition-notify)
@@ -39,6 +41,7 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 * [`DOTCL:GC-STATS`](#dotclgc-stats)
 * [`DOTCL:GETCWD`](#dotclgetcwd)
 * [`DOTCL:GETENV`](#dotclgetenv)
+* [`DOTCL:LAUNCH-PROCESS`](#dotcllaunch-process)
 * [`DOTCL:LOCK-PACKAGE`](#dotcllock-package)
 * [`DOTCL:LOCKP`](#dotcllockp)
 * [`DOTCL:MAKE-CONDITION-VARIABLE`](#dotclmake-condition-variable)
@@ -48,6 +51,7 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 * [`DOTCL:MAKE-THREAD`](#dotclmake-thread)
 * [`DOTCL:PACKAGE-LOCAL-NICKNAMES`](#dotclpackage-local-nicknames)
 * [`DOTCL:PACKAGE-LOCKED-P`](#dotclpackage-locked-p)
+* [`DOTCL:PRINT-BACKTRACE`](#dotclprint-backtrace)
 * [`DOTCL:QUIT`](#dotclquit)
 * [`DOTCL:RECURSIVE-LOCK-P`](#dotclrecursive-lock-p)
 * [`DOTCL:RELEASE-LOCK`](#dotclrelease-lock)
@@ -59,6 +63,7 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 * [`DOTCL:THREAD-ALIVE-P`](#dotclthread-alive-p)
 * [`DOTCL:THREAD-JOIN`](#dotclthread-join)
 * [`DOTCL:THREAD-NAME`](#dotclthread-name)
+* [`DOTCL:THREAD-OBJECT`](#dotclthread-object)
 * [`DOTCL:THREAD-YIELD`](#dotclthread-yield)
 * [`DOTCL:THREADP`](#dotclthreadp)
 * [`DOTCL:UNLOCK-PACKAGE`](#dotclunlock-package)
@@ -301,6 +306,28 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 
 ---
 
+### `DOTCL:BACKTRACE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:backtrace)
+  ```
+* **Description:** Returns a list of current call frames as strings, representing the Lisp backtrace.
+
+---
+
+### `DOTCL:BACKTRACE-WITH-ARGS`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:backtrace-with-args)
+  ```
+* **Description:** Returns a list of current call frames, including argument values where available, representing the Lisp backtrace.
+
+---
+
 ### `DOTCL:COMMAND-LINE-ARGUMENTS`
 
 * **Type:** Function
@@ -504,6 +531,17 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 
 ---
 
+### `DOTCL:LAUNCH-PROCESS`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:launch-process program arguments &key directory input output error if-input-does-not-exist if-output-exists if-error-output-exists)
+  ```
+* **Description:** Streaming process handle for UIOP `launch-program`/`process-info`. Unlike `run-process` (which waits and collects all output), this exposes the child's stdin/stdout/stderr as live Lisp streams so the full `run-program` contract can be built on UIOP's `slurp-input-stream`. Each of input/output/error can be `:stream` (default), a pathname (file redirection), `nil` (EOF / discard), or `t` / `:inherit` (inherit parent handle).
+
+---
+
 ### `DOTCL:LOCK-PACKAGE`
 
 * **Type:** Function
@@ -649,6 +687,17 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
   ```lisp
   (dotcl:package-locked-p "COMMON-LISP") ; Returns T
   ```
+
+---
+
+### `DOTCL:PRINT-BACKTRACE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:print-backtrace)
+  ```
+* **Description:** Prints the current call stack backtrace to standard output.
 
 ---
 
@@ -827,12 +876,22 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
   ```lisp
   (dotcl:thread-name thread)
   ```
-* **Description:** Returns the string name associated with the Lisp thread.
-* **Under the Hood:** Backed by `Runtime.ThreadName` in `Runtime.Thread.cs`. Returns the `ThreadName` field of the `LispThread` wrapper.
+* **Description:** Returns the string name of the thread, or `"anonymous"` if no name was provided at creation.
 * **Usage Example:**
   ```lisp
-  (dotcl:thread-name (dotcl:current-thread)) ; Returns e.g. "main"
+  (dotcl:thread-name (dotcl:current-thread))
   ```
+
+---
+
+### `DOTCL:THREAD-OBJECT`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:thread-object thread)
+  ```
+* **Description:** Returns the underlying .NET `System.Threading.Thread` object for a DotCL thread wrapper.
 
 ---
 

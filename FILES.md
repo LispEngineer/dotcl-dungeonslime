@@ -74,6 +74,8 @@ and files in this repository.
 
 * [package-dotcl-internal.md](doc/package-dotcl-internal.md) provides detailed documentation of all 154 internal/system symbols in the `DOTCL-INTERNAL` package.
 
+* [dotnet-dotcl-interop.md](doc/dotnet-dotcl-interop.md) explains in detail all the mechanisms for .NET interoperability, in both directions, between DotCL Common Lisp and the .NET CLR.
+
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)

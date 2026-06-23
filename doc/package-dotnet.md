@@ -18,6 +18,7 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ### Member Invocation & Property Access
 * [`DOTNET:INVOKE`](#dotnetinvoke)
+* [`DOTNET:INVOKE-GENERIC`](#dotnetinvoke-generic)
 * [`DOTNET:%SET-INVOKE`](#dotnetset-invoke)
 * [`DOTNET:STATIC`](#dotnetstatic)
 * [`DOTNET:%SET-STATIC`](#dotnetset-static)
@@ -25,6 +26,9 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * [`DOTNET:CALL-OUT`](#dotnetcall-out)
 * [`DOTNET:STATIC-GENERIC`](#dotnetstatic-generic)
 * [`DOTNET:BOX`](#dotnetbox)
+* [`DOTNET:HINT-TYPE`](#dotnethint-type)
+* [`DOTNET:OBJECT-TYPE`](#dotnetobject-type)
+* [`DOTNET:RESOLVE-TYPE`](#dotnetresolve-type)
 
 ### Event Handling & Delegates
 * [`DOTNET:ADD-EVENT`](#dotnetadd-event)
@@ -149,7 +153,7 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   ```lisp
   (dotnet:%set-invoke object member-name &rest indexer-args value)
   ```
-* **Description:** Mutator function that assigns a value to an instance property, field, or indexer on a .NET object.
+* **Description:** Mutator function that assigns a value to an instance property, field, or indexer on a .NET object. Idiomatically, you should use `(setf (dotnet:invoke object member-name &rest indexer-args) value)` instead, which macro-expands into this function.
 * **Parameters:**
   * `object` (LispDotNetObject): The target .NET object wrapper.
   * `member-name` (String): The name of the property, field, or indexer to set.
@@ -159,8 +163,9 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * **Usage Example:**
   ```lisp
   (let ((sb (dotnet:new "System.Text.StringBuilder" "Hello")))
-    ;; Set the Length property to truncate the string
-    (dotnet:%set-invoke sb "Length" 3)
+    ;; Set the Length property to truncate the string using idiomatic setf
+    (setf (dotnet:invoke sb "Length") 3)
+    ;; Which expands to: (dotnet:%set-invoke sb "Length" 3)
     (dotnet:invoke sb "ToString")) ; Returns "Hel"
   ```
 
@@ -173,7 +178,7 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   ```lisp
   (dotnet:%set-static type-name member-name &rest indexer-args value)
   ```
-* **Description:** Mutator function that assigns a value to a static property or field on a .NET type.
+* **Description:** Mutator function that assigns a value to a static property or field on a .NET type. Idiomatically, you should use `(setf (dotnet:static type-name member-name &rest indexer-args) value)` instead, which macro-expands into this function.
 * **Parameters:**
   * `type-name` (String): The fully-qualified name of the .NET type.
   * `member-name` (String): The name of the static property or field to set.
@@ -182,8 +187,9 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * **Implementation Details:** Backed by `Runtime.DotNetSetStatic` in `Runtime.DotNet.cs`. It resolves the type using `Type.GetType` or searching loaded assemblies, converts the arguments, and calls `Type.InvokeMember` using `BindingFlags.SetProperty | BindingFlags.SetField | BindingFlags.Static | BindingFlags.Public`.
 * **Usage Example:**
   ```lisp
-  ;; Set the title of the current console window
-  (dotnet:%set-static "System.Console" "Title" "My DotCL Game")
+  ;; Set the title of the current console window using idiomatic setf
+  (setf (dotnet:static "System.Console" "Title") "My DotCL Game")
+  ;; Which expands to: (dotnet:%set-static "System.Console" "Title" "My DotCL Game")
   ```
 
 ---
@@ -283,13 +289,13 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   ```lisp
   (dotnet:call-out type-or-obj method-name &rest in-args)
   ```
-* **Description:** Calls a .NET method that has `out` or `ref` parameter modifiers. The Lisp code provides only the input arguments, and the function returns the method's return value along with the output arguments.
+* **Description:** Calls a .NET method that has `out` or `ref` parameter modifiers. The Lisp code provides only the input arguments, and the function returns the method's return value along with the output arguments. *(Note: This function does not support calling generic methods.)*
 * **Parameters:**
   * `type-or-obj` (String or LispDotNetObject): A type name string for static calls, or a .NET object wrapper for instance calls.
   * `method-name` (String): The name of the method to call.
   * `in-args` (Rest): Only the input (non-out) arguments.
 * **Returns:** Multiple values: first is the method's return value (or `t` if void), followed by the values of each `out` or `ref` parameter in declaration order.
-* **Implementation Details:** Backed by `Runtime.DotNetCallOut` in `Runtime.DotNet.cs`. It reflects on the method to detect `IsOut` or `IsByRef` parameter flags, prepares a parameters array with placeholders for output positions, invokes the method, and extracts the results to return as a Lisp multiple value list.
+* **Implementation Details:** Backed by `Runtime.DotNetCallOut` in `Runtime.DotNet.cs`. It reflects on the method to detect `IsOut` or `IsByRef` parameter flags, prepares a parameters array with placeholders for output positions, invokes the method, and extracts the results to return as a Lisp multiple value list. Because the resolution logic looks for concrete type matching and does not include `MakeGenericMethod` logic, `call-out` cannot be used on generic method definitions.
 * **Usage Example:**
   ```lisp
   (multiple-value-bind (success result)
@@ -405,6 +411,17 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ---
 
+### `DOTNET:HINT-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:hint-type obj)
+  ```
+* **Description:** For a `dotnet:box` value, returns its hint type (the user-supplied static type used to choose overloads) as a `System.Type`. Returns `nil` if `obj` carries no hint. See `dotnet:object-type` for the actual runtime type.
+
+---
+
 ### `DOTNET:INVOKE`
 
 * **Type:** Function
@@ -423,6 +440,21 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   (let ((sb (dotnet:new "System.Text.StringBuilder" "Hello")))
     (dotnet:invoke sb "Append" " World")
     (dotnet:invoke sb "ToString")) ; Returns "Hello World"
+  ```
+
+---
+
+### `DOTNET:INVOKE-GENERIC`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:invoke-generic object method-name type-args-list &rest args)
+  ```
+* **Description:** Instance counterpart of `dotnet:static-generic`: invoke a generic instance method on an object, instantiating it with the given type-argument name strings before the call.
+* **Usage Example:**
+  ```lisp
+  (dotnet:invoke-generic cm "Load" '("Texture2D") "images/logo")
   ```
 
 ---
@@ -576,6 +608,17 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ---
 
+### `DOTNET:OBJECT-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:object-type obj)
+  ```
+* **Description:** Returns the actual runtime type of a .NET object as a `System.Type`. Returns `nil` if `obj` is not a .NET object. For a `dotnet:box` value this may differ from `dotnet:hint-type`.
+
+---
+
 ### `DOTNET:REMOVE-EVENT`
 
 * **Type:** Function
@@ -613,6 +656,17 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   ```lisp
   (dotnet:require "Newtonsoft.Json" "13.0.3")
   ```
+
+---
+
+### `DOTNET:RESOLVE-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:resolve-type type-name)
+  ```
+* **Description:** Resolves a .NET `System.Type` from a name string, searching loaded assemblies (loading by namespace prefix, and COM ProgIDs on Windows). The result can be inspected or passed anywhere a `System.Type` is expected. Errors if not found.
 
 ---
 
