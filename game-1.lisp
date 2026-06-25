@@ -337,7 +337,7 @@
             (pos (score-text-position game))
             (origin (score-text-origin game))
             (text (format nil "~a: ~a" (score-text game) score)))
-       (draw-string sb font text pos +white+ :origin origin))
+       (draw-string sb font text pos color:+white+ :origin origin))
 
      (dotnet:invoke sb "End"))
 
