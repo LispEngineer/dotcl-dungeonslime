@@ -35,25 +35,28 @@
   (dotnet:invoke font "MeasureString" string))
 
 (defun draw-string (sprite-batch font string position color
-                    &key (rotation 0.0f0) (origin v2:+zero+)
-                         (scale v2:+one+) (effects sprite-effects:+none+)
-                         (layer-depth 0.0f0))
-  "Draw text using the given SpriteFont.
+                     &key (rotation 0.0f0) (origin v2:+zero+)
+                          (scale v2:+one+) (effects sprite-effects:+none+)
+                          (layer-depth 0.0f0))
+   "Draw text using the given SpriteFont.
 
-   Keyword arguments match the C# SpriteBatch.DrawString overloads,
-   providing a Lisp-friendly interface with sensible defaults.
+    Keyword arguments match the C# SpriteBatch.DrawString overloads,
+    providing a Lisp-friendly interface with sensible defaults.
 
-   Arguments:
-     sprite-batch - The SpriteBatch to draw on
-     font         - The SpriteFont to use
-     string       - The text to render
-     position     - A Vector2 defining where to draw the text
-     color        - The Color to tint the text
-     rotation     - Rotation in radians (default 0.0)
-     origin       - Origin Vector2 for rotation/scaling (default Vector2.Zero)
-     scale        - Scale Vector2 (default Vector2.One)
-     effects      - SpriteEffects enum value (default None)
-     layer-depth  - Layer depth float (default 0.0)"
-  (dotnet:invoke sprite-batch "DrawString"
-    font string position color
-    rotation origin scale effects layer-depth))
+    Arguments:
+      sprite-batch - The SpriteBatch to draw on
+      font         - The SpriteFont to use
+      string       - The text to render
+      position     - A Vector2 defining where to draw the text
+      color        - The Color to tint the text
+      rotation     - Rotation in radians (default 0.0)
+      origin       - Origin Vector2 for rotation/scaling (default Vector2.Zero)
+      scale        - Scale Vector2 (default Vector2.One)
+      effects      - SpriteEffects enum value (default None)
+      layer-depth  - Layer depth float (default 0.0)"
+   ;; C# SpriteBatch.DrawString takes positional args, so pass keyword args
+   ;; as positional values. This avoids keyword symbol type mismatches.
+   (dotnet:invoke sprite-batch "DrawString"
+     font string position color
+     (float rotation 'single-float)
+     origin scale effects (float layer-depth 'single-float)))
