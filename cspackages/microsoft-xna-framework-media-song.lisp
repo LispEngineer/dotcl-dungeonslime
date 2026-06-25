@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.Song
 ;;; Generator Version: 10
-;;; Creation Date: 2026-06-21T23:39:56Z
+;;; Creation Date: 2026-06-25T23:47:26Z
 
 (in-package :cl-user)
 
@@ -43,7 +43,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.Song"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
-(defconstant <creation> "2026-06-21T23:39:56Z")
+(defconstant <creation> "2026-06-25T23:47:26Z")
 (defconstant <version> 10)
 
 ;; Register C# Type with CLOS
