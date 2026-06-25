@@ -332,12 +332,20 @@
      (sprite-draw (bat game)   sb (bat-pos game))
 
      ;; Chapter 16: Draw the score text
-     (let* ((font (score-font game))
-            (score (score game))
-            (pos (score-text-position game))
-            (origin (score-text-origin game))
-            (text (format nil "~a: ~a" (score-text game) score)))
-       (draw-string sb font text pos color:+white+ :origin origin))
+      (let* ((font (score-font game))
+             (score (score game))
+             (pos (score-text-position game))
+             (origin (score-text-origin game))
+             (text (format nil "~a: ~a" (score-text game) score)))
+        ;; Debug: print values to stderr
+        (format *error-output* "[draw] font=~A pos=(~a,~a) origin=(~a,~a) text=~S score=~a~%"
+                font (x pos) (y pos) (x origin) (y origin) text score)
+        ;; Temporarily hardcode position (15, 15) with zero origin to isolate
+        ;; whether the draw-string call works at all.
+        (draw-string sb font text
+                     (vector2 15.0f0 15.0f0)
+                     (dotnet:static "Microsoft.Xna.Framework.Color" "White")
+                     :origin v2:+zero+))
 
      (dotnet:invoke sb "End"))
 
