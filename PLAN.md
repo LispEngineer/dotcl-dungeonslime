@@ -24,8 +24,10 @@ to do with this game & framework.
   * Added `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string`
   * Added score tracking to `game-1` with `score` slot
   * Score increments by 100 when slime collides with bat
-  * Score text rendered in top-left corner using precomputed position/origin
-  * Font asset: `04B_30.ttf` via proper MonoGame content pipeline
+  * Score text rendered in top-left corner using `04B_30.ttf` font
+  * Font asset: `AdwaitaMono-Regular.ttf` (system font) — the tutorial's
+    `04B_30.ttf` download link returns 404
+  * SpriteFont loaded via proper MonoGame content pipeline
   * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
 
 

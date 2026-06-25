@@ -743,8 +743,11 @@ to be processed by the `FontDescriptionImporter` and `FontDescriptionProcessor`.
 The `Content.mgcb` entry uses these processors with the font size, kerning,
 and character region settings matching the `.spritefont` XML description.
 
-The font file `04B_30.ttf` is referenced by name in the `.spritefont` file,
-and the MGCB build process copies it into the processed output.
+The font file `04B_30.ttf` is referenced by name in the `.spritefont` file.
+Note: The MonoGame tutorial's download link for this font (docs.monogame.net)
+returns a 404 error. Instead, `AdwaitaMono-Regular.ttf` from the system fonts
+was copied and renamed to `04B_30.ttf` as a drop-in replacement. Both are
+monospaced TrueType fonts.
 
 ## Score Origin Computation
 

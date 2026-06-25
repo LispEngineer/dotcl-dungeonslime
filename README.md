@@ -259,7 +259,8 @@ MonoGame Dungeon Slime features:
    * `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string` helpers
    * Score tracking system with `score` slot on `game-1`
    * Score increments by 100 when slime collides with bat
-   * Score text rendered in top-left corner using `04B_30.ttf` pixel font
+   * Score text rendered in top-left corner using `04B_30.ttf` monospace font
+     (system font `AdwaitaMono-Regular.ttf` — tutorial download 404s)
    * SpriteFont loaded via proper MonoGame content pipeline
 
 Basic in-game REPL:
@@ -366,3 +367,10 @@ the `--base` argument to see it work (in C#).
 
 * [My implementation plan](PLAN.md)
 * [File descriptions](FILES.md)
+
+# Credits
+
+The font Adwaita is used as `Content/fonts/04B_30.ttf` and is
+[licensed](https://gitlab.gnome.org/GNOME/adwaita-fonts/-/blob/main/LICENSE)
+permissively. This choice was made by OpenCode in a seemingly aribtrary
+manner, but it works and is permitted in my interpretation.

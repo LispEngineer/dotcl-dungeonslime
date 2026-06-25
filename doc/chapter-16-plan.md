@@ -35,9 +35,11 @@ The tutorial is adapted for idiomatic Common Lisp as follows:
 
 Create the following files:
 
-- `Content/fonts/04B_30.ttf` - Download from the MonoGame tutorial site
-  (`https://docs.monogame.net/articles/tutorials/building_2d_games/files/04B_30.ttf`).
-  This is a pixel font with a permissive license.
+- `Content/fonts/04B_30.ttf` - The tutorial's download link
+  (`https://docs.monogame.net/articles/tutorials/building_2d_games/files/04B_30.ttf`)
+  returns a 404 HTML page. Instead, `AdwaitaMono-Regular.ttf` from the
+  system fonts (`/usr/share/fonts/Adwaita/`) was used as a drop-in replacement.
+  Both are monospaced TrueType fonts, so the visual result is similar.
 
 - `Content/fonts/04B_30.spritefont` - SpriteFont XML description with:
   - `<FontName>04B_30.ttf</FontName>`
@@ -191,7 +193,7 @@ Add `sprite-font` as a dependency in the ASDF system.
 
 | File | Action | Description |
 |------|--------|-------------|
-| `Content/fonts/04B_30.ttf` | Create | Download font file (pixel font) |
+| `Content/fonts/04B_30.ttf` | Create | Font file (AdwaitaMono from system fonts, tutorial download 404s) |
 | `Content/fonts/04B_30.spritefont` | Create | SpriteFont XML description |
 | `Content.mgcb` | Modify | Add SpriteFont pipeline entry |
 | `sprite-font.lisp` | Create | `load-font`, `measure-string`, `draw-string` |
