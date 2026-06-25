@@ -252,9 +252,15 @@ MonoGame Dungeon Slime features:
   * Collect sound effects triggered on slime-vs-bat collisions
   * Automated loading verification test suite in `audio-test.lisp`
 * All Chapter 15 content (audio controller)
-  * `audio-controller` CLOS class for centralized audio lifecycle management
-  * Tracks and disposes of `SoundEffectInstance` objects automatically
-  * Global mute state (`M` key) and volume controls (`+` / `-` keys)
+   * `audio-controller` CLOS class for centralized audio lifecycle management
+   * Tracks and disposes of `SoundEffectInstance` objects automatically
+   * Global mute state (`M` key) and volume controls (`+` / `-` keys)
+* All Chapter 16 content (SpriteFonts)
+   * `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string` helpers
+   * Score tracking system with `score` slot on `game-1`
+   * Score increments by 100 when slime collides with bat
+   * Score text rendered in top-left corner using `04B_30.ttf` pixel font
+   * SpriteFont loaded via proper MonoGame content pipeline
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

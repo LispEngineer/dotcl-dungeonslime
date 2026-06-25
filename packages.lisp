@@ -149,7 +149,8 @@
     #:initialize #:load-content #:update #:draw #:dispose #:begin-run #:end-run #:run
     #:update-audio #:play-sound-effect #:play-song #:pause-audio #:resume-audio #:toggle-mute #:adjust-volume #:dispose-audio
     #:game-1 #:slime #:bat #:bat-pos #:bat-vel
-    #:circle #:circle-intersects
+     #:score #:score-text #:score-font #:score-text-position #:score-text-origin
+     #:circle #:circle-intersects
     #:circle-left #:circle-right #:circle-top #:circle-bottom
     #:pulse-color
     #:animation #:animated-sprite
@@ -157,7 +158,8 @@
     #:texture-atlas #:ta-add-region #:ta-get-region #:ta-remove-region #:ta-clear
     #:ta-create-sprite #:ta-create-animated-sprite #:ta-add-animation #:ta-get-animation
     #:ta-remove-animation #:ta-from-file
-    #:texture-region #:tr-draw))
+    #:texture-region #:tr-draw
+     #:load-font #:measure-string #:draw-string))
 
 (defpackage :dungeon-slime-input
   (:use :cl :mg-classes :csharp)

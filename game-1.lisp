@@ -80,9 +80,31 @@
     :initform nil
     :documentation "The SoundEffect for slime eating bat")
    (theme-song
-    :accessor theme-song
-    :initform nil
-    :documentation "The Song for background music")))
+     :accessor theme-song
+     :initform nil
+     :documentation "The Song for background music")
+    ;; Chapter 16: Score tracking and text rendering
+    (score
+     :accessor score
+     :initform 0
+     :documentation "Player's score")
+    (score-text
+     :initform "Score"
+     :initarg :score-text
+     :accessor score-text
+     :documentation "Prefix string for score display")
+    (score-font
+     :accessor score-font
+     :initform nil
+     :documentation "Loaded SpriteFont for score rendering")
+    (score-text-position
+     :accessor score-text-position
+     :initform v2:+zero+
+     :documentation "Precomputed position for score text")
+    (score-text-origin
+     :accessor score-text-origin
+     :initform v2:+zero+
+     :documentation "Precomputed origin for score text alignment")))
 
 (defmethod initialize-instance :after ((game game-1) &key)
   ;; This code runs immediately after a game-1 object is created
@@ -90,19 +112,34 @@
   (format *error-output* "[game-1:initialize-instance:after] Booting up game-1...~%")
   (format *error-output* "[game-1:initialize-instance:after] game-1 booted.~%"))
 
-(defmethod initialize ((game game-1))
-  "Initialize the game. Call-next-method triggers the C# lifecycle
-   (including LoadContent), then sets initial bat position and velocity."
-  ;; equivalent to C# base.Initialize()
-  ;; This call triggers the C# Game.Initialize() chain, which includes
-  ;; calling LoadContent() — so sprites are available after this returns.
-  (call-next-method game)
-  ;; Set the initial position of the bat to be 10px
-  ;; to the right of the slime's starting position.
-  (setf (bat-pos game)
-    (vector2 (+ 10 (width (slime game))) 0.0e0))
-  ;; Assign the initial random velocity to the bat.
-  (assign-random-bat-velocity game))
+ (defmethod initialize ((game game-1))
+   "Initialize the game. Call-next-method triggers the C# lifecycle
+    (including LoadContent), then sets initial bat position and velocity.
+    Also precomputes score text position and origin."
+   ;; equivalent to C# base.Initialize()
+   ;; This call triggers the C# Game.Initialize() chain, which includes
+   ;; calling LoadContent() — so sprites are available after this returns.
+   (call-next-method game)
+   ;; Set the initial position of the bat to be 10px
+   ;; to the right of the slime's starting position.
+   (setf (bat-pos game)
+     (vector2 (+ 10 (width (slime game))) 0.0e0))
+   ;; Assign the initial random velocity to the bat.
+   (assign-random-bat-velocity game)
+   ;; Chapter 16: Precompute score text position and origin.
+   ;; Position: left edge of room bounds, vertically centered on first tile.
+   (let* ((room (room-bounds game))
+          (tm (tilemap game))
+          (ts (tileset tm))
+          (font (score-font game)))
+     (setf (score-text-position game)
+       (vector2 (rect:left room) (* 0.5f0 (tile-height ts))))
+     ;; Measure the full score string ("Score: 0") to compute origin.
+     ;; Using the number ensures proper left-center alignment.
+     (let* ((text (format nil "~a: 0" (score-text game)))
+            (size (measure-string font text)))
+       (setf (score-text-origin game)
+         (vector2 0.0f0 (* 0.5f0 (y size)))))))
 
 (defmethod load-content ((game game-1))
   "Load our atlas textures then pass to base class."
@@ -133,7 +170,9 @@
       (setf (theme-song game) (song:from-uri "theme" uri)))
     ;; Play theme song if not already playing
     (play-song (audio-controller game) (theme-song game))
-    (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t))
+    (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t)
+    ;; Chapter 16: Load the SpriteFont for score display
+    (setf (score-font game) (load-font cont)))
   (call-next-method game))
 
 (defmethod update ((game game-1) gt) ;; GameTime
@@ -242,6 +281,8 @@
       ;; Trigger collision response: slime "eats" the bat.
       (when (circle-intersects slime-bounds-adjusted bat-bounds)
         (play-sound-effect (audio-controller game) (collect-sound game))
+        ;; Chapter 16: Increase the player's score.
+        (setf (score game) (+ (score game) 100))
         (let* ((tm (tilemap game))
                (ts (tileset tm))
                (total-columns (columns tm))
@@ -287,10 +328,18 @@
     (draw (tilemap game) sb)
 
     ;; Draw the slime and bat
-    (sprite-draw (slime game) sb (slime-pos game))
-    (sprite-draw (bat game)   sb (bat-pos game))
+     (sprite-draw (slime game) sb (slime-pos game))
+     (sprite-draw (bat game)   sb (bat-pos game))
 
-    (dotnet:invoke sb "End"))
+     ;; Chapter 16: Draw the score text
+     (let* ((font (score-font game))
+            (score (score game))
+            (pos (score-text-position game))
+            (origin (score-text-origin game))
+            (text (format nil "~a: ~a" (score-text game) score)))
+       (draw-string sb font text pos +white+ :origin origin))
+
+     (dotnet:invoke sb "End"))
 
   (call-next-method game gt))
 

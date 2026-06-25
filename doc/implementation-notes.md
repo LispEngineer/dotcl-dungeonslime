@@ -719,3 +719,50 @@ Example:
   (setf (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume")
         (coerce vol 'single-float)))
 ```
+
+# Chapter 16: SpriteFont Text Rendering
+
+## Design Decision: Helper Functions, Not a CLOS Class
+
+`SpriteFont` is a sealed C# class from MonoGame with no virtual methods.
+Creating a CLOS wrapper class around it would add unnecessary indirection
+without providing any polymorphic benefit. Instead, `sprite-font.lisp`
+provides three helper functions:
+
+* `load-font` — loads a SpriteFont via `ContentManager.Load<SpriteFont>(name)`
+* `measure-string` — calls `SpriteFont.MeasureString(string)` to get text dimensions
+* `draw-string` — calls `SpriteBatch.DrawString(...)` with keyword arguments
+
+This follows the same pattern used for `SoundEffect` and `Song` helpers in the
+generated `cspackages/` directory.
+
+## Content Pipeline Setup
+
+The SpriteFont must go through the MonoGame content pipeline (not a simple copy)
+to be processed by the `FontDescriptionImporter` and `FontDescriptionProcessor`.
+The `Content.mgcb` entry uses these processors with the font size, kerning,
+and character region settings matching the `.spritefont` XML description.
+
+The font file `04B_30.ttf` is referenced by name in the `.spritefont` file,
+and the MGCB build process copies it into the processed output.
+
+## Score Origin Computation
+
+The score text origin is computed by measuring the string `"Score: 0"` (not
+just `"Score"`) to ensure proper left-center alignment. This is because the
+full text `"Score: 123"` or `"Score: 9999"` will be drawn at render time,
+and the origin needs to account for the full width of the text pattern.
+
+The position is computed once during `initialize` (after `load-content` via
+`call-next-method`) and stored in the `score-text-position` and
+`score-text-origin` slots on the `game-1` class.
+
+## ASDF Dependency Chain
+
+```
+packages -> mg-classes -> clr-generic -> sprite-font -> game-1
+```
+
+`sprite-font.lisp` depends on `mg-classes` for `v2:+zero+`, `v2:+one+`
+and `sprite-effects:+none+`. It depends on `clr-generic` for the
+`dotnet-class` require.

@@ -202,8 +202,14 @@ and files in this repository.
   development only.
 
 * `sprite.lisp`: The Sprite class from the Dungeon Slime tutorial
-  [Chapter 8](https://docs.monogame.net/articles/tutorials/building_2d_games/08_the_sprite_class/index.html) 
+  [Chapter 8](https://docs.monogame.net/articles/tutorials/building_2d_games/08_the_sprite_class/index.html)
   as a CLOS class.
+
+* `sprite-font.lisp`: SpriteFont helper functions for Chapter 16.
+  Provides `load-font`, `measure-string`, and `draw-string` functions
+  for loading, measuring, and rendering text via MonoGame's SpriteFont
+  class. Implemented as pure helper functions (not a CLOS class) since
+  SpriteFont is a sealed C# class with no virtual methods.
 
 * `animation.lisp`: The Animation and Animated Sprite classes from
   Chapter 9 of the tutorial.

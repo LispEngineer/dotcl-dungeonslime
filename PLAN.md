@@ -18,6 +18,16 @@ to do with this game & framework.
   It doesn't seem to matter. So put a wrapper around that sleep and
   catch that error and exit?
 
+# Implemented Chapters
+
+* **DONE** Chapter 16: SpriteFonts and Score Display
+  * Added `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string`
+  * Added score tracking to `game-1` with `score` slot
+  * Score increments by 100 when slime collides with bat
+  * Score text rendered in top-left corner using precomputed position/origin
+  * Font asset: `04B_30.ttf` via proper MonoGame content pipeline
+  * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
+
 
 # Miscellaneous
 
