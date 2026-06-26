@@ -168,14 +168,14 @@ and files in this repository.
 
 * `tilemap-test.lisp`: Tests the tileset splitting and tilemap loading logic.
 
-* `game-1.lisp`: An extension of the `core` class above that actually
-  will implement the MonoGame Dungeon Slime logic. For now, it also will
-  steadily rotate the background color between black and red, which speed can
-  be controlled with `color-cycle-period`. Changing that acts as a good test
-  that the in-game REPL is working. Updated to define `+tilemap-filename+`
-  and load tilemap from the Content directory, with coerced integer
-  dimensions for the room bounds rectangle. Also updated to load and trigger
-  bounce/collect sound effects and background theme music.
+* `game-1.lisp`: An extension of the `core` class above that actually implements the MonoGame
+  Dungeon Slime logic. It rotates the background color between black and red (adjustable speed
+  via `color-cycle-period`) for REPL testing. It includes the `+tilemap-filename+` constant,
+  loading tilemaps with coerced integer bounds. It manages audio triggers for bouncing/collecting
+  sound effects and loops the background theme music. Refactored to utilize `cspackages`
+  constructor capabilities, replacing raw `dotnet:new` and the custom `(vector2 ...)`
+  instantiations with `v2:new`, `system-uri:new`, and `color:new`.
+
 
 * `game-repl.lisp`: Provides functions to launch a background thread which
   operates a Lisp REPL. Sorta klugey for now but works.

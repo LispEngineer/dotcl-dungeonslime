@@ -23,7 +23,7 @@
   (let* ((t-norm (mod seconds color-cycle-period))
          (frac (/ t-norm color-cycle-period))
          (a (round (* 255 frac))))
-    (dotnet:new "Microsoft.Xna.Framework.Color" a 0 0)))
+    (color:new a 0 0)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,7 +123,7 @@
    ;; Set the initial position of the bat to be 10px
    ;; to the right of the slime's starting position.
    (setf (bat-pos game)
-     (vector2 (+ 10 (width (slime game))) 0.0e0))
+     (v2:new (+ 10 (width (slime game))) 0.0e0))
    ;; Assign the initial random velocity to the bat.
    (assign-random-bat-velocity game)
    ;; Chapter 16: Precompute score text position and origin.
@@ -133,14 +133,14 @@
           (ts (tileset tm))
           (font (score-font game)))
      (setf (score-text-position game)
-        (vector2 (rect:left room)
-                 (* 0.5f0 (tile-height ts) (x (scale tm)))))
+        (v2:new (rect:left room)
+                (* 0.5f0 (tile-height ts) (x (scale tm)))))
      ;; Measure the full score string ("Score: 0") to compute origin.
      ;; Using the number ensures proper left-center alignment.
      (let* ((text (format nil "~a: 0" (score-text game)))
             (size (measure-string font text)))
        (setf (score-text-origin game)
-         (vector2 0.0f0 (* 0.5f0 (y size)))))))
+         (v2:new 0.0f0 (* 0.5f0 (y size)))))))
 
 (defmethod load-content ((game game-1))
   "Load our atlas textures then pass to base class."
@@ -151,13 +151,13 @@
     (loop for key being the hash-keys of (regions atlas) using (hash-value value)
       do (format *error-output* "[game-1:load-content]   Key: ~a, Value: ~a~%" key value))
     (setf (slime game) (ta-create-animated-sprite atlas "slime-animation"))
-    (setf (scale (slime game)) (vector2 4.0e0)) ; FIXME: Magic name & number
+    (setf (scale (slime game)) (v2:new 4.0e0)) ; FIXME: Magic name & number
     (setf (bat game) (ta-create-animated-sprite atlas "bat-animation"))
-    (setf (scale (bat game)) (vector2 4.0e0)) ; FIXME: Magic name & number
+    (setf (scale (bat game)) (v2:new 4.0e0)) ; FIXME: Magic name & number
     (format *error-output* "[game-1:load-content] bat = ~A, slime = ~A~%" (bat game) (slime game))
     ;; Load tilemap
     (let ((tm (tm-from-file cont +tilemap-filename+)))
-      (setf (scale tm) (vector2 4.0e0))
+      (setf (scale tm) (v2:new 4.0e0))
       (setf (tilemap game) tm)
       (let* ((ts (tileset tm))
              (tm-width  (round (* (columns tm) (tile-width ts) (x (scale tm)))))
@@ -167,7 +167,7 @@
     ;; FIXME: Make constants of these filenames
     (setf (bounce-sound game) (sound-effect:from-file "Content/audio/bounce.wav"))
     (setf (collect-sound game) (sound-effect:from-file "Content/audio/collect.wav"))
-    (let ((uri (dotnet:new "System.Uri" "Content/audio/theme.ogg" (dotnet:static "System.UriKind" "Relative"))))
+    (let ((uri (system-uri:new "Content/audio/theme.ogg" system-uri-kind:+relative+)))
       (setf (theme-song game) (song:from-uri "theme" uri)))
     ;; Play theme song if not already playing
     (play-song (audio-controller game) (theme-song game))
@@ -218,16 +218,16 @@
     ;; Blocking collision response: keep the slime within screen bounds.
     ;; Check left edge
     (when (< (circle-left slime-bounds) (rect:left r-bounds))
-      (setf (slime-pos game) (vector2 (rect:left r-bounds) (y sp))))
+      (setf (slime-pos game) (v2:new (rect:left r-bounds) (y sp))))
     ;; Check right edge
     (when (> (circle-right slime-bounds) (rect:right r-bounds))
-      (setf (slime-pos game) (vector2 (- (rect:right r-bounds) slime-width) (y sp))))
+      (setf (slime-pos game) (v2:new (- (rect:right r-bounds) slime-width) (y sp))))
     ;; Check top edge
     (when (< (circle-top slime-bounds) (rect:top r-bounds))
-      (setf (slime-pos game) (vector2 (x sp) (rect:top r-bounds))))
+      (setf (slime-pos game) (v2:new (x sp) (rect:top r-bounds))))
     ;; Check bottom edge
     (when (> (circle-bottom slime-bounds) (rect:bottom r-bounds))
-      (setf (slime-pos game) (vector2 (x sp) (- (rect:bottom r-bounds) slime-height))))
+      (setf (slime-pos game) (v2:new (x sp) (- (rect:bottom r-bounds) slime-height))))
 
     ;; Re-read the slime position after blocking adjustments
     (let* ((sp-adjusted (slime-pos game))
@@ -257,23 +257,23 @@
       (if (< (circle-left bat-bounds) (rect:left r-bounds))
         (progn
           (setf normal-x 1.0e0)
-          (setf new-bat-pos (vector2 (rect:left r-bounds) (y new-bat-pos))))
+          (setf new-bat-pos (v2:new (rect:left r-bounds) (y new-bat-pos))))
         ;; Check right edge
         (when (> (circle-right bat-bounds) (rect:right r-bounds))
           (setf normal-x -1.0e0)
-          (setf new-bat-pos (vector2 (- (rect:right r-bounds) bat-width) (y new-bat-pos)))))
+          (setf new-bat-pos (v2:new (- (rect:right r-bounds) bat-width) (y new-bat-pos)))))
       ;; Check top edge
       (if (< (circle-top bat-bounds) (rect:top r-bounds))
         (progn
           (setf normal-y 1.0e0)
-          (setf new-bat-pos (vector2 (x new-bat-pos) (rect:top r-bounds))))
+          (setf new-bat-pos (v2:new (x new-bat-pos) (rect:top r-bounds))))
         ;; Check bottom edge
         (when (> (circle-bottom bat-bounds) (rect:bottom r-bounds))
           (setf normal-y -1.0e0)
-          (setf new-bat-pos (vector2 (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
+          (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
       ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
-        (let ((normal (v2-normalize (vector2 normal-x normal-y))))
+        (let ((normal (v2-normalize (v2:new normal-x normal-y))))
           (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
           (play-sound-effect (audio-controller game) (bounce-sound game))))
       ;; Update the bat position
@@ -292,8 +292,8 @@
                (row (+ 1 (random (- total-rows 2)))))
           ;; Respawn the bat at a random position inside the map
           (setf (bat-pos game)
-            (vector2 (float (* column (tile-width ts) (x (scale tm))) 0.0e0)
-                     (float (* row (tile-height ts) (y (scale tm))) 0.0e0)))
+            (v2:new (float (* column (tile-width ts) (x (scale tm))) 0.0e0)
+                    (float (* row (tile-height ts) (y (scale tm))) 0.0e0)))
           ;; Assign a new random velocity
            (assign-random-bat-velocity game)))))
   (call-next-method game gt))
@@ -308,7 +308,7 @@
          (angle (random pi2))
          (x (cos angle))
          (y (sin angle)))
-    (setf (bat-vel game) (v2* (vector2 x y) +movement-speed+))))
+    (setf (bat-vel game) (v2* (v2:new x y) +movement-speed+))))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."
@@ -339,7 +339,7 @@
            (origin (score-text-origin game))
            (text (format nil "~a: ~a" (score-text game) score)))
       (draw-string sb font text
-                   (vector2 (+ 30.0f0 (x pos)) (+ 0.0f0 (y pos)))
+                   (v2:new (+ 30.0f0 (x pos)) (+ 0.0f0 (y pos)))
                    color:+red+
                    :origin origin))
 
@@ -404,17 +404,17 @@ if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
       (setf speed (* speed +fast-multiplier+)))
     ;; Move in direction(s) pressed
     (when (or (input:is-key-down kb key:+w+) (input:is-key-down kb key:+up+))
-      (setf (slime-pos game) (vector2    (x (slime-pos game))
-                                       (- (y (slime-pos game)) speed))))
+      (setf (slime-pos game) (v2:new (x (slime-pos game))
+                                     (- (y (slime-pos game)) speed))))
     (when (or (input:is-key-down kb key:+s+) (input:is-key-down kb key:+down+))
-      (setf (slime-pos game) (vector2    (x (slime-pos game))
-                                       (+ (y (slime-pos game)) speed))))
+      (setf (slime-pos game) (v2:new (x (slime-pos game))
+                                     (+ (y (slime-pos game)) speed))))
     (when (or (input:is-key-down kb key:+a+) (input:is-key-down kb key:+left+))
-      (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
-                                          (y (slime-pos game)))))
+      (setf (slime-pos game) (v2:new (- (x (slime-pos game)) speed)
+                                     (y (slime-pos game)))))
     (when (or (input:is-key-down kb key:+d+) (input:is-key-down kb key:+right+))
-      (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
-                                          (y (slime-pos game)))))))
+      (setf (slime-pos game) (v2:new (+ (x (slime-pos game)) speed)
+                                     (y (slime-pos game)))))))
 
 #|
 
@@ -488,22 +488,22 @@ else
     (if (v2:not= (input:game-pad-left-thumb-stick gp-pad) v2:+zero+)
       ;; Use the thumbstick
       (setf (slime-pos game)
-        (vector2 (+ (x (slime-pos game))
-                    (* speed (x (input:game-pad-left-thumb-stick gp-pad))))
-                 (- (y (slime-pos game))
-                    (* speed (y (input:game-pad-left-thumb-stick gp-pad))))))
+        (v2:new (+ (x (slime-pos game))
+                   (* speed (x (input:game-pad-left-thumb-stick gp-pad))))
+                (- (y (slime-pos game))
+                   (* speed (y (input:game-pad-left-thumb-stick gp-pad))))))
       ;; Use the d-pad
       (progn
         (when (input:is-button-down gp-pad button:+d-pad-up+)
-          (setf (slime-pos game) (vector2 (x (slime-pos game))
+          (setf (slime-pos game) (v2:new (x (slime-pos game))
                                          (- (y (slime-pos game)) speed))))
         (when (input:is-button-down gp-pad button:+d-pad-down+)
-          (setf (slime-pos game) (vector2 (x (slime-pos game))
+          (setf (slime-pos game) (v2:new (x (slime-pos game))
                                          (+ (y (slime-pos game)) speed))))
         (when (input:is-button-down gp-pad button:+d-pad-left+)
-          (setf (slime-pos game) (vector2 (- (x (slime-pos game)) speed)
-                                            (y (slime-pos game)))))
+          (setf (slime-pos game) (v2:new (- (x (slime-pos game)) speed)
+                                         (y (slime-pos game)))))
         (when (input:is-button-down gp-pad button:+d-pad-right+)
-          (setf (slime-pos game) (vector2 (+ (x (slime-pos game)) speed)
-                                            (y (slime-pos game)))))))))
+          (setf (slime-pos game) (v2:new (+ (x (slime-pos game)) speed)
+                                         (y (slime-pos game)))))))))
 

@@ -789,3 +789,14 @@ overwriting the runtime dispatch `new` function.
 To resolve this collision, the generator skips creating the type-suffixed function for any
 zero-parameter constructor when a type has multiple clean constructors. The runtime dispatch
 `new` function handles the parameterless case correctly when called without arguments: `(new)`.
+
+### Refactoring game-1.lisp to Use Constructor Wrappers
+The game code in `game-1.lisp` was refactored to replace raw `dotnet:new` instantiations and local
+helper functions with the newly generated package constructor wrappers:
+- Raw instantiations of `System.Uri` via `(dotnet:new "System.Uri" ...)` were replaced with
+  `system-uri:new`.
+- Raw instantiations of `Microsoft.Xna.Framework.Vector2` via the `(vector2 ...)` helper were
+  replaced with `v2:new` (using the nickname package `v2`).
+- The custom local helper function `vector2` in `mg-classes.lisp` is no longer needed for new
+  instantiations since the generated `v2:new` constructor handles the same behavior cleanly.
+
