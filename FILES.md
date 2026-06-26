@@ -86,12 +86,17 @@ and files in this repository.
 
 # Lisp
 
-* `packages.lisp`: Defines the Lisp packages used across the project.
+* `packages.lisp`: Defines the Lisp packages used across the project. Pre-declares C# package
+  stubs at the top of the file to support local nicknames, preventing compiler lookup failures
+  during compilation of early packages (e.g. `mg-classes`).
+
 
 * `test-harness.lisp`: Runs all the other tests sprinkled all throughout
   the Lisp code.
 
-* `audio-test.lisp`: Verifies that audio resources (bounce, collect, theme) load correctly using the pre-generated C# wrappers.
+* `audio-test.lisp`: Verifies that audio resources (bounce, collect, theme) load correctly using
+  the pre-generated C# wrappers. Refactored to use `system-uri:new` and
+  `system-uri-kind:+relative+`.
 
 * `utils.lisp`: Contains general utility functions (like path qualification and safe reading).
 
@@ -113,6 +118,8 @@ and files in this repository.
 
 * `mg-classes.lisp`: Defines basic MonoGame classes and functions in a Lisp-friendly way 
   (e.g. `vector2`, `rect`, accessors `x`, `y`, `width`, `height`, and `sprite-batch-begin` helpers).
+  Refactored to utilize generated C# wrappers like `game-time:`, `v2:`, and `rect:new` instead of
+  raw `dotnet:invoke` and `dotnet:new` calls.
 
 * `texture-region.lisp`: Implements the CLOS class `texture-region` and 
   associated drawing/retrieval functions.
@@ -123,8 +130,9 @@ and files in this repository.
 * `mg-core.lisp`: Creates a C# class `MonoGameCLOSProxy` which acts as a proxy between the
   MonoGame Game C# world and the Lisp CLOS world. Defines a base CLOS
   class called `core` which defines all the methods that are the target
-  of this proxy class. Importantly, the `core` must be given a reference
-  to an instantiated proxy class when instantiated! 
+  of this proxy class. Refactored to utilize generated `game:`, `sprite-batch:` wrappers.
+  Importantly, the `core` must be given a reference to an instantiated proxy class when
+  instantiated! 
   
   This base `core` class has mostly administrative functionality:
   * Start and stop the background REPL
@@ -132,11 +140,12 @@ and files in this repository.
   * Save various MonoGame-relevant items in CLOS slots in the
     "constructor" (via `initialize-instance :after`)
 
-* `input-manager.lisp`: Implements the MonoGame Chapter 11 input management
-  system in CLOS. Provides `KeyboardInfo`, `MouseInfo`, `GamePadInfo`, and
-  `InputManager` classes that track previous/current input states for
-  detecting "just pressed" and "just released" transitions. Includes timed
-  vibration management for gamepads.
+* `input-manager.lisp`: Implements the MonoGame Chapter 11 input management system in CLOS.
+  Provides `KeyboardInfo`, `MouseInfo`, `GamePadInfo`, and `InputManager` classes that track
+  previous/current input states for detecting "just pressed" and "just released" transitions.
+  Includes timed vibration management for gamepads. Refactored to utilize generated C# package
+  member stubs and constructor functions in place of raw `.NET` interop calls.
+
 
 * `collision.lisp`: Implements the MonoGame Chapter 12 collision detection
   system in CLOS. Provides the `circle` CLOS class with boundary functions
@@ -152,7 +161,8 @@ and files in this repository.
 
 * `audio-controller.lisp`: Implements the `audio-controller` CLOS class for Chapter 15.
   Provides centralized audio management, tracks sound effect instances for proper
-  disposal, and handles global mute state and volume adjustments.
+  disposal, and handles global mute state and volume adjustments. Refactored to use
+  `sei:dispose` instead of raw `dotnet:invoke` calls.
 
 * `tilemap.lisp`: Implements the `tilemap` CLOS class for Chapter 13.
   Loads a tilemap layout from an S-expression file, mapping grid

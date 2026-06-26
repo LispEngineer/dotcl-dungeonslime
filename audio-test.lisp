@@ -32,7 +32,7 @@
             (format *error-output* "  [FAIL] Failed to load collect.wav~%")))
             
       (format *error-output* "  Testing Song:from-uri~%")
-      (let* ((uri (dotnet:new "System.Uri" theme-path (dotnet:static "System.UriKind" "Relative")))
+      (let* ((uri (system-uri:new theme-path system-uri-kind:+relative+))
              (theme (song:from-uri "theme" uri)))
         (if theme
             (format *error-output* "  [PASS] Loaded theme.ogg~%")

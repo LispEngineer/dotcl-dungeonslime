@@ -15,31 +15,31 @@
 (defun game-time-total (gt)
   "Gets TotalGameTime on this Microsoft.Xna.Framework.GameTime object,
    which returns a C# TimeSpan."
-  (dotnet:invoke gt "TotalGameTime"))
+  (game-time:total-game-time gt))
 
 (defun game-time-elapsed (gt)
   "Gets ElapsedGameTime on this Microsoft.Xna.Framework.GameTime object,
    which is the time since the last call to Update().
    Returns a C# TimeSpan."
-  (dotnet:invoke gt "ElapsedGameTime"))
+  (game-time:elapsed-game-time gt))
 
 (defun game-time-slow? (gt)
   "Gets IsRunningSlowly on this Microsoft.Xna.Framework.GameTime."
-  (dotnet:invoke gt "IsRunningSlowly"))
+  (game-time:is-running-slowly gt))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vector functions
 
-(defconstant +v2-0+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero")
+(defconstant +v2-0+ v2:+zero+
   "C#'s Vector2.Zero")
 
-(defconstant +v2-1+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "One")
+(defconstant +v2-1+ v2:+one+
   "C#'s Vector2.One")
 
-(defconstant +v2-x1+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "UnitX")
+(defconstant +v2-x1+ v2:+unit-x+
   "C#'s Vector2.UnitX")
 
-(defconstant +v2-y1+ (dotnet:static "Microsoft.Xna.Framework.Vector2" "UnitY")
+(defconstant +v2-y1+ v2:+unit-y+
   "C#'s Vector2.UnitY")
 
 (defun vector2 (x &optional (y 0.0e0 y-supplied-p))
@@ -77,7 +77,7 @@
 (defun rect (x y w h)
   "Returns a new C# Rectangle with the specified values. The number types in Vector2
    are float."
-  (dotnet:new "Microsoft.Xna.Framework.Rectangle" x y w h))
+  (rect:new x y w h))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Generic functions

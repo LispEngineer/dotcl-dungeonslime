@@ -6,6 +6,38 @@
 (in-package :cl-user)
 (format *error-output* "[packages.lisp] Defining packages in package ~S~%" *package*)
 
+;; Pre-declare empty C# packages so local-nicknames doesn't crash
+(defpackage :microsoft-xna-framework-vector2)
+(defpackage :system-time-span)
+(defpackage :microsoft-xna-framework-input-keys)
+(defpackage :microsoft-xna-framework-input-keyboard)
+(defpackage :microsoft-xna-framework-input-keyboard-state)
+(defpackage :microsoft-xna-framework-input-game-pad)
+(defpackage :microsoft-xna-framework-input-game-pad-state)
+(defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks)
+(defpackage :microsoft-xna-framework-input-buttons)
+(defpackage :microsoft-xna-framework-color)
+(defpackage :microsoft-xna-framework-graphics-sprite-effects)
+(defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
+(defpackage :microsoft-xna-framework-graphics-sampler-state)
+(defpackage :microsoft-xna-framework-player-index)
+(defpackage :microsoft-xna-framework-input-mouse-state)
+(defpackage :microsoft-xna-framework-input-game-pad-triggers)
+(defpackage :microsoft-xna-framework-input-button-state)
+(defpackage :microsoft-xna-framework-point)
+(defpackage :microsoft-xna-framework-rectangle)
+(defpackage :microsoft-xna-framework-graphics-graphics-device)
+(defpackage :microsoft-xna-framework-graphics-presentation-parameters)
+(defpackage :microsoft-xna-framework-audio-sound-effect)
+(defpackage :microsoft-xna-framework-audio-sound-effect-instance)
+(defpackage :microsoft-xna-framework-audio-sound-state)
+(defpackage :microsoft-xna-framework-media-media-player)
+(defpackage :microsoft-xna-framework-media-song)
+(defpackage :microsoft-xna-framework-game-time)
+(defpackage :microsoft-xna-framework-game)
+(defpackage :microsoft-xna-framework-graphics-sprite-batch)
+(defpackage :microsoft-xna-framework-input-mouse)
+
 (defpackage :utils
   (:use :cl)
   (:export #:safe-read-form-from-file
@@ -35,6 +67,10 @@
 
 (defpackage :mg-classes
   (:use :cl)
+  (:local-nicknames
+    (:v2 :microsoft-xna-framework-vector2)
+    (:rect :microsoft-xna-framework-rectangle)
+    (:game-time :microsoft-xna-framework-game-time))
   (:export #:vector2
             #:rect
             #:+v2-0+
@@ -76,33 +112,6 @@
   (:export #:defc#generic
             #:defc#method))
 
-;; Pre-declare empty C# packages so local-nicknames doesn't crash
-(defpackage :microsoft-xna-framework-vector2)
-(defpackage :system-time-span)
-(defpackage :microsoft-xna-framework-input-keys)
-(defpackage :microsoft-xna-framework-input-keyboard)
-(defpackage :microsoft-xna-framework-input-keyboard-state)
-(defpackage :microsoft-xna-framework-input-game-pad)
-(defpackage :microsoft-xna-framework-input-game-pad-state)
-(defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks)
-(defpackage :microsoft-xna-framework-input-buttons)
-(defpackage :microsoft-xna-framework-color)
-(defpackage :microsoft-xna-framework-graphics-sprite-effects)
-(defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
-(defpackage :microsoft-xna-framework-graphics-sampler-state)
-(defpackage :microsoft-xna-framework-player-index)
-(defpackage :microsoft-xna-framework-input-mouse-state)
-(defpackage :microsoft-xna-framework-input-game-pad-triggers)
-(defpackage :microsoft-xna-framework-input-button-state)
-(defpackage :microsoft-xna-framework-point)
-(defpackage :microsoft-xna-framework-rectangle)
-(defpackage :microsoft-xna-framework-graphics-graphics-device)
-(defpackage :microsoft-xna-framework-graphics-presentation-parameters)
-(defpackage :microsoft-xna-framework-audio-sound-effect)
-(defpackage :microsoft-xna-framework-audio-sound-effect-instance)
-(defpackage :microsoft-xna-framework-audio-sound-state)
-(defpackage :microsoft-xna-framework-media-media-player)
-(defpackage :microsoft-xna-framework-media-song)
 (defpackage :dungeon-slime-input)
 
 (defpackage :dungeon-slime
@@ -134,7 +143,9 @@
     (:sound-state :microsoft-xna-framework-audio-sound-state)
     (:media-player :microsoft-xna-framework-media-media-player)
     (:song :microsoft-xna-framework-media-song)
-  )
+    (:game-time :microsoft-xna-framework-game-time)
+    (:game :microsoft-xna-framework-game)
+    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch))
   (:export 
     ;; Constants
     #:+window-defaults+ #:+content-default+ #:+false+
@@ -172,7 +183,10 @@
     (:button :microsoft-xna-framework-input-buttons)
     (:pi :microsoft-xna-framework-player-index)
     (:v2 :microsoft-xna-framework-vector2)
-    (:bs :microsoft-xna-framework-input-button-state))
+    (:bs :microsoft-xna-framework-input-button-state)
+    (:kb :microsoft-xna-framework-input-keyboard)
+    (:mouse :microsoft-xna-framework-input-mouse)
+    (:gp :microsoft-xna-framework-input-game-pad))
   (:export
     ;; KeyboardInfo class and functions
     #:keyboard-info

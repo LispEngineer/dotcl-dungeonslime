@@ -28,7 +28,7 @@
   (let ((remaining-instances nil))
     (dolist (instance (active-instances ac))
       (if (string-equal (dotnet:invoke (sei:state instance) "ToString") "Stopped")
-          (dotnet:invoke instance "Dispose")
+          (sei:dispose instance)
           (push instance remaining-instances)))
     (setf (active-instances ac) (nreverse remaining-instances))))
 
@@ -109,6 +109,6 @@
   "Disposes all active instances and marks controller as disposed."
   (when (disposed? ac) (return-from dispose-audio))
   (dolist (instance (active-instances ac))
-    (dotnet:invoke instance "Dispose"))
+    (sei:dispose instance))
   (setf (active-instances ac) nil)
   (setf (disposed? ac) t))

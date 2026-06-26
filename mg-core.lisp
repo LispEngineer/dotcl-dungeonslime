@@ -93,18 +93,18 @@
     (dotnet:invoke gdm "ApplyChanges") ;; Make the changes above live
 
     ;; Set the title of the game window (on C# Window.Title property)
-    (setf (dotnet:invoke (dotnet:invoke mg "Window") "Title")
+    (setf (dotnet:invoke (game:window mg) "Title")
       (getf (window-info game) :title (getf +window-defaults+ :title)))
 
     ;; Save the C# class's ContentManager
-    (let ((cs-content (dotnet:invoke mg "Content")))
+    (let ((cs-content (game:content mg)))
       (setf (content game) cs-content)
       ;; and set its root directory to Content/
       (setf (dotnet:invoke cs-content "RootDirectory")
         +content-default+))
 
     ;; Ensure mouse pointer is visible by default
-    (setf (dotnet:invoke mg "IsMouseVisible") T))
+    (setf (game:is-mouse-visible mg) T))
 
   (format *error-output* "[core:initialize-instance:after] core booted.~%"))
 
@@ -123,10 +123,10 @@
     ;; Initialize the base class, which in Core is the monogame class
     (dotnet:call-base monogame "Initialize")
 
-    (let ((base-gd (dotnet:invoke monogame "GraphicsDevice")))
+    (let ((base-gd (game:graphics-device monogame)))
       (setf (graphics-device game) base-gd)
       (setf (sprite-batch game)
-        (dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" base-gd))))
+        (sprite-batch:new base-gd))))
 
   (format *error-output* "[core:initialize] complete.~%"))
 

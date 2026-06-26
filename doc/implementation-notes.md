@@ -800,3 +800,69 @@ helper functions with the newly generated package constructor wrappers:
 - The custom local helper function `vector2` in `mg-classes.lisp` is no longer needed for new
   instantiations since the generated `v2:new` constructor handles the same behavior cleanly.
 
+
+# Refactoring Raw .NET Interop Calls to C# Package Wrappers
+
+All `.lisp` files have been reviewed and raw `.NET` interop calls (`dotnet:new`,
+`dotnet:invoke`, `dotnet:static`, and raw namespace-qualified readers like
+`#!!`) were replaced with their corresponding `cspackages` wrappers.
+
+## Nicename Scoping and Pre-declarations
+
+To allow packages like `dungeon-slime-input` and `mg-classes` to use generated C# package
+wrappers via local nicknames, all generated C# package namespaces were moved to the
+top of `packages.lisp` and pre-declared empty:
+- `(defpackage :microsoft-xna-framework-game-time)`
+- `(defpackage :microsoft-xna-framework-game)`
+- `(defpackage :microsoft-xna-framework-graphics-sprite-batch)`
+- `(defpackage :microsoft-xna-framework-input-mouse)`
+This ensures compilation and package loading succeed without order-of-definition crashes.
+
+## Input Management Refactoring
+
+In `input-manager.lisp`, raw constructor and static state query calls were replaced:
+- `(dotnet:new "Microsoft.Xna.Framework.Input.KeyboardState")` -> `(kb-state:new)`
+- `(#!!Microsoft.Xna.Framework.Input.Keyboard.GetState)` -> `(kb:get-state)`
+- `(dotnet:new "Microsoft.Xna.Framework.Input.MouseState")` -> `(ms:new)`
+- `(#!!Microsoft.Xna.Framework.Input.Mouse.GetState)` -> `(mouse:get-state)`
+- `(dotnet:static "Microsoft.Xna.Framework.Input.Mouse" "SetPosition" ...)` -> `(mouse:set-position ...)`
+- `(dotnet:new "Microsoft.Xna.Framework.Input.MouseState" ...)` -> `(ms:new ...)`
+- `(dotnet:new "Microsoft.Xna.Framework.Input.GamePadState")` -> `(gp-state:new)`
+- `(#!!Microsoft.Xna.Framework.Input.GamePad.GetState ...)` -> `(gp:get-state ...)`
+- `(dotnet:static "Microsoft.Xna.Framework.Input.GamePad" "SetVibration" ...)` -> `(gp:set-vibration ...)`
+
+## Audio and Test Framework Refactoring
+
+In `audio-controller.lisp`, instance disposal calls were refactored:
+- `(dotnet:invoke instance "Dispose")` -> `(sei:dispose instance)`
+
+In `audio-test.lisp`, raw system URI constructors were refactored:
+- `(dotnet:new "System.Uri" ...)` -> `(system-uri:new theme-path system-uri-kind:+relative+)`
+
+## CLOS Utility Classes Refactoring
+
+In `mg-classes.lisp`, raw `Vector2` static field fetches, `Rectangle` constructors, and `GameTime`
+property gets were refactored:
+- `(dotnet:invoke gt "TotalGameTime")` -> `(game-time:total-game-time gt)`
+- `(dotnet:invoke gt "ElapsedGameTime")` -> `(game-time:elapsed-game-time gt)`
+- `(dotnet:invoke gt "IsRunningSlowly")` -> `(game-time:is-running-slowly gt)`
+- `(dotnet:static "Microsoft.Xna.Framework.Vector2" "Zero")` -> `v2:+zero+`
+- `(dotnet:static "Microsoft.Xna.Framework.Vector2" "One")` -> `v2:+one+`
+- `(dotnet:static "Microsoft.Xna.Framework.Vector2" "UnitX")` -> `v2:+unit-x+`
+- `(dotnet:static "Microsoft.Xna.Framework.Vector2" "UnitY")` -> `v2:+unit-y+`
+- `(dotnet:new "Microsoft.Xna.Framework.Rectangle" ...)` -> `(rect:new x y w h)`
+
+In `mg-core.lisp`, C# window/game property accesses and the `SpriteBatch` constructor
+were refactored:
+- `(dotnet:invoke mg "Content")` -> `(game:content mg)`
+- `(dotnet:invoke mg "Window")` -> `(game:window mg)`
+- `(setf (dotnet:invoke mg "IsMouseVisible") T)` -> `(setf (game:is-mouse-visible mg) T)`
+- `(dotnet:invoke monogame "GraphicsDevice")` -> `(game:graphics-device monogame)`
+- `(dotnet:new "Microsoft.Xna.Framework.Graphics.SpriteBatch" ...)` -> `(sprite-batch:new base-gd)`
+
+## ASDF Dependency Ordering
+
+In `dungeon-slime.asd`, components that utilize the local C# package nicknames (`mg-classes` and
+`input-manager`) were updated to explicitly list the generated `*cspackages-components*` in their
+`:depends-on` declaration list. This ensures the generator stubs are fully loaded
+and defined before the main game files compile.

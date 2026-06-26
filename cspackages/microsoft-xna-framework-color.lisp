@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-26T00:57:30Z
+;;; Creation Date: 2026-06-26T01:41:53Z
 
 (in-package :cl-user)
 
@@ -201,7 +201,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-26T00:57:30Z")
+(defconstant <creation> "2026-06-26T01:41:53Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS

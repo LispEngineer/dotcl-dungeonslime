@@ -37,17 +37,17 @@
 (defclass keyboard-info ()
   ((previous-state
     :accessor keyboard-previous-state
-    :initform (dotnet:new "Microsoft.Xna.Framework.Input.KeyboardState")
+    :initform (kb-state:new)
     :documentation "The state of keyboard input during the previous update cycle.")
    (current-state
     :accessor keyboard-current-state
-    :initform (#!!Microsoft.Xna.Framework.Input.Keyboard.GetState)
+    :initform (kb:get-state)
     :documentation "The state of keyboard input during the current update cycle.")))
 
 (defmethod keyboard-update ((info keyboard-info))
   "Shift current state to previous, then get a fresh current state."
   (setf (slot-value info 'previous-state) (slot-value info 'current-state))
-  (setf (slot-value info 'current-state) (#!!Microsoft.Xna.Framework.Input.Keyboard.GetState)))
+  (setf (slot-value info 'current-state) (kb:get-state)))
 
 (defmethod is-key-down ((info keyboard-info) key)
   "Returns true as long as the specified key is being held down."
@@ -74,17 +74,17 @@
 (defclass mouse-info ()
   ((previous-state
     :accessor mouse-previous-state
-    :initform (dotnet:new "Microsoft.Xna.Framework.Input.MouseState")
+    :initform (ms:new)
     :documentation "The state of mouse input during the previous update cycle.")
    (current-state
     :accessor mouse-current-state
-    :initform (#!!Microsoft.Xna.Framework.Input.Mouse.GetState)
+    :initform (mouse:get-state)
     :documentation "The state of mouse input during the current update cycle.")))
 
 (defmethod mouse-update ((info mouse-info))
   "Shift current state to previous, then get a fresh current state."
   (setf (slot-value info 'previous-state) (slot-value info 'current-state))
-  (setf (slot-value info 'current-state) (#!!Microsoft.Xna.Framework.Input.Mouse.GetState)))
+  (setf (slot-value info 'current-state) (mouse:get-state)))
 
 (defun mouse-button-from-state (state button)
   "Get the ButtonState for a given mouse button keyword from a MouseState."
@@ -159,16 +159,15 @@
 
 (defmethod mouse-set-position ((info mouse-info) x y)
   "Sets the mouse cursor position and updates internal state."
-  (dotnet:static "Microsoft.Xna.Framework.Input.Mouse" "SetPosition" x y)
+  (mouse:set-position x y)
   (setf (slot-value info 'current-state)
-    (dotnet:new "Microsoft.Xna.Framework.Input.MouseState"
-                x y
-                (ms:scroll-wheel-value (slot-value info 'current-state))
-                (ms:left-button (slot-value info 'current-state))
-                (ms:middle-button (slot-value info 'current-state))
-                (ms:right-button (slot-value info 'current-state))
-                (ms:x-button1 (slot-value info 'current-state))
-                (ms:x-button2 (slot-value info 'current-state)))))
+    (ms:new x y
+            (ms:scroll-wheel-value (slot-value info 'current-state))
+            (ms:left-button (slot-value info 'current-state))
+            (ms:middle-button (slot-value info 'current-state))
+            (ms:right-button (slot-value info 'current-state))
+            (ms:x-button1 (slot-value info 'current-state))
+            (ms:x-button2 (slot-value info 'current-state)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -181,7 +180,7 @@
     :documentation "The PlayerIndex this gamepad is associated with.")
    (previous-state
     :accessor game-pad-previous-state
-    :initform (dotnet:new "Microsoft.Xna.Framework.Input.GamePadState")
+    :initform (gp-state:new)
     :documentation "The state of gamepad input during the previous update cycle.")
    (current-state
     :accessor game-pad-current-state
@@ -194,7 +193,7 @@
 (defmethod initialize-instance :after ((info game-pad-info) &key)
   "Initialize the current state after the instance is created."
   (setf (slot-value info 'current-state)
-    (#!!Microsoft.Xna.Framework.Input.GamePad.GetState (slot-value info 'player-index))))
+    (gp:get-state (slot-value info 'player-index))))
 
 (defmethod game-pad-is-connected ((info game-pad-info))
   "Returns true if the gamepad is currently connected."
@@ -204,7 +203,7 @@
   "Shift current state to previous, get fresh current state, and handle vibration timing."
   (setf (slot-value info 'previous-state) (slot-value info 'current-state))
   (setf (slot-value info 'current-state)
-    (#!!Microsoft.Xna.Framework.Input.GamePad.GetState (slot-value info 'player-index)))
+    (gp:get-state (slot-value info 'player-index)))
   ;; Handle timed vibration
   (when (csharp:ts> (slot-value info 'vibration-time-remaining)
                     (csharp:timespan<-milliseconds 0))
@@ -252,14 +251,12 @@
 (defmethod game-pad-set-vibration ((info game-pad-info) strength duration)
   "Starts vibration at the specified strength for the given TimeSpan duration."
   (setf (slot-value info 'vibration-time-remaining) duration)
-  (dotnet:static "Microsoft.Xna.Framework.Input.GamePad" "SetVibration"
-                 (slot-value info 'player-index) strength strength))
+  (gp:set-vibration (slot-value info 'player-index) strength strength))
 
 (defmethod game-pad-stop-vibration ((info game-pad-info))
   "Immediately stops all vibration on this gamepad."
   (setf (slot-value info 'vibration-time-remaining) (csharp:timespan<-milliseconds 0))
-  (dotnet:static "Microsoft.Xna.Framework.Input.GamePad" "SetVibration"
-                 (slot-value info 'player-index) 0.0f0 0.0f0))
+  (gp:set-vibration (slot-value info 'player-index) 0.0f0 0.0f0))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
