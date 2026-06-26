@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameTime
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-26T01:41:20Z
+;;; Creation Date: 2026-06-26T02:27:49Z
 
 (in-package :cl-user)
 
@@ -24,7 +24,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameTime"))
 (defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
-(defconstant <creation> "2026-06-26T01:41:20Z")
+(defconstant <creation> "2026-06-26T02:27:49Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS
