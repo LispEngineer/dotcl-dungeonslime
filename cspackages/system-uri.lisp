@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:26Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:56:49Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,14 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-string
+   #:new-string-boolean
+   #:new-string-uri-kind
+   #:new-uri-string
+   #:new-serialization-info-streaming-context
+   #:new-uri-uri
+   #:new-uri-string-boolean
    #:+scheme-delimiter+
    #:+uri-scheme-file+
    #:+uri-scheme-ftp+
@@ -94,13 +102,78 @@
 
 (defconstant <type> (monoutils:get-type "System.Uri"))
 (defconstant <type-str> "System.Uri")
-(defconstant <creation> "2026-06-25T23:46:26Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:56:49Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.Uri")))
+
+(defun new (&rest args)
+  "Passthrough constructor for System.Uri. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-string (uri-string)
+  "Calls System.Uri constructor new(String). Summary: Initializes a new instance of the System.Uri class with the specified URI.
+Parameters:
+  - uri-string (System.String): A string that identifies the resource to be represented by the System.Uri instance.
+"
+  (dotnet:new <type-str> uri-string))
+
+(defun new-string-boolean (uri-string dont-escape)
+  "Calls System.Uri constructor new(String, Boolean). Summary: Initializes a new instance of the System.Uri class with the specified URI, with explicit control of character escaping.
+Parameters:
+  - uri-string (System.String): A string that identifies the resource to be represented by the System.Uri instance. Note that an IPv6 address in string form must be enclosed within brackets. For example, \"http://[2607:f8b0:400d:c06::69]\".
+  - dont-escape (System.Boolean): if uriString is completely escaped; otherwise, .
+"
+  (dotnet:new <type-str> uri-string dont-escape))
+
+(defun new-string-uri-kind (uri-string uri-kind)
+  "Calls System.Uri constructor new(String, UriKind). Summary: Initializes a new instance of the System.Uri class with the specified URI. This constructor allows you to specify if the URI string is a relative URI, absolute URI, or is indeterminate.
+Parameters:
+  - uri-string (System.String): A string that identifies the resource to be represented by the System.Uri instance.
+  - uri-kind (System.UriKind): Specifies whether the URI string is a relative URI, absolute URI, or is indeterminate.
+"
+  (dotnet:new <type-str> uri-string uri-kind))
+
+(defun new-uri-string (base-uri relative-uri)
+  "Calls System.Uri constructor new(Uri, String). Summary: Initializes a new instance of the System.Uri class based on the specified base URI and relative URI string.
+Parameters:
+  - base-uri (System.Uri): The base URI.
+  - relative-uri (System.String): The relative URI to add to the base URI.
+"
+  (dotnet:new <type-str> base-uri relative-uri))
+
+(defun new-serialization-info-streaming-context (serialization-info streaming-context)
+  "Calls System.Uri constructor new(SerializationInfo, StreamingContext). Summary: Initializes a new instance of the System.Uri class from the specified instances of the System.Runtime.Serialization.SerializationInfo and System.Runtime.Serialization.StreamingContext classes.
+Parameters:
+  - serialization-info (System.Runtime.Serialization.SerializationInfo): The information required to serialize the new System.Uri instance.
+  - streaming-context (System.Runtime.Serialization.StreamingContext): The source of the serialized stream associated with the new System.Uri instance.
+"
+  (dotnet:new <type-str> serialization-info streaming-context))
+
+(defun new-uri-uri (base-uri relative-uri)
+  "Calls System.Uri constructor new(Uri, Uri). Summary: Initializes a new instance of the System.Uri class based on the combination of a specified base System.Uri instance and a relative System.Uri instance.
+Parameters:
+  - base-uri (System.Uri): An absolute System.Uri that is the base for the new System.Uri instance.
+  - relative-uri (System.Uri): A relative System.Uri instance that is combined with baseUri.
+"
+  (dotnet:new <type-str> base-uri relative-uri))
+
+(defun new-uri-string-boolean (base-uri relative-uri dont-escape)
+  "Calls System.Uri constructor new(Uri, String, Boolean). Summary: Initializes a new instance of the System.Uri class based on the specified base and relative URIs, with explicit control of character escaping.
+Parameters:
+  - base-uri (System.Uri): The base URI.
+  - relative-uri (System.String): The relative URI to add to the base URI.
+  - dont-escape (System.Boolean): if baseUri and relativeUri are completely escaped; otherwise, .
+"
+  (dotnet:new <type-str> base-uri relative-uri dont-escape))
+
+;; Note: System.Uri also has the following constructors with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   new(String, UriCreationOptions&)
 
 (defconstant +scheme-delimiter+ (dotnet:static <type-str> "SchemeDelimiter"))
 (setf (documentation '+scheme-delimiter+ 'variable) "Specifies the characters that separate the communication protocol scheme from the address portion of the URI. This field is read-only.")

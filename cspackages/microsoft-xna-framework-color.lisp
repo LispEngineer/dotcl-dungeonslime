@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:47:04Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:30Z
 
 (in-package :cl-user)
 
@@ -16,6 +16,17 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-u-int32
+   #:new-vector4
+   #:new-vector3
+   #:new-color-int32
+   #:new-color-single
+   #:new-single-single-single
+   #:new-int32-int32-int32
+   #:new-single-single-single-single
+   #:new-int32-int32-int32-int32
+   #:new-byte-byte-byte-byte
    #:+alice-blue+
    #:+antique-white+
    #:+aqua+
@@ -190,13 +201,57 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-25T23:47:04Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:30Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Color")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Color. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-u-int32 (packed-value)
+  "Calls Microsoft.Xna.Framework.Color constructor new(UInt32)"
+  (dotnet:new <type-str> packed-value))
+
+(defun new-vector4 (color)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Vector4)"
+  (dotnet:new <type-str> color))
+
+(defun new-vector3 (color)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Vector3)"
+  (dotnet:new <type-str> color))
+
+(defun new-color-int32 (color alpha)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Color, Int32)"
+  (dotnet:new <type-str> color alpha))
+
+(defun new-color-single (color alpha)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Color, Single)"
+  (dotnet:new <type-str> color alpha))
+
+(defun new-single-single-single (r g b)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Single, Single, Single)"
+  (dotnet:new <type-str> r g b))
+
+(defun new-int32-int32-int32 (r g b)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Int32, Int32, Int32)"
+  (dotnet:new <type-str> r g b))
+
+(defun new-single-single-single-single (r g b alpha)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Single, Single, Single, Single)"
+  (dotnet:new <type-str> r g b alpha))
+
+(defun new-int32-int32-int32-int32 (r g b alpha)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Int32, Int32, Int32, Int32)"
+  (dotnet:new <type-str> r g b alpha))
+
+(defun new-byte-byte-byte-byte (r g b alpha)
+  "Calls Microsoft.Xna.Framework.Color constructor new(Byte, Byte, Byte, Byte)"
+  (dotnet:new <type-str> r g b alpha))
 
 (defconstant +alice-blue+ (dotnet:static <type-str> "AliceBlue"))
 

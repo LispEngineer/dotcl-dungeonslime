@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:28Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:56:51Z
 
 (in-package :cl-user)
 
@@ -25,6 +25,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-single
+   #:new-single-single
    #:+one+
    #:+unit-x+
    #:+unit-y+
@@ -98,13 +101,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-25T23:46:28Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:56:51Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Vector2. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-single (value)
+  "Calls Microsoft.Xna.Framework.Vector2 constructor new(Single)"
+  (dotnet:new <type-str> value))
+
+(defun new-single-single (x y)
+  "Calls Microsoft.Xna.Framework.Vector2 constructor new(Single, Single)"
+  (dotnet:new <type-str> x y))
 
 (defconstant +one+ (dotnet:static <type-str> "One"))
 

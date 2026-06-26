@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:47:20Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:47Z
 
 (in-package :cl-user)
 
@@ -12,6 +12,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-byte[]-int32-audio-channels
+   #:new-byte[]-int32-int32-int32-audio-channels-int32-int32
    #:duration
    #:is-disposed
    #:name
@@ -31,13 +34,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(defconstant <creation> "2026-06-25T23:47:20Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:47Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffect")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Audio.SoundEffect. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-byte[]-int32-audio-channels (buffer sample-rate channels)
+  "Calls Microsoft.Xna.Framework.Audio.SoundEffect constructor new(Byte[], Int32, AudioChannels)"
+  (dotnet:new <type-str> buffer sample-rate channels))
+
+(defun new-byte[]-int32-int32-int32-audio-channels-int32-int32 (buffer offset count sample-rate channels loop-start loop-length)
+  "Calls Microsoft.Xna.Framework.Audio.SoundEffect constructor new(Byte[], Int32, Int32, Int32, AudioChannels, Int32, Int32)"
+  (dotnet:new <type-str> buffer offset count sample-rate channels loop-start loop-length))
 
 (defun duration (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffect") obj) "get_Duration"))

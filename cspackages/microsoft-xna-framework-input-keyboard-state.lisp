@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:38Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:02Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,7 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
    #:caps-lock
    #:item
    #:num-lock
@@ -33,13 +34,22 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(defconstant <creation> "2026-06-25T23:46:38Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:02Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState")))
+
+(defun new ()
+  (dotnet:new <type-str>))
+
+;; Note: Microsoft.Xna.Framework.Input.KeyboardState also has the following constructors with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   new(params Keys[])
+;;   new(Keys[], Boolean, Boolean)
 
 (defun caps-lock (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_CapsLock"))

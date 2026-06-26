@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:47:17Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:43Z
 
 (in-package :cl-user)
 
@@ -12,6 +12,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-graphics-adapter-graphics-profile-presentation-parameters
+   #:new-graphics-adapter-graphics-profile-boolean-presentation-parameters
    #:adapter
    #:blend-factor
    #:blend-state
@@ -78,13 +81,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(defconstant <creation> "2026-06-25T23:47:17Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:43Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Graphics.GraphicsDevice. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-graphics-adapter-graphics-profile-presentation-parameters (adapter graphics-profile presentation-parameters)
+  "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice constructor new(GraphicsAdapter, GraphicsProfile, PresentationParameters)"
+  (dotnet:new <type-str> adapter graphics-profile presentation-parameters))
+
+(defun new-graphics-adapter-graphics-profile-boolean-presentation-parameters (adapter graphics-profile prefer-half-pixel-offset presentation-parameters)
+  "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice constructor new(GraphicsAdapter, GraphicsProfile, Boolean, PresentationParameters)"
+  (dotnet:new <type-str> adapter graphics-profile prefer-half-pixel-offset presentation-parameters))
 
 (defun adapter (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "get_Adapter"))

@@ -271,4 +271,79 @@
                   t
                   "Rectangle.Empty constant"))
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; 6. Constructor Tests (Version 11)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (format *error-output* "--- Constructor Tests ---~%")
+
+  ;; Vector2 Constructors (Struct, multi-overload)
+  (let* ((v2-pkg :microsoft-xna-framework-vector2)
+         (v2-eq (find-symbol "=" v2-pkg))
+         (new-fn (find-symbol "NEW" v2-pkg))
+         (new-single-single (find-symbol "NEW-SINGLE-SINGLE" v2-pkg))
+         ;; Test default parameterless constructor (injected for structs)
+         (v-def (funcall new-fn))
+         ;; Test parameterized constructor via runtime dispatch (new)
+         (v-param (funcall new-fn 3.0e0 4.0e0))
+         ;; Test parameterized constructor via typed overload
+         (v-typed (funcall new-single-single 3.0e0 4.0e0)))
+
+    (assert-cspkg (funcall v2-eq v-def (vector2 0.0e0 0.0e0)) t
+                  "Vector2 default constructor (injected)")
+    (assert-cspkg (funcall v2-eq v-param (vector2 3.0e0 4.0e0)) t
+                  "Vector2 constructor via new")
+    (assert-cspkg (funcall v2-eq v-typed (vector2 3.0e0 4.0e0)) t
+                  "Vector2 constructor via new-single-single"))
+
+  ;; Rectangle Constructors (Struct, multi-overload)
+  (let* ((rect-pkg :microsoft-xna-framework-rectangle)
+         (new-fn (find-symbol "NEW" rect-pkg))
+         (new-int-int-int-int (find-symbol "NEW-INT32-INT32-INT32-INT32" rect-pkg))
+         ;; Test default parameterless constructor
+         (r-def (funcall new-fn))
+         ;; Test parameterized constructor
+         (r-param (funcall new-fn 10 20 100 200))
+         ;; Test typed constructor
+         (r-typed (funcall new-int-int-int-int 10 20 100 200)))
+
+    (assert-cspkg (= (funcall (find-symbol "LEFT" rect-pkg) r-def) 0) t
+                  "Rectangle default constructor left")
+    (assert-cspkg (= (funcall (find-symbol "LEFT" rect-pkg) r-param) 10) t
+                  "Rectangle parameterized constructor left")
+    (assert-cspkg (= (funcall (find-symbol "LEFT" rect-pkg) r-typed) 10) t
+                  "Rectangle typed constructor left"))
+
+  ;; TimeSpan Constructors (Struct, multi-overload)
+  (let* ((ts-pkg :system-time-span)
+         (ts-eq (find-symbol "=" ts-pkg))
+         (new-fn (find-symbol "NEW" ts-pkg))
+         (new-ticks (find-symbol "NEW-INT64" ts-pkg))
+         ;; Test default parameterless constructor
+         (t-def (funcall new-fn))
+         ;; Test parameterized constructor
+         (t-param (funcall new-fn 5000))
+         ;; Test typed constructor
+         (t-typed (funcall new-ticks 5000)))
+
+    (assert-cspkg (funcall ts-eq t-def (system-time-span:from-ticks 0)) t
+                  "TimeSpan default constructor")
+    (assert-cspkg (funcall ts-eq t-param (system-time-span:from-ticks 5000)) t
+                  "TimeSpan parameterized constructor")
+    (assert-cspkg (funcall ts-eq t-typed (system-time-span:from-ticks 5000)) t
+                  "TimeSpan typed constructor"))
+
+  ;; Uri Constructors (Class, multi-overload)
+  (let* ((uri-pkg :system-uri)
+         (new-fn (find-symbol "NEW" uri-pkg))
+         (new-str (find-symbol "NEW-STRING" uri-pkg))
+         ;; Test single parameter string constructor via new (class)
+         (u-param (funcall new-fn "http://localhost/"))
+         ;; Test single parameter string constructor via typed overload
+         (u-typed (funcall new-str "http://localhost/")))
+
+    (assert-cspkg (dotnet:invoke u-param "ToString") "http://localhost/"
+                  "Uri constructor via new")
+    (assert-cspkg (dotnet:invoke u-typed "ToString") "http://localhost/"
+                  "Uri constructor via new-string"))
+
   (format *error-output* "--- C# Packages Integration Tests Completed ---~%"))

@@ -50,7 +50,7 @@ to do with this game & framework.
     and dirty overload documentation.
   * Handle dirty overloads (ref/out) with -ref suffix naming and
     out→multiple-values mapping in a future version.
-  * Make simple constructors work in the package generator code, using the name `make`
+  * **DONE** Version 11: Make constructors work in the package generator code, using the name `new` with support for overload resolution (passthrough + type-suffixed functions) and struct parameterless constructor injection.
   * **DONE** Change `/=` to `not=` in the Lispy style
   * Consider casting mutator parameters to the correct type, e.g.,
     `(#!!System.Convert.ToByte 37)`, or `(dotnet:box 37 "System.Byte")`

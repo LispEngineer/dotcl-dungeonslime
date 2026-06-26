@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.PresentationParameters
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:47:19Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:45Z
 
 (in-package :cl-user)
 
@@ -12,6 +12,7 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
    #:+default-present-rate+
    #:back-buffer-format
    #:back-buffer-height
@@ -33,13 +34,16 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.PresentationParameters"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.PresentationParameters")
-(defconstant <creation> "2026-06-25T23:47:19Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:45Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.PresentationParameters")))
+
+(defun new ()
+  (dotnet:new <type-str>))
 
 (defconstant +default-present-rate+ (dotnet:static <type-str> "DefaultPresentRate"))
 

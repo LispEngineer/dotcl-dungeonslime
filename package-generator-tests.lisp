@@ -101,6 +101,37 @@
                 nil
                 "simple-method-p rejects property getter method (get_Title)"))
 
+  ;; 3.5 Test clean-constructor-p and constructor-overload-name helper logic using mock plists
+  (let ((ctors-list
+          '(
+            ;; 1. Simple clean constructor with no parameters
+            (:parameters nil :public t)
+            ;; 2. Clean constructor with parameters
+            (:parameters ((:name "x" :type "System.Single") (:name "y" :type "System.Single")) :public t)
+            ;; 3. Constructor with ref parameter (dirty)
+            (:parameters ((:name "value" :type "System.Int32" :ref t)) :public t)
+            )))
+    
+    (assert-test (assembly-package-generator::clean-constructor-p (first ctors-list))
+                t
+                "clean-constructor-p accepts clean parameterless constructor")
+
+    (assert-test (assembly-package-generator::clean-constructor-p (second ctors-list))
+                t
+                "clean-constructor-p accepts clean parameterized constructor")
+
+    (assert-test (assembly-package-generator::clean-constructor-p (third ctors-list))
+                nil
+                "clean-constructor-p rejects constructor with ref parameter")
+
+    (assert-test (assembly-package-generator::constructor-overload-name (first ctors-list))
+                "new"
+                "constructor-overload-name for parameterless constructor is new")
+
+    (assert-test (assembly-package-generator::constructor-overload-name (second ctors-list))
+                "new-single-single"
+                "constructor-overload-name for parameterized constructor matches types"))
+
   ;; 4. Test Operator Overloads on Generated TimeSpan and Vector2 packages
   (format *error-output* "--- Running Generated Package Operator Overload Tests ---~%")
 

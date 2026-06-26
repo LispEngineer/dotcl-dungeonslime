@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteBatch
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:47:13Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:40Z
 
 (in-package :cl-user)
 
@@ -12,6 +12,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-graphics-device
+   #:new-graphics-device-int32
    #:dispose
    #:draw
    #:draw-texture2-d-vector2-color
@@ -32,13 +35,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteBatch"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteBatch")
-(defconstant <creation> "2026-06-25T23:47:13Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:40Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteBatch")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Graphics.SpriteBatch. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-graphics-device (graphics-device)
+  "Calls Microsoft.Xna.Framework.Graphics.SpriteBatch constructor new(GraphicsDevice)"
+  (dotnet:new <type-str> graphics-device))
+
+(defun new-graphics-device-int32 (graphics-device capacity)
+  "Calls Microsoft.Xna.Framework.Graphics.SpriteBatch constructor new(GraphicsDevice, Int32)"
+  (dotnet:new <type-str> graphics-device capacity))
 
 (defun dispose (obj disposing)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteBatch") obj) "Dispose" disposing))

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:30Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:56:53Z
 
 (in-package :cl-user)
 
@@ -16,6 +16,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-point-point
+   #:new-int32-int32-int32-int32
    #:+empty+
    #:bottom
    #:center
@@ -55,13 +58,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Rectangle"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(defconstant <creation> "2026-06-25T23:46:30Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:56:53Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Rectangle. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-point-point (location size)
+  "Calls Microsoft.Xna.Framework.Rectangle constructor new(Point, Point)"
+  (dotnet:new <type-str> location size))
+
+(defun new-int32-int32-int32-int32 (x y width height)
+  "Calls Microsoft.Xna.Framework.Rectangle constructor new(Int32, Int32, Int32, Int32)"
+  (dotnet:new <type-str> x y width height))
 
 (defconstant +empty+ (dotnet:static <type-str> "Empty"))
 

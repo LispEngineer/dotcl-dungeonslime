@@ -259,20 +259,22 @@ This phase adds support for read-write properties and fields:
 
 ## Phase 3: Constructors & Overload Dispatch
 
+**STATUS: COMPLETED (Version 10 & 11)**
 This phase adds object instantiation and signature overloading:
-*   Translate C# constructors into instantiation wrapper functions (e.g., `make-classname`
-    or `new-classname`).
-*   Implement overload-resolution logic for C# methods. Generate optional arguments
-    with `supplied-p` checks for overloads with identical parameter structures to a point,
-    or generate specialized type-checking/arity dispatch forms for distinct overloads.
+*   Translate C# constructors into instantiation wrapper functions named `new` (passthrough
+    and type-suffixed variants) and inject parameterless default constructors for structs.
+*   Implement overload-resolution logic for C# methods. Generate passthrough `&rest`
+    dispatch functions alongside type-suffixed functions (e.g., `contains-vector-2`)
+    for explicit dispatch.
 
 ## Phase 4: Parameter Modifiers & Operator Overloads
 
+**STATUS: COMPLETED (Version 10)**
 This phase adds support for special signatures and parameters:
-*   Support parameter modifiers such as `out`, `ref`, `in` (ref readonly), and `params`
-    arrays by generating necessary boxing/unboxing or marshalling wrappers.
-*   Handle operator overloads, mapping from C# mangled names (like `op_Addition`) to
-    standard Lisp operators.
+*   Document unsupported parameter modifiers (such as `out`, `ref`, `in`, and `params` arrays)
+    in generated package file comments.
+*   Handle operator overloads, mapping from C# mangled names (like `op_Addition` and
+    `op_Equality`) to standard Lisp operators (like `+`, `=`, etc.).
 
 ## Phase 5: Generics Support
 

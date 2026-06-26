@@ -9,7 +9,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 10
+(defparameter *generator-version* 11
   "Integer version number for the generated Lisp source files.
    Version history:
    1 - Initial generator mapping C# classes to Lisp packages.
@@ -23,7 +23,8 @@
    9 - Added instance property accessors and mutators.
    10 - Added method overload handling with classification into clean vs dirty overloads,
         type-suffixed naming for multi-overload methods, passthrough &rest functions,
-        typed-call optimization for value type receivers, and dirty overload documentation.")
+        typed-call optimization for value type receivers, and dirty overload documentation.
+   11 - Added support for C# constructors (new) with overload dispatch and struct parameterless constructor injection.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
@@ -229,6 +230,56 @@
                              params)))
     (format nil "~A(~{~A~^, ~}) -> ~A" name param-strs return-type)))
 
+(defun clean-constructor-p (ctor)
+  "Returns t if the constructor is 'clean' (no ref/out/params/defaults/generics)."
+  (let ((params (getf ctor :parameters)))
+    (every (lambda (p)
+             (and (not (getf p :has-default))
+                  (not (getf p :out))
+                  (not (getf p :ref))
+                  (not (getf p :ref-readonly))
+                  (not (getf p :params))
+                  (not (generic-type-p (getf p :type)))))
+           params)))
+
+(defun dirty-constructor-p (ctor)
+  "Returns t if the constructor has any special parameter modifiers (ref, out, params, or defaults)."
+  (let ((params (getf ctor :parameters)))
+    (some (lambda (p)
+            (or (getf p :has-default)
+                (getf p :out)
+                (getf p :ref)
+                (getf p :ref-readonly)
+                (getf p :params)))
+          params)))
+
+(defun constructor-overload-name (ctor)
+  "Generate a disambiguated Lisp function name for an overloaded constructor,
+   by appending kebab-cased simple parameter type names.
+   e.g., ctor(float, float) => \"new-single-single\""
+  (let* ((params (getf ctor :parameters))
+         (type-suffixes (mapcar (lambda (p)
+                                  (camel-to-kebab (simple-type-name (getf p :type))))
+                                params)))
+    (if type-suffixes
+        (format nil "new-~{~A~^-~}" type-suffixes)
+        "new")))
+
+(defun constructor-signature-str (ctor)
+  "Return a human-readable signature string for a constructor, e.g.
+   'new(ref Rectangle, out bool)'."
+  (let* ((params (getf ctor :parameters))
+         (param-strs (mapcar (lambda (p)
+                               (let ((modifier-str (cond
+                                                     ((getf p :ref) "ref ")
+                                                     ((getf p :out) "out ")
+                                                     ((getf p :params) "params ")
+                                                     (t "")))
+                                     (type-str (simple-type-name (getf p :type))))
+                                 (format nil "~A~A" modifier-str type-str)))
+                             params)))
+    (format nil "new(~{~A~^, ~})" param-strs)))
+
 (defun build-docstring (summary returns parameters doc-plist)
   "Builds a formatted docstring from documentation elements."
   (with-output-to-string (out)
@@ -259,6 +310,13 @@
          (properties (getf class-plist :properties))
          (methods (getf class-plist :methods))
          (kind (getf class-plist :kind))
+         (raw-ctors (getf class-plist :constructors))
+         ;; Structs (value types) in C# have an implicit parameterless constructor.
+         ;; If no parameterless constructor is in raw-ctors, we inject one.
+         (ctors (if (and (eq kind :struct)
+                         (not (some (lambda (ctor) (null (getf ctor :parameters))) raw-ctors)))
+                    (cons '(:parameters nil :public t) raw-ctors)
+                    raw-ctors))
          (is-value-type-p (or (eq kind :struct) (eq kind :enum)))
          (creation-time (get-iso-8601-time)))
     
@@ -290,8 +348,12 @@
                (let ((groups nil))
                  (maphash (lambda (name methods)
                             (push (cons name (nreverse methods)) groups))
-                          table)
+                           table)
                  (nreverse groups))))
+           (clean-ctors (remove-if-not #'clean-constructor-p ctors))
+           (dirty-ctors (remove-if-not #'dirty-constructor-p ctors))
+           (clean-ctor-count (length clean-ctors))
+           (dirty-ctor-count (length dirty-ctors))
            (exports nil)
            (shadows nil))
       
@@ -300,6 +362,15 @@
       (push "<type-str>" exports)
       (push "<creation>" exports)
       (push "<version>" exports)
+      
+      ;; Collect constructor exports
+      (when (> clean-ctor-count 0)
+        (push "new" exports)
+        (when (>= clean-ctor-count 2)
+          (dolist (c clean-ctors)
+            (let ((params (getf c :parameters)))
+              (when params
+                (push (constructor-overload-name c) exports))))))
       
       (dolist (f literal-fields)
         (push (format nil "+~A+" (camel-to-kebab (getf f :name))) exports))
@@ -375,6 +446,75 @@
         (format stream "(eval-when (:compile-toplevel :load-toplevel :execute)~%")
         (format stream "  (dotnet:static \"DotCL.Runtime\" \"EnsureDotNetTypeClass\"~%")
         (format stream "                 (dotnet:resolve-type \"~A\")))~%~%" fq-name)
+        
+        ;; Constructors
+        (cond
+          ;; Case 1: No clean constructors - all are dirty
+          ((and (> dirty-ctor-count 0) (= clean-ctor-count 0))
+           (format stream ";; The following C# ~A constructors have special parameter types~%" fq-name)
+           (format stream ";; (ref, out, params, or defaults) and are not yet supported:~%")
+           (dolist (dc dirty-ctors)
+             (format stream ";;   ~A~%" (constructor-signature-str dc)))
+           (format stream "~%"))
+          
+          ;; Case 2: Single clean constructor
+          ((= clean-ctor-count 1)
+           (let* ((c (first clean-ctors))
+                  (c-doc (getf c :documentation))
+                  (summary (getf c-doc :summary))
+                  (returns (getf c-doc :returns))
+                  (params (getf c :parameters))
+                  (param-names (mapcar (lambda (p) (map-param-name (getf p :name))) params))
+                  (args-str (format nil "~{~A~^ ~}" param-names))
+                  (docstring (build-docstring summary returns params c-doc))
+                  (escaped-docstring (escape-lisp-string docstring)))
+             (format stream "(defun new (~A)~%" args-str)
+             (when (> (length escaped-docstring) 0)
+               (format stream "  \"~A\"~%" escaped-docstring))
+             (format stream "  (dotnet:new <type-str>~@[ ~{~A~^ ~}~]))~%~%" param-names)
+             ;; Emit dirty constructor doc-comments if any
+             (when (> dirty-ctor-count 0)
+               (format stream ";; Note: ~A also has the following constructors with special~%" fq-name)
+               (format stream ";; parameter types (ref, out, params, or defaults) that are not~%")
+               (format stream ";; yet supported:~%")
+               (dolist (dc dirty-ctors)
+                 (format stream ";;   ~A~%" (constructor-signature-str dc)))
+               (format stream "~%"))))
+          
+          ;; Case 3: Multiple clean constructors
+          ((>= clean-ctor-count 2)
+           ;; Generate passthrough &rest function for DotCL runtime dispatch
+           (format stream "(defun new (&rest args)~%")
+           (format stream "  \"Passthrough constructor for ~A. Dispatches at runtime.\"~%" fq-name)
+           (format stream "  (apply #'dotnet:new <type-str> args))~%~%")
+           ;; Generate per-overload typed functions with type-suffixed names
+           (dolist (c clean-ctors)
+             (let ((params (getf c :parameters)))
+               (when params
+                 (let* ((cname (constructor-overload-name c))
+                        (c-doc (getf c :documentation))
+                        (summary (getf c-doc :summary))
+                        (returns (getf c-doc :returns))
+                        (param-names (mapcar (lambda (p) (map-param-name (getf p :name))) params))
+                        (overload-signature (constructor-signature-str c))
+                        (args-str (format nil "~{~A~^ ~}" param-names))
+                        (docstring (build-docstring summary returns params c-doc))
+                        (overload-note (format nil "Calls ~A constructor ~A" fq-name overload-signature))
+                        (full-docstring (if (> (length docstring) 0)
+                                            (concatenate 'string overload-note ". " docstring)
+                                            overload-note))
+                        (escaped-full-doc (escape-lisp-string full-docstring)))
+                   (format stream "(defun ~A (~A)~%" cname args-str)
+                   (format stream "  \"~A\"~%" escaped-full-doc)
+                   (format stream "  (dotnet:new <type-str>~@[ ~{~A~^ ~}~]))~%~%" param-names)))))
+           ;; Emit dirty constructor doc-comments if any
+           (when (> dirty-ctor-count 0)
+             (format stream ";; Note: ~A also has the following constructors with special~%" fq-name)
+             (format stream ";; parameter types (ref, out, params, or defaults) that are not~%")
+             (format stream ";; yet supported:~%")
+             (dolist (dc dirty-ctors)
+               (format stream ";;   ~A~%" (constructor-signature-str dc)))
+             (format stream "~%"))))
         
         ;; Compile-Time Constants (Literal Fields)
         (dolist (f literal-fields)

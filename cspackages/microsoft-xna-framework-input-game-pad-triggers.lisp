@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadTriggers
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:54Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:19Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,8 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-single-single
    #:left
    #:right
    #:=
@@ -28,13 +30,21 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadTriggers"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadTriggers")
-(defconstant <creation> "2026-06-25T23:46:54Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:19Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadTriggers")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Input.GamePadTriggers. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-single-single (left-trigger right-trigger)
+  "Calls Microsoft.Xna.Framework.Input.GamePadTriggers constructor new(Single, Single)"
+  (dotnet:new <type-str> left-trigger right-trigger))
 
 (defun left (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadTriggers") obj) "get_Left"))

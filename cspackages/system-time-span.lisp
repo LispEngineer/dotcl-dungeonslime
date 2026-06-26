@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:21Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:56:44Z
 
 (in-package :cl-user)
 
@@ -23,6 +23,12 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-int64
+   #:new-int32-int32-int32
+   #:new-int32-int32-int32-int32
+   #:new-int32-int32-int32-int32-int32
+   #:new-int32-int32-int32-int32-int32-int32
    #:+hours-per-day+
    #:+microseconds-per-day+
    #:+microseconds-per-hour+
@@ -135,13 +141,66 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-25T23:46:21Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:56:44Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.TimeSpan")))
+
+(defun new (&rest args)
+  "Passthrough constructor for System.TimeSpan. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-int64 (ticks)
+  "Calls System.TimeSpan constructor new(Int64). Summary: Initializes a new instance of the System.TimeSpan structure to the specified number of ticks.
+Parameters:
+  - ticks (System.Int64): A time period expressed in 100-nanosecond units.
+"
+  (dotnet:new <type-str> ticks))
+
+(defun new-int32-int32-int32 (hours minutes seconds)
+  "Calls System.TimeSpan constructor new(Int32, Int32, Int32). Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of hours, minutes, and seconds.
+Parameters:
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int32): Number of minutes.
+  - seconds (System.Int32): Number of seconds.
+"
+  (dotnet:new <type-str> hours minutes seconds))
+
+(defun new-int32-int32-int32-int32 (days hours minutes seconds)
+  "Calls System.TimeSpan constructor new(Int32, Int32, Int32, Int32). Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of days, hours, minutes, and seconds.
+Parameters:
+  - days (System.Int32): Number of days.
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int32): Number of minutes.
+  - seconds (System.Int32): Number of seconds.
+"
+  (dotnet:new <type-str> days hours minutes seconds))
+
+(defun new-int32-int32-int32-int32-int32 (days hours minutes seconds milliseconds)
+  "Calls System.TimeSpan constructor new(Int32, Int32, Int32, Int32, Int32). Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of days, hours, minutes, seconds, and milliseconds.
+Parameters:
+  - days (System.Int32): Number of days.
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int32): Number of minutes.
+  - seconds (System.Int32): Number of seconds.
+  - milliseconds (System.Int32): Number of milliseconds.
+"
+  (dotnet:new <type-str> days hours minutes seconds milliseconds))
+
+(defun new-int32-int32-int32-int32-int32-int32 (days hours minutes seconds milliseconds microseconds)
+  "Calls System.TimeSpan constructor new(Int32, Int32, Int32, Int32, Int32, Int32). Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of days, hours, minutes, seconds, milliseconds, and microseconds.
+Parameters:
+  - days (System.Int32): Number of days.
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int32): Number of minutes.
+  - seconds (System.Int32): Number of seconds.
+  - milliseconds (System.Int32): Number of milliseconds.
+  - microseconds (System.Int32): Number of microseconds.
+"
+  (dotnet:new <type-str> days hours minutes seconds milliseconds microseconds))
 
 (defconstant +hours-per-day+ (dotnet:static <type-str> "HoursPerDay"))
 (setf (documentation '+hours-per-day+ 'variable) "Represents the number of hours in 1 day. This field is constant.")

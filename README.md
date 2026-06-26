@@ -351,6 +351,15 @@ C# Lisp Package Generator v10: Method Overload Support:
   Reflect, Intersects, Contains) are now auto-generated and tested via
   `cspackages-test.lisp`.
 
+C# Lisp Package Generator v11: Object Constructor Support:
+* Generates `new` wrapper functions for C# classes and structs.
+* Handles overload resolution using passthrough `new` functions and type-suffixed wrappers
+  (e.g. `new-single-single`, `new-int32-int32-int32-int32`).
+* Avoids naming collisions by skipping type-suffixed wrappers for 0-argument constructors
+  when a type has multiple constructors.
+* Automatically injects parameterless default constructors for structs (value types),
+  which are otherwise omitted by the Reflection API.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:31Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:56:55Z
 
 (in-package :cl-user)
 
@@ -19,6 +19,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-int32
+   #:new-int32-int32
    #:+zero+
    #:-
    #:*
@@ -38,13 +41,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Point"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(defconstant <creation> "2026-06-25T23:46:31Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:56:55Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Point")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Point. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-int32 (value)
+  "Calls Microsoft.Xna.Framework.Point constructor new(Int32)"
+  (dotnet:new <type-str> value))
+
+(defun new-int32-int32 (x y)
+  "Calls Microsoft.Xna.Framework.Point constructor new(Int32, Int32)"
+  (dotnet:new <type-str> x y))
 
 (defconstant +zero+ (dotnet:static <type-str> "Zero"))
 

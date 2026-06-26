@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:52Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:17Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,8 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-vector2-vector2
    #:left
    #:right
    #:=
@@ -28,13 +30,21 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(defconstant <creation> "2026-06-25T23:46:52Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:17Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Input.GamePadThumbSticks. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-vector2-vector2 (left-position right-position)
+  "Calls Microsoft.Xna.Framework.Input.GamePadThumbSticks constructor new(Vector2, Vector2)"
+  (dotnet:new <type-str> left-position right-position))
 
 (defun left (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "get_Left"))

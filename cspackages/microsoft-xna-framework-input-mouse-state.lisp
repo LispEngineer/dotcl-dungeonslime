@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:44Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:08Z
 
 (in-package :cl-user)
 
@@ -16,6 +16,9 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state
+   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state-int32
    #:horizontal-scroll-wheel-value
    #:left-button
    #:middle-button
@@ -37,13 +40,25 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.MouseState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(defconstant <creation> "2026-06-25T23:46:44Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:08Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.MouseState")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Input.MouseState. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state (x y scroll-wheel left-button middle-button right-button x-button1 x-button2)
+  "Calls Microsoft.Xna.Framework.Input.MouseState constructor new(Int32, Int32, Int32, ButtonState, ButtonState, ButtonState, ButtonState, ButtonState)"
+  (dotnet:new <type-str> x y scroll-wheel left-button middle-button right-button x-button1 x-button2))
+
+(defun new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state-int32 (x y scroll-wheel left-button middle-button right-button x-button1 x-button2 horizontal-scroll-wheel)
+  "Calls Microsoft.Xna.Framework.Input.MouseState constructor new(Int32, Int32, Int32, ButtonState, ButtonState, ButtonState, ButtonState, ButtonState, Int32)"
+  (dotnet:new <type-str> x y scroll-wheel left-button middle-button right-button x-button1 x-button2 horizontal-scroll-wheel))
 
 (defun horizontal-scroll-wheel-value (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.MouseState") obj) "get_HorizontalScrollWheelValue"))

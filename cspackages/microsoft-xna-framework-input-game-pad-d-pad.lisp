@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 10
-;;; Creation Date: 2026-06-25T23:46:51Z
+;;; Generator Version: 11
+;;; Creation Date: 2026-06-26T00:57:15Z
 
 (in-package :cl-user)
 
@@ -15,6 +15,8 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
+   #:new-button-state-button-state-button-state-button-state
    #:down
    #:left
    #:right
@@ -30,13 +32,21 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(defconstant <creation> "2026-06-25T23:46:51Z")
-(defconstant <version> 10)
+(defconstant <creation> "2026-06-26T00:57:15Z")
+(defconstant <version> 11)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad")))
+
+(defun new (&rest args)
+  "Passthrough constructor for Microsoft.Xna.Framework.Input.GamePadDPad. Dispatches at runtime."
+  (apply #'dotnet:new <type-str> args))
+
+(defun new-button-state-button-state-button-state-button-state (up-value down-value left-value right-value)
+  "Calls Microsoft.Xna.Framework.Input.GamePadDPad constructor new(ButtonState, ButtonState, ButtonState, ButtonState)"
+  (dotnet:new <type-str> up-value down-value left-value right-value))
 
 (defun down (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDPad") obj) "get_Down"))

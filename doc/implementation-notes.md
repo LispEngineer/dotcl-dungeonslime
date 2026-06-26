@@ -769,3 +769,23 @@ packages -> mg-classes -> clr-generic -> sprite-font -> game-1
 `sprite-font.lisp` depends on `mg-classes` for `v2:+zero+`, `v2:+one+`
 and `sprite-effects:+none+`. It depends on `clr-generic` for the
 `dotnet-class` require.
+
+## C# Package Object Constructors (Version 11)
+
+### Struct Parameterless Constructor Injection
+In .NET Reflection, value types (structs) do not return their implicit parameterless constructor
+via `GetConstructors()`. To generate the correct parameterless `new` constructors for value types,
+the generator (`assembly-package-generator.lisp`) checks if the type is a struct (`:kind :struct`).
+If it is a struct and no zero-parameter constructor is found in the metadata, the generator
+injects a default parameterless constructor `(:parameters nil :public t)` into its internal
+constructors list.
+
+### Overload Collision Prevention
+For types with multiple clean constructors, the generator outputs a runtime dispatch `new`
+function using `&rest` arguments. Additionally, type-suffixed constructors (e.g.,
+`new-single-single`) are generated for performance or explicit dispatch. However, if a
+constructor has zero parameters, its type-suffixed name would be `new`, colliding with and
+overwriting the runtime dispatch `new` function.
+To resolve this collision, the generator skips creating the type-suffixed function for any
+zero-parameter constructor when a type has multiple clean constructors. The runtime dispatch
+`new` function handles the parameterless case correctly when called without arguments: `(new)`.
