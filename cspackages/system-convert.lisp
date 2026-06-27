@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Convert
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-26T02:27:41Z
+;;; Creation Date: 2026-06-27T13:31:29Z
 
 (in-package :cl-user)
 
@@ -354,7 +354,7 @@
 
 (defconstant <type> (monoutils:get-type "System.Convert"))
 (defconstant <type-str> "System.Convert")
-(defconstant <creation> "2026-06-26T02:27:41Z")
+(defconstant <creation> "2026-06-27T13:31:29Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS

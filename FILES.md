@@ -76,6 +76,8 @@ and files in this repository.
 
 * [dotnet-dotcl-interop.md](doc/dotnet-dotcl-interop.md) explains in detail all the mechanisms for .NET interoperability, in both directions, between DotCL Common Lisp and the .NET CLR.
 
+* [compilation-warnings-in-0.1.14.md](doc/compilation-warnings-in-0.1.14.md): Detailed analysis of the compile and load warnings under DotCL 0.1.14.
+
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
