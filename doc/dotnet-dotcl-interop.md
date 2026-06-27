@@ -255,10 +255,10 @@ While DotCL provides a robust interoperability layer, several "modern C#" and ad
 
 ## 1. Modern C# Paradigms
 
-### Async / Await (`dotnet:await`)
+### Async / Await (`dotnet:await`) - **DONE**
 Modern .NET APIs heavily rely on `Task` and `Task<T>`. Calling them from Lisp currently requires manually blocking the thread with `(dotnet:invoke task "Wait")` or `(dotnet:invoke task "get_Result")`, which wraps inner errors in an `AggregateException`.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Elegantly unwraps the Task, yields the Lisp thread if supported, 
 ;; and throws the actual inner exception if the task faults.
@@ -287,10 +287,10 @@ Because `Span<T>` is a `ref struct`, it cannot be boxed on the managed heap or w
 
 ## 2. Type & Array Utilities
 
-### Typed Array Creation (`dotnet:make-array`)
+### Typed Array Creation (`dotnet:make-array` and `dotnet:new-array`) - **DONE**
 You can get and set array elements via `dotnet:invoke` (which routes internally to `Array.GetValue`/`SetValue`), but creating a new .NET array (especially multi-dimensional ones) currently requires explicit reflection on `System.Array` and calling `CreateInstance`.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Create a 1D array: int[] of length 100
 (defvar *my-array-1d* (dotnet:make-array "System.Int32" 100))
@@ -298,13 +298,16 @@ You can get and set array elements via `dotnet:invoke` (which routes internally 
 ;; Create a 2D multi-dimensional array: float[,] of dimensions 10x20
 (defvar *my-array-2d* (dotnet:make-array "System.Single" 10 20))
 
+;; Create an array from existing elements
+(defvar *my-populated-array* (dotnet:new-array "System.String" "foo" "bar"))
+
 ;; Accessing multi-dimensional arrays (using existing `invoke` routing)
 ;; Set element at [5, 10] to 3.14
 (setf (dotnet:invoke *my-array-2d* "set_Item" 5 10) 3.14)
 (format t "Value at [5, 10]: ~A~%" (dotnet:invoke *my-array-2d* "get_Item" 5 10))
 ```
 
-*Proposed Syntax (Native `aref` integration):*
+*Proposed Syntax (Native `aref` integration) - still not present as of DotCL 0.1.14:*
 The native Lisp `aref` function could be updated in the runtime to transparently intercept `LispDotNetObject` instances that wrap a `System.Array`, allowing standard Common Lisp array syntax to work seamlessly on .NET arrays of any dimension:
 ```lisp
 ;; Clean native array access using standard Lisp `aref`
@@ -312,10 +315,10 @@ The native Lisp `aref` function could be updated in the runtime to transparently
 (format t "Value at [5, 10]: ~A~%" (aref *my-array-2d* 5 10))
 ```
 
-### Dynamic Generic Type Construction
+### Dynamic Generic Type Construction (`dotnet:make-generic-type`) - **DONE**
 Creating closed generic types (like `Dictionary<string, int>`) requires passing the exact, complex assembly-qualified string to `dotnet:new`.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Dynamically constructs the closed generic System.Type
 (defvar *dict-type* (dotnet:make-generic-type "System.Collections.Generic.Dictionary`2" 
@@ -323,10 +326,10 @@ Creating closed generic types (like `Dictionary<string, int>`) requires passing 
 (defvar *dict* (dotnet:new *dict-type*))
 ```
 
-### Type Checking and Casting (`dotnet:is-a` / `dotnet:cast`)
+### Type Checking and Casting (`dotnet:is-instance-of` / `dotnet:cast`) - **DONE**
 To check types, you currently have to manually resolve the type and call `Type.IsAssignableFrom`.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Direct casting and type checking
 (when (dotnet:is-instance-of obj "System.String")
@@ -336,10 +339,10 @@ To check types, you currently have to manually resolve the type and call `Type.I
 
 ## 3. Advanced Method Invocation
 
-### Generic `out` / `ref` Calls (`dotnet:call-out-generic`)
+### Generic `out` / `ref` Calls (`dotnet:call-out-generic`) - **DONE**
 `dotnet:call-out` cannot currently resolve open generic method definitions because it lacks a parameter for generic type arguments.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Combined generic type resolution with out/ref parameter handling
 (multiple-value-bind (success result)
@@ -347,10 +350,10 @@ To check types, you currently have to manually resolve the type and call `Type.I
   ...)
 ```
 
-### Enum Flag Utilities
+### Enum Flag Utilities (`dotnet:enum-or`) - **DONE**
 Bitwise OR-ing C# `[Flags]` enums requires manually fetching integer values, applying `logior`, and boxing the result.
 
-*Proposed Syntax:*
+*Implemented Syntax (as of 0.1.14):*
 ```lisp
 ;; Automatically parses, combines, and returns a boxed strongly-typed enum
 (dotnet:enum-or "System.IO.FileMode" "Open" "ReadWrite")
@@ -358,13 +361,11 @@ Bitwise OR-ing C# `[Flags]` enums requires manually fetching integer values, app
 
 ## 4. Exception Handling Boundaries
 
-### Catching Specific .NET Exceptions
+### Catching Specific .NET Exceptions - **DONE**
 All .NET exceptions thrown during a `dotnet:invoke` are caught by the runtime and wrapped in a generic `LispErrorException` or `LispProgramError`. You cannot easily dispatch Lisp `handler-bind` logic on the specific underlying .NET exception type.
 
-*Possible Syntax:*
-
-Not really happy with this syntax, being a string, and if it would work at all.
-So, some additional thought should be put here.
+*Implemented Syntax (as of 0.1.14):*
+DotCL 0.1.14 introduced `dotnet:handler-bind`, `dotnet:exception-typep`, and `dotnet:exception-type`.
 
 ```lisp
 ;; A dedicated macro that unwraps the exception and matches the .NET type

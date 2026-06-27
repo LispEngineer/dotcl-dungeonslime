@@ -14,6 +14,9 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ### Object Creation & Class Definition
 * [`DOTNET:NEW`](#dotnetnew)
+* [`DOTNET:MAKE-ARRAY`](#dotnetmake-array)
+* [`DOTNET:NEW-ARRAY`](#dotnetnew-array)
+* [`DOTNET:MAKE-GENERIC-TYPE`](#dotnetmake-generic-type)
 * [`DOTNET:%DEFINE-CLASS`](#dotnetdefine-class)
 
 ### Member Invocation & Property Access
@@ -24,23 +27,30 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * [`DOTNET:%SET-STATIC`](#dotnetset-static)
 * [`DOTNET:CALL-BASE`](#dotnetcall-base)
 * [`DOTNET:CALL-OUT`](#dotnetcall-out)
+* [`DOTNET:CALL-OUT-GENERIC`](#dotnetcall-out-generic)
 * [`DOTNET:STATIC-GENERIC`](#dotnetstatic-generic)
 * [`DOTNET:BOX`](#dotnetbox)
 * [`DOTNET:HINT-TYPE`](#dotnethint-type)
 * [`DOTNET:OBJECT-TYPE`](#dotnetobject-type)
 * [`DOTNET:RESOLVE-TYPE`](#dotnetresolve-type)
+* [`DOTNET:IS-INSTANCE-OF`](#dotnetis-instance-of)
+* [`DOTNET:CAST`](#dotnetcast)
+* [`DOTNET:NULL`](#dotnetnull)
+* [`DOTNET:AWAIT`](#dotnetawait)
+* [`DOTNET:ENUM-OR`](#dotnetenum-or)
 
 ### Event Handling & Delegates
 * [`DOTNET:ADD-EVENT`](#dotnetadd-event)
 * [`DOTNET:REMOVE-EVENT`](#dotnetremove-event)
 * [`DOTNET:MAKE-DELEGATE`](#dotnetmake-delegate)
 
+### Exception Handling
+* [`DOTNET:HANDLER-BIND`](#dotnethandler-bind)
+* [`DOTNET:EXCEPTION-TYPEP`](#dotnetexception-typep)
+* [`DOTNET:EXCEPTION-TYPE`](#dotnetexception-type)
+
 ### Stream Wrapping
 * [`DOTNET:TO-STREAM`](#dotnetto-stream)
-
-### WinForms STA UI Thread Support
-* [`DOTNET:UI-INVOKE`](#dotnetui-invoke)
-* [`DOTNET:UI-POST`](#dotnetui-post)
 
 ### Unmanaged Memory & Native FFI
 * [`DOTNET:%FFI-CALL`](#dotnetffi-call)
@@ -774,45 +784,155 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ---
 
-### `DOTNET:UI-INVOKE`
+### `DOTNET:AWAIT`
 
 * **Type:** Function
 * **Syntax:**
   ```lisp
-  (dotnet:ui-invoke function)
+  (dotnet:await awaitable)
   ```
-* **Description:** Synchronously executes a Lisp function on the STA (Single Threaded Apartment) UI thread. This is required for Windows Forms or WPF UI operations that restrict GUI element modification to the main UI thread.
+* **Description:** Block until a .NET `Task`, `Task<T>`, `ValueTask`, or `ValueTask<T>` completes and return its result marshalled to Lisp (returns `nil` for a void/non-generic awaitable). A faulted awaitable rethrows its inner exception so `handler-case` or `handler-bind` sees the real condition. Holds the calling thread, so run it on a worker thread when the caller must stay responsive.
+
+---
+
+### `DOTNET:CALL-OUT-GENERIC`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:call-out-generic type-or-obj method-name type-args-list &rest in-args)
+  ```
+* **Description:** Generic counterpart of `dotnet:call-out`: instantiate an open generic method with the given type-argument name strings (`MakeGenericMethod`), then invoke it handling out/ref parameters.
 * **Parameters:**
-  * `function` (Function): The Lisp function to execute.
-* **Returns:** The result of executing the function.
-* **Implementation Details:** Backed by `DotNetWinForms.UiInvoke` in `Runtime.WinForms.cs`. It lazily spawns a background STA thread named `"dotcl-ui"` running a standard Application message loop, and blocks the caller thread using a `ManualResetEventSlim` while executing the callback via `SynchronizationContext.Send`. Exceptions are captured and re-thrown on the caller thread.
+  * `type-or-obj` (String or LispDotNetObject): A type name string (static) or a .NET object (instance).
+  * `method-name` (String): The name of the method to call.
+  * `type-args-list` (List): List of strings indicating the generic type arguments.
+  * `in-args` (Rest): Only the input (non-out) arguments.
+* **Returns:** Multiple values: first is the method's return value (or `t` if void), followed by the values of each `out` or `ref` parameter.
 * **Usage Example:**
   ```lisp
-  (dotnet:ui-invoke
-    (lambda ()
-      (let ((form (dotnet:new "System.Windows.Forms.Form")))
-        (dotnet:invoke form "Show")
-        form)))
+  (multiple-value-bind (ok day) (dotnet:call-out-generic "System.Enum" "TryParse" '("System.DayOfWeek") "Monday") ...)
   ```
 
 ---
 
-### `DOTNET:UI-POST`
+### `DOTNET:CAST`
 
 * **Type:** Function
 * **Syntax:**
   ```lisp
-  (dotnet:ui-post function)
+  (dotnet:cast obj type-name)
   ```
-* **Description:** Asynchronously posts a Lisp function to be executed on the STA UI thread (fire-and-forget). Returns immediately.
-* **Parameters:**
-  * `function` (Function): The Lisp function to run.
-* **Returns:** `nil`.
-* **Implementation Details:** Backed by `DotNetWinForms.UiPost` in `Runtime.WinForms.cs`. It posts the task using `SynchronizationContext.Post` to run on the background UI thread. Any errors thrown during execution are caught and silently swallowed.
+* **Description:** Reference cast: verify `obj` is an instance of `type-name` (error if not) and return it re-wrapped carrying `type-name` as its static hint. This ensures that later `dotnet:invoke` or `dotnet:new` overload resolution treats it as `type-name` (useful for upcasting to a base class/interface). For value-type conversions use `dotnet:box` instead.
+
+---
+
+### `DOTNET:ENUM-OR`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:enum-or enum-type &rest members)
+  ```
+* **Description:** Combine `[Flags]` enum members with bitwise OR. `enum-type` is a type-name string/symbol or `System.Type`. Each member is a member-name string/symbol (case-insensitive), an integer, or an existing enum value of the type.
 * **Usage Example:**
   ```lisp
-  (dotnet:ui-post
-    (lambda ()
-      (format t "Asynchronously updating UI from thread: ~A~%"
-              (dotnet:static "System.Threading.Thread" "get_CurrentThread"))))
+  (dotnet:enum-or "System.IO.FileAccess" "Read" "Write")
   ```
+
+---
+
+### `DOTNET:EXCEPTION-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:exception-type condition)
+  ```
+* **Description:** For a condition wrapping a raw .NET exception (e.g. caught in `handler-case`), return the original CLR exception `System.Type`; returns `nil` for an ordinary Lisp condition.
+
+---
+
+### `DOTNET:EXCEPTION-TYPEP`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:exception-typep condition type-name)
+  ```
+* **Description:** Returns `t` if `condition` wraps a raw .NET exception whose CLR type is `type-name` or a subtype (`Type.IsAssignableFrom`). `type-name` is a type-name string/symbol or `System.Type`. This is the matcher `dotnet:handler-bind` uses.
+
+---
+
+### `DOTNET:HANDLER-BIND`
+
+* **Type:** Macro
+* **Syntax:**
+  ```lisp
+  (dotnet:handler-bind ((type-name handler) ...) body...)
+  ```
+* **Description:** A dedicated macro that wraps Lisp `handler-bind` to catch specific .NET exceptions. It unwraps the condition and matches the .NET type using `dotnet:exception-typep`.
+
+---
+
+### `DOTNET:IS-INSTANCE-OF`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:is-instance-of obj type-name)
+  ```
+* **Description:** Return `t` if `obj` is an instance of `type-name` (a type-name string/symbol or `System.Type`), else `nil`. `obj` may be a wrapped .NET object or a plain Lisp value (marshalled to its natural .NET type first). Replaces manual `Type.IsAssignableFrom` checks.
+
+---
+
+### `DOTNET:MAKE-ARRAY`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:make-array element-type &rest dimensions)
+  ```
+* **Description:** Create a typed .NET array of `element-type` sized by `dimensions`, filled with the element type's default. One dimension creates a 1-D array; several creates a multi-dimensional array. `element-type` is a type-name string/symbol or a resolved `System.Type`. Access elements via `(dotnet:invoke arr "get_Item"/"set_Item" idx... [val])`.
+* **Usage Example:**
+  ```lisp
+  (dotnet:make-array "System.Int32" 100)
+  (dotnet:make-array "System.Single" 10 20)
+  ```
+
+---
+
+### `DOTNET:MAKE-GENERIC-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:make-generic-type open-type type-args-list)
+  ```
+* **Description:** Construct a closed generic `System.Type` from an open generic type definition and a list of type-argument names. `open-type` may carry the CLR backtick-arity suffix (e.g. `"...Dictionary\`2"`) or omit it (arity inferred from the list). The result is usable with `dotnet:new` and other type args.
+* **Usage Example:**
+  ```lisp
+  (dotnet:make-generic-type "System.Collections.Generic.Dictionary" '("System.String" "System.Int32"))
+  ```
+
+---
+
+### `DOTNET:NEW-ARRAY`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:new-array element-type &rest elements)
+  ```
+* **Description:** Create a typed .NET array (element-type[]) filled with the marshalled `elements`. `element-type` is a type-name string/symbol or a resolved `System.Type`. A Lisp list or vector is also auto-marshalled to an array-typed parameter or property natively, but this allows explicit creation.
+
+---
+
+### `DOTNET:NULL`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:null)
+  ```
+* **Description:** Return a marker that marshals to an explicit .NET `null`, for a reference or `Nullable<T>` parameter. Distinct from Lisp `nil`, which marshals to `false` for a `bool` / `Nullable<bool>` target.

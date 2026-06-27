@@ -68,7 +68,7 @@ all necessarily compatible with each other.
 
 ## CLOS
 
-* Multimethods: Allow dispatching on C# types
+* Multimethods: Allow dispatching on C# types - **DONE (as of 0.1.9)**
   * Example:
     ```lisp
     (defmethod do-something ((arg "Some.CSharp.Type"))
