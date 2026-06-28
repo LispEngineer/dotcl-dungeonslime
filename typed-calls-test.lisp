@@ -109,5 +109,3 @@
     (assert-not-fboundp '(setf microsoft-xna-framework-input-game-pad-state:is-connected) "GamePadState.IsConnected mutator absence"))
   (format *error-output* "  [ALL PASSED] Detailed property accessor/mutator tests completed successfully.~%"))
 
-;; Run tests immediately upon loading
-(run-typed-calls-tests)

@@ -27,6 +27,9 @@
   (format *error-output* "[test-harness.lisp] Running C# Packages Integration tests...~%")
   (run-cspackages-tests)
 
+  (format *error-output* "[test-harness.lisp] Running Typed Calls tests...~%")
+  (run-typed-calls-tests)
+
   (format *error-output* "[test-harness.lisp] Running Load System tests...~%")
   (run-load-system-tests)
 
