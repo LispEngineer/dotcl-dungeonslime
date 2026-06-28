@@ -739,7 +739,7 @@
                              metadata)))
     
     (when (and filters (= 0 (length classes-to-gen)))
-      (format *error-output* "Warning: No classes matched the filter ~S~%" class-filter))
+      (utils:format-red *error-output* "Warning: No classes matched the filter ~S~%" class-filter))
     
     (dolist (cls classes-to-gen)
       (format *error-output* "Generating package for C# Class: ~A~%" (getf cls :fully-qualified-name))
@@ -749,12 +749,16 @@
 
 (defun run-assembly-package-generator (metadata-file class-filter output-dir &optional constant-properties-str)
   "CLI entry point called by DotclHost.Call. Maps string parameters safely."
-  (let ((mfile (and metadata-file (> (length metadata-file) 0) metadata-file))
-        (cfilter (and class-filter (> (length class-filter) 0) class-filter))
-        (odir (and output-dir (> (length output-dir) 0) output-dir))
-        (cprops (and constant-properties-str (> (length constant-properties-str) 0) (split-string constant-properties-str #\,))))
-    (unless mfile
-      (error "Metadata file path is required."))
-    (unless odir
-      (error "Output directory path is required."))
-    (generate-assembly-packages mfile cfilter odir cprops)))
+  (handler-case
+      (let ((mfile (and metadata-file (> (length metadata-file) 0) metadata-file))
+            (cfilter (and class-filter (> (length class-filter) 0) class-filter))
+            (odir (and output-dir (> (length output-dir) 0) output-dir))
+            (cprops (and constant-properties-str (> (length constant-properties-str) 0) (split-string constant-properties-str #\,))))
+        (unless mfile
+          (error "Metadata file path is required."))
+        (unless odir
+          (error "Output directory path is required."))
+        (generate-assembly-packages mfile cfilter odir cprops))
+    (error (c)
+      (utils:format-red *error-output* "Error in assembly-package-generator: ~A~%" c)
+      (error c))))

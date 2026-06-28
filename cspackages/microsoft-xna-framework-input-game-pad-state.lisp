@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-27T13:31:55Z
+;;; Creation Date: 2026-06-28T01:13:32Z
 
 (in-package :cl-user)
 
@@ -19,7 +19,7 @@
    #:new-game-pad-thumb-sticks-game-pad-triggers-game-pad-buttons-game-pad-d-pad
    #:new-vector2-vector2-single-single-buttons
    #:new-vector2-vector2-single-single-buttons[]
-   #:+default+
+   #:default
    #:buttons
    #:d-pad
    #:is-connected
@@ -39,7 +39,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(defconstant <creation> "2026-06-27T13:31:55Z")
+(defconstant <creation> "2026-06-28T01:13:32Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS
@@ -63,7 +63,7 @@
   "Calls Microsoft.Xna.Framework.Input.GamePadState constructor new(Vector2, Vector2, Single, Single, Buttons[])"
   (dotnet:new <type-str> left-thumb-stick right-thumb-stick left-trigger right-trigger buttons))
 
-(defconstant +default+ (dotnet:static <type-str> "Default"))
+(define-symbol-macro default (dotnet:static <type-str> "Default"))
 
 (defun buttons (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_Buttons"))

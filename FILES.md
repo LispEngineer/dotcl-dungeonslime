@@ -262,6 +262,8 @@ and files in this repository.
   * Generates C# object constructors (version 11), generating `new` wrappers for each package
     with support for overload resolution (passthrough `new` and type-suffixed functions like
     `new-single-single`) and implicit default constructor injection for structs.
+  * Refactored in DotCL 0.1.14 to wrap warnings and errors (such as unmatched filters or execution errors)
+    using `utils:format-red` for high-visibility terminal printing.
   * `package-generator-tests.lisp`: Unit test suite verifying the naming
     conversion, string splitting, member filtering, and constructor classification behaviors of
     the assembly package generator, as well as testing the generated

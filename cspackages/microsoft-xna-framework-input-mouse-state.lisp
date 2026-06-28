@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-27T13:31:49Z
+;;; Creation Date: 2026-06-28T01:13:28Z
 
 (in-package :cl-user)
 
@@ -40,7 +40,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.MouseState"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(defconstant <creation> "2026-06-27T13:31:49Z")
+(defconstant <creation> "2026-06-28T01:13:28Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS

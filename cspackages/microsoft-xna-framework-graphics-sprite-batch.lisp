@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteBatch
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-27T13:32:22Z
+;;; Creation Date: 2026-06-28T01:13:49Z
 
 (in-package :cl-user)
 
@@ -35,7 +35,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteBatch"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteBatch")
-(defconstant <creation> "2026-06-27T13:32:22Z")
+(defconstant <creation> "2026-06-28T01:13:49Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS

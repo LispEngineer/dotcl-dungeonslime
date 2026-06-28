@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
 ;;; Generator Version: 11
-;;; Creation Date: 2026-06-27T13:31:39Z
+;;; Creation Date: 2026-06-28T01:13:22Z
 
 (in-package :cl-user)
 
@@ -53,7 +53,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(defconstant <creation> "2026-06-27T13:31:39Z")
+(defconstant <creation> "2026-06-28T01:13:22Z")
 (defconstant <version> 11)
 
 ;; Register C# Type with CLOS
