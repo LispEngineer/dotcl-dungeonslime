@@ -360,6 +360,11 @@ C# Lisp Package Generator v11: Object Constructor Support:
 * Automatically injects parameterless default constructors for structs (value types),
   which are otherwise omitted by the Reflection API.
 
+C# Lisp Package Generator v12: Generic Method Support:
+* Generates wrapper functions for generic methods of exactly one type argument.
+* The wrapper accepts a `type` parameter (a type name string, alias, or System.Type object) as its first argument, followed by `obj` (for instance methods), and regular arguments.
+* Calls `dotnet:invoke-generic` or `dotnet:static-generic` passing `(list type)` under the hood.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

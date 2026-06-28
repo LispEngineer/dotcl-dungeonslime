@@ -69,6 +69,10 @@
             (:name "RefMethod" :is-static t :return-type "System.Void" :parameters ((:name "value" :type "System.Int32" :ref t)))
             ;; 5. Property accessor
             (:name "get_Title" :is-static t :return-type "System.String" :parameters nil)
+            ;; 6. Generic method with arity 1
+            (:name "GenericArity1" :is-static t :is-generic t :generic-arity 1 :return-type "T" :parameters nil)
+            ;; 7. Generic method with arity 2
+            (:name "GenericArity2" :is-static t :is-generic t :generic-arity 2 :return-type "T" :parameters nil)
             )))
     
     (assert-test (assembly-package-generator::simple-method-p 
@@ -99,7 +103,19 @@
                   (sixth methods-list)
                   methods-list)
                 nil
-                "simple-method-p rejects property getter method (get_Title)"))
+                "simple-method-p rejects property getter method (get_Title)")
+
+    (assert-test (assembly-package-generator::simple-method-p 
+                  (nth 6 methods-list)
+                  methods-list)
+                t
+                "simple-method-p accepts generic method of arity 1")
+
+    (assert-test (assembly-package-generator::simple-method-p 
+                  (nth 7 methods-list)
+                  methods-list)
+                nil
+                "simple-method-p rejects generic method of arity 2"))
 
   ;; 3.5 Test clean-constructor-p and constructor-overload-name helper logic using mock plists
   (let ((ctors-list

@@ -284,7 +284,7 @@
           (format *error-output* "[SCHEMA ERROR] ~A: Method entry is not a plist: ~S~%" context method))
         (progn
           (when (not (validate-plist-keys method '(:name :return-type)
-                                         '(:name :mangled-name :is-static :extension-method :return-type :assembly-qualified-return-type :parameters :documentation)
+                                         '(:name :mangled-name :is-static :extension-method :return-type :assembly-qualified-return-type :parameters :documentation :is-generic :generic-arity)
                                          context))
             (setf valid nil))
           (let ((mname (getf method :name))

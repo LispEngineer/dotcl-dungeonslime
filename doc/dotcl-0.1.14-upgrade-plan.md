@@ -126,5 +126,13 @@ The Lisp package generator (`assembly-package-generator.lisp` and `AssemblyToLis
       (apply #'dotnet:new-array <type-str> elements))
     ```
 
+### E. Support for Generic Methods of Exactly One Type Argument (**DONE**)
+* **Implemented Behavior:**
+  - Extracted `:is-generic` and `:generic-arity` in `AssemblyToLispy.cs`.
+  - Modified `assembly-package-generator.lisp` (`simple-method-p`, `clean-method-p`) to accept generic methods of exactly 1 type argument.
+  - Generated wrappers prefixing the method arguments with the `type` parameter, calling `dotnet:invoke-generic` or `dotnet:static-generic` under the hood.
+* **Open Questions for 2+ Type Arguments:**
+  - For generic methods with 2+ type arguments, should the syntax be flat positional (e.g. `(method type1 type2 obj args...)`) or list-based (e.g. `(method (list type1 type2) obj args...)`)? This design decision remains open and will be resolved when implementing 2+ generic arity support.
+
 ## Conclusion
 By adopting these tools, we can further reduce the footprint of `mg-classes.lisp` and eliminate custom reflection wrappers in `clr-generic.lisp`. No code has been modified yet; this plan serves as a roadmap for the next refactoring pass.

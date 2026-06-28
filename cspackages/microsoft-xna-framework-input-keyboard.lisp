@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 11
-;;; Creation Date: 2026-06-28T01:13:24Z
+;;; Generator Version: 12
+;;; Creation Date: 2026-06-28T01:32:10Z
 
 (in-package :cl-user)
 
@@ -20,8 +20,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Keyboard"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(defconstant <creation> "2026-06-28T01:13:24Z")
-(defconstant <version> 11)
+(defconstant <creation> "2026-06-28T01:32:10Z")
+(defconstant <version> 12)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)

@@ -122,4 +122,26 @@ namespace AssemblyToLispyTestTarget
         {
         }
     }
+
+    /// <summary>
+    /// A class containing generic methods of one type argument for testing.
+    /// </summary>
+    public class GenericMethodTestClass
+    {
+        /// <summary>
+        /// A generic instance method of one type argument.
+        /// </summary>
+        public T Load<T>(string name)
+        {
+            return default(T)!;
+        }
+
+        /// <summary>
+        /// A generic static method of one type argument.
+        /// </summary>
+        public static T Create<T>()
+        {
+            return default(T)!;
+        }
+    }
 }

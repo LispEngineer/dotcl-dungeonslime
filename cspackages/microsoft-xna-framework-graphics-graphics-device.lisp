@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 11
-;;; Creation Date: 2026-06-28T01:13:54Z
+;;; Generator Version: 12
+;;; Creation Date: 2026-06-28T01:32:42Z
 
 (in-package :cl-user)
 
@@ -81,8 +81,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(defconstant <creation> "2026-06-28T01:13:54Z")
-(defconstant <version> 11)
+(defconstant <creation> "2026-06-28T01:32:42Z")
+(defconstant <version> 12)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -259,52 +259,52 @@
 (defun draw-primitives (obj primitive-type vertex-start primitive-count)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawPrimitives" primitive-type vertex-start primitive-count))
 
-(defun draw-user-indexed-primitives (obj &rest args)
+(defun draw-user-indexed-primitives (type obj &rest args)
   "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" args))
+  (apply #'dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (list type) args))
 
-(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32 (obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count)
+(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32 (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int16[], Int32, Int32) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
 
-(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32 (obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count)
+(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32 (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int32[], Int32, Int32) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
 
-(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32-vertex-declaration (obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration)
+(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32-vertex-declaration (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int16[], Int32, Int32, VertexDeclaration) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
 
-(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32-vertex-declaration (obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration)
+(defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32-vertex-declaration (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int32[], Int32, Int32, VertexDeclaration) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
 
-(defun draw-user-primitives (obj &rest args)
+(defun draw-user-primitives (type obj &rest args)
   "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" args))
+  (apply #'dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (list type) args))
 
-(defun draw-user-primitives-primitive-type-t[]-int32-int32 (obj primitive-type vertex-data vertex-offset primitive-count)
+(defun draw-user-primitives-primitive-type-t[]-int32-int32 (type obj primitive-type vertex-data vertex-offset primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives DrawUserPrimitives(PrimitiveType, T[], Int32, Int32) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" primitive-type vertex-data vertex-offset primitive-count))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (list type) primitive-type vertex-data vertex-offset primitive-count))
 
-(defun draw-user-primitives-primitive-type-t[]-int32-int32-vertex-declaration (obj primitive-type vertex-data vertex-offset primitive-count vertex-declaration)
+(defun draw-user-primitives-primitive-type-t[]-int32-int32-vertex-declaration (type obj primitive-type vertex-data vertex-offset primitive-count vertex-declaration)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives DrawUserPrimitives(PrimitiveType, T[], Int32, Int32, VertexDeclaration) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" primitive-type vertex-data vertex-offset primitive-count vertex-declaration))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (list type) primitive-type vertex-data vertex-offset primitive-count vertex-declaration))
 
 (defun finalize (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Finalize"))
 
-(defun get-back-buffer-data (obj &rest args)
+(defun get-back-buffer-data (type obj &rest args)
   "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" args))
+  (apply #'dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (list type) args))
 
-(defun get-back-buffer-data-t[] (obj data)
+(defun get-back-buffer-data-t[] (type obj data)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData GetBackBufferData(T[]) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" data))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (list type) data))
 
-(defun get-back-buffer-data-t[]-int32-int32 (obj data start-index element-count)
+(defun get-back-buffer-data-t[]-int32-int32 (type obj data start-index element-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData GetBackBufferData(T[], Int32, Int32) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" data start-index element-count))
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (list type) data start-index element-count))
 
 (defun get-render-targets (obj &rest args)
   "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetRenderTargets overloads. Dispatches at runtime."

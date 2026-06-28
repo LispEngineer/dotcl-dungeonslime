@@ -97,6 +97,14 @@ To call generic methods, you must explicitly supply the type arguments.
 (dotnet:invoke-generic manager "Load" '("Microsoft.Xna.Framework.Graphics.Texture2D") "logo")
 ```
 
+**C# Lisp Package Generator Support:**
+For C# classes with generic methods of exactly one type argument, the package generator automatically outputs wrappers. The `type` parameter is placed first, followed by the target object `obj` (if an instance method), followed by the rest of the arguments:
+- **Instance generic method**: `(load type obj asset-name)`
+- **Static generic method**: `(create type args...)`
+
+The `type` parameter accepts either a string representing the type name or alias (e.g. `"Microsoft.Xna.Framework.Graphics.Texture2D"`) or a `System.Type` object.
+
+
 ### Dealing with Overloads and Out/Ref Parameters
 
 **Type Hinting / Boxing:**

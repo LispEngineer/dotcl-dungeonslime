@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
-;;; Generator Version: 11
-;;; Creation Date: 2026-06-28T01:13:43Z
+;;; Generator Version: 12
+;;; Creation Date: 2026-06-28T01:32:31Z
 
 (in-package :cl-user)
 
@@ -37,8 +37,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(defconstant <creation> "2026-06-28T01:13:43Z")
-(defconstant <version> 11)
+(defconstant <creation> "2026-06-28T01:32:31Z")
+(defconstant <version> 12)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -84,17 +84,17 @@
 (defun finalize (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Finalize"))
 
-(defun load (obj asset-name)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Load" asset-name))
+(defun load (type obj asset-name)
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Load" (list type) asset-name))
 
-(defun load-localized (obj asset-name)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "LoadLocalized" asset-name))
+(defun load-localized (type obj asset-name)
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "LoadLocalized" (list type) asset-name))
 
 (defun open-stream (obj asset-name)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "OpenStream" asset-name))
 
-(defun reload-asset (obj original-asset-name current-asset)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "ReloadAsset" original-asset-name current-asset))
+(defun reload-asset (type obj original-asset-name current-asset)
+  (dotnet:invoke-generic (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "ReloadAsset" (list type) original-asset-name current-asset))
 
 (defun reload-graphics-assets (obj)
   (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "ReloadGraphicsAssets"))

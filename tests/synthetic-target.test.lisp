@@ -76,4 +76,21 @@
         (when ext-method
           (assert-true (getf ext-method :extension-method) "Method should have :extension-method flag")
           (let ((params (getf ext-method :parameters)))
-            (assert-true (getf (nth 0 params) :extension-this) "First parameter should be tagged as :extension-this")))))))
+            (assert-true (getf (nth 0 params) :extension-this) "First parameter should be tagged as :extension-this"))))))
+
+  ;; Test GenericMethodTestClass
+  (let ((gmc (find-if (lambda (cls) (string= (getf cls :name) "GenericMethodTestClass")) *metadata*)))
+    (assert-not-null gmc "Should find GenericMethodTestClass")
+    (when gmc
+      (let ((load-method (find-if (lambda (m) (string= (getf m :name) "Load")) (getf gmc :methods))))
+        (assert-not-null load-method "Should find Load method")
+        (when load-method
+          (assert-true (getf load-method :is-generic) "Load method should be generic")
+          (assert-equal 1 (getf load-method :generic-arity) "Load generic-arity should be 1")
+          (assert-equal nil (getf load-method :is-static) "Load method should be instance")))
+      (let ((create-method (find-if (lambda (m) (string= (getf m :name) "Create")) (getf gmc :methods))))
+        (assert-not-null create-method "Should find Create method")
+        (when create-method
+          (assert-true (getf create-method :is-generic) "Create method should be generic")
+          (assert-equal 1 (getf create-method :generic-arity) "Create generic-arity should be 1")
+          (assert-true (getf create-method :is-static) "Create method should be static"))))))

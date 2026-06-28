@@ -933,3 +933,12 @@ When upgrading to DotCL 0.1.14 and performing `make build`, the compilation cras
 * **Pre-declaration Stub**: To prevent reader package lookup errors, a stub `(defpackage :anaphora)` was added to `packages.lisp` (which is compiled first), following the established repository pattern for C# package stubs.
 * **Stale FASL Cleanup**: Stale `.fasl` files compiled by previous DotCL versions (such as 0.1.11 or 0.1.12) are incompatible with DotCL 0.1.14 and are silently ignored by the loader during the dependency resolution phase. Consequently, the actual `"anaphora"` package was never loaded. Deleting all stale `.fasl` files in both the workspace and the Quicklisp directory and cleaning the project's `obj` directory forces a full rebuild, compiling the dependencies cleanly using DotCL 0.1.14.
 
+## 3. C# Generic Method Wrappers (Generator Version 12)
+To support invoking generic methods of exactly one type argument from Lisp, the C# Lisp Package Generator has been enhanced:
+
+* **Metadata Extraction**: [AssemblyToLispy.cs](file:///home/dfields/src/cl/dotcl-dungeonslime/AssemblyToLispy.cs) formats generic methods by exporting `:is-generic t` and `:generic-arity [count]` (retrieved via `method.IsGenericMethod` and `method.GetGenericArguments().Length`).
+* **Schema Validation**: Updated the testing schema ([framework.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/tests/framework.lisp) and [assembly-to-lispy-tests-final.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/assembly-to-lispy-tests-final.lisp)) to allow `:is-generic` and `:generic-arity` keywords inside method property lists, preventing validation failures.
+* **Method Classification**: Modified `simple-method-p` and `clean-method-p` in [assembly-package-generator.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/assembly-package-generator.lisp) to support generic methods if their generic arity is exactly 1.
+* **Wrapper Generation**: Generated Lisp functions take the `type` parameter (supporting type name string, alias, or System.Type object) as the first argument (or second argument after `obj` for instance methods). The wrapper delegates invocation to DotCL's `dotnet:invoke-generic` or `dotnet:static-generic` interop targets by passing `(list type)` as the type arguments list.
+
+

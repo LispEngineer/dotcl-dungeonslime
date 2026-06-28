@@ -532,6 +532,11 @@ namespace DungeonSlime {
                 parts.Add($":mangled-name {EscapeLispString(method.Name)}");
             }
 
+            if (method.IsGenericMethod) {
+                parts.Add(":is-generic t");
+                parts.Add($":generic-arity {method.GetGenericArguments().Length}");
+            }
+
             if (method.IsStatic) {
                 parts.Add(":is-static t");
             }
