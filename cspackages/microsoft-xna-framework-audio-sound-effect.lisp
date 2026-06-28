@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
 ;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T01:32:45Z
+;;; Creation Date: 2026-06-28T14:10:11Z
 
 (in-package :cl-user)
 
@@ -34,7 +34,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(defconstant <creation> "2026-06-28T01:32:45Z")
+(defconstant <creation> "2026-06-28T14:10:11Z")
 (defconstant <version> 12)
 
 ;; Register C# Type with CLOS

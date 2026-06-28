@@ -10,7 +10,9 @@
                     (let ((name (pathname-name file)))
                       (list :file (concatenate 'string "cspackages/" name)
                             :pathname (uiop:subpathname cspackages-dir (concatenate 'string name ".lisp"))
-                            :depends-on '("packages" "utils" "monoutils"))))
+                            :depends-on (if (string-equal name "system-app-domain")
+                                            '("packages" "monoutils")
+                                            '("packages" "utils" "monoutils")))))
                   (remove-if-not (lambda (file)
                                    (string-equal (pathname-type file) "lisp"))
                                  (uiop:directory-files cspackages-dir)))
@@ -28,14 +30,24 @@
   :components #.(append
                  '((:file "packages")
                    (:file "settings" :depends-on ("packages")) ;; Load this file early, it contains declaims
-                   (:file "utils" :depends-on ("packages"))
+                   (:file "type-aliases" :depends-on ("packages" "settings"))
                    (:file "monoutils" :depends-on ("packages"))
-                   (:file "constants")
-                   (:file "type-aliases")
+                  )
+                 ;; Load system-app-domain cspackage first (needed by utils)
+                 (remove-if-not (lambda (comp)
+                                  (string= (second comp) "cspackages/system-app-domain"))
+                                *cspackages-components*)
+                 '((:file "utils" :depends-on ("packages" "cspackages/system-app-domain"))
+                  )
+                 ;; Load remaining cspackages
+                 (remove-if (lambda (comp)
+                              (string= (second comp) "cspackages/system-app-domain"))
+                            *cspackages-components*)
+                 '((:file "constants")
                    (:file "load-system-test")
                    (:file "csharp" :depends-on ("packages"))
-                   (:file "assembly-package-generator" :depends-on ("packages" "utils")))
-                 *cspackages-components*
+                   (:file "assembly-package-generator" :depends-on ("packages" "utils"))
+                  )
                  (list
                   `(:file "package-generator-tests" :depends-on ("utils" "assembly-package-generator"
                                                                  ,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)))

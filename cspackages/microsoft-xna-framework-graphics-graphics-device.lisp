@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
 ;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T01:32:42Z
+;;; Creation Date: 2026-06-28T14:10:09Z
 
 (in-package :cl-user)
 
@@ -81,7 +81,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(defconstant <creation> "2026-06-28T01:32:42Z")
+(defconstant <creation> "2026-06-28T14:10:09Z")
 (defconstant <version> 12)
 
 ;; Register C# Type with CLOS

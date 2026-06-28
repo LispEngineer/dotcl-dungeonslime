@@ -7,40 +7,62 @@
 (format *error-output* "[packages.lisp] Defining packages in package ~S~%" *package*)
 
 ;; Pre-declare empty C# packages so local-nicknames doesn't crash
-(defpackage :microsoft-xna-framework-vector2)
-(defpackage :system-time-span)
-(defpackage :microsoft-xna-framework-input-keys)
-(defpackage :microsoft-xna-framework-input-keyboard)
-(defpackage :microsoft-xna-framework-input-keyboard-state)
+;; Recreate this with: fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/'
+(defpackage :microsoft-xna-framework-audio-sound-effect-instance)
+(defpackage :microsoft-xna-framework-audio-sound-effect)
+(defpackage :microsoft-xna-framework-audio-sound-state)
+(defpackage :microsoft-xna-framework-color)
+(defpackage :microsoft-xna-framework-content-content-manager)
+(defpackage :microsoft-xna-framework-game)
+(defpackage :microsoft-xna-framework-game-time)
+(defpackage :microsoft-xna-framework-graphics-graphics-device)
+(defpackage :microsoft-xna-framework-graphics-presentation-parameters)
+(defpackage :microsoft-xna-framework-graphics-sampler-state)
+(defpackage :microsoft-xna-framework-graphics-sprite-batch)
+(defpackage :microsoft-xna-framework-graphics-sprite-effects)
+(defpackage :microsoft-xna-framework-graphics-sprite-font)
+(defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
+(defpackage :microsoft-xna-framework-input-buttons)
+(defpackage :microsoft-xna-framework-input-button-state)
+(defpackage :microsoft-xna-framework-input-game-pad-d-pad)
 (defpackage :microsoft-xna-framework-input-game-pad)
 (defpackage :microsoft-xna-framework-input-game-pad-state)
 (defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks)
-(defpackage :microsoft-xna-framework-input-buttons)
-(defpackage :microsoft-xna-framework-color)
-(defpackage :microsoft-xna-framework-graphics-sprite-effects)
-(defpackage :microsoft-xna-framework-graphics-sprite-sort-mode)
-(defpackage :microsoft-xna-framework-graphics-sampler-state)
-(defpackage :microsoft-xna-framework-player-index)
-(defpackage :microsoft-xna-framework-input-mouse-state)
 (defpackage :microsoft-xna-framework-input-game-pad-triggers)
-(defpackage :microsoft-xna-framework-input-button-state)
-(defpackage :microsoft-xna-framework-point)
-(defpackage :microsoft-xna-framework-rectangle)
-(defpackage :microsoft-xna-framework-graphics-graphics-device)
-(defpackage :microsoft-xna-framework-graphics-presentation-parameters)
-(defpackage :microsoft-xna-framework-audio-sound-effect)
-(defpackage :microsoft-xna-framework-audio-sound-effect-instance)
-(defpackage :microsoft-xna-framework-audio-sound-state)
+(defpackage :microsoft-xna-framework-input-keyboard)
+(defpackage :microsoft-xna-framework-input-keyboard-state)
+(defpackage :microsoft-xna-framework-input-keys)
+(defpackage :microsoft-xna-framework-input-mouse)
+(defpackage :microsoft-xna-framework-input-mouse-state)
 (defpackage :microsoft-xna-framework-media-media-player)
 (defpackage :microsoft-xna-framework-media-song)
-(defpackage :microsoft-xna-framework-game-time)
-(defpackage :microsoft-xna-framework-game)
-(defpackage :microsoft-xna-framework-graphics-sprite-batch)
-(defpackage :microsoft-xna-framework-input-mouse)
+(defpackage :microsoft-xna-framework-player-index)
+(defpackage :microsoft-xna-framework-point)
+(defpackage :microsoft-xna-framework-rectangle)
+(defpackage :microsoft-xna-framework-vector2)
+(defpackage :system-app-domain
+  (:export #:base-directory
+           #:current-domain))
+(defpackage :system-boolean)
+(defpackage :system-console)
+(defpackage :system-convert)
+(defpackage :system-io-path)
+(defpackage :system-object
+  (:export #:get-type))
+(defpackage :system-reflection-member-info)
+(defpackage :system-time-span)
+(defpackage :system-type
+  (:export #:full-name))
+(defpackage :system-uri-kind)
+(defpackage :system-uri)
+;; Additional manually added packages
 (defpackage :anaphora)
 
 (defpackage :utils
   (:use :cl)
+  (:local-nicknames
+    (:path :system-io-path)
+    (:app-domain :system-app-domain))
   (:export #:safe-read-form-from-file
             #:+base-directory+
             #:format-red
@@ -50,6 +72,9 @@
 
 (defpackage :monoutils
   (:use :cl)
+  (:local-nicknames
+    (:object :system-object)
+    (:type :system-type))
   (:export #:add3
             #:dotnet-p
             #:boxed-dotnet-p
@@ -146,6 +171,7 @@
     (:song :microsoft-xna-framework-media-song)
     (:game-time :microsoft-xna-framework-game-time)
     (:game :microsoft-xna-framework-game)
+    (:app-domain :system-app-domain)
     (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch))
   (:export 
     ;; Constants

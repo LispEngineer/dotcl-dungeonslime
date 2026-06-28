@@ -14,12 +14,13 @@
       (read stream nil :eof))))                ; 4. Graceful EOF handling
 
 (defconstant +base-directory+
-  (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "BaseDirectory")
+  (app-domain:base-directory app-domain:current-domain)
   "Get the C# base directory of this current executable")
 
 ;; I have no idea why, but this stopped working...?
 ;; %Unhandled exception. System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
 ;;  ---> System.MissingMethodException: Method 'System.IO.Path.Combine' not found.
+
 #|
 (defun path-combine (part1 part2 &optional (part3 nil part3-p) (part4 nil part4-p))
   "Calls the C# Path Combining logic with 2-4 parameters."
@@ -27,11 +28,12 @@
           part1 part2 part3 part4 part3-p part4-p)
   (cond
    (part4-p
-    (dotnet:static "System.IO.Path" "Combine" part1 part2 part3 part4))
+    ;; Could use combine-string-string-string-string too
+    (path:combine part1 part2 part3 part4))
    (part3-p
-    (dotnet:static "System.IO.Path" "Combine" part1 part2 part3))
+    (path:combine part1 part2 part3))
    (t
-    (dotnet:static "System.IO.Path" "Combine" part1 part2))))
+    (path:combine part1 part2))))
 |#
 
 ;; UIOP version

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
 ;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T01:32:02Z
+;;; Creation Date: 2026-06-28T14:09:26Z
 
 (in-package :cl-user)
 
@@ -32,7 +32,7 @@
 
 (defconstant <type> (monoutils:get-type "System.Boolean"))
 (defconstant <type-str> "System.Boolean")
-(defconstant <creation> "2026-06-28T01:32:02Z")
+(defconstant <creation> "2026-06-28T14:09:26Z")
 (defconstant <version> 12)
 
 ;; Register C# Type with CLOS

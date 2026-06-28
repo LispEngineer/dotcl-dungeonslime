@@ -1,0 +1,1646 @@
+;;; Generated automatically. Do not edit.
+;;; Class: System.Type
+;;; Generator Version: 12
+;;; Creation Date: 2026-06-28T14:09:28Z
+
+(in-package :cl-user)
+
+(defpackage :system-type
+  (:use :cl)
+  (:shadow
+   #:=
+   #:get-properties
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:delimiter
+   #:empty-types
+   #:filter-attribute
+   #:filter-name
+   #:filter-name-ignore-case
+   #:missing
+   #:default-binder
+   #:assembly
+   #:assembly-qualified-name
+   #:attributes
+   #:base-type
+   #:contains-generic-parameters
+   #:declaring-method
+   #:declaring-type
+   #:full-name
+   #:generic-parameter-attributes
+   #:generic-parameter-position
+   #:generic-type-arguments
+   #:guid
+   #:has-element-type
+   #:is-abstract
+   #:is-ansi-class
+   #:is-array
+   #:is-auto-class
+   #:is-auto-layout
+   #:is-by-ref
+   #:is-by-ref-like
+   #:is-class
+   #:is-com-object
+   #:is-constructed-generic-type
+   #:is-contextful
+   #:is-enum
+   #:is-explicit-layout
+   #:is-function-pointer
+   #:is-generic-method-parameter
+   #:is-generic-parameter
+   #:is-generic-type
+   #:is-generic-type-definition
+   #:is-generic-type-parameter
+   #:is-import
+   #:is-interface
+   #:is-layout-sequential
+   #:is-marshal-by-ref
+   #:is-nested
+   #:is-nested-assembly
+   #:is-nested-fam-and-assem
+   #:is-nested-family
+   #:is-nested-fam-or-assem
+   #:is-nested-private
+   #:is-nested-public
+   #:is-not-public
+   #:is-pointer
+   #:is-primitive
+   #:is-public
+   #:is-sealed
+   #:is-security-critical
+   #:is-security-safe-critical
+   #:is-security-transparent
+   #:is-serializable
+   #:is-signature-type
+   #:is-special-name
+   #:is-sz-array
+   #:is-type-definition
+   #:is-unicode-class
+   #:is-unmanaged-function-pointer
+   #:is-value-type
+   #:is-variable-bound-array
+   #:is-visible
+   #:member-type
+   #:module
+   #:namespace
+   #:reflected-type
+   #:struct-layout-attribute
+   #:type-handle
+   #:type-initializer
+   #:underlying-system-type
+   #:=
+   #:equals
+   #:equals-object
+   #:equals-type
+   #:find-interfaces
+   #:find-members
+   #:get-array-rank
+   #:get-attribute-flags-impl
+   #:get-constructor
+   #:get-constructor-type[]
+   #:get-constructor-binding-flags-type[]
+   #:get-constructor-binding-flags-binder-type[]-parameter-modifier[]
+   #:get-constructor-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
+   #:get-constructor-impl
+   #:get-constructors
+   #:get-constructors-binding-flags
+   #:get-default-members
+   #:get-element-type
+   #:get-enum-name
+   #:get-enum-names
+   #:get-enum-underlying-type
+   #:get-enum-values
+   #:get-enum-values-as-underlying-type
+   #:get-event
+   #:get-event-string
+   #:get-event-string-binding-flags
+   #:get-events
+   #:get-events-binding-flags
+   #:get-field
+   #:get-field-string
+   #:get-field-string-binding-flags
+   #:get-fields
+   #:get-fields-binding-flags
+   #:get-function-pointer-calling-conventions
+   #:get-function-pointer-parameter-types
+   #:get-function-pointer-return-type
+   #:get-generic-arguments
+   #:get-generic-parameter-constraints
+   #:get-generic-type-definition
+   #:get-hash-code
+   #:get-interface
+   #:get-interface-string
+   #:get-interface-string-boolean
+   #:get-interface-map
+   #:get-interfaces
+   #:get-member
+   #:get-member-string
+   #:get-member-string-binding-flags
+   #:get-member-string-member-types-binding-flags
+   #:get-members
+   #:get-members-binding-flags
+   #:get-member-with-same-metadata-definition-as
+   #:get-method
+   #:get-method-string
+   #:get-method-string-binding-flags
+   #:get-method-string-type[]
+   #:get-method-string-binding-flags-type[]
+   #:get-method-string-type[]-parameter-modifier[]
+   #:get-method-string-int32-type[]
+   #:get-method-string-int32-type[]-parameter-modifier[]
+   #:get-method-string-int32-binding-flags-type[]
+   #:get-method-string-binding-flags-binder-type[]-parameter-modifier[]
+   #:get-method-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
+   #:get-method-string-int32-binding-flags-binder-type[]-parameter-modifier[]
+   #:get-method-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
+   #:get-method-impl
+   #:get-method-impl-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
+   #:get-method-impl-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
+   #:get-methods
+   #:get-methods-binding-flags
+   #:get-nested-type
+   #:get-nested-type-string
+   #:get-nested-type-string-binding-flags
+   #:get-nested-types
+   #:get-nested-types-binding-flags
+   #:get-optional-custom-modifiers
+   #:get-properties
+   #:get-properties-binding-flags
+   #:get-property
+   #:get-property-string
+   #:get-property-string-binding-flags
+   #:get-property-string-type
+   #:get-property-string-type[]
+   #:get-property-string-type-type[]
+   #:get-property-string-type-type[]-parameter-modifier[]
+   #:get-property-string-binding-flags-binder-type-type[]-parameter-modifier[]
+   #:get-property-impl
+   #:get-required-custom-modifiers
+   #:get-type
+   #:get-type-string
+   #:get-type-string-boolean
+   #:get-type-string-boolean-boolean
+   #:get-type-array
+   #:get-type-code
+   #:get-type-code-impl
+   #:get-type-from-clsid
+   #:get-type-from-clsid-guid
+   #:get-type-from-clsid-guid-boolean
+   #:get-type-from-clsid-guid-string
+   #:get-type-from-clsid-guid-string-boolean
+   #:get-type-from-handle
+   #:get-type-from-prog-id
+   #:get-type-from-prog-id-string
+   #:get-type-from-prog-id-string-boolean
+   #:get-type-from-prog-id-string-string
+   #:get-type-from-prog-id-string-string-boolean
+   #:get-type-handle
+   #:has-element-type-impl
+   #:invoke-member
+   #:invoke-member-string-binding-flags-binder-object-object[]
+   #:invoke-member-string-binding-flags-binder-object-object[]-culture-info
+   #:invoke-member-string-binding-flags-binder-object-object[]-parameter-modifier[]-culture-info-string[]
+   #:is-array-impl
+   #:is-assignable-from
+   #:is-assignable-to
+   #:is-by-ref-impl
+   #:is-com-object-impl
+   #:is-contextful-impl
+   #:is-enum-defined
+   #:is-equivalent-to
+   #:is-instance-of-type
+   #:is-marshal-by-ref-impl
+   #:is-pointer-impl
+   #:is-primitive-impl
+   #:is-subclass-of
+   #:is-value-type-impl
+   #:make-array-type
+   #:make-array-type-int32
+   #:make-by-ref-type
+   #:make-generic-method-parameter
+   #:make-pointer-type
+   #:not=
+   #:reflection-only-get-type
+   #:to-string
+  ))
+
+(in-package :system-type)
+
+(defconstant <type> (monoutils:get-type "System.Type"))
+(defconstant <type-str> "System.Type")
+(defconstant <creation> "2026-06-28T14:09:28Z")
+(defconstant <version> 12)
+
+;; Register C# Type with CLOS
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Type")))
+
+(defun new ()
+  "Summary: Initializes a new instance of the System.Type class.
+"
+  (dotnet:new <type-str>))
+
+(define-symbol-macro delimiter (dotnet:static <type-str> "Delimiter"))
+(setf (documentation 'delimiter 'variable) "Separates names in the namespace of the System.Type. This field is read-only.")
+
+(define-symbol-macro empty-types (dotnet:static <type-str> "EmptyTypes"))
+(setf (documentation 'empty-types 'variable) "Represents an empty array of type System.Type. This field is read-only.")
+
+(define-symbol-macro filter-attribute (dotnet:static <type-str> "FilterAttribute"))
+(setf (documentation 'filter-attribute 'variable) "Represents the member filter used on attributes. This field is read-only.")
+
+(define-symbol-macro filter-name (dotnet:static <type-str> "FilterName"))
+(setf (documentation 'filter-name 'variable) "Represents the case-sensitive member filter used on names. This field is read-only.")
+
+(define-symbol-macro filter-name-ignore-case (dotnet:static <type-str> "FilterNameIgnoreCase"))
+(setf (documentation 'filter-name-ignore-case 'variable) "Represents the case-insensitive member filter used on names. This field is read-only.")
+
+(define-symbol-macro missing (dotnet:static <type-str> "Missing"))
+(setf (documentation 'missing 'variable) "Represents a missing value in the System.Type information. This field is read-only.")
+
+(define-symbol-macro default-binder (dotnet:static <type-str> "DefaultBinder"))
+(setf (documentation 'default-binder 'variable) "Gets a reference to the default binder, which implements internal rules for selecting the appropriate members to be called by System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[]).")
+
+(defun assembly (obj)
+  "Gets the System.Reflection.Assembly in which the type is declared. For generic types, gets the System.Reflection.Assembly in which the generic type is defined."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_Assembly"))
+
+(defun assembly-qualified-name (obj)
+  "Gets the assembly-qualified name of the type, which includes the name of the assembly from which this System.Type object was loaded."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_AssemblyQualifiedName"))
+
+(defun attributes (obj)
+  "Gets the attributes associated with the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_Attributes"))
+
+(defun base-type (obj)
+  "Gets the type from which the current System.Type directly inherits."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_BaseType"))
+
+(defun contains-generic-parameters (obj)
+  "Gets a value indicating whether the current System.Type object has type parameters that have not been replaced by specific types."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_ContainsGenericParameters"))
+
+(defun declaring-method (obj)
+  "Gets a System.Reflection.MethodBase that represents the declaring method, if the current System.Type represents a type parameter of a generic method."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_DeclaringMethod"))
+
+(defun declaring-type (obj)
+  "Gets the type that declares the current nested type or generic type parameter."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_DeclaringType"))
+
+(defun full-name (obj)
+  "Gets the fully qualified name of the type, including its namespace but not its assembly."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_FullName"))
+
+(defun generic-parameter-attributes (obj)
+  "Gets a combination of System.Reflection.GenericParameterAttributes flags that describe the covariance and special constraints of the current generic type parameter."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_GenericParameterAttributes"))
+
+(defun generic-parameter-position (obj)
+  "Gets the position of the type parameter in the type parameter list of the generic type or method that declared the parameter, when the System.Type object represents a type parameter of a generic type or a generic method."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_GenericParameterPosition"))
+
+(defun generic-type-arguments (obj)
+  "Gets an array of the generic type arguments for this type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_GenericTypeArguments"))
+
+(defun guid (obj)
+  "Gets the GUID associated with the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_GUID"))
+
+(defun has-element-type (obj)
+  "Gets a value indicating whether the current System.Type encompasses or refers to another type; that is, whether the current System.Type is an array, a pointer, or is passed by reference."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_HasElementType"))
+
+(defun is-abstract (obj)
+  "Gets a value indicating whether the System.Type is abstract and must be overridden."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsAbstract"))
+
+(defun is-ansi-class (obj)
+  "Gets a value indicating whether the string format attribute is selected for the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsAnsiClass"))
+
+(defun is-array (obj)
+  "Gets a value that indicates whether the type is an array."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsArray"))
+
+(defun is-auto-class (obj)
+  "Gets a value indicating whether the string format attribute is selected for the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsAutoClass"))
+
+(defun is-auto-layout (obj)
+  "Gets a value indicating whether the fields of the current type are laid out automatically by the common language runtime."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsAutoLayout"))
+
+(defun is-by-ref (obj)
+  "Gets a value indicating whether the System.Type is passed by reference."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsByRef"))
+
+(defun is-by-ref-like (obj)
+  "Gets a value that indicates whether the type is a byref-like structure."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsByRefLike"))
+
+(defun is-class (obj)
+  "Gets a value indicating whether the System.Type is a class or a delegate; that is, not a value type or interface."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsClass"))
+
+(defun is-com-object (obj)
+  "Gets a value indicating whether the System.Type is a COM object."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsCOMObject"))
+
+(defun is-constructed-generic-type (obj)
+  "Gets a value that indicates whether this object represents a constructed generic type. You can create instances of a constructed generic type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsConstructedGenericType"))
+
+(defun is-contextful (obj)
+  "Gets a value indicating whether the System.Type can be hosted in a context."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsContextful"))
+
+(defun is-enum (obj)
+  "Gets a value indicating whether the current System.Type represents an enumeration."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsEnum"))
+
+(defun is-explicit-layout (obj)
+  "Gets a value indicating whether the fields of the current type are laid out at explicitly specified offsets."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsExplicitLayout"))
+
+(defun is-function-pointer (obj)
+  "Gets a value that indicates whether the current System.Type is a function pointer."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsFunctionPointer"))
+
+(defun is-generic-method-parameter (obj)
+  "Gets a value that indicates whether the current System.Type represents a type parameter in the definition of a generic method."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsGenericMethodParameter"))
+
+(defun is-generic-parameter (obj)
+  "Gets a value indicating whether the current System.Type represents a type parameter in the definition of a generic type or method."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsGenericParameter"))
+
+(defun is-generic-type (obj)
+  "Gets a value indicating whether the current type is a generic type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsGenericType"))
+
+(defun is-generic-type-definition (obj)
+  "Gets a value indicating whether the current System.Type represents a generic type definition, from which other generic types can be constructed."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsGenericTypeDefinition"))
+
+(defun is-generic-type-parameter (obj)
+  "Gets a value that indicates whether the current System.Type represents a type parameter in the definition of a generic type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsGenericTypeParameter"))
+
+(defun is-import (obj)
+  "Gets a value indicating whether the System.Type has a System.Runtime.InteropServices.ComImportAttribute attribute applied, indicating that it was imported from a COM type library."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsImport"))
+
+(defun is-interface (obj)
+  "Gets a value indicating whether the System.Type is an interface; that is, not a class or a value type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsInterface"))
+
+(defun is-layout-sequential (obj)
+  "Gets a value indicating whether the fields of the current type are laid out sequentially, in the order that they were defined or emitted to the metadata."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsLayoutSequential"))
+
+(defun is-marshal-by-ref (obj)
+  "Gets a value indicating whether the System.Type is marshaled by reference."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsMarshalByRef"))
+
+(defun is-nested (obj)
+  "Gets a value indicating whether the current System.Type object represents a type whose definition is nested inside the definition of another type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNested"))
+
+(defun is-nested-assembly (obj)
+  "Gets a value indicating whether the System.Type is nested and visible only within its own assembly."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedAssembly"))
+
+(defun is-nested-fam-and-assem (obj)
+  "Gets a value indicating whether the System.Type is nested and visible only to classes that belong to both its own family and its own assembly."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedFamANDAssem"))
+
+(defun is-nested-family (obj)
+  "Gets a value indicating whether the System.Type is nested and visible only within its own family."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedFamily"))
+
+(defun is-nested-fam-or-assem (obj)
+  "Gets a value indicating whether the System.Type is nested and visible only to classes that belong to either its own family or to its own assembly."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedFamORAssem"))
+
+(defun is-nested-private (obj)
+  "Gets a value indicating whether the System.Type is nested and declared private."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedPrivate"))
+
+(defun is-nested-public (obj)
+  "Gets a value indicating whether a class is nested and declared public."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNestedPublic"))
+
+(defun is-not-public (obj)
+  "Gets a value indicating whether the System.Type is not declared public."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsNotPublic"))
+
+(defun is-pointer (obj)
+  "Gets a value indicating whether the System.Type is a pointer."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsPointer"))
+
+(defun is-primitive (obj)
+  "Gets a value indicating whether the System.Type is one of the primitive types."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsPrimitive"))
+
+(defun is-public (obj)
+  "Gets a value indicating whether the System.Type is declared public."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsPublic"))
+
+(defun is-sealed (obj)
+  "Gets a value indicating whether the System.Type is declared sealed."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSealed"))
+
+(defun is-security-critical (obj)
+  "Gets a value that indicates whether the current type is security-critical or security-safe-critical at the current trust level, and therefore can perform critical operations."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSecurityCritical"))
+
+(defun is-security-safe-critical (obj)
+  "Gets a value that indicates whether the current type is security-safe-critical at the current trust level; that is, whether it can perform critical operations and can be accessed by transparent code."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSecuritySafeCritical"))
+
+(defun is-security-transparent (obj)
+  "Gets a value that indicates whether the current type is transparent at the current trust level, and therefore cannot perform critical operations."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSecurityTransparent"))
+
+(defun is-serializable (obj)
+  "Gets a value indicating whether the System.Type is binary serializable."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSerializable"))
+
+(defun is-signature-type (obj)
+  "Gets a value that indicates whether the type is a signature type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSignatureType"))
+
+(defun is-special-name (obj)
+  "Gets a value indicating whether the type has a name that requires special handling."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSpecialName"))
+
+(defun is-sz-array (obj)
+  "Gets a value that indicates whether the type is an array type that can represent only a single-dimensional array with a zero lower bound."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsSZArray"))
+
+(defun is-type-definition (obj)
+  "Gets a value that indicates whether the type is a type definition."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsTypeDefinition"))
+
+(defun is-unicode-class (obj)
+  "Gets a value indicating whether the string format attribute is selected for the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsUnicodeClass"))
+
+(defun is-unmanaged-function-pointer (obj)
+  "Gets a value that indicates whether the current System.Type is an unmanaged function pointer."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsUnmanagedFunctionPointer"))
+
+(defun is-value-type (obj)
+  "Gets a value indicating whether the System.Type is a value type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsValueType"))
+
+(defun is-variable-bound-array (obj)
+  "Gets a value that indicates whether the type is an array type that can represent a multi-dimensional array or an array with an arbitrary lower bound."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsVariableBoundArray"))
+
+(defun is-visible (obj)
+  "Gets a value indicating whether the System.Type can be accessed by code outside the assembly."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_IsVisible"))
+
+(defun member-type (obj)
+  "Gets a System.Reflection.MemberTypes value indicating that this member is a type or a nested type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_MemberType"))
+
+(defun module (obj)
+  "Gets the module (the DLL) in which the current System.Type is defined."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_Module"))
+
+(defun namespace (obj)
+  "Gets the namespace of the System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_Namespace"))
+
+(defun reflected-type (obj)
+  "Gets the class object that was used to obtain this member."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_ReflectedType"))
+
+(defun struct-layout-attribute (obj)
+  "Gets a System.Runtime.InteropServices.StructLayoutAttribute that describes the layout of the current type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_StructLayoutAttribute"))
+
+(defun type-handle (obj)
+  "Gets the handle for the current System.Type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_TypeHandle"))
+
+(defun type-initializer (obj)
+  "Gets the initializer for the type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_TypeInitializer"))
+
+(defun underlying-system-type (obj)
+  "Indicates the type provided by the common language runtime that represents this type."
+  (dotnet:invoke (the (dotnet "System.Type") obj) "get_UnderlyingSystemType"))
+
+(defun = (left right)
+  "Summary: Indicates whether two System.Type objects are equal.
+Returns: if left is equal to right; otherwise, .
+Parameters:
+  - left (System.Type): The first object to compare.
+  - right (System.Type): The second object to compare.
+"
+  (dotnet:static <type-str> "op_Equality" (the (dotnet "System.Type") left) (the (dotnet "System.Type") right)))
+
+(defun equals (obj &rest args)
+  "Passthrough for System.Type.Equals overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "Equals" args))
+
+(defun equals-object (obj o)
+  "Calls System.Type.Equals Equals(Object) -> Boolean. Summary: Determines if the underlying system type of the current System.Type object is the same as the underlying system type of the specified System.Object.
+Returns: if the underlying system type of o is the same as the underlying system type of the current System.Type; otherwise, . This method also returns if: - o is . - o cannot be cast or converted to a System.Type object.
+Parameters:
+  - o (System.Object): The object whose underlying system type is to be compared with the underlying system type of the current System.Type. For the comparison to succeed, o must be able to be cast or converted to an object of type System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "Equals" o))
+
+(defun equals-type (obj o)
+  "Calls System.Type.Equals Equals(Type) -> Boolean. Summary: Determines if the underlying system type of the current System.Type is the same as the underlying system type of the specified System.Type.
+Returns: if the underlying system type of o is the same as the underlying system type of the current System.Type; otherwise, .
+Parameters:
+  - o (System.Type): The object whose underlying system type is to be compared with the underlying system type of the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "Equals" o))
+
+(defun find-interfaces (obj filter filter-criteria)
+  "Summary: Returns an array of System.Type objects representing a filtered list of interfaces implemented or inherited by the current System.Type.
+Returns: An array of System.Type objects representing a filtered list of the interfaces implemented or inherited by the current System.Type, or an empty array if no interfaces matching the filter are implemented or inherited by the current System.Type.
+Parameters:
+  - filter (System.Reflection.TypeFilter): The delegate that compares the interfaces against filterCriteria.
+  - filter-criteria (System.Object): The search criteria that determines whether an interface should be included in the returned array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "FindInterfaces" filter filter-criteria))
+
+(defun find-members (obj member-type binding-attr filter filter-criteria)
+  "Summary: Returns a filtered array of System.Reflection.MemberInfo objects of the specified member type.
+Returns: A filtered array of System.Reflection.MemberInfo objects of the specified member type. -or- An empty array if the current System.Type does not have members of type memberType that match the filter criteria.
+Parameters:
+  - member-type (System.Reflection.MemberTypes): A bitwise combination of the enumeration values that indicates the type of member to search for.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - filter (System.Reflection.MemberFilter): The delegate that does the comparisons, returning if the member currently being inspected matches the filterCriteria and otherwise.
+  - filter-criteria (System.Object): The search criteria that determines whether a member is returned in the array of objects. The fields of , , and can be used in conjunction with the delegate supplied by this class.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "FindMembers" member-type binding-attr filter filter-criteria))
+
+(defun get-array-rank (obj)
+  "Summary: Gets the number of dimensions in an array.
+Returns: An integer that contains the number of dimensions in the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetArrayRank"))
+
+(defun get-attribute-flags-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.Attributes property and gets a bitwise combination of enumeration values that indicate the attributes associated with the System.Type.
+Returns: A System.Reflection.TypeAttributes object representing the attribute set of the System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetAttributeFlagsImpl"))
+
+(defun get-constructor (obj &rest args)
+  "Passthrough for System.Type.GetConstructor overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructor" args))
+
+(defun get-constructor-type[] (obj types)
+  "Calls System.Type.GetConstructor GetConstructor(Type[]) -> ConstructorInfo. Summary: Searches for a public instance constructor whose parameters match the types in the specified array.
+Returns: An object representing the public instance constructor whose parameters match the types in the parameter type array, if found; otherwise, .
+Parameters:
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the desired constructor. -or- An empty array of System.Type objects, to get a constructor that takes no parameters. Such an empty array is provided by the field System.Type.EmptyTypes.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructor" types))
+
+(defun get-constructor-binding-flags-type[] (obj binding-attr types)
+  "Calls System.Type.GetConstructor GetConstructor(BindingFlags, Type[]) -> ConstructorInfo. Summary: Searches for a constructor whose parameters match the specified argument types, using the specified binding constraints.
+Returns: A System.Reflection.ConstructorInfo object representing the constructor that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- Default to return .
+  - types (System.Type[]): An array of Type objects representing the number, order, and type of the parameters for the constructor to get. -or- An empty array of the type System.Type (that is, Type[] types = Array.Empty{Type}()) to get a constructor that takes no parameters. -or- System.Type.EmptyTypes.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructor" binding-attr types))
+
+(defun get-constructor-binding-flags-binder-type[]-parameter-modifier[] (obj binding-attr binder types modifiers)
+  "Calls System.Type.GetConstructor GetConstructor(BindingFlags, Binder, Type[], ParameterModifier[]) -> ConstructorInfo. Summary: Searches for a constructor whose parameters match the specified argument types and modifiers, using the specified binding constraints.
+Returns: A System.Reflection.ConstructorInfo object representing the constructor that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the constructor to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a constructor that takes no parameters. -or- System.Type.EmptyTypes.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the parameter type array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructor" binding-attr binder types modifiers))
+
+(defun get-constructor-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj binding-attr binder call-convention types modifiers)
+  "Calls System.Type.GetConstructor GetConstructor(BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> ConstructorInfo. Summary: Searches for a constructor whose parameters match the specified argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: An object representing the constructor that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and the stack is cleaned up.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the constructor to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a constructor that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructor" binding-attr binder call-convention types modifiers))
+
+(defun get-constructor-impl (obj binding-attr binder call-convention types modifiers)
+  "Summary: When overridden in a derived class, searches for a constructor whose parameters match the specified argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: A System.Reflection.ConstructorInfo object representing the constructor that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and the stack is cleaned up.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the constructor to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a constructor that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructorImpl" binding-attr binder call-convention types modifiers))
+
+(defun get-constructors (obj &rest args)
+  "Passthrough for System.Type.GetConstructors overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructors" args))
+
+(defun get-constructors (obj)
+  "Calls System.Type.GetConstructors GetConstructors() -> ConstructorInfo[]. Summary: Returns all the public constructors defined for the current System.Type.
+Returns: An array of System.Reflection.ConstructorInfo objects representing all the public instance constructors defined for the current System.Type, but not including the type initializer (static constructor). If no public instance constructors are defined for the current System.Type, or if the current System.Type represents a type parameter in the definition of a generic type or generic method, an empty array of type System.Reflection.ConstructorInfo is returned.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructors"))
+
+(defun get-constructors-binding-flags (obj binding-attr)
+  "Calls System.Type.GetConstructors GetConstructors(BindingFlags) -> ConstructorInfo[]. Summary: When overridden in a derived class, searches for the constructors defined for the current System.Type, using the specified .
+Returns: An array of System.Reflection.ConstructorInfo objects representing all constructors defined for the current System.Type that match the specified binding constraints, including the type initializer if it's defined. Returns an empty array of type System.Reflection.ConstructorInfo if no constructors are defined for the current System.Type, if none of the defined constructors match the binding constraints, or if the current System.Type represents a type parameter in the definition of a generic type or generic method.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetConstructors" binding-attr))
+
+(defun get-default-members (obj)
+  "Summary: Searches for the members defined for the current System.Type whose System.Reflection.DefaultMemberAttribute is set.
+Returns: An array of System.Reflection.MemberInfo objects representing all default members of the current System.Type. -or- An empty array of type System.Reflection.MemberInfo, if the current System.Type does not have default members.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetDefaultMembers"))
+
+(defun get-element-type (obj)
+  "Summary: When overridden in a derived class, returns the System.Type of the object encompassed or referred to by the current array, pointer or reference type.
+Returns: The System.Type of the object encompassed or referred to by the current array, pointer, or reference type, or if the current System.Type is not an array or a pointer, or is not passed by reference, or represents a generic type or a type parameter in the definition of a generic type or generic method.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetElementType"))
+
+(defun get-enum-name (obj value)
+  "Summary: Returns the name of the constant that has the specified value, for the current enumeration type.
+Returns: The name of the member of the current enumeration type that has the specified value, or if no such constant is found.
+Parameters:
+  - value (System.Object): The value whose name is to be retrieved.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEnumName" value))
+
+(defun get-enum-names (obj)
+  "Summary: Returns the names of the members of the current enumeration type.
+Returns: An array that contains the names of the members of the enumeration.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEnumNames"))
+
+(defun get-enum-underlying-type (obj)
+  "Summary: Returns the underlying type of the current enumeration type.
+Returns: The underlying type of the current enumeration.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEnumUnderlyingType"))
+
+(defun get-enum-values (obj)
+  "Summary: Returns an array of the values of the constants in the current enumeration type.
+Returns: An array that contains the values. The elements of the array are sorted by the binary values (that is, the unsigned values) of the enumeration constants.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEnumValues"))
+
+(defun get-enum-values-as-underlying-type (obj)
+  "Summary: Retrieves an array of the values of the underlying type constants of this enumeration type.
+Returns: An array that contains the values of the underlying type constants in this enumeration type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEnumValuesAsUnderlyingType"))
+
+(defun get-event (obj &rest args)
+  "Passthrough for System.Type.GetEvent overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetEvent" args))
+
+(defun get-event-string (obj name)
+  "Calls System.Type.GetEvent GetEvent(String) -> EventInfo. Summary: Returns the System.Reflection.EventInfo object representing the specified public event.
+Returns: The object representing the specified public event that is declared or inherited by the current System.Type, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of an event that is declared or inherited by the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEvent" name))
+
+(defun get-event-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetEvent GetEvent(String, BindingFlags) -> EventInfo. Summary: When overridden in a derived class, returns the System.Reflection.EventInfo object representing the specified event, using the specified binding constraints.
+Returns: The object representing the specified event that is declared or inherited by the current System.Type, if found; otherwise, .
+Parameters:
+  - name (System.String): The name of an event that is declared or inherited by the current System.Type.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEvent" name binding-attr))
+
+(defun get-events (obj &rest args)
+  "Passthrough for System.Type.GetEvents overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetEvents" args))
+
+(defun get-events (obj)
+  "Calls System.Type.GetEvents GetEvents() -> EventInfo[]. Summary: Returns all the public events that are declared or inherited by the current System.Type.
+Returns: An array of System.Reflection.EventInfo objects representing all the public events which are declared or inherited by the current System.Type. -or- An empty array of type System.Reflection.EventInfo, if the current System.Type does not have public events.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEvents"))
+
+(defun get-events-binding-flags (obj binding-attr)
+  "Calls System.Type.GetEvents GetEvents(BindingFlags) -> EventInfo[]. Summary: When overridden in a derived class, searches for events that are declared or inherited by the current System.Type, using the specified binding constraints.
+Returns: An array of System.Reflection.EventInfo objects representing all events that are declared or inherited by the current System.Type that match the specified binding constraints. -or- An empty array of type System.Reflection.EventInfo, if the current System.Type does not have events, or if none of the events match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetEvents" binding-attr))
+
+(defun get-field (obj &rest args)
+  "Passthrough for System.Type.GetField overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetField" args))
+
+(defun get-field-string (obj name)
+  "Calls System.Type.GetField GetField(String) -> FieldInfo. Summary: Searches for the public field with the specified name.
+Returns: An object representing the public field with the specified name, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the data field to get.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetField" name))
+
+(defun get-field-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetField GetField(String, BindingFlags) -> FieldInfo. Summary: Searches for the specified field, using the specified binding constraints.
+Returns: An object representing the field that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the data field to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetField" name binding-attr))
+
+(defun get-fields (obj &rest args)
+  "Passthrough for System.Type.GetFields overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetFields" args))
+
+(defun get-fields (obj)
+  "Calls System.Type.GetFields GetFields() -> FieldInfo[]. Summary: Returns all the public fields of the current System.Type.
+Returns: An array of System.Reflection.FieldInfo objects representing all the public fields defined for the current System.Type. -or- An empty array of type System.Reflection.FieldInfo, if no public fields are defined for the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetFields"))
+
+(defun get-fields-binding-flags (obj binding-attr)
+  "Calls System.Type.GetFields GetFields(BindingFlags) -> FieldInfo[]. Summary: When overridden in a derived class, searches for the fields defined for the current System.Type, using the specified binding constraints.
+Returns: An array of System.Reflection.FieldInfo objects representing all fields defined for the current System.Type that match the specified binding constraints. -or- An empty array of type System.Reflection.FieldInfo, if no fields are defined for the current System.Type, or if none of the defined fields match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetFields" binding-attr))
+
+(defun get-function-pointer-calling-conventions (obj)
+  "Summary: When overridden in a derived class, returns the calling conventions of the current function pointer System.Type.
+Returns: An array of System.Type objects representing all the calling conventions for the current function pointer System.Type.-or-An empty array of type System.Type, if no calling conventions are defined for the current function pointer System.Type.-or-An empty array of type System.Type, if the current function pointer System.Type is not a modified System.Type. A modified System.Type is obtained from System.Reflection.FieldInfo.GetModifiedFieldType, System.Reflection.PropertyInfo.GetModifiedPropertyType, or System.Reflection.ParameterInfo.GetModifiedParameterType.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetFunctionPointerCallingConventions"))
+
+(defun get-function-pointer-parameter-types (obj)
+  "Summary: When overridden in a derived class, returns the parameter types of the current function pointer System.Type.
+Returns: An array of System.Type objects representing all the parameter types for the current function pointer System.Type.-or-An empty array of type System.Type, if no parameters are defined for the current function pointer System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetFunctionPointerParameterTypes"))
+
+(defun get-function-pointer-return-type (obj)
+  "Summary: When overridden in a derived class, returns the return type of the current function pointer System.Type.
+Returns: A System.Type object representing the return type for the current function pointer System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetFunctionPointerReturnType"))
+
+(defun get-generic-arguments (obj)
+  "Summary: Returns an array of System.Type objects that represent the type arguments of a closed generic type or the type parameters of a generic type definition.
+Returns: An array of System.Type objects that represent the type arguments of a generic type. Returns an empty array if the current type is not a generic type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetGenericArguments"))
+
+(defun get-generic-parameter-constraints (obj)
+  "Summary: Returns an array of System.Type objects that represent the constraints on the current generic type parameter.
+Returns: An array of System.Type objects that represent the constraints on the current generic type parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetGenericParameterConstraints"))
+
+(defun get-generic-type-definition (obj)
+  "Summary: Returns a System.Type object that represents a generic type definition from which the current generic type can be constructed.
+Returns: A System.Type object representing a generic type from which the current type can be constructed.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetGenericTypeDefinition"))
+
+(defun get-hash-code (obj)
+  "Summary: Returns the hash code for this instance.
+Returns: The hash code for this instance.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetHashCode"))
+
+(defun get-interface (obj &rest args)
+  "Passthrough for System.Type.GetInterface overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetInterface" args))
+
+(defun get-interface-string (obj name)
+  "Calls System.Type.GetInterface GetInterface(String) -> Type. Summary: Searches for the interface with the specified name.
+Returns: An object representing the interface with the specified name, implemented or inherited by the current System.Type, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the interface to get. For generic interfaces, this is the mangled name.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetInterface" name))
+
+(defun get-interface-string-boolean (obj name ignore-case)
+  "Calls System.Type.GetInterface GetInterface(String, Boolean) -> Type. Summary: When overridden in a derived class, searches for the specified interface, specifying whether to do a case-insensitive search for the interface name.
+Returns: An object representing the interface with the specified name, implemented or inherited by the current System.Type, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the interface to get. For generic interfaces, this is the mangled name.
+  - ignore-case (System.Boolean): to ignore the case of that part of name that specifies the simple interface name (the part that specifies the namespace must be correctly cased). -or- to perform a case-sensitive search for all parts of name.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetInterface" name ignore-case))
+
+(defun get-interface-map (obj interface-type)
+  "Summary: Returns an interface mapping for the specified interface type.
+Returns: An object that represents the interface mapping for interfaceType.
+Parameters:
+  - interface-type (System.Type): The interface type to retrieve a mapping for.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetInterfaceMap" interface-type))
+
+(defun get-interfaces (obj)
+  "Summary: When overridden in a derived class, gets all the interfaces implemented or inherited by the current System.Type.
+Returns: An array of System.Type objects representing all the interfaces implemented or inherited by the current System.Type. -or- An empty array of type System.Type, if no interfaces are implemented or inherited by the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetInterfaces"))
+
+(defun get-member (obj &rest args)
+  "Passthrough for System.Type.GetMember overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetMember" args))
+
+(defun get-member-string (obj name)
+  "Calls System.Type.GetMember GetMember(String) -> MemberInfo[]. Summary: Searches for the public members with the specified name.
+Returns: An array of System.Reflection.MemberInfo objects representing the public members with the specified name, if found; otherwise, an empty array.
+Parameters:
+  - name (System.String): The string containing the name of the public members to get.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMember" name))
+
+(defun get-member-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetMember GetMember(String, BindingFlags) -> MemberInfo[]. Summary: Searches for the specified members, using the specified binding constraints.
+Returns: An array of System.Reflection.MemberInfo objects representing the public members with the specified name, if found; otherwise, an empty array.
+Parameters:
+  - name (System.String): The string containing the name of the members to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMember" name binding-attr))
+
+(defun get-member-string-member-types-binding-flags (obj name type binding-attr)
+  "Calls System.Type.GetMember GetMember(String, MemberTypes, BindingFlags) -> MemberInfo[]. Summary: Searches for the specified members of the specified member type, using the specified binding constraints.
+Returns: An array of System.Reflection.MemberInfo objects representing the public members with the specified name, if found; otherwise, an empty array.
+Parameters:
+  - name (System.String): The string containing the name of the members to get.
+  - type (System.Reflection.MemberTypes): The value to search for.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMember" name type binding-attr))
+
+(defun get-members (obj &rest args)
+  "Passthrough for System.Type.GetMembers overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetMembers" args))
+
+(defun get-members (obj)
+  "Calls System.Type.GetMembers GetMembers() -> MemberInfo[]. Summary: Returns all the public members of the current System.Type.
+Returns: An array of System.Reflection.MemberInfo objects representing all the public members of the current System.Type. -or- An empty array of type System.Reflection.MemberInfo, if the current System.Type does not have public members.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMembers"))
+
+(defun get-members-binding-flags (obj binding-attr)
+  "Calls System.Type.GetMembers GetMembers(BindingFlags) -> MemberInfo[]. Summary: When overridden in a derived class, searches for the members defined for the current System.Type, using the specified binding constraints.
+Returns: An array of System.Reflection.MemberInfo objects representing all members defined for the current System.Type that match the specified binding constraints. -or- An empty array if no members are defined for the current System.Type, or if none of the defined members match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMembers" binding-attr))
+
+(defun get-member-with-same-metadata-definition-as (obj member)
+  "Summary: Searches for the System.Reflection.MemberInfo on the current System.Type that matches the specified System.Reflection.MemberInfo.
+Returns: An object representing the member on the current System.Type that matches the specified member.
+Parameters:
+  - member (System.Reflection.MemberInfo): The System.Reflection.MemberInfo to find on the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMemberWithSameMetadataDefinitionAs" member))
+
+(defun get-method (obj &rest args)
+  "Passthrough for System.Type.GetMethod overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" args))
+
+(defun get-method-string (obj name)
+  "Calls System.Type.GetMethod GetMethod(String) -> MethodInfo. Summary: Searches for the public method with the specified name.
+Returns: An object that represents the public method with the specified name, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name))
+
+(defun get-method-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetMethod GetMethod(String, BindingFlags) -> MethodInfo. Summary: Searches for the specified method, using the specified binding constraints.
+Returns: An object representing the method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name binding-attr))
+
+(defun get-method-string-type[] (obj name types)
+  "Calls System.Type.GetMethod GetMethod(String, Type[]) -> MethodInfo. Summary: Searches for the specified public method whose parameters match the specified argument types.
+Returns: An object representing the public method whose parameters match the specified argument types, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name types))
+
+(defun get-method-string-binding-flags-type[] (obj name binding-attr types)
+  "Calls System.Type.GetMethod GetMethod(String, BindingFlags, Type[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified argument types, using the specified binding constraints.
+Returns: An object representing the method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- Default to return .
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name binding-attr types))
+
+(defun get-method-string-type[]-parameter-modifier[] (obj name types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified public method whose parameters match the specified argument types and modifiers.
+Returns: An object representing the public method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name types modifiers))
+
+(defun get-method-string-int32-type[] (obj name generic-parameter-count types)
+  "Calls System.Type.GetMethod GetMethod(String, Int32, Type[]) -> MethodInfo. Summary: Searches for the specified public method whose parameters match the specified generic parameter count and argument types.
+Returns: An object representing the public method whose parameters match the specified generic parameter count and argument types, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count types))
+
+(defun get-method-string-int32-type[]-parameter-modifier[] (obj name generic-parameter-count types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, Int32, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified public method whose parameters match the specified generic parameter count, argument types and modifiers.
+Returns: An object representing the public method that matches the specified generic parameter count, argument types and modifiers, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count types modifiers))
+
+(defun get-method-string-int32-binding-flags-type[] (obj name generic-parameter-count binding-attr types)
+  "Calls System.Type.GetMethod GetMethod(String, Int32, BindingFlags, Type[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified generic parameter count and argument types, using the specified binding constraints.
+Returns: An object representing the method that matches the specified generic parameter count, argument types, and binding constraints, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count binding-attr types))
+
+(defun get-method-string-binding-flags-binder-type[]-parameter-modifier[] (obj name binding-attr binder types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, BindingFlags, Binder, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified argument types and modifiers, using the specified binding constraints.
+Returns: An object representing the method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name binding-attr binder types modifiers))
+
+(defun get-method-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj name binding-attr binder call-convention types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: An object representing the method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and how the stack is cleaned up.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name binding-attr binder call-convention types modifiers))
+
+(defun get-method-string-int32-binding-flags-binder-type[]-parameter-modifier[] (obj name generic-parameter-count binding-attr binder types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, Int32, BindingFlags, Binder, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified generic parameter count, argument types and modifiers, using the specified binding constraints.
+Returns: An object representing the method that matches the specified generic parameter count, argument types, modifiers and binding constraints, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count binding-attr binder types modifiers))
+
+(defun get-method-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj name generic-parameter-count binding-attr binder call-convention types modifiers)
+  "Calls System.Type.GetMethod GetMethod(String, Int32, BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> MethodInfo. Summary: Searches for the specified method whose parameters match the specified generic parameter count, argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: An object representing the method that matches the specified generic parameter count, argument types, modifiers, binding constraints and calling convention, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and how the stack is cleaned up.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of System.Type objects (as provided by the System.Type.EmptyTypes field) to get a method that takes no parameters.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. To be only used when calling through COM interop, and only parameters that are passed by reference are handled. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count binding-attr binder call-convention types modifiers))
+
+(defun get-method-impl (obj &rest args)
+  "Passthrough for System.Type.GetMethodImpl overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetMethodImpl" args))
+
+(defun get-method-impl-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj name binding-attr binder call-convention types modifiers)
+  "Calls System.Type.GetMethodImpl GetMethodImpl(String, BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> MethodInfo. Summary: When overridden in a derived class, searches for the specified method whose parameters match the specified argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: An object representing the method that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and what process cleans up the stack.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a method that takes no parameters. -or- . If types is , arguments are not matched.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethodImpl" name binding-attr binder call-convention types modifiers))
+
+(defun get-method-impl-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj name generic-parameter-count binding-attr binder call-convention types modifiers)
+  "Calls System.Type.GetMethodImpl GetMethodImpl(String, Int32, BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> MethodInfo. Summary: When overridden in a derived class, searches for the specified method whose parameters match the specified generic parameter count, argument types and modifiers, using the specified binding constraints and the specified calling convention.
+Returns: An object representing the method that matches the specified generic parameter count, argument types, modifiers, binding constraints and calling convention, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the method to get.
+  - generic-parameter-count (System.Int32): The number of generic type parameters of the method.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - call-convention (System.Reflection.CallingConventions): The object that specifies the set of rules to use regarding the order and layout of arguments, how the return value is passed, what registers are used for arguments, and what process cleans up the stack.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the method to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a method that takes no parameters. -or- . If types is , arguments are not matched.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethodImpl" name generic-parameter-count binding-attr binder call-convention types modifiers))
+
+(defun get-methods (obj &rest args)
+  "Passthrough for System.Type.GetMethods overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetMethods" args))
+
+(defun get-methods (obj)
+  "Calls System.Type.GetMethods GetMethods() -> MethodInfo[]. Summary: Returns all the public methods of the current System.Type.
+Returns: An array of System.Reflection.MethodInfo objects representing all the public methods defined for the current System.Type. -or- An empty array of type System.Reflection.MethodInfo, if no public methods are defined for the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethods"))
+
+(defun get-methods-binding-flags (obj binding-attr)
+  "Calls System.Type.GetMethods GetMethods(BindingFlags) -> MethodInfo[]. Summary: When overridden in a derived class, searches for the methods defined for the current System.Type, using the specified binding constraints.
+Returns: An array of System.Reflection.MethodInfo objects representing all methods defined for the current System.Type that match the specified binding constraints. -or- An empty array of type System.Reflection.MethodInfo, if no methods are defined for the current System.Type, or if none of the defined methods match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetMethods" binding-attr))
+
+(defun get-nested-type (obj &rest args)
+  "Passthrough for System.Type.GetNestedType overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedType" args))
+
+(defun get-nested-type-string (obj name)
+  "Calls System.Type.GetNestedType GetNestedType(String) -> Type. Summary: Searches for the public nested type with the specified name.
+Returns: An object representing the public nested type with the specified name, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the nested type to get.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedType" name))
+
+(defun get-nested-type-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetNestedType GetNestedType(String, BindingFlags) -> Type. Summary: When overridden in a derived class, searches for the specified nested type, using the specified binding constraints.
+Returns: An object representing the nested type that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the nested type to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedType" name binding-attr))
+
+(defun get-nested-types (obj &rest args)
+  "Passthrough for System.Type.GetNestedTypes overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedTypes" args))
+
+(defun get-nested-types (obj)
+  "Calls System.Type.GetNestedTypes GetNestedTypes() -> Type[]. Summary: Returns the public types nested in the current System.Type.
+Returns: An array of System.Type objects representing the public types nested in the current System.Type (the search is not recursive), or an empty array of type System.Type if no public types are nested in the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedTypes"))
+
+(defun get-nested-types-binding-flags (obj binding-attr)
+  "Calls System.Type.GetNestedTypes GetNestedTypes(BindingFlags) -> Type[]. Summary: When overridden in a derived class, searches for the types nested in the current System.Type, using the specified binding constraints.
+Returns: An array of System.Type objects representing all the types nested in the current System.Type that match the specified binding constraints (the search is not recursive), or an empty array of type System.Type, if no nested types are found that match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetNestedTypes" binding-attr))
+
+(defun get-optional-custom-modifiers (obj)
+  "Summary: When overridden in a derived class, returns the optional custom modifiers of the current System.Type.
+Returns: An array of System.Type objects that identify the optional custom modifiers of the current System.Type. -or- An empty array of type System.Type, if the current System.Type has no custom modifiers. -or- An empty array of type System.Type, if the current System.Type is not a modified System.Type. A modified System.Type is obtained from System.Reflection.FieldInfo.GetModifiedFieldType, System.Reflection.PropertyInfo.GetModifiedPropertyType, or System.Reflection.ParameterInfo.GetModifiedParameterType.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetOptionalCustomModifiers"))
+
+(defun get-properties (obj &rest args)
+  "Passthrough for System.Type.GetProperties overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetProperties" args))
+
+(defun get-properties (obj)
+  "Calls System.Type.GetProperties GetProperties() -> PropertyInfo[]. Summary: Returns all the public properties of the current System.Type.
+Returns: An array of System.Reflection.PropertyInfo objects representing all public properties of the current System.Type. -or- An empty array of type System.Reflection.PropertyInfo, if the current System.Type does not have public properties.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperties"))
+
+(defun get-properties-binding-flags (obj binding-attr)
+  "Calls System.Type.GetProperties GetProperties(BindingFlags) -> PropertyInfo[]. Summary: When overridden in a derived class, searches for the properties of the current System.Type, using the specified binding constraints.
+Returns: An array of objects representing all properties of the current System.Type that match the specified binding constraints. -or- An empty array of type System.Reflection.PropertyInfo, if the current System.Type does not have properties, or if none of the properties match the binding constraints.
+Parameters:
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return an empty array.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperties" binding-attr))
+
+(defun get-property (obj &rest args)
+  "Passthrough for System.Type.GetProperty overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" args))
+
+(defun get-property-string (obj name)
+  "Calls System.Type.GetProperty GetProperty(String) -> PropertyInfo. Summary: Searches for the public property with the specified name.
+Returns: An object representing the public property with the specified name, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public property to get.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name))
+
+(defun get-property-string-binding-flags (obj name binding-attr)
+  "Calls System.Type.GetProperty GetProperty(String, BindingFlags) -> PropertyInfo. Summary: Searches for the specified property, using the specified binding constraints.
+Returns: An object representing the property that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the property to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name binding-attr))
+
+(defun get-property-string-type (obj name return-type)
+  "Calls System.Type.GetProperty GetProperty(String, Type) -> PropertyInfo. Summary: Searches for the public property with the specified name and return type.
+Returns: An object representing the public property with the specified name, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public property to get.
+  - return-type (System.Type): The return type of the property.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name return-type))
+
+(defun get-property-string-type[] (obj name types)
+  "Calls System.Type.GetProperty GetProperty(String, Type[]) -> PropertyInfo. Summary: Searches for the specified public property whose parameters match the specified argument types.
+Returns: An object representing the public property whose parameters match the specified argument types, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public property to get.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the indexed property to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a property that is not indexed.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name types))
+
+(defun get-property-string-type-type[] (obj name return-type types)
+  "Calls System.Type.GetProperty GetProperty(String, Type, Type[]) -> PropertyInfo. Summary: Searches for the specified public property whose parameters match the specified argument types.
+Returns: An object representing the public property whose parameters match the specified argument types, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public property to get.
+  - return-type (System.Type): The return type of the property.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the indexed property to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a property that is not indexed.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name return-type types))
+
+(defun get-property-string-type-type[]-parameter-modifier[] (obj name return-type types modifiers)
+  "Calls System.Type.GetProperty GetProperty(String, Type, Type[], ParameterModifier[]) -> PropertyInfo. Summary: Searches for the specified public property whose parameters match the specified argument types and modifiers.
+Returns: An object representing the public property that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the public property to get.
+  - return-type (System.Type): The return type of the property.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the indexed property to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a property that is not indexed.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name return-type types modifiers))
+
+(defun get-property-string-binding-flags-binder-type-type[]-parameter-modifier[] (obj name binding-attr binder return-type types modifiers)
+  "Calls System.Type.GetProperty GetProperty(String, BindingFlags, Binder, Type, Type[], ParameterModifier[]) -> PropertyInfo. Summary: Searches for the specified property whose parameters match the specified argument types and modifiers, using the specified binding constraints.
+Returns: An object representing the property that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the property to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - return-type (System.Type): The return type of the property.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the indexed property to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a property that is not indexed.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetProperty" name binding-attr binder return-type types modifiers))
+
+(defun get-property-impl (obj name binding-attr binder return-type types modifiers)
+  "Summary: When overridden in a derived class, searches for the specified property whose parameters match the specified argument types and modifiers, using the specified binding constraints.
+Returns: An object representing the property that matches the specified requirements, if found; otherwise, .
+Parameters:
+  - name (System.String): The string containing the name of the property to get.
+  - binding-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. -or- System.Reflection.BindingFlags.Default to return .
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded member, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder.
+  - return-type (System.Type): The return type of the property.
+  - types (System.Type[]): An array of System.Type objects representing the number, order, and type of the parameters for the indexed property to get. -or- An empty array of the type System.Type (that is, Type[] types = new Type[0]) to get a property that is not indexed.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the types array. The default binder does not process this parameter.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetPropertyImpl" name binding-attr binder return-type types modifiers))
+
+(defun get-required-custom-modifiers (obj)
+  "Summary: When overridden in a derived class, returns the required custom modifiers of the current System.Type.
+Returns: An array of System.Type objects that identify the required custom modifiers of the current System.Type. -or- An empty array of type System.Type, if the current System.Type has no custom modifiers. -or- An empty array of type System.Type, if the current System.Type is not a modified System.Type. A modified System.Type is obtained from System.Reflection.FieldInfo.GetModifiedFieldType, System.Reflection.PropertyInfo.GetModifiedPropertyType, or System.Reflection.ParameterInfo.GetModifiedParameterType.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetRequiredCustomModifiers"))
+
+(defun get-type (obj &rest args)
+  "Passthrough for System.Type.GetType overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "GetType" args))
+
+(defun get-type (obj)
+  "Calls System.Type.GetType GetType() -> Type. Summary: Gets the current System.Type.
+Returns: The current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetType"))
+
+(defun get-type-string (obj type-name)
+  "Calls System.Type.GetType GetType(String) -> Type. Summary: Gets the System.Type with the specified name, performing a case-sensitive search.
+Returns: The type with the specified name, if found; otherwise, .
+Parameters:
+  - type-name (System.String): The assembly-qualified name of the type to get. See System.Type.AssemblyQualifiedName. If the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, it's sufficient to supply the type name qualified by its namespace.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetType" type-name))
+
+(defun get-type-string-boolean (obj type-name throw-on-error)
+  "Calls System.Type.GetType GetType(String, Boolean) -> Type. Summary: Gets the System.Type with the specified name, performing a case-sensitive search and specifying whether to throw an exception if the type is not found.
+Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
+Parameters:
+  - type-name (System.String): The assembly-qualified name of the type to get. See System.Type.AssemblyQualifiedName. If the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, it's sufficient to supply the type name qualified by its namespace.
+  - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetType" type-name throw-on-error))
+
+(defun get-type-string-boolean-boolean (obj type-name throw-on-error ignore-case)
+  "Calls System.Type.GetType GetType(String, Boolean, Boolean) -> Type. Summary: Gets the System.Type with the specified name, specifying whether to throw an exception if the type is not found and whether to perform a case-sensitive search.
+Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
+Parameters:
+  - type-name (System.String): The assembly-qualified name of the type to get. See System.Type.AssemblyQualifiedName. If the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, it's sufficient to supply the type name qualified by its namespace.
+  - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
+  - ignore-case (System.Boolean): to perform a case-insensitive search for typeName, to perform a case-sensitive search for typeName.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetType" type-name throw-on-error ignore-case))
+
+(defun get-type-array (args)
+  "Summary: Gets the types of the objects in the specified array.
+Returns: An array of System.Type objects representing the types of the corresponding elements in args.
+Parameters:
+  - args (System.Object[]): An array of objects whose types to determine.
+"
+  (dotnet:static <type-str> "GetTypeArray" (the (dotnet "System.Object[]") args)))
+
+(defun get-type-code (type)
+  "Summary: Gets the underlying type code of the specified System.Type.
+Returns: The code of the underlying type, or System.TypeCode.Empty if type is .
+Parameters:
+  - type (System.Type): The type whose underlying type code to get.
+"
+  (dotnet:static <type-str> "GetTypeCode" (the (dotnet "System.Type") type)))
+
+(defun get-type-code-impl (obj)
+  "Summary: Returns the underlying type code of this System.Type instance.
+Returns: The type code of the underlying type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "GetTypeCodeImpl"))
+
+(defun get-type-from-clsid (&rest args)
+  "Passthrough for System.Type.GetTypeFromCLSID overloads. Dispatches at runtime."
+  (apply #'dotnet:static <type-str> "GetTypeFromCLSID" args))
+
+(defun get-type-from-clsid-guid (clsid)
+  "Calls System.Type.GetTypeFromCLSID GetTypeFromCLSID(Guid) -> Type. Summary: Gets the type associated with the specified class identifier (CLSID).
+Returns: regardless of whether the CLSID is valid.
+Parameters:
+  - clsid (System.Guid): The CLSID of the type to get.
+"
+  (dotnet:static <type-str> "GetTypeFromCLSID" (the (dotnet "System.Guid") clsid)))
+
+(defun get-type-from-clsid-guid-boolean (clsid throw-on-error)
+  "Calls System.Type.GetTypeFromCLSID GetTypeFromCLSID(Guid, Boolean) -> Type. Summary: Gets the type associated with the specified class identifier (CLSID), specifying whether to throw an exception if an error occurs while loading the type.
+Returns: regardless of whether the CLSID is valid.
+Parameters:
+  - clsid (System.Guid): The CLSID of the type to get.
+  - throw-on-error (System.Boolean): to throw any exception that occurs. -or- to ignore any exception that occurs.
+"
+  (dotnet:static <type-str> "GetTypeFromCLSID" (the (dotnet "System.Guid") clsid) (the (dotnet "System.Boolean") throw-on-error)))
+
+(defun get-type-from-clsid-guid-string (clsid server)
+  "Calls System.Type.GetTypeFromCLSID GetTypeFromCLSID(Guid, String) -> Type. Summary: Gets the type associated with the specified class identifier (CLSID) from the specified server.
+Returns: regardless of whether the CLSID is valid.
+Parameters:
+  - clsid (System.Guid): The CLSID of the type to get.
+  - server (System.String): The server from which to load the type. If the server name is , this method automatically reverts to the local machine.
+"
+  (dotnet:static <type-str> "GetTypeFromCLSID" (the (dotnet "System.Guid") clsid) (the (dotnet "System.String") server)))
+
+(defun get-type-from-clsid-guid-string-boolean (clsid server throw-on-error)
+  "Calls System.Type.GetTypeFromCLSID GetTypeFromCLSID(Guid, String, Boolean) -> Type. Summary: Gets the type associated with the specified class identifier (CLSID) from the specified server, specifying whether to throw an exception if an error occurs while loading the type.
+Returns: regardless of whether the CLSID is valid.
+Parameters:
+  - clsid (System.Guid): The CLSID of the type to get.
+  - server (System.String): The server from which to load the type. If the server name is , this method automatically reverts to the local machine.
+  - throw-on-error (System.Boolean): to throw any exception that occurs. -or- to ignore any exception that occurs.
+"
+  (dotnet:static <type-str> "GetTypeFromCLSID" (the (dotnet "System.Guid") clsid) (the (dotnet "System.String") server) (the (dotnet "System.Boolean") throw-on-error)))
+
+(defun get-type-from-handle (handle)
+  "Summary: Gets the type referenced by the specified type handle.
+Returns: The type referenced by the specified System.RuntimeTypeHandle, or if the System.RuntimeTypeHandle.Value property of handle is .
+Parameters:
+  - handle (System.RuntimeTypeHandle): The object that refers to the type.
+"
+  (dotnet:static <type-str> "GetTypeFromHandle" (the (dotnet "System.RuntimeTypeHandle") handle)))
+
+(defun get-type-from-prog-id (&rest args)
+  "Passthrough for System.Type.GetTypeFromProgID overloads. Dispatches at runtime."
+  (apply #'dotnet:static <type-str> "GetTypeFromProgID" args))
+
+(defun get-type-from-prog-id-string (prog-id)
+  "Calls System.Type.GetTypeFromProgID GetTypeFromProgID(String) -> Type. Summary: Gets the type associated with the specified program identifier (ProgID), returning null if an error is encountered while loading the System.Type.
+Returns: The type associated with the specified ProgID, if progID is a valid entry in the registry and a type is associated with it; otherwise, .
+Parameters:
+  - prog-id (System.String): The ProgID of the type to get.
+"
+  (dotnet:static <type-str> "GetTypeFromProgID" (the (dotnet "System.String") prog-id)))
+
+(defun get-type-from-prog-id-string-boolean (prog-id throw-on-error)
+  "Calls System.Type.GetTypeFromProgID GetTypeFromProgID(String, Boolean) -> Type. Summary: Gets the type associated with the specified program identifier (ProgID), specifying whether to throw an exception if an error occurs while loading the type.
+Returns: The type associated with the specified program identifier (ProgID), if progID is a valid entry in the registry and a type is associated with it; otherwise, .
+Parameters:
+  - prog-id (System.String): The ProgID of the type to get.
+  - throw-on-error (System.Boolean): to throw any exception that occurs. -or- to ignore any exception that occurs.
+"
+  (dotnet:static <type-str> "GetTypeFromProgID" (the (dotnet "System.String") prog-id) (the (dotnet "System.Boolean") throw-on-error)))
+
+(defun get-type-from-prog-id-string-string (prog-id server)
+  "Calls System.Type.GetTypeFromProgID GetTypeFromProgID(String, String) -> Type. Summary: Gets the type associated with the specified program identifier (progID) from the specified server, returning null if an error is encountered while loading the type.
+Returns: The type associated with the specified program identifier (progID), if progID is a valid entry in the registry and a type is associated with it; otherwise, .
+Parameters:
+  - prog-id (System.String): The progID of the type to get.
+  - server (System.String): The server from which to load the type. If the server name is , this method automatically reverts to the local machine.
+"
+  (dotnet:static <type-str> "GetTypeFromProgID" (the (dotnet "System.String") prog-id) (the (dotnet "System.String") server)))
+
+(defun get-type-from-prog-id-string-string-boolean (prog-id server throw-on-error)
+  "Calls System.Type.GetTypeFromProgID GetTypeFromProgID(String, String, Boolean) -> Type. Summary: Gets the type associated with the specified program identifier (progID) from the specified server, specifying whether to throw an exception if an error occurs while loading the type.
+Returns: The type associated with the specified program identifier (progID), if progID is a valid entry in the registry and a type is associated with it; otherwise, .
+Parameters:
+  - prog-id (System.String): The progID of the System.Type to get.
+  - server (System.String): The server from which to load the type. If the server name is , this method automatically reverts to the local machine.
+  - throw-on-error (System.Boolean): to throw any exception that occurs. -or- to ignore any exception that occurs.
+"
+  (dotnet:static <type-str> "GetTypeFromProgID" (the (dotnet "System.String") prog-id) (the (dotnet "System.String") server) (the (dotnet "System.Boolean") throw-on-error)))
+
+(defun get-type-handle (o)
+  "Summary: Gets the handle for the System.Type of a specified object.
+Returns: The handle for the System.Type of the specified System.Object.
+Parameters:
+  - o (System.Object): The object for which to get the type handle.
+"
+  (dotnet:static <type-str> "GetTypeHandle" (the (dotnet "System.Object") o)))
+
+(defun has-element-type-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.HasElementType property and determines whether the current System.Type encompasses or refers to another type; that is, whether the current System.Type is an array, a pointer, or is passed by reference.
+Returns: if the System.Type is an array, a pointer, or is passed by reference; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "HasElementTypeImpl"))
+
+(defun invoke-member (obj &rest args)
+  "Passthrough for System.Type.InvokeMember overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "InvokeMember" args))
+
+(defun invoke-member-string-binding-flags-binder-object-object[] (obj name invoke-attr binder target args)
+  "Calls System.Type.InvokeMember InvokeMember(String, BindingFlags, Binder, Object, Object[]) -> Object. Summary: Invokes the specified member, using the specified binding constraints and matching the specified argument list.
+Returns: An object representing the return value of the invoked member.
+Parameters:
+  - name (System.String): The string containing the name of the constructor, method, property, or field member to invoke. -or- An empty string (\"\") to invoke the default member. -or- For members, a string representing the DispID, for example \"[DispID=3]\".
+  - invoke-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. The access can be one of the such as , , , , , and so on. The type of lookup need not be specified. If the type of lookup is omitted, | | are used.
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder. Note that explicitly defining a System.Reflection.Binder object may be required for successfully invoking method overloads with variable arguments.
+  - target (System.Object): The object on which to invoke the specified member.
+  - args (System.Object[]): An array containing the arguments to pass to the member to invoke.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args))
+
+(defun invoke-member-string-binding-flags-binder-object-object[]-culture-info (obj name invoke-attr binder target args culture)
+  "Calls System.Type.InvokeMember InvokeMember(String, BindingFlags, Binder, Object, Object[], CultureInfo) -> Object. Summary: Invokes the specified member, using the specified binding constraints and matching the specified argument list and culture.
+Returns: An object representing the return value of the invoked member.
+Parameters:
+  - name (System.String): The string containing the name of the constructor, method, property, or field member to invoke. -or- An empty string (\"\") to invoke the default member. -or- For members, a string representing the DispID, for example \"[DispID=3]\".
+  - invoke-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. The access can be one of the such as , , , , , and so on. The type of lookup need not be specified. If the type of lookup is omitted, | | are used.
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference ( in Visual Basic), to use the System.Type.DefaultBinder. Note that explicitly defining a System.Reflection.Binder object may be required for successfully invoking method overloads with variable arguments.
+  - target (System.Object): The object on which to invoke the specified member.
+  - args (System.Object[]): An array containing the arguments to pass to the member to invoke.
+  - culture (System.Globalization.CultureInfo): The object representing the globalization locale to use, which may be necessary for locale-specific conversions, such as converting a numeric System.String to a System.Double. -or- A null reference ( in Visual Basic) to use the current thread's System.Globalization.CultureInfo.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args culture))
+
+(defun invoke-member-string-binding-flags-binder-object-object[]-parameter-modifier[]-culture-info-string[] (obj name invoke-attr binder target args modifiers culture named-parameters)
+  "Calls System.Type.InvokeMember InvokeMember(String, BindingFlags, Binder, Object, Object[], ParameterModifier[], CultureInfo, String[]) -> Object. Summary: When overridden in a derived class, invokes the specified member, using the specified binding constraints and matching the specified argument list, modifiers and culture.
+Returns: An object representing the return value of the invoked member.
+Parameters:
+  - name (System.String): The string containing the name of the constructor, method, property, or field member to invoke. -or- An empty string (\"\") to invoke the default member. -or- For members, a string representing the DispID, for example \"[DispID=3]\".
+  - invoke-attr (System.Reflection.BindingFlags): A bitwise combination of the enumeration values that specify how the search is conducted. The access can be one of the such as , , , , , and so on. The type of lookup need not be specified. If the type of lookup is omitted, | | are used.
+  - binder (System.Reflection.Binder): An object that defines a set of properties and enables binding, which can involve selection of an overloaded method, coercion of argument types, and invocation of a member through reflection. -or- A null reference (Nothing in Visual Basic), to use the System.Type.DefaultBinder. Note that explicitly defining a System.Reflection.Binder object may be required for successfully invoking method overloads with variable arguments.
+  - target (System.Object): The object on which to invoke the specified member.
+  - args (System.Object[]): An array containing the arguments to pass to the member to invoke.
+  - modifiers (System.Reflection.ParameterModifier[]): An array of System.Reflection.ParameterModifier objects representing the attributes associated with the corresponding element in the args array. A parameter's associated attributes are stored in the member's signature. The default binder processes this parameter only when calling a COM component.
+  - culture (System.Globalization.CultureInfo): The System.Globalization.CultureInfo object representing the globalization locale to use, which may be necessary for locale-specific conversions, such as converting a numeric String to a Double. -or- A null reference ( in Visual Basic) to use the current thread's System.Globalization.CultureInfo.
+  - named-parameters (System.String[]): An array containing the names of the parameters to which the values in the args array are passed.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args modifiers culture named-parameters))
+
+(defun is-array-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.IsArray property and determines whether the System.Type is an array.
+Returns: if the System.Type is an array; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsArrayImpl"))
+
+(defun is-assignable-from (obj c)
+  "Summary: Determines whether an instance of a specified type c can be assigned to a variable of the current type.
+Returns: if any of the following conditions is true: - c and the current instance represent the same type. - c is derived either directly or indirectly from the current instance. c is derived directly from the current instance if it inherits from the current instance; c is derived indirectly from the current instance if it inherits from a succession of one or more classes that inherit from the current instance. - The current instance is an interface that c implements. - c is a generic type parameter, and the current instance represents one of the constraints of c. - c represents a value type, and the current instance represents Nullable<c> (Nullable(Of c) in Visual Basic). if none of these conditions are true, or if c is .
+Parameters:
+  - c (System.Type): The type to compare with the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsAssignableFrom" c))
+
+(defun is-assignable-to (obj target-type)
+  "Summary: Determines whether the current type can be assigned to a variable of the specified targetType.
+Returns: if any of the following conditions is true: - The current instance and targetType represent the same type. - The current type is derived either directly or indirectly from targetType. The current type is derived directly from targetType if it inherits from targetType; the current type is derived indirectly from targetType if it inherits from a succession of one or more classes that inherit from targetType. - targetType is an interface that the current type implements. - The current type is a generic type parameter, and targetType represents one of the constraints of the current type. - The current type represents a value type, and targetType represents Nullable<c> (Nullable(Of c) in Visual Basic). if none of these conditions are true, or if targetType is .
+Parameters:
+  - target-type (System.Type): The type to compare with the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsAssignableTo" target-type))
+
+(defun is-by-ref-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.IsByRef property and determines whether the System.Type is passed by reference.
+Returns: if the System.Type is passed by reference; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsByRefImpl"))
+
+(defun is-com-object-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.IsCOMObject property and determines whether the System.Type is a COM object.
+Returns: if the System.Type is a COM object; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsCOMObjectImpl"))
+
+(defun is-contextful-impl (obj)
+  "Summary: Implements the System.Type.IsContextful property and determines whether the System.Type can be hosted in a context.
+Returns: if the System.Type can be hosted in a context; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsContextfulImpl"))
+
+(defun is-enum-defined (obj value)
+  "Summary: Returns a value that indicates whether the specified value exists in the current enumeration type.
+Returns: if the specified value is a member of the current enumeration type; otherwise, .
+Parameters:
+  - value (System.Object): The value to be tested.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsEnumDefined" value))
+
+(defun is-equivalent-to (obj other)
+  "Summary: Determines whether two COM types have the same identity and are eligible for type equivalence.
+Returns: if the COM types are equivalent; otherwise, . This method also returns if one type is in an assembly that is loaded for execution, and the other is in an assembly that is loaded into the reflection-only context.
+Parameters:
+  - other (System.Type): The COM type that is tested for equivalence with the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsEquivalentTo" other))
+
+(defun is-instance-of-type (obj o)
+  "Summary: Determines whether the specified object is an instance of the current System.Type.
+Returns: if the current is in the inheritance hierarchy of the object represented by o, or if the current is an interface that o implements. if neither of these conditions is the case, if o is , or if the current is an open generic type (that is, System.Type.ContainsGenericParameters returns ).
+Parameters:
+  - o (System.Object): The object to compare with the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsInstanceOfType" o))
+
+(defun is-marshal-by-ref-impl (obj)
+  "Summary: Implements the System.Type.IsMarshalByRef property and determines whether the System.Type is marshaled by reference.
+Returns: if the System.Type is marshaled by reference; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsMarshalByRefImpl"))
+
+(defun is-pointer-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.IsPointer property and determines whether the System.Type is a pointer.
+Returns: if the System.Type is a pointer; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsPointerImpl"))
+
+(defun is-primitive-impl (obj)
+  "Summary: When overridden in a derived class, implements the System.Type.IsPrimitive property and determines whether the System.Type is one of the primitive types.
+Returns: if the System.Type is one of the primitive types; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsPrimitiveImpl"))
+
+(defun is-subclass-of (obj c)
+  "Summary: Determines whether the current System.Type derives from the specified System.Type.
+Returns: if the current derives from c; otherwise, . This method also returns if c and the current are equal.
+Parameters:
+  - c (System.Type): The type to compare with the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsSubclassOf" c))
+
+(defun is-value-type-impl (obj)
+  "Summary: Implements the System.Type.IsValueType property and determines whether the System.Type is a value type; that is, not a class or an interface.
+Returns: if the System.Type is a value type; otherwise, .
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "IsValueTypeImpl"))
+
+(defun make-array-type (obj &rest args)
+  "Passthrough for System.Type.MakeArrayType overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "System.Type") obj) "MakeArrayType" args))
+
+(defun make-array-type (obj)
+  "Calls System.Type.MakeArrayType MakeArrayType() -> Type. Summary: Returns a System.Type object representing a one-dimensional array of the current type, with a lower bound of zero.
+Returns: A System.Type object representing a one-dimensional array of the current type, with a lower bound of zero.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "MakeArrayType"))
+
+(defun make-array-type-int32 (obj rank)
+  "Calls System.Type.MakeArrayType MakeArrayType(Int32) -> Type. Summary: Returns a System.Type object representing an array of the current type, with the specified number of dimensions.
+Returns: An object representing an array of the current type, with the specified number of dimensions.
+Parameters:
+  - rank (System.Int32): The number of dimensions for the array. This number must be less than or equal to 32.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "MakeArrayType" rank))
+
+(defun make-by-ref-type (obj)
+  "Summary: Returns a System.Type object that represents the current type when passed as a parameter ( parameter in Visual Basic).
+Returns: A System.Type object that represents the current type when passed as a parameter ( parameter in Visual Basic).
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "MakeByRefType"))
+
+(defun make-generic-method-parameter (position)
+  "Summary: Returns a signature type object that can be passed into the Type[] array parameter of a System.Type.GetMethod method to represent a generic parameter reference.
+Returns: A signature type object that can be passed into the Type[] array parameter of a System.Type.GetMethod method to represent a generic parameter reference.
+Parameters:
+  - position (System.Int32): The typed parameter position.
+"
+  (dotnet:static <type-str> "MakeGenericMethodParameter" (the (dotnet "System.Int32") position)))
+
+;; The following C# System.Type.MakeGenericSignatureType overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   MakeGenericSignatureType(Type, params Type[]) -> Type
+
+;; The following C# System.Type.MakeGenericType overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   MakeGenericType(params Type[]) -> Type
+
+(defun make-pointer-type (obj)
+  "Summary: Returns a System.Type object that represents a pointer to the current type.
+Returns: A System.Type object that represents a pointer to the current type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "MakePointerType"))
+
+(defun not= (left right)
+  "Summary: Indicates whether two System.Type objects are not equal.
+Returns: if left is not equal to right; otherwise, .
+Parameters:
+  - left (System.Type): The first object to compare.
+  - right (System.Type): The second object to compare.
+"
+  (dotnet:static <type-str> "op_Inequality" (the (dotnet "System.Type") left) (the (dotnet "System.Type") right)))
+
+(defun reflection-only-get-type (type-name throw-if-not-found ignore-case)
+  "Summary: Gets the System.Type with the specified name, specifying whether to perform a case-sensitive search and whether to throw an exception if the type is not found. The type is loaded for reflection only, not for execution.
+Returns: The type with the specified name, if found; otherwise, . If the type is not found, the throwIfNotFound parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwIfNotFound. See the Exceptions section.
+Parameters:
+  - type-name (System.String): The assembly-qualified name of the System.Type to get.
+  - throw-if-not-found (System.Boolean): to throw a System.TypeLoadException if the type cannot be found; to return if the type cannot be found. Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
+  - ignore-case (System.Boolean): to perform a case-insensitive search for typeName; to perform a case-sensitive search for typeName.
+"
+  (dotnet:static <type-str> "ReflectionOnlyGetType" (the (dotnet "System.String") type-name) (the (dotnet "System.Boolean") throw-if-not-found) (the (dotnet "System.Boolean") ignore-case)))
+
+(defun to-string (obj)
+  "Summary: Returns a representing the name of the current .
+Returns: A System.String representing the name of the current System.Type.
+"
+  (dotnet:invoke (the (dotnet "System.Type") obj) "ToString"))
+

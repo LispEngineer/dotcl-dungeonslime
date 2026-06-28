@@ -29,7 +29,7 @@
       (dotnet:resolve-type obj-or-string)
       ;; Get the type from the object itself.
       ;; This call may fail if not a C# object or maybe if nil.
-      (dotnet:invoke obj-or-string "GetType"))
+      (object:get-type obj-or-string))
     (error () nil)))
 
 (defun get-type-full-name (obj)
@@ -39,5 +39,5 @@
   (let ((typ (get-type obj)))
     (when typ
       (handler-case
-        (dotnet:invoke typ "FullName")
+        (type:full-name typ)
         (error () nil)))))
