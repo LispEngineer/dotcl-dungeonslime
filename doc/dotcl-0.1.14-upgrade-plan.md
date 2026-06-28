@@ -73,5 +73,58 @@ We can intercept specific MonoGame errors (e.g. `ContentLoadException` when an a
   (content:load-texture2d manager asset-name))
 ```
 
+## 7. C# Lisp Package Generator Enhancements
+
+The Lisp package generator (`assembly-package-generator.lisp` and `AssemblyToLispy.cs`) can be updated to utilize the new DotCL 0.1.14 capabilities when generating standard class/struct/enum bindings.
+
+### A. Support for `out` and `ref` Parameters
+* **Current Behavior:** Methods containing `out` or `ref` parameter modifiers are flagged as "dirty" and completely skipped.
+* **Proposed Update:** Incorporate `dotnet:call-out` and `dotnet:call-out-generic` to generate wrappers for these methods.
+  - `:ref` parameters are supplied by the caller as inputs (since they pass an initial value), whereas `:out` parameters are omitted from the generated function's parameter list.
+  - The generated function will call `dotnet:call-out` (or `dotnet:call-out-generic` for generic methods), passing the input parameters.
+  - The updated `:ref` and `:out` parameter values will be returned as additional Lisp multiple values following the method's primary return value.
+
+### B. Enum Flags Generation (`dotnet:enum-or`)
+* **Current Behavior:** Bitwise combination of C# `[Flags]` enums is performed manually in Lisp using `logior` on raw values.
+* **Proposed Update:** 
+  - Update the metadata extractor (`AssemblyToLispy.cs`) to detect if an enum has the `[System.FlagsAttribute]` and record this boolean attribute in the output metadata.
+  - If (and only if) the enum has flags, the package generator will generate a `flags` helper in the enum's package using `dotnet:enum-or`:
+    ```lisp
+    (defun flags (&rest members)
+      "Combine enum flag members using bitwise OR."
+      (apply #'dotnet:enum-or <type-str> members))
+    ```
+  - The arguments passed to `flags` should map to the `+constants+` defined elsewhere in the generated package (e.g., `+flip-horizontally+`).
+
+### C. Type Predicates and Casts
+* **Proposed Update:** Export standard type predicate and casting functions in every package.
+  - An `instance-of?` predicate (using `dotnet:is-instance-of`):
+    ```lisp
+    (defun instance-of? (obj)
+      "Returns T if obj is an instance of this type, otherwise NIL."
+      (dotnet:is-instance-of obj <type-str>))
+    ```
+  - A `cast` helper (using `dotnet:cast`):
+    ```lisp
+    (defun cast (obj)
+      "Verify obj matches this type, returning the object carrying a static type hint."
+      (dotnet:cast obj <type-str>))
+    ```
+
+### D. Type-Specialized Array Constructors
+* **Proposed Update:** Export specialized array allocation wrappers for each class/struct type.
+  - `make-array` wrapper:
+    ```lisp
+    (defun make-array (&rest dimensions)
+      "Create a .NET array of this type."
+      (apply #'dotnet:make-array <type-str> dimensions))
+    ```
+  - `new-array` wrapper:
+    ```lisp
+    (defun new-array (&rest elements)
+      "Create a .NET array of this type pre-populated with elements."
+      (apply #'dotnet:new-array <type-str> elements))
+    ```
+
 ## Conclusion
 By adopting these tools, we can further reduce the footprint of `mg-classes.lisp` and eliminate custom reflection wrappers in `clr-generic.lisp`. No code has been modified yet; this plan serves as a roadmap for the next refactoring pass.
