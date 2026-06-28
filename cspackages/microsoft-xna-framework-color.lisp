@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:57Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:54Z
 
 (in-package :cl-user)
 
@@ -201,8 +201,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(defconstant <creation> "2026-06-28T14:09:57Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:54Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -579,7 +579,14 @@
 
 (defun * (&rest args)
   "Passthrough for Microsoft.Xna.Framework.Color.* overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "*" args))
+  (cond
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (numberp (nth 1 args)))
+     (apply #'*-color-single args))
+    ((and (cl:= (length args) 2) (numberp (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'*-single-color args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'*-color-color args))
+    (t (error "Microsoft.Xna.Framework.Color.*: no matching overload found for args: ~S" args))))
 
 (defun *-color-single (value scale)
   "Calls Microsoft.Xna.Framework.Color.* *(Color, Single) -> Color"

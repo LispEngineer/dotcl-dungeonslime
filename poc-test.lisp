@@ -97,7 +97,7 @@
   (format *error-output* "--- Running C# Package Generator Integration Tests ---~%")
 
   (let ((sc-pkg (find-package "SYSTEM-CONSOLE"))
-        (sts-pkg (find-package "SYSTEM-TIME-SPAN"))
+        (sts-pkg (find-package "TS"))
         (mv2-pkg (find-package "MICROSOFT-XNA-FRAMEWORK-VECTOR2")))
     (if (and sc-pkg sts-pkg mv2-pkg)
         (progn
@@ -124,8 +124,8 @@
                 (ts-type (and ts-type-sym (symbol-value ts-type-sym)))
                 (type-name (and ts-type (dotnet:invoke ts-type "FullName"))))
             (if (equal type-name "System.TimeSpan")
-                (format *error-output* "[PASS] system-time-span:<type> returned System.TimeSpan~%")
-                (utils:format-red *error-output* "[FAIL] system-time-span:<type> returned ~S~%" type-name)))
+                (format *error-output* "[PASS] ts:<type> returned System.TimeSpan~%")
+                (utils:format-red *error-output* "[FAIL] ts:<type> returned ~S~%" type-name)))
 
           ;; 3. Microsoft.Xna.Framework.Vector2 Tests
           (let* ((vec-type-sym (find-symbol "<TYPE>" mv2-pkg))

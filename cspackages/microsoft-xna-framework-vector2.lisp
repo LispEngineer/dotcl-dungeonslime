@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:32Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:27Z
 
 (in-package :cl-user)
 
@@ -101,8 +101,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(defconstant <creation> "2026-06-28T14:09:32Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:27Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -131,7 +131,12 @@
 
 (defun - (&rest args)
   "Passthrough for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "-" args))
+  (cond
+    ((and (cl:= (length args) 1) (monoutils:dotnet-p (nth 0 args)))
+     (apply #'--vector2 args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'--vector2-vector2 args))
+    (t (error "Microsoft.Xna.Framework.Vector2.-: no matching overload found for args: ~S" args))))
 
 (defun --vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.- -(Vector2) -> Vector2"
@@ -143,7 +148,14 @@
 
 (defun * (&rest args)
   "Passthrough for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "*" args))
+  (cond
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'*-vector2-vector2 args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (numberp (nth 1 args)))
+     (apply #'*-vector2-single args))
+    ((and (cl:= (length args) 2) (numberp (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'*-single-vector2 args))
+    (t (error "Microsoft.Xna.Framework.Vector2.*: no matching overload found for args: ~S" args))))
 
 (defun *-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2.* *(Vector2, Vector2) -> Vector2"
@@ -159,7 +171,12 @@
 
 (defun / (&rest args)
   "Passthrough for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "/" args))
+  (cond
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'/-vector2-vector2 args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (numberp (nth 1 args)))
+     (apply #'/-vector2-single args))
+    (t (error "Microsoft.Xna.Framework.Vector2./: no matching overload found for args: ~S" args))))
 
 (defun /-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2./ /(Vector2, Vector2) -> Vector2"

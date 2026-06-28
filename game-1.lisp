@@ -480,7 +480,7 @@ else
       (progn
         (setf speed (* speed +fast-multiplier+))
         (input:game-pad-set-vibration gp-pad 1.0f0
-                                      (csharp:timespan<-milliseconds 1000)))
+                                      (ts:from-milliseconds 1000)))
       (input:game-pad-stop-vibration gp-pad))
     ;; Check thumbstick first since it has priority over which gamepad input
     ;; is movement.  It has priority since the thumbstick values provide a

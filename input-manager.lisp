@@ -187,7 +187,7 @@
     :documentation "The state of gamepad input during the current update cycle.")
    (vibration-time-remaining
     :accessor game-pad-vibration-time-remaining
-    :initform (csharp:timespan<-milliseconds 0)
+    :initform (ts:from-milliseconds 0)
     :documentation "How much longer the gamepad should vibrate.")))
 
 (defmethod initialize-instance :after ((info game-pad-info) &key)
@@ -205,13 +205,13 @@
   (setf (slot-value info 'current-state)
     (gp:get-state (slot-value info 'player-index)))
   ;; Handle timed vibration
-  (when (csharp:ts> (slot-value info 'vibration-time-remaining)
-                    (csharp:timespan<-milliseconds 0))
+  (when (ts:> (slot-value info 'vibration-time-remaining)
+              (ts:from-milliseconds 0))
     (setf (slot-value info 'vibration-time-remaining)
-      (csharp:ts- (slot-value info 'vibration-time-remaining)
-                  (game-time-elapsed gt)))
-    (when (csharp:ts<= (slot-value info 'vibration-time-remaining)
-                       (csharp:timespan<-milliseconds 0))
+      (ts:- (slot-value info 'vibration-time-remaining)
+            (game-time-elapsed gt)))
+    (when (ts:<= (slot-value info 'vibration-time-remaining)
+                 (ts:from-milliseconds 0))
       (game-pad-stop-vibration info))))
 
 (defmethod game-pad-left-thumb-stick ((info game-pad-info))
@@ -255,7 +255,7 @@
 
 (defmethod game-pad-stop-vibration ((info game-pad-info))
   "Immediately stops all vibration on this gamepad."
-  (setf (slot-value info 'vibration-time-remaining) (csharp:timespan<-milliseconds 0))
+  (setf (slot-value info 'vibration-time-remaining) (ts:from-milliseconds 0))
   (gp:set-vibration (slot-value info 'player-index) 0.0f0 0.0f0))
 
 

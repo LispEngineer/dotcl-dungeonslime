@@ -117,8 +117,9 @@ mgcb:
 	dotnet tool run mgcb-editor-linux
 
 repl:
+  # rlwrap should work as of 0.1.12 but still does not as of 0.1.14 for me.
   # The // at the end is required!
-	#rlwrap --always-readline \ 
 	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" \
+	# rlwrap \
 	dotcl --eval '(load "load-repl.lisp")' \
 	      --eval '(in-package :dungeon-slime)' repl

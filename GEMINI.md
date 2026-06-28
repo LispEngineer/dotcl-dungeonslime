@@ -41,6 +41,8 @@
 * Use the `scratch/` directory to store temporary files, such as to explore
   how things work. These are not committed to Git so do not put anything
   important or durable in there!
+* Any generated test/execution run log files (such as `run_out*` files or `repl_out*` files)
+  in the root directory should be cleaned up / deleted before ending the session.
 
 
 # Useful Commands

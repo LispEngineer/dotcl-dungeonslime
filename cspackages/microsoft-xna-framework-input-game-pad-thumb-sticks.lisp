@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:49Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:45Z
 
 (in-package :cl-user)
 
@@ -30,8 +30,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(defconstant <creation> "2026-06-28T14:09:49Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:45Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)

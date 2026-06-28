@@ -152,55 +152,55 @@
   (format *error-output* "--- Running Generated Package Operator Overload Tests ---~%")
 
   ;; TimeSpan Operator Tests
-  (let ((t1 (system-time-span:from-ticks 100))
-        (t2 (system-time-span:from-ticks 200))
-        (t3 (system-time-span:from-ticks 100)))
+  (let ((t1 (ts:from-ticks 100))
+        (t2 (ts:from-ticks 200))
+        (t3 (ts:from-ticks 100)))
 
-    (assert-test (system-time-span:= t1 t3)
+    (assert-test (ts:= t1 t3)
                 t
                 "TimeSpan = operator (true case)")
 
-    (assert-test (system-time-span:= t1 t2)
+    (assert-test (ts:= t1 t2)
                 nil
                 "TimeSpan = operator (false case)")
 
-    (assert-test (system-time-span:not= t1 t2)
+    (assert-test (ts:not= t1 t2)
                 t
                 "TimeSpan not= operator (true case)")
 
-    (assert-test (system-time-span:not= t1 t3)
+    (assert-test (ts:not= t1 t3)
                 nil
                 "TimeSpan not= operator (false case)")
 
-    (assert-test (system-time-span:< t1 t2)
+    (assert-test (ts:< t1 t2)
                 t
                 "TimeSpan < operator (true case)")
 
-    (assert-test (system-time-span:< t2 t1)
+    (assert-test (ts:< t2 t1)
                 nil
                 "TimeSpan < operator (false case)")
 
-    (assert-test (system-time-span:<= t1 t2)
+    (assert-test (ts:<= t1 t2)
                 t
                 "TimeSpan <= operator (less than case)")
 
-    (assert-test (system-time-span:<= t1 t3)
+    (assert-test (ts:<= t1 t3)
                 t
                 "TimeSpan <= operator (equal case)")
 
-    (assert-test (system-time-span:> t2 t1)
+    (assert-test (ts:> t2 t1)
                 t
                 "TimeSpan > operator (true case)")
 
-    (assert-test (system-time-span:> t1 t2)
+    (assert-test (ts:> t1 t2)
                 nil
                 "TimeSpan > operator (false case)")
 
-    (assert-test (system-time-span:>= t2 t1)
+    (assert-test (ts:>= t2 t1)
                 t
                 "TimeSpan >= operator (greater than case)")
 
-    (assert-test (system-time-span:>= t1 t3)
+    (assert-test (ts:>= t1 t3)
                 t
                 "TimeSpan >= operator (equal case)"))
 

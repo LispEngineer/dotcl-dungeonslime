@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Mouse
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:42Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:37Z
 
 (in-package :cl-user)
 
@@ -22,8 +22,8 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Mouse"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.Mouse")
-(defconstant <creation> "2026-06-28T14:09:42Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:37Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)

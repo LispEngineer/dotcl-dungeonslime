@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:17Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:10Z
 
 (in-package :cl-user)
 
@@ -141,8 +141,8 @@
 
 (defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (defconstant <type-str> "System.TimeSpan")
-(defconstant <creation> "2026-06-28T14:09:17Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:10Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -339,7 +339,12 @@ Parameters:
 
 (defun - (&rest args)
   "Passthrough for System.TimeSpan.- overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "-" args))
+  (cond
+    ((and (cl:= (length args) 1) (monoutils:dotnet-p (nth 0 args)))
+     (apply #'--time-span args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'--time-span-time-span args))
+    (t (error "System.TimeSpan.-: no matching overload found for args: ~S" args))))
 
 (defun --time-span (t-val)
   "Calls System.TimeSpan.- -(TimeSpan) -> TimeSpan. Summary: Returns a System.TimeSpan whose value is the negated value of the specified instance.
@@ -360,7 +365,12 @@ Parameters:
 
 (defun * (&rest args)
   "Passthrough for System.TimeSpan.* overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "*" args))
+  (cond
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (numberp (nth 1 args)))
+     (apply #'*-time-span-double args))
+    ((and (cl:= (length args) 2) (numberp (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'*-double-time-span args))
+    (t (error "System.TimeSpan.*: no matching overload found for args: ~S" args))))
 
 (defun *-time-span-double (time-span factor)
   "Calls System.TimeSpan.* *(TimeSpan, Double) -> TimeSpan. Summary: Returns a new System.TimeSpan object whose value is the result of multiplying the specified timeSpan instance and the specified factor.
@@ -382,7 +392,12 @@ Parameters:
 
 (defun / (&rest args)
   "Passthrough for System.TimeSpan./ overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "/" args))
+  (cond
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (numberp (nth 1 args)))
+     (apply #'/-time-span-double args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'/-time-span-time-span args))
+    (t (error "System.TimeSpan./: no matching overload found for args: ~S" args))))
 
 (defun /-time-span-double (time-span divisor)
   "Calls System.TimeSpan./ /(TimeSpan, Double) -> TimeSpan. Summary: Returns a new System.TimeSpan object whose value is the result of dividing the specified timeSpan by the specified divisor.
@@ -404,7 +419,12 @@ Parameters:
 
 (defun + (&rest args)
   "Passthrough for System.TimeSpan.+ overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "+" args))
+  (cond
+    ((and (cl:= (length args) 1) (monoutils:dotnet-p (nth 0 args)))
+     (apply #'+-time-span args))
+    ((and (cl:= (length args) 2) (monoutils:dotnet-p (nth 0 args)) (monoutils:dotnet-p (nth 1 args)))
+     (apply #'+-time-span-time-span args))
+    (t (error "System.TimeSpan.+: no matching overload found for args: ~S" args))))
 
 (defun +-time-span (t-val)
   "Calls System.TimeSpan.+ +(TimeSpan) -> TimeSpan. Summary: Returns the specified instance of System.TimeSpan.

@@ -99,11 +99,11 @@
       (assert-equal (to-int (microsoft-xna-framework-color:a c)) 0 "Color A after packed-value mutate to 0"))
 
     ;; 4. Value Type Read-Only Property (TimeSpan struct)
-    (let ((ts (system-time-span:from-ticks 10000))) ; 1 millisecond
-      (assert-equal (system-time-span:total-milliseconds ts) 1.0 "TimeSpan TotalMilliseconds"))
+    (let ((ts (ts:from-ticks 10000))) ; 1 millisecond
+      (assert-equal (ts:total-milliseconds ts) 1.0 "TimeSpan TotalMilliseconds"))
 
     ;; 5. Verification of Absence of Mutators (Read-Only Properties)
-    (assert-not-fboundp '(setf system-time-span:total-milliseconds) "TimeSpan.TotalMilliseconds mutator absence")
+    (assert-not-fboundp '(setf ts:total-milliseconds) "TimeSpan.TotalMilliseconds mutator absence")
     (assert-not-fboundp '(setf microsoft-xna-framework-input-mouse-state:x) "MouseState.X mutator absence")
     (assert-not-fboundp '(setf microsoft-xna-framework-input-keyboard-state:caps-lock) "KeyboardState.CapsLock mutator absence")
     (assert-not-fboundp '(setf microsoft-xna-framework-input-game-pad-state:is-connected) "GamePadState.IsConnected mutator absence"))

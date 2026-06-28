@@ -152,7 +152,7 @@
                       (frames (getf val :frames '())))
                  (format *error-output* "[ta-from-file] animation: ~S ~S ~S~%" name delay frames)
                  (ta-add-animation atlas name
-                   (csharp:timespan<-milliseconds delay)
+                   (ts:from-milliseconds delay)
                    (mapcar (lambda (sym) (ta-get-region atlas (string-downcase (string sym)))) frames))))
       ;; Return our completed texture atlas
       atlas)))
@@ -183,7 +183,7 @@
       (assert (equal (height reg-b) 64))
       ;; Animation tests
       (let* ((delay-ts (delay ani-ab))
-            (delay-ms (csharp:timespan->milliseconds delay-ts)))
+            (delay-ms (ts:total-milliseconds delay-ts)))
         (format *error-output* "[texture-atlas.lisp] delay-ts = ~A, delay-ms = ~A~%" delay-ts delay-ms)
         ;; Use = instead of equal for numeric comparison to handle type differences (double-float vs integer)
         (assert (= delay-ms 234)))

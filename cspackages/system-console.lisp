@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 12
-;;; Creation Date: 2026-06-28T14:09:15Z
+;;; Generator Version: 14
+;;; Creation Date: 2026-06-28T22:30:08Z
 
 (in-package :cl-user)
 
@@ -96,8 +96,8 @@
 
 (defconstant <type> (monoutils:get-type "System.Console"))
 (defconstant <type-str> "System.Console")
-(defconstant <creation> "2026-06-28T14:09:15Z")
-(defconstant <version> 12)
+(defconstant <creation> "2026-06-28T22:30:08Z")
+(defconstant <version> 14)
 
 ;; Register C# Type with CLOS
 (eval-when (:compile-toplevel :load-toplevel :execute)

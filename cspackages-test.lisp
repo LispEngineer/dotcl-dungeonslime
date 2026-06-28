@@ -203,27 +203,21 @@
 
   (format *error-output* "--- TimeSpan Method Tests ---~%")
 
-  (let* ((t1 (system-time-span:from-ticks 100))
-         (t2 (system-time-span:from-ticks 200))
-         (t3 (system-time-span:from-ticks 100))
-         (ts-pkg :system-time-span))
+  (let* ((t1 (ts:from-ticks 100))
+         (t2 (ts:from-ticks 200))
+         (t3 (ts:from-ticks 100)))
 
     ;; TimeSpan operators (version 9)
-    (let ((ts-eq (find-symbol "=" ts-pkg))
-          (ts-noteq (find-symbol "NOT=" ts-pkg))
-          (ts-lt (find-symbol "<" ts-pkg))
-          (ts-gt (find-symbol ">" ts-pkg)))
-      (assert-cspkg (funcall ts-eq t1 t3) t
-                    "TimeSpan = operator (true case)")
-      (assert-cspkg (funcall ts-eq t1 t2) nil
-                    "TimeSpan = operator (false case)")
-      (assert-cspkg (funcall ts-noteq t1 t2) t
-                    "TimeSpan not= operator (true case)")
-      (assert-cspkg (funcall ts-lt t1 t2) t
-                    "TimeSpan < operator (true case)")
-      (assert-cspkg (funcall ts-gt t2 t1) t
-                    "TimeSpan > operator (true case)"))
-    )
+    (assert-cspkg (ts:= t1 t3) t
+                  "TimeSpan = operator (true case)")
+    (assert-cspkg (ts:= t1 t2) nil
+                  "TimeSpan = operator (false case)")
+    (assert-cspkg (ts:not= t1 t2) t
+                  "TimeSpan not= operator (true case)")
+    (assert-cspkg (ts:< t1 t2) t
+                  "TimeSpan < operator (true case)")
+    (assert-cspkg (ts:> t2 t1) t
+                  "TimeSpan > operator (true case)"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; 5. Edge Cases
@@ -314,22 +308,15 @@
                   "Rectangle typed constructor left"))
 
   ;; TimeSpan Constructors (Struct, multi-overload)
-  (let* ((ts-pkg :system-time-span)
-         (ts-eq (find-symbol "=" ts-pkg))
-         (new-fn (find-symbol "NEW" ts-pkg))
-         (new-ticks (find-symbol "NEW-INT64" ts-pkg))
-         ;; Test default parameterless constructor
-         (t-def (funcall new-fn))
-         ;; Test parameterized constructor
-         (t-param (funcall new-fn 5000))
-         ;; Test typed constructor
-         (t-typed (funcall new-ticks 5000)))
+  (let* ((t-def (ts:new))
+         (t-param (ts:new 5000))
+         (t-typed (ts:new-int64 5000)))
 
-    (assert-cspkg (funcall ts-eq t-def (system-time-span:from-ticks 0)) t
+    (assert-cspkg (ts:= t-def (ts:from-ticks 0)) t
                   "TimeSpan default constructor")
-    (assert-cspkg (funcall ts-eq t-param (system-time-span:from-ticks 5000)) t
+    (assert-cspkg (ts:= t-param (ts:from-ticks 5000)) t
                   "TimeSpan parameterized constructor")
-    (assert-cspkg (funcall ts-eq t-typed (system-time-span:from-ticks 5000)) t
+    (assert-cspkg (ts:= t-typed (ts:from-ticks 5000)) t
                   "TimeSpan typed constructor"))
 
   ;; Uri Constructors (Class, multi-overload)

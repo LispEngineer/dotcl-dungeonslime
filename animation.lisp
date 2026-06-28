@@ -24,7 +24,7 @@
    (delay
     :accessor delay
     :initarg :delay
-    :initform (csharp:timespan<-milliseconds 100)
+    :initform (ts:from-milliseconds 100)
     :documentation "The amount of time to delay between each frame before moving
                     to the next frame for this animation. This is a C# System.TimeSpan.")))
 
@@ -87,11 +87,11 @@
     (when (null nft)
       ;; Set our next frame time to now + the delay
       (setf (next-frame-time as)
-        (csharp:ts+ (game-time-total gt) delay))
+        (ts:+ (game-time-total gt) delay))
       (return-from update nil))
 
     ;; Do we need to update now?
-    (when (csharp:ts>= (game-time-total gt) nft)
+    (when (ts:>= (game-time-total gt) nft)
       ;; Update our current frame
       (setf (current-frame as)
         (if (>= cf (1- (length (frames anim))))
@@ -101,4 +101,4 @@
         (nth (current-frame as) (frames anim)))
       ;; And figure out our next update
       (setf (next-frame-time as)
-        (csharp:ts+ (game-time-total gt) delay)))))
+        (ts:+ (game-time-total gt) delay)))))

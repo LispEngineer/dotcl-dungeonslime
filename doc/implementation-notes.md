@@ -1016,3 +1016,58 @@ to just:
    `*content-directory*`.
 
 
+# Local Nickname Migration and TimeSpan Operator Dispatchers
+
+## 1. TimeSpan Package Nickname Migration
+
+To clean up references to the `system-time-span` package, all references across
+the codebase were migrated to use a `:ts` package local nickname:
+* Package definitions for `:dungeon-slime`, `:dungeon-slime-input`, and
+  `:dungeon-slime-tests` in [packages.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/packages.lisp) were updated to include
+  `(:ts :system-time-span)` under `:local-nicknames`.
+* The obsolete `:time-span` nickname was removed to prevent collisions.
+* All code symbols (e.g. `system-time-span:from-milliseconds`) and tests (e.g.
+  `system-time-span:from-ticks`) were refactored to use `ts:`.
+* Test code using dynamic symbol reflection (e.g., `(find-symbol "=" :ts)`) was
+  updated to make direct, read-time resolved calls (e.g. `(ts:= t1 t2)`),
+  eliminating runtime package name resolution issues.
+
+## 2. TimeSpan Standard Operator Dispatchers
+
+Standard operators like `+`, `-`, `*`, and `/` are overloaded in C#'s
+`System.TimeSpan`. The package generator emitted generic runtime dispatchers for
+these, passing the operator strings directly to `dotnet:static` (e.g., `(apply
+#'dotnet:static <type-str> "+" args)`).
+
+However, .NET static operators compiled in IL have special names (such as
+`op_Addition`, `op_UnaryPlus`, `op_Subtraction`, `op_UnaryNegation`,
+`op_Multiply`, `op_Division`), so calling `"+"` or `"-"` directly via
+`dotnet:static` results in `System.MissingMethodException`.
+
+To fix this, the operators inside [cspackages/system-time-span.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/cspackages/system-time-span.lisp) were
+refactored to perform type and argument count dispatching purely in Lisp,
+calling the correct typed static method wrapper functions:
+* **`-`**: Calls `--time-span-time-span` (`op_Subtraction`) for 2 arguments, or
+  `--time-span` (`op_UnaryNegation`) for 1 argument.
+* **`+`**: Calls `+-time-span-time-span` (`op_Addition`) for 2 arguments, or
+  `+-time-span` (`op_UnaryPlus`) for 1 argument.
+* **`*`**: Inspects if the first argument is a C# object (via
+  `monoutils:dotnet-p`) to dispatch to `*-time-span-double` (`op_Multiply`) or
+  `*-double-time-span` (`op_Multiply`).
+* **`/`**: Inspects if the second argument is a C# object (via
+  `monoutils:dotnet-p`) to dispatch to `/-time-span-time-span` (`op_Division`)
+  or `/-time-span-double` (`op_Division`).
+
+
+# C# Operator Overload Dispatch in Package Generator (Generator Version 13 & 14)
+
+## 1. Type-Based Operator Dispatching (Version 13)
+The C# Lisp Package Generator has been enhanced in Version 13 to automatically generate type- and argument-count-aware dispatch wrappers for C# operator overloads (methods whose name starts with `"op_"` in C#, such as `op_Addition` and `op_Subtraction`, which are mapped to Lisp symbols like `+` and `-`):
+* **Runtime Dispatch**: For overloaded operators, instead of outputting generic `(apply #'dotnet:static ...)` calls with raw operator symbols (e.g. `"+"` or `"-"`) which fail with `System.MissingMethodException`, the generator now emits a Lisp `cond` block.
+* **Overload Selection**: The `cond` block inspects the runtime argument count and types (numbers, booleans, strings, or `.NET` objects) and dispatches the call to the corresponding type-suffixed generated overload functions (e.g. `+-time-span-time-span` or `*-time-span-double`).
+* **Safe Fallback**: If no overload matches the argument patterns, a descriptive runtime error is thrown.
+
+## 2. Standard Lisp Package Qualification (Version 14)
+When standard Lisp operators (like `=`) are shadowed in a generated package (like `:system-time-span` shadowing `=`), any un-qualified calls to `=` in that package will resolve to the shadowed operator rather than the standard Common Lisp comparison function `cl:=`.
+* **The Bug**: In Version 13, the generated test conditions (e.g. `(= (length args) 2)`) inside `:system-time-span` resolved to `system-time-span:=`. This caused recursive dispatch attempts with integer arguments (e.g. calling `op_Equality(int, int)`), leading to `MissingMethodException`.
+* **The Fix**: In Version 14, the generator qualified all standard Lisp comparison operations in generated tests using the `cl:` package prefix (e.g., `(cl:= (length args) 2)`), ensuring they are evaluated as built-in Lisp functions rather than shadowed operator wrappers.

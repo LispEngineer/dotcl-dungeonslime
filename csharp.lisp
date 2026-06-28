@@ -11,6 +11,8 @@
 
 (format *error-output* "[csharp.lisp] Loading in package ~S~%" *package*)
 
+;; Use the generated timespan methods now
+#|
 (defun timespan<-milliseconds (millis &optional (micros 0 has-micros-p))
   "Create a TimeSpan struct from this number of milliseconds,
    which is either a Double or Int64. Optionally include Int64 microseconds."
@@ -48,6 +50,7 @@
   "Compares two System.TimeSpan objects, ts1 <= ts2.
    Does not check for nil or correct object types."
   (dotnet:static "System.TimeSpan" "op_LessThanOrEqual" ts1 ts2))
+|#
 
 ;; Make calling DotNet functions more convenient.
 ;;

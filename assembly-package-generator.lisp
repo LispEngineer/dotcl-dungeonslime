@@ -9,7 +9,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 12
+(defparameter *generator-version* 14
   "Integer version number for the generated Lisp source files.
    Version history:
    1 - Initial generator mapping C# classes to Lisp packages.
@@ -25,7 +25,9 @@
         type-suffixed naming for multi-overload methods, passthrough &rest functions,
         typed-call optimization for value type receivers, and dirty overload documentation.
    11 - Added support for C# constructors (new) with overload dispatch and struct parameterless constructor injection.
-   12 - Added support for C# generic methods of exactly one type argument using dotnet:invoke-generic and dotnet:static-generic.")
+   12 - Added support for C# generic methods of exactly one type argument using dotnet:invoke-generic and dotnet:static-generic.
+   13 - Refactored C# overloaded operator passthrough generation to dispatch based on argument types and counts in Lisp, avoiding MissingMethodExceptions.
+   14 - Qualified standard Common Lisp comparison function cl:= in emitted passthrough code, preventing it from resolving to the shadowed = operator of the generated package.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
@@ -308,6 +310,29 @@
                     (map-param-name pname)
                     ptype
                     pdesc)))))))
+
+(defun format-param-type-check (param-type arg-str)
+  "Returns a Lisp type checking expression string for the given C# parameter type."
+  (cond
+    ((member param-type '("System.Double" "System.Single" "System.Int32" "System.Int64" "System.Int16" "System.Byte" "System.Decimal") :test #'string=)
+     (format nil "(numberp ~A)" arg-str))
+    ((string= param-type "System.Boolean")
+     (format nil "(typep ~A 'boolean)" arg-str))
+    ((string= param-type "System.String")
+     (format nil "(stringp ~A)" arg-str))
+    (t
+     (format nil "(monoutils:dotnet-p ~A)" arg-str))))
+
+(defun format-overload-test (cm)
+  "Generates a Lisp conditional test expression string for checking if the runtime arguments match the method's parameters."
+  (let* ((params (getf cm :parameters))
+         (arg-count (length params)))
+    (if (= arg-count 0)
+        (format nil "(cl:= (length args) 0)")
+        (let ((checks (loop for p in params
+                            for idx from 0
+                            collect (format-param-type-check (getf p :type) (format nil "(nth ~D args)" idx)))))
+          (format nil "(and (cl:= (length args) ~D)~{ ~A~})" arg-count checks)))))
 
 (defun generate-class-file (class-plist output-dir &optional constant-properties-list)
   "Generates the Lisp source file for a single class plist."
@@ -681,15 +706,14 @@
                    (format stream ";; yet supported:~%")
                    (dolist (dm dirty-methods)
                      (format stream ";;   ~A~%" (method-signature-str dm)))
-                   (format stream "~%")))
-               ;; end Case 2
-               )
+                   (format stream "~%"))))
               
               ;; Case 3: Multiple clean overloads (2 or more)
               (t
                ;; Generate passthrough &rest function for DotCL runtime dispatch
                (let* ((first-clean (first clean-methods))
                       (is-generic-p (getf first-clean :is-generic))
+                      (is-operator (uiop:string-prefix-p "op_" (or (getf first-clean :mangled-name) "")))
                       (passthrough-args (cond
                                           ((and static-p is-generic-p) "type &rest args")
                                           (static-p "&rest args")
@@ -698,6 +722,13 @@
                  (format stream "(defun ~A (~A)~%" kebab-name passthrough-args)
                  (format stream "  \"Passthrough for ~A.~A overloads. Dispatches at runtime.\"~%" fq-name name)
                  (cond
+                   (is-operator
+                    (format stream "  (cond~%")
+                    (dolist (cm clean-methods)
+                      (let ((test-str (format-overload-test cm))
+                            (overload-fn (method-overload-name cm)))
+                        (format stream "    (~A~%     (apply #'~A args))~%" test-str overload-fn)))
+                    (format stream "    (t (error \"~A.~A: no matching overload found for args: ~~S\" args))))~%~%" fq-name name))
                    ((and static-p is-generic-p)
                     (format stream "  (apply #'dotnet:static-generic <type-str> \"~A\" (list type) args))~%~%" name))
                    (static-p

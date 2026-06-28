@@ -148,7 +148,7 @@
     (:kb :microsoft-xna-framework-input-keyboard)
     (:kb-state :microsoft-xna-framework-input-keyboard-state)
     (:gp :microsoft-xna-framework-input-game-pad)
-    (:ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
+    (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
     (:gp-state :microsoft-xna-framework-input-game-pad-state)
     (:button :microsoft-xna-framework-input-buttons)
     (:pi :microsoft-xna-framework-player-index)
@@ -161,7 +161,6 @@
     (:gd :microsoft-xna-framework-graphics-graphics-device)
     (:pp :microsoft-xna-framework-graphics-presentation-parameters)
     (:point :microsoft-xna-framework-point)
-    (:time-span :system-time-span)
     (:sound-effect :microsoft-xna-framework-audio-sound-effect)
     (:sei :microsoft-xna-framework-audio-sound-effect-instance)
     (:sound-state :microsoft-xna-framework-audio-sound-state)
@@ -211,7 +210,8 @@
     (:bs :microsoft-xna-framework-input-button-state)
     (:kb :microsoft-xna-framework-input-keyboard)
     (:mouse :microsoft-xna-framework-input-mouse)
-    (:gp :microsoft-xna-framework-input-game-pad))
+    (:gp :microsoft-xna-framework-input-game-pad)
+    (:ts :system-time-span))
   (:export
     ;; KeyboardInfo class and functions
     #:keyboard-info
@@ -270,6 +270,8 @@
 
 (defpackage :dungeon-slime-tests
   (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
+  (:local-nicknames
+    (:ts :system-time-span))
   (:export
     #:run-all-tests
     #:test-clr-defmethods))
