@@ -41,3 +41,7 @@
       (handler-case
         (type:full-name typ)
         (error () nil)))))
+
+(eval-when (:load-toplevel :execute)
+  (format *error-output* "[monoutils.lisp] Initializing MonoUtilsRegistrar...~%")
+  (dotnet:static "MonoUtilsRegistrar" "Initialize"))

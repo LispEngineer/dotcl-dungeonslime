@@ -14,7 +14,7 @@
       (read stream nil :eof))))                ; 4. Graceful EOF handling
 
 (defconstant +base-directory+
-  (app-domain:base-directory app-domain:current-domain)
+  (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "get_BaseDirectory")
   "Get the C# base directory of this current executable")
 
 ;; I have no idea why, but this stopped working...?

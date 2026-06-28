@@ -40,9 +40,7 @@
 (defpackage :microsoft-xna-framework-point)
 (defpackage :microsoft-xna-framework-rectangle)
 (defpackage :microsoft-xna-framework-vector2)
-(defpackage :system-app-domain
-  (:export #:base-directory
-           #:current-domain))
+(defpackage :system-app-domain)
 (defpackage :system-boolean)
 (defpackage :system-console)
 (defpackage :system-convert)

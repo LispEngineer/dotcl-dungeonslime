@@ -101,6 +101,7 @@ and files in this repository.
   `system-uri-kind:+relative+`.
 
 * `utils.lisp`: Contains general utility functions (like path qualification and safe reading).
+  Uses native interop to retrieve the base directory, avoiding load-time package circular dependencies.
 
 * `settings.lisp`: Defines system-wide Lisp settings (e.g., `declaim`).
 
@@ -195,7 +196,8 @@ and files in this repository.
 
 * `load-repl.lisp`: Not a part of the sources of the game; use this like
   `(load "load-repl.lisp")` from a clean `dotcl` REPL instance to get the
-  entire game loaded and ready for REPL hacking.
+  entire game loaded and ready for REPL hacking. Streamlined to only load the
+  system and instantiate the game using compile-time paths.
 
 * `load-system-test.lisp`: Proof of concept that we can load a system using
   ASDF and use it in our binary. Also has related changes in `.csproj` file.
@@ -209,6 +211,7 @@ and files in this repository.
   several C# functions intended to be used from Lisp land. Works similarly
   to DotCL's `dotnet` package. Also contains the documentation strings for
   the functions as I couldn't figure out how to set them in the C# source.
+  Triggers C# registrar initialization automatically at load-time.
 
 * `poc-test.lisp`: Optional Proofs of Concept and Tests that can be run by
   including them in the `.asd` file (commented out by default). Useful during
@@ -229,8 +232,12 @@ and files in this repository.
 
 * `type-aliases.lisp`: Provides MonoGame-specific and other C# type aliases
   into `dotnet::*type-aliases*` mostly for ease of reading the code.
+  Loads assemblies dynamically when ASDF is present, supporting clean
+  compilation and REPL usage while remaining safe for standalone executable
+  environments.
 
-* `dungeon-slime.asd`: ASDF system definition file for this game.
+* `dungeon-slime.asd`: ASDF system definition file for this game. Simplified to load
+  all components in a linear build order.
 
 * `explore.lisp`: Just some functions I load into the REPL to explore
   the areas of DotCL.

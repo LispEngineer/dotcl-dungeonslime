@@ -75,25 +75,31 @@
 ;; 1. First load all the necessary assemblies
 ;; 2. Then register the classes with the CLOS type system
 
-(eval-when (:compile-toplevel)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter *content-directory* nil
+    "The resolved content directory path used in REPL contexts."))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
   (defparameter dotnet-assemblies
     '("MonoGame.Framework.dll"
       "DungeonSlime.dll")
     "These are all the assemblies we will load so we can get their classes
-    registered for the method dispatch")
-  (format *error-output* "[type-aliases.lisp] Loading compile-time assemblies...~%")
+     registered for the method dispatch")
 
-  (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
-         (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
-         (bin-dir (with-open-file (s outdir-file) (read-line s))))
-    (dolist (assembly dotnet-assemblies)
-      (format *error-output* "[type-aliases.lisp] Loading compile-time assembly: ~S~%" assembly)
-      (dotnet:load-assembly
-        (namestring
-          (merge-pathnames 
-            (concatenate 'string bin-dir assembly)
-            (asdf:system-source-directory "dungeon-slime"))))))
-  (format *error-output* "[type-aliases.lisp] Loaded compile-time assemblies.~%"))
+  (when (find-package :asdf)
+    (format *error-output* "[type-aliases.lisp] Loading assemblies...~%")
+    (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
+           (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
+           (bin-dir (with-open-file (s outdir-file) (read-line s))))
+      (setf *content-directory*
+            (merge-pathnames (concatenate 'string bin-dir "Content") sys-dir))
+      (dolist (assembly dotnet-assemblies)
+        (format *error-output* "[type-aliases.lisp] Loading assembly: ~S~%" assembly)
+        (dotnet:load-assembly
+          (namestring
+            (merge-pathnames 
+              (concatenate 'string bin-dir assembly)
+              sys-dir)))))))
 
 (eval-when (:load-toplevel :execute)
   (defparameter csharp-classes

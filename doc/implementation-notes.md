@@ -942,3 +942,77 @@ To support invoking generic methods of exactly one type argument from Lisp, the 
 * **Wrapper Generation**: Generated Lisp functions take the `type` parameter (supporting type name string, alias, or System.Type object) as the first argument (or second argument after `obj` for instance methods). The wrapper delegates invocation to DotCL's `dotnet:invoke-generic` or `dotnet:static-generic` interop targets by passing `(list type)` as the type arguments list.
 
 
+# Dependency Refactoring and REPL Load Simplification
+
+The build dependency hierarchy was refactored to eliminate compile-time
+circular dependencies, simplify `dungeon-slime.asd`, and streamline the REPL
+loader (`load-repl.lisp`).
+
+## 1. Circular Dependency Elimination
+
+Previously, `utils.lisp` relied on the generated C# wrapper package
+`system-app-domain` to retrieve `+base-directory+` via
+`(app-domain:base-directory app-domain:current-domain)`. However, the generator
+for `system-app-domain` depended on `utils.lisp`. This created a compile-time
+and load-time dependency loop.
+
+To break this loop:
+* The initialization of `+base-directory+` in `utils.lisp` was rewritten to use
+  direct, native `.NET` interop calls:
+  ```lisp
+  (defconstant +base-directory+
+    (dotnet:invoke (dotnet:static "System.AppDomain" "CurrentDomain") "get_BaseDirectory")
+    "Get the C# base directory of this current executable")
+  ```
+* This decouples the utility layer entirely from `system-app-domain.lisp`.
+* Stub definitions for `:system-app-domain`, `:system-object`, and
+  `:system-type` in `packages.lisp` were reverted to simple stubs. Stub exports
+  are only retained for symbols referenced at read-time by referencing files
+  before the generated packages compile (`system-object:get-type` and
+  `system-type:full-name`).
+
+## 2. Linear Build Sequence
+
+With utility modules decoupled from generated code, the component load order in
+`dungeon-slime.asd` was restored to a simple, flat linear sequence:
+1. `packages`
+2. `settings`
+3. `type-aliases`
+4. `monoutils`
+5. `utils`
+6. `*cspackages-components*` (loads all generated package wrappers, all of
+   which now consistently depend on `packages`, `utils`, and `monoutils`)
+7. Remaining game files.
+
+This completely eliminated complex `remove-if` and `remove-if-not` filters
+from the system definition.
+
+## 3. Dynamic Assembly Loading and Standalone Executables
+
+To ensure the compiled game executable runs cleanly without requiring ASDF to
+be loaded at runtime, all system directory and assembly paths inside
+`type-aliases.lisp` are resolved dynamically by checking if ASDF is present
+via `(find-package :asdf)`.
+
+If ASDF is present (during Lisp compilation or inside REPL sessions), the
+loader resolves the output directory relative to the ASDF system directory and
+loads the assemblies dynamically. If ASDF is absent (during standalone
+executable execution), the assembly loading sequence is completely skipped,
+as the assemblies are already statically linked and loaded by the C# host
+process. This prevents runtime `Undefined function` errors.
+
+## 4. Self-Contained REPL Loader
+
+The C# helper registrar `MonoUtilsRegistrar.Initialize` call was moved to a
+load-time `eval-when` block at the end of `monoutils.lisp`.
+
+Because assembly loading, path resolution, and registrar initialization are
+now handled automatically by the ASDF system, `load-repl.lisp` was simplified
+to just:
+1. Load ASDF and register the directory.
+2. Load the `"dungeon-slime"` ASDF system.
+3. Change package to `:dungeon-slime`.
+4. Create the game object and configure `RootDirectory` using
+   `*content-directory*`.
+
+
