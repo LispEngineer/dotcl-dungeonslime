@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:19Z
+;;; Creation Date: 2026-06-28T22:57:06Z
 
 (in-package :cl-user)
 
@@ -52,7 +52,7 @@
 
 (defconstant <type> (monoutils:get-type "System.IO.Path"))
 (defconstant <type-str> "System.IO.Path")
-(defconstant <creation> "2026-06-28T22:30:19Z")
+(defconstant <creation> "2026-06-28T22:57:06Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

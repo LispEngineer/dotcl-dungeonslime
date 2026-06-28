@@ -15,6 +15,8 @@
 (defpackage :microsoft-xna-framework-content-content-manager)
 (defpackage :microsoft-xna-framework-game)
 (defpackage :microsoft-xna-framework-game-time)
+(defpackage :microsoft-xna-framework-game-window)
+(defpackage :microsoft-xna-framework-graphics-device-manager)
 (defpackage :microsoft-xna-framework-graphics-graphics-device)
 (defpackage :microsoft-xna-framework-graphics-presentation-parameters)
 (defpackage :microsoft-xna-framework-graphics-sampler-state)
@@ -45,14 +47,17 @@
 (defpackage :system-console)
 (defpackage :system-convert)
 (defpackage :system-io-path)
-(defpackage :system-object
-  (:export #:get-type))
+(defpackage :system-object)
 (defpackage :system-reflection-member-info)
 (defpackage :system-time-span)
-(defpackage :system-type
-  (:export #:full-name))
+(defpackage :system-type)
 (defpackage :system-uri-kind)
 (defpackage :system-uri)
+;; Some special packages
+(defpackage :system-object
+  (:export #:get-type))
+(defpackage :system-type
+  (:export #:full-name))
 ;; Additional manually added packages
 (defpackage :anaphora)
 
@@ -168,8 +173,12 @@
     (:song :microsoft-xna-framework-media-song)
     (:game-time :microsoft-xna-framework-game-time)
     (:game :microsoft-xna-framework-game)
+    (:window :microsoft-xna-framework-game-window)
     (:app-domain :system-app-domain)
-    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch))
+    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch)
+    (:gdm :microsoft-xna-framework-graphics-device-manager)
+    (:cm :microsoft-xna-framework-content-content-manager)
+  )
   (:export 
     ;; Constants
     #:+window-defaults+ #:+content-default+ #:+false+

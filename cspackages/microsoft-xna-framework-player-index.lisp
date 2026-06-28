@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.PlayerIndex
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:31:05Z
+;;; Creation Date: 2026-06-28T22:57:52Z
 
 (in-package :cl-user)
 
@@ -22,7 +22,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.PlayerIndex"))
 (defconstant <type-str> "Microsoft.Xna.Framework.PlayerIndex")
-(defconstant <creation> "2026-06-28T22:31:05Z")
+(defconstant <creation> "2026-06-28T22:57:52Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

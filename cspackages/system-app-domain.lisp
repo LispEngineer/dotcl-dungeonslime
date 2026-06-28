@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:17Z
+;;; Creation Date: 2026-06-28T22:57:05Z
 
 (in-package :cl-user)
 
@@ -82,7 +82,7 @@
 
 (defconstant <type> (monoutils:get-type "System.AppDomain"))
 (defconstant <type-str> "System.AppDomain")
-(defconstant <creation> "2026-06-28T22:30:17Z")
+(defconstant <creation> "2026-06-28T22:57:05Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

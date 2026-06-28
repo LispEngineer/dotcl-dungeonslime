@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:45Z
+;;; Creation Date: 2026-06-28T22:57:31Z
 
 (in-package :cl-user)
 
@@ -30,7 +30,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(defconstant <creation> "2026-06-28T22:30:45Z")
+(defconstant <creation> "2026-06-28T22:57:31Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

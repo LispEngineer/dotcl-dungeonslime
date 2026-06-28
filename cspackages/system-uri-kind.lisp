@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.UriKind
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:12Z
+;;; Creation Date: 2026-06-28T22:57:00Z
 
 (in-package :cl-user)
 
@@ -21,7 +21,7 @@
 
 (defconstant <type> (monoutils:get-type "System.UriKind"))
 (defconstant <type-str> "System.UriKind")
-(defconstant <creation> "2026-06-28T22:30:12Z")
+(defconstant <creation> "2026-06-28T22:57:00Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:55Z
+;;; Creation Date: 2026-06-28T22:57:40Z
 
 (in-package :cl-user)
 
@@ -37,7 +37,7 @@
 
 (defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(defconstant <creation> "2026-06-28T22:30:55Z")
+(defconstant <creation> "2026-06-28T22:57:40Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS

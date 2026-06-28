@@ -78,19 +78,31 @@
   (setf *core* game)
 
   (let* ((mg (monogame game))
-         (gdm (dotnet:new "Microsoft.Xna.Framework.GraphicsDeviceManager" mg)))
+         (gdm (gdm:new mg)))
 
     ;; Get the GraphicsDeviceManager from the C# class instance
     (setf (graphics game) gdm)
 
     ;; Set the graphic window size & type
-    (setf (dotnet:invoke gdm "PreferredBackBufferWidth")
+    (setf (gdm:preferred-back-buffer-width gdm)
       (getf (window-info game) :width (getf +window-defaults+ :width)))
-    (setf (dotnet:invoke gdm "PreferredBackBufferHeight")
+    (setf (gdm:preferred-back-buffer-height gdm)
       (getf (window-info game) :height (getf +window-defaults+ :height)))
-    (setf (dotnet:invoke gdm "IsFullScreen")
+    (setf (gdm:is-full-screen gdm)
       (getf (window-info game) :full-screen (getf +window-defaults+ :full-screen)))
-    (dotnet:invoke gdm "ApplyChanges") ;; Make the changes above live
+    (gdm:apply-changes gdm) ;; Make the changes above live
+
+    (format *error-output* "Game window: ~A~%  type: ~A~%"
+      (game:window mg) (type-of (game:window mg)))
+
+    ;; FIXME: Package generator v14 has a bug with GameWindow. It has a Property
+    ;; called Title, but creates a set-title function that doesn't actually exist.
+    ;; So, we can't use window:set-title here on (game:window mg) unfortunately.
+    ;; DOES NOT WORK:
+    #|
+    (window:set-title (game:window mg)
+      (getf (window-info game) :title (getf +window-defaults+ :title)))
+    |#
 
     ;; Set the title of the game window (on C# Window.Title property)
     (setf (dotnet:invoke (game:window mg) "Title")
@@ -100,8 +112,7 @@
     (let ((cs-content (game:content mg)))
       (setf (content game) cs-content)
       ;; and set its root directory to Content/
-      (setf (dotnet:invoke cs-content "RootDirectory")
-        +content-default+))
+      (setf (cm:root-directory cs-content) +content-default+))
 
     ;; Ensure mouse pointer is visible by default
     (setf (game:is-mouse-visible mg) T))
@@ -154,7 +165,7 @@
    Note that in the C# class, Dispose() is NOT virtual."
   ;; Unload the content first
   (format *error-output* "[core:dispose] unloading content...~%")
-  (dotnet:invoke (content game) "Unload")
+  (cm:unload (content game))
   (format *error-output* "[core:dispose] unloading content complete~%")
   ;; Dispose audio
   (format *error-output* "[core:dispose] disposing audio controller...~%")

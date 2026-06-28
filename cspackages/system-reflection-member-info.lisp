@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
 ;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:30:25Z
+;;; Creation Date: 2026-06-28T22:57:12Z
 
 (in-package :cl-user)
 
@@ -39,7 +39,7 @@
 
 (defconstant <type> (monoutils:get-type "System.Reflection.MemberInfo"))
 (defconstant <type-str> "System.Reflection.MemberInfo")
-(defconstant <creation> "2026-06-28T22:30:25Z")
+(defconstant <creation> "2026-06-28T22:57:12Z")
 (defconstant <version> 14)
 
 ;; Register C# Type with CLOS
