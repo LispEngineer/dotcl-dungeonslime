@@ -907,3 +907,29 @@ as completely benign.
   freshly built FASL) and when first loading Quicklisp setup, and does not
   affect the game.
 
+
+# C# Generic Function Type Checking Refactoring (DotCL 0.1.14 Upgrade - Part 1)
+
+The C# Generic Function type checking in `clr-generic.lisp` was updated from manual reflection-based `IsAssignableFrom` checks to use `dotnet:is-instance-of` which was introduced in DotCL 0.1.14.
+
+## 1. Type Assignability Verification
+In `c#method-applicable-p` (defined in `clr-generic.lisp`), the previous implementation looked up types manually and invoked reflection:
+```lisp
+(let ((arg-type (monoutils:get-type first-arg))
+      (spec-type (monoutils:get-type spec)))
+  (when (and arg-type spec-type)
+    (dotnet:invoke spec-type "IsAssignableFrom" arg-type)))
+```
+This was refactored to use the native type predicate:
+```lisp
+(dotnet:is-instance-of first-arg spec)
+```
+This eliminates manual type-lookup reflection logic in Lisp and delegates it to the DotCL runtime.
+
+## 2. Resolving the `"ANAPHORA"` Package Error during Clean Build
+When upgrading to DotCL 0.1.14 and performing `make build`, the compilation crashed with a `PACKAGE-ERROR` stating that no package named `"ANAPHORA"` exists.
+
+* **Reader/Package Mismatch**: During compilation, the DotCL compiler concatenates all files into `.concat.lisp` and reads them completely before evaluation. The Lisp reader parses symbols like `anaphora:awhen` before the `eval-when` form that loads `"anaphora"` is evaluated.
+* **Pre-declaration Stub**: To prevent reader package lookup errors, a stub `(defpackage :anaphora)` was added to `packages.lisp` (which is compiled first), following the established repository pattern for C# package stubs.
+* **Stale FASL Cleanup**: Stale `.fasl` files compiled by previous DotCL versions (such as 0.1.11 or 0.1.12) are incompatible with DotCL 0.1.14 and are silently ignored by the loader during the dependency resolution phase. Consequently, the actual `"anaphora"` package was never loaded. Deleting all stale `.fasl` files in both the workspace and the Quicklisp directory and cleaning the project's `obj` directory forces a full rebuild, compiling the dependencies cleanly using DotCL 0.1.14.
+

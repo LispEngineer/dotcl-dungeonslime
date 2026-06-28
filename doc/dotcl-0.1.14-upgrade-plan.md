@@ -2,7 +2,7 @@
 
 With the new interoperability capabilities introduced in DotCL 0.1.14, several areas of the `dungeon-slime` codebase can be refactored to reduce boilerplate and improve performance.
 
-## 1. Refactor Type Checking in `clr-generic.lisp`
+## 1. Refactor Type Checking in `clr-generic.lisp` (**DONE**)
 
 Currently, `clr-generic.lisp` performs manual type verification using raw reflection on `System.Type` objects.
 

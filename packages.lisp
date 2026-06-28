@@ -37,6 +37,7 @@
 (defpackage :microsoft-xna-framework-game)
 (defpackage :microsoft-xna-framework-graphics-sprite-batch)
 (defpackage :microsoft-xna-framework-input-mouse)
+(defpackage :anaphora)
 
 (defpackage :utils
   (:use :cl)

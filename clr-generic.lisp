@@ -55,14 +55,9 @@
     (cond
       ;; T matches anything (including non-C# objects)
       ((eq spec 't) t)
-      ;; C# type string requires a C# object whose type is assignable to the specializer
       ((stringp spec)
        (when (monoutils:dotnet-p first-arg)
-          (let ((arg-type (monoutils:get-type first-arg))
-                (spec-type (monoutils:get-type spec)))
-            (when (and arg-type spec-type)
-              ;; Check Assignability
-              (dotnet:invoke spec-type "IsAssignableFrom" arg-type)))))
+         (dotnet:is-instance-of first-arg spec)))
       ;; No match
       (t nil))))
 

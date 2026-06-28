@@ -313,13 +313,13 @@ Lisp utility functionality:
 * `safe-read-form-from-file` is used to securely load
   Lisp-based texture atlas descriptions without read-time evaluation.
 
-C# Class-Aware Generic Function System (Version 1):
+C# Class-Aware Generic Function System (Version 1.1):
 * NOTE: This may have been superseded by DotCL's 0.1.9 ability to dispatch
   C# types in (CLOS) methods.
 * Implemented the `defc#generic` and `defc#method` macros in `clr-generic.lisp` 
   to support C# class type dispatch.
-* Uses reflection (`IsAssignableFrom` checks) to dynamically verify subclassing or 
-  interface implementation on the first argument of the generic function.
+* Refactored in DotCL 0.1.14 to use `dotnet:is-instance-of` for dynamic assignability 
+  checks instead of manual reflection (`IsAssignableFrom` checks).
 * Performs topological class/interface inheritance specificity sorting on applicable 
   methods to find the most specific target method.
 * Employs deterministic interface precedence sorting, utilizing alphabetical class 

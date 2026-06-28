@@ -89,8 +89,8 @@ and files in this repository.
 # Lisp
 
 * `packages.lisp`: Defines the Lisp packages used across the project. Pre-declares C# package
-  stubs at the top of the file to support local nicknames, preventing compiler lookup failures
-  during compilation of early packages (e.g. `mg-classes`).
+  stubs and the third-party `:anaphora` package at the top of the file to support local nicknames
+  and prevent compiler reader/lookup failures during compilation of early packages.
 
 
 * `test-harness.lisp`: Runs all the other tests sprinkled all throughout
@@ -109,6 +109,7 @@ and files in this repository.
 
 * `clr-generic.lisp`: Implements the Version 1 C# class-aware generic function
   system macros (`defc#generic`, `defc#method`) and dispatch/specificity resolution logic.
+  Refactored to utilize `dotnet:is-instance-of` for assignability checks under DotCL 0.1.14.
 
 * `clr-generic-test.lisp`: Startup test suite verifying C# generic function 
   dispatching, interface specificity, and alias resolution.
