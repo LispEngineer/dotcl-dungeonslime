@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:29Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:35Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-game-pad-state
+(cl:defpackage :microsoft-xna-framework-input-game-pad-state
   (:use :cl)
   (:shadow
    #:=
@@ -35,72 +35,72 @@
    #:to-string
   ))
 
-(in-package :microsoft-xna-framework-input-game-pad-state)
+(cl:in-package :microsoft-xna-framework-input-game-pad-state)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(defconstant <creation> "2026-06-28T22:57:29Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
+(cl:defconstant <creation> "2026-06-29T00:58:35Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState")))
 
-(defun new (&rest args)
+(cl:defun new (cl:&rest args)
   "Passthrough constructor for Microsoft.Xna.Framework.Input.GamePadState. Dispatches at runtime."
-  (apply #'dotnet:new <type-str> args))
+  (cl:apply (cl:function dotnet:new) <type-str> args))
 
-(defun new-game-pad-thumb-sticks-game-pad-triggers-game-pad-buttons-game-pad-d-pad (thumb-sticks triggers buttons d-pad)
+(cl:defun new-game-pad-thumb-sticks-game-pad-triggers-game-pad-buttons-game-pad-d-pad (thumb-sticks triggers buttons d-pad)
   "Calls Microsoft.Xna.Framework.Input.GamePadState constructor new(GamePadThumbSticks, GamePadTriggers, GamePadButtons, GamePadDPad)"
   (dotnet:new <type-str> thumb-sticks triggers buttons d-pad))
 
-(defun new-vector2-vector2-single-single-buttons (left-thumb-stick right-thumb-stick left-trigger right-trigger button)
+(cl:defun new-vector2-vector2-single-single-buttons (left-thumb-stick right-thumb-stick left-trigger right-trigger button)
   "Calls Microsoft.Xna.Framework.Input.GamePadState constructor new(Vector2, Vector2, Single, Single, Buttons)"
   (dotnet:new <type-str> left-thumb-stick right-thumb-stick left-trigger right-trigger button))
 
-(defun new-vector2-vector2-single-single-buttons[] (left-thumb-stick right-thumb-stick left-trigger right-trigger buttons)
+(cl:defun new-vector2-vector2-single-single-buttons[] (left-thumb-stick right-thumb-stick left-trigger right-trigger buttons)
   "Calls Microsoft.Xna.Framework.Input.GamePadState constructor new(Vector2, Vector2, Single, Single, Buttons[])"
   (dotnet:new <type-str> left-thumb-stick right-thumb-stick left-trigger right-trigger buttons))
 
-(define-symbol-macro default (dotnet:static <type-str> "Default"))
+(cl:define-symbol-macro default (dotnet:static <type-str> "Default"))
 
-(defun buttons (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_Buttons"))
+(cl:defun buttons (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_Buttons"))
 
-(defun d-pad (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_DPad"))
+(cl:defun d-pad (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_DPad"))
 
-(defun is-connected (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_IsConnected"))
+(cl:defun is-connected (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_IsConnected"))
 
-(defun packet-number (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_PacketNumber"))
+(cl:defun packet-number (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_PacketNumber"))
 
-(defun thumb-sticks (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_ThumbSticks"))
+(cl:defun thumb-sticks (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_ThumbSticks"))
 
-(defun triggers (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_Triggers"))
+(cl:defun triggers (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_Triggers"))
 
-(defun = (left right)
-  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") right)))
+(cl:defun = (left right)
+  (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") left) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") right)))
 
-(defun equals (obj obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "Equals" obj))
+(cl:defun equals (obj obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "Equals" obj))
 
-(defun get-hash-code (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "GetHashCode"))
+(cl:defun get-hash-code (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "GetHashCode"))
 
-(defun is-button-down (obj button)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonDown" button))
+(cl:defun is-button-down (obj button)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonDown" button))
 
-(defun is-button-up (obj button)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonUp" button))
+(cl:defun is-button-up (obj button)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonUp" button))
 
-(defun not= (left right)
-  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") right)))
+(cl:defun not= (left right)
+  (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") left) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") right)))
 
-(defun to-string (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "ToString"))
+(cl:defun to-string (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "ToString"))
 

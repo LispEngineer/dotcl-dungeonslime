@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameTime
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:17Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:22Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-game-time
+(cl:defpackage :microsoft-xna-framework-game-time
   (:use :cl)
   (:export
    #:<type>
@@ -20,45 +20,45 @@
    #:total-game-time
   ))
 
-(in-package :microsoft-xna-framework-game-time)
+(cl:in-package :microsoft-xna-framework-game-time)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameTime"))
-(defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
-(defconstant <creation> "2026-06-28T22:57:17Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameTime"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
+(cl:defconstant <creation> "2026-06-29T00:58:22Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.GameTime")))
 
-(defun new (&rest args)
+(cl:defun new (cl:&rest args)
   "Passthrough constructor for Microsoft.Xna.Framework.GameTime. Dispatches at runtime."
-  (apply #'dotnet:new <type-str> args))
+  (cl:apply (cl:function dotnet:new) <type-str> args))
 
-(defun new-time-span-time-span (total-game-time elapsed-game-time)
+(cl:defun new-time-span-time-span (total-game-time elapsed-game-time)
   "Calls Microsoft.Xna.Framework.GameTime constructor new(TimeSpan, TimeSpan)"
   (dotnet:new <type-str> total-game-time elapsed-game-time))
 
-(defun new-time-span-time-span-boolean (total-real-time elapsed-real-time is-running-slowly)
+(cl:defun new-time-span-time-span-boolean (total-real-time elapsed-real-time is-running-slowly)
   "Calls Microsoft.Xna.Framework.GameTime constructor new(TimeSpan, TimeSpan, Boolean)"
   (dotnet:new <type-str> total-real-time elapsed-real-time is-running-slowly))
 
-(defun elapsed-game-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_ElapsedGameTime"))
+(cl:defun elapsed-game-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_ElapsedGameTime"))
 
-(defun (setf elapsed-game-time) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_ElapsedGameTime" new-value))
+(cl:defun (cl:setf elapsed-game-time) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_ElapsedGameTime" new-value))
 
-(defun is-running-slowly (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_IsRunningSlowly"))
+(cl:defun is-running-slowly (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_IsRunningSlowly"))
 
-(defun (setf is-running-slowly) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_IsRunningSlowly" new-value))
+(cl:defun (cl:setf is-running-slowly) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_IsRunningSlowly" new-value))
 
-(defun total-game-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_TotalGameTime"))
+(cl:defun total-game-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_TotalGameTime"))
 
-(defun (setf total-game-time) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_TotalGameTime" new-value))
+(cl:defun (cl:setf total-game-time) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_TotalGameTime" new-value))
 

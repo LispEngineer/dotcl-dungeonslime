@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.PresentationParameters
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:51Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:58Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-graphics-presentation-parameters
+(cl:defpackage :microsoft-xna-framework-graphics-presentation-parameters
   (:use :cl)
   (:export
    #:<type>
@@ -30,95 +30,95 @@
    #:clone
   ))
 
-(in-package :microsoft-xna-framework-graphics-presentation-parameters)
+(cl:in-package :microsoft-xna-framework-graphics-presentation-parameters)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.PresentationParameters"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Graphics.PresentationParameters")
-(defconstant <creation> "2026-06-28T22:57:51Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.PresentationParameters"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.PresentationParameters")
+(cl:defconstant <creation> "2026-06-29T00:58:58Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.PresentationParameters")))
 
-(defun new ()
+(cl:defun new ()
   (dotnet:new <type-str>))
 
-(defconstant +default-present-rate+ (dotnet:static <type-str> "DefaultPresentRate"))
+(cl:defconstant +default-present-rate+ (dotnet:static <type-str> "DefaultPresentRate"))
 
-(defun back-buffer-format (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferFormat"))
+(cl:defun back-buffer-format (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferFormat"))
 
-(defun (setf back-buffer-format) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferFormat" new-value))
+(cl:defun (cl:setf back-buffer-format) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferFormat" new-value))
 
-(defun back-buffer-height (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferHeight"))
+(cl:defun back-buffer-height (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferHeight"))
 
-(defun (setf back-buffer-height) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferHeight" new-value))
+(cl:defun (cl:setf back-buffer-height) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferHeight" new-value))
 
-(defun back-buffer-width (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferWidth"))
+(cl:defun back-buffer-width (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_BackBufferWidth"))
 
-(defun (setf back-buffer-width) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferWidth" new-value))
+(cl:defun (cl:setf back-buffer-width) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_BackBufferWidth" new-value))
 
-(defun bounds (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_Bounds"))
+(cl:defun bounds (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_Bounds"))
 
-(defun depth-stencil-format (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DepthStencilFormat"))
+(cl:defun depth-stencil-format (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DepthStencilFormat"))
 
-(defun (setf depth-stencil-format) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DepthStencilFormat" new-value))
+(cl:defun (cl:setf depth-stencil-format) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DepthStencilFormat" new-value))
 
-(defun device-window-handle (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DeviceWindowHandle"))
+(cl:defun device-window-handle (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DeviceWindowHandle"))
 
-(defun (setf device-window-handle) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DeviceWindowHandle" new-value))
+(cl:defun (cl:setf device-window-handle) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DeviceWindowHandle" new-value))
 
-(defun display-orientation (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DisplayOrientation"))
+(cl:defun display-orientation (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_DisplayOrientation"))
 
-(defun (setf display-orientation) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DisplayOrientation" new-value))
+(cl:defun (cl:setf display-orientation) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_DisplayOrientation" new-value))
 
-(defun hardware-mode-switch (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_HardwareModeSwitch"))
+(cl:defun hardware-mode-switch (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_HardwareModeSwitch"))
 
-(defun (setf hardware-mode-switch) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_HardwareModeSwitch" new-value))
+(cl:defun (cl:setf hardware-mode-switch) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_HardwareModeSwitch" new-value))
 
-(defun is-full-screen (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_IsFullScreen"))
+(cl:defun is-full-screen (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_IsFullScreen"))
 
-(defun (setf is-full-screen) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_IsFullScreen" new-value))
+(cl:defun (cl:setf is-full-screen) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_IsFullScreen" new-value))
 
-(defun multi-sample-count (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_MultiSampleCount"))
+(cl:defun multi-sample-count (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_MultiSampleCount"))
 
-(defun (setf multi-sample-count) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_MultiSampleCount" new-value))
+(cl:defun (cl:setf multi-sample-count) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_MultiSampleCount" new-value))
 
-(defun presentation-interval (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_PresentationInterval"))
+(cl:defun presentation-interval (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_PresentationInterval"))
 
-(defun (setf presentation-interval) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_PresentationInterval" new-value))
+(cl:defun (cl:setf presentation-interval) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_PresentationInterval" new-value))
 
-(defun render-target-usage (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_RenderTargetUsage"))
+(cl:defun render-target-usage (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_RenderTargetUsage"))
 
-(defun (setf render-target-usage) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_RenderTargetUsage" new-value))
+(cl:defun (cl:setf render-target-usage) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_RenderTargetUsage" new-value))
 
-(defun clear (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "Clear"))
+(cl:defun clear (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "Clear"))
 
-(defun clone (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "Clone"))
+(cl:defun clone (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "Clone"))
 

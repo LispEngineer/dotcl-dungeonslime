@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:22Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:27Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-keyboard-state
+(cl:defpackage :microsoft-xna-framework-input-keyboard-state
   (:use :cl)
   (:shadow
    #:=
@@ -30,19 +30,19 @@
    #:not=
   ))
 
-(in-package :microsoft-xna-framework-input-keyboard-state)
+(cl:in-package :microsoft-xna-framework-input-keyboard-state)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(defconstant <creation> "2026-06-28T22:57:22Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
+(cl:defconstant <creation> "2026-06-29T00:58:27Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState")))
 
-(defun new ()
+(cl:defun new ()
   (dotnet:new <type-str>))
 
 ;; Note: Microsoft.Xna.Framework.Input.KeyboardState also has the following constructors with special
@@ -51,45 +51,45 @@
 ;;   new(params Keys[])
 ;;   new(Keys[], Boolean, Boolean)
 
-(defun caps-lock (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_CapsLock"))
+(cl:defun caps-lock (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_CapsLock"))
 
-(defun item (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_Item"))
+(cl:defun item (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_Item"))
 
-(defun num-lock (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_NumLock"))
+(cl:defun num-lock (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "get_NumLock"))
 
-(defun = (a b)
-  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") a) (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") b)))
+(cl:defun = (a b)
+  (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") a) (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") b)))
 
-(defun equals (obj obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "Equals" obj))
+(cl:defun equals (obj obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "Equals" obj))
 
-(defun get-hash-code (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetHashCode"))
+(cl:defun get-hash-code (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetHashCode"))
 
-(defun get-pressed-key-count (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeyCount"))
+(cl:defun get-pressed-key-count (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeyCount"))
 
-(defun get-pressed-keys (obj &rest args)
+(cl:defun get-pressed-keys (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" args))
+  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" args))
 
-(defun get-pressed-keys (obj)
+(cl:defun get-pressed-keys (obj)
   "Calls Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys GetPressedKeys() -> Keys[]"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys"))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys"))
 
-(defun get-pressed-keys-keys[] (obj keys)
+(cl:defun get-pressed-keys-keys[] (obj keys)
   "Calls Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys GetPressedKeys(Keys[]) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" keys))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" keys))
 
-(defun is-key-down (obj key)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyDown" key))
+(cl:defun is-key-down (obj key)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyDown" key))
 
-(defun is-key-up (obj key)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyUp" key))
+(cl:defun is-key-up (obj key)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyUp" key))
 
-(defun not= (a b)
-  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") a) (the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") b)))
+(cl:defun not= (a b)
+  (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") a) (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") b)))
 

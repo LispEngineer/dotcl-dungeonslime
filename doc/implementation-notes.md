@@ -1071,3 +1071,27 @@ The C# Lisp Package Generator has been enhanced in Version 13 to automatically g
 When standard Lisp operators (like `=`) are shadowed in a generated package (like `:system-time-span` shadowing `=`), any un-qualified calls to `=` in that package will resolve to the shadowed operator rather than the standard Common Lisp comparison function `cl:=`.
 * **The Bug**: In Version 13, the generated test conditions (e.g. `(= (length args) 2)`) inside `:system-time-span` resolved to `system-time-span:=`. This caused recursive dispatch attempts with integer arguments (e.g. calling `op_Equality(int, int)`), leading to `MissingMethodException`.
 * **The Fix**: In Version 14, the generator qualified all standard Lisp comparison operations in generated tests using the `cl:` package prefix (e.g., `(cl:= (length args) 2)`), ensuring they are evaluated as built-in Lisp functions rather than shadowed operator wrappers.
+
+
+# Namespace Safety & Standard Lisp Symbol Protection (Version 15)
+
+The Lisp Package Generator has been enhanced in Version 15 to establish complete namespace safety, preventing generated wrappers from shadowing critical Lisp syntax symbols and resolving symbol name collisions.
+
+## 1. Mapping Special Forms & Reserved Words
+In Common Lisp, symbols like `quote` and `function` are special operators used by reader macros `'` and `#'`. If a package shadows them, reader macros expand to package-local symbols (e.g. `microsoft-xna-framework-vector2:quote`), which crashes Lisp evaluation.
+* **The Bug**: When generating wrappers for types containing members named `Quote`, `Function`, `T`, or `Nil`, the generator would output Lisp symbols like `quote` and `function` and place them in the package's `:shadow` list, causing syntax/compilation failures.
+* **The Fix**: Version 15 maps C# member names named `Quote`, `Function`, `T`, or `Nil` to safe names `quote!`, `function!`, `t!`, and `nil!` respectively. This keeps them out of the package's `:shadow` list and preserves standard Common Lisp reader behavior.
+
+## 2. Standard Lisp Symbol Qualification
+To prevent other shadowed symbols in generated packages (such as `length`, `nth`, `cond`, `and`, `or`, `error`, `setf`, `defun`, `apply`, `function`, `the`, `list`, `numberp`, `typep`, `stringp`, `boolean`, `t`, etc.) from colliding with standard Lisp operators inside generated templates, the generator now qualifies all standard Lisp operators in generated templates with the `cl:` package prefix.
+* **Examples**:
+  - `(cond ...)` -> `(cl:cond ...)`
+  - `(length args)` -> `(cl:length args)`
+  - `(and ...)` -> `(cl:and ...)`
+  - `(nth idx args)` -> `(cl:nth idx args)`
+  - `(defun ...)` -> `(cl:defun ...)`
+  - `(apply ...)` -> `(cl:apply ...)`
+  - `(the ...)` -> `(cl:the ...)`
+  - `(setf ...)` -> `(cl:setf ...)`
+  - `(error ...)` -> `(cl:error ...)`
+This prevents type-cast exceptions like `Unable to cast object of type 'DotCL.Cons' to type 'DotCL.LispDotNetObject'` when calling `v2:*` or other methods in generated files.

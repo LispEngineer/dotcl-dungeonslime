@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.UriKind
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:00Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:05Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :system-uri-kind
+(cl:defpackage :system-uri-kind
   (:use :cl)
   (:export
    #:<type>
@@ -17,24 +17,24 @@
    #:+relative-or-absolute+
   ))
 
-(in-package :system-uri-kind)
+(cl:in-package :system-uri-kind)
 
-(defconstant <type> (monoutils:get-type "System.UriKind"))
-(defconstant <type-str> "System.UriKind")
-(defconstant <creation> "2026-06-28T22:57:00Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "System.UriKind"))
+(cl:defconstant <type-str> "System.UriKind")
+(cl:defconstant <creation> "2026-06-29T00:58:05Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.UriKind")))
 
-(defconstant +absolute+ (dotnet:static <type-str> "Absolute"))
-(setf (documentation '+absolute+ 'variable) "The URI is absolute.")
+(cl:defconstant +absolute+ (dotnet:static <type-str> "Absolute"))
+(cl:setf (cl:documentation (cl:quote +absolute+) (cl:quote cl:variable)) "The URI is absolute.")
 
-(defconstant +relative+ (dotnet:static <type-str> "Relative"))
-(setf (documentation '+relative+ 'variable) "The URI is relative.")
+(cl:defconstant +relative+ (dotnet:static <type-str> "Relative"))
+(cl:setf (cl:documentation (cl:quote +relative+) (cl:quote cl:variable)) "The URI is relative.")
 
-(defconstant +relative-or-absolute+ (dotnet:static <type-str> "RelativeOrAbsolute"))
-(setf (documentation '+relative-or-absolute+ 'variable) "The URI kind is indeterminate.")
+(cl:defconstant +relative-or-absolute+ (dotnet:static <type-str> "RelativeOrAbsolute"))
+(cl:setf (cl:documentation (cl:quote +relative-or-absolute+) (cl:quote cl:variable)) "The URI kind is indeterminate.")
 

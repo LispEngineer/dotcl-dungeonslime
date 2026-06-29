@@ -8,6 +8,19 @@ to do with this game & framework.
 
 # Open Bugs
 
+* See the Vector2 package - It defines two `normalize` functions in a row.
+Obviously, this is wrong. This is as of v14
+
+```lisp
+(defun normalize (obj &rest args)
+  "Passthrough for Microsoft.Xna.Framework.Vector2.Normalize overloads. Dispatches at runtime."
+  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize" args))
+
+(defun normalize (obj)
+  "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize() -> Void"
+  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
+```
+
 * If the standalone game is exited using the GUI of the game (currently
   by pressing `ESC`), it gives this error:
   ```

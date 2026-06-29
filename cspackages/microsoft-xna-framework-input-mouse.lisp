@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Mouse
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:24Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:30Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-mouse
+(cl:defpackage :microsoft-xna-framework-input-mouse
   (:use :cl)
   (:export
    #:<type>
@@ -18,33 +18,33 @@
    #:set-position
   ))
 
-(in-package :microsoft-xna-framework-input-mouse)
+(cl:in-package :microsoft-xna-framework-input-mouse)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Mouse"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.Mouse")
-(defconstant <creation> "2026-06-28T22:57:24Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Mouse"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Mouse")
+(cl:defconstant <creation> "2026-06-29T00:58:30Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Mouse")))
 
-(defun get-state (&rest args)
+(cl:defun get-state (cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.Mouse.GetState overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "GetState" args))
+  (cl:apply (cl:function dotnet:static) <type-str> "GetState" args))
 
-(defun get-state ()
+(cl:defun get-state ()
   "Calls Microsoft.Xna.Framework.Input.Mouse.GetState GetState() -> MouseState"
   (dotnet:static <type-str> "GetState"))
 
-(defun get-state-game-window (window)
+(cl:defun get-state-game-window (window)
   "Calls Microsoft.Xna.Framework.Input.Mouse.GetState GetState(GameWindow) -> MouseState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "Microsoft.Xna.Framework.GameWindow") window)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") window)))
 
-(defun set-cursor (cursor)
-  (dotnet:static <type-str> "SetCursor" (the (dotnet "Microsoft.Xna.Framework.Input.MouseCursor") cursor)))
+(cl:defun set-cursor (cursor)
+  (dotnet:static <type-str> "SetCursor" (cl:the (dotnet "Microsoft.Xna.Framework.Input.MouseCursor") cursor)))
 
-(defun set-position (x y)
-  (dotnet:static <type-str> "SetPosition" (the (dotnet "System.Int32") x) (the (dotnet "System.Int32") y)))
+(cl:defun set-position (x y)
+  (dotnet:static <type-str> "SetPosition" (cl:the (dotnet "System.Int32") x) (cl:the (dotnet "System.Int32") y)))
 

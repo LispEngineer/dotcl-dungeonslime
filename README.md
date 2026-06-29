@@ -365,6 +365,14 @@ C# Lisp Package Generator v12: Generic Method Support:
 * The wrapper accepts a `type` parameter (a type name string, alias, or System.Type object) as its first argument, followed by `obj` (for instance methods), and regular arguments.
 * Calls `dotnet:invoke-generic` or `dotnet:static-generic` passing `(list type)` under the hood.
 
+C# Lisp Package Generator v13 & v14: Operator Dispatch & Comparison Qualification:
+* Resolves runtime `System.MissingMethodException` errors for operator calls (such as `+`, `-`, `*`, `/`) by generating type-based and count-based dispatching templates.
+* Qualifies the standard Common Lisp comparison function `cl:=` inside emitted dispatcher templates, preventing name resolution collisions with shadowed `=` operators.
+
+C# Lisp Package Generator v15: Namespace Safety & Standard Lisp Symbol Protection:
+* Protects critical Lisp syntax symbols (`Quote`, `Function`, `T`, `Nil`) from shadowing by mapping conflicting C# member names to `quote!`, `function!`, `t!`, and `nil!`.
+* Qualifies all other standard Common Lisp symbols (such as `defun`, `apply`, `cond`, `and`, `or`, `error`, `the`, `setf`, `length`, `nth`, etc.) with the `cl:` package prefix inside emitted wrappers, ensuring robust namespace safety.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

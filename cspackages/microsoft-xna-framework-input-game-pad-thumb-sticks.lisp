@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:31Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:37Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks
+(cl:defpackage :microsoft-xna-framework-input-game-pad-thumb-sticks
   (:use :cl)
   (:shadow
    #:=
@@ -26,44 +26,44 @@
    #:to-string
   ))
 
-(in-package :microsoft-xna-framework-input-game-pad-thumb-sticks)
+(cl:in-package :microsoft-xna-framework-input-game-pad-thumb-sticks)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(defconstant <creation> "2026-06-28T22:57:31Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
+(cl:defconstant <creation> "2026-06-29T00:58:37Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")))
 
-(defun new (&rest args)
+(cl:defun new (cl:&rest args)
   "Passthrough constructor for Microsoft.Xna.Framework.Input.GamePadThumbSticks. Dispatches at runtime."
-  (apply #'dotnet:new <type-str> args))
+  (cl:apply (cl:function dotnet:new) <type-str> args))
 
-(defun new-vector2-vector2 (left-position right-position)
+(cl:defun new-vector2-vector2 (left-position right-position)
   "Calls Microsoft.Xna.Framework.Input.GamePadThumbSticks constructor new(Vector2, Vector2)"
   (dotnet:new <type-str> left-position right-position))
 
-(defun left (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "get_Left"))
+(cl:defun left (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "get_Left"))
 
-(defun right (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "get_Right"))
+(cl:defun right (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "get_Right"))
 
-(defun = (left right)
-  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") right)))
+(cl:defun = (left right)
+  (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") left) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") right)))
 
-(defun equals (obj obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "Equals" obj))
+(cl:defun equals (obj obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "Equals" obj))
 
-(defun get-hash-code (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "GetHashCode"))
+(cl:defun get-hash-code (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "GetHashCode"))
 
-(defun not= (left right)
-  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") left) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") right)))
+(cl:defun not= (left right)
+  (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") left) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") right)))
 
-(defun to-string (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "ToString"))
+(cl:defun to-string (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadThumbSticks") obj) "ToString"))
 

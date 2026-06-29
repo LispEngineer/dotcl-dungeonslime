@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.Song
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:57Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:59:04Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-media-song
+(cl:defpackage :microsoft-xna-framework-media-song
   (:use :cl)
   (:shadow
    #:position
@@ -39,81 +39,81 @@
    #:not=
   ))
 
-(in-package :microsoft-xna-framework-media-song)
+(cl:in-package :microsoft-xna-framework-media-song)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.Song"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
-(defconstant <creation> "2026-06-28T22:57:57Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.Song"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
+(cl:defconstant <creation> "2026-06-29T00:59:04Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Media.Song")))
 
-(defun album (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Album"))
+(cl:defun album (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Album"))
 
-(defun artist (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Artist"))
+(cl:defun artist (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Artist"))
 
-(defun duration (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Duration"))
+(cl:defun duration (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Duration"))
 
-(defun genre (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Genre"))
+(cl:defun genre (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Genre"))
 
-(defun is-disposed (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsDisposed"))
+(cl:defun is-disposed (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsDisposed"))
 
-(defun is-protected (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsProtected"))
+(cl:defun is-protected (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsProtected"))
 
-(defun is-rated (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsRated"))
+(cl:defun is-rated (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsRated"))
 
-(defun name (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Name"))
+(cl:defun name (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Name"))
 
-(defun play-count (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_PlayCount"))
+(cl:defun play-count (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_PlayCount"))
 
-(defun position (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Position"))
+(cl:defun position (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Position"))
 
-(defun rating (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Rating"))
+(cl:defun rating (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Rating"))
 
-(defun track-number (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_TrackNumber"))
+(cl:defun track-number (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_TrackNumber"))
 
-(defun = (song1 song2)
-  (dotnet:static <type-str> "op_Equality" (the (dotnet "Microsoft.Xna.Framework.Media.Song") song1) (the (dotnet "Microsoft.Xna.Framework.Media.Song") song2)))
+(cl:defun = (song1 song2)
+  (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song1) (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song2)))
 
-(defun dispose (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Dispose"))
+(cl:defun dispose (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Dispose"))
 
-(defun equals (obj &rest args)
+(cl:defun equals (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Media.Song.Equals overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" args))
+  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" args))
 
-(defun equals-song (obj song)
+(cl:defun equals-song (obj song)
   "Calls Microsoft.Xna.Framework.Media.Song.Equals Equals(Song) -> Boolean"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" song))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" song))
 
-(defun equals-object (obj obj)
+(cl:defun equals-object (obj obj)
   "Calls Microsoft.Xna.Framework.Media.Song.Equals Equals(Object) -> Boolean"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" obj))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Equals" obj))
 
-(defun finalize (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Finalize"))
+(cl:defun finalize (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "Finalize"))
 
-(defun from-uri (name uri)
-  (dotnet:static <type-str> "FromUri" (the (dotnet "System.String") name) (the (dotnet "System.Uri") uri)))
+(cl:defun from-uri (name uri)
+  (dotnet:static <type-str> "FromUri" (cl:the (dotnet "System.String") name) (cl:the (dotnet "System.Uri") uri)))
 
-(defun get-hash-code (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "GetHashCode"))
+(cl:defun get-hash-code (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "GetHashCode"))
 
-(defun not= (song1 song2)
-  (dotnet:static <type-str> "op_Inequality" (the (dotnet "Microsoft.Xna.Framework.Media.Song") song1) (the (dotnet "Microsoft.Xna.Framework.Media.Song") song2)))
+(cl:defun not= (song1 song2)
+  (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song1) (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song2)))
 

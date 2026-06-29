@@ -26,7 +26,7 @@
     :documentation "The total number of tiles in this tilemap.")
    (scale
     :accessor scale
-    :initform +v2-1+
+    :initform v2:+one+
     :initarg :scale
     :documentation "The scale to draw the tilemap.")
    (tiles
@@ -76,8 +76,8 @@
              (tile-tr (get-tile ts tile-id))
              (col (mod i cols))
              (row (floor i cols))
-             (pos (vector2 (float (* col tw sc-x))
-                           (float (* row th sc-y)))))
+             (pos (v2:new (float (* col tw sc-x))
+                          (float (* row th sc-y)))))
         (tr-draw tile-tr sb pos microsoft-xna-framework-color:+white+ 0.0e0 nil sc)))))
 
 (defun content-load-texture2d (content-manager asset-name)

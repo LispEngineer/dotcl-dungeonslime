@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePad
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:28Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:33Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-game-pad
+(cl:defpackage :microsoft-xna-framework-input-game-pad
   (:use :cl)
   (:export
    #:<type>
@@ -30,77 +30,77 @@
    #:set-vibration-int32-single-single-single-single
   ))
 
-(in-package :microsoft-xna-framework-input-game-pad)
+(cl:in-package :microsoft-xna-framework-input-game-pad)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePad"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePad")
-(defconstant <creation> "2026-06-28T22:57:28Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePad"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePad")
+(cl:defconstant <creation> "2026-06-29T00:58:33Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePad")))
 
-(define-symbol-macro maximum-game-pad-count (dotnet:static <type-str> "MaximumGamePadCount"))
+(cl:define-symbol-macro maximum-game-pad-count (dotnet:static <type-str> "MaximumGamePadCount"))
 
-(defun get-capabilities (&rest args)
+(cl:defun get-capabilities (cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.GamePad.GetCapabilities overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "GetCapabilities" args))
+  (cl:apply (cl:function dotnet:static) <type-str> "GetCapabilities" args))
 
-(defun get-capabilities-player-index (player-index)
+(cl:defun get-capabilities-player-index (player-index)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetCapabilities GetCapabilities(PlayerIndex) -> GamePadCapabilities"
-  (dotnet:static <type-str> "GetCapabilities" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
+  (dotnet:static <type-str> "GetCapabilities" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
 
-(defun get-capabilities-int32 (index)
+(cl:defun get-capabilities-int32 (index)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetCapabilities GetCapabilities(Int32) -> GamePadCapabilities"
-  (dotnet:static <type-str> "GetCapabilities" (the (dotnet "System.Int32") index)))
+  (dotnet:static <type-str> "GetCapabilities" (cl:the (dotnet "System.Int32") index)))
 
-(defun get-state (&rest args)
+(cl:defun get-state (cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.GamePad.GetState overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "GetState" args))
+  (cl:apply (cl:function dotnet:static) <type-str> "GetState" args))
 
-(defun get-state-player-index (player-index)
+(cl:defun get-state-player-index (player-index)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(PlayerIndex) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
 
-(defun get-state-int32 (index)
+(cl:defun get-state-int32 (index)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(Int32) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "System.Int32") index)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "System.Int32") index)))
 
-(defun get-state-player-index-game-pad-dead-zone (player-index dead-zone-mode)
+(cl:defun get-state-player-index-game-pad-dead-zone (player-index dead-zone-mode)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(PlayerIndex, GamePadDeadZone) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") dead-zone-mode)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") dead-zone-mode)))
 
-(defun get-state-int32-game-pad-dead-zone (index dead-zone-mode)
+(cl:defun get-state-int32-game-pad-dead-zone (index dead-zone-mode)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(Int32, GamePadDeadZone) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "System.Int32") index) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") dead-zone-mode)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") dead-zone-mode)))
 
-(defun get-state-player-index-game-pad-dead-zone-game-pad-dead-zone (player-index left-dead-zone-mode right-dead-zone-mode)
+(cl:defun get-state-player-index-game-pad-dead-zone-game-pad-dead-zone (player-index left-dead-zone-mode right-dead-zone-mode)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(PlayerIndex, GamePadDeadZone, GamePadDeadZone) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") left-dead-zone-mode) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") right-dead-zone-mode)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") left-dead-zone-mode) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") right-dead-zone-mode)))
 
-(defun get-state-int32-game-pad-dead-zone-game-pad-dead-zone (index left-dead-zone-mode right-dead-zone-mode)
+(cl:defun get-state-int32-game-pad-dead-zone-game-pad-dead-zone (index left-dead-zone-mode right-dead-zone-mode)
   "Calls Microsoft.Xna.Framework.Input.GamePad.GetState GetState(Int32, GamePadDeadZone, GamePadDeadZone) -> GamePadState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "System.Int32") index) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") left-dead-zone-mode) (the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") right-dead-zone-mode)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") left-dead-zone-mode) (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadDeadZone") right-dead-zone-mode)))
 
-(defun set-vibration (&rest args)
+(cl:defun set-vibration (cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.GamePad.SetVibration overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "SetVibration" args))
+  (cl:apply (cl:function dotnet:static) <type-str> "SetVibration" args))
 
-(defun set-vibration-player-index-single-single (player-index left-motor right-motor)
+(cl:defun set-vibration-player-index-single-single (player-index left-motor right-motor)
   "Calls Microsoft.Xna.Framework.Input.GamePad.SetVibration SetVibration(PlayerIndex, Single, Single) -> Boolean"
-  (dotnet:static <type-str> "SetVibration" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (the (dotnet "System.Single") left-motor) (the (dotnet "System.Single") right-motor)))
+  (dotnet:static <type-str> "SetVibration" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (cl:the (dotnet "System.Single") left-motor) (cl:the (dotnet "System.Single") right-motor)))
 
-(defun set-vibration-int32-single-single (index left-motor right-motor)
+(cl:defun set-vibration-int32-single-single (index left-motor right-motor)
   "Calls Microsoft.Xna.Framework.Input.GamePad.SetVibration SetVibration(Int32, Single, Single) -> Boolean"
-  (dotnet:static <type-str> "SetVibration" (the (dotnet "System.Int32") index) (the (dotnet "System.Single") left-motor) (the (dotnet "System.Single") right-motor)))
+  (dotnet:static <type-str> "SetVibration" (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "System.Single") left-motor) (cl:the (dotnet "System.Single") right-motor)))
 
-(defun set-vibration-player-index-single-single-single-single (player-index left-motor right-motor left-trigger right-trigger)
+(cl:defun set-vibration-player-index-single-single-single-single (player-index left-motor right-motor left-trigger right-trigger)
   "Calls Microsoft.Xna.Framework.Input.GamePad.SetVibration SetVibration(PlayerIndex, Single, Single, Single, Single) -> Boolean"
-  (dotnet:static <type-str> "SetVibration" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (the (dotnet "System.Single") left-motor) (the (dotnet "System.Single") right-motor) (the (dotnet "System.Single") left-trigger) (the (dotnet "System.Single") right-trigger)))
+  (dotnet:static <type-str> "SetVibration" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index) (cl:the (dotnet "System.Single") left-motor) (cl:the (dotnet "System.Single") right-motor) (cl:the (dotnet "System.Single") left-trigger) (cl:the (dotnet "System.Single") right-trigger)))
 
-(defun set-vibration-int32-single-single-single-single (index left-motor right-motor left-trigger right-trigger)
+(cl:defun set-vibration-int32-single-single-single-single (index left-motor right-motor left-trigger right-trigger)
   "Calls Microsoft.Xna.Framework.Input.GamePad.SetVibration SetVibration(Int32, Single, Single, Single, Single) -> Boolean"
-  (dotnet:static <type-str> "SetVibration" (the (dotnet "System.Int32") index) (the (dotnet "System.Single") left-motor) (the (dotnet "System.Single") right-motor) (the (dotnet "System.Single") left-trigger) (the (dotnet "System.Single") right-trigger)))
+  (dotnet:static <type-str> "SetVibration" (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "System.Single") left-motor) (cl:the (dotnet "System.Single") right-motor) (cl:the (dotnet "System.Single") left-trigger) (cl:the (dotnet "System.Single") right-trigger)))
 

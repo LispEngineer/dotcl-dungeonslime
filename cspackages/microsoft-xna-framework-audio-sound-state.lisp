@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundState
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:56Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:59:03Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-audio-sound-state
+(cl:defpackage :microsoft-xna-framework-audio-sound-state
   (:use :cl)
   (:export
    #:<type>
@@ -17,21 +17,21 @@
    #:+stopped+
   ))
 
-(in-package :microsoft-xna-framework-audio-sound-state)
+(cl:in-package :microsoft-xna-framework-audio-sound-state)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundState"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundState")
-(defconstant <creation> "2026-06-28T22:57:56Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundState"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundState")
+(cl:defconstant <creation> "2026-06-29T00:59:03Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundState")))
 
-(defconstant +paused+ (dotnet:static <type-str> "Paused"))
+(cl:defconstant +paused+ (dotnet:static <type-str> "Paused"))
 
-(defconstant +playing+ (dotnet:static <type-str> "Playing"))
+(cl:defconstant +playing+ (dotnet:static <type-str> "Playing"))
 
-(defconstant +stopped+ (dotnet:static <type-str> "Stopped"))
+(cl:defconstant +stopped+ (dotnet:static <type-str> "Stopped"))
 

@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.ButtonState
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:26Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:32Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-button-state
+(cl:defpackage :microsoft-xna-framework-input-button-state
   (:use :cl)
   (:export
    #:<type>
@@ -16,19 +16,19 @@
    #:+released+
   ))
 
-(in-package :microsoft-xna-framework-input-button-state)
+(cl:in-package :microsoft-xna-framework-input-button-state)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.ButtonState"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.ButtonState")
-(defconstant <creation> "2026-06-28T22:57:26Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.ButtonState"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.ButtonState")
+(cl:defconstant <creation> "2026-06-29T00:58:32Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.ButtonState")))
 
-(defconstant +pressed+ (dotnet:static <type-str> "Pressed"))
+(cl:defconstant +pressed+ (dotnet:static <type-str> "Pressed"))
 
-(defconstant +released+ (dotnet:static <type-str> "Released"))
+(cl:defconstant +released+ (dotnet:static <type-str> "Released"))
 

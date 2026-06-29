@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:49Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:56Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-graphics-sprite-font
+(cl:defpackage :microsoft-xna-framework-graphics-sprite-font
   (:use :cl)
   (:export
    #:<type>
@@ -23,54 +23,54 @@
    #:measure-string-string-builder
   ))
 
-(in-package :microsoft-xna-framework-graphics-sprite-font)
+(cl:in-package :microsoft-xna-framework-graphics-sprite-font)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
-(defconstant <creation> "2026-06-28T22:57:49Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
+(cl:defconstant <creation> "2026-06-29T00:58:56Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont")))
 
-(defun characters (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Characters"))
+(cl:defun characters (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Characters"))
 
-(defun default-character (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_DefaultCharacter"))
+(cl:defun default-character (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_DefaultCharacter"))
 
-(defun (setf default-character) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_DefaultCharacter" new-value))
+(cl:defun (cl:setf default-character) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_DefaultCharacter" new-value))
 
-(defun glyphs (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Glyphs"))
+(cl:defun glyphs (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Glyphs"))
 
-(defun line-spacing (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_LineSpacing"))
+(cl:defun line-spacing (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_LineSpacing"))
 
-(defun (setf line-spacing) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_LineSpacing" new-value))
+(cl:defun (cl:setf line-spacing) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_LineSpacing" new-value))
 
-(defun spacing (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Spacing"))
+(cl:defun spacing (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Spacing"))
 
-(defun (setf spacing) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_Spacing" new-value))
+(cl:defun (cl:setf spacing) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "set_Spacing" new-value))
 
-(defun texture (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Texture"))
+(cl:defun texture (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Texture"))
 
-(defun measure-string (obj &rest args)
+(cl:defun measure-string (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" args))
+  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" args))
 
-(defun measure-string-string (obj text)
+(cl:defun measure-string-string (obj text)
   "Calls Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString MeasureString(String) -> Vector2"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
 
-(defun measure-string-string-builder (obj text)
+(cl:defun measure-string-string-builder (obj text)
   "Calls Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString MeasureString(StringBuilder) -> Vector2"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
 

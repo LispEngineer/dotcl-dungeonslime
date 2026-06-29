@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.PlayerIndex
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:52Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:59:00Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-player-index
+(cl:defpackage :microsoft-xna-framework-player-index
   (:use :cl)
   (:export
    #:<type>
@@ -18,23 +18,23 @@
    #:+two+
   ))
 
-(in-package :microsoft-xna-framework-player-index)
+(cl:in-package :microsoft-xna-framework-player-index)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.PlayerIndex"))
-(defconstant <type-str> "Microsoft.Xna.Framework.PlayerIndex")
-(defconstant <creation> "2026-06-28T22:57:52Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.PlayerIndex"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.PlayerIndex")
+(cl:defconstant <creation> "2026-06-29T00:59:00Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.PlayerIndex")))
 
-(defconstant +four+ (dotnet:static <type-str> "Four"))
+(cl:defconstant +four+ (dotnet:static <type-str> "Four"))
 
-(defconstant +one+ (dotnet:static <type-str> "One"))
+(cl:defconstant +one+ (dotnet:static <type-str> "One"))
 
-(defconstant +three+ (dotnet:static <type-str> "Three"))
+(cl:defconstant +three+ (dotnet:static <type-str> "Three"))
 
-(defconstant +two+ (dotnet:static <type-str> "Two"))
+(cl:defconstant +two+ (dotnet:static <type-str> "Two"))
 

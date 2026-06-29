@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:18Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:23Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-game
+(cl:defpackage :microsoft-xna-framework-game
   (:use :cl)
   (:export
    #:<type>
@@ -49,150 +49,150 @@
    #:update
   ))
 
-(in-package :microsoft-xna-framework-game)
+(cl:in-package :microsoft-xna-framework-game)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(defconstant <creation> "2026-06-28T22:57:18Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
+(cl:defconstant <creation> "2026-06-29T00:58:23Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Game")))
 
-(defun new ()
+(cl:defun new ()
   (dotnet:new <type-str>))
 
-(defun components (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Components"))
+(cl:defun components (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Components"))
 
-(defun content (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Content"))
+(cl:defun content (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Content"))
 
-(defun (setf content) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_Content" new-value))
+(cl:defun (cl:setf content) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_Content" new-value))
 
-(defun graphics-device (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_GraphicsDevice"))
+(cl:defun graphics-device (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_GraphicsDevice"))
 
-(defun inactive-sleep-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_InactiveSleepTime"))
+(cl:defun inactive-sleep-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_InactiveSleepTime"))
 
-(defun (setf inactive-sleep-time) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_InactiveSleepTime" new-value))
+(cl:defun (cl:setf inactive-sleep-time) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_InactiveSleepTime" new-value))
 
-(defun is-active (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsActive"))
+(cl:defun is-active (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsActive"))
 
-(defun is-fixed-time-step (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsFixedTimeStep"))
+(cl:defun is-fixed-time-step (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsFixedTimeStep"))
 
-(defun (setf is-fixed-time-step) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsFixedTimeStep" new-value))
+(cl:defun (cl:setf is-fixed-time-step) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsFixedTimeStep" new-value))
 
-(defun is-mouse-visible (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsMouseVisible"))
+(cl:defun is-mouse-visible (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsMouseVisible"))
 
-(defun (setf is-mouse-visible) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsMouseVisible" new-value))
+(cl:defun (cl:setf is-mouse-visible) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsMouseVisible" new-value))
 
-(defun launch-parameters (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_LaunchParameters"))
+(cl:defun launch-parameters (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_LaunchParameters"))
 
-(defun max-elapsed-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_MaxElapsedTime"))
+(cl:defun max-elapsed-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_MaxElapsedTime"))
 
-(defun (setf max-elapsed-time) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_MaxElapsedTime" new-value))
+(cl:defun (cl:setf max-elapsed-time) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_MaxElapsedTime" new-value))
 
-(defun services (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Services"))
+(cl:defun services (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Services"))
 
-(defun target-elapsed-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_TargetElapsedTime"))
+(cl:defun target-elapsed-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_TargetElapsedTime"))
 
-(defun (setf target-elapsed-time) (new-value obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_TargetElapsedTime" new-value))
+(cl:defun (cl:setf target-elapsed-time) (new-value obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_TargetElapsedTime" new-value))
 
-(defun window (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Window"))
+(cl:defun window (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_Window"))
 
-(defun begin-draw (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "BeginDraw"))
+(cl:defun begin-draw (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "BeginDraw"))
 
-(defun begin-run (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "BeginRun"))
+(cl:defun begin-run (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "BeginRun"))
 
-(defun dispose (obj &rest args)
+(cl:defun dispose (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Game.Dispose overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" args))
+  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" args))
 
-(defun dispose (obj)
+(cl:defun dispose (obj)
   "Calls Microsoft.Xna.Framework.Game.Dispose Dispose() -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose"))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose"))
 
-(defun dispose-boolean (obj disposing)
+(cl:defun dispose-boolean (obj disposing)
   "Calls Microsoft.Xna.Framework.Game.Dispose Dispose(Boolean) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" disposing))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" disposing))
 
-(defun draw (obj game-time)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Draw" game-time))
+(cl:defun draw (obj game-time)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Draw" game-time))
 
-(defun end-draw (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "EndDraw"))
+(cl:defun end-draw (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "EndDraw"))
 
-(defun end-run (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "EndRun"))
+(cl:defun end-run (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "EndRun"))
 
-(defun exit (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Exit"))
+(cl:defun exit (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Exit"))
 
-(defun finalize (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Finalize"))
+(cl:defun finalize (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Finalize"))
 
-(defun initialize (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Initialize"))
+(cl:defun initialize (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Initialize"))
 
-(defun load-content (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "LoadContent"))
+(cl:defun load-content (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "LoadContent"))
 
-(defun on-activated (obj sender args)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnActivated" sender args))
+(cl:defun on-activated (obj sender args)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnActivated" sender args))
 
-(defun on-deactivated (obj sender args)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnDeactivated" sender args))
+(cl:defun on-deactivated (obj sender args)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnDeactivated" sender args))
 
-(defun on-exiting (obj sender args)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnExiting" sender args))
+(cl:defun on-exiting (obj sender args)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "OnExiting" sender args))
 
-(defun reset-elapsed-time (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "ResetElapsedTime"))
+(cl:defun reset-elapsed-time (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "ResetElapsedTime"))
 
-(defun run (obj &rest args)
+(cl:defun run (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Game.Run overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" args))
+  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" args))
 
-(defun run (obj)
+(cl:defun run (obj)
   "Calls Microsoft.Xna.Framework.Game.Run Run() -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run"))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run"))
 
-(defun run-game-run-behavior (obj run-behavior)
+(cl:defun run-game-run-behavior (obj run-behavior)
   "Calls Microsoft.Xna.Framework.Game.Run Run(GameRunBehavior) -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" run-behavior))
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" run-behavior))
 
-(defun run-one-frame (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "RunOneFrame"))
+(cl:defun run-one-frame (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "RunOneFrame"))
 
-(defun suppress-draw (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "SuppressDraw"))
+(cl:defun suppress-draw (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "SuppressDraw"))
 
-(defun tick (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Tick"))
+(cl:defun tick (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Tick"))
 
-(defun unload-content (obj)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "UnloadContent"))
+(cl:defun unload-content (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "UnloadContent"))
 
-(defun update (obj game-time)
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Game") obj) "Update" game-time))
+(cl:defun update (obj game-time)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Update" game-time))
 

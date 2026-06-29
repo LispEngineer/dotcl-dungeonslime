@@ -128,10 +128,10 @@
 
 (defmethod mouse-position-delta ((info mouse-info))
   "Returns the difference in cursor position as a Vector2 (dx, dy)."
-  (vector2 (- (ms:x (mouse-current-state info))
-              (ms:x (mouse-previous-state info)))
-           (- (ms:y (mouse-current-state info))
-              (ms:y (mouse-previous-state info)))))
+  (v2:new (- (ms:x (mouse-current-state info))
+             (ms:x (mouse-previous-state info)))
+          (- (ms:y (mouse-current-state info))
+             (ms:y (mouse-previous-state info)))))
 
 (defmethod mouse-x-delta ((info mouse-info))
   "Returns the horizontal cursor movement since the last frame."

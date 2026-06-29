@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteSortMode
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:44Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:51Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-graphics-sprite-sort-mode
+(cl:defpackage :microsoft-xna-framework-graphics-sprite-sort-mode
   (:use :cl)
   (:export
    #:<type>
@@ -19,25 +19,25 @@
    #:+texture+
   ))
 
-(in-package :microsoft-xna-framework-graphics-sprite-sort-mode)
+(cl:in-package :microsoft-xna-framework-graphics-sprite-sort-mode)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteSortMode")
-(defconstant <creation> "2026-06-28T22:57:44Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteSortMode")
+(cl:defconstant <creation> "2026-06-29T00:58:51Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode")))
 
-(defconstant +back-to-front+ (dotnet:static <type-str> "BackToFront"))
+(cl:defconstant +back-to-front+ (dotnet:static <type-str> "BackToFront"))
 
-(defconstant +deferred+ (dotnet:static <type-str> "Deferred"))
+(cl:defconstant +deferred+ (dotnet:static <type-str> "Deferred"))
 
-(defconstant +front-to-back+ (dotnet:static <type-str> "FrontToBack"))
+(cl:defconstant +front-to-back+ (dotnet:static <type-str> "FrontToBack"))
 
-(defconstant +immediate+ (dotnet:static <type-str> "Immediate"))
+(cl:defconstant +immediate+ (dotnet:static <type-str> "Immediate"))
 
-(defconstant +texture+ (dotnet:static <type-str> "Texture"))
+(cl:defconstant +texture+ (dotnet:static <type-str> "Texture"))
 

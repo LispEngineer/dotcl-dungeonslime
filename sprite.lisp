@@ -30,10 +30,10 @@
     :documentation "Rotation to apply (in radians); default 0.0e0")
    (scale
     :accessor scale
-    :documentation "Scale to apply (Vector2 C# object); default +v2-1+")
+    :documentation "Scale to apply (Vector2 C# object); default Vector2 1")
    (origin
     :accessor origin
-    :documentation "Origin to apply (Vector2 C# object); default +v2-0+.
+    :documentation "Origin to apply (Vector2 C# object); default Vector2 0.
                     The xy-coordinate origin point, relative to the top-left corner.")
    (effects
     :accessor effects
@@ -55,9 +55,9 @@
   (unless (slot-boundp spr 'rotation)
     (setf (rotation spr) 0.0e0))
   (unless (slot-boundp spr 'scale)
-    (setf (scale spr) +v2-1+))
+    (setf (scale spr) v2:+one+))
   (unless (slot-boundp spr 'origin)
-    (setf (origin spr) +v2-0+))
+    (setf (origin spr) v2:+zero+))
   (unless (slot-boundp spr 'effects)
     (setf (effects spr) sprite-effects:+none+))
   (unless (slot-boundp spr 'layer-depth)
@@ -81,7 +81,7 @@
    Silently do nothing when the region is unbound."
   (when (slot-boundp spr 'region spr)
     (setf (origin spr)
-          (v2* (vector2 (height (region spr)) (width (region spr))) 0.5e0))))
+          (v2:* (v2:new (height (region spr)) (width (region spr))) 0.5e0))))
 
 (defun sprite-draw (sprite sprite-batch position)
   "Submit this sprite for drawing in the specified batch at the specified position."

@@ -273,7 +273,7 @@
           (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
       ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
-        (let ((normal (v2-normalize (v2:new normal-x normal-y))))
+        (let ((normal (v2:normalize (v2:new normal-x normal-y))))
           (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
           (play-sound-effect (audio-controller game) (bounce-sound game))))
       ;; Update the bat position
@@ -307,8 +307,13 @@
   (let* ((pi2 (coerce (* 2 pi) 'single-float))
          (angle (random pi2))
          (x (cos angle))
-         (y (sin angle)))
-    (setf (bat-vel game) (v2* (v2:new x y) +movement-speed+))))
+         (y (sin angle))
+         (_1 (format *error-output* "[assign-random-bat-velocity] 1~%"))
+         (direction (v2:new x y))
+         (_2 (format *error-output* "[assign-random-bat-velocity] 2~%"))
+         (velocity (v2:* direction +movement-speed+)))
+    (format *error-output* "[assign-random-bat-velocity] 3~%")
+    (setf (bat-vel game) velocity)))
 
 (defmethod draw ((game game-1) gt) ;; GameTime
   "Handles the per-tick drawing of the MonoGame scene."

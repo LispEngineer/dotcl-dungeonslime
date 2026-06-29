@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 14
-;;; Creation Date: 2026-06-28T22:57:21Z
+;;; Generator Version: 15
+;;; Creation Date: 2026-06-29T00:58:26Z
 
-(in-package :cl-user)
+(cl:in-package :cl-user)
 
-(defpackage :microsoft-xna-framework-input-keyboard
+(cl:defpackage :microsoft-xna-framework-input-keyboard
   (:use :cl)
   (:export
    #:<type>
@@ -16,27 +16,27 @@
    #:get-state-player-index
   ))
 
-(in-package :microsoft-xna-framework-input-keyboard)
+(cl:in-package :microsoft-xna-framework-input-keyboard)
 
-(defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Keyboard"))
-(defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(defconstant <creation> "2026-06-28T22:57:21Z")
-(defconstant <version> 14)
+(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Keyboard"))
+(cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
+(cl:defconstant <creation> "2026-06-29T00:58:26Z")
+(cl:defconstant <version> 15)
 
 ;; Register C# Type with CLOS
-(eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard")))
 
-(defun get-state (&rest args)
+(cl:defun get-state (cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime."
-  (apply #'dotnet:static <type-str> "GetState" args))
+  (cl:apply (cl:function dotnet:static) <type-str> "GetState" args))
 
-(defun get-state ()
+(cl:defun get-state ()
   "Calls Microsoft.Xna.Framework.Input.Keyboard.GetState GetState() -> KeyboardState"
   (dotnet:static <type-str> "GetState"))
 
-(defun get-state-player-index (player-index)
+(cl:defun get-state-player-index (player-index)
   "Calls Microsoft.Xna.Framework.Input.Keyboard.GetState GetState(PlayerIndex) -> KeyboardState"
-  (dotnet:static <type-str> "GetState" (the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
+  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
 
