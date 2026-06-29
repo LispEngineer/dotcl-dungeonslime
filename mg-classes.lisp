@@ -30,6 +30,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vector functions
 
+#|
 (defconstant +v2-0+ v2:+zero+
   "C#'s Vector2.Zero")
 
@@ -41,6 +42,7 @@
 
 (defconstant +v2-y1+ v2:+unit-y+
   "C#'s Vector2.UnitY")
+|#
 
 (defun vector2 (x &optional (y 0.0e0 y-supplied-p))
   "Returns a new C# Vector2 with the specified values. The number types in Vector2
@@ -50,6 +52,7 @@
     (dotnet:new "Microsoft.Xna.Framework.Vector2" x y)
     (dotnet:new "Microsoft.Xna.Framework.Vector2" x)))
 
+#|
 (defun v2* (arg1 arg2)
   "Multiply two C# Vector2s. Valid pairs:
   Vector2, Vector2
@@ -66,6 +69,7 @@
     (if (= 0.0e0 len)
       +v2-0+
       (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Division" v len))))
+|#
 
 ;; TODO: Add all the other v2 operators
 ;; TODO: Make a multimethod if/when DotCL implements 

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Object
-;;; Generator Version: 15
-;;; Creation Date: 2026-06-29T00:58:16Z
+;;; Generator Version: 16
+;;; Creation Date: 2026-06-29T01:13:01Z
 
 (cl:in-package :cl-user)
 
@@ -28,8 +28,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Object"))
 (cl:defconstant <type-str> "System.Object")
-(cl:defconstant <creation> "2026-06-29T00:58:16Z")
-(cl:defconstant <version> 15)
+(cl:defconstant <creation> "2026-06-29T01:13:01Z")
+(cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -53,14 +53,14 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Object") obj) "Equals" obj))
 
-(cl:defun equals-object-object (obj obj-a obj-b)
+(cl:defun equals-object-object (obj-a obj-b)
   "Calls System.Object.Equals Equals(Object, Object) -> Boolean. Summary: Determines whether the specified object instances are considered equal.
 Returns: if the objects are considered equal; otherwise, . If both objA and objB are null, the method returns .
 Parameters:
   - obj-a (System.Object): The first object to compare.
   - obj-b (System.Object): The second object to compare.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Object") obj) "Equals" obj-a obj-b))
+  (dotnet:static <type-str> "Equals" (cl:the (dotnet "System.Object") obj-a) (cl:the (dotnet "System.Object") obj-b)))
 
 (cl:defun finalize (obj)
   "Summary: Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.

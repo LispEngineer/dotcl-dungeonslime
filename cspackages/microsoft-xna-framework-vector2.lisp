@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 15
-;;; Creation Date: 2026-06-29T00:58:18Z
+;;; Generator Version: 16
+;;; Creation Date: 2026-06-29T01:13:04Z
 
 (cl:in-package :cl-user)
 
@@ -101,8 +101,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-06-29T00:58:18Z")
-(cl:defconstant <version> 15)
+(cl:defconstant <creation> "2026-06-29T01:13:04Z")
+(cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -224,9 +224,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.Ceiling Ceiling() -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling"))
 
-(cl:defun ceiling-vector2 (obj value)
+(cl:defun ceiling-vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.Ceiling Ceiling(Vector2) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling" value))
+  (dotnet:static <type-str> "Ceiling" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Ceiling also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -307,9 +307,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.Floor Floor() -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor"))
 
-(cl:defun floor-vector2 (obj value)
+(cl:defun floor-vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.Floor Floor(Vector2) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor" value))
+  (dotnet:static <type-str> "Floor" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Floor also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -402,9 +402,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize() -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
 
-(cl:defun normalize-vector2 (obj value)
+(cl:defun normalize-vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize(Vector2) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize" value))
+  (dotnet:static <type-str> "Normalize" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Normalize also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -430,9 +430,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Single) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" radians))
 
-(cl:defun rotate-vector2-single (obj value radians)
+(cl:defun rotate-vector2-single (value radians)
   "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Vector2, Single) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" value radians))
+  (dotnet:static <type-str> "Rotate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") radians)))
 
 (cl:defun rotate-around (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Vector2.RotateAround overloads. Dispatches at runtime."
@@ -442,9 +442,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Single) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" origin radians))
 
-(cl:defun rotate-around-vector2-vector2-single (obj value origin radians)
+(cl:defun rotate-around-vector2-vector2-single (value origin radians)
   "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Vector2, Single) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" value origin radians))
+  (dotnet:static <type-str> "RotateAround" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") origin) (cl:the (dotnet "System.Single") radians)))
 
 (cl:defun round (obj cl:&rest args)
   "Passthrough for Microsoft.Xna.Framework.Vector2.Round overloads. Dispatches at runtime."
@@ -454,9 +454,9 @@
   "Calls Microsoft.Xna.Framework.Vector2.Round Round() -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round"))
 
-(cl:defun round-vector2 (obj value)
+(cl:defun round-vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.Round Round(Vector2) -> Vector2"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round" value))
+  (dotnet:static <type-str> "Round" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Round also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not

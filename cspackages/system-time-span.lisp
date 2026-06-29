@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 15
-;;; Creation Date: 2026-06-29T00:58:03Z
+;;; Generator Version: 16
+;;; Creation Date: 2026-06-29T01:12:48Z
 
 (cl:in-package :cl-user)
 
@@ -141,8 +141,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (cl:defconstant <type-str> "System.TimeSpan")
-(cl:defconstant <creation> "2026-06-29T00:58:03Z")
-(cl:defconstant <version> 15)
+(cl:defconstant <creation> "2026-06-29T01:12:48Z")
+(cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -571,14 +571,14 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Equals" obj))
 
-(cl:defun equals-time-span-time-span (obj t1 t2)
+(cl:defun equals-time-span-time-span (t1 t2)
   "Calls System.TimeSpan.Equals Equals(TimeSpan, TimeSpan) -> Boolean. Summary: Returns a value that indicates whether two specified instances of System.TimeSpan are equal.
 Returns: if the values of t1 and t2 are equal; otherwise, .
 Parameters:
   - t1 (System.TimeSpan): The first time interval to compare.
   - t2 (System.TimeSpan): The second time interval to compare.
 "
-  (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Equals" t1 t2))
+  (dotnet:static <type-str> "Equals" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
 (cl:defun from-days (cl:&rest args)
   "Passthrough for System.TimeSpan.FromDays overloads. Dispatches at runtime."

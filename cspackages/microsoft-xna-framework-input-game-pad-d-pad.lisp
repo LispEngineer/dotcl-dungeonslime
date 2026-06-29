@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 15
-;;; Creation Date: 2026-06-29T00:58:36Z
+;;; Generator Version: 16
+;;; Creation Date: 2026-06-29T01:13:21Z
 
 (cl:in-package :cl-user)
 
@@ -32,8 +32,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(cl:defconstant <creation> "2026-06-29T00:58:36Z")
-(cl:defconstant <version> 15)
+(cl:defconstant <creation> "2026-06-29T01:13:21Z")
+(cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

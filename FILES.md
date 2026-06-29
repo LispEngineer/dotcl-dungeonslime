@@ -272,6 +272,7 @@ and files in this repository.
   * Generates C# generic method wrappers (version 12) for methods with exactly one generic type argument, placing the type parameter first and utilizing native `dotnet:invoke-generic` / `dotnet:static-generic` calls.
   * Resolves System.MissingMethodException (version 13 & 14) during runtime operator dispatch for TimeSpan by generating type-suffixed functions and qualifying Common Lisp comparison functions with `cl:=`.
   * Enhances namespace safety (version 15) by mapping critical Lisp syntax symbols (`Quote`, `Function`, `T`, `Nil`) to safe names (`quote!`, `function!`, `t!`, `nil!`), and qualifies other standard Common Lisp symbols (such as `defun`, `apply`, `cond`, `and`, `or`, `error`, `the`, `setf`, `length`, `nth`, etc.) with the `cl:` prefix inside generated wrapper code to prevent symbol collision crashes.
+  * Tracks `is-static-overload-p` per method overload inside multi-overloaded method groups (version 16), resolving static vs instance naming collisions (such as `Vector2.Normalize`) by generating static methods as static wrappers (using `dotnet:static` instead of `dotnet:invoke` without an implicit `obj` receiver).
   * Refactored in DotCL 0.1.14 to wrap warnings and errors (such as unmatched filters or execution errors)
     using `utils:format-red` for high-visibility terminal printing.
   * `package-generator-tests.lisp`: Unit test suite verifying the naming

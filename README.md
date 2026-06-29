@@ -373,6 +373,10 @@ C# Lisp Package Generator v15: Namespace Safety & Standard Lisp Symbol Protectio
 * Protects critical Lisp syntax symbols (`Quote`, `Function`, `T`, `Nil`) from shadowing by mapping conflicting C# member names to `quote!`, `function!`, `t!`, and `nil!`.
 * Qualifies all other standard Common Lisp symbols (such as `defun`, `apply`, `cond`, `and`, `or`, `error`, `the`, `setf`, `length`, `nth`, etc.) with the `cl:` package prefix inside emitted wrappers, ensuring robust namespace safety.
 
+C# Lisp Package Generator v16: Overload Static Tracking:
+* Tracks `is-static-overload-p` per method overload inside multi-overload method groups (Case 3), rather than relying on group-wide `static-p` resolution.
+* Resolves naming and dispatch collisions between static and instance methods with the same name (such as `Vector2.Normalize`), ensuring static overloads are correctly generated as static wrappers (using `dotnet:static` and not introducing an implicit `obj` receiver).
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

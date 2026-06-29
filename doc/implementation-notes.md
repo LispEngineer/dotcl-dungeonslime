@@ -1095,3 +1095,51 @@ To prevent other shadowed symbols in generated packages (such as `length`, `nth`
   - `(setf ...)` -> `(cl:setf ...)`
   - `(error ...)` -> `(cl:error ...)`
 This prevents type-cast exceptions like `Unable to cast object of type 'DotCL.Cons' to type 'DotCL.LispDotNetObject'` when calling `v2:*` or other methods in generated files.
+
+
+# Struct Mutation, Boxing, and Overload Resolution (Version 16)
+
+## 1. Static vs. Instance Method Name Collisions
+
+In C#, a class can define an instance method and a static method with the exact same name. For example, `Microsoft.Xna.Framework.Vector2` defines:
+- `public void Normalize()` — an instance method that normalizes the vector in-place (returns `void`).
+- `public static Vector2 Normalize(Vector2 value)` — a static method that returns a new normalized vector.
+
+In the Lisp wrapper package generator, methods are grouped by name to generate overload dispatchers. Because both methods are named `Normalize`, they were grouped together. However:
+- The generator previously determined if a method group was static based on the first method in that group. Since the instance method `Normalize()` appeared first, the entire group was classified as non-static (`static-p` is `nil`).
+- Consequently, the static overload was generated as an instance method `normalize-vector2` (incorrectly expecting an `obj` receiver and using `dotnet:invoke` on it), and the passthrough dispatcher `normalize` was overwritten by a 1-argument instance wrapper `(cl:defun normalize (obj))`.
+
+In Version 16, this was resolved by tracking `is-static-overload-p` per individual clean method overload (via `(getf cm :is-static)`) rather than using the group-wide `static-p`. This ensures that static overloads grouped with instance methods (such as `Vector2.Normalize(Vector2)`) are correctly generated as static wrappers utilizing `dotnet:static` without requiring an implicit `obj` receiver.
+
+## 2. Struct Boxing & In-Place Mutation Failures
+
+C# structures (like `Vector2` or `Color`) are value types (structs). In the Common Lisp / DotNet CLR interop layer, invoking any instance method on a value type receiver (such as calling the instance method `Normalize()` on a `Vector2` instance) requires boxing the structure into a heap-allocated `.NET` object wrapper.
+
+Any mutations performed by that instance method are applied only to the boxed copy on the heap. Once the method invocation returns, the boxed copy is discarded, and the original Lisp reference or local variable remains completely unmodified.
+
+Furthermore, because the instance method `Normalize()` returns `void`, the Lisp wrapper function evaluates to `nil`. Consequently:
+1. Calling `(v2:normalize (v2:new normal-x normal-y))` returns `nil`.
+2. The original vector is not normalized (since the mutation was performed on a boxed copy that was immediately discarded).
+3. The resulting `nil` normal vector causes subsequent math operations (such as velocity reflection) to fail silently or behave incorrectly, causing gameplay issues such as collision bounce failures.
+
+## 3. Workaround: Lisp-Native Helpers
+
+Because of the boxing mutation problem, in-place struct mutations should be avoided in Lisp. Instead, static methods returning a new struct instance (or Lisp-native helper functions) should be used.
+
+For vector normalization, the helper `v2-normalize` is defined in [mg-classes.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/mg-classes.lisp):
+```lisp
+(defun v2-normalize (v)
+  "Returns a normalized copy of a Vector2 (unit vector in the same direction).
+   If the vector is zero-length, returns Vector2.Zero."
+  (let ((len (microsoft-xna-framework-vector2:length v)))
+    (if (= 0.0e0 len)
+      +v2-0+
+      (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Division" v len))))
+```
+
+This helper has two key advantages:
+1. It avoids the boxing mutation issue by returning a new `Vector2` instance.
+2. It guards against division by zero (which in C# returns `NaN` components, leading to cascading physics bugs).
+
+The bat collision bounce logic in [game-1.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/game-1.lisp) was updated to use this `v2-normalize` helper instead of `v2:normalize`.
+

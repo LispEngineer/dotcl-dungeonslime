@@ -9,7 +9,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 15
+(defparameter *generator-version* 16
   "Integer version number for the generated Lisp source files.
    Version history:
    1 - Initial generator mapping C# classes to Lisp packages.
@@ -28,7 +28,8 @@
    12 - Added support for C# generic methods of exactly one type argument using dotnet:invoke-generic and dotnet:static-generic.
    13 - Refactored C# overloaded operator passthrough generation to dispatch based on argument types and counts in Lisp, avoiding MissingMethodExceptions.
    14 - Qualified standard Common Lisp comparison function cl:= in emitted passthrough code, preventing it from resolving to the shadowed = operator of the generated package.
-   15 - Protected critical Lisp syntax symbols (quote, function, t, nil) from being shadowed by mapping conflicting C# member names to quote!, function!, t!, nil!; qualified other standard Common Lisp symbols in generated templates with cl: prefix.")
+   15 - Protected critical Lisp syntax symbols (quote, function, t, nil) from being shadowed by mapping conflicting C# member names to quote!, function!, t!, nil!; qualified other standard Common Lisp symbols in generated templates with cl: prefix.
+   16 - Tracked is-static-overload-p per clean method overload inside Case 3 (instead of using group-wide static-p) to ensure overloaded static methods are correctly generated as static wrappers.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
@@ -757,12 +758,13 @@
                           (returns (getf m-doc :returns))
                           (params (getf cm :parameters))
                           (is-generic-overload-p (getf cm :is-generic))
+                          (is-static-overload-p (getf cm :is-static))
                           (param-names (mapcar (lambda (p) (map-param-name (getf p :name))) params))
                           (overload-signature (method-signature-str cm))
                           (args-str (cl:cond
-                                      ((and static-p is-generic-overload-p)
+                                      ((and is-static-overload-p is-generic-overload-p)
                                        (format nil "type~@[ ~{~A~^ ~}~]" param-names))
-                                      (static-p
+                                      (is-static-overload-p
                                        (format nil "~{~A~^ ~}" param-names))
                                       (is-generic-overload-p
                                        (format nil "type obj~@[ ~{~A~^ ~}~]" param-names))
@@ -779,7 +781,7 @@
                           (dotnet-method-name (or (getf cm :mangled-name) name))
                           ;; Static method type hints for typed overloads
                           (static-typed-args
-                            (if static-p
+                            (if is-static-overload-p
                                 (mapcar (lambda (pn pt)
                                           (format nil "(cl:the (dotnet \"~A\") ~A)" pt pn))
                                         param-names
@@ -788,9 +790,9 @@
                      (format stream "(cl:defun ~A (~A)~%" mname args-str)
                      (format stream "  \"~A\"~%" escaped-full-doc)
                      (cl:cond
-                       ((and static-p is-generic-overload-p)
+                       ((and is-static-overload-p is-generic-overload-p)
                         (format stream "  (dotnet:static-generic <type-str> \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names))
-                       (static-p
+                       (is-static-overload-p
                         (if static-typed-args
                             (format stream "  (dotnet:static <type-str> \"~A\"~@[~{ ~A~}~]))~%~%" dotnet-method-name static-typed-args)
                             (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))

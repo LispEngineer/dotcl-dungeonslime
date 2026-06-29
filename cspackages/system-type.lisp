@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Type
-;;; Generator Version: 15
-;;; Creation Date: 2026-06-29T00:58:14Z
+;;; Generator Version: 16
+;;; Creation Date: 2026-06-29T01:12:59Z
 
 (cl:in-package :cl-user)
 
@@ -233,8 +233,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Type"))
 (cl:defconstant <type-str> "System.Type")
-(cl:defconstant <creation> "2026-06-29T00:58:14Z")
-(cl:defconstant <version> 15)
+(cl:defconstant <creation> "2026-06-29T01:12:59Z")
+(cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -1282,24 +1282,24 @@ Returns: The current System.Type.
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetType"))
 
-(cl:defun get-type-string (obj type-name)
+(cl:defun get-type-string (type-name)
   "Calls System.Type.GetType GetType(String) -> Type. Summary: Gets the System.Type with the specified name, performing a case-sensitive search.
 Returns: The type with the specified name, if found; otherwise, .
 Parameters:
   - type-name (System.String): The assembly-qualified name of the type to get. See System.Type.AssemblyQualifiedName. If the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, it's sufficient to supply the type name qualified by its namespace.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetType" type-name))
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name)))
 
-(cl:defun get-type-string-boolean (obj type-name throw-on-error)
+(cl:defun get-type-string-boolean (type-name throw-on-error)
   "Calls System.Type.GetType GetType(String, Boolean) -> Type. Summary: Gets the System.Type with the specified name, performing a case-sensitive search and specifying whether to throw an exception if the type is not found.
 Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
 Parameters:
   - type-name (System.String): The assembly-qualified name of the type to get. See System.Type.AssemblyQualifiedName. If the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, it's sufficient to supply the type name qualified by its namespace.
   - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetType" type-name throw-on-error))
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Boolean") throw-on-error)))
 
-(cl:defun get-type-string-boolean-boolean (obj type-name throw-on-error ignore-case)
+(cl:defun get-type-string-boolean-boolean (type-name throw-on-error ignore-case)
   "Calls System.Type.GetType GetType(String, Boolean, Boolean) -> Type. Summary: Gets the System.Type with the specified name, specifying whether to throw an exception if the type is not found and whether to perform a case-sensitive search.
 Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
 Parameters:
@@ -1307,7 +1307,7 @@ Parameters:
   - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
   - ignore-case (System.Boolean): to perform a case-insensitive search for typeName, to perform a case-sensitive search for typeName.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetType" type-name throw-on-error ignore-case))
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Boolean") throw-on-error) (cl:the (dotnet "System.Boolean") ignore-case)))
 
 (cl:defun get-type-array (args)
   "Summary: Gets the types of the objects in the specified array.
