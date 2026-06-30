@@ -27,14 +27,6 @@
   "Gets IsRunningSlowly on this Microsoft.Xna.Framework.GameTime."
   (game-time:is-running-slowly gt))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Rectangle functions
-
-(defun rect (x y w h)
-  "Returns a new C# Rectangle with the specified values. The number types in Vector2
-   are float."
-  (rect:new x y w h))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Generic functions
 

@@ -9,7 +9,7 @@
 
   ;; Create a mock texture region
   (let* ((tex nil) ; mock texture
-         (tr (make-instance 'texture-region :texture tex :source-rect (rect 0 0 100 100)))
+         (tr (make-instance 'texture-region :texture tex :source-rect (rect:new 0 0 100 100)))
          (ts (make-instance 'tileset :texture-region tr :tile-width 10 :tile-height 10)))
 
     (assert (= (columns ts) 10) () "Tileset columns mismatch")

@@ -162,7 +162,7 @@
       (let* ((ts (tileset tm))
              (tm-width  (round (* (columns tm) (tile-width ts) (x (scale tm)))))
              (tm-height (round (* (rows tm) (tile-height ts) (y (scale tm))))))
-        (setf (room-bounds game) (rect 0 0 tm-width tm-height))))
+        (setf (room-bounds game) (rect:new 0 0 tm-width tm-height))))
     ;; Load audio resources
     ;; FIXME: Make constants of these filenames
     (setf (bounce-sound game) (sound-effect:from-file "Content/audio/bounce.wav"))

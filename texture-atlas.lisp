@@ -53,7 +53,7 @@
    height: The height, in pixels, of the region."
   (let ((tr (make-instance 'texture-region
                            :texture (texture ta)
-                           :source-rect (rect x y w h))))
+                           :source-rect (rect:new x y w h))))
     (setf (gethash name (regions ta)) tr)))
 
 (defun ta-get-region (ta name)

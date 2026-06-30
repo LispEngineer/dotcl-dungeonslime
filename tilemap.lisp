@@ -112,7 +112,7 @@
          (ry (getf region-data :y))
          (rw (getf region-data :w))
          (rh (getf region-data :h))
-         (tr (make-instance 'texture-region :texture tex :source-rect (rect rx ry rw rh)))
+         (tr (make-instance 'texture-region :texture tex :source-rect (rect:new rx ry rw rh)))
          ;; Create tileset
          (ts (make-instance 'tileset :texture-region tr :tile-width tw :tile-height th))
          ;; Create tilemap

@@ -283,6 +283,7 @@
   (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
   (:local-nicknames
     (:v2 :microsoft-xna-framework-vector2)
+    (:rect :microsoft-xna-framework-rectangle)
     (:single :system-single)
     (:ts :system-time-span))
   (:export

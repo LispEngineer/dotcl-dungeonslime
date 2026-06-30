@@ -53,7 +53,7 @@
                (ty (+ base-y (* row th)))
                (tile-tr (make-instance 'texture-region
                           :texture tex
-                          :source-rect (rect tx ty tw th))))
+                          :source-rect (rect:new tx ty tw th))))
           (setf (aref tile-array i) tile-tr))))))
 
 (defgeneric get-tile (tileset id-or-column &optional row)

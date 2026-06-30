@@ -108,8 +108,8 @@
 
   (format *error-output* "--- Rectangle Method Tests ---~%")
 
-  (let* ((r-outer (rect 0 0 100 100))
-         (r-inner (rect 10 10 20 20))
+  (let* ((r-outer (rect:new 0 0 100 100))
+         (r-inner (rect:new 10 10 20 20))
          (v-point (v2:new 50.0e0 50.0e0))
          (rect-pkg :microsoft-xna-framework-rectangle))
 
@@ -117,7 +117,7 @@
     (let ((intersects (find-symbol "INTERSECTS" rect-pkg)))
       (assert-cspkg (funcall intersects r-outer r-inner) t
                     "Rectangle.Intersects overlapping rectangles")
-      (assert-cspkg (funcall intersects (rect 0 0 32 32) (rect 100 100 32 32)) nil
+      (assert-cspkg (funcall intersects (rect:new 0 0 32 32) (rect:new 100 100 32 32)) nil
                     "Rectangle.Intersects non-overlapping rectangles"))
 
     ;; Rectangle.Contains - multi-overload (5 clean + 3 dirty)
@@ -225,7 +225,7 @@
 
   (format *error-output* "--- Edge Case Tests ---~%")
 
-  (let* ((r (rect 0 0 100 100))
+  (let* ((r (rect:new 0 0 100 100))
          (rect-pkg :microsoft-xna-framework-rectangle))
 
     ;; Rectangle.Contains with Point (no typed overload, uses passthrough)
