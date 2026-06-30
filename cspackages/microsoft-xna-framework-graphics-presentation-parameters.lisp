@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.PresentationParameters
 ;;; Generator Version: 16
-;;; Creation Date: 2026-06-29T01:13:44Z
+;;; Creation Date: 2026-06-30T03:12:02Z
 
 (cl:in-package :cl-user)
 
@@ -34,7 +34,7 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.PresentationParameters"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.PresentationParameters")
-(cl:defconstant <creation> "2026-06-29T01:13:44Z")
+(cl:defconstant <creation> "2026-06-30T03:12:02Z")
 (cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS

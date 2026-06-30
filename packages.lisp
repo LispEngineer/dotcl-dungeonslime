@@ -48,6 +48,8 @@
 (defpackage :system-convert)
 (defpackage :system-io-path)
 (defpackage :system-object)
+(defpackage :system-single)
+(defpackage :system-double)
 (defpackage :system-reflection-member-info)
 (defpackage :system-time-span)
 (defpackage :system-type)
@@ -280,6 +282,8 @@
 (defpackage :dungeon-slime-tests
   (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
   (:local-nicknames
+    (:v2 :microsoft-xna-framework-vector2)
+    (:single :system-single)
     (:ts :system-time-span))
   (:export
     #:run-all-tests

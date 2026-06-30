@@ -90,7 +90,7 @@
   (format *error-output* "  [clr-defmethod-test] Starting tests...~%")
   (let ((entity (make-instance 'game-entity :x 10.0d0 :y 20.0d0 :width 30.0d0 :height 40.0d0))
         (cs-entity (dotnet:new "CSharpEntity" 15.0d0 25.0d0 35.0d0 45.0d0))
-        (vector2 (dotnet:new "Microsoft.Xna.Framework.Vector2" 100.0f0 200.0f0))
+        (vec2 (dotnet:new "Microsoft.Xna.Framework.Vector2" 100.0f0 200.0f0))
         (rect (dotnet:new "Microsoft.Xna.Framework.Rectangle" 50 60 70 80)))
     
     (format *error-output* "    Testing game-entity (CLOS):~%")
@@ -108,10 +108,10 @@
     (format *error-output* "      OK~%")
 
     (format *error-output* "    Testing Vector2 (Raw CLR):~%")
-    (assert (= 100.0 (get-x vector2)))
-    (assert (= 200.0 (get-y vector2)))
-    (assert (= 0.0 (get-width vector2)))
-    (assert (= 0.0 (get-height vector2)))
+    (assert (= 100.0 (get-x vec2)))
+    (assert (= 200.0 (get-y vec2)))
+    (assert (= 0.0 (get-width vec2)))
+    (assert (= 0.0 (get-height vec2)))
     (format *error-output* "      OK~%")
 
     (format *error-output* "    Testing Rectangle (Raw CLR):~%")

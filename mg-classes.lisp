@@ -27,54 +27,6 @@
   "Gets IsRunningSlowly on this Microsoft.Xna.Framework.GameTime."
   (game-time:is-running-slowly gt))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Vector functions
-
-#|
-(defconstant +v2-0+ v2:+zero+
-  "C#'s Vector2.Zero")
-
-(defconstant +v2-1+ v2:+one+
-  "C#'s Vector2.One")
-
-(defconstant +v2-x1+ v2:+unit-x+
-  "C#'s Vector2.UnitX")
-
-(defconstant +v2-y1+ v2:+unit-y+
-  "C#'s Vector2.UnitY")
-|#
-
-(defun vector2 (x &optional (y 0.0e0 y-supplied-p))
-  "Returns a new C# Vector2 with the specified values. The number types in Vector2
-   are float. If the y parameter is omitted, the Vector2 is initialized with
-   both components initialized to x"
-  (if y-supplied-p
-    (dotnet:new "Microsoft.Xna.Framework.Vector2" x y)
-    (dotnet:new "Microsoft.Xna.Framework.Vector2" x)))
-
-#|
-(defun v2* (arg1 arg2)
-  "Multiply two C# Vector2s. Valid pairs:
-  Vector2, Vector2
-  short-float, Vector2
-  Vector2, short-float"
-  (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Multiply" arg1 arg2))
-
-(defun v2-normalize (v)
-  "Returns a normalized copy of a Vector2 (unit vector in the same direction).
-   If the vector is zero-length, returns Vector2.Zero.
-   Uses the generated microsoft-xna-framework-vector2 package for Length
-   and dotnet:static for the division operation."
-  (let ((len (microsoft-xna-framework-vector2:length v)))
-    (if (= 0.0e0 len)
-      +v2-0+
-      (dotnet:static "Microsoft.Xna.Framework.Vector2" "op_Division" v len))))
-|#
-
-;; TODO: Add all the other v2 operators
-;; TODO: Make a multimethod if/when DotCL implements 
-;;       C# type dispatching on multimethods
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rectangle functions
 
@@ -127,36 +79,6 @@
   (if (dotnet-p obj)
     (dotnet:invoke obj "Height")
     (error "Unknown object for height: ~S" obj)))
-
-;; Tests of generic functions - no longer needed
-#|
-(format *error-output* "[mg-classes.lisp] Testing defining 3 methods called yyyy.~%")
-
-(print-gf-methods 'yyyy)
-(defgeneric yyyy (obj)
-  (:documentation "Test what happens after each method is defined"))
-(print-gf-methods 'yyyy)
-(defmethod yyyy ((obj t))
-  "Specialized on T"
-  :T)
-(print-gf-methods 'yyyy)
-(defmethod yyyy ((obj string))
-  "Specialized on string"
-  :string)
-(print-gf-methods 'yyyy)
-(defmethod yyyy ((obj integer))
-  "Specialized on integer"
-  :integer)
-(print-gf-methods 'yyyy)
-
-(format *error-output* "[mg-classes.lisp] Undefining yyyy.~%")
-;; DotCL keeps track of generic functions in an internal C# dictionary (_gfRegistry)
-;; to manage CLOS dispatch and compilation. Even after calling fmakunbound, 
-;; the generic function object remains registered.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (fmakunbound 'yyyy)
-  (dotnet:static "DotCL.Runtime" "RemoveGfRegistryEntry" 'yyyy nil)) ; nil = not a setf function
-|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper Functions

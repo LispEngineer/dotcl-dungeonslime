@@ -46,6 +46,8 @@ cspackages:
 	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Boolean --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Type --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Object --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Single --output $(OUT_DIR)
+	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Double --output $(OUT_DIR)
 	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Reflection.MemberInfo --output $(OUT_DIR)
 	# MonoGame.Framework
 	$(EXECUTABLE)  --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata

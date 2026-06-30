@@ -51,10 +51,10 @@
 
   (format *error-output* "--- Vector2 Method Tests ---~%")
 
-  (let* ((v1 (vector2 3.0e0 4.0e0))
-         (v2 (vector2 0.0e0 0.0e0))
-         (v3 (vector2 1.0e0 0.0e0))
-         (v4 (vector2 0.0e0 1.0e0))
+  (let* ((v1 (v2:new 3.0e0 4.0e0))
+         (v2 (v2:new 0.0e0 0.0e0))
+         (v3 (v2:new 1.0e0 0.0e0))
+         (v4 (v2:new 0.0e0 1.0e0))
          (v2-pkg1 :microsoft-xna-framework-vector2))
 
     ;; Vector2.DistanceSquared - static, single clean + single dirty overload
@@ -67,14 +67,14 @@
     ;; Vector2.Reflect - static, single clean overload
     (let* ((reflect (find-symbol "REFLECT" v2-pkg1))
            (v2-eq (find-symbol "=" v2-pkg1))
-           (r (funcall reflect (vector2 1.0e0 -1.0e0) (vector2 0.0e0 1.0e0))))
-      (assert-cspkg (funcall v2-eq r (vector2 1.0e0 1.0e0)) t
+           (r (funcall reflect (v2:new 1.0e0 -1.0e0) (v2:new 0.0e0 1.0e0))))
+      (assert-cspkg (funcall v2-eq r (v2:new 1.0e0 1.0e0)) t
                     "Vector2.Reflect (1,-1) about (0,1) = (1,1)"))
 
     (let* ((reflect (find-symbol "REFLECT" v2-pkg1))
            (v2-eq (find-symbol "=" v2-pkg1))
-           (r (funcall reflect (vector2 1.0e0 1.0e0) (vector2 1.0e0 0.0e0))))
-      (assert-cspkg (funcall v2-eq r (vector2 -1.0e0 1.0e0)) t
+           (r (funcall reflect (v2:new 1.0e0 1.0e0) (v2:new 1.0e0 0.0e0))))
+      (assert-cspkg (funcall v2-eq r (v2:new -1.0e0 1.0e0)) t
                     "Vector2.Reflect (1,1) about (1,0) = (-1,1)"))
 
     ;; Vector2.Length - instance property (version 9)
@@ -89,7 +89,7 @@
     (let* ((v2-eq (find-symbol "=" v2-pkg1))
            (v2-add (find-symbol "+" v2-pkg1)))
       (assert-cspkg
-        (funcall v2-eq (funcall v2-add v3 v4) (vector2 1.0e0 1.0e0)) t
+        (funcall v2-eq (funcall v2-add v3 v4) (v2:new 1.0e0 1.0e0)) t
         "Vector2 + operator (UnitX + UnitY = One)"))
 
     ;; Bad type argument should signal an error
@@ -110,7 +110,7 @@
 
   (let* ((r-outer (rect 0 0 100 100))
          (r-inner (rect 10 10 20 20))
-         (v-point (vector2 50.0e0 50.0e0))
+         (v-point (v2:new 50.0e0 50.0e0))
          (rect-pkg :microsoft-xna-framework-rectangle))
 
     ;; Rectangle.Intersects - single clean overload + dirty
@@ -125,7 +125,7 @@
     (let ((contains (find-symbol "CONTAINS" rect-pkg)))
       (assert-cspkg (funcall contains r-outer v-point) t
                     "Rectangle.Contains passthrough center point")
-      (assert-cspkg (funcall contains r-outer (vector2 200 200)) nil
+      (assert-cspkg (funcall contains r-outer (v2:new 200 200)) nil
                     "Rectangle.Contains passthrough outside point")
       (assert-cspkg (funcall contains r-outer r-inner) t
                     "Rectangle.Contains passthrough contained rectangle")
@@ -137,7 +137,7 @@
           (contains-rectangle (find-symbol "CONTAINS-RECTANGLE" rect-pkg)))
       (assert-cspkg (funcall contains-vector2 r-outer v-point) t
                     "Rectangle.Contains Vector2 typed overload")
-      (assert-cspkg (funcall contains-vector2 r-outer (vector2 200 200)) nil
+      (assert-cspkg (funcall contains-vector2 r-outer (v2:new 200 200)) nil
                     "Rectangle.Contains Vector2 typed overload outside")
       (assert-cspkg (funcall contains-rectangle r-outer r-inner) t
                     "Rectangle.Contains Rectangle typed overload contained")
@@ -178,7 +178,7 @@
     ;; Point.ToVector2 - instance method
     (let ((v (funcall (find-symbol "TO-VECTOR2" point-pkg) one))
           (v2-eq (find-symbol "=" :microsoft-xna-framework-vector2)))
-      (assert-cspkg (funcall v2-eq v (vector2 1.0e0 1.0e0)) t
+      (assert-cspkg (funcall v2-eq v (v2:new 1.0e0 1.0e0)) t
                     "Point.ToVector2 (1,1) = Vector2(1,1)"))
 
     ;; Point operators
@@ -243,16 +243,16 @@
   (let* ((v2-pkg :microsoft-xna-framework-vector2)
          (v2-eq (find-symbol "=" v2-pkg)))
     (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+ZERO+" v2-pkg))
-                           (vector2 0.0e0 0.0e0)) t
+                           (v2:new 0.0e0 0.0e0)) t
                   "Vector2.Zero constant")
     (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+ONE+" v2-pkg))
-                           (vector2 1.0e0 1.0e0)) t
+                           (v2:new 1.0e0 1.0e0)) t
                   "Vector2.One constant")
     (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+UNIT-X+" v2-pkg))
-                           (vector2 1.0e0 0.0e0)) t
+                           (v2:new 1.0e0 0.0e0)) t
                   "Vector2.UnitX constant")
     (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+UNIT-Y+" v2-pkg))
-                           (vector2 0.0e0 1.0e0)) t
+                           (v2:new 0.0e0 1.0e0)) t
                   "Vector2.UnitY constant"))
 
   ;; Rectangle constant property (version 9)
@@ -282,11 +282,11 @@
          ;; Test parameterized constructor via typed overload
          (v-typed (funcall new-single-single 3.0e0 4.0e0)))
 
-    (assert-cspkg (funcall v2-eq v-def (vector2 0.0e0 0.0e0)) t
+    (assert-cspkg (funcall v2-eq v-def (v2:new 0.0e0 0.0e0)) t
                   "Vector2 default constructor (injected)")
-    (assert-cspkg (funcall v2-eq v-param (vector2 3.0e0 4.0e0)) t
+    (assert-cspkg (funcall v2-eq v-param (v2:new 3.0e0 4.0e0)) t
                   "Vector2 constructor via new")
-    (assert-cspkg (funcall v2-eq v-typed (vector2 3.0e0 4.0e0)) t
+    (assert-cspkg (funcall v2-eq v-typed (v2:new 3.0e0 4.0e0)) t
                   "Vector2 constructor via new-single-single"))
 
   ;; Rectangle Constructors (Struct, multi-overload)

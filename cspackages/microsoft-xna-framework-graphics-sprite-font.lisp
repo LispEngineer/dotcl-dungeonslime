@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont
 ;;; Generator Version: 16
-;;; Creation Date: 2026-06-29T01:13:41Z
+;;; Creation Date: 2026-06-30T03:11:57Z
 
 (cl:in-package :cl-user)
 
@@ -27,7 +27,7 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
-(cl:defconstant <creation> "2026-06-29T01:13:41Z")
+(cl:defconstant <creation> "2026-06-30T03:11:57Z")
 (cl:defconstant <version> 16)
 
 ;; Register C# Type with CLOS
