@@ -2,26 +2,91 @@
   "$schema": "https://opencode.ai/config.json",
   "compaction": {
     "auto": true,
+    "preserveRecentMessages": 6,
     "prune": true,
-    "threshold": 0.68,
     "strategy": "summarize",
-    "preserveRecentMessages": 6
+    "threshold": 0.68
   },
-  "model_overrides": {
-    "*Qwen*": {
-      "contextWindow": 262144
-    },
-    "*Llama*": {
-      "contextWindow": 32768
-    },
-    "*Ornith*": {
-      "contextWindow": 262144
-    },
-    "*Codestral*": {
-      "contextWindow": 32000
-    },
-    "*Gemma*": {
-      "contextWindow": 262144
+  "provider": {
+    "Lemonade": {
+      "models": {
+        "Codestral-22B-v0.1-GGUF-Q6_K": {
+          "contextWindow": 32000,
+	  "maxTokens": 2048,
+          "name": "Codestral-22B-v0.1-GGUF-Q6_K (local)"
+        },
+        "Gemma-4-31B-it-GGUF": {
+          "contextWindow": 210000,
+	  "maxTokens": 2048,
+          "name": "Gemma-4-31B-it-GGUF (local)"
+        },
+        "Gemma-4-E2B-it-GGUF": {
+          "contextWindow": 262144,
+	  "maxTokens": 2048,
+          "name": "Gemma-4-E2B-it-GGUF (local)"
+        },
+        "Llama-3.3-70B-Instruct-GGUF-UD-Q8_K_XL": {
+          "contextWindow": 32768,
+	  "maxTokens": 2048,
+          "name": "Llama-3.3-70B-Instruct-GGUF-UD-Q8_K_XL (local)"
+        },
+        "Ornith-1.0-35B-GGUF-Q8_0": {
+          "contextWindow": 210000,
+	  "maxTokens": 2048,
+          "name": "Ornith-1.0-35B-GGUF-Q8_0 (local)"
+        },
+        "Ornith-1.0-9B-GGUF-Q8_0": {
+          "contextWindow": 210000,
+	  "maxTokens": 2048,
+          "name": "Ornith-1.0-9B-GGUF-Q8_0 (local)"
+        },
+        "Qwen3.5-27B-GGUF-UD-Q8_K_XL": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.5-27B-GGUF-UD-Q8_K_XL (local)"
+        },
+        "Qwen3.6-27B-MTP-GGUF-UD-Q8_K_XL": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-27B-MTP-GGUF-UD-Q8_K_XL (local)"
+        },
+        "Qwen3.6-35B-A3B-GGUF": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-35B-A3B-GGUF (local)"
+        },
+        "Qwen3.6-35B-A3B-MTP-GGUF": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-35B-A3B-MTP-GGUF (local)"
+        },
+        "Qwen3.6-35B-A3B-MTP-GGUF-UD-Q8_K_XL": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-35B-A3B-MTP-GGUF-UD-Q8_K_XL (local)"
+        },
+        "Qwen3.6-35B-A3B-MTP-ThinkingCoder": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-35B-A3B-MTP-ThinkingCoder (local)"
+        },
+        "Qwen3.6-35B-A3B-ThinkingCoder": {
+          "contextWindow": 210000,
+	  "maxTokens": 1024,
+          "name": "Qwen3.6-35B-A3B-ThinkingCoder (local)"
+        },
+        "gemma-4-26B-A4B-it-GGUF-UD-Q8_K_XL": {
+          "contextWindow": 210000,
+	  "maxTokens": 2048,
+          "name": "gemma-4-26B-A4B-it-GGUF-UD-Q8_K_XL (local)"
+        }
+      },
+      "name": "Lemonade Server (local)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "lemonade",
+        "baseURL": "http://127.0.0.1:13305/v1"
+      }
     }
   }
 }
