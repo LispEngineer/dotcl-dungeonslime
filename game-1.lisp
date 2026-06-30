@@ -273,8 +273,7 @@
           (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
       ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
-        ;; FIXME: Use a v2:normalize which doesn't change a boxed lisp value and returns
-        ;; a value correctly.
+        ;; FIXME: Use v2:normalize-vector2 which is a static C# method that returns a new struct.
         (let ((normal (v2:normalize-vector2 (v2:new normal-x normal-y))))
           (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
           (play-sound-effect (audio-controller game) (bounce-sound game))))
