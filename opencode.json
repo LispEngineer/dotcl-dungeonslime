@@ -1,0 +1,27 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "threshold": 0.68,
+    "strategy": "summarize",
+    "preserveRecentMessages": 6
+  },
+  "model_overrides": {
+    "*Qwen*": {
+      "contextWindow": 262144
+    },
+    "*Llama*": {
+      "contextWindow": 32768
+    },
+    "*Ornith*": {
+      "contextWindow": 262144
+    },
+    "*Codestral*": {
+      "contextWindow": 32000
+    },
+    "*Gemma*": {
+      "contextWindow": 262144
+    }
+  }
+}
