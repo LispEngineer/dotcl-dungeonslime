@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:09:48Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:57:50Z
 
 (cl:in-package :cl-user)
 
@@ -24,9 +24,9 @@
    #:caps-lock
    #:error
    #:in
-   #:is-error-redirected
-   #:is-input-redirected
-   #:is-output-redirected
+   #:error-redirected?
+   #:input-redirected?
+   #:output-redirected?
    #:key-available
    #:largest-window-height
    #:largest-window-width
@@ -96,8 +96,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-06-30T03:09:48Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:57:50Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -113,14 +113,14 @@
 (cl:define-symbol-macro in (dotnet:static <type-str> "In"))
 (cl:setf (cl:documentation (cl:quote in) (cl:quote cl:variable)) "Gets the standard input stream.")
 
-(cl:define-symbol-macro is-error-redirected (dotnet:static <type-str> "IsErrorRedirected"))
-(cl:setf (cl:documentation (cl:quote is-error-redirected) (cl:quote cl:variable)) "Gets a value that indicates whether the error output stream has been redirected from the standard error stream.")
+(cl:define-symbol-macro error-redirected? (dotnet:static <type-str> "IsErrorRedirected"))
+(cl:setf (cl:documentation (cl:quote error-redirected?) (cl:quote cl:variable)) "Gets a value that indicates whether the error output stream has been redirected from the standard error stream.")
 
-(cl:define-symbol-macro is-input-redirected (dotnet:static <type-str> "IsInputRedirected"))
-(cl:setf (cl:documentation (cl:quote is-input-redirected) (cl:quote cl:variable)) "Gets a value that indicates whether input has been redirected from the standard input stream.")
+(cl:define-symbol-macro input-redirected? (dotnet:static <type-str> "IsInputRedirected"))
+(cl:setf (cl:documentation (cl:quote input-redirected?) (cl:quote cl:variable)) "Gets a value that indicates whether input has been redirected from the standard input stream.")
 
-(cl:define-symbol-macro is-output-redirected (dotnet:static <type-str> "IsOutputRedirected"))
-(cl:setf (cl:documentation (cl:quote is-output-redirected) (cl:quote cl:variable)) "Gets a value that indicates whether output has been redirected from the standard output stream.")
+(cl:define-symbol-macro output-redirected? (dotnet:static <type-str> "IsOutputRedirected"))
+(cl:setf (cl:documentation (cl:quote output-redirected?) (cl:quote cl:variable)) "Gets a value that indicates whether output has been redirected from the standard output stream.")
 
 (cl:define-symbol-macro key-available (dotnet:static <type-str> "KeyAvailable"))
 (cl:setf (cl:documentation (cl:quote key-available) (cl:quote cl:variable)) "Gets a value indicating whether a key press is available in the input stream.")

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:46Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:50Z
 
 (cl:in-package :cl-user)
 
@@ -17,9 +17,9 @@
    #:content
    #:graphics-device
    #:inactive-sleep-time
-   #:is-active
-   #:is-fixed-time-step
-   #:is-mouse-visible
+   #:active?
+   #:fixed-time-step?
+   #:mouse-visible?
    #:launch-parameters
    #:max-elapsed-time
    #:services
@@ -53,8 +53,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(cl:defconstant <creation> "2026-06-30T03:10:46Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:50Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -82,19 +82,19 @@
 (cl:defun (cl:setf inactive-sleep-time) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_InactiveSleepTime" new-value))
 
-(cl:defun is-active (obj)
+(cl:defun active? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsActive"))
 
-(cl:defun is-fixed-time-step (obj)
+(cl:defun fixed-time-step? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsFixedTimeStep"))
 
-(cl:defun (cl:setf is-fixed-time-step) (new-value obj)
+(cl:defun (cl:setf fixed-time-step?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsFixedTimeStep" new-value))
 
-(cl:defun is-mouse-visible (obj)
+(cl:defun mouse-visible? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "get_IsMouseVisible"))
 
-(cl:defun (cl:setf is-mouse-visible) (new-value obj)
+(cl:defun (cl:setf mouse-visible?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "set_IsMouseVisible" new-value))
 
 (cl:defun launch-parameters (obj)

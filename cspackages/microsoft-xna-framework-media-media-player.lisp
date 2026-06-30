@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:12:18Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T04:00:24Z
 
 (cl:in-package :cl-user)
 
@@ -13,7 +13,7 @@
    #:<creation>
    #:<version>
    #:game-has-control
-   #:is-visualization-enabled
+   #:visualization-enabled?
    #:play-position
    #:queue
    #:state
@@ -29,8 +29,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-06-30T03:12:18Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T04:00:24Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -39,7 +39,7 @@
 
 (cl:define-symbol-macro game-has-control (dotnet:static <type-str> "GameHasControl"))
 
-(cl:define-symbol-macro is-visualization-enabled (dotnet:static <type-str> "IsVisualizationEnabled"))
+(cl:define-symbol-macro visualization-enabled? (dotnet:static <type-str> "IsVisualizationEnabled"))
 
 (cl:define-symbol-macro play-position (dotnet:static <type-str> "PlayPosition"))
 

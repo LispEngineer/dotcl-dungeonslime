@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffectInstance
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:12:10Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T04:00:16Z
 
 (cl:in-package :cl-user)
 
@@ -12,8 +12,8 @@
    #:<type-str>
    #:<creation>
    #:<version>
-   #:is-disposed
-   #:is-looped
+   #:disposed?
+   #:looped?
    #:pan
    #:pitch
    #:state
@@ -35,21 +35,21 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffectInstance")
-(cl:defconstant <creation> "2026-06-30T03:12:10Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T04:00:16Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance")))
 
-(cl:defun is-disposed (obj)
+(cl:defun disposed? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "get_IsDisposed"))
 
-(cl:defun is-looped (obj)
+(cl:defun looped? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "get_IsLooped"))
 
-(cl:defun (cl:setf is-looped) (new-value obj)
+(cl:defun (cl:setf looped?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "set_IsLooped" new-value))
 
 (cl:defun pan (obj)

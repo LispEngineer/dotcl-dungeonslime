@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:00Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:02Z
 
 (cl:in-package :cl-user)
 
@@ -48,11 +48,11 @@
    #:host
    #:host-name-type
    #:idn-host
-   #:is-absolute-uri
-   #:is-default-port
-   #:is-file
-   #:is-loopback
-   #:is-unc
+   #:absolute-uri?
+   #:default-port?
+   #:file?
+   #:loopback?
+   #:unc?
    #:local-path
    #:original-string
    #:path-and-query
@@ -81,14 +81,14 @@
    #:get-left-part
    #:get-object-data
    #:hex-escape
-   #:is-bad-file-system-character
-   #:is-base-of
-   #:is-excluded-character
-   #:is-hex-digit
-   #:is-hex-encoding
-   #:is-reserved-character
-   #:is-well-formed-original-string
-   #:is-well-formed-uri-string
+   #:bad-file-system-character?
+   #:base-of?
+   #:excluded-character?
+   #:hex-digit?
+   #:hex-encoding?
+   #:reserved-character?
+   #:well-formed-original-string?
+   #:well-formed-uri-string?
    #:make-relative
    #:make-relative-uri
    #:not=
@@ -102,8 +102,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-06-30T03:10:00Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:02Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -258,23 +258,23 @@ Parameters:
   "Gets the RFC 3490 compliant International Domain Name of the host, using Punycode as appropriate. This string, after being unescaped if necessary, is safe to use for DNS resolution."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IdnHost"))
 
-(cl:defun is-absolute-uri (obj)
+(cl:defun absolute-uri? (obj)
   "Gets a value that indicates whether the System.Uri instance is absolute."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IsAbsoluteUri"))
 
-(cl:defun is-default-port (obj)
+(cl:defun default-port? (obj)
   "Gets a value that indicates whether the port value of the URI is the default for this scheme."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IsDefaultPort"))
 
-(cl:defun is-file (obj)
+(cl:defun file? (obj)
   "Gets a value that indicates whether the specified System.Uri is a file URI."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IsFile"))
 
-(cl:defun is-loopback (obj)
+(cl:defun loopback? (obj)
   "Gets a value that indicates whether the specified System.Uri references the local host."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IsLoopback"))
 
-(cl:defun is-unc (obj)
+(cl:defun unc? (obj)
   "Gets a value that indicates whether the specified System.Uri is a universal naming convention (UNC) path."
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "get_IsUnc"))
 
@@ -461,7 +461,7 @@ Parameters:
 ;; (ref, out, params, or defaults) and are not yet supported:
 ;;   HexUnescape(String, ref Int32&) -> Char
 
-(cl:defun is-bad-file-system-character (obj character)
+(cl:defun bad-file-system-character? (obj character)
   "Summary: Indicates whether a character is invalid in a file system name.
 Returns: if the specified character is invalid; otherwise, .
 Parameters:
@@ -469,7 +469,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "IsBadFileSystemCharacter" character))
 
-(cl:defun is-base-of (obj uri)
+(cl:defun base-of? (obj uri)
   "Summary: Determines whether the current System.Uri instance is a base of the specified System.Uri instance.
 Returns: if the current System.Uri instance is a base of uri; otherwise, .
 Parameters:
@@ -477,7 +477,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "IsBaseOf" uri))
 
-(cl:defun is-excluded-character (character)
+(cl:defun excluded-character? (character)
   "Summary: Determines whether the specified character should be escaped.
 Returns: if the specified character should be escaped; otherwise, .
 Parameters:
@@ -485,7 +485,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsExcludedCharacter" (cl:the (dotnet "System.Char") character)))
 
-(cl:defun is-hex-digit (character)
+(cl:defun hex-digit? (character)
   "Summary: Determines whether a specified character is a valid hexadecimal digit.
 Returns: if the character is a valid hexadecimal digit; otherwise, .
 Parameters:
@@ -493,7 +493,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsHexDigit" (cl:the (dotnet "System.Char") character)))
 
-(cl:defun is-hex-encoding (pattern index)
+(cl:defun hex-encoding? (pattern index)
   "Summary: Determines whether a character in a string is hexadecimal encoded.
 Returns: if pattern is hexadecimal encoded at the specified location; otherwise, .
 Parameters:
@@ -502,7 +502,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsHexEncoding" (cl:the (dotnet "System.String") pattern) (cl:the (dotnet "System.Int32") index)))
 
-(cl:defun is-reserved-character (obj character)
+(cl:defun reserved-character? (obj character)
   "Summary: Determines whether the specified character is a reserved character.
 Returns: if the specified character is a reserved character otherwise, .
 Parameters:
@@ -510,13 +510,13 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "IsReservedCharacter" character))
 
-(cl:defun is-well-formed-original-string (obj)
+(cl:defun well-formed-original-string? (obj)
   "Summary: Indicates whether the string used to construct this System.Uri was well-formed and does not require further escaping.
 Returns: if the string was well-formed; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "IsWellFormedOriginalString"))
 
-(cl:defun is-well-formed-uri-string (uri-string uri-kind)
+(cl:defun well-formed-uri-string? (uri-string uri-kind)
   "Summary: Indicates whether the string is well-formed by attempting to construct a URI with the string and ensures that the string does not require further escaping.
 Returns: if the string was well-formed; otherwise, .
 Parameters:

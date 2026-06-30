@@ -377,6 +377,11 @@ C# Lisp Package Generator v16: Overload Static Tracking:
 * Tracks `is-static-overload-p` per method overload inside multi-overload method groups (Case 3), rather than relying on group-wide `static-p` resolution.
 * Resolves naming and dispatch collisions between static and instance methods with the same name (such as `Vector2.Normalize`), ensuring static overloads are correctly generated as static wrappers (using `dotnet:static` and not introducing an implicit `obj` receiver).
 
+C# Lisp Package Generator v17: Idiomatic Naming Conventions:
+* Maps C# field/property name `"NaN"` directly to `"nan"` in `camel-to-kebab` (generating constant wrappers as `+nan+`).
+* Maps methods/properties named `"IsNaN"` to `"nan?"`.
+* Converts C# predicate method/property names starting with `"Is"` followed by an uppercase letter (e.g. `IsEmpty`, `IsActive`) to Lisp predicates ending with a question mark `?` (e.g. `empty?`, `active?`), removing the `is-` prefix.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:38Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:41Z
 
 (cl:in-package :cl-user)
 
@@ -22,7 +22,7 @@
    #:+empty+
    #:bottom
    #:center
-   #:is-empty
+   #:empty?
    #:left
    #:location
    #:right
@@ -58,8 +58,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Rectangle"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(cl:defconstant <creation> "2026-06-30T03:10:38Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:41Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -86,7 +86,7 @@
 (cl:defun center (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj) "get_Center"))
 
-(cl:defun is-empty (obj)
+(cl:defun empty? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj) "get_IsEmpty"))
 
 (cl:defun left (obj)

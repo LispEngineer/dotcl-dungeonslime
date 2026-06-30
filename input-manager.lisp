@@ -7,6 +7,8 @@
 ;;; Provides KeyboardInfo, MouseInfo, GamePadInfo, and InputManager
 ;;; classes that track previous/current input states to detect
 ;;; "just pressed" and "just released" transitions.
+;;;
+;;; FIXME: Rename all these is- (or was-) functions to ? functions
 
 (in-package :dungeon-slime-input)
 
@@ -51,21 +53,21 @@
 
 (defmethod is-key-down ((info keyboard-info) key)
   "Returns true as long as the specified key is being held down."
-  (kb-state:is-key-down (keyboard-current-state info) key))
+  (kb-state:key-down? (keyboard-current-state info) key))
 
 (defmethod is-key-up ((info keyboard-info) key)
   "Returns true as long as the specified key is not being pressed."
-  (kb-state:is-key-up (keyboard-current-state info) key))
+  (kb-state:key-up? (keyboard-current-state info) key))
 
 (defmethod was-key-just-pressed ((info keyboard-info) key)
   "Returns true only on the frame when the specified key changes from up to down."
-  (and (kb-state:is-key-down (keyboard-current-state info) key)
-       (kb-state:is-key-up (keyboard-previous-state info) key)))
+  (and (kb-state:key-down? (keyboard-current-state info) key)
+       (kb-state:key-up? (keyboard-previous-state info) key)))
 
 (defmethod was-key-just-released ((info keyboard-info) key)
   "Returns true only on the frame when the specified key changes from down to up."
-  (and (kb-state:is-key-up (keyboard-current-state info) key)
-       (kb-state:is-key-down (keyboard-previous-state info) key)))
+  (and (kb-state:key-up? (keyboard-current-state info) key)
+       (kb-state:key-down? (keyboard-previous-state info) key)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -197,7 +199,7 @@
 
 (defmethod game-pad-is-connected ((info game-pad-info))
   "Returns true if the gamepad is currently connected."
-  (gp-state:is-connected (game-pad-current-state info)))
+  (gp-state:connected? (game-pad-current-state info)))
 
 (defmethod game-pad-update ((info game-pad-info) gt)
   "Shift current state to previous, get fresh current state, and handle vibration timing."
@@ -232,21 +234,21 @@
 
 (defmethod is-button-down ((info game-pad-info) button)
   "Returns true as long as the specified gamepad button is being held down."
-  (gp-state:is-button-down (game-pad-current-state info) button))
+  (gp-state:button-down? (game-pad-current-state info) button))
 
 (defmethod is-button-up ((info game-pad-info) button)
   "Returns true as long as the specified gamepad button is not being pressed."
-  (gp-state:is-button-up (game-pad-current-state info) button))
+  (gp-state:button-up? (game-pad-current-state info) button))
 
 (defmethod was-button-just-pressed ((info game-pad-info) button)
   "Returns true only on the frame when the specified button changes from up to down."
-  (and (gp-state:is-button-down (game-pad-current-state info) button)
-       (gp-state:is-button-up (game-pad-previous-state info) button)))
+  (and (gp-state:button-down? (game-pad-current-state info) button)
+       (gp-state:button-up? (game-pad-previous-state info) button)))
 
 (defmethod was-button-just-released ((info game-pad-info) button)
   "Returns true only on the frame when the specified button changes from down to up."
-  (and (gp-state:is-button-up (game-pad-current-state info) button)
-       (gp-state:is-button-down (game-pad-previous-state info) button)))
+  (and (gp-state:button-up? (game-pad-current-state info) button)
+       (gp-state:button-down? (game-pad-previous-state info) button)))
 
 (defmethod game-pad-set-vibration ((info game-pad-info) strength duration)
   "Starts vibration at the specified strength for the given TimeSpan duration."

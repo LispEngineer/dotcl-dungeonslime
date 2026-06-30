@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameWindow
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:49Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:53Z
 
 (cl:in-package :cl-user)
 
@@ -21,7 +21,7 @@
    #:client-bounds
    #:current-orientation
    #:handle
-   #:is-borderless
+   #:borderless?
    #:position
    #:screen-device-name
    #:title
@@ -42,8 +42,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameWindow"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameWindow")
-(cl:defconstant <creation> "2026-06-30T03:10:49Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:53Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -74,10 +74,10 @@
 (cl:defun handle (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "get_Handle"))
 
-(cl:defun is-borderless (obj)
+(cl:defun borderless? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "get_IsBorderless"))
 
-(cl:defun (cl:setf is-borderless) (new-value obj)
+(cl:defun (cl:setf borderless?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "set_IsBorderless" new-value))
 
 (cl:defun position (obj)

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.PresentationParameters
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:12:02Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T04:00:08Z
 
 (cl:in-package :cl-user)
 
@@ -22,7 +22,7 @@
    #:device-window-handle
    #:display-orientation
    #:hardware-mode-switch
-   #:is-full-screen
+   #:full-screen?
    #:multi-sample-count
    #:presentation-interval
    #:render-target-usage
@@ -34,8 +34,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.PresentationParameters"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.PresentationParameters")
-(cl:defconstant <creation> "2026-06-30T03:12:02Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T04:00:08Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -92,10 +92,10 @@
 (cl:defun (cl:setf hardware-mode-switch) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_HardwareModeSwitch" new-value))
 
-(cl:defun is-full-screen (obj)
+(cl:defun full-screen? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "get_IsFullScreen"))
 
-(cl:defun (cl:setf is-full-screen) (new-value obj)
+(cl:defun (cl:setf full-screen?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.PresentationParameters") obj) "set_IsFullScreen" new-value))
 
 (cl:defun multi-sample-count (obj)

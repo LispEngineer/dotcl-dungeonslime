@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:32Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:35Z
 
 (cl:in-package :cl-user)
 
@@ -18,7 +18,7 @@
    #:new
    #:custom-attributes
    #:declaring-type
-   #:is-collectible
+   #:collectible?
    #:member-type
    #:metadata-token
    #:module
@@ -31,7 +31,7 @@
    #:get-custom-attributes-type-boolean
    #:get-hash-code
    #:has-same-metadata-definition-as
-   #:is-defined
+   #:defined?
    #:not=
   ))
 
@@ -39,8 +39,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-06-30T03:10:32Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:35Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -60,7 +60,7 @@
   "Gets the class that declares this member."
   (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "get_DeclaringType"))
 
-(cl:defun is-collectible (obj)
+(cl:defun collectible? (obj)
   "Gets a value that indicates whether this System.Reflection.MemberInfo object references one or more assemblies held in a collectible System.Runtime.Loader.AssemblyLoadContext."
   (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "get_IsCollectible"))
 
@@ -134,7 +134,7 @@ Returns: A 32-bit signed integer hash code.
 "
   (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "HasSameMetadataDefinitionAs" other))
 
-(cl:defun is-defined (obj attribute-type inherit)
+(cl:defun defined? (obj attribute-type inherit)
   "Summary: When overridden in a derived class, indicates whether one or more attributes of the specified type or of its derived types is applied to this member.
 Returns: if one or more instances of attributeType or any of its derived types is applied to this member; otherwise, .
 Parameters:

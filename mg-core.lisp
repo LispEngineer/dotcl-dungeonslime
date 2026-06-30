@@ -88,7 +88,7 @@
       (getf (window-info game) :width (getf +window-defaults+ :width)))
     (setf (gdm:preferred-back-buffer-height gdm)
       (getf (window-info game) :height (getf +window-defaults+ :height)))
-    (setf (gdm:is-full-screen gdm)
+    (setf (gdm:full-screen? gdm)
       (getf (window-info game) :full-screen (getf +window-defaults+ :full-screen)))
     (gdm:apply-changes gdm) ;; Make the changes above live
 
@@ -115,7 +115,7 @@
       (setf (cm:root-directory cs-content) +content-default+))
 
     ;; Ensure mouse pointer is visible by default
-    (setf (game:is-mouse-visible mg) T))
+    (setf (game:mouse-visible? mg) T))
 
   (format *error-output* "[core:initialize-instance:after] core booted.~%"))
 

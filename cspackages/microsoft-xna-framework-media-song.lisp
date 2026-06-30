@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.Song
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:12:15Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T04:00:22Z
 
 (cl:in-package :cl-user)
 
@@ -20,9 +20,9 @@
    #:artist
    #:duration
    #:genre
-   #:is-disposed
-   #:is-protected
-   #:is-rated
+   #:disposed?
+   #:protected?
+   #:rated?
    #:name
    #:play-count
    #:position
@@ -43,8 +43,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.Song"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
-(cl:defconstant <creation> "2026-06-30T03:12:15Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T04:00:22Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -63,13 +63,13 @@
 (cl:defun genre (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_Genre"))
 
-(cl:defun is-disposed (obj)
+(cl:defun disposed? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsDisposed"))
 
-(cl:defun is-protected (obj)
+(cl:defun protected? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsProtected"))
 
-(cl:defun is-rated (obj)
+(cl:defun rated? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj) "get_IsRated"))
 
 (cl:defun name (obj)

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Type
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:18Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:21Z
 
 (cl:in-package :cl-user)
 
@@ -37,54 +37,54 @@
    #:generic-type-arguments
    #:guid
    #:has-element-type
-   #:is-abstract
-   #:is-ansi-class
-   #:is-array
-   #:is-auto-class
-   #:is-auto-layout
-   #:is-by-ref
-   #:is-by-ref-like
-   #:is-class
-   #:is-com-object
-   #:is-constructed-generic-type
-   #:is-contextful
-   #:is-enum
-   #:is-explicit-layout
-   #:is-function-pointer
-   #:is-generic-method-parameter
-   #:is-generic-parameter
-   #:is-generic-type
-   #:is-generic-type-definition
-   #:is-generic-type-parameter
-   #:is-import
-   #:is-interface
-   #:is-layout-sequential
-   #:is-marshal-by-ref
-   #:is-nested
-   #:is-nested-assembly
-   #:is-nested-fam-and-assem
-   #:is-nested-family
-   #:is-nested-fam-or-assem
-   #:is-nested-private
-   #:is-nested-public
-   #:is-not-public
-   #:is-pointer
-   #:is-primitive
-   #:is-public
-   #:is-sealed
-   #:is-security-critical
-   #:is-security-safe-critical
-   #:is-security-transparent
-   #:is-serializable
-   #:is-signature-type
-   #:is-special-name
-   #:is-sz-array
-   #:is-type-definition
-   #:is-unicode-class
-   #:is-unmanaged-function-pointer
-   #:is-value-type
-   #:is-variable-bound-array
-   #:is-visible
+   #:abstract?
+   #:ansi-class?
+   #:array?
+   #:auto-class?
+   #:auto-layout?
+   #:by-ref?
+   #:by-ref-like?
+   #:class?
+   #:com-object?
+   #:constructed-generic-type?
+   #:contextful?
+   #:enum?
+   #:explicit-layout?
+   #:function-pointer?
+   #:generic-method-parameter?
+   #:generic-parameter?
+   #:generic-type?
+   #:generic-type-definition?
+   #:generic-type-parameter?
+   #:import?
+   #:interface?
+   #:layout-sequential?
+   #:marshal-by-ref?
+   #:nested?
+   #:nested-assembly?
+   #:nested-fam-and-assem?
+   #:nested-family?
+   #:nested-fam-or-assem?
+   #:nested-private?
+   #:nested-public?
+   #:not-public?
+   #:pointer?
+   #:primitive?
+   #:public?
+   #:sealed?
+   #:security-critical?
+   #:security-safe-critical?
+   #:security-transparent?
+   #:serializable?
+   #:signature-type?
+   #:special-name?
+   #:sz-array?
+   #:type-definition?
+   #:unicode-class?
+   #:unmanaged-function-pointer?
+   #:value-type?
+   #:variable-bound-array?
+   #:visible?
    #:member-type
    #:module
    #:namespace
@@ -205,20 +205,20 @@
    #:invoke-member-string-binding-flags-binder-object-object[]
    #:invoke-member-string-binding-flags-binder-object-object[]-culture-info
    #:invoke-member-string-binding-flags-binder-object-object[]-parameter-modifier[]-culture-info-string[]
-   #:is-array-impl
-   #:is-assignable-from
-   #:is-assignable-to
-   #:is-by-ref-impl
-   #:is-com-object-impl
-   #:is-contextful-impl
-   #:is-enum-defined
-   #:is-equivalent-to
-   #:is-instance-of-type
-   #:is-marshal-by-ref-impl
-   #:is-pointer-impl
-   #:is-primitive-impl
-   #:is-subclass-of
-   #:is-value-type-impl
+   #:array-impl?
+   #:assignable-from?
+   #:assignable-to?
+   #:by-ref-impl?
+   #:com-object-impl?
+   #:contextful-impl?
+   #:enum-defined?
+   #:equivalent-to?
+   #:instance-of-type?
+   #:marshal-by-ref-impl?
+   #:pointer-impl?
+   #:primitive-impl?
+   #:subclass-of?
+   #:value-type-impl?
    #:make-array-type
    #:make-array-type-int32
    #:make-by-ref-type
@@ -233,8 +233,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Type"))
 (cl:defconstant <type-str> "System.Type")
-(cl:defconstant <creation> "2026-06-30T03:10:18Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:21Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -319,195 +319,195 @@
   "Gets a value indicating whether the current System.Type encompasses or refers to another type; that is, whether the current System.Type is an array, a pointer, or is passed by reference."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_HasElementType"))
 
-(cl:defun is-abstract (obj)
+(cl:defun abstract? (obj)
   "Gets a value indicating whether the System.Type is abstract and must be overridden."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsAbstract"))
 
-(cl:defun is-ansi-class (obj)
+(cl:defun ansi-class? (obj)
   "Gets a value indicating whether the string format attribute is selected for the System.Type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsAnsiClass"))
 
-(cl:defun is-array (obj)
+(cl:defun array? (obj)
   "Gets a value that indicates whether the type is an array."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsArray"))
 
-(cl:defun is-auto-class (obj)
+(cl:defun auto-class? (obj)
   "Gets a value indicating whether the string format attribute is selected for the System.Type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsAutoClass"))
 
-(cl:defun is-auto-layout (obj)
+(cl:defun auto-layout? (obj)
   "Gets a value indicating whether the fields of the current type are laid out automatically by the common language runtime."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsAutoLayout"))
 
-(cl:defun is-by-ref (obj)
+(cl:defun by-ref? (obj)
   "Gets a value indicating whether the System.Type is passed by reference."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsByRef"))
 
-(cl:defun is-by-ref-like (obj)
+(cl:defun by-ref-like? (obj)
   "Gets a value that indicates whether the type is a byref-like structure."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsByRefLike"))
 
-(cl:defun is-class (obj)
+(cl:defun class? (obj)
   "Gets a value indicating whether the System.Type is a class or a delegate; that is, not a value type or interface."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsClass"))
 
-(cl:defun is-com-object (obj)
+(cl:defun com-object? (obj)
   "Gets a value indicating whether the System.Type is a COM object."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsCOMObject"))
 
-(cl:defun is-constructed-generic-type (obj)
+(cl:defun constructed-generic-type? (obj)
   "Gets a value that indicates whether this object represents a constructed generic type. You can create instances of a constructed generic type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsConstructedGenericType"))
 
-(cl:defun is-contextful (obj)
+(cl:defun contextful? (obj)
   "Gets a value indicating whether the System.Type can be hosted in a context."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsContextful"))
 
-(cl:defun is-enum (obj)
+(cl:defun enum? (obj)
   "Gets a value indicating whether the current System.Type represents an enumeration."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsEnum"))
 
-(cl:defun is-explicit-layout (obj)
+(cl:defun explicit-layout? (obj)
   "Gets a value indicating whether the fields of the current type are laid out at explicitly specified offsets."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsExplicitLayout"))
 
-(cl:defun is-function-pointer (obj)
+(cl:defun function-pointer? (obj)
   "Gets a value that indicates whether the current System.Type is a function pointer."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsFunctionPointer"))
 
-(cl:defun is-generic-method-parameter (obj)
+(cl:defun generic-method-parameter? (obj)
   "Gets a value that indicates whether the current System.Type represents a type parameter in the definition of a generic method."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsGenericMethodParameter"))
 
-(cl:defun is-generic-parameter (obj)
+(cl:defun generic-parameter? (obj)
   "Gets a value indicating whether the current System.Type represents a type parameter in the definition of a generic type or method."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsGenericParameter"))
 
-(cl:defun is-generic-type (obj)
+(cl:defun generic-type? (obj)
   "Gets a value indicating whether the current type is a generic type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsGenericType"))
 
-(cl:defun is-generic-type-definition (obj)
+(cl:defun generic-type-definition? (obj)
   "Gets a value indicating whether the current System.Type represents a generic type definition, from which other generic types can be constructed."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsGenericTypeDefinition"))
 
-(cl:defun is-generic-type-parameter (obj)
+(cl:defun generic-type-parameter? (obj)
   "Gets a value that indicates whether the current System.Type represents a type parameter in the definition of a generic type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsGenericTypeParameter"))
 
-(cl:defun is-import (obj)
+(cl:defun import? (obj)
   "Gets a value indicating whether the System.Type has a System.Runtime.InteropServices.ComImportAttribute attribute applied, indicating that it was imported from a COM type library."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsImport"))
 
-(cl:defun is-interface (obj)
+(cl:defun interface? (obj)
   "Gets a value indicating whether the System.Type is an interface; that is, not a class or a value type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsInterface"))
 
-(cl:defun is-layout-sequential (obj)
+(cl:defun layout-sequential? (obj)
   "Gets a value indicating whether the fields of the current type are laid out sequentially, in the order that they were defined or emitted to the metadata."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsLayoutSequential"))
 
-(cl:defun is-marshal-by-ref (obj)
+(cl:defun marshal-by-ref? (obj)
   "Gets a value indicating whether the System.Type is marshaled by reference."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsMarshalByRef"))
 
-(cl:defun is-nested (obj)
+(cl:defun nested? (obj)
   "Gets a value indicating whether the current System.Type object represents a type whose definition is nested inside the definition of another type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNested"))
 
-(cl:defun is-nested-assembly (obj)
+(cl:defun nested-assembly? (obj)
   "Gets a value indicating whether the System.Type is nested and visible only within its own assembly."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedAssembly"))
 
-(cl:defun is-nested-fam-and-assem (obj)
+(cl:defun nested-fam-and-assem? (obj)
   "Gets a value indicating whether the System.Type is nested and visible only to classes that belong to both its own family and its own assembly."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedFamANDAssem"))
 
-(cl:defun is-nested-family (obj)
+(cl:defun nested-family? (obj)
   "Gets a value indicating whether the System.Type is nested and visible only within its own family."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedFamily"))
 
-(cl:defun is-nested-fam-or-assem (obj)
+(cl:defun nested-fam-or-assem? (obj)
   "Gets a value indicating whether the System.Type is nested and visible only to classes that belong to either its own family or to its own assembly."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedFamORAssem"))
 
-(cl:defun is-nested-private (obj)
+(cl:defun nested-private? (obj)
   "Gets a value indicating whether the System.Type is nested and declared private."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedPrivate"))
 
-(cl:defun is-nested-public (obj)
+(cl:defun nested-public? (obj)
   "Gets a value indicating whether a class is nested and declared public."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNestedPublic"))
 
-(cl:defun is-not-public (obj)
+(cl:defun not-public? (obj)
   "Gets a value indicating whether the System.Type is not declared public."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsNotPublic"))
 
-(cl:defun is-pointer (obj)
+(cl:defun pointer? (obj)
   "Gets a value indicating whether the System.Type is a pointer."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsPointer"))
 
-(cl:defun is-primitive (obj)
+(cl:defun primitive? (obj)
   "Gets a value indicating whether the System.Type is one of the primitive types."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsPrimitive"))
 
-(cl:defun is-public (obj)
+(cl:defun public? (obj)
   "Gets a value indicating whether the System.Type is declared public."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsPublic"))
 
-(cl:defun is-sealed (obj)
+(cl:defun sealed? (obj)
   "Gets a value indicating whether the System.Type is declared sealed."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSealed"))
 
-(cl:defun is-security-critical (obj)
+(cl:defun security-critical? (obj)
   "Gets a value that indicates whether the current type is security-critical or security-safe-critical at the current trust level, and therefore can perform critical operations."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSecurityCritical"))
 
-(cl:defun is-security-safe-critical (obj)
+(cl:defun security-safe-critical? (obj)
   "Gets a value that indicates whether the current type is security-safe-critical at the current trust level; that is, whether it can perform critical operations and can be accessed by transparent code."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSecuritySafeCritical"))
 
-(cl:defun is-security-transparent (obj)
+(cl:defun security-transparent? (obj)
   "Gets a value that indicates whether the current type is transparent at the current trust level, and therefore cannot perform critical operations."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSecurityTransparent"))
 
-(cl:defun is-serializable (obj)
+(cl:defun serializable? (obj)
   "Gets a value indicating whether the System.Type is binary serializable."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSerializable"))
 
-(cl:defun is-signature-type (obj)
+(cl:defun signature-type? (obj)
   "Gets a value that indicates whether the type is a signature type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSignatureType"))
 
-(cl:defun is-special-name (obj)
+(cl:defun special-name? (obj)
   "Gets a value indicating whether the type has a name that requires special handling."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSpecialName"))
 
-(cl:defun is-sz-array (obj)
+(cl:defun sz-array? (obj)
   "Gets a value that indicates whether the type is an array type that can represent only a single-dimensional array with a zero lower bound."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsSZArray"))
 
-(cl:defun is-type-definition (obj)
+(cl:defun type-definition? (obj)
   "Gets a value that indicates whether the type is a type definition."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsTypeDefinition"))
 
-(cl:defun is-unicode-class (obj)
+(cl:defun unicode-class? (obj)
   "Gets a value indicating whether the string format attribute is selected for the System.Type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsUnicodeClass"))
 
-(cl:defun is-unmanaged-function-pointer (obj)
+(cl:defun unmanaged-function-pointer? (obj)
   "Gets a value that indicates whether the current System.Type is an unmanaged function pointer."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsUnmanagedFunctionPointer"))
 
-(cl:defun is-value-type (obj)
+(cl:defun value-type? (obj)
   "Gets a value indicating whether the System.Type is a value type."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsValueType"))
 
-(cl:defun is-variable-bound-array (obj)
+(cl:defun variable-bound-array? (obj)
   "Gets a value that indicates whether the type is an array type that can represent a multi-dimensional array or an array with an arbitrary lower bound."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsVariableBoundArray"))
 
-(cl:defun is-visible (obj)
+(cl:defun visible? (obj)
   "Gets a value indicating whether the System.Type can be accessed by code outside the assembly."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "get_IsVisible"))
 
@@ -1477,13 +1477,13 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args modifiers culture named-parameters))
 
-(cl:defun is-array-impl (obj)
+(cl:defun array-impl? (obj)
   "Summary: When overridden in a derived class, implements the System.Type.IsArray property and determines whether the System.Type is an array.
 Returns: if the System.Type is an array; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsArrayImpl"))
 
-(cl:defun is-assignable-from (obj c)
+(cl:defun assignable-from? (obj c)
   "Summary: Determines whether an instance of a specified type c can be assigned to a variable of the current type.
 Returns: if any of the following conditions is true: - c and the current instance represent the same type. - c is derived either directly or indirectly from the current instance. c is derived directly from the current instance if it inherits from the current instance; c is derived indirectly from the current instance if it inherits from a succession of one or more classes that inherit from the current instance. - The current instance is an interface that c implements. - c is a generic type parameter, and the current instance represents one of the constraints of c. - c represents a value type, and the current instance represents Nullable<c> (Nullable(Of c) in Visual Basic). if none of these conditions are true, or if c is .
 Parameters:
@@ -1491,7 +1491,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsAssignableFrom" c))
 
-(cl:defun is-assignable-to (obj target-type)
+(cl:defun assignable-to? (obj target-type)
   "Summary: Determines whether the current type can be assigned to a variable of the specified targetType.
 Returns: if any of the following conditions is true: - The current instance and targetType represent the same type. - The current type is derived either directly or indirectly from targetType. The current type is derived directly from targetType if it inherits from targetType; the current type is derived indirectly from targetType if it inherits from a succession of one or more classes that inherit from targetType. - targetType is an interface that the current type implements. - The current type is a generic type parameter, and targetType represents one of the constraints of the current type. - The current type represents a value type, and targetType represents Nullable<c> (Nullable(Of c) in Visual Basic). if none of these conditions are true, or if targetType is .
 Parameters:
@@ -1499,25 +1499,25 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsAssignableTo" target-type))
 
-(cl:defun is-by-ref-impl (obj)
+(cl:defun by-ref-impl? (obj)
   "Summary: When overridden in a derived class, implements the System.Type.IsByRef property and determines whether the System.Type is passed by reference.
 Returns: if the System.Type is passed by reference; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsByRefImpl"))
 
-(cl:defun is-com-object-impl (obj)
+(cl:defun com-object-impl? (obj)
   "Summary: When overridden in a derived class, implements the System.Type.IsCOMObject property and determines whether the System.Type is a COM object.
 Returns: if the System.Type is a COM object; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsCOMObjectImpl"))
 
-(cl:defun is-contextful-impl (obj)
+(cl:defun contextful-impl? (obj)
   "Summary: Implements the System.Type.IsContextful property and determines whether the System.Type can be hosted in a context.
 Returns: if the System.Type can be hosted in a context; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsContextfulImpl"))
 
-(cl:defun is-enum-defined (obj value)
+(cl:defun enum-defined? (obj value)
   "Summary: Returns a value that indicates whether the specified value exists in the current enumeration type.
 Returns: if the specified value is a member of the current enumeration type; otherwise, .
 Parameters:
@@ -1525,7 +1525,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsEnumDefined" value))
 
-(cl:defun is-equivalent-to (obj other)
+(cl:defun equivalent-to? (obj other)
   "Summary: Determines whether two COM types have the same identity and are eligible for type equivalence.
 Returns: if the COM types are equivalent; otherwise, . This method also returns if one type is in an assembly that is loaded for execution, and the other is in an assembly that is loaded into the reflection-only context.
 Parameters:
@@ -1533,7 +1533,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsEquivalentTo" other))
 
-(cl:defun is-instance-of-type (obj o)
+(cl:defun instance-of-type? (obj o)
   "Summary: Determines whether the specified object is an instance of the current System.Type.
 Returns: if the current is in the inheritance hierarchy of the object represented by o, or if the current is an interface that o implements. if neither of these conditions is the case, if o is , or if the current is an open generic type (that is, System.Type.ContainsGenericParameters returns ).
 Parameters:
@@ -1541,25 +1541,25 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsInstanceOfType" o))
 
-(cl:defun is-marshal-by-ref-impl (obj)
+(cl:defun marshal-by-ref-impl? (obj)
   "Summary: Implements the System.Type.IsMarshalByRef property and determines whether the System.Type is marshaled by reference.
 Returns: if the System.Type is marshaled by reference; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsMarshalByRefImpl"))
 
-(cl:defun is-pointer-impl (obj)
+(cl:defun pointer-impl? (obj)
   "Summary: When overridden in a derived class, implements the System.Type.IsPointer property and determines whether the System.Type is a pointer.
 Returns: if the System.Type is a pointer; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsPointerImpl"))
 
-(cl:defun is-primitive-impl (obj)
+(cl:defun primitive-impl? (obj)
   "Summary: When overridden in a derived class, implements the System.Type.IsPrimitive property and determines whether the System.Type is one of the primitive types.
 Returns: if the System.Type is one of the primitive types; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsPrimitiveImpl"))
 
-(cl:defun is-subclass-of (obj c)
+(cl:defun subclass-of? (obj c)
   "Summary: Determines whether the current System.Type derives from the specified System.Type.
 Returns: if the current derives from c; otherwise, . This method also returns if c and the current are equal.
 Parameters:
@@ -1567,7 +1567,7 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsSubclassOf" c))
 
-(cl:defun is-value-type-impl (obj)
+(cl:defun value-type-impl? (obj)
   "Summary: Implements the System.Type.IsValueType property and determines whether the System.Type is a value type; that is, not a class or an interface.
 Returns: if the System.Type is a value type; otherwise, .
 "

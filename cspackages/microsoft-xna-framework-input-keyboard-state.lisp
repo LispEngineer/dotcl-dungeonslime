@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:54Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:58Z
 
 (cl:in-package :cl-user)
 
@@ -25,8 +25,8 @@
    #:get-pressed-key-count
    #:get-pressed-keys
    #:get-pressed-keys-keys[]
-   #:is-key-down
-   #:is-key-up
+   #:key-down?
+   #:key-up?
    #:not=
   ))
 
@@ -34,8 +34,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(cl:defconstant <creation> "2026-06-30T03:10:54Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:58Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -84,10 +84,10 @@
   "Calls Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys GetPressedKeys(Keys[]) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" keys))
 
-(cl:defun is-key-down (obj key)
+(cl:defun key-down? (obj key)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyDown" key))
 
-(cl:defun is-key-up (obj key)
+(cl:defun key-up? (obj key)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "IsKeyUp" key))
 
 (cl:defun not= (a b)

@@ -1143,3 +1143,17 @@ This helper has two key advantages:
 
 The bat collision bounce logic in [game-1.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/game-1.lisp) was updated to use this `v2-normalize` helper instead of `v2:normalize`.
 
+
+# Idiomatic Lisp Naming Conventions (Version 17)
+
+To make C# package wrappers feel more idiomatic to Common Lisp developers, Version 17 of the C# Lisp Package Generator updates the naming conventions for specific types of methods and fields:
+
+## 1. NaN and IsNaN Mapping
+- **`NaN` Constant**: Mapped directly to `"nan"` in `camel-to-kebab` so that constant wrappers for `NaN` (such as `System.Double.NaN`) generate as `+nan+` instead of the literal kebab-case `+na-n+`.
+- **`IsNaN` Methods**: Mapped to `"nan?"` instead of the literal `is-na-n`.
+
+## 2. IsSomething Boolean Predicates Suffix
+- Any method or property whose C# name starts with `"Is"` followed by an uppercase letter (e.g. `IsEmpty`, `IsActive`, `IsFinite`) is translated to a Lisp predicate ending with a question mark `?` (e.g. `empty?`, `active?`, `finite?`), replacing the `is-` prefix.
+- If the name is exactly `"Is"` or does not start with an uppercase letter following "Is" (e.g. `"Issue"`), the name is translated normally without the question mark conversion.
+
+

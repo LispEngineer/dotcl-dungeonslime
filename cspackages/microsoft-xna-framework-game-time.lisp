@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameTime
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:43Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:47Z
 
 (cl:in-package :cl-user)
 
@@ -16,7 +16,7 @@
    #:new-time-span-time-span
    #:new-time-span-time-span-boolean
    #:elapsed-game-time
-   #:is-running-slowly
+   #:running-slowly?
    #:total-game-time
   ))
 
@@ -24,8 +24,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameTime"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
-(cl:defconstant <creation> "2026-06-30T03:10:43Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:47Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -50,10 +50,10 @@
 (cl:defun (cl:setf elapsed-game-time) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_ElapsedGameTime" new-value))
 
-(cl:defun is-running-slowly (obj)
+(cl:defun running-slowly? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "get_IsRunningSlowly"))
 
-(cl:defun (cl:setf is-running-slowly) (new-value obj)
+(cl:defun (cl:setf running-slowly?) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameTime") obj) "set_IsRunningSlowly" new-value))
 
 (cl:defun total-game-time (obj)

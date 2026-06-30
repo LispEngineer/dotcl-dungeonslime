@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:11:51Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:59:57Z
 
 (cl:in-package :cl-user)
 
@@ -24,8 +24,8 @@
    #:graphics-device-status
    #:graphics-profile
    #:indices
-   #:is-content-lost
-   #:is-disposed
+   #:content-lost?
+   #:disposed?
    #:metrics
    #:presentation-parameters
    #:rasterizer-state
@@ -81,8 +81,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-06-30T03:11:51Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:59:57Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -143,10 +143,10 @@
 (cl:defun (cl:setf indices) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "set_Indices" new-value))
 
-(cl:defun is-content-lost (obj)
+(cl:defun content-lost? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "get_IsContentLost"))
 
-(cl:defun is-disposed (obj)
+(cl:defun disposed? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "get_IsDisposed"))
 
 (cl:defun metrics (obj)

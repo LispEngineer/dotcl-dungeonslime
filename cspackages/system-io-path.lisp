@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:11Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:14Z
 
 (cl:in-package :cl-user)
 
@@ -39,8 +39,8 @@
    #:get-temp-file-name
    #:get-temp-path
    #:has-extension
-   #:is-path-fully-qualified
-   #:is-path-rooted
+   #:path-fully-qualified?
+   #:path-rooted?
    #:join
    #:join-string-string
    #:join-string-string-string
@@ -52,8 +52,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-06-30T03:10:11Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:14Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -247,7 +247,7 @@ Parameters:
 "
   (dotnet:static <type-str> "HasExtension" (cl:the (dotnet "System.String") path)))
 
-(cl:defun is-path-fully-qualified (path)
+(cl:defun path-fully-qualified? (path)
   "Summary: Returns a value that indicates whether the specified file path is fixed to a specific drive or UNC path.
 Returns: if the path is fixed to a specific drive or UNC path; if the path is relative to the current drive or working directory.
 Parameters:
@@ -255,7 +255,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsPathFullyQualified" (cl:the (dotnet "System.String") path)))
 
-(cl:defun is-path-rooted (path)
+(cl:defun path-rooted? (path)
   "Summary: Returns a value indicating whether the specified path string contains a root.
 Returns: if path contains a root; otherwise, .
 Parameters:

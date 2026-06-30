@@ -106,6 +106,6 @@
     (assert-not-fboundp '(setf ts:total-milliseconds) "TimeSpan.TotalMilliseconds mutator absence")
     (assert-not-fboundp '(setf microsoft-xna-framework-input-mouse-state:x) "MouseState.X mutator absence")
     (assert-not-fboundp '(setf microsoft-xna-framework-input-keyboard-state:caps-lock) "KeyboardState.CapsLock mutator absence")
-    (assert-not-fboundp '(setf microsoft-xna-framework-input-game-pad-state:is-connected) "GamePadState.IsConnected mutator absence"))
+    (assert-not-fboundp '(setf microsoft-xna-framework-input-game-pad-state:connected?) "GamePadState.IsConnected mutator absence"))
   (format *error-output* "  [ALL PASSED] Detailed property accessor/mutator tests completed successfully.~%"))
 

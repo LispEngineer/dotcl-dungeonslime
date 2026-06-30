@@ -176,8 +176,8 @@
          (n (v2:normalize-vector2 v)))
     ;; Should return +v2-0+ (Vector2.Zero)
     (format *error-output* "  [info] v2:normalize-vector2 zero vector returned: ~A~%" n)
-    (assert (single:is-na-n (x n)))
-    (assert (single:is-na-n (y n)))
+    (assert (single:nan? (x n)))
+    (assert (single:nan? (y n)))
     (format *error-output* "  [PASS] v2:normalize-vector2 zero vector returns NaN for both parts~%"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

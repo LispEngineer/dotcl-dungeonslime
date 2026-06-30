@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:25Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:28Z
 
 (cl:in-package :cl-user)
 
@@ -46,7 +46,7 @@
    #:+epsilon+
    #:+max-value+
    #:+min-value+
-   #:+na-n+
+   #:+nan+
    #:+negative-infinity+
    #:+negative-zero+
    #:+pi+
@@ -104,20 +104,20 @@
    #:hypot
    #:ieee754-remainder
    #:i-log-b
-   #:is-even-integer
-   #:is-finite
-   #:is-infinity
-   #:is-integer
-   #:is-na-n
-   #:is-negative
-   #:is-negative-infinity
-   #:is-normal
-   #:is-odd-integer
-   #:is-positive
-   #:is-positive-infinity
-   #:is-pow2
-   #:is-real-number
-   #:is-subnormal
+   #:even-integer?
+   #:finite?
+   #:infinity?
+   #:integer?
+   #:nan?
+   #:negative?
+   #:negative-infinity?
+   #:normal?
+   #:odd-integer?
+   #:positive?
+   #:positive-infinity?
+   #:pow2?
+   #:real-number?
+   #:subnormal?
    #:lerp
    #:log
    #:log-single
@@ -174,8 +174,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-06-30T03:10:25Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:28Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -197,8 +197,8 @@
 (cl:defconstant +min-value+ (dotnet:static <type-str> "MinValue"))
 (cl:setf (cl:documentation (cl:quote +min-value+) (cl:quote cl:variable)) "Represents the smallest possible value of System.Single. This field is constant.")
 
-(cl:defconstant +na-n+ (dotnet:static <type-str> "NaN"))
-(cl:setf (cl:documentation (cl:quote +na-n+) (cl:quote cl:variable)) "Represents not a number (). This field is constant.")
+(cl:defconstant +nan+ (dotnet:static <type-str> "NaN"))
+(cl:setf (cl:documentation (cl:quote +nan+) (cl:quote cl:variable)) "Represents not a number (). This field is constant.")
 
 (cl:defconstant +negative-infinity+ (dotnet:static <type-str> "NegativeInfinity"))
 (cl:setf (cl:documentation (cl:quote +negative-infinity+) (cl:quote cl:variable)) "Represents negative infinity. This field is constant.")
@@ -635,7 +635,7 @@ Parameters:
 "
   (dotnet:static <type-str> "ILogB" (cl:the (dotnet "System.Single") x)))
 
-(cl:defun is-even-integer (value)
+(cl:defun even-integer? (value)
   "Summary: Determines if a value represents an even integral number.
 Returns: if value is an even integer; otherwise, .
 Parameters:
@@ -643,7 +643,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsEvenInteger" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-finite (f)
+(cl:defun finite? (f)
   "Summary: Determines whether the specified value is finite (zero, subnormal or normal).
 Returns: if the specified value is finite (zero, subnormal or normal); otherwise, .
 Parameters:
@@ -651,7 +651,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsFinite" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-infinity (f)
+(cl:defun infinity? (f)
   "Summary: Returns a value indicating whether the specified number evaluates to negative or positive infinity.
 Returns: if f evaluates to System.Single.PositiveInfinity or System.Single.NegativeInfinity; otherwise, .
 Parameters:
@@ -659,7 +659,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsInfinity" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-integer (value)
+(cl:defun integer? (value)
   "Summary: Determines if a value represents an integral value.
 Returns: if value is an integer; otherwise, .
 Parameters:
@@ -667,7 +667,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsInteger" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-na-n (f)
+(cl:defun nan? (f)
   "Summary: Returns a value that indicates whether the specified value is not a number (System.Single.NaN).
 Returns: if f evaluates to not a number (System.Single.NaN); otherwise, .
 Parameters:
@@ -675,7 +675,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsNaN" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-negative (f)
+(cl:defun negative? (f)
   "Summary: Determines whether the specified value is negative.
 Returns: if negative, otherwise.
 Parameters:
@@ -683,7 +683,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsNegative" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-negative-infinity (f)
+(cl:defun negative-infinity? (f)
   "Summary: Returns a value indicating whether the specified number evaluates to negative infinity.
 Returns: if f evaluates to System.Single.NegativeInfinity; otherwise, .
 Parameters:
@@ -691,7 +691,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsNegativeInfinity" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-normal (f)
+(cl:defun normal? (f)
   "Summary: Determines whether the specified value is normal.
 Returns: if f is normal; otherwise.
 Parameters:
@@ -699,7 +699,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsNormal" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-odd-integer (value)
+(cl:defun odd-integer? (value)
   "Summary: Determines if a value represents an odd integral number.
 Returns: if value is an odd integer; otherwise, .
 Parameters:
@@ -707,7 +707,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsOddInteger" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-positive (value)
+(cl:defun positive? (value)
   "Summary: Determines if a value is positive.
 Returns: if value is positive; otherwise, .
 Parameters:
@@ -715,7 +715,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsPositive" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-positive-infinity (f)
+(cl:defun positive-infinity? (f)
   "Summary: Returns a value indicating whether the specified number evaluates to positive infinity.
 Returns: if f evaluates to System.Single.PositiveInfinity; otherwise, .
 Parameters:
@@ -723,7 +723,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsPositiveInfinity" (cl:the (dotnet "System.Single") f)))
 
-(cl:defun is-pow2 (value)
+(cl:defun pow2? (value)
   "Summary: Determines if a value is a power of two.
 Returns: if value is a power of two; otherwise, .
 Parameters:
@@ -731,7 +731,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsPow2" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-real-number (value)
+(cl:defun real-number? (value)
   "Summary: Determines if a value represents a real number.
 Returns: if value is a real number; otherwise, .
 Parameters:
@@ -739,7 +739,7 @@ Parameters:
 "
   (dotnet:static <type-str> "IsRealNumber" (cl:the (dotnet "System.Single") value)))
 
-(cl:defun is-subnormal (f)
+(cl:defun subnormal? (f)
   "Summary: Determines whether the specified value is subnormal.
 Returns: if f is subnormal; otherwise.
 Parameters:

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:07Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:10Z
 
 (cl:in-package :cl-user)
 
@@ -21,8 +21,8 @@
    #:dynamic-directory
    #:friendly-name
    #:id
-   #:is-fully-trusted
-   #:is-homogenous
+   #:fully-trusted?
+   #:homogenous?
    #:monitoring-survived-memory-size
    #:monitoring-total-allocated-memory-size
    #:monitoring-total-processor-time
@@ -59,8 +59,8 @@
    #:get-assemblies
    #:get-current-thread-id
    #:get-data
-   #:is-default-app-domain
-   #:is-finalizing-for-unload
+   #:default-app-domain?
+   #:finalizing-for-unload?
    #:load
    #:load-byte[]
    #:load-assembly-name
@@ -82,8 +82,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-06-30T03:10:07Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:10Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -112,11 +112,11 @@
   "Gets an integer that uniquely identifies the application domain within the process."
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "get_Id"))
 
-(cl:defun is-fully-trusted (obj)
+(cl:defun fully-trusted? (obj)
   "Gets a value that indicates whether assemblies that are loaded into the current application domain execute with full trust."
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "get_IsFullyTrusted"))
 
-(cl:defun is-homogenous (obj)
+(cl:defun homogenous? (obj)
   "Gets a value that indicates whether the current application domain has a set of permissions that is granted to all assemblies that are loaded into the application domain."
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "get_IsHomogenous"))
 
@@ -399,13 +399,13 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "GetData" name))
 
-(cl:defun is-default-app-domain (obj)
+(cl:defun default-app-domain? (obj)
   "Summary: Returns a value that indicates whether the application domain is the default application domain for the process.
 Returns: if the current System.AppDomain object represents the default application domain for the process; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "IsDefaultAppDomain"))
 
-(cl:defun is-finalizing-for-unload (obj)
+(cl:defun finalizing-for-unload? (obj)
   "Summary: Indicates whether this application domain is unloading, and the objects it contains are being finalized by the common language runtime.
 Returns: if this application domain is unloading and the common language runtime has started invoking finalizers; otherwise, .
 "

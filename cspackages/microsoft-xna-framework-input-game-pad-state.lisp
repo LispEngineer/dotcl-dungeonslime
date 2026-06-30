@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:11:11Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:59:15Z
 
 (cl:in-package :cl-user)
 
@@ -22,15 +22,15 @@
    #:default
    #:buttons
    #:d-pad
-   #:is-connected
+   #:connected?
    #:packet-number
    #:thumb-sticks
    #:triggers
    #:=
    #:equals
    #:get-hash-code
-   #:is-button-down
-   #:is-button-up
+   #:button-down?
+   #:button-up?
    #:not=
    #:to-string
   ))
@@ -39,8 +39,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(cl:defconstant <creation> "2026-06-30T03:11:11Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:59:15Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -71,7 +71,7 @@
 (cl:defun d-pad (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_DPad"))
 
-(cl:defun is-connected (obj)
+(cl:defun connected? (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "get_IsConnected"))
 
 (cl:defun packet-number (obj)
@@ -92,10 +92,10 @@
 (cl:defun get-hash-code (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "GetHashCode"))
 
-(cl:defun is-button-down (obj button)
+(cl:defun button-down? (obj button)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonDown" button))
 
-(cl:defun is-button-up (obj button)
+(cl:defun button-up? (obj button)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.GamePadState") obj) "IsButtonUp" button))
 
 (cl:defun not= (left right)

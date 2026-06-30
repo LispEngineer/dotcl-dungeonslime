@@ -9,7 +9,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 16
+(defparameter *generator-version* 17
   "Integer version number for the generated Lisp source files.
    Version history:
    1 - Initial generator mapping C# classes to Lisp packages.
@@ -29,29 +29,32 @@
    13 - Refactored C# overloaded operator passthrough generation to dispatch based on argument types and counts in Lisp, avoiding MissingMethodExceptions.
    14 - Qualified standard Common Lisp comparison function cl:= in emitted passthrough code, preventing it from resolving to the shadowed = operator of the generated package.
    15 - Protected critical Lisp syntax symbols (quote, function, t, nil) from being shadowed by mapping conflicting C# member names to quote!, function!, t!, nil!; qualified other standard Common Lisp symbols in generated templates with cl: prefix.
-   16 - Tracked is-static-overload-p per clean method overload inside Case 3 (instead of using group-wide static-p) to ensure overloaded static methods are correctly generated as static wrappers.")
+   16 - Tracked is-static-overload-p per clean method overload inside Case 3 (instead of using group-wide static-p) to ensure overloaded static methods are correctly generated as static wrappers.
+   17 - Mapped C# field/property 'NaN' to Lisp 'nan' in camel-to-kebab; mapped 'IsSomething' methods/properties to 'something?' in map-member-name.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
    Also maps dot characters '.' to hyphens '-'."
-  (let ((len (length name)))
-    (with-output-to-string (sb)
-      (loop for i from 0 to (1- len)
-            for c = (char name i)
-            do (cond
-                 ((char= c #\.)
-                  (write-char #\- sb))
-                 ((upper-case-p c)
-                  (when (and (> i 0)
-                             (char/= (char name (1- i)) #\-)
-                             (char/= (char name (1- i)) #\.)
-                             (or (not (upper-case-p (char name (1- i))))
-                                 (and (< (1+ i) len)
-                                      (lower-case-p (char name (1+ i))))))
-                    (write-char #\- sb))
-                  (write-char (char-downcase c) sb))
-                 (t
-                  (write-char c sb)))))))
+  (if (string= name "NaN")
+      "nan"
+      (let ((len (length name)))
+        (with-output-to-string (sb)
+          (loop for i from 0 to (1- len)
+                for c = (char name i)
+                do (cond
+                     ((char= c #\.)
+                      (write-char #\- sb))
+                     ((upper-case-p c)
+                      (when (and (> i 0)
+                                 (char/= (char name (1- i)) #\-)
+                                 (char/= (char name (1- i)) #\.)
+                                 (or (not (upper-case-p (char name (1- i))))
+                                     (and (< (1+ i) len)
+                                          (lower-case-p (char name (1+ i))))))
+                        (write-char #\- sb))
+                      (write-char (char-downcase c) sb))
+                     (t
+                      (write-char c sb))))))))
 
 (defun split-string (string &optional (separator #\;))
   "Split a string into a list of substrings at occurrences of the separator character."
@@ -77,8 +80,14 @@
 
 (defun map-member-name (name)
   "Convert a Pascal/camel C# member name to a kebab-case Lisp name,
-   renaming critical Common Lisp symbols to avoid shadowing them."
-  (let ((kebab (camel-to-kebab name)))
+   renaming critical Common Lisp symbols to avoid shadowing them,
+   converting IsSomething to something?, and handling NaN."
+  (let* ((kebab (cond
+                  ((and (uiop:string-prefix-p "Is" name)
+                        (> (length name) 2)
+                        (upper-case-p (char name 2)))
+                   (format nil "~A?" (camel-to-kebab (subseq name 2))))
+                  (t (camel-to-kebab name)))))
     (cond
       ((string= kebab "quote") "quote!")
       ((string= kebab "function") "function!")

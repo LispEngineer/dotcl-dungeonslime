@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Convert
-;;; Generator Version: 16
-;;; Creation Date: 2026-06-30T03:10:04Z
+;;; Generator Version: 17
+;;; Creation Date: 2026-06-30T03:58:06Z
 
 (cl:in-package :cl-user)
 
@@ -22,7 +22,7 @@
    #:from-base64-string
    #:from-hex-string
    #:get-type-code
-   #:is-db-null
+   #:db-null?
    #:to-base64-char-array
    #:to-base64-char-array-byte[]-int32-int32-char[]-int32
    #:to-base64-char-array-byte[]-int32-int32-char[]-int32-base64-formatting-options
@@ -354,8 +354,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Convert"))
 (cl:defconstant <type-str> "System.Convert")
-(cl:defconstant <creation> "2026-06-30T03:10:04Z")
-(cl:defconstant <version> 16)
+(cl:defconstant <creation> "2026-06-30T03:58:06Z")
+(cl:defconstant <version> 17)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -441,7 +441,7 @@ Parameters:
 "
   (dotnet:static <type-str> "GetTypeCode" (cl:the (dotnet "System.Object") value)))
 
-(cl:defun is-db-null (value)
+(cl:defun db-null? (value)
   "Summary: Returns an indication whether the specified object is of type System.DBNull.
 Returns: if value is of type System.DBNull; otherwise, .
 Parameters:
