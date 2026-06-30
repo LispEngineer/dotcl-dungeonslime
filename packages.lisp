@@ -102,26 +102,14 @@
     (:v2 :microsoft-xna-framework-vector2)
     (:rect :microsoft-xna-framework-rectangle)
     (:game-time :microsoft-xna-framework-game-time))
-  (:export #:vector2
-            #:rect
-            #:+v2-0+
-            #:+v2-1+
-            #:+v2-x1+
-            #:+v2-y1+
-            #:v2*
-            #:v2-normalize
-            #:print-gf-methods
+  (:export 
             #:x
             #:y
             #:width
             #:height
             #:°2R
             #:sprite-batch-begin
-            #:game-time-total
-            #:game-time-elapsed
-            #:game-time-slow?
-            #:keyboard-state
-            #:key-down?))
+  ))
 
 (defpackage :game-repl
   (:use :cl)
@@ -222,6 +210,7 @@
     (:kb :microsoft-xna-framework-input-keyboard)
     (:mouse :microsoft-xna-framework-input-mouse)
     (:gp :microsoft-xna-framework-input-game-pad)
+    (:game-time :microsoft-xna-framework-game-time)
     (:ts :system-time-span))
   (:export
     ;; KeyboardInfo class and functions

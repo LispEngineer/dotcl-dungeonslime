@@ -9,24 +9,6 @@
 
 (format *error-output* "[mg-classes.lisp] Loading in package ~S~%" *package*)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; GameTime functions
-
-(defun game-time-total (gt)
-  "Gets TotalGameTime on this Microsoft.Xna.Framework.GameTime object,
-   which returns a C# TimeSpan."
-  (game-time:total-game-time gt))
-
-(defun game-time-elapsed (gt)
-  "Gets ElapsedGameTime on this Microsoft.Xna.Framework.GameTime object,
-   which is the time since the last call to Update().
-   Returns a C# TimeSpan."
-  (game-time:elapsed-game-time gt))
-
-(defun game-time-slow? (gt)
-  "Gets IsRunningSlowly on this Microsoft.Xna.Framework.GameTime."
-  (game-time:is-running-slowly gt))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Generic functions
 
@@ -79,21 +61,8 @@
   "Convert degrees to radians, returning a single-float (used commonly in MonoGame)"
   (coerce (* degrees (/ pi 180)) 'single-float))
 
-;; Ease of use function for Sprite Batch Begin
-#|
-(defun sprite-batch-begin (sprite-batch
-                           &optional (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode:+deferred+)
-                           blend-state sampler-state depth-stencil-state
-                           rasterizer-state effect transform-matrix)
-  "Call the SpriteBatch.Begin() function with the specified arguments."
-  ;; FIXME: Once DotCL allows calling dotnet:invoke with partial arguments
-  ;; and default values for the rest, we can get rid of this.
-  (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
-                                      depth-stencil-state rasterizer-state
-                                      effect transform-matrix))
-|#
-
 ;; Ease of use function for Sprite Batch Begin using keyword arguments
+;; FIXME: Use the cspackage version once that is available
 (defun sprite-batch-begin (sprite-batch
                             &key (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode:+deferred+)
                             (blend-state nil)
@@ -106,13 +75,3 @@
   (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
                                       depth-stencil-state rasterizer-state
                                       effect transform-matrix))
-
-#|
-(defun keyboard-state ()
-  "Gets the keyboard state via Keyboard.GetState()"
-  (dotnet:static "Microsoft.Xna.Framework.Input.Keyboard" "GetState"))
-
-(defun key-down? (keyboard-state key-code)
-  "Using keyboard-state, checks if key-code is pressed (down)."
-  (dotnet:invoke keyboard-state "IsKeyDown" key-code))
-|#

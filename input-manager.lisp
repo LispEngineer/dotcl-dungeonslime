@@ -209,7 +209,7 @@
               (ts:from-milliseconds 0))
     (setf (slot-value info 'vibration-time-remaining)
       (ts:- (slot-value info 'vibration-time-remaining)
-            (game-time-elapsed gt)))
+            (game-time:elapsed-game-time gt)))
     (when (ts:<= (slot-value info 'vibration-time-remaining)
                  (ts:from-milliseconds 0))
       (game-pad-stop-vibration info))))

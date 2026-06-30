@@ -87,11 +87,11 @@
     (when (null nft)
       ;; Set our next frame time to now + the delay
       (setf (next-frame-time as)
-        (ts:+ (game-time-total gt) delay))
+        (ts:+ (game-time:total-game-time gt) delay))
       (return-from update nil))
 
     ;; Do we need to update now?
-    (when (ts:>= (game-time-total gt) nft)
+    (when (ts:>= (game-time:total-game-time gt) nft)
       ;; Update our current frame
       (setf (current-frame as)
         (if (>= cf (1- (length (frames anim))))
@@ -101,4 +101,4 @@
         (nth (current-frame as) (frames anim)))
       ;; And figure out our next update
       (setf (next-frame-time as)
-        (ts:+ (game-time-total gt) delay)))))
+        (ts:+ (game-time:total-game-time gt) delay)))))
