@@ -2134,7 +2134,7 @@ The recursion ensures innermost-first disposal order.
 
 ---
 
-### dotnet:*type-aliases* (Special Variable)
+### `dotnet:*type-aliases*` (Special Variable)
 
 **Source:** `contrib/dotnet-class/dotnet-class.lisp`
 
