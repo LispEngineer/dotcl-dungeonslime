@@ -1,5 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- ========================================================================= -->
+  <!-- General Project Configuration Property Group                              -->
+  <!-- ========================================================================= -->
+  <!-- This section defines standard .NET application settings:                  -->
+  <!-- * OutputType: Configures the build as a Windows GUI executable (WinExe)   -->
+  <!--   to prevent a console window from showing when launching the game.       -->
+  <!-- * RootNamespace: Sets the default namespace for generated C# classes.     -->
+  <!-- * ImplicitUsings/Nullable: Enables modern C# compiler features (implicit  -->
+  <!--   usings and nullable reference type compile-time warnings).              -->
+  <!-- * RollForward: Directs the .NET host to execute on newer major .NET       -->
+  <!--   runtimes if the exact target runtime is not available locally.          -->
+  <!-- * DefaultItemExcludes: Excludes the metadata test target directory from   -->
+  <!--   implicit compilation, as it is a separate target library project.       -->
+  <!-- ========================================================================= -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DungeonSlime</RootNamespace>
@@ -9,7 +23,13 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);AssemblyToLispyTestTarget\**</DefaultItemExcludes>
   </PropertyGroup>
 
-  <!-- Platform-conditional TFM and RID. -->
+  <!-- ========================================================================= -->
+  <!-- Platform-Conditional Target Framework and Runtime Identifier (RID)        -->
+  <!-- ========================================================================= -->
+  <!-- This section specifies the Target Framework Moniker (TFM) and RID based   -->
+  <!-- on the host operating system, which is necessary to resolve appropriate   -->
+  <!-- platform binaries (e.g. MonoGame SDL vs. DX, and native libraries):       -->
+  <!-- ========================================================================= -->
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
     <!-- net10.0-windows lets the MonoGame.Framework.WindowsDX package
          (ships against net8.0-windows7.0) resolve via NuGet's compat
@@ -29,12 +49,28 @@
     <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
   </PropertyGroup>
 
+  <!-- ========================================================================= -->
+  <!-- DotCL Build Properties                                                    -->
+  <!-- ========================================================================= -->
+  <!-- This section configures properties required by the DotCL compiler task:   -->
+  <!-- * DotclProjectAsd: Specifies the entry ASDF system definition file path.  -->
+  <!--   The compiler task resolves dependencies and compiles Lisp sources       -->
+  <!--   relative to this file.                                                  -->
+  <!-- ========================================================================= -->
   <PropertyGroup>
     <DotclProjectAsd>$(MSBuildProjectDirectory)/dungeon-slime.asd</DotclProjectAsd>
   </PropertyGroup>
 
+  <!-- ========================================================================= -->
+  <!-- DotCL Build Initialization Script                                         -->
+  <!-- ========================================================================= -->
+  <!-- This section declares Lisp build initialization files that must be loaded -->
+  <!-- by the DotCL compiler task before compiling project source files.         -->
+  <!-- * DotclBuildInit: Points to the script that locates and loads Quicklisp,  -->
+  <!--   registering the ASDF system search hooks so that external libraries     -->
+  <!--   (such as 'anaphora') are successfully resolved at build-time.           -->
+  <!-- ========================================================================= -->
   <ItemGroup>
-    <!-- DotclBuildInit runs at build-time to configure Lisp settings (e.g. Quicklisp setup) -->
     <DotclBuildInit Include="$(MSBuildProjectDirectory)/build-setup.lisp" />
   </ItemGroup>
 
@@ -45,68 +81,92 @@
   </ItemGroup>
   -->
 
-<!--
-In .NET SDK-style projects, files located inside the project directory are automatically matched and included in
-default build groups by the SDK's implicit globbing rules. Non-C# source files (like  .lisp  and  .asd  files) are
-automatically categorized under the  <None>  item group by default.
-
-The following elements:
-
+  <!-- ========================================================================= -->
+  <!-- Raw Lisp Source File Exclusions                                           -->
+  <!-- ========================================================================= -->
+  <!-- Under .NET SDK-style projects, all files in the project folder matching   -->
+  <!-- default patterns (including .lisp and .asd) are automatically included    -->
+  <!-- in the standard <None> item group. This section removes them to:          -->
+  <!-- 1. Prevent default MSBuild copy tasks from copying uncompiled Lisp source -->
+  <!--    files directly to the root of the output directory during a build.     -->
+  <!-- 2. Keep the files reserved exclusively for DotCL's custom compilation     -->
+  <!--    targets (which package compiled FASLs in the dotcl-fasl/ subfolder).   -->
+  <!-- 3. Prevent duplicate visual entries or warnings in IDE solution views.    -->
+  <!-- ========================================================================= -->
   <ItemGroup>
     <None Remove="main.lisp" />
     <None Remove="dungeon-slime.asd" />
   </ItemGroup>
 
-perform the following functions:
-
-1. Prevents Default Copy Actions: If files are left in the default  <None>  group, default MSBuild tasks might copy the
-    raw, uncompiled main.lisp and dungeon-slime.asd files directly into the root of the output directory during a build.
-2. Reserves Handling for DotCL Targets: By explicitly removing these files from the standard  <None>  group, the
-    project ensures they are handled exclusively by the custom build targets defined in  Dotcl.targets  (which compile them
-    into binary FASL files and package them into the  dotcl-fasl/  subfolder).
-3. IDE Organization: It informs IDEs (such as Visual Studio, Rider, or VS Code) to manage the files separately,
-    preventing duplicate or default actions on the raw source files.
--->
+  <!-- ========================================================================= -->
+  <!-- MonoGame NuGet Package References                                         -->
+  <!-- ========================================================================= -->
+  <!-- This section specifies the core MonoGame dependencies:                    -->
+  <!-- * MonoGame.Framework.DesktopGL: Provides the cross-platform OpenGL/SDL    -->
+  <!--   rendering, windowing, and audio capabilities.                           -->
+  <!-- * MonoGame.Content.Builder.Task: Integrates the MonoGame Content Builder  -->
+  <!--   (MGCB) tool directly into the MSBuild pipeline, compiling assets        -->
+  <!--   (textures, fonts, audio) automatically during project builds.           -->
+  <!-- ========================================================================= -->
   <ItemGroup>
-    <None Remove="main.lisp" />
-    <None Remove="dungeon-slime.asd" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- DesktopGL = SDL2 + OpenGL backend. WindowsDX (SharpDX) didn't render
-         on Snapdragon Windows ARM64; DesktopGL has better ARM64 coverage
-         since SDL2 is multi-arch. -->
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*" />
-    <!-- Build our content library for ContentManager to load -->
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
   </ItemGroup>
 
+  <!-- ========================================================================= -->
+  <!-- DotCL Runtime and Test Fixture References                                 -->
+  <!-- ========================================================================= -->
+  <!-- This section integrates Lisp runtime support and test target libraries:   -->
+  <!-- * DotCL.Runtime PackageReference: Integrates the DotCL Lisp execution     -->
+  <!--   host library and automatically imports package compilation targets,     -->
+  <!--   allowing in-process Lisp compilation during MSBuild runs.               -->
+  <!-- * AssemblyToLispyTestTarget ProjectReference: References the target test  -->
+  <!--   assembly compiled specifically to verify metadata extraction and        -->
+  <!--   reflection functionalities during tests.                                -->
+  <!-- ========================================================================= -->
   <ItemGroup>
     <PackageReference Include="DotCL.Runtime" Version="0.1.15" />
     <ProjectReference Include="AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
   </ItemGroup>
 
-
+  <!-- ========================================================================= -->
+  <!-- Contrib Lisp Library Copy Task                                            -->
+  <!-- ========================================================================= -->
+  <!-- This section copies the Lisp standard library ('contrib' directory) from  -->
+  <!-- the restored NuGet package assets folder to the build output directory.   -->
+  <!-- This is required so that the game host can dynamically resolve ASDF/UIOP  -->
+  <!-- packages via (require "asdf") at runtime. The condition ensures that it   -->
+  <!-- is only evaluated when the contrib directory variable is resolved to      -->
+  <!-- prevent empty wildcard directory scanning errors during early builds.     -->
+  <!-- ========================================================================= -->
   <ItemGroup Condition="'$(DotclProjectAsd)' != '' and '$(_DotCLContribDir)' != ''">
-    <!-- Copy the entire dotcl contrib directory (ASDF, UIOP, etc.) from the NuGet package
-         to the build output folder so they can be dynamically resolved at runtime. -->
     <None Include="$(_DotCLContribDir)\**\*">
       <Link>contrib\%(RecursiveDir)%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
-  <!-- Copy all reference assemblies to the output directory before Lisp compilation runs,
-       so that compile-time assembly loading of NuGet packages (like MonoGame) does not fail
-       on a clean build. -->
+  <!-- ========================================================================= -->
+  <!-- NuGet Reference Assembly Copy Target                                      -->
+  <!-- ========================================================================= -->
+  <!-- This target copies all local NuGet reference assemblies (e.g. MonoGame)   -->
+  <!-- to the output bin/ directory before Lisp dependency resolution runs.      -->
+  <!-- This is necessary on clean builds to prevent compile-time Lisp loading    -->
+  <!-- errors when resolving and loading interop type definitions.               -->
+  <!-- ========================================================================= -->
   <Target Name="CopyReferencesBeforeLisp" BeforeTargets="_DotCLResolveDeps" DependsOnTargets="ResolveReferences" Condition="'$(DotclProjectAsd)' != ''">
-    <!-- Ensure directory exists -->
     <MakeDir Directories="$(OutDir)" />
     <Copy SourceFiles="@(ReferenceCopyLocalPaths)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
   </Target>
 
-  <!-- Write the MSBuild $(OutDir) out to a file so DotCL's compile-file process can reliably locate the
-       target bin/ directory during Lisp macro expansion, avoiding brittle hardcoded paths. -->
+  <!-- ========================================================================= -->
+  <!-- Output Directory Manifest Target                                          -->
+  <!-- ========================================================================= -->
+  <!-- This target writes the build target output folder path out to a text file -->
+  <!-- ('obj/dotcl-outdir.txt') before Lisp root compilation executes.           -->
+  <!-- This is required by compile-time Lisp macros to locate reference assembly -->
+  <!-- paths dynamically, eliminating fragile hardcoded path assumptions.        -->
+  <!-- ========================================================================= -->
   <Target Name="WriteOutDirForLisp" BeforeTargets="_DotCLCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
     <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
   </Target>
