@@ -1,6 +1,15 @@
 ;; REPL loader for simplicity
 ;; (load "load-repl.lisp")
 
+;; Load build-setup to register Quicklisp so ASDF can locate dependencies
+(let ((setup (merge-pathnames "build-setup.lisp"
+                              (uiop:pathname-directory-pathname
+                                (cond (*load-pathname* *load-pathname*)
+                                      (*load-truename* *load-truename*)
+                                      (t *default-pathname-defaults*))))))
+  (when (probe-file setup)
+    (load setup)))
+
 (format *error-output* "[load-repl.lisp] Requiring ASDF/UIOP...~%")
 (require "asdf")
 

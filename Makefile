@@ -18,17 +18,11 @@ check-parens:
 	find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py
 
 build-actual:
-	# First, build the C# project without DotCL targets to ensure all NuGet
-	# dependencies (like MonoGame.Framework.dll) are fully copied to the bin/ directory.
-	# This prevents the Lisp compiler from crashing during compile-time assembly loading.
-	dotnet build DungeonSlime.csproj -c Debug -p:DotclProjectAsd=""
-	# Then, perform the actual build including the DotCL Lisp compilation targets.
-	# dotnet build DungeonSlime.csproj -v d -c Debug
-	# The // at the end of CL_SOURCE_REGISTRY is required!! Removing it breaks the build.
-	# In ASDF's CL_SOURCE_REGISTRY:
-	# - A single trailing / means: scan only this directory for .asd files.
-	# - A double trailing // means: recursively scan this directory and all subdirectories for .asd files.
-	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" dotnet build DungeonSlime.csproj -v d -c Debug
+	# Build the project, compiling both C# and DotCL Common Lisp code in one step.
+	# NuGet reference dependencies are automatically copied to the bin directory
+	# before Lisp dependency resolution and compilation targets run, and
+	# Quicklisp-installed libraries are resolved via build-setup.lisp.
+	dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:
 	mkdir -p obj $(OUT_DIR)
@@ -119,9 +113,5 @@ mgcb:
 	dotnet tool run mgcb-editor-linux
 
 repl:
-  # rlwrap should work as of 0.1.12 but still does not as of 0.1.14 for me.
-  # The // at the end is required!
-	CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" \
-	# rlwrap \
 	dotcl --eval '(load "load-repl.lisp")' \
 	      --eval '(in-package :dungeon-slime)' repl

@@ -70,12 +70,37 @@ Preparation:
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
-You can then use the provided `Makefile` to build, test, and run the project:
+### The Upgraded Build System (DotCL 0.1.15+)
 
-* **Build the project:** `make build` (runs the `dotnet build` command)
+As of DotCL 0.1.15, the project build system is consolidated into a single-step build process
+that automates external library resolution and reference management.
+
+Key features of the updated build system:
+1. **Quicklisp Integration via Build-Init**: The project utilizes DotCL's `<DotclBuildInit>`
+   task pointing to [build-setup.lisp](build-setup.lisp). At build time, this script loads the local
+   Quicklisp installation (`~/quicklisp/setup.lisp`) to register ASDF system search hooks.
+   External systems (such as `anaphora`) are resolved, compiled, and bundled into the output
+   directory automatically without requiring manual `CL_SOURCE_REGISTRY` environment variables
+   or wrappers.
+2. **Automated Reference Copying**: A custom MSBuild target (`CopyReferencesBeforeLisp`) copies
+   all referenced NuGet assemblies (like `MonoGame.Framework.dll`) to the output folder before
+   Lisp compilation runs, preventing compile-time assembly load errors.
+3. **Decoupled Compile-time Assemblies**: The Lisp compilation process does not require loading
+   `DungeonSlime.dll` during the `:compile-toplevel` phase (avoiding circular dependency or file
+   missing errors on clean builds). The assembly is dynamically loaded only during runtime
+   `:load-toplevel` and `:execute` phases, so that custom C# types (such as `MonoUtilsRegistrar`)
+   are successfully resolved during standalone interactive REPL sessions.
+4. **Self-Contained Executable Bundle**: Compiled dependency FASLs (e.g. `anaphora.fasl`,
+   `dotcl-repl.fasl`) and the load manifest (`dotcl-deps.txt`) are placed next to the executable
+   in the `dotcl-fasl/` directory, allowing the entire `bin/` directory to be copied and run
+   standalone on another machine.
+
+You can use the provided `Makefile` to build, test, and run the project:
+
+* **Build the project:** `make build` (runs the consolidated `dotnet build` command in a single step)
 * **Run the test suite:** `make test` (runs the game in `--test` mode)
 * **Run the game:** `make run` (runs the GUI game)
-* **Clean build files:** `make clean`
+* **Clean build files:** `make clean` (cleans temporary directories and compiled FASL files)
 * **Run MonoGame Content Builder**: `make mgcb`
 * **Check Lisp parentheses balance:** `make check-parens`
 
@@ -87,8 +112,7 @@ Or manually run the steps:
    * `-v diag` shows the most, but I haven't really noticed a difference.
 
 2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime`
-   * To run in test mode, add `--test` to the command line, and it will
-     not invoke the game.
+   * To run in test mode, add `--test` to the command line, and it will not invoke the game.
 
 3. To generate assembly metadata (work in progress):
    `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime --assembly <path-to-dll> [--output <output-path>]`
@@ -102,22 +126,22 @@ Or manually run the steps:
 
 5. To check Lisp parentheses balance manually:
    `find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py`
-   * Parentheses balance is usually not much of a problem for human coders due to IDE
-     support, but it seems to trip up AI assistance a lot. The problem is compounded
-     due to DotCL's mechanism of concatenating all Lisp files into a single input during
-     compilation phase.
+   * Parentheses balance is usually not much of a problem for human coders due to IDE support,
+     but it seems to trip up AI assistance a lot. The problem is compounded due to DotCL's
+     mechanism of concatenating all Lisp files into a single input during compilation phase.
 
 ## How to Load in REPL
 
-First, build the game per the above - this will ensure the C#
-files are all compiled into `.dll` files which we can load, and
-the ContentManager can load its content.
+First, build the game per the above. This ensures the C# files are compiled and copied into the
+output directory, and the ContentManager assets are generated.
 
-Invoke DotCL with `rlwrap --always-readline dotcl` (or omit rlwrap
-if you prefer).
+Invoke DotCL REPL using the provided Makefile target:
+`make repl`
+(Which executes `dotcl --eval '(load "load-repl.lisp")' --eval '(in-package :dungeon-slime)' repl`
+directly).
 
-You will need to edit `load-repl.lisp` for your directory structure,
-sorry!
+Alternatively, invoke DotCL manually with `rlwrap --always-readline dotcl` (or omit rlwrap if you
+prefer), then:
 
 ```lisp
 ;; Load all the necessary dependencies and make a game instance as

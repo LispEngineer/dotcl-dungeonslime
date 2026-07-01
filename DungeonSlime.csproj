@@ -39,6 +39,40 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- DotclBuildInit runs at build-time to configure Lisp settings (e.g. Quicklisp setup) -->
+    <DotclBuildInit Include="$(MSBuildProjectDirectory)/build-setup.lisp" />
+  </ItemGroup>
+
+  <!--
+  To add external ASDF systems outside of Quicklisp or project-core, declare search paths here:
+  <ItemGroup>
+    <DotclAsdSearchPath Include="../path/to/some-library/" />
+  </ItemGroup>
+  -->
+
+<!--
+In .NET SDK-style projects, files located inside the project directory are automatically matched and included in
+default build groups by the SDK's implicit globbing rules. Non-C# source files (like  .lisp  and  .asd  files) are
+automatically categorized under the  <None>  item group by default.
+
+The following elements:
+
+  <ItemGroup>
+    <None Remove="main.lisp" />
+    <None Remove="dungeon-slime.asd" />
+  </ItemGroup>
+
+perform the following functions:
+
+1. Prevents Default Copy Actions: If files are left in the default  <None>  group, default MSBuild tasks might copy the
+    raw, uncompiled main.lisp and dungeon-slime.asd files directly into the root of the output directory during a build.
+2. Reserves Handling for DotCL Targets: By explicitly removing these files from the standard  <None>  group, the
+    project ensures they are handled exclusively by the custom build targets defined in  Dotcl.targets  (which compile them
+    into binary FASL files and package them into the  dotcl-fasl/  subfolder).
+3. IDE Organization: It informs IDEs (such as Visual Studio, Rider, or VS Code) to manage the files separately,
+    preventing duplicate or default actions on the raw source files.
+-->
+  <ItemGroup>
     <None Remove="main.lisp" />
     <None Remove="dungeon-slime.asd" />
   </ItemGroup>
@@ -52,11 +86,78 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
   </ItemGroup>
 
+<!--
+These lines define compile-time and runtime project-to-project dependencies:
+
   <ItemGroup>
     <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
     <ProjectReference Include="AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
   </ItemGroup>
 
+### Purpose of These Lines
+
+1. DotCL.Runtime.csproj:
+   This reference compiles and imports the local Lisp runtime engine (C# side) into the project. It provides the necessary
+   APIs for initializing the Lisp host environment, resolving types, and performing method dispatching and callbacks. It
+   also imports the custom MSBuild targets ( Dotcl.targets ) that compile the Lisp source files into  .fasl  binaries
+   during the build process.
+2. AssemblyToLispyTestTarget.csproj:
+   This reference compiles a target C# assembly specifically used as a test fixture. It contains synthetic structures
+   (like nested types, optional parameters, and edge-case overloads) that the metadata extraction pipeline
+   (AssemblyToLispy.cs) and its Lisp-native test suite verify during testing (via  make test ).
+
+### Alternative Ways to Accomplish the Same Purpose
+
+• For  DotCL.Runtime.csproj :
+  Instead of referencing the local in-tree source project directly via  <ProjectReference> , the project could reference
+  a compiled package from NuGet using a  <PackageReference>  node:
+  <ItemGroup>
+    <PackageReference Include="DotCL.Runtime" Version="0.1.15" />
+  </ItemGroup>
+  This approach decouples the repository from local paths and makes the repository easier to compile on other
+  environments or CI/CD pipelines where the sibling  /home/dfields/src/cl/dotcl  source tree is not present.
+• For  AssemblyToLispyTestTarget.csproj :
+  Instead of compiling it as a project dependency, the test fixture could be built independently beforehand and added as
+  a direct binary assembly reference:
+  <ItemGroup>
+    <Reference Include="AssemblyToLispyTestTarget">
+      <HintPath>AssemblyToLispyTestTarget/bin/Debug/net10.0/AssemblyToLispyTestTarget.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  Alternatively, the compiled  AssemblyToLispyTestTarget.dll  could simply be placed directly into a test resource
+  folder and resolved dynamically by the extraction tools at test-time.
+-->
+  <ItemGroup>
+    <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
+    <ProjectReference Include="AssemblyToLispyTestTarget\AssemblyToLispyTestTarget.csproj" />
+  </ItemGroup>
+
+
+<!--
+### 1. Relation to the  CopyReferencesBeforeLisp  Target
+
+The  CopyReferencesBeforeLisp  target copies compiled reference assemblies (DLL files) that are restored as NuGet
+package dependencies (such as  MonoGame.Framework.dll  or  NVorbis.dll ) from the  @(ReferenceCopyLocalPaths)  item
+group.
+
+It does not copy source Lisp assets or directory trees from the sibling  ../dotcl/contrib  folder.
+
+### 2. Relation to DotCL 0.1.15
+
+Because the project references the local DotCL source tree using a project-to-project reference ( <ProjectReference
+Include="..\dotcl\runtime\DotCL.Runtime.csproj" /> ), MSBuild does not automatically copy assets from the sibling
+contrib  directory during compile or build steps.
+
+The manual copying of the  contrib  folder is necessary to copy Lisp systems (such as  asdf  and  uiop ) into the build
+output folder ( bin/Debug/net10.0/arch-x64/contrib/ ).
+
+### Why it is Needed at Runtime
+
+At runtime, if the game code (for example in load-system-test.lisp) calls  (require "asdf") , the DotCL engine resolves
+this
+call by searching the  contrib/  subdirectory relative to the application's base directory. If this folder is not
+copied to the output directory, the call to  require  will fail and cause runtime load errors.
+-->
   <ItemGroup>
     <!-- Copy the entire dotcl contrib directory (ASDF, UIOP, etc.) to the build output folder
          so they can be dynamically resolved at runtime via (require "asdf") -->
@@ -66,12 +167,52 @@
     </None>
   </ItemGroup>
 
-  <!-- Write the MSBuild $(OutDir) out to a file so DotCL's compile-file process can reliably locate the 
+  <!-- Copy all reference assemblies to the output directory before Lisp compilation runs,
+       so that compile-time assembly loading of NuGet packages (like MonoGame) does not fail
+       on a clean build. -->
+  <Target Name="CopyReferencesBeforeLisp" BeforeTargets="DotclResolveDeps" DependsOnTargets="ResolveReferences" Condition="'$(DotclProjectAsd)' != ''">
+    <!-- Ensure directory exists -->
+    <MakeDir Directories="$(OutDir)" />
+    <Copy SourceFiles="@(ReferenceCopyLocalPaths)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <!-- Write the MSBuild $(OutDir) out to a file so DotCL's compile-file process can reliably locate the
        target bin/ directory during Lisp macro expansion, avoiding brittle hardcoded paths. -->
   <Target Name="WriteOutDirForLisp" BeforeTargets="DotclCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
     <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
   </Target>
 
+<!--
+### 1. What this line does
+
+    <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
+
+This line imports the custom MSBuild targets file  Dotcl.targets  (from the local sibling DotCL check-out) into the
+MSBuild project execution context. This file specifies all Lisp-specific compilation targets (such as  DotclResolveDeps
+,  DotclCompileRoot ,  DotclWriteManifest , and  DotclInjectAssets ) that resolve Lisp dependencies, compile Lisp
+source code into  .fasl  binaries, and bundle them into the build output directory.
+──────
+### 2. Is it still needed in DotCL 0.1.15?
+
+Yes, it is required when referencing DotCL via a local ProjectReference. MSBuild needs these build target definitions
+loaded into its pipeline, otherwise Lisp compilation will not run during  dotnet build .
+──────
+### 3. Is there a more portable way in DotCL 0.1.15?
+
+Yes.
+
+If DungeonSlime.csproj transitions to referencing  DotCL.Runtime  as a NuGet package using a  <PackageReference>  node:
+
+  <ItemGroup>
+    <PackageReference Include="DotCL.Runtime" Version="0.1.15" />
+  </ItemGroup>
+
+MSBuild will automatically discover and import the package's bundled build targets from the NuGet package cache during
+build initialization.
+
+This eliminates the need for the manual  <Import>  line entirely and removes the relative, hardcoded in-tree path
+reference ( ..\dotcl\runtime\build\Dotcl.targets ), making the project build portable across different machines.
+-->
   <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
 
 </Project>

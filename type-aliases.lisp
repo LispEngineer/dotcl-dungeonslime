@@ -81,27 +81,45 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (defparameter dotnet-assemblies
-    '("MonoGame.Framework.dll"
-      "DungeonSlime.dll")
-    "These are all the assemblies we will load so we can get their classes
-     registered for the method dispatch")
+    '("MonoGame.Framework.dll")
+    "These are all the external assemblies loaded so that classes are registered
+     for method dispatch.")
 
   (when (find-package :asdf)
     (format *error-output* "[type-aliases.lisp] Loading assemblies...~%")
     (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
            (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
-           (bin-dir (with-open-file (s outdir-file) (read-line s))))
-      (setf *content-directory*
-            (merge-pathnames (concatenate 'string bin-dir "Content") sys-dir))
-      (dolist (assembly dotnet-assemblies)
-        (format *error-output* "[type-aliases.lisp] Loading assembly: ~S~%" assembly)
-        (dotnet:load-assembly
-          (namestring
-            (merge-pathnames 
-              (concatenate 'string bin-dir assembly)
-              sys-dir)))))))
+           (bin-dir (when (probe-file outdir-file)
+                      (with-open-file (s outdir-file)
+                        (read-line s)))))
+      (when bin-dir
+        (setf *content-directory*
+              (merge-pathnames (concatenate 'string bin-dir "Content") sys-dir))
+        (dolist (assembly dotnet-assemblies)
+          (let ((path (merge-pathnames (concatenate 'string bin-dir assembly) sys-dir)))
+            (if (probe-file path)
+                (progn
+                  (format *error-output* "[type-aliases.lisp] Loading assembly: ~S~%" assembly)
+                  (dotnet:load-assembly (namestring path)))
+                (format *error-output* "[type-aliases.lisp] Warning: Assembly not found at ~A~%" path))))))))
 
 (eval-when (:load-toplevel :execute)
+  ;; Load the runtime assembly for this project so that custom C# types
+  ;; (like MonoUtilsRegistrar) are resolvable during REPL sessions.
+  (when (find-package :asdf)
+    (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
+           (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
+           (bin-dir (when (probe-file outdir-file)
+                      (with-open-file (s outdir-file)
+                        (read-line s)))))
+      (when bin-dir
+        (let ((path (merge-pathnames (concatenate 'string bin-dir "DungeonSlime.dll") sys-dir)))
+          (if (probe-file path)
+              (progn
+                (format *error-output* "[type-aliases.lisp] Loading runtime assembly: DungeonSlime.dll~%")
+                (dotnet:load-assembly (namestring path)))
+              (format *error-output* "[type-aliases.lisp] Warning: Runtime assembly DungeonSlime.dll not found at ~A~%" path))))))
+
   (defparameter csharp-classes
     '("Microsoft.Xna.Framework.Vector2"
       "Microsoft.Xna.Framework.Rectangle")

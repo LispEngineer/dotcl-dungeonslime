@@ -90,6 +90,8 @@ and files in this repository.
 
 # Lisp
 
+* `build-setup.lisp`: Build-time Lisp initialization script loaded by the MSBuild task. It automatically searches for and loads Quicklisp to make Quicklisp-installed systems discoverable by ASDF during compilation.
+
 * `packages.lisp`: Defines the Lisp packages used across the project. Pre-declares C# package
   stubs and the third-party `:anaphora` package at the top of the file to support local nicknames
   and prevent compiler reader/lookup failures during compilation of early packages.

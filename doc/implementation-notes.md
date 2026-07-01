@@ -552,20 +552,18 @@ Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
 ```
 
 
-# DotCL 0.1.12 Build Execution Changes and ASDF Loading
+# DotCL Build Execution Changes and ASDF Loading
 
-In DotCL 0.1.12, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`.
+In DotCL, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`.
 
-Previously, dependencies like `anaphora` required complex `eval-when` workarounds to inject paths into `asdf:*central-registry*` at both compile-time and run-time, and required explicit MSBuild copy targets to bundle the source files into the binary folder.
+**The Streamlined Approach (Upgraded in Session June 30, 2026):**
+1. **Dependencies via `build-setup.lisp`**: Instead of passing the `CL_SOURCE_REGISTRY` environment variable manually in the `Makefile` or command line, the project uses the `<DotclBuildInit>` target pointing to a build initialization script: [build-setup.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/build-setup.lisp).
+   
+   During the MSBuild task execution, the compiler loads `build-setup.lisp`, which automatically searches for and loads Quicklisp from the user's home directory. This registers the Quicklisp system search functions with ASDF at build-time, allowing all Quicklisp-installed libraries (such as `anaphora`) to resolve naturally without manual path configuration.
 
-**The Streamlined Approach:**
-1. **Dependencies via `CL_SOURCE_REGISTRY`**: Instead of manually pushing paths to ASDF in Lisp, pass the `CL_SOURCE_REGISTRY` environment variable directly to `dotnet build` in the `Makefile`.
-   ```makefile
-   CL_SOURCE_REGISTRY="$(HOME)/quicklisp/dists/quicklisp/software//" dotnet build DungeonSlime.csproj -c Debug
-   ```
-   During the `DotclCompileRoot` MSBuild target, `dotcl build` will naturally resolve `anaphora.asd`, compile it to `anaphora.fasl`, and bundle it seamlessly into `dotcl-deps.txt`.
+2. **Automated Reference Copying**: To allow building the project in a single step (even on a clean check-out), a target `CopyReferencesBeforeLisp` copies all NuGet reference assemblies (like `MonoGame.Framework.dll`) to the output folder before the Lisp dependency resolver and compiler stages run. This prevents compile-time assembly load errors.
 
-2. **Loading Macros at Compile-Time**: Because `DotclCompileRoot` evaluates dependencies strictly for producing `.fasl` bundles, it does *not* automatically load third-party systems into the compiler's execution environment. If you need to use a macro from a dependency (like `anaphora:awhen`), you still must load the system during `:compile-toplevel`:
+3. **Loading Macros at Compile-Time**: Because `DotclCompileRoot` evaluates dependencies strictly for producing `.fasl` bundles, it does *not* automatically load third-party systems into the compiler's execution environment. If a macro from a dependency is needed (like `anaphora:awhen`), the system must still load it during `:compile-toplevel`:
    ```lisp
    (eval-when (:compile-toplevel)
      (asdf:load-system "anaphora"))
