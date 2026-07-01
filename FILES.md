@@ -65,8 +65,10 @@ and files in this repository.
 * [dotcl-generic.md](doc/dotcl-generic.md) details the internal workings of
   generic functions and method dispatch inside the DotCL 0.1.8 runtime environment.
 
-* [package-dotnet.md](doc/package-dotnet.md) provides detailed documentation of
-  all 30 standard symbols and the 2 extra WinForms symbols in the DotCL `DOTNET` package.
+* [opencode-qwen36-dotnet-analysis-0.1.15-v2.md](doc/opencode-qwen36-dotnet-analysis-0.1.15-v2.md):
+  Comprehensive analysis of all 53 exported symbols in the DotCL `DOTNET` package
+  as of v0.1.15, organized by functional category with detailed documentation,
+  internal mechanics, and examples. Supersedes the incomplete v1 analysis.
 
 * [package-dotcl.md](doc/package-dotcl.md) lists the exported symbols in the `DOTCL` package.
 
