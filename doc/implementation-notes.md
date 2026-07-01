@@ -554,30 +554,36 @@ Error: Method 'Microsoft.Xna.Framework.Color.set_R' not found.
 
 # DotCL Build Execution Changes and ASDF Loading
 
-In DotCL, the build pipeline natively supports automatically bundling dependencies (like Quicklisp systems) during MSBuild execution via `Dotcl.targets`.
+In DotCL, the build pipeline natively supports automatically bundling dependencies (like Quicklisp
+systems) during MSBuild execution.
 
-**The Streamlined Approach (Upgraded in Session June 30, 2026):**
-1. **Dependencies via `build-setup.lisp`**: Instead of passing the `CL_SOURCE_REGISTRY` environment variable manually in the `Makefile` or command line, the project uses the `<DotclBuildInit>` target pointing to a build initialization script: [build-setup.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/build-setup.lisp).
-   
-   During the MSBuild task execution, the compiler loads `build-setup.lisp`, which automatically searches for and loads Quicklisp from the user's home directory. This registers the Quicklisp system search functions with ASDF at build-time, allowing all Quicklisp-installed libraries (such as `anaphora`) to resolve naturally without manual path configuration.
-
-2. **Automated Reference Copying**: To allow building the project in a single step (even on a clean check-out), a target `CopyReferencesBeforeLisp` copies all NuGet reference assemblies (like `MonoGame.Framework.dll`) to the output folder before the Lisp dependency resolver and compiler stages run. This prevents compile-time assembly load errors.
-
-3. **Loading Macros at Compile-Time**: Because `DotclCompileRoot` evaluates dependencies strictly for producing `.fasl` bundles, it does *not* automatically load third-party systems into the compiler's execution environment. If a macro from a dependency is needed (like `anaphora:awhen`), the system must still load it during `:compile-toplevel`:
+**The Streamlined PackageReference Approach (Upgraded to DotCL 0.1.15):**
+1. **Transition to PackageReference**: The project is decoupled from the local sibling check-out of
+   the `dotcl` repository by utilizing `<PackageReference Include="DotCL.Runtime" Version="0.1.15" />`
+   instead of a `<ProjectReference>`. MSBuild automatically imports the custom compilation targets from
+   the package cache.
+2. **Dependencies via `build-setup.lisp`**: The project registers a build initialization script:
+   [build-setup.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/build-setup.lisp) using the
+   `<DotclBuildInit>` target. During build execution, the package-internal compiler task loads this
+   script, which automatically finds and loads Quicklisp to register ASDF system search hooks at
+   build-time.
+3. **Automated Reference Copying**: A custom target `CopyReferencesBeforeLisp` executes before Lisp
+   compilation, copying all referenced NuGet assembly DLLs (like `MonoGame.Framework.dll`) to the output
+   directory so they can be loaded by the Lisp compiler at compile-time.
+4. **Copying the `contrib` Library**: The MSBuild project file includes a target to copy the standard
+   `contrib` Lisp package directories (ASDF, UIOP, socket, thread, etc.) from the restored package assets
+   directory `$(_DotCLContribDir)` into the output `contrib/` subdirectory, enabling the game to resolve
+   built-in systems dynamically (e.g. via `(require "asdf")`) at runtime.
+5. **Loading Macros at Compile-Time**: Because Lisp compilation evaluates dependencies strictly to
+   generate `.fasl` bundles, it does not automatically load dependency systems into the compiler's
+   active environment. To use macros from a dependency (like `anaphora:awhen`), the system must still
+   be loaded during `:compile-toplevel`:
    ```lisp
    (eval-when (:compile-toplevel)
      (asdf:load-system "anaphora"))
    ```
-   At runtime, `DotclHost.LoadFromManifest` loads all dependencies automatically, so `:load-toplevel` and `:execute` are no longer needed for loading systems.
-
-### Broken `DotCL.Runtime` 0.1.12 NuGet Package
-
-DotCL 0.1.12 theoretically supports completely decoupling the Lisp build from a local DotCL source repository checkout by replacing the MSBuild `<ProjectReference>` with `<PackageReference Include="DotCL.Runtime" Version="0.1.12" />`.
-
-**However, the `0.1.12` NuGet package published by DotCL is broken.** It is missing the `tasks/DotCL.Build.Tasks.dll` assembly inside the `.nupkg` archive. Attempting to build with the `PackageReference` fails with:
-`error MSB4036: The "DotclCompileProject" task was not found.`
-
-Because the MSBuild custom targets in the NuGet package are non-functional, the application must currently remain bound to the `ProjectReference` pointing to a local `../dotcl/runtime/runtime.csproj` build, along with the explicit `Dotcl.targets` `<Import>`. Once the DotCL maintainer fixes the packaging issue to correctly include the `tasks/` directory, the build can be safely transitioned to the `PackageReference`.
+   At runtime, `DotclHost.LoadFromManifest` loads all FASL dependencies automatically in the order
+   defined by `dotcl-deps.txt`.
 
 # Input Management (MonoGame Chapter 11)
 

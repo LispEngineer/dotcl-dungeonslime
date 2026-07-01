@@ -54,26 +54,20 @@ not test the `dotnet tool install`ed one.
   The game should build fine without these minor patches, which
   I have already submitted to DotCL.
 
-As of 0.1.7, using the pre-compiled, provided `dotcl` installed with
-`dotnet tool install --global dotcl` does not work for me.
-
 ## Build & Launch Steps
 
 Preparation:
 
-1. First, get, build and install `dotcl` in the sibling directory `../dotcl`.
-   * This project's build files assume this was done there, and that the `dotcl`
-     was locally built rather than retrieved from NuGet.
-
-2. To use the MonoGame Content Builder, in this project's home directory:
+1. To use the MonoGame Content Builder, in this project's home directory:
    `dotnet tool restore`
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
 ### The Upgraded Build System (DotCL 0.1.15+)
 
-As of DotCL 0.1.15, the project build system is consolidated into a single-step build process
-that automates external library resolution and reference management.
+As of DotCL 0.1.15, the project build system is migrated to a pure NuGet package reference structure
+(`<PackageReference Include="DotCL.Runtime" Version="0.1.15" />`). This removes the need for a local
+sibling `dotcl` repository check-out.
 
 Key features of the updated build system:
 1. **Quicklisp Integration via Build-Init**: The project utilizes DotCL's `<DotclBuildInit>`
@@ -92,8 +86,10 @@ Key features of the updated build system:
    are successfully resolved during standalone interactive REPL sessions.
 4. **Self-Contained Executable Bundle**: Compiled dependency FASLs (e.g. `anaphora.fasl`,
    `dotcl-repl.fasl`) and the load manifest (`dotcl-deps.txt`) are placed next to the executable
-   in the `dotcl-fasl/` directory, allowing the entire `bin/` directory to be copied and run
-   standalone on another machine.
+   in the `dotcl-fasl/` directory. Additionally, the standard `contrib/` Lisp library is copied
+   directly from the restored NuGet package cache folder (`$(_DotCLContribDir)`) to the build
+   output directory, allowing the entire `bin/` directory to be copied and run standalone on
+   another machine.
 
 You can use the provided `Makefile` to build, test, and run the project:
 
