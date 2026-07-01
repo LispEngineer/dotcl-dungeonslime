@@ -167,7 +167,8 @@
         (progn
           (setf (bounce-sound game) (sound-effect:from-file (qualify-path "Content/audio/bounce.wav")))
           (setf (collect-sound game) (sound-effect:from-file (qualify-path "Content/audio/collect.wav")))
-          (let ((uri (system-uri:new "Content/audio/theme.ogg" system-uri-kind:+relative+)))
+          (let* ((qualified-path (qualify-path "Content/audio/theme.ogg"))
+                 (uri (system-uri:new qualified-path system-uri-kind:+relative-or-absolute+)))
             (setf (theme-song game) (song:from-uri "theme" uri)))
           ;; Play theme song if not already playing
           (play-song (audio-controller game) (theme-song game))
