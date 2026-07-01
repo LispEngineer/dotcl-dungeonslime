@@ -147,6 +147,20 @@
   </ItemGroup>
 
   <!-- ========================================================================= -->
+  <!-- Raw Audio Asset Copy Task                                                 -->
+  <!-- ========================================================================= -->
+  <!-- This section copies the raw sound effect (.wav) files to the build output -->
+  <!-- directory. This is necessary because the Lisp game engine loads them       -->
+  <!-- directly from the filesystem using SoundEffect.FromFile, which bypasses   -->
+  <!-- MonoGame's ContentManager compiling pipeline.                             -->
+  <!-- ========================================================================= -->
+  <ItemGroup>
+    <Content Include="Content\audio\*.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- ========================================================================= -->
   <!-- NuGet Reference Assembly Copy Target                                      -->
   <!-- ========================================================================= -->
   <!-- This target copies all local NuGet reference assemblies (e.g. MonoGame)   -->
