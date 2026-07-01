@@ -163,10 +163,8 @@
              (tm-width  (round (* (columns tm) (tile-width ts) (x (scale tm)))))
              (tm-height (round (* (rows tm) (tile-height ts) (y (scale tm))))))
         (setf (room-bounds game) (rect:new 0 0 tm-width tm-height))))
-    ;; Load audio resources
-    ;; FIXME: Make constants of these filenames
-    (setf (bounce-sound game) (sound-effect:from-file "Content/audio/bounce.wav"))
-    (setf (collect-sound game) (sound-effect:from-file "Content/audio/collect.wav"))
+    (setf (bounce-sound game) (sound-effect:from-file (qualify-path "Content/audio/bounce.wav")))
+    (setf (collect-sound game) (sound-effect:from-file (qualify-path "Content/audio/collect.wav")))
     (let ((uri (system-uri:new "Content/audio/theme.ogg" system-uri-kind:+relative+)))
       (setf (theme-song game) (song:from-uri "theme" uri)))
     ;; Play theme song if not already playing
