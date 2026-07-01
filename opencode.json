@@ -11,7 +11,7 @@
     "Lemonade": {
       "models": {
         "Codestral-22B-v0.1-GGUF-Q6_K": {
-          "contextWindow": 32000,
+          "contextWindow": 131072,
 	  "maxTokens": 2048,
           "name": "Codestral-22B-v0.1-GGUF-Q6_K (local)"
         },
