@@ -1644,7 +1644,8 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | June 30, 2026 | [README.md](README.md) | Modified | Added a "Portable Execution & Multi-User Testing Considerations" section documenting design details and guidelines for future portable development. |
 | June 30, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added a "Multi-User Portability and Exception-Safe Audio Support" section detailing build copying, path string conversion, URI parsing, and audio fallback structures. |
 | June 30, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the exception-safe audio handling and documentation fixes. |
-
+| July 1, 2026 | [sprite.lisp](sprite.lisp) | Modified | Fixed `(slot-boundp spr 'region spr)` to `(slot-boundp spr 'region)` in `sprite-center-origin`. The 3-arg form is `(slot-boundp obj slot slot-name)`, but the third argument was the object itself (`spr`) instead of the slot name (`'region`). This prevented the function from correctly detecting when the region was unbound and silently skipped setting the origin to center. |
+| July 1, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the slot-boundp bug fix in sprite-center-origin. |
 
 
 

@@ -79,7 +79,7 @@
 (defun sprite-center-origin (spr)
   "Sets the origin of this sprite to the center.
    Silently do nothing when the region is unbound."
-  (when (slot-boundp spr 'region spr)
+  (when (slot-boundp spr 'region)
     (setf (origin spr)
           (v2:* (v2:new (height (region spr)) (width (region spr))) 0.5e0))))
 
