@@ -163,13 +163,20 @@
              (tm-width  (round (* (columns tm) (tile-width ts) (x (scale tm)))))
              (tm-height (round (* (rows tm) (tile-height ts) (y (scale tm))))))
         (setf (room-bounds game) (rect:new 0 0 tm-width tm-height))))
-    (setf (bounce-sound game) (sound-effect:from-file (qualify-path "Content/audio/bounce.wav")))
-    (setf (collect-sound game) (sound-effect:from-file (qualify-path "Content/audio/collect.wav")))
-    (let ((uri (system-uri:new "Content/audio/theme.ogg" system-uri-kind:+relative+)))
-      (setf (theme-song game) (song:from-uri "theme" uri)))
-    ;; Play theme song if not already playing
-    (play-song (audio-controller game) (theme-song game))
-    (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t)
+    (handler-case
+        (progn
+          (setf (bounce-sound game) (sound-effect:from-file (qualify-path "Content/audio/bounce.wav")))
+          (setf (collect-sound game) (sound-effect:from-file (qualify-path "Content/audio/collect.wav")))
+          (let ((uri (system-uri:new "Content/audio/theme.ogg" system-uri-kind:+relative+)))
+            (setf (theme-song game) (song:from-uri "theme" uri)))
+          ;; Play theme song if not already playing
+          (play-song (audio-controller game) (theme-song game))
+          (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "IsRepeating") t))
+      (error (c)
+        (format *error-output* "Warning: Failed to initialize or load audio resources: ~A~%" c)
+        (setf (bounce-sound game) nil)
+        (setf (collect-sound game) nil)
+        (setf (theme-song game) nil)))
     ;; Chapter 16: Load the SpriteFont for score display
     (setf (score-font game) (load-font cont)))
   (call-next-method game))

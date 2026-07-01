@@ -34,48 +34,70 @@
 
 (defmethod play-sound-effect ((ac audio-controller) se)
   "Creates an instance of the sound effect, plays it, and tracks it."
-  (when (disposed? ac) (return-from play-sound-effect))
-  (let ((instance (sound-effect:create-instance se)))
-    (sei:play instance)
-    (push instance (active-instances ac))))
+  (when (or (disposed? ac) (null se)) (return-from play-sound-effect))
+  (handler-case
+      (let ((instance (sound-effect:create-instance se)))
+        (sei:play instance)
+        (push instance (active-instances ac)))
+    (error (c)
+      (format *error-output* "Warning: play-sound-effect failed: ~A~%" c))))
 
 (defmethod play-song ((ac audio-controller) song)
   "Plays the given song if not already playing."
-  (when (disposed? ac) (return-from play-song))
-  (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
-    (media-player:play song)))
+  (when (or (disposed? ac) (null song)) (return-from play-song))
+  (handler-case
+      (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+        (media-player:play song))
+    (error (c)
+      (format *error-output* "Warning: play-song failed: ~A~%" c))))
 
 (defmethod pause-audio ((ac audio-controller))
   "Pauses all sound effects and the media player."
   (when (disposed? ac) (return-from pause-audio))
-  (dolist (instance (active-instances ac))
-    (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Playing")
-      (sei:pause instance)))
-  (when (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
-    (media-player:pause)))
+  (handler-case
+      (progn
+        (dolist (instance (active-instances ac))
+          (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Playing")
+            (sei:pause instance)))
+        (when (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+          (media-player:pause)))
+    (error (c)
+      (format *error-output* "Warning: pause-audio failed: ~A~%" c))))
 
 (defmethod resume-audio ((ac audio-controller))
   "Resumes all sound effects and the media player."
   (when (disposed? ac) (return-from resume-audio))
-  (dolist (instance (active-instances ac))
-    (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Paused")
-      (sei:resume instance)))
-  (when (string-equal (dotnet:invoke media-player:state "ToString") "Paused")
-    (media-player:resume)))
+  (handler-case
+      (progn
+        (dolist (instance (active-instances ac))
+          (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Paused")
+            (sei:resume instance)))
+        (when (string-equal (dotnet:invoke media-player:state "ToString") "Paused")
+          (media-player:resume)))
+    (error (c)
+      (format *error-output* "Warning: resume-audio failed: ~A~%" c))))
 
 (defun get-media-volume ()
-  (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume"))
+  (handler-case
+      (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume")
+    (error () 0.0f0)))
 
 (defun set-media-volume (vol)
-  (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume")
-        (coerce vol 'single-float)))
+  (handler-case
+      (setf (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Volume")
+            (coerce vol 'single-float))
+    (error () nil)))
 
 (defun get-master-volume ()
-  (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume"))
+  (handler-case
+      (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume")
+    (error () 0.0f0)))
 
 (defun set-master-volume (vol)
-  (setf (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume")
-        (coerce vol 'single-float)))
+  (handler-case
+      (setf (dotnet:static "Microsoft.Xna.Framework.Audio.SoundEffect" "MasterVolume")
+            (coerce vol 'single-float))
+    (error () nil)))
 
 (defmethod toggle-mute ((ac audio-controller))
   "Toggles the global mute state."

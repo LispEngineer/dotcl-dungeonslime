@@ -86,7 +86,7 @@
        filename)
       ((file-exists-and-readable-p combined)
       ;  (format *error-output* "[qualify-path] exists with +base-directory+ = ~S~A" combined)
-       combined)
+       (uiop:native-namestring combined))
       (t
       ;  (format *error-output* "[qualify-path] neither~A")
        filename))))
