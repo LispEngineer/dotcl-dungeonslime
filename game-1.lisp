@@ -186,9 +186,9 @@
   "Quit the game if ESC key is pressed. Cause intentional error if F7 is pressed.
    Updates the animated sprites. Applies collision detection and response for
    slime screen boundaries, bat screen bouncing, and slime-vs-bat collisions."
-  (let* ((kb (input:im-keyboard (input-manager game)))
-         (esc-just-pressed (input:was-key-just-pressed kb key:+escape+))
-         (f7-just-pressed (input:was-key-just-pressed kb key:+f7+)))
+  (let* ((kb (im-keyboard (input-manager game)))
+        (esc-just-pressed (was-key-just-pressed kb key:+escape+))
+        (f7-just-pressed (was-key-just-pressed kb key:+f7+)))
     (when esc-just-pressed
       (format *error-output* "[game-1:update] escape just pressed~%")
       (force-output *error-output*)
@@ -400,31 +400,31 @@ if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
 
 (defun check-keyboard-input (game)
   "Handles keyboard input for moving the slime around"
-  (let* ((kb (input:im-keyboard (input-manager game)))
+  (let* ((kb (im-keyboard (input-manager game)))
          (speed +movement-speed+))
     ;; Audio Controls
-    (when (input:was-key-just-pressed kb key:+m+)
+    (when (was-key-just-pressed kb key:+m+)
       (toggle-mute (audio-controller game)))
-    (when (or (input:was-key-just-pressed kb key:+oem-plus+)
-              (input:was-key-just-pressed kb key:+add+))
+    (when (or (was-key-just-pressed kb key:+oem-plus+)
+              (was-key-just-pressed kb key:+add+))
       (adjust-volume (audio-controller game) 0.1f0))
-    (when (or (input:was-key-just-pressed kb key:+oem-minus+)
-              (input:was-key-just-pressed kb key:+subtract+))
+    (when (or (was-key-just-pressed kb key:+oem-minus+)
+              (was-key-just-pressed kb key:+subtract+))
       (adjust-volume (audio-controller game) -0.1f0))
     ;; 50% faster when space held
-    (when (input:is-key-down kb key:+space+)
+    (when (is-key-down kb key:+space+)
       (setf speed (* speed +fast-multiplier+)))
     ;; Move in direction(s) pressed
-    (when (or (input:is-key-down kb key:+w+) (input:is-key-down kb key:+up+))
+    (when (or (is-key-down kb key:+w+) (is-key-down kb key:+up+))
       (setf (slime-pos game) (v2:new (x (slime-pos game))
                                      (- (y (slime-pos game)) speed))))
-    (when (or (input:is-key-down kb key:+s+) (input:is-key-down kb key:+down+))
+    (when (or (is-key-down kb key:+s+) (is-key-down kb key:+down+))
       (setf (slime-pos game) (v2:new (x (slime-pos game))
                                      (+ (y (slime-pos game)) speed))))
-    (when (or (input:is-key-down kb key:+a+) (input:is-key-down kb key:+left+))
+    (when (or (is-key-down kb key:+a+) (is-key-down kb key:+left+))
       (setf (slime-pos game) (v2:new (- (x (slime-pos game)) speed)
                                      (y (slime-pos game)))))
-    (when (or (input:is-key-down kb key:+d+) (input:is-key-down kb key:+right+))
+    (when (or (is-key-down kb key:+d+) (is-key-down kb key:+right+))
       (setf (slime-pos game) (v2:new (+ (x (slime-pos game)) speed)
                                      (y (slime-pos game)))))))
 
@@ -485,37 +485,37 @@ else
 (defun check-gamepad-input (game)
   "Handles gamepad input for moving the slime around.
    Uses the InputManager's GamePadInfo at PlayerIndex.One."
-  (let* ((gp-pad (aref (input:im-game-pads (input-manager game)) 0))
+  (let* ((gp-pad (aref (im-game-pads (input-manager game)) 0))
          (speed +movement-speed+))
     ;; Double speed and turn on vibration if A is pressed
-    (if (input:is-button-down gp-pad button:+a+)
+    (if (is-button-down gp-pad button:+a+)
       (progn
         (setf speed (* speed +fast-multiplier+))
-        (input:game-pad-set-vibration gp-pad 1.0f0
+        (game-pad-set-vibration gp-pad 1.0f0
                                       (ts:from-milliseconds 1000)))
-      (input:game-pad-stop-vibration gp-pad))
+      (game-pad-stop-vibration gp-pad))
     ;; Check thumbstick first since it has priority over which gamepad input
     ;; is movement.  It has priority since the thumbstick values provide a
     ;; more granular analog value that can be used for movement.
-    (if (v2:not= (input:game-pad-left-thumb-stick gp-pad) v2:+zero+)
+    (if (v2:not= (game-pad-left-thumb-stick gp-pad) v2:+zero+)
       ;; Use the thumbstick
       (setf (slime-pos game)
         (v2:new (+ (x (slime-pos game))
-                   (* speed (x (input:game-pad-left-thumb-stick gp-pad))))
-                (- (y (slime-pos game))
-                   (* speed (y (input:game-pad-left-thumb-stick gp-pad))))))
+                   (* speed (x (game-pad-left-thumb-stick gp-pad))))
+                 (- (y (slime-pos game))
+                   (* speed (y (game-pad-left-thumb-stick gp-pad))))))
       ;; Use the d-pad
       (progn
-        (when (input:is-button-down gp-pad button:+d-pad-up+)
+        (when (is-button-down gp-pad button:+d-pad-up+)
           (setf (slime-pos game) (v2:new (x (slime-pos game))
                                          (- (y (slime-pos game)) speed))))
-        (when (input:is-button-down gp-pad button:+d-pad-down+)
+        (when (is-button-down gp-pad button:+d-pad-down+)
           (setf (slime-pos game) (v2:new (x (slime-pos game))
                                          (+ (y (slime-pos game)) speed))))
-        (when (input:is-button-down gp-pad button:+d-pad-left+)
+        (when (is-button-down gp-pad button:+d-pad-left+)
           (setf (slime-pos game) (v2:new (- (x (slime-pos game)) speed)
                                          (y (slime-pos game)))))
-        (when (input:is-button-down gp-pad button:+d-pad-right+)
+        (when (is-button-down gp-pad button:+d-pad-right+)
           (setf (slime-pos game) (v2:new (+ (x (slime-pos game)) speed)
                                          (y (slime-pos game)))))))))
 

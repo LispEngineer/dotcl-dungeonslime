@@ -131,8 +131,6 @@
   (:export #:defc#generic
             #:defc#method))
 
-(defpackage :dungeon-slime-input)
-
 (defpackage :dungeon-slime
   (:use :cl 
         :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
@@ -143,15 +141,18 @@
     (:kb :microsoft-xna-framework-input-keyboard)
     (:kb-state :microsoft-xna-framework-input-keyboard-state)
     (:gp :microsoft-xna-framework-input-game-pad)
-    (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
     (:gp-state :microsoft-xna-framework-input-game-pad-state)
+    (:ms :microsoft-xna-framework-input-mouse-state)
+    (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
+    (:gp-trig :microsoft-xna-framework-input-game-pad-triggers)
+    (:mouse :microsoft-xna-framework-input-mouse)
     (:button :microsoft-xna-framework-input-buttons)
+    (:bs :microsoft-xna-framework-input-button-state)
     (:pi :microsoft-xna-framework-player-index)
     (:color :microsoft-xna-framework-color)
     (:sprite-effects :microsoft-xna-framework-graphics-sprite-effects)
     (:sprite-sort-mode :microsoft-xna-framework-graphics-sprite-sort-mode)
     (:sampler-state :microsoft-xna-framework-graphics-sampler-state)
-    (:input :dungeon-slime-input)
     (:rect :microsoft-xna-framework-rectangle)
     (:gd :microsoft-xna-framework-graphics-graphics-device)
     (:pp :microsoft-xna-framework-graphics-presentation-parameters)
@@ -193,80 +194,7 @@
     #:ta-create-sprite #:ta-create-animated-sprite #:ta-add-animation #:ta-get-animation
     #:ta-remove-animation #:ta-from-file
     #:texture-region #:tr-draw
-     #:load-font #:measure-string #:draw-string))
-
-(defpackage :dungeon-slime-input
-  (:use :cl :mg-classes :csharp)
-  (:local-nicknames
-    (:kb-state :microsoft-xna-framework-input-keyboard-state)
-    (:gp-state :microsoft-xna-framework-input-game-pad-state)
-    (:ms :microsoft-xna-framework-input-mouse-state)
-    (:gp-ts :microsoft-xna-framework-input-game-pad-thumb-sticks)
-    (:gp-trig :microsoft-xna-framework-input-game-pad-triggers)
-    (:button :microsoft-xna-framework-input-buttons)
-    (:pi :microsoft-xna-framework-player-index)
-    (:v2 :microsoft-xna-framework-vector2)
-    (:bs :microsoft-xna-framework-input-button-state)
-    (:kb :microsoft-xna-framework-input-keyboard)
-    (:mouse :microsoft-xna-framework-input-mouse)
-    (:gp :microsoft-xna-framework-input-game-pad)
-    (:game-time :microsoft-xna-framework-game-time)
-    (:ts :system-time-span))
-  (:export
-    ;; KeyboardInfo class and functions
-    #:keyboard-info
-    #:keyboard-previous-state
-    #:keyboard-current-state
-    #:keyboard-update
-    #:is-key-down
-    #:is-key-up
-    #:was-key-just-pressed
-    #:was-key-just-released
-    ;; MouseInfo class and functions
-    #:mouse-info
-    #:mouse-previous-state
-    #:mouse-current-state
-    #:mouse-update
-    #:mouse-set-position
-    #:mouse-button
-    #:is-button-down
-    #:is-button-up
-    #:was-button-just-pressed
-    #:was-button-just-released
-    #:mouse-position
-    #:mouse-x
-    #:mouse-y
-    #:mouse-position-delta
-    #:mouse-x-delta
-    #:mouse-y-delta
-    #:mouse-was-moved
-    #:mouse-scroll-wheel
-    #:mouse-scroll-wheel-delta
-    ;; GamePadInfo class and functions
-    #:game-pad-info
-    #:game-pad-player-index
-    #:game-pad-previous-state
-    #:game-pad-current-state
-    #:game-pad-is-connected
-    #:game-pad-update
-    #:game-pad-left-thumb-stick
-    #:game-pad-right-thumb-stick
-    #:game-pad-left-trigger
-    #:game-pad-right-trigger
-    #:game-pad-set-vibration
-    #:game-pad-stop-vibration
-    ;; InputManager class and functions
-    #:input-manager
-    #:im-keyboard
-    #:im-mouse
-    #:im-game-pads
-    #:input-manager-update
-    ;; MouseButton constants
-    #:+mouse-left+
-    #:+mouse-middle+
-    #:+mouse-right+
-    #:+mouse-x-button1+
-    #:+mouse-x-button2+))
+      #:load-font #:measure-string #:draw-string))
 
 (defpackage :dungeon-slime-tests
   (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)

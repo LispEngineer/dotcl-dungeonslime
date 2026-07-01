@@ -128,7 +128,7 @@
   (let* ((monogame (monogame game)))
     ;; Create the input manager and audio controller BEFORE base.Initialize
     ;; so they are available during LoadContent
-    (setf (input-manager game) (make-instance 'input:input-manager))
+    (setf (input-manager game) (make-instance 'input-manager))
     (setf (audio-controller game) (make-instance 'audio-controller))
 
     ;; Initialize the base class, which in Core is the monogame class
@@ -151,7 +151,7 @@
 (defmethod update ((game core) gt) ;; GameTime
   "Updates the input manager, then calls the monogame base class."
   ;; Update input states first so they're ready for the current frame
-  (input:input-manager-update (input-manager game) gt)
+  (input-manager-update (input-manager game) gt)
   ;; Update audio controller
   (update-audio (audio-controller game))
   (dotnet:call-base (monogame game) "Update" gt))

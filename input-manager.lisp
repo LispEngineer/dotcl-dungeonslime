@@ -10,7 +10,7 @@
 ;;;
 ;;; FIXME: Rename all these is- (or was-) functions to ? functions
 
-(in-package :dungeon-slime-input)
+(in-package :dungeon-slime)
 
 (format *error-output* "[input-manager.lisp] Loading in package ~S~%" *package*)
 
