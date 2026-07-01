@@ -1,7 +1,5 @@
 bin/
 obj/
 .vscode/
-antigravity-log.md
-antigravity-memory.md
 .aider*
 scratch/

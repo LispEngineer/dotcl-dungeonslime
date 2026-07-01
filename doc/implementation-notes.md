@@ -1161,3 +1161,52 @@ To make C# package wrappers feel more idiomatic to Common Lisp developers, Versi
 - If the name is exactly `"Is"` or does not start with an uppercase letter following "Is" (e.g. `"Issue"`), the name is translated normally without the question mark conversion.
 
 
+# Multi-User Portability and Exception-Safe Audio Support
+
+To support multi-user testing environments (e.g., executing the game compiled by
+one user under another local account via `/tmp` or running from different working
+directories), the codebase implements path qualification safety and graceful host
+subsystem failure fallbacks.
+
+## 1. Raw Sound File Copying
+By default, the MonoGame Content Builder (`MGCB`) compiles audio files into
+`.xnb` format. However, the Lisp game engine loads sound effects directly from
+the filesystem using `SoundEffect.FromFile`, bypassing the content pipeline.
+To support this, a copy target is declared in [DungeonSlime.csproj](file:///home/dfields/src/cl/dotcl-dungeonslime/DungeonSlime.csproj) to
+explicitly copy raw `.wav` sound files under `Content/audio/` to the build output
+directory, keeping them alongside the compiled assets.
+
+## 2. Interop Path Qualification and Type Safety
+Relative paths passed to filesystem-based static constructors (e.g.,
+`SoundEffect.FromFile`) are resolved to the application's base installation directory
+using `qualify-path` (defined in [utils.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/utils.lisp)). 
+- **Type Safety**: Lisp path-manipulation functions (such as `uiop:subpathname*` inside
+  `path-combine`) return `pathname` objects. Passing a `pathname` object to a C#
+  method expecting a string signature results in a method lookup failure
+  (`MissingMethodException`).
+- **Fix**: `qualify-path` is updated to convert resolved pathnames to native string
+  representations using `uiop:native-namestring`.
+
+## 3. Flexible URI Parsing for Audio
+Theme songs are loaded via `Song.FromUri`. When loading qualified filesystem paths on Unix
+systems (which lack a scheme prefix like `file:///`), the constructor is called using
+`system-uri-kind:+relative-or-absolute+`:
+```lisp
+(system-uri:new qualified-path system-uri-kind:+relative-or-absolute+)
+```
+This prevents `UriFormatException` crashes while correctly resolving both absolute paths (when
+the file exists in the installation directory) and relative fallbacks.
+
+## 4. Graceful Audio Device Fallbacks
+Under multi-user environments, access to the primary user's sound server (PipeWire or
+PulseAudio) is frequently restricted, causing OpenAL device initialization to fail.
+- **Tolerant Loading**: Audio resource loading in [game-1.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/game-1.lisp) is wrapped in a
+  `handler-case` expression. If sound device initialization fails, a warning is printed
+  to the error console, the audio slots are set to `nil`, and the game successfully
+  loads and runs in silent mode rather than crashing.
+- **Protected Actions**: Playback controls and volume setters/getters in
+  [audio-controller.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/audio-controller.lisp) are wrapped in `handler-case` and guard against `nil`
+  inputs, ensuring volume adjustments or collision triggers do not crash during silent runs.
+
+
+

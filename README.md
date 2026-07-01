@@ -175,6 +175,43 @@ Create another user, I use one called `dummy`.
   * `export DISPLAY=:0`
   * `/tmp/bin/Debug/net10.0/arch-x64/DungeonSlime` to run the game; ensure it works
 
+## Portable Execution & Multi-User Testing Considerations
+
+To ensure the application is fully portable and runs successfully when executed
+by another user account (or from a different directory), several design and
+build system choices are implemented.
+
+### Portable Design Features Implemented
+1. **Raw Sound File Copying**: Raw `.wav` audio files are explicitly copied to
+   the output folder via the MSBuild project file (`DungeonSlime.csproj`) so they
+   are available on disk for native filesystem loading.
+2. **C# Interop Path Qualification**: Relative paths passed to filesystem-based
+   constructors (like `SoundEffect.FromFile` and `Song.FromUri`) are resolved
+   relative to the executable's directory using `qualify-path`. The paths are
+   coerced to strings using `uiop:native-namestring` to prevent interop method
+   signature mismatch crashes.
+3. **Flexible URI Parsing**: Theme song URIs are constructed using
+   `system-uri-kind:+relative-or-absolute+` to ensure they parse Unix absolute
+   paths correctly without throwing formatting exceptions.
+4. **Graceful Subsystem Fallback**: Audio hardware initialization and loading is
+   protected by `handler-case` blocks. If the target environment blocks sound server
+   connections (e.g. PipeWire socket permissions), the game runs in silent mode
+   rather than crashing.
+
+### Guidelines for Future Portable Development
+- **Qualify Filesystem Paths**: Never pass raw relative strings directly to
+  foreign filesystem methods. Wrap them in `qualify-path` to ensure directory
+  independence.
+- **Ensure String Conversion**: Always call `uiop:native-namestring` on resolved
+  pathnames before passing them to C# constructors to avoid type dispatch failures.
+- **Declare Custom Assets in Project File**: Any raw asset loaded directly via the
+  filesystem (bypassing the MonoGame `ContentManager` pipeline) must be declared
+  as `<Content>` with `<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>`
+  in `DungeonSlime.csproj`.
+- **Trap Host Subsystem Exceptions**: Wrap host hardware and driver initialization
+  routines (sound, graphics, network) in `handler-case` blocks so the game degrades
+  gracefully on restricted host environments.
+
 # A Note on ML/AI & Tooling
 
 You may have noticed references to Antigravity or Gemini. I do use
