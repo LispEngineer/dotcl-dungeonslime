@@ -1651,7 +1651,10 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | July 2, 2026 | [collision-test.lisp](collision-test.lisp) | Modified | Reverted Contains test assertions to use the clean positional interface instead of keywords. |
 | July 2, 2026 | [README.md](README.md) | Modified | Documented Lisp Package Generator v18 features. |
 | July 2, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added detailed technical documentation of Version 18 overload resolution rules and package-name diagnostics. |
-| July 2, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged Version 18 overload resolution improvements. |
+| July 2, 2026 | [doc/package-generator-dependencies.md](doc/package-generator-dependencies.md) | Created | Documented the external dependencies of the package generator code and its generated package wrappers. |
+| July 2, 2026 | [FILES.md](FILES.md) | Modified | Added doc/package-generator-dependencies.md and Version 18 overload changes. |
+| July 2, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged Version 18 overload resolution improvements and dependencies documentation. |
+
 
 #### O. C# Overload Resolution Improvements (Version 18)
 - **Objective**: Fix type dispatch and runtime lookup failures for overloaded C# methods (e.g. `TimeSpan.FromMilliseconds`, `Rectangle.Contains`, operator overloads like `+`).

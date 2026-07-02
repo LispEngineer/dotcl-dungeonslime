@@ -80,6 +80,8 @@ and files in this repository.
 
 * [compilation-warnings-in-0.1.14.md](doc/compilation-warnings-in-0.1.14.md): Detailed analysis of the compile and load warnings under DotCL 0.1.14.
 
+* [package-generator-dependencies.md](doc/package-generator-dependencies.md): Dependency analysis of the Lisp C# package generator and the generated packages.
+
 * [GEMINI.md](GEMINI.md) - Contains useful references on libraries for
   human consumption. Used to provide guidance to Google's 
   [Antigravity CLI](https://antigravity.google/product/antigravity-cli)
