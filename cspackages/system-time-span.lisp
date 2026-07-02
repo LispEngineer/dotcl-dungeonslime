@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:57:55Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:01Z
 
 (cl:in-package :cl-user)
 
@@ -96,15 +96,18 @@
    #:divide-time-span
    #:duration
    #:equals
+   #:equals*
    #:equals-object
    #:equals-time-span
    #:equals-time-span-time-span
    #:from-days
    #:from-days-double
    #:from-days-int32
+   #:from-days-int32-int32-int64-int64-int64-int64
    #:from-hours
    #:from-hours-int32
    #:from-hours-double
+   #:from-hours-int32-int64-int64-int64-int64
    #:from-microseconds
    #:from-microseconds-int64
    #:from-microseconds-double
@@ -115,9 +118,11 @@
    #:from-minutes
    #:from-minutes-int64
    #:from-minutes-double
+   #:from-minutes-int64-int64-int64-int64
    #:from-seconds
    #:from-seconds-int64
    #:from-seconds-double
+   #:from-seconds-int64-int64-int64
    #:from-ticks
    #:get-hash-code
    #:multiply
@@ -126,11 +131,14 @@
    #:parse
    #:parse-string
    #:parse-string-i-format-provider
+   #:parse-char]-i-format-provider
    #:parse-exact
    #:parse-exact-string-string-i-format-provider
    #:parse-exact-string-string[]-i-format-provider
    #:parse-exact-string-string-i-format-provider-time-span-styles
+   #:parse-exact-char]-char]-i-format-provider-time-span-styles
    #:parse-exact-string-string[]-i-format-provider-time-span-styles
+   #:parse-exact-char]-string[]-i-format-provider-time-span-styles
    #:subtract
    #:to-string
    #:to-string-string
@@ -141,8 +149,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.TimeSpan"))
 (cl:defconstant <type-str> "System.TimeSpan")
-(cl:defconstant <creation> "2026-06-30T03:57:55Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:01Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -337,14 +345,18 @@ Parameters:
   "Gets the value of the current System.TimeSpan structure expressed in whole and fractional seconds."
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "get_TotalSeconds"))
 
-(cl:defun - (cl:&rest args)
-  "Passthrough for System.TimeSpan.- overloads. Dispatches at runtime."
+(cl:defun - (t-val cl:&optional (t2 cl:nil supplied-t2))
+  "Master wrapper for System.TimeSpan.- overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 1) (monoutils:dotnet-p (cl:nth 0 args)))
-     (cl:apply (cl:function --time-span) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function --time-span-time-span) args))
-    (cl:t (cl:error "System.TimeSpan.-: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null t-val) (monoutils:dotnet-p t-val)) supplied-t2 (cl:or (cl:null t2) (monoutils:dotnet-p t2)))
+     (dotnet:static <type-str> "op_Subtraction" t-val t2))
+    ((cl:and (cl:or (cl:null t-val) (monoutils:dotnet-p t-val)) (cl:not supplied-t2))
+     (dotnet:static <type-str> "op_UnaryNegation" t-val))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "-"
+                    :supplied-args (cl:append (cl:list :t-val t-val) (cl:when supplied-t2 (cl:list :t2 t2)))))))
 
 (cl:defun --time-span (t-val)
   "Calls System.TimeSpan.- -(TimeSpan) -> TimeSpan. Summary: Returns a System.TimeSpan whose value is the negated value of the specified instance.
@@ -363,14 +375,18 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Subtraction" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
-(cl:defun * (cl:&rest args)
-  "Passthrough for System.TimeSpan.* overloads. Dispatches at runtime."
+(cl:defun * (time-span factor)
+  "Master wrapper for System.TimeSpan.* overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (cl:numberp (cl:nth 1 args)))
-     (cl:apply (cl:function *-time-span-double) args))
-    ((cl:and (cl:= (cl:length args) 2) (cl:numberp (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function *-double-time-span) args))
-    (cl:t (cl:error "System.TimeSpan.*: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null time-span) (monoutils:dotnet-p time-span)) (cl:numberp factor))
+     (dotnet:static <type-str> "op_Multiply" time-span factor))
+    ((cl:and (cl:numberp time-span) (cl:or (cl:null factor) (monoutils:dotnet-p factor)))
+     (dotnet:static <type-str> "op_Multiply" time-span factor))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "*"
+                    :supplied-args (cl:append (cl:list :time-span time-span) (cl:list :factor factor))))))
 
 (cl:defun *-time-span-double (time-span factor)
   "Calls System.TimeSpan.* *(TimeSpan, Double) -> TimeSpan. Summary: Returns a new System.TimeSpan object whose value is the result of multiplying the specified timeSpan instance and the specified factor.
@@ -390,14 +406,18 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "System.Double") factor) (cl:the (dotnet "System.TimeSpan") time-span)))
 
-(cl:defun / (cl:&rest args)
-  "Passthrough for System.TimeSpan./ overloads. Dispatches at runtime."
+(cl:defun / (time-span divisor)
+  "Master wrapper for System.TimeSpan./ overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (cl:numberp (cl:nth 1 args)))
-     (cl:apply (cl:function /-time-span-double) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function /-time-span-time-span) args))
-    (cl:t (cl:error "System.TimeSpan./: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null time-span) (monoutils:dotnet-p time-span)) (cl:numberp divisor))
+     (dotnet:static <type-str> "op_Division" time-span divisor))
+    ((cl:and (cl:or (cl:null time-span) (monoutils:dotnet-p time-span)) (cl:or (cl:null divisor) (monoutils:dotnet-p divisor)))
+     (dotnet:static <type-str> "op_Division" time-span divisor))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "/"
+                    :supplied-args (cl:append (cl:list :time-span time-span) (cl:list :divisor divisor))))))
 
 (cl:defun /-time-span-double (time-span divisor)
   "Calls System.TimeSpan./ /(TimeSpan, Double) -> TimeSpan. Summary: Returns a new System.TimeSpan object whose value is the result of dividing the specified timeSpan by the specified divisor.
@@ -417,14 +437,18 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Division" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
-(cl:defun + (cl:&rest args)
-  "Passthrough for System.TimeSpan.+ overloads. Dispatches at runtime."
+(cl:defun + (t-val cl:&optional (t2 cl:nil supplied-t2))
+  "Master wrapper for System.TimeSpan.+ overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 1) (monoutils:dotnet-p (cl:nth 0 args)))
-     (cl:apply (cl:function +-time-span) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function +-time-span-time-span) args))
-    (cl:t (cl:error "System.TimeSpan.+: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null t-val) (monoutils:dotnet-p t-val)) supplied-t2 (cl:or (cl:null t2) (monoutils:dotnet-p t2)))
+     (dotnet:static <type-str> "op_Addition" t-val t2))
+    ((cl:and (cl:or (cl:null t-val) (monoutils:dotnet-p t-val)) (cl:not supplied-t2))
+     (dotnet:static <type-str> "op_UnaryPlus" t-val))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "+"
+                    :supplied-args (cl:append (cl:list :t-val t-val) (cl:when supplied-t2 (cl:list :t2 t2)))))))
 
 (cl:defun +-time-span (t-val)
   "Calls System.TimeSpan.+ +(TimeSpan) -> TimeSpan. Summary: Returns the specified instance of System.TimeSpan.
@@ -505,9 +529,18 @@ Parameters:
 "
   (dotnet:static <type-str> "Compare" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
-(cl:defun compare-to (obj cl:&rest args)
-  "Passthrough for System.TimeSpan.CompareTo overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.TimeSpan") obj) "CompareTo" args))
+(cl:defun compare-to (obj value)
+  "Master wrapper for System.TimeSpan.CompareTo overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "CompareTo" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "CompareTo" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "CompareTo"
+                    :supplied-args (cl:append (cl:list :value value))))))
 
 (cl:defun compare-to-object (obj value)
   "Calls System.TimeSpan.CompareTo CompareTo(Object) -> Int32. Summary: Compares this instance to a specified object and returns an integer that indicates whether this instance is shorter than, equal to, or longer than the specified object.
@@ -525,9 +558,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "CompareTo" value))
 
-(cl:defun divide (obj cl:&rest args)
-  "Passthrough for System.TimeSpan.Divide overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.TimeSpan") obj) "Divide" args))
+(cl:defun divide (obj divisor)
+  "Master wrapper for System.TimeSpan.Divide overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp divisor))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Divide" divisor))
+    ((cl:and (cl:or (cl:null divisor) (monoutils:dotnet-p divisor)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Divide" divisor))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "Divide"
+                    :supplied-args (cl:append (cl:list :divisor divisor))))))
 
 (cl:defun divide-double (obj divisor)
   "Calls System.TimeSpan.Divide Divide(Double) -> TimeSpan. Summary: Returns a new System.TimeSpan object whose value is the result of dividing this instance by the specified divisor.
@@ -551,9 +593,27 @@ Returns: A new object whose value is the absolute value of the current System.Ti
 "
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Duration"))
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for System.TimeSpan.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.TimeSpan") obj) "Equals" args))
+(cl:defun equals (obj value)
+  "Master wrapper for System.TimeSpan.Equals overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Equals" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Equals" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "Equals"
+                    :supplied-args (cl:append (cl:list :value value))))))
+
+(cl:defun equals* (t1 t2)
+  "Summary: Returns a value that indicates whether two specified instances of System.TimeSpan are equal.
+Returns: if the values of t1 and t2 are equal; otherwise, .
+Parameters:
+  - t1 (System.TimeSpan): The first time interval to compare.
+  - t2 (System.TimeSpan): The second time interval to compare.
+"
+  (dotnet:static <type-str> "Equals" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
 (cl:defun equals-object (obj value)
   "Calls System.TimeSpan.Equals Equals(Object) -> Boolean. Summary: Returns a value indicating whether this instance is equal to a specified object.
@@ -580,9 +640,20 @@ Parameters:
 "
   (dotnet:static <type-str> "Equals" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
-(cl:defun from-days (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromDays overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromDays" args))
+(cl:defun from-days (value cl:&key (hours cl:nil supplied-hours) (minutes cl:nil supplied-minutes) (seconds cl:nil supplied-seconds) (milliseconds cl:nil supplied-milliseconds) (microseconds cl:nil supplied-microseconds))
+  "Master wrapper for System.TimeSpan.FromDays overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp value) (cl:numberp hours) (cl:numberp minutes) (cl:numberp seconds) (cl:numberp milliseconds) (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromDays" value hours minutes seconds milliseconds microseconds))
+    ((cl:and (cl:numberp value) (cl:not supplied-hours) (cl:not supplied-minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromDays" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-hours) (cl:not supplied-minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromDays" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromDays"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-hours (cl:list :hours hours)) (cl:when supplied-minutes (cl:list :minutes minutes)) (cl:when supplied-seconds (cl:list :seconds seconds)) (cl:when supplied-milliseconds (cl:list :milliseconds milliseconds)) (cl:when supplied-microseconds (cl:list :microseconds microseconds)))))))
 
 (cl:defun from-days-double (value)
   "Calls System.TimeSpan.FromDays FromDays(Double) -> TimeSpan. Summary: Returns a System.TimeSpan that represents a specified number of days, where the specification is accurate to the nearest millisecond.
@@ -600,14 +671,38 @@ Parameters:
 "
   (dotnet:static <type-str> "FromDays" (cl:the (dotnet "System.Int32") days)))
 
+(cl:defun from-days-int32-int32-int64-int64-int64-int64 (days hours minutes seconds milliseconds microseconds)
+  "Calls System.TimeSpan.FromDays FromDays(Int32, Int32, Int64, Int64, Int64, Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of days, hours, minutes, seconds, milliseconds, and microseconds.
+Returns: Returns a System.TimeSpan that represents a specified number of days, hours, minutes, seconds, milliseconds, and microseconds.
+Parameters:
+  - days (System.Int32): Number of days.
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int64): Number of minutes.
+  - seconds (System.Int64): Number of seconds.
+  - milliseconds (System.Int64): Number of milliseconds.
+  - microseconds (System.Int64): Number of microseconds.
+"
+  (dotnet:static <type-str> "FromDays" (cl:the (dotnet "System.Int32") days) (cl:the (dotnet "System.Int32") hours) (cl:the (dotnet "System.Int64") minutes) (cl:the (dotnet "System.Int64") seconds) (cl:the (dotnet "System.Int64") milliseconds) (cl:the (dotnet "System.Int64") microseconds)))
+
 ;; Note: System.TimeSpan.FromDays also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
 ;; yet supported:
 ;;   FromDays(Int32, Int32, Int64, Int64, Int64, Int64) -> TimeSpan
 
-(cl:defun from-hours (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromHours overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromHours" args))
+(cl:defun from-hours (hours cl:&key (minutes cl:nil supplied-minutes) (seconds cl:nil supplied-seconds) (milliseconds cl:nil supplied-milliseconds) (microseconds cl:nil supplied-microseconds))
+  "Master wrapper for System.TimeSpan.FromHours overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp hours) (cl:numberp minutes) (cl:numberp seconds) (cl:numberp milliseconds) (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromHours" hours minutes seconds milliseconds microseconds))
+    ((cl:and (cl:numberp hours) (cl:not supplied-minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromHours" hours))
+    ((cl:and (cl:numberp hours) (cl:not supplied-minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromHours" hours))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromHours"
+                    :supplied-args (cl:append (cl:list :hours hours) (cl:when supplied-minutes (cl:list :minutes minutes)) (cl:when supplied-seconds (cl:list :seconds seconds)) (cl:when supplied-milliseconds (cl:list :milliseconds milliseconds)) (cl:when supplied-microseconds (cl:list :microseconds microseconds)))))))
 
 (cl:defun from-hours-int32 (hours)
   "Calls System.TimeSpan.FromHours FromHours(Int32) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of hours.
@@ -625,14 +720,35 @@ Parameters:
 "
   (dotnet:static <type-str> "FromHours" (cl:the (dotnet "System.Double") value)))
 
+(cl:defun from-hours-int32-int64-int64-int64-int64 (hours minutes seconds milliseconds microseconds)
+  "Calls System.TimeSpan.FromHours FromHours(Int32, Int64, Int64, Int64, Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of hours, minutes, seconds, milliseconds, and microseconds.
+Returns: Returns a System.TimeSpan that represents a specified number of hours, minutes, seconds, milliseconds, and microseconds.
+Parameters:
+  - hours (System.Int32): Number of hours.
+  - minutes (System.Int64): Number of minutes.
+  - seconds (System.Int64): Number of seconds.
+  - milliseconds (System.Int64): Number of milliseconds.
+  - microseconds (System.Int64): Number of microseconds.
+"
+  (dotnet:static <type-str> "FromHours" (cl:the (dotnet "System.Int32") hours) (cl:the (dotnet "System.Int64") minutes) (cl:the (dotnet "System.Int64") seconds) (cl:the (dotnet "System.Int64") milliseconds) (cl:the (dotnet "System.Int64") microseconds)))
+
 ;; Note: System.TimeSpan.FromHours also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
 ;; yet supported:
 ;;   FromHours(Int32, Int64, Int64, Int64, Int64) -> TimeSpan
 
-(cl:defun from-microseconds (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromMicroseconds overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromMicroseconds" args))
+(cl:defun from-microseconds (microseconds)
+  "Master wrapper for System.TimeSpan.FromMicroseconds overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromMicroseconds" microseconds))
+    ((cl:and (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromMicroseconds" microseconds))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromMicroseconds"
+                    :supplied-args (cl:append (cl:list :microseconds microseconds))))))
 
 (cl:defun from-microseconds-int64 (microseconds)
   "Calls System.TimeSpan.FromMicroseconds FromMicroseconds(Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of microseconds.
@@ -650,9 +766,20 @@ Parameters:
 "
   (dotnet:static <type-str> "FromMicroseconds" (cl:the (dotnet "System.Double") value)))
 
-(cl:defun from-milliseconds (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromMilliseconds overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromMilliseconds" args))
+(cl:defun from-milliseconds (milliseconds cl:&optional (microseconds cl:nil supplied-microseconds))
+  "Master wrapper for System.TimeSpan.FromMilliseconds overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp milliseconds) supplied-microseconds (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromMilliseconds" milliseconds microseconds))
+    ((cl:and (cl:numberp milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromMilliseconds" milliseconds))
+    ((cl:and (cl:numberp milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromMilliseconds" milliseconds))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromMilliseconds"
+                    :supplied-args (cl:append (cl:list :milliseconds milliseconds) (cl:when supplied-microseconds (cl:list :microseconds microseconds)))))))
 
 (cl:defun from-milliseconds-int64 (milliseconds)
   "Calls System.TimeSpan.FromMilliseconds FromMilliseconds(Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of milliseconds.
@@ -679,9 +806,20 @@ Parameters:
 "
   (dotnet:static <type-str> "FromMilliseconds" (cl:the (dotnet "System.Int64") milliseconds) (cl:the (dotnet "System.Int64") microseconds)))
 
-(cl:defun from-minutes (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromMinutes overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromMinutes" args))
+(cl:defun from-minutes (minutes cl:&key (seconds cl:nil supplied-seconds) (milliseconds cl:nil supplied-milliseconds) (microseconds cl:nil supplied-microseconds))
+  "Master wrapper for System.TimeSpan.FromMinutes overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp minutes) (cl:numberp seconds) (cl:numberp milliseconds) (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromMinutes" minutes seconds milliseconds microseconds))
+    ((cl:and (cl:numberp minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromMinutes" minutes))
+    ((cl:and (cl:numberp minutes) (cl:not supplied-seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromMinutes" minutes))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromMinutes"
+                    :supplied-args (cl:append (cl:list :minutes minutes) (cl:when supplied-seconds (cl:list :seconds seconds)) (cl:when supplied-milliseconds (cl:list :milliseconds milliseconds)) (cl:when supplied-microseconds (cl:list :microseconds microseconds)))))))
 
 (cl:defun from-minutes-int64 (minutes)
   "Calls System.TimeSpan.FromMinutes FromMinutes(Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of minutes.
@@ -699,14 +837,36 @@ Parameters:
 "
   (dotnet:static <type-str> "FromMinutes" (cl:the (dotnet "System.Double") value)))
 
+(cl:defun from-minutes-int64-int64-int64-int64 (minutes seconds milliseconds microseconds)
+  "Calls System.TimeSpan.FromMinutes FromMinutes(Int64, Int64, Int64, Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of minutes, seconds, milliseconds, and microseconds.
+Returns: Returns a System.TimeSpan that represents a specified number of minutes, seconds, milliseconds, and microseconds.
+Parameters:
+  - minutes (System.Int64): Number of minutes.
+  - seconds (System.Int64): Number of seconds.
+  - milliseconds (System.Int64): Number of milliseconds.
+  - microseconds (System.Int64): Number of microseconds.
+"
+  (dotnet:static <type-str> "FromMinutes" (cl:the (dotnet "System.Int64") minutes) (cl:the (dotnet "System.Int64") seconds) (cl:the (dotnet "System.Int64") milliseconds) (cl:the (dotnet "System.Int64") microseconds)))
+
 ;; Note: System.TimeSpan.FromMinutes also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
 ;; yet supported:
 ;;   FromMinutes(Int64, Int64, Int64, Int64) -> TimeSpan
 
-(cl:defun from-seconds (cl:&rest args)
-  "Passthrough for System.TimeSpan.FromSeconds overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "FromSeconds" args))
+(cl:defun from-seconds (seconds cl:&key (milliseconds cl:nil supplied-milliseconds) (microseconds cl:nil supplied-microseconds))
+  "Master wrapper for System.TimeSpan.FromSeconds overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp seconds) (cl:numberp milliseconds) (cl:numberp microseconds))
+     (dotnet:static <type-str> "FromSeconds" seconds milliseconds microseconds))
+    ((cl:and (cl:numberp seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromSeconds" seconds))
+    ((cl:and (cl:numberp seconds) (cl:not supplied-milliseconds) (cl:not supplied-microseconds))
+     (dotnet:static <type-str> "FromSeconds" seconds))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "FromSeconds"
+                    :supplied-args (cl:append (cl:list :seconds seconds) (cl:when supplied-milliseconds (cl:list :milliseconds milliseconds)) (cl:when supplied-microseconds (cl:list :microseconds microseconds)))))))
 
 (cl:defun from-seconds-int64 (seconds)
   "Calls System.TimeSpan.FromSeconds FromSeconds(Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of seconds.
@@ -723,6 +883,16 @@ Parameters:
   - value (System.Double): A number of seconds, accurate to the nearest millisecond.
 "
   (dotnet:static <type-str> "FromSeconds" (cl:the (dotnet "System.Double") value)))
+
+(cl:defun from-seconds-int64-int64-int64 (seconds milliseconds microseconds)
+  "Calls System.TimeSpan.FromSeconds FromSeconds(Int64, Int64, Int64) -> TimeSpan. Summary: Initializes a new instance of the System.TimeSpan structure to a specified number of seconds, milliseconds, and microseconds.
+Returns: Returns a System.TimeSpan that represents a specified number of seconds, milliseconds, and microseconds.
+Parameters:
+  - seconds (System.Int64): Number of seconds.
+  - milliseconds (System.Int64): Number of milliseconds.
+  - microseconds (System.Int64): Number of microseconds.
+"
+  (dotnet:static <type-str> "FromSeconds" (cl:the (dotnet "System.Int64") seconds) (cl:the (dotnet "System.Int64") milliseconds) (cl:the (dotnet "System.Int64") microseconds)))
 
 ;; Note: System.TimeSpan.FromSeconds also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -766,9 +936,20 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.TimeSpan") t1) (cl:the (dotnet "System.TimeSpan") t2)))
 
-(cl:defun parse (cl:&rest args)
-  "Passthrough for System.TimeSpan.Parse overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Parse" args))
+(cl:defun parse (s cl:&optional (format-provider cl:nil supplied-format-provider))
+  "Master wrapper for System.TimeSpan.Parse overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp s) supplied-format-provider (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)))
+     (dotnet:static <type-str> "Parse" s format-provider))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-format-provider (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)))
+     (dotnet:static <type-str> "Parse" s format-provider))
+    ((cl:and (cl:stringp s) (cl:not supplied-format-provider))
+     (dotnet:static <type-str> "Parse" s))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "Parse"
+                    :supplied-args (cl:append (cl:list :s s) (cl:when supplied-format-provider (cl:list :format-provider format-provider)))))))
 
 (cl:defun parse-string (s)
   "Calls System.TimeSpan.Parse Parse(String) -> TimeSpan. Summary: Converts the string representation of a time interval to its System.TimeSpan equivalent.
@@ -787,9 +968,40 @@ Parameters:
 "
   (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") input) (cl:the (dotnet "System.IFormatProvider") format-provider)))
 
-(cl:defun parse-exact (cl:&rest args)
-  "Passthrough for System.TimeSpan.ParseExact overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ParseExact" args))
+(cl:defun parse-char]-i-format-provider (input format-provider)
+  "Calls System.TimeSpan.Parse Parse(Char], IFormatProvider) -> TimeSpan. Summary: Converts the span representation of a time interval to its System.TimeSpan equivalent by using the specified culture-specific format information.
+Returns: A time interval that corresponds to input, as specified by formatProvider.
+Parameters:
+  - input (System.ReadOnlySpan`1[System.Char]): A span containing the characters that represent the time interval to convert.
+  - format-provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
+"
+  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") input) (cl:the (dotnet "System.IFormatProvider") format-provider)))
+
+;; Note: System.TimeSpan.Parse also has the following overloads with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   Parse(Char], IFormatProvider) -> TimeSpan
+
+(cl:defun parse-exact (input format format-provider cl:&optional (styles cl:nil supplied-styles))
+  "Master wrapper for System.TimeSpan.ParseExact overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp input) (cl:stringp format) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) supplied-styles (cl:or (cl:null styles) (monoutils:dotnet-p styles)))
+     (dotnet:static <type-str> "ParseExact" input format format-provider styles))
+    ((cl:and (cl:or (cl:null input) (monoutils:dotnet-p input)) (cl:or (cl:null format) (monoutils:dotnet-p format)) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) supplied-styles (cl:or (cl:null styles) (monoutils:dotnet-p styles)))
+     (dotnet:static <type-str> "ParseExact" input format format-provider styles))
+    ((cl:and (cl:stringp input) (cl:or (cl:null format) (monoutils:dotnet-p format)) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) supplied-styles (cl:or (cl:null styles) (monoutils:dotnet-p styles)))
+     (dotnet:static <type-str> "ParseExact" input format format-provider styles))
+    ((cl:and (cl:or (cl:null input) (monoutils:dotnet-p input)) (cl:or (cl:null format) (monoutils:dotnet-p format)) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) supplied-styles (cl:or (cl:null styles) (monoutils:dotnet-p styles)))
+     (dotnet:static <type-str> "ParseExact" input format format-provider styles))
+    ((cl:and (cl:stringp input) (cl:stringp format) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) (cl:not supplied-styles))
+     (dotnet:static <type-str> "ParseExact" input format format-provider))
+    ((cl:and (cl:stringp input) (cl:or (cl:null format) (monoutils:dotnet-p format)) (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)) (cl:not supplied-styles))
+     (dotnet:static <type-str> "ParseExact" input format format-provider))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "ParseExact"
+                    :supplied-args (cl:append (cl:list :input input) (cl:list :format format) (cl:list :format-provider format-provider) (cl:when supplied-styles (cl:list :styles styles)))))))
 
 (cl:defun parse-exact-string-string-i-format-provider (input format format-provider)
   "Calls System.TimeSpan.ParseExact ParseExact(String, String, IFormatProvider) -> TimeSpan. Summary: Converts the string representation of a time interval to its System.TimeSpan equivalent by using the specified format and culture-specific format information. The format of the string representation must match the specified format exactly.
@@ -822,6 +1034,17 @@ Parameters:
 "
   (dotnet:static <type-str> "ParseExact" (cl:the (dotnet "System.String") input) (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.IFormatProvider") format-provider) (cl:the (dotnet "System.Globalization.TimeSpanStyles") styles)))
 
+(cl:defun parse-exact-char]-char]-i-format-provider-time-span-styles (input format format-provider styles)
+  "Calls System.TimeSpan.ParseExact ParseExact(Char], Char], IFormatProvider, TimeSpanStyles) -> TimeSpan. Summary: Converts the char span of a time interval to its System.TimeSpan equivalent by using the specified format and culture-specific format information. The format of the string representation must match the specified format exactly.
+Returns: A time interval that corresponds to input, as specified by format and formatProvider.
+Parameters:
+  - input (System.ReadOnlySpan`1[System.Char]): A span that specifies the time interval to convert.
+  - format (System.ReadOnlySpan`1[System.Char]): A standard or custom format string that defines the required format of input.
+  - format-provider (System.IFormatProvider): An object that provides culture-specific formatting information.
+  - styles (System.Globalization.TimeSpanStyles): A bitwise combination of enumeration values that defines the style elements that may be present in input.
+"
+  (dotnet:static <type-str> "ParseExact" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") input) (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") format) (cl:the (dotnet "System.IFormatProvider") format-provider) (cl:the (dotnet "System.Globalization.TimeSpanStyles") styles)))
+
 (cl:defun parse-exact-string-string[]-i-format-provider-time-span-styles (input formats format-provider styles)
   "Calls System.TimeSpan.ParseExact ParseExact(String, String[], IFormatProvider, TimeSpanStyles) -> TimeSpan. Summary: Converts the string representation of a time interval to its System.TimeSpan equivalent by using the specified formats, culture-specific format information, and styles. The format of the string representation must match one of the specified formats exactly.
 Returns: A time interval that corresponds to input, as specified by formats, formatProvider, and styles.
@@ -833,6 +1056,23 @@ Parameters:
 "
   (dotnet:static <type-str> "ParseExact" (cl:the (dotnet "System.String") input) (cl:the (dotnet "System.String[]") formats) (cl:the (dotnet "System.IFormatProvider") format-provider) (cl:the (dotnet "System.Globalization.TimeSpanStyles") styles)))
 
+(cl:defun parse-exact-char]-string[]-i-format-provider-time-span-styles (input formats format-provider styles)
+  "Calls System.TimeSpan.ParseExact ParseExact(Char], String[], IFormatProvider, TimeSpanStyles) -> TimeSpan. Summary: Converts the string representation of a time interval to its System.TimeSpan equivalent by using the specified formats, culture-specific format information, and styles. The format of the string representation must match one of the specified formats exactly.
+Returns: A time interval that corresponds to input, as specified by formats, formatProvider, and styles.
+Parameters:
+  - input (System.ReadOnlySpan`1[System.Char]): A span that specifies the time interval to convert.
+  - formats (System.String[]): An array of standard or custom format strings that define the required format of input.
+  - format-provider (System.IFormatProvider): An object that provides culture-specific formatting information.
+  - styles (System.Globalization.TimeSpanStyles): A bitwise combination of enumeration values that defines the style elements that may be present in input.
+"
+  (dotnet:static <type-str> "ParseExact" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") input) (cl:the (dotnet "System.String[]") formats) (cl:the (dotnet "System.IFormatProvider") format-provider) (cl:the (dotnet "System.Globalization.TimeSpanStyles") styles)))
+
+;; Note: System.TimeSpan.ParseExact also has the following overloads with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   ParseExact(Char], Char], IFormatProvider, TimeSpanStyles) -> TimeSpan
+;;   ParseExact(Char], String[], IFormatProvider, TimeSpanStyles) -> TimeSpan
+
 (cl:defun subtract (obj ts)
   "Summary: Returns a new System.TimeSpan object whose value is the difference between the specified System.TimeSpan object and this instance.
 Returns: A new time interval whose value is the result of the value of this instance minus the value of ts.
@@ -841,9 +1081,20 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "Subtract" ts))
 
-(cl:defun to-string (obj cl:&rest args)
-  "Passthrough for System.TimeSpan.ToString overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.TimeSpan") obj) "ToString" args))
+(cl:defun to-string (obj cl:&optional (format cl:nil supplied-format) (format-provider cl:nil supplied-format-provider))
+  "Master wrapper for System.TimeSpan.ToString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-format (cl:stringp format) supplied-format-provider (cl:or (cl:null format-provider) (monoutils:dotnet-p format-provider)))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "ToString" format format-provider))
+    ((cl:and supplied-format (cl:stringp format) (cl:not supplied-format-provider))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "ToString" format))
+    ((cl:and (cl:not supplied-format) (cl:not supplied-format-provider))
+     (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "ToString"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TIME-SPAN"
+                    :class-name <type-str>
+                    :method-name "ToString"
+                    :supplied-args (cl:append (cl:when supplied-format (cl:list :format format)) (cl:when supplied-format-provider (cl:list :format-provider format-provider)))))))
 
 (cl:defun to-string (obj)
   "Calls System.TimeSpan.ToString ToString() -> String. Summary: Converts the value of the current System.TimeSpan object to its equivalent string representation.
@@ -868,15 +1119,26 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.TimeSpan") obj) "ToString" format format-provider))
 
+;; The following C# System.TimeSpan.TryFormat overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryFormat(Char], out Int32&, Char], IFormatProvider) -> Boolean
+;;   TryFormat(Byte], out Int32&, Char], IFormatProvider) -> Boolean
+
 ;; The following C# System.TimeSpan.TryParse overloads have special parameter types
 ;; (ref, out, params, or defaults) and are not yet supported:
 ;;   TryParse(String, out TimeSpan&) -> Boolean
+;;   TryParse(Char], out TimeSpan&) -> Boolean
 ;;   TryParse(String, IFormatProvider, out TimeSpan&) -> Boolean
+;;   TryParse(Char], IFormatProvider, out TimeSpan&) -> Boolean
 
 ;; The following C# System.TimeSpan.TryParseExact overloads have special parameter types
 ;; (ref, out, params, or defaults) and are not yet supported:
 ;;   TryParseExact(String, String, IFormatProvider, out TimeSpan&) -> Boolean
+;;   TryParseExact(Char], Char], IFormatProvider, out TimeSpan&) -> Boolean
 ;;   TryParseExact(String, String[], IFormatProvider, out TimeSpan&) -> Boolean
+;;   TryParseExact(Char], String[], IFormatProvider, out TimeSpan&) -> Boolean
 ;;   TryParseExact(String, String, IFormatProvider, TimeSpanStyles, out TimeSpan&) -> Boolean
+;;   TryParseExact(Char], Char], IFormatProvider, TimeSpanStyles, out TimeSpan&) -> Boolean
 ;;   TryParseExact(String, String[], IFormatProvider, TimeSpanStyles, out TimeSpan&) -> Boolean
+;;   TryParseExact(Char], String[], IFormatProvider, TimeSpanStyles, out TimeSpan&) -> Boolean
 

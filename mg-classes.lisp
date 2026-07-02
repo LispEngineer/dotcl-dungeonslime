@@ -60,18 +60,3 @@
 (defun °2R (degrees)
   "Convert degrees to radians, returning a single-float (used commonly in MonoGame)"
   (coerce (* degrees (/ pi 180)) 'single-float))
-
-;; Ease of use function for Sprite Batch Begin using keyword arguments
-;; FIXME: Use the cspackage version once that is available
-(defun sprite-batch-begin (sprite-batch
-                            &key (sort-mode microsoft-xna-framework-graphics-sprite-sort-mode:+deferred+)
-                            (blend-state nil)
-                            (sampler-state nil)
-                            (depth-stencil-state nil)
-                            (rasterizer-state nil)
-                            (effect nil)
-                            (transform-matrix nil))
-  "Call the SpriteBatch.Begin() function with the specified arguments."
-  (dotnet:invoke sprite-batch "Begin" sort-mode blend-state sampler-state 
-                                      depth-stencil-state rasterizer-state
-                                      effect transform-matrix))

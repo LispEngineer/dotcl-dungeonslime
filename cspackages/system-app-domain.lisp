@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:10Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:12Z
 
 (cl:in-package :cl-user)
 
@@ -59,6 +59,7 @@
    #:get-assemblies
    #:get-current-thread-id
    #:get-data
+   #:compatibility-switch-set?
    #:default-app-domain?
    #:finalizing-for-unload?
    #:load
@@ -82,8 +83,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-06-30T03:58:10Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:12Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -181,9 +182,20 @@ Parameters:
 "
   (dotnet:static <type-str> "CreateDomain" (cl:the (dotnet "System.String") friendly-name)))
 
-(cl:defun create-instance (obj cl:&rest args)
-  "Passthrough for System.AppDomain.CreateInstance overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "CreateInstance" args))
+(cl:defun create-instance (obj assembly-name type-name cl:&optional (activation-attributes cl:nil supplied-activation-attributes) (binding-attr cl:nil supplied-binding-attr) (binder cl:nil supplied-binder) (args cl:nil supplied-args) (culture cl:nil supplied-culture) (activation-attributes cl:nil supplied-activation-attributes))
+  "Master wrapper for System.AppDomain.CreateInstance overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) supplied-activation-attributes (cl:typep activation-attributes 'cl:boolean) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-binder (cl:or (cl:null binder) (monoutils:dotnet-p binder)) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstance" assembly-name type-name activation-attributes binding-attr binder args culture activation-attributes))
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstance" assembly-name type-name activation-attributes))
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) (cl:not supplied-activation-attributes) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstance" assembly-name type-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "CreateInstance"
+                    :supplied-args (cl:append (cl:list :assembly-name assembly-name) (cl:list :type-name type-name) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-binder (cl:list :binder binder)) (cl:when supplied-args (cl:list :args args)) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)))))))
 
 (cl:defun create-instance-string-string (obj assembly-name type-name)
   "Calls System.AppDomain.CreateInstance CreateInstance(String, String) -> ObjectHandle. Summary: Creates a new instance of the specified type defined in the specified assembly.
@@ -219,9 +231,20 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstance" assembly-name type-name ignore-case binding-attr binder args culture activation-attributes))
 
-(cl:defun create-instance-and-unwrap (obj cl:&rest args)
-  "Passthrough for System.AppDomain.CreateInstanceAndUnwrap overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceAndUnwrap" args))
+(cl:defun create-instance-and-unwrap (obj assembly-name type-name cl:&optional (activation-attributes cl:nil supplied-activation-attributes) (binding-attr cl:nil supplied-binding-attr) (binder cl:nil supplied-binder) (args cl:nil supplied-args) (culture cl:nil supplied-culture) (activation-attributes cl:nil supplied-activation-attributes))
+  "Master wrapper for System.AppDomain.CreateInstanceAndUnwrap overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) supplied-activation-attributes (cl:typep activation-attributes 'cl:boolean) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-binder (cl:or (cl:null binder) (monoutils:dotnet-p binder)) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceAndUnwrap" assembly-name type-name activation-attributes binding-attr binder args culture activation-attributes))
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceAndUnwrap" assembly-name type-name activation-attributes))
+    ((cl:and (cl:stringp assembly-name) (cl:stringp type-name) (cl:not supplied-activation-attributes) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceAndUnwrap" assembly-name type-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "CreateInstanceAndUnwrap"
+                    :supplied-args (cl:append (cl:list :assembly-name assembly-name) (cl:list :type-name type-name) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-binder (cl:list :binder binder)) (cl:when supplied-args (cl:list :args args)) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)))))))
 
 (cl:defun create-instance-and-unwrap-string-string (obj assembly-name type-name)
   "Calls System.AppDomain.CreateInstanceAndUnwrap CreateInstanceAndUnwrap(String, String) -> Object. Summary: Creates a new instance of the specified type. Parameters specify the assembly where the type is defined, and the name of the type.
@@ -257,9 +280,20 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceAndUnwrap" assembly-name type-name ignore-case binding-attr binder args culture activation-attributes))
 
-(cl:defun create-instance-from (obj cl:&rest args)
-  "Passthrough for System.AppDomain.CreateInstanceFrom overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFrom" args))
+(cl:defun create-instance-from (obj assembly-file type-name cl:&optional (activation-attributes cl:nil supplied-activation-attributes) (binding-attr cl:nil supplied-binding-attr) (binder cl:nil supplied-binder) (args cl:nil supplied-args) (culture cl:nil supplied-culture) (activation-attributes cl:nil supplied-activation-attributes))
+  "Master wrapper for System.AppDomain.CreateInstanceFrom overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) supplied-activation-attributes (cl:typep activation-attributes 'cl:boolean) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-binder (cl:or (cl:null binder) (monoutils:dotnet-p binder)) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFrom" assembly-file type-name activation-attributes binding-attr binder args culture activation-attributes))
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFrom" assembly-file type-name activation-attributes))
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) (cl:not supplied-activation-attributes) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFrom" assembly-file type-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "CreateInstanceFrom"
+                    :supplied-args (cl:append (cl:list :assembly-file assembly-file) (cl:list :type-name type-name) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-binder (cl:list :binder binder)) (cl:when supplied-args (cl:list :args args)) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)))))))
 
 (cl:defun create-instance-from-string-string (obj assembly-file type-name)
   "Calls System.AppDomain.CreateInstanceFrom CreateInstanceFrom(String, String) -> ObjectHandle. Summary: Creates a new instance of the specified type defined in the specified assembly file.
@@ -295,9 +329,20 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFrom" assembly-file type-name ignore-case binding-attr binder args culture activation-attributes))
 
-(cl:defun create-instance-from-and-unwrap (obj cl:&rest args)
-  "Passthrough for System.AppDomain.CreateInstanceFromAndUnwrap overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFromAndUnwrap" args))
+(cl:defun create-instance-from-and-unwrap (obj assembly-file type-name cl:&optional (activation-attributes cl:nil supplied-activation-attributes) (binding-attr cl:nil supplied-binding-attr) (binder cl:nil supplied-binder) (args cl:nil supplied-args) (culture cl:nil supplied-culture) (activation-attributes cl:nil supplied-activation-attributes))
+  "Master wrapper for System.AppDomain.CreateInstanceFromAndUnwrap overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) supplied-activation-attributes (cl:typep activation-attributes 'cl:boolean) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-binder (cl:or (cl:null binder) (monoutils:dotnet-p binder)) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFromAndUnwrap" assembly-file type-name activation-attributes binding-attr binder args culture activation-attributes))
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) supplied-activation-attributes (cl:or (cl:null activation-attributes) (monoutils:dotnet-p activation-attributes)) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFromAndUnwrap" assembly-file type-name activation-attributes))
+    ((cl:and (cl:stringp assembly-file) (cl:stringp type-name) (cl:not supplied-activation-attributes) (cl:not supplied-binding-attr) (cl:not supplied-binder) (cl:not supplied-args) (cl:not supplied-culture) (cl:not supplied-activation-attributes))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFromAndUnwrap" assembly-file type-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "CreateInstanceFromAndUnwrap"
+                    :supplied-args (cl:append (cl:list :assembly-file assembly-file) (cl:list :type-name type-name) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-binder (cl:list :binder binder)) (cl:when supplied-args (cl:list :args args)) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-activation-attributes (cl:list :activation-attributes activation-attributes)))))))
 
 (cl:defun create-instance-from-and-unwrap-string-string (obj assembly-file type-name)
   "Calls System.AppDomain.CreateInstanceFromAndUnwrap CreateInstanceFromAndUnwrap(String, String) -> Object. Summary: Creates a new instance of the specified type defined in the specified assembly file.
@@ -333,9 +378,20 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "CreateInstanceFromAndUnwrap" assembly-file type-name ignore-case binding-attr binder args culture activation-attributes))
 
-(cl:defun execute-assembly (obj cl:&rest args)
-  "Passthrough for System.AppDomain.ExecuteAssembly overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "ExecuteAssembly" args))
+(cl:defun execute-assembly (obj assembly-file cl:&optional (args cl:nil supplied-args) (hash-value cl:nil supplied-hash-value) (hash-algorithm cl:nil supplied-hash-algorithm))
+  "Master wrapper for System.AppDomain.ExecuteAssembly overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp assembly-file) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-hash-value (cl:or (cl:null hash-value) (monoutils:dotnet-p hash-value)) supplied-hash-algorithm (cl:or (cl:null hash-algorithm) (monoutils:dotnet-p hash-algorithm)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "ExecuteAssembly" assembly-file args hash-value hash-algorithm))
+    ((cl:and (cl:stringp assembly-file) supplied-args (cl:or (cl:null args) (monoutils:dotnet-p args)) (cl:not supplied-hash-value) (cl:not supplied-hash-algorithm))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "ExecuteAssembly" assembly-file args))
+    ((cl:and (cl:stringp assembly-file) (cl:not supplied-args) (cl:not supplied-hash-value) (cl:not supplied-hash-algorithm))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "ExecuteAssembly" assembly-file))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "ExecuteAssembly"
+                    :supplied-args (cl:append (cl:list :assembly-file assembly-file) (cl:when supplied-args (cl:list :args args)) (cl:when supplied-hash-value (cl:list :hash-value hash-value)) (cl:when supplied-hash-algorithm (cl:list :hash-algorithm hash-algorithm)))))))
 
 (cl:defun execute-assembly-string (obj assembly-file)
   "Calls System.AppDomain.ExecuteAssembly ExecuteAssembly(String) -> Int32. Summary: Executes the assembly contained in the specified file.
@@ -399,6 +455,14 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "GetData" name))
 
+(cl:defun compatibility-switch-set? (obj value)
+  "Summary: Gets a nullable Boolean value that indicates whether any compatibility switches are set, and if so, whether the specified compatibility switch is set.
+Returns: A null reference ( in Visual Basic) if no compatibility switches are set; otherwise, a Boolean value that indicates whether the compatibility switch that is specified by value is set.
+Parameters:
+  - value (System.String): The compatibility switch to test.
+"
+  (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "IsCompatibilitySwitchSet" value))
+
 (cl:defun default-app-domain? (obj)
   "Summary: Returns a value that indicates whether the application domain is the default application domain for the process.
 Returns: if the current System.AppDomain object represents the default application domain for the process; otherwise, .
@@ -411,9 +475,22 @@ Returns: if this application domain is unloading and the common language runtime
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "IsFinalizingForUnload"))
 
-(cl:defun load (obj cl:&rest args)
-  "Passthrough for System.AppDomain.Load overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.AppDomain") obj) "Load" args))
+(cl:defun load (obj raw-assembly cl:&optional (raw-symbol-store cl:nil supplied-raw-symbol-store))
+  "Master wrapper for System.AppDomain.Load overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null raw-assembly) (monoutils:dotnet-p raw-assembly)) supplied-raw-symbol-store (cl:or (cl:null raw-symbol-store) (monoutils:dotnet-p raw-symbol-store)))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "Load" raw-assembly raw-symbol-store))
+    ((cl:and (cl:or (cl:null raw-assembly) (monoutils:dotnet-p raw-assembly)) (cl:not supplied-raw-symbol-store))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "Load" raw-assembly))
+    ((cl:and (cl:or (cl:null raw-assembly) (monoutils:dotnet-p raw-assembly)) (cl:not supplied-raw-symbol-store))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "Load" raw-assembly))
+    ((cl:and (cl:stringp raw-assembly) (cl:not supplied-raw-symbol-store))
+     (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj) "Load" raw-assembly))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-APP-DOMAIN"
+                    :class-name <type-str>
+                    :method-name "Load"
+                    :supplied-args (cl:append (cl:list :raw-assembly raw-assembly) (cl:when supplied-raw-symbol-store (cl:list :raw-symbol-store raw-symbol-store)))))))
 
 (cl:defun load-byte[] (obj raw-assembly)
   "Calls System.AppDomain.Load Load(Byte[]) -> Assembly. Summary: Loads the System.Reflection.Assembly with a common object file format (COFF) based image containing an emitted System.Reflection.Assembly.

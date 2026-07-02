@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T04:00:02Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:03:35Z
 
 (cl:in-package :cl-user)
 
@@ -12,12 +12,14 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:new
    #:characters
    #:default-character
    #:glyphs
    #:line-spacing
    #:spacing
    #:texture
+   #:get-glyphs
    #:measure-string
    #:measure-string-string
    #:measure-string-string-builder
@@ -27,13 +29,16 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
-(cl:defconstant <creation> "2026-06-30T04:00:02Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:03:35Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont")))
+
+(cl:defun new (texture glyph-bounds cropping characters line-spacing spacing kerning default-character)
+  (dotnet:new <type-str> texture glyph-bounds cropping characters line-spacing spacing kerning default-character))
 
 (cl:defun characters (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Characters"))
@@ -62,9 +67,21 @@
 (cl:defun texture (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "get_Texture"))
 
-(cl:defun measure-string (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" args))
+(cl:defun get-glyphs (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "GetGlyphs"))
+
+(cl:defun measure-string (obj text)
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp text))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
+    ((cl:and (cl:or (cl:null text) (monoutils:dotnet-p text)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj) "MeasureString" text))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-SPRITE-FONT"
+                    :class-name <type-str>
+                    :method-name "MeasureString"
+                    :supplied-args (cl:append (cl:list :text text))))))
 
 (cl:defun measure-string-string (obj text)
   "Calls Microsoft.Xna.Framework.Graphics.SpriteFont.MeasureString MeasureString(String) -> Vector2"

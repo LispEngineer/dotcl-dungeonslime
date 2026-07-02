@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:59:57Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:03:31Z
 
 (cl:in-package :cl-user)
 
@@ -64,6 +64,7 @@
    #:get-back-buffer-data
    #:get-back-buffer-data-t[]
    #:get-back-buffer-data-t[]-int32-int32
+   #:get-back-buffer-data-rectangle]-t[]-int32-int32
    #:get-render-targets
    #:get-render-targets-render-target-binding[]
    #:present
@@ -81,8 +82,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-06-30T03:59:57Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:03:31Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -200,9 +201,20 @@
 (cl:defun (cl:setf viewport) (new-value obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "set_Viewport" new-value))
 
-(cl:defun clear (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Clear overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Clear" args))
+(cl:defun clear (obj color cl:&optional (color cl:nil supplied-color) (depth cl:nil supplied-depth) (stencil cl:nil supplied-stencil))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Clear overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null color) (monoutils:dotnet-p color)) supplied-color (cl:or (cl:null color) (monoutils:dotnet-p color)) supplied-depth (cl:numberp depth) supplied-stencil (cl:numberp stencil))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Clear" color color depth stencil))
+    ((cl:and (cl:or (cl:null color) (monoutils:dotnet-p color)) supplied-color (cl:or (cl:null color) (monoutils:dotnet-p color)) supplied-depth (cl:numberp depth) supplied-stencil (cl:numberp stencil))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Clear" color color depth stencil))
+    ((cl:and (cl:or (cl:null color) (monoutils:dotnet-p color)) (cl:not supplied-color) (cl:not supplied-depth) (cl:not supplied-stencil))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Clear" color))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "Clear"
+                    :supplied-args (cl:append (cl:list :color color) (cl:when supplied-color (cl:list :color color)) (cl:when supplied-depth (cl:list :depth depth)) (cl:when supplied-stencil (cl:list :stencil stencil)))))))
 
 (cl:defun clear-color (obj color)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Clear Clear(Color) -> Void"
@@ -216,9 +228,18 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Clear Clear(ClearOptions, Vector4, Single, Int32) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Clear" options color depth stencil))
 
-(cl:defun dispose (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Dispose overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Dispose" args))
+(cl:defun dispose (obj cl:&optional (disposing cl:nil supplied-disposing))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Dispose overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-disposing (cl:typep disposing 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Dispose" disposing))
+    ((cl:and (cl:not supplied-disposing))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Dispose"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "Dispose"
+                    :supplied-args (cl:append (cl:when supplied-disposing (cl:list :disposing disposing)))))))
 
 (cl:defun dispose (obj)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Dispose Dispose() -> Void"
@@ -228,9 +249,18 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Dispose Dispose(Boolean) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Dispose" disposing))
 
-(cl:defun draw-indexed-primitives (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawIndexedPrimitives overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawIndexedPrimitives" args))
+(cl:defun draw-indexed-primitives (obj primitive-type base-vertex start-index primitive-count cl:&optional (start-index cl:nil supplied-start-index) (primitive-count cl:nil supplied-primitive-count))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawIndexedPrimitives overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) supplied-start-index (cl:numberp start-index) supplied-primitive-count (cl:numberp primitive-count))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawIndexedPrimitives" primitive-type base-vertex start-index primitive-count start-index primitive-count))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) (cl:not supplied-start-index) (cl:not supplied-primitive-count))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawIndexedPrimitives" primitive-type base-vertex start-index primitive-count))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "DrawIndexedPrimitives"
+                    :supplied-args (cl:append (cl:list :primitive-type primitive-type) (cl:list :base-vertex base-vertex) (cl:list :start-index start-index) (cl:list :primitive-count primitive-count) (cl:when supplied-start-index (cl:list :start-index start-index)) (cl:when supplied-primitive-count (cl:list :primitive-count primitive-count)))))))
 
 (cl:defun draw-indexed-primitives-primitive-type-int32-int32-int32 (obj primitive-type base-vertex start-index primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawIndexedPrimitives DrawIndexedPrimitives(PrimitiveType, Int32, Int32, Int32) -> Void"
@@ -240,9 +270,20 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawIndexedPrimitives DrawIndexedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32, Int32) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawIndexedPrimitives" primitive-type base-vertex min-vertex-index num-vertices start-index primitive-count))
 
-(cl:defun draw-instanced-primitives (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawInstancedPrimitives overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawInstancedPrimitives" args))
+(cl:defun draw-instanced-primitives (obj primitive-type base-vertex start-index primitive-count instance-count cl:&optional (instance-count cl:nil supplied-instance-count) (instance-count cl:nil supplied-instance-count))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawInstancedPrimitives overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) (cl:numberp instance-count) supplied-instance-count (cl:numberp instance-count) supplied-instance-count (cl:numberp instance-count))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawInstancedPrimitives" primitive-type base-vertex start-index primitive-count instance-count instance-count instance-count))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) (cl:numberp instance-count) supplied-instance-count (cl:numberp instance-count) (cl:not supplied-instance-count))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawInstancedPrimitives" primitive-type base-vertex start-index primitive-count instance-count instance-count))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) (cl:numberp instance-count) (cl:not supplied-instance-count) (cl:not supplied-instance-count))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawInstancedPrimitives" primitive-type base-vertex start-index primitive-count instance-count))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "DrawInstancedPrimitives"
+                    :supplied-args (cl:append (cl:list :primitive-type primitive-type) (cl:list :base-vertex base-vertex) (cl:list :start-index start-index) (cl:list :primitive-count primitive-count) (cl:list :instance-count instance-count) (cl:when supplied-instance-count (cl:list :instance-count instance-count)) (cl:when supplied-instance-count (cl:list :instance-count instance-count)))))))
 
 (cl:defun draw-instanced-primitives-primitive-type-int32-int32-int32-int32 (obj primitive-type base-vertex start-index primitive-count instance-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawInstancedPrimitives DrawInstancedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32) -> Void"
@@ -259,9 +300,22 @@
 (cl:defun draw-primitives (obj primitive-type vertex-start primitive-count)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawPrimitives" primitive-type vertex-start primitive-count))
 
-(cl:defun draw-user-indexed-primitives (type obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke-generic) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) args))
+(cl:defun draw-user-indexed-primitives (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count cl:&optional (vertex-declaration cl:nil supplied-vertex-declaration))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp num-vertices) (cl:or (cl:null index-data) (monoutils:dotnet-p index-data)) (cl:numberp index-offset) (cl:numberp primitive-count) supplied-vertex-declaration (cl:or (cl:null vertex-declaration) (monoutils:dotnet-p vertex-declaration)))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp num-vertices) (cl:or (cl:null index-data) (monoutils:dotnet-p index-data)) (cl:numberp index-offset) (cl:numberp primitive-count) supplied-vertex-declaration (cl:or (cl:null vertex-declaration) (monoutils:dotnet-p vertex-declaration)))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp num-vertices) (cl:or (cl:null index-data) (monoutils:dotnet-p index-data)) (cl:numberp index-offset) (cl:numberp primitive-count) (cl:not supplied-vertex-declaration))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp num-vertices) (cl:or (cl:null index-data) (monoutils:dotnet-p index-data)) (cl:numberp index-offset) (cl:numberp primitive-count) (cl:not supplied-vertex-declaration))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "DrawUserIndexedPrimitives"
+                    :supplied-args (cl:append (cl:list :primitive-type primitive-type) (cl:list :vertex-data vertex-data) (cl:list :vertex-offset vertex-offset) (cl:list :num-vertices num-vertices) (cl:list :index-data index-data) (cl:list :index-offset index-offset) (cl:list :primitive-count primitive-count) (cl:when supplied-vertex-declaration (cl:list :vertex-declaration vertex-declaration)))))))
 
 (cl:defun draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32 (type obj primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int16[], Int32, Int32) -> Void"
@@ -279,9 +333,18 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserIndexedPrimitives DrawUserIndexedPrimitives(PrimitiveType, T[], Int32, Int32, Int32[], Int32, Int32, VertexDeclaration) -> Void"
   (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserIndexedPrimitives" (cl:list type) primitive-type vertex-data vertex-offset num-vertices index-data index-offset primitive-count vertex-declaration))
 
-(cl:defun draw-user-primitives (type obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke-generic) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (cl:list type) args))
+(cl:defun draw-user-primitives (type obj primitive-type vertex-data vertex-offset primitive-count cl:&optional (vertex-declaration cl:nil supplied-vertex-declaration))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp primitive-count) supplied-vertex-declaration (cl:or (cl:null vertex-declaration) (monoutils:dotnet-p vertex-declaration)))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (cl:list type) primitive-type vertex-data vertex-offset primitive-count vertex-declaration))
+    ((cl:and (cl:or (cl:null primitive-type) (monoutils:dotnet-p primitive-type)) (cl:or (cl:null vertex-data) (monoutils:dotnet-p vertex-data)) (cl:numberp vertex-offset) (cl:numberp primitive-count) (cl:not supplied-vertex-declaration))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "DrawUserPrimitives" (cl:list type) primitive-type vertex-data vertex-offset primitive-count))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "DrawUserPrimitives"
+                    :supplied-args (cl:append (cl:list :primitive-type primitive-type) (cl:list :vertex-data vertex-data) (cl:list :vertex-offset vertex-offset) (cl:list :primitive-count primitive-count) (cl:when supplied-vertex-declaration (cl:list :vertex-declaration vertex-declaration)))))))
 
 (cl:defun draw-user-primitives-primitive-type-t[]-int32-int32 (type obj primitive-type vertex-data vertex-offset primitive-count)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.DrawUserPrimitives DrawUserPrimitives(PrimitiveType, T[], Int32, Int32) -> Void"
@@ -294,9 +357,20 @@
 (cl:defun finalize (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Finalize"))
 
-(cl:defun get-back-buffer-data (type obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke-generic) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) args))
+(cl:defun get-back-buffer-data (type obj data cl:&optional (start-index cl:nil supplied-start-index) (element-count cl:nil supplied-element-count) (element-count cl:nil supplied-element-count))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null data) (monoutils:dotnet-p data)) supplied-start-index (cl:or (cl:null start-index) (monoutils:dotnet-p start-index)) supplied-element-count (cl:numberp element-count) supplied-element-count (cl:numberp element-count))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) data start-index element-count element-count))
+    ((cl:and (cl:or (cl:null data) (monoutils:dotnet-p data)) supplied-start-index (cl:numberp start-index) supplied-element-count (cl:numberp element-count) (cl:not supplied-element-count))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) data start-index element-count))
+    ((cl:and (cl:or (cl:null data) (monoutils:dotnet-p data)) (cl:not supplied-start-index) (cl:not supplied-element-count) (cl:not supplied-element-count))
+     (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) data))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "GetBackBufferData"
+                    :supplied-args (cl:append (cl:list :data data) (cl:when supplied-start-index (cl:list :start-index start-index)) (cl:when supplied-element-count (cl:list :element-count element-count)) (cl:when supplied-element-count (cl:list :element-count element-count)))))))
 
 (cl:defun get-back-buffer-data-t[] (type obj data)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData GetBackBufferData(T[]) -> Void"
@@ -306,9 +380,22 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData GetBackBufferData(T[], Int32, Int32) -> Void"
   (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) data start-index element-count))
 
-(cl:defun get-render-targets (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetRenderTargets overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetRenderTargets" args))
+(cl:defun get-back-buffer-data-rectangle]-t[]-int32-int32 (type obj rect data start-index element-count)
+  "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetBackBufferData GetBackBufferData(Rectangle], T[], Int32, Int32) -> Void"
+  (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetBackBufferData" (cl:list type) rect data start-index element-count))
+
+(cl:defun get-render-targets (obj cl:&optional (out-targets cl:nil supplied-out-targets))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetRenderTargets overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-out-targets (cl:or (cl:null out-targets) (monoutils:dotnet-p out-targets)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetRenderTargets" out-targets))
+    ((cl:and (cl:not supplied-out-targets))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "GetRenderTargets"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "GetRenderTargets"
+                    :supplied-args (cl:append (cl:when supplied-out-targets (cl:list :out-targets out-targets)))))))
 
 (cl:defun get-render-targets (obj)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.GetRenderTargets GetRenderTargets() -> RenderTargetBinding[]"
@@ -321,9 +408,18 @@
 (cl:defun present (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Present"))
 
-(cl:defun reset (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Reset overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Reset" args))
+(cl:defun reset (obj cl:&optional (presentation-parameters cl:nil supplied-presentation-parameters))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Reset overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-presentation-parameters (cl:or (cl:null presentation-parameters) (monoutils:dotnet-p presentation-parameters)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Reset" presentation-parameters))
+    ((cl:and (cl:not supplied-presentation-parameters))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Reset"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "Reset"
+                    :supplied-args (cl:append (cl:when supplied-presentation-parameters (cl:list :presentation-parameters presentation-parameters)))))))
 
 (cl:defun reset (obj)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Reset Reset() -> Void"
@@ -333,9 +429,18 @@
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.Reset Reset(PresentationParameters) -> Void"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "Reset" presentation-parameters))
 
-(cl:defun set-render-target (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetRenderTarget overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetRenderTarget" args))
+(cl:defun set-render-target (obj render-target cl:&optional (cube-map-face cl:nil supplied-cube-map-face))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetRenderTarget overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null render-target) (monoutils:dotnet-p render-target)) supplied-cube-map-face (cl:or (cl:null cube-map-face) (monoutils:dotnet-p cube-map-face)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetRenderTarget" render-target cube-map-face))
+    ((cl:and (cl:or (cl:null render-target) (monoutils:dotnet-p render-target)) (cl:not supplied-cube-map-face))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetRenderTarget" render-target))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "SetRenderTarget"
+                    :supplied-args (cl:append (cl:list :render-target render-target) (cl:when supplied-cube-map-face (cl:list :cube-map-face cube-map-face)))))))
 
 (cl:defun set-render-target-render-target2-d (obj render-target)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetRenderTarget SetRenderTarget(RenderTarget2D) -> Void"
@@ -349,9 +454,18 @@
 ;; (ref, out, params, or defaults) and are not yet supported:
 ;;   SetRenderTargets(params RenderTargetBinding[]) -> Void
 
-(cl:defun set-vertex-buffer (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetVertexBuffer overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetVertexBuffer" args))
+(cl:defun set-vertex-buffer (obj vertex-buffer cl:&optional (vertex-offset cl:nil supplied-vertex-offset))
+  "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetVertexBuffer overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null vertex-buffer) (monoutils:dotnet-p vertex-buffer)) supplied-vertex-offset (cl:numberp vertex-offset))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetVertexBuffer" vertex-buffer vertex-offset))
+    ((cl:and (cl:or (cl:null vertex-buffer) (monoutils:dotnet-p vertex-buffer)) (cl:not supplied-vertex-offset))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj) "SetVertexBuffer" vertex-buffer))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-GRAPHICS-DEVICE"
+                    :class-name <type-str>
+                    :method-name "SetVertexBuffer"
+                    :supplied-args (cl:append (cl:list :vertex-buffer vertex-buffer) (cl:when supplied-vertex-offset (cl:list :vertex-offset vertex-offset)))))))
 
 (cl:defun set-vertex-buffer-vertex-buffer (obj vertex-buffer)
   "Calls Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetVertexBuffer SetVertexBuffer(VertexBuffer) -> Void"

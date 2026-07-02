@@ -1210,3 +1210,23 @@ PulseAudio) is frequently restricted, causing OpenAL device initialization to fa
 
 
 
+
+# C# Package Overload Resolution Enhancements (Version 18)
+
+To support seamless interop for overloaded C# methods, the Lisp Package Generator implements Version 18 overload resolution rules:
+
+## 1. Index-Based Positional Prefix Determination
+Previously, the generator determined the common positional parameter prefix across overloads based on both name matching and lack of default values. However, C# overloads can use different parameter names for the same positional slots (e.g. `FromMilliseconds(double value)` vs `FromMilliseconds(long milliseconds)`).
+- **Rule**: The positional prefix is now determined solely by the lack of default values up to `min-len` of the overloads, ignoring parameter names.
+- **Variable Mapping**: Positional parameters are mapped in the generated master wrapper lambda list using parameter names from the first overload. During invocation code generation (`format-master-overload-action`), parameters are mapped back by positional index rather than name, ensuring variables are correctly bound and passed to the C# interop.
+
+## 2. Literal Package Names in Fallback Conditions
+When an overloaded method call fails to match any valid C# signature at runtime, the generator signals a `csharp-overload-not-found` error.
+- **Fix**: The package name parameter is now generated as a literal string constant computed at generation time (e.g. `"MICROSOFT-XNA-FRAMEWORK-VECTOR2"`) rather than querying `(cl:package-name *package*)` at runtime. This guarantees accurate, package-independent diagnostics.
+
+## 3. Optional Positional Overload Dispatch
+To support overloaded methods like binary/unary operators (e.g. `TimeSpan.+` and `Vector2.+`) and multi-arity positional methods (e.g., `Rectangle.Contains`), the generator determines optional positional parameters beyond the minimum overload parameter length:
+- **Maximum Mandatory Length**: The generator computes `max-mandatory-parameter-len` across all overloads.
+- **Optional Parameter Collection**: Positional parameters between `min-len` and `max-mandatory-len` are generated in the master wrapper lambda list using `cl:&optional` (with `supplied-p` variables) instead of keyword arguments.
+- **Strict Dispatching**: Master wrapper `cond` clauses evaluate both argument type checks and `supplied-p` presence flags to accurately dispatch to the correct C# overload signature.
+

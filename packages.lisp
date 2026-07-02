@@ -73,7 +73,12 @@
             #:format-red
             #:path-combine
             #:file-exists-and-readable-p
-            #:qualify-path))
+            #:qualify-path
+            #:csharp-overload-not-found
+            #:csharp-overload-package-name
+            #:csharp-overload-class-name
+            #:csharp-overload-method-name
+            #:csharp-overload-supplied-args))
 
 (defpackage :monoutils
   (:use :cl)
@@ -108,7 +113,6 @@
             #:width
             #:height
             #:°2R
-            #:sprite-batch-begin
   ))
 
 (defpackage :game-repl
@@ -202,7 +206,8 @@
     (:v2 :microsoft-xna-framework-vector2)
     (:rect :microsoft-xna-framework-rectangle)
     (:single :system-single)
-    (:ts :system-time-span))
+    (:ts :system-time-span)
+    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch))
   (:export
     #:run-all-tests
     #:test-clr-defmethods))

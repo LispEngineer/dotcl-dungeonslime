@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameWindow
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:53Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:42Z
 
 (cl:in-package :cl-user)
 
@@ -42,8 +42,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameWindow"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameWindow")
-(cl:defconstant <creation> "2026-06-30T03:58:53Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:42Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -98,9 +98,18 @@
 (cl:defun begin-screen-device-change (obj will-be-full-screen)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "BeginScreenDeviceChange" will-be-full-screen))
 
-(cl:defun end-screen-device-change (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.GameWindow.EndScreenDeviceChange overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "EndScreenDeviceChange" args))
+(cl:defun end-screen-device-change (obj screen-device-name cl:&optional (client-width cl:nil supplied-client-width) (client-height cl:nil supplied-client-height))
+  "Master wrapper for Microsoft.Xna.Framework.GameWindow.EndScreenDeviceChange overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp screen-device-name) supplied-client-width (cl:numberp client-width) supplied-client-height (cl:numberp client-height))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "EndScreenDeviceChange" screen-device-name client-width client-height))
+    ((cl:and (cl:stringp screen-device-name) (cl:not supplied-client-width) (cl:not supplied-client-height))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "EndScreenDeviceChange" screen-device-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GAME-WINDOW"
+                    :class-name <type-str>
+                    :method-name "EndScreenDeviceChange"
+                    :supplied-args (cl:append (cl:list :screen-device-name screen-device-name) (cl:when supplied-client-width (cl:list :client-width client-width)) (cl:when supplied-client-height (cl:list :client-height client-height)))))))
 
 (cl:defun end-screen-device-change-string (obj screen-device-name)
   "Calls Microsoft.Xna.Framework.GameWindow.EndScreenDeviceChange EndScreenDeviceChange(String) -> Void"

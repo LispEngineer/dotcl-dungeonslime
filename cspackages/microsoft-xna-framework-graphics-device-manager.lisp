@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GraphicsDeviceManager
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:59:46Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:03:23Z
 
 (cl:in-package :cl-user)
 
@@ -44,8 +44,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GraphicsDeviceManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GraphicsDeviceManager")
-(cl:defconstant <creation> "2026-06-30T03:59:46Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:03:23Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -134,9 +134,18 @@
 (cl:defun begin-draw (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj) "BeginDraw"))
 
-(cl:defun dispose (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.GraphicsDeviceManager.Dispose overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj) "Dispose" args))
+(cl:defun dispose (obj cl:&optional (disposing cl:nil supplied-disposing))
+  "Master wrapper for Microsoft.Xna.Framework.GraphicsDeviceManager.Dispose overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-disposing (cl:typep disposing 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj) "Dispose" disposing))
+    ((cl:and (cl:not supplied-disposing))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj) "Dispose"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-DEVICE-MANAGER"
+                    :class-name <type-str>
+                    :method-name "Dispose"
+                    :supplied-args (cl:append (cl:when supplied-disposing (cl:list :disposing disposing)))))))
 
 (cl:defun dispose (obj)
   "Calls Microsoft.Xna.Framework.GraphicsDeviceManager.Dispose Dispose() -> Void"

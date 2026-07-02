@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:57:50Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:01:57Z
 
 (cl:in-package :cl-user)
 
@@ -35,6 +35,7 @@
    #:beep
    #:beep-int32-int32
    #:clear
+   #:get-cursor-position
    #:move-buffer-area
    #:move-buffer-area-int32-int32-int32-int32-int32-int32
    #:move-buffer-area-int32-int32-int32-int32-int32-int32-char-console-color-console-color
@@ -69,7 +70,9 @@
    #:write-u-int64
    #:write-object
    #:write-string
+   #:write-char]
    #:write-string-object
+   #:write-string-object]
    #:write-string-object-object
    #:write-char[]-int32-int32
    #:write-string-object-object-object
@@ -86,7 +89,9 @@
    #:write-line-u-int64
    #:write-line-object
    #:write-line-string
+   #:write-line-char]
    #:write-line-string-object
+   #:write-line-string-object]
    #:write-line-char[]-int32-int32
    #:write-line-string-object-object
    #:write-line-string-object-object-object
@@ -96,8 +101,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-06-30T03:57:50Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:01:57Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -137,9 +142,18 @@
 (cl:define-symbol-macro out (dotnet:static <type-str> "Out"))
 (cl:setf (cl:documentation (cl:quote out) (cl:quote cl:variable)) "Gets the standard output stream.")
 
-(cl:defun beep (cl:&rest args)
-  "Passthrough for System.Console.Beep overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Beep" args))
+(cl:defun beep (cl:&optional (frequency cl:nil supplied-frequency) (duration cl:nil supplied-duration))
+  "Master wrapper for System.Console.Beep overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-frequency (cl:numberp frequency) supplied-duration (cl:numberp duration))
+     (dotnet:static <type-str> "Beep" frequency duration))
+    ((cl:and (cl:not supplied-frequency) (cl:not supplied-duration))
+     (dotnet:static <type-str> "Beep"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "Beep"
+                    :supplied-args (cl:append (cl:when supplied-frequency (cl:list :frequency frequency)) (cl:when supplied-duration (cl:list :duration duration)))))))
 
 (cl:defun beep ()
   "Calls System.Console.Beep Beep() -> Void. Summary: Plays the sound of a beep through the console speaker.
@@ -159,9 +173,24 @@ Parameters:
 "
   (dotnet:static <type-str> "Clear"))
 
-(cl:defun move-buffer-area (cl:&rest args)
-  "Passthrough for System.Console.MoveBufferArea overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "MoveBufferArea" args))
+(cl:defun get-cursor-position ()
+  "Summary: Gets the position of the cursor.
+Returns: The column and row position of the cursor.
+"
+  (dotnet:static <type-str> "GetCursorPosition"))
+
+(cl:defun move-buffer-area (source-left source-top source-width source-height target-left target-top cl:&optional (source-char cl:nil supplied-source-char) (source-fore-color cl:nil supplied-source-fore-color) (source-back-color cl:nil supplied-source-back-color))
+  "Master wrapper for System.Console.MoveBufferArea overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp source-left) (cl:numberp source-top) (cl:numberp source-width) (cl:numberp source-height) (cl:numberp target-left) (cl:numberp target-top) supplied-source-char (cl:or (cl:null source-char) (monoutils:dotnet-p source-char)) supplied-source-fore-color (cl:or (cl:null source-fore-color) (monoutils:dotnet-p source-fore-color)) supplied-source-back-color (cl:or (cl:null source-back-color) (monoutils:dotnet-p source-back-color)))
+     (dotnet:static <type-str> "MoveBufferArea" source-left source-top source-width source-height target-left target-top source-char source-fore-color source-back-color))
+    ((cl:and (cl:numberp source-left) (cl:numberp source-top) (cl:numberp source-width) (cl:numberp source-height) (cl:numberp target-left) (cl:numberp target-top) (cl:not supplied-source-char) (cl:not supplied-source-fore-color) (cl:not supplied-source-back-color))
+     (dotnet:static <type-str> "MoveBufferArea" source-left source-top source-width source-height target-left target-top))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "MoveBufferArea"
+                    :supplied-args (cl:append (cl:list :source-left source-left) (cl:list :source-top source-top) (cl:list :source-width source-width) (cl:list :source-height source-height) (cl:list :target-left target-left) (cl:list :target-top target-top) (cl:when supplied-source-char (cl:list :source-char source-char)) (cl:when supplied-source-fore-color (cl:list :source-fore-color source-fore-color)) (cl:when supplied-source-back-color (cl:list :source-back-color source-back-color)))))))
 
 (cl:defun move-buffer-area-int32-int32-int32-int32-int32-int32 (source-left source-top source-width source-height target-left target-top)
   "Calls System.Console.MoveBufferArea MoveBufferArea(Int32, Int32, Int32, Int32, Int32, Int32) -> Void. Summary: Copies a specified source area of the screen buffer to a specified destination area.
@@ -190,9 +219,18 @@ Parameters:
 "
   (dotnet:static <type-str> "MoveBufferArea" (cl:the (dotnet "System.Int32") source-left) (cl:the (dotnet "System.Int32") source-top) (cl:the (dotnet "System.Int32") source-width) (cl:the (dotnet "System.Int32") source-height) (cl:the (dotnet "System.Int32") target-left) (cl:the (dotnet "System.Int32") target-top) (cl:the (dotnet "System.Char") source-char) (cl:the (dotnet "System.ConsoleColor") source-fore-color) (cl:the (dotnet "System.ConsoleColor") source-back-color)))
 
-(cl:defun open-standard-error (cl:&rest args)
-  "Passthrough for System.Console.OpenStandardError overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "OpenStandardError" args))
+(cl:defun open-standard-error (cl:&optional (buffer-size cl:nil supplied-buffer-size))
+  "Master wrapper for System.Console.OpenStandardError overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-buffer-size (cl:numberp buffer-size))
+     (dotnet:static <type-str> "OpenStandardError" buffer-size))
+    ((cl:and (cl:not supplied-buffer-size))
+     (dotnet:static <type-str> "OpenStandardError"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "OpenStandardError"
+                    :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
 (cl:defun open-standard-error ()
   "Calls System.Console.OpenStandardError OpenStandardError() -> Stream. Summary: Acquires the standard error stream.
@@ -208,9 +246,18 @@ Parameters:
 "
   (dotnet:static <type-str> "OpenStandardError" (cl:the (dotnet "System.Int32") buffer-size)))
 
-(cl:defun open-standard-input (cl:&rest args)
-  "Passthrough for System.Console.OpenStandardInput overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "OpenStandardInput" args))
+(cl:defun open-standard-input (cl:&optional (buffer-size cl:nil supplied-buffer-size))
+  "Master wrapper for System.Console.OpenStandardInput overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-buffer-size (cl:numberp buffer-size))
+     (dotnet:static <type-str> "OpenStandardInput" buffer-size))
+    ((cl:and (cl:not supplied-buffer-size))
+     (dotnet:static <type-str> "OpenStandardInput"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "OpenStandardInput"
+                    :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
 (cl:defun open-standard-input ()
   "Calls System.Console.OpenStandardInput OpenStandardInput() -> Stream. Summary: Acquires the standard input stream.
@@ -226,9 +273,18 @@ Parameters:
 "
   (dotnet:static <type-str> "OpenStandardInput" (cl:the (dotnet "System.Int32") buffer-size)))
 
-(cl:defun open-standard-output (cl:&rest args)
-  "Passthrough for System.Console.OpenStandardOutput overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "OpenStandardOutput" args))
+(cl:defun open-standard-output (cl:&optional (buffer-size cl:nil supplied-buffer-size))
+  "Master wrapper for System.Console.OpenStandardOutput overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-buffer-size (cl:numberp buffer-size))
+     (dotnet:static <type-str> "OpenStandardOutput" buffer-size))
+    ((cl:and (cl:not supplied-buffer-size))
+     (dotnet:static <type-str> "OpenStandardOutput"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "OpenStandardOutput"
+                    :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
 (cl:defun open-standard-output ()
   "Calls System.Console.OpenStandardOutput OpenStandardOutput() -> Stream. Summary: Acquires the standard output stream.
@@ -250,9 +306,18 @@ Returns: The next character from the input stream, or negative one (-1) if there
 "
   (dotnet:static <type-str> "Read"))
 
-(cl:defun read-key (cl:&rest args)
-  "Passthrough for System.Console.ReadKey overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ReadKey" args))
+(cl:defun read-key (cl:&optional (intercept cl:nil supplied-intercept))
+  "Master wrapper for System.Console.ReadKey overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-intercept (cl:typep intercept 'cl:boolean))
+     (dotnet:static <type-str> "ReadKey" intercept))
+    ((cl:and (cl:not supplied-intercept))
+     (dotnet:static <type-str> "ReadKey"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "ReadKey"
+                    :supplied-args (cl:append (cl:when supplied-intercept (cl:list :intercept intercept)))))))
 
 (cl:defun read-key ()
   "Calls System.Console.ReadKey ReadKey() -> ConsoleKeyInfo. Summary: Obtains the next character or function key pressed by the user. The pressed key is displayed in the console window.
@@ -332,9 +397,50 @@ Parameters:
 "
   (dotnet:static <type-str> "SetWindowSize" (cl:the (dotnet "System.Int32") width) (cl:the (dotnet "System.Int32") height)))
 
-(cl:defun write (cl:&rest args)
-  "Passthrough for System.Console.Write overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Write" args))
+(cl:defun write (value cl:&optional (arg0 cl:nil supplied-arg0) (arg1 cl:nil supplied-arg1) (arg2 cl:nil supplied-arg2))
+  "Master wrapper for System.Console.Write overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) supplied-arg1 (cl:or (cl:null arg1) (monoutils:dotnet-p arg1)) supplied-arg2 (cl:or (cl:null arg2) (monoutils:dotnet-p arg2)))
+     (dotnet:static <type-str> "Write" value arg0 arg1 arg2))
+    ((cl:and (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) supplied-arg1 (cl:or (cl:null arg1) (monoutils:dotnet-p arg1)) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value arg0 arg1))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-arg0 (cl:numberp arg0) supplied-arg1 (cl:numberp arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value arg0 arg1))
+    ((cl:and (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value arg0))
+    ((cl:and (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value arg0))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-arg0) (cl:not supplied-arg1) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "Write" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "Write"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-arg0 (cl:list :arg0 arg0)) (cl:when supplied-arg1 (cl:list :arg1 arg1)) (cl:when supplied-arg2 (cl:list :arg2 arg2)))))))
 
 (cl:defun write-boolean (value)
   "Calls System.Console.Write Write(Boolean) -> Void. Summary: Writes the text representation of the specified Boolean value to the standard output stream.
@@ -420,6 +526,12 @@ Parameters:
 "
   (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") value)))
 
+(cl:defun write-char] (value)
+  "Calls System.Console.Write Write(Char]) -> Void. Parameters:
+  - value (System.ReadOnlySpan`1[System.Char]): 
+"
+  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") value)))
+
 (cl:defun write-string-object (format arg0)
   "Calls System.Console.Write Write(String, Object) -> Void. Summary: Writes the text representation of the specified object to the standard output stream using the specified format information.
 Parameters:
@@ -427,6 +539,14 @@ Parameters:
   - arg0 (System.Object): An object to write using format.
 "
   (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0)))
+
+(cl:defun write-string-object] (format arg)
+  "Calls System.Console.Write Write(String, Object]) -> Void. Summary: Writes the text representation of the specified span of objects to the standard output stream using the specified format information.
+Parameters:
+  - format (System.String): A composite format string.
+  - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
+"
+  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.ReadOnlySpan`1[System.Object]") arg)))
 
 (cl:defun write-string-object-object (format arg0 arg1)
   "Calls System.Console.Write Write(String, Object, Object) -> Void. Summary: Writes the text representation of the specified objects to the standard output stream using the specified format information.
@@ -461,9 +581,52 @@ Parameters:
 ;; yet supported:
 ;;   Write(String, params Object[]) -> Void
 
-(cl:defun write-line (cl:&rest args)
-  "Passthrough for System.Console.WriteLine overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "WriteLine" args))
+(cl:defun write-line (cl:&optional (value cl:nil supplied-value) (arg0 cl:nil supplied-arg0) (count cl:nil supplied-count) (arg2 cl:nil supplied-arg2))
+  "Master wrapper for System.Console.WriteLine overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-value (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) supplied-count (cl:or (cl:null count) (monoutils:dotnet-p count)) supplied-arg2 (cl:or (cl:null arg2) (monoutils:dotnet-p arg2)))
+     (dotnet:static <type-str> "WriteLine" value arg0 count arg2))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-arg0 (cl:numberp arg0) supplied-count (cl:numberp count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value arg0 count))
+    ((cl:and supplied-value (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) supplied-count (cl:or (cl:null count) (monoutils:dotnet-p count)) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value arg0 count))
+    ((cl:and supplied-value (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value arg0))
+    ((cl:and supplied-value (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (monoutils:dotnet-p arg0)) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value arg0))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:stringp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:typep value 'cl:boolean) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and supplied-value (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine" value))
+    ((cl:and (cl:not supplied-value) (cl:not supplied-arg0) (cl:not supplied-count) (cl:not supplied-arg2))
+     (dotnet:static <type-str> "WriteLine"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONSOLE"
+                    :class-name <type-str>
+                    :method-name "WriteLine"
+                    :supplied-args (cl:append (cl:when supplied-value (cl:list :value value)) (cl:when supplied-arg0 (cl:list :arg0 arg0)) (cl:when supplied-count (cl:list :count count)) (cl:when supplied-arg2 (cl:list :arg2 arg2)))))))
 
 (cl:defun write-line ()
   "Calls System.Console.WriteLine WriteLine() -> Void. Summary: Writes the current line terminator to the standard output stream.
@@ -554,6 +717,12 @@ Parameters:
 "
   (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") value)))
 
+(cl:defun write-line-char] (value)
+  "Calls System.Console.WriteLine WriteLine(Char]) -> Void. Parameters:
+  - value (System.ReadOnlySpan`1[System.Char]): 
+"
+  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") value)))
+
 (cl:defun write-line-string-object (format arg0)
   "Calls System.Console.WriteLine WriteLine(String, Object) -> Void. Summary: Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream using the specified format information.
 Parameters:
@@ -561,6 +730,14 @@ Parameters:
   - arg0 (System.Object): An object to write using format.
 "
   (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0)))
+
+(cl:defun write-line-string-object] (format arg)
+  "Calls System.Console.WriteLine WriteLine(String, Object]) -> Void. Summary: Writes the text representation of the specified span of objects, followed by the current line terminator, to the standard output stream using the specified format information.
+Parameters:
+  - format (System.String): A composite format string.
+  - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
+"
+  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.ReadOnlySpan`1[System.Object]") arg)))
 
 (cl:defun write-line-char[]-int32-int32 (buffer index count)
   "Calls System.Console.WriteLine WriteLine(Char[], Int32, Int32) -> Void. Summary: Writes the specified subarray of Unicode characters, followed by the current line terminator, to the standard output stream.

@@ -9,7 +9,7 @@
 
 (in-package :assembly-package-generator)
 
-(defparameter *generator-version* 17
+(defparameter *generator-version* 18
   "Integer version number for the generated Lisp source files.
    Version history:
    1 - Initial generator mapping C# classes to Lisp packages.
@@ -30,7 +30,8 @@
    14 - Qualified standard Common Lisp comparison function cl:= in emitted passthrough code, preventing it from resolving to the shadowed = operator of the generated package.
    15 - Protected critical Lisp syntax symbols (quote, function, t, nil) from being shadowed by mapping conflicting C# member names to quote!, function!, t!, nil!; qualified other standard Common Lisp symbols in generated templates with cl: prefix.
    16 - Tracked is-static-overload-p per clean method overload inside Case 3 (instead of using group-wide static-p) to ensure overloaded static methods are correctly generated as static wrappers.
-   17 - Mapped C# field/property 'NaN' to Lisp 'nan' in camel-to-kebab; mapped 'IsSomething' methods/properties to 'something?' in map-member-name.")
+   17 - Mapped C# field/property 'NaN' to Lisp 'nan' in camel-to-kebab; mapped 'IsSomething' methods/properties to 'something?' in map-member-name.
+   18 - Added Master Wrapper with Precise Dispatch using Lisp's &key (var init supplied-p) syntax, split static vs instance mixed-mode overloads using '*' suffix, and added csharp-overload-not-found condition.")
 
 (defun camel-to-kebab (name)
   "Convert a PascalCase/camelCase string to Lisp kebab-case.
@@ -144,8 +145,8 @@
 
 
 (defun generic-type-p (type-str)
-  "Checks if a C# type signature string represents a generic type (contains a backtick or exclamation point)."
-  (and type-str (or (find #\` type-str) (find #\! type-str))))
+  "Checks if a C# type signature string represents an uninstantiated generic type parameter (contains an exclamation point)."
+  (and type-str (find #\! type-str)))
 
 (defun simple-method-p (method all-methods)
   "Returns t if the method qualifies for Phase 1 compilation.
@@ -199,8 +200,7 @@
          (or (not is-generic) (eql arity 1))
          (not (generic-type-p (getf method :return-type)))
          (every (lambda (p)
-                  (and (not (getf p :has-default))
-                       (not (getf p :out))
+                  (and (not (getf p :out))
                        (not (getf p :ref))
                        (not (getf p :ref-readonly))
                        (not (getf p :params))
@@ -343,7 +343,249 @@
     ((string= param-type "System.String")
      (format nil "(cl:stringp ~A)" arg-str))
     (t
-     (format nil "(monoutils:dotnet-p ~A)" arg-str))))
+     (format nil "(cl:or (cl:null ~A) (monoutils:dotnet-p ~A))" arg-str arg-str))))
+
+(cl:defun complex-group-p (clean-methods)
+  "Returns t if the group of clean methods requires a master wrapper dispatch (either multiple overloads or presence of default arguments)."
+  (cl:or (cl:>= (cl:length clean-methods) 2)
+         (cl:some (cl:lambda (m)
+                    (cl:some (cl:lambda (p) (cl:getf p :has-default)) (cl:getf m :parameters)))
+                  clean-methods)))
+
+(cl:defun collect-key-params (methods prefix-len)
+  "Collects the union of all keyword parameters from methods beyond prefix-len."
+  (cl:let ((key-params nil))
+    (cl:dolist (m methods)
+      (cl:let ((params (cl:nthcdr prefix-len (cl:getf m :parameters))))
+        (cl:dolist (p params)
+          (cl:let* ((pname (cl:getf p :name))
+                    (existing (cl:find pname key-params :key (cl:lambda (kp) (cl:getf kp :name)) :test #'cl:string=)))
+            (cl:unless existing
+              (cl:push p key-params))))))
+    (cl:nreverse key-params)))
+
+(cl:defun find-parameter-default-str (pname methods)
+  "Locates the C# default value of parameter pname across methods and returns it as a Lisp expression string."
+  (cl:dolist (m methods)
+    (cl:let ((p (cl:find pname (cl:getf m :parameters) :key (cl:lambda (param) (cl:getf param :name)) :test #'cl:string=)))
+      (cl:when (cl:and p (cl:getf p :has-default))
+        (cl:return (cl:getf p :default-value)))))
+  "cl:nil")
+
+(cl:defun common-parameter-prefix (methods)
+  "Determines the maximum common positional parameter prefix across methods based on lack of default values."
+  (cl:let* ((param-lists (cl:mapcar (cl:lambda (m) (cl:getf m :parameters)) methods))
+            (min-len (cl:reduce #'cl:min (cl:mapcar #'cl:length param-lists)))
+            (prefix nil))
+    (cl:loop for idx from 0 to (cl:1- min-len) do
+      (cl:let* ((first-param (cl:nth idx (cl:first param-lists)))
+                ;; A parameter cannot be positional if it has a default value in any overload.
+                (no-default-p (cl:every (cl:lambda (pl)
+                                          (cl:let ((p (cl:nth idx pl)))
+                                            (cl:not (cl:getf p :has-default))))
+                                        param-lists)))
+        (cl:if no-default-p
+            (cl:push first-param prefix)
+            (cl:loop-finish))))
+    (cl:nreverse prefix)))
+
+(cl:defun max-mandatory-parameter-len (methods)
+  "Returns the maximum number of mandatory parameters (parameters without defaults) in any single overload."
+  (cl:let ((max-len 0))
+    (cl:dolist (m methods)
+      (cl:let* ((params (cl:getf m :parameters))
+                (mandatory-count
+                  (cl:loop for p in params
+                           for idx from 0
+                           while (cl:not (cl:getf p :has-default))
+                           count t)))
+        (cl:setf max-len (cl:max max-len mandatory-count))))
+    max-len))
+
+(cl:defun collect-optional-positional-params (methods prefix-len max-mand-len)
+  "Collects parameter descriptors for optional positional parameters from index prefix-len to max-mand-len."
+  (cl:let ((opt-params nil))
+    (cl:loop for idx from prefix-len to (cl:1- max-mand-len) do
+      (cl:let ((found-param nil))
+        (cl:dolist (m methods)
+          (cl:let ((params (cl:getf m :parameters)))
+            (cl:when (cl:< idx (cl:length params))
+              (cl:setf found-param (cl:nth idx params))
+              (cl:return))))
+        (cl:when found-param
+          (cl:push found-param opt-params))))
+    (cl:nreverse opt-params)))
+
+(cl:defun format-master-overload-condition (cm prefix opt-params key-params)
+  "Generates Lisp conditional test expression checking supplied-p flags and parameter types for cm."
+  (cl:let* ((cond-parts nil)
+            (cm-params (cl:getf cm :parameters))
+            (prefix-len (cl:length prefix))
+            (max-mand-len (+ prefix-len (cl:length opt-params))))
+    ;; 1. Check positional prefix types by position index
+    (cl:loop for pp in prefix
+             for idx from 0 do
+      (cl:let* ((lpname (map-param-name (cl:getf pp :name)))
+                (cm-p (cl:nth idx cm-params))
+                (type-check (format-param-type-check (cl:getf cm-p :type) lpname)))
+        (cl:push type-check cond-parts)))
+    ;; 2. Check optional positional parameters presence and types
+    (cl:loop for op in opt-params
+             for idx from prefix-len to (cl:1- max-mand-len) do
+      (cl:let* ((op-name (map-param-name (cl:getf op :name)))
+                (supplied-var (cl:format nil "supplied-~A" op-name))
+                (cm-p (cl:nth idx cm-params)))
+        (cl:if cm-p
+            (cl:progn
+              (cl:push supplied-var cond-parts)
+              (cl:push (format-param-type-check (cl:getf cm-p :type) op-name) cond-parts))
+            (cl:push (cl:format nil "(cl:not ~A)" supplied-var) cond-parts))))
+    ;; 3. Check keyword parameters presence and types
+    (cl:dolist (kp key-params)
+      (cl:let* ((pname (cl:getf kp :name))
+             (lpname (map-param-name pname))
+             (supplied-var (cl:format nil "supplied-~A" lpname))
+             (cm-p (cl:find pname cm-params :key (cl:lambda (p) (cl:getf p :name)) :test #'cl:string=)))
+        (cl:if cm-p
+            (cl:progn
+              (cl:unless (cl:getf cm-p :has-default)
+                (cl:push supplied-var cond-parts))
+              (cl:push (format-param-type-check (cl:getf cm-p :type) lpname) cond-parts))
+            (cl:push (cl:format nil "(cl:not ~A)" supplied-var) cond-parts))))
+    (cl:format nil "(cl:and ~{~A~^ ~})" (cl:nreverse cond-parts))))
+
+(cl:defun format-master-overload-action (cm fq-name name static-p is-generic-p prefix opt-params)
+  "Generates C# invocation code for cm, mapping parameter names to the master wrapper's bound variables."
+  (cl:let* ((cm-params (cl:getf cm :parameters))
+            (prefix-len (cl:length prefix))
+            (max-mand-len (+ prefix-len (cl:length opt-params)))
+            (param-names
+              (cl:loop for p in cm-params
+                       for idx from 0
+                       collect (cl:cond
+                                 ((cl:< idx prefix-len)
+                                  (map-param-name (cl:getf (cl:nth idx prefix) :name)))
+                                 ((cl:< idx max-mand-len)
+                                  (map-param-name (cl:getf (cl:nth (- idx prefix-len) opt-params) :name)))
+                                 (cl:t
+                                  (map-param-name (cl:getf p :name))))))
+            (dotnet-method-name (cl:or (cl:getf cm :mangled-name) name)))
+    (cl:cond
+      ((cl:and static-p is-generic-p)
+       (cl:format nil "(dotnet:static-generic <type-str> \"~A\" (cl:list type)~@[ ~{~A~^ ~}~])" dotnet-method-name param-names))
+      (static-p
+       (cl:format nil "(dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~])" dotnet-method-name param-names))
+      (is-generic-p
+       (cl:format nil "(dotnet:invoke-generic (cl:the (dotnet \"~A\") obj) \"~A\" (cl:list type)~@[ ~{~A~^ ~}~])" fq-name dotnet-method-name param-names))
+      (cl:t
+       (cl:format nil "(dotnet:invoke (cl:the (dotnet \"~A\") obj) \"~A\"~@[ ~{~A~^ ~}~])" fq-name dotnet-method-name param-names)))))
+
+(cl:defun format-supplied-args-expr (prefix opt-params key-params)
+  "Generates Lisp expression constructing a plist of supplied arguments at runtime."
+  (cl:let ((parts nil))
+    (cl:dolist (pp prefix)
+      (cl:let ((lpname (map-param-name (cl:getf pp :name))))
+        (cl:push (cl:format nil "(cl:list :~A ~A)" lpname lpname) parts)))
+    (cl:dolist (op opt-params)
+      (cl:let* ((lpname (map-param-name (cl:getf op :name)))
+                (supplied-var (cl:format nil "supplied-~A" lpname)))
+        (cl:push (cl:format nil "(cl:when ~A (cl:list :~A ~A))" supplied-var lpname lpname) parts)))
+    (cl:dolist (kp key-params)
+      (cl:let* ((lpname (map-param-name (cl:getf kp :name)))
+             (supplied-var (cl:format nil "supplied-~A" lpname)))
+        (cl:push (cl:format nil "(cl:when ~A (cl:list :~A ~A))" supplied-var lpname lpname) parts)))
+    (cl:format nil "(cl:append ~{~A~^ ~})" (cl:nreverse parts))))
+
+(cl:defun generate-master-wrapper (stream methods name mname fq-name static-p is-generic-p)
+  "Generates Master Wrapper defun with precise dispatch cond block and fallback error signaling."
+  (cl:let* ((prefix (common-parameter-prefix methods))
+            (prefix-len (cl:length prefix))
+            (prefix-names (cl:mapcar (cl:lambda (p) (map-param-name (cl:getf p :name))) prefix))
+            (max-mand-len (max-mandatory-parameter-len methods))
+            (opt-params (collect-optional-positional-params methods prefix-len max-mand-len))
+            (key-params (collect-key-params methods max-mand-len))
+            (args-list nil))
+    (cl:when is-generic-p
+      (cl:setf args-list (cl:append args-list (cl:list "type"))))
+    (cl:unless static-p
+      (cl:setf args-list (cl:append args-list (cl:list "obj"))))
+    (cl:setf args-list (cl:append args-list prefix-names))
+    (cl:when opt-params
+      (cl:setf args-list (cl:append args-list (cl:list "cl:&optional")))
+      (cl:dolist (op opt-params)
+        (cl:let* ((op-name (map-param-name (cl:getf op :name)))
+                  (supplied-var (cl:format nil "supplied-~A" op-name)))
+          (cl:setf args-list (cl:append args-list (cl:list (cl:format nil "(~A cl:nil ~A)" op-name supplied-var)))))))
+    (cl:when key-params
+      (cl:setf args-list (cl:append args-list (cl:list "cl:&key")))
+      (cl:dolist (kp key-params)
+        (cl:let* ((kp-name (map-param-name (cl:getf kp :name)))
+               (kp-default (find-parameter-default-str (cl:getf kp :name) methods))
+               (supplied-var (cl:format nil "supplied-~A" kp-name)))
+          (cl:setf args-list (cl:append args-list (cl:list (cl:format nil "(~A ~A ~A)" kp-name kp-default supplied-var)))))))
+    
+    (cl:format stream "(cl:defun ~A (~{~A~^ ~})~%" mname args-list)
+    (cl:format stream "  \"Master wrapper for ~A.~A overloads. Dispatches at runtime.\"~%" fq-name name)
+    (cl:format stream "  (cl:cond~%")
+    
+    ;; Sort methods by parameter count descending for specificity
+    (cl:let ((sorted-methods (cl:sort (cl:copy-list methods) #'> :key (cl:lambda (m) (cl:length (cl:getf m :parameters))))))
+      (cl:dolist (cm sorted-methods)
+        (cl:let ((cond-str (format-master-overload-condition cm prefix opt-params key-params))
+              (action-str (format-master-overload-action cm fq-name name static-p is-generic-p prefix opt-params)))
+          (cl:format stream "    (~A~%" cond-str)
+          (cl:format stream "     ~A)~%" action-str))))
+    
+    (cl:let ((supplied-args-expr (format-supplied-args-expr prefix opt-params key-params)))
+      (cl:format stream "    (cl:t (cl:error 'utils:csharp-overload-not-found~%")
+      (cl:format stream "                    :package-name \"~A\"~%" (cl:string-upcase (camel-to-kebab fq-name)))
+      (cl:format stream "                    :class-name <type-str>~%")
+      (cl:format stream "                    :method-name \"~A\"~%" name)
+      (cl:format stream "                    :supplied-args ~A))))~%~%" supplied-args-expr))))
+
+(cl:defun generate-single-overload (stream m mname fq-name static-p)
+  "Generates Lisp wrapper function for a single clean C# overload."
+  (cl:let* ((m-doc (cl:getf m :documentation))
+            (summary (cl:getf m-doc :summary))
+            (returns (cl:getf m-doc :returns))
+            (params (cl:getf m :parameters))
+            (is-generic-p (cl:getf m :is-generic))
+            (param-names (cl:mapcar (cl:lambda (p) (map-param-name (cl:getf p :name))) params))
+            (args-str (cl:cond
+                        ((cl:and static-p is-generic-p)
+                         (cl:format nil "type~@[ ~{~A~^ ~}~]" param-names))
+                        (static-p
+                         (cl:format nil "~{~A~^ ~}" param-names))
+                        (is-generic-p
+                         (cl:format nil "type obj~@[ ~{~A~^ ~}~]" param-names))
+                        (cl:t
+                         (cl:format nil "obj~@[ ~{~A~^ ~}~]" param-names))))
+            (docstring (build-docstring summary returns params m-doc))
+            (escaped-docstring (escape-lisp-string docstring))
+            (dotnet-method-name (cl:or (cl:getf m :mangled-name) (cl:getf m :name)))
+            ;; For static method params, add (the (dotnet "Type") arg) hints
+            (static-typed-args
+              (cl:if static-p
+                  (cl:mapcar (cl:lambda (pn pt)
+                            (cl:format nil "(cl:the (dotnet \"~A\") ~A)" pt pn))
+                          param-names
+                          (cl:mapcar (cl:lambda (p) (cl:getf p :type)) params))
+                  nil)))
+       
+       (cl:format stream "(cl:defun ~A (~A)~%" mname args-str)
+       (cl:when (cl:> (cl:length escaped-docstring) 0)
+         (cl:format stream "  \"~A\"~%" escaped-docstring))
+       (cl:cond
+         ((cl:and static-p is-generic-p)
+          (cl:format stream "  (dotnet:static-generic <type-str> \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names))
+         (static-p
+          (cl:if static-typed-args
+              (cl:format stream "  (dotnet:static <type-str> \"~A\"~@[~{ ~A~}~]))~%~%" dotnet-method-name static-typed-args)
+              (cl:format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))
+         (is-generic-p
+          (cl:format stream "  (dotnet:invoke-generic (cl:the (dotnet \"~A\") obj) \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names))
+         (cl:t
+          (cl:format stream "  (dotnet:invoke (cl:the (dotnet \"~A\") obj) \"~A\"~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names)))))
 
 (defun format-overload-test (cm)
   "Generates a Lisp conditional test expression string for checking if the runtime arguments match the method's parameters."
@@ -448,9 +690,17 @@
       (dolist (group method-groups)
         (let* ((name (car group))
                (clean-methods (remove-if-not #'clean-method-p (cdr group)))
-               (clean-count (length clean-methods)))
+               (clean-count (length clean-methods))
+               (kebab-name (map-member-name name))
+               (static-clean (remove-if-not (lambda (m) (getf m :is-static)) clean-methods))
+               (instance-clean (remove-if-not (lambda (m) (not (getf m :is-static))) clean-methods))
+               (static-count (length static-clean))
+               (instance-count (length instance-clean))
+               (mixed-mode-p (and (> static-count 0) (> instance-count 0))))
           (when (> clean-count 0)
-            (push (map-member-name name) exports))
+            (push kebab-name exports)
+            (when mixed-mode-p
+              (push (concatenate 'string kebab-name "*") exports)))
           (when (>= clean-count 2)
             ;; Export type-suffixed names for multi-overload methods
             (dolist (cm clean-methods)
@@ -660,12 +910,16 @@
         (dolist (group method-groups)
           (let* ((name (car group))
                  (group-methods (cdr group))
-                 (static-p (getf (first group-methods) :is-static))
                  (clean-methods (remove-if-not #'clean-method-p group-methods))
                  (dirty-methods (remove-if-not #'dirty-method-p group-methods))
                  (clean-count (length clean-methods))
                  (dirty-count (length dirty-methods))
-                 (kebab-name (map-member-name name)))
+                 (kebab-name (map-member-name name))
+                 (static-clean (remove-if-not (lambda (m) (getf m :is-static)) clean-methods))
+                 (instance-clean (remove-if-not (lambda (m) (not (getf m :is-static))) clean-methods))
+                 (static-count (length static-clean))
+                 (instance-count (length instance-clean))
+                 (mixed-mode-p (and (> static-count 0) (> instance-count 0))))
             
             (cond
               ;; Case 1: No clean overloads - all are dirty (ref/out/params/defaults)
@@ -676,90 +930,34 @@
                  (format stream ";;   ~A~%" (method-signature-str dm)))
                (format stream "~%"))
               
-              ;; Case 2: Single clean overload
-              ((= clean-count 1)
-               (let* ((m (first clean-methods))
-                      (mname kebab-name)
-                      (m-doc (getf m :documentation))
-                      (summary (getf m-doc :summary))
-                      (returns (getf m-doc :returns))
-                      (params (getf m :parameters))
-                      (is-generic-p (getf m :is-generic))
-                      (param-names (mapcar (lambda (p) (map-param-name (getf p :name))) params))
-                      (args-str (cond
-                                  ((and static-p is-generic-p)
-                                   (format nil "type~@[ ~{~A~^ ~}~]" param-names))
-                                  (static-p
-                                   (format nil "~{~A~^ ~}" param-names))
-                                  (is-generic-p
-                                   (format nil "type obj~@[ ~{~A~^ ~}~]" param-names))
-                                  (t
-                                   (format nil "obj~@[ ~{~A~^ ~}~]" param-names))))
-                      (docstring (build-docstring summary returns params m-doc))
-                      (escaped-docstring (escape-lisp-string docstring))
-                      (dotnet-method-name (or (getf m :mangled-name) name))
-                      ;; For static method params, add (the (dotnet "Type") arg) hints
-                      (static-typed-args
-                        (if static-p
-                            (mapcar (lambda (pn pt)
-                                      (format nil "(cl:the (dotnet \"~A\") ~A)" pt pn))
-                                    param-names
-                                    (mapcar (lambda (p) (getf p :type)) params))
-                            nil)))
-                 
-                 (format stream "(cl:defun ~A (~A)~%" mname args-str)
-                 (when (> (length escaped-docstring) 0)
-                   (format stream "  \"~A\"~%" escaped-docstring))
-                 (cl:cond
-                   ((and static-p is-generic-p)
-                    (format stream "  (dotnet:static-generic <type-str> \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names))
-                   (static-p
-                    (if static-typed-args
-                        (format stream "  (dotnet:static <type-str> \"~A\"~@[~{ ~A~}~]))~%~%" dotnet-method-name static-typed-args)
-                        (format stream "  (dotnet:static <type-str> \"~A\"~@[ ~{~A~^ ~}~]))~%~%" dotnet-method-name param-names)))
-                   (is-generic-p
-                    (format stream "  (dotnet:invoke-generic (cl:the (dotnet \"~A\") obj) \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names))
-                   (cl:t
-                    (format stream "  (dotnet:invoke (cl:the (dotnet \"~A\") obj) \"~A\"~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names)))
-                 ;; Emit dirty overload doc-comment if any
-                 (when (> dirty-count 0)
-                   (format stream ";; Note: ~A.~A also has the following overloads with special~%" fq-name name)
-                   (format stream ";; parameter types (ref, out, params, or defaults) that are not~%")
-                   (format stream ";; yet supported:~%")
-                   (dolist (dm dirty-methods)
-                     (format stream ";;   ~A~%" (method-signature-str dm)))
-                   (format stream "~%"))))
-              
-              ;; Case 3: Multiple clean overloads (2 or more)
+               ;; Case 2: Clean overloads exist
               (t
-               ;; Generate passthrough &rest function for DotCL runtime dispatch
-               (let* ((first-clean (first clean-methods))
-                      (is-generic-p (getf first-clean :is-generic))
-                      (is-operator (uiop:string-prefix-p "op_" (or (getf first-clean :mangled-name) "")))
-                      (passthrough-args (cl:cond
-                                          ((and static-p is-generic-p) "type cl:&rest args")
-                                          (static-p "cl:&rest args")
-                                          (is-generic-p "type obj cl:&rest args")
-                                          (cl:t "obj cl:&rest args"))))
-                 (format stream "(cl:defun ~A (~A)~%" kebab-name passthrough-args)
-                 (format stream "  \"Passthrough for ~A.~A overloads. Dispatches at runtime.\"~%" fq-name name)
-                 (cl:cond
-                   (is-operator
-                    (format stream "  (cl:cond~%")
-                    (dolist (cm clean-methods)
-                      (let ((test-str (format-overload-test cm))
-                            (overload-fn (method-overload-name cm)))
-                        (format stream "    (~A~%     (cl:apply (cl:function ~A) args))~%" test-str overload-fn)))
-                    (format stream "    (cl:t (cl:error \"~A.~A: no matching overload found for args: ~~S\" args))))~%~%" fq-name name))
-                   ((and static-p is-generic-p)
-                    (format stream "  (cl:apply (cl:function dotnet:static-generic) <type-str> \"~A\" (cl:list type) args))~%~%" name))
-                   (static-p
-                    (format stream "  (cl:apply (cl:function dotnet:static) <type-str> \"~A\" args))~%~%" name))
-                   (is-generic-p
-                    (format stream "  (cl:apply (cl:function dotnet:invoke-generic) (cl:the (dotnet \"~A\") obj) \"~A\" (cl:list type) args))~%~%" fq-name name))
-                   (cl:t
-                    (format stream "  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet \"~A\") obj) \"~A\" args))~%~%" fq-name name)))
-                 ;; Generate per-overload typed functions with type-suffixed names
+               (cl:cond
+                 (mixed-mode-p
+                  ;; Mixed-Mode: instance name is kebab-name, static name is kebab-name*
+                  (cl:let ((static-kebab-name (concatenate 'string kebab-name "*")))
+                    ;; Instance wrappers
+                    (cl:if (cl:and (= instance-count 1) (cl:not (complex-group-p instance-clean)))
+                           (generate-single-overload stream (first instance-clean) kebab-name fq-name nil)
+                           (generate-master-wrapper stream instance-clean name kebab-name fq-name nil (getf (first instance-clean) :is-generic)))
+                    ;; Static wrappers
+                    (cl:if (cl:and (= static-count 1) (cl:not (complex-group-p static-clean)))
+                           (generate-single-overload stream (first static-clean) static-kebab-name fq-name t)
+                           (generate-master-wrapper stream static-clean name static-kebab-name fq-name t (getf (first static-clean) :is-generic)))))
+                 (t
+                  ;; Single-Mode: name is kebab-name
+                  (cl:cond
+                    ((> static-count 0)
+                     (cl:if (cl:and (= static-count 1) (cl:not (complex-group-p static-clean)))
+                            (generate-single-overload stream (first static-clean) kebab-name fq-name t)
+                            (generate-master-wrapper stream static-clean name kebab-name fq-name t (getf (first static-clean) :is-generic))))
+                    ((> instance-count 0)
+                     (cl:if (cl:and (= instance-count 1) (cl:not (complex-group-p instance-clean)))
+                            (generate-single-overload stream (first instance-clean) kebab-name fq-name nil)
+                            (generate-master-wrapper stream instance-clean name kebab-name fq-name nil (getf (first instance-clean) :is-generic)))))))
+               
+               ;; Generate per-overload typed functions with type-suffixed names (for clean-count >= 2)
+               (when (>= clean-count 2)
                  (dolist (cm clean-methods)
                    (let* ((mname (method-overload-name cm))
                           (m-doc (getf cm :documentation))
@@ -809,14 +1007,15 @@
                         (format stream "  (dotnet:invoke-generic (cl:the (dotnet \"~A\") obj) \"~A\" (cl:list type)~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names))
                        (cl:t
                         (format stream "  (dotnet:invoke (cl:the (dotnet \"~A\") obj) \"~A\"~@[ ~{~A~^ ~}~]))~%~%" fq-name dotnet-method-name param-names))))))
-                 ;; Emit dirty overload doc-comment if any
-                 (when (> dirty-count 0)
-                   (format stream ";; Note: ~A.~A also has the following overloads with special~%" fq-name name)
-                   (format stream ";; parameter types (ref, out, params, or defaults) that are not~%")
-                   (format stream ";; yet supported:~%")
-                   (dolist (dm dirty-methods)
-                     (format stream ";;   ~A~%" (method-signature-str dm)))
-                   (format stream "~%"))))))
+               
+               ;; Emit dirty overload doc-comment if any
+               (when (> dirty-count 0)
+                 (format stream ";; Note: ~A.~A also has the following overloads with special~%" fq-name name)
+                 (format stream ";; parameter types (ref, out, params, or defaults) that are not~%")
+                 (format stream ";; yet supported:~%")
+                 (dolist (dm dirty-methods)
+                   (format stream ";;   ~A~%" (method-signature-str dm)))
+                 (format stream "~%"))))))
         ) ;; close with-open-file
       ) ;; close inner analysis let*
     ) ;; close outer let*

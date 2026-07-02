@@ -218,32 +218,32 @@
   (let ((contains (find-symbol "CONTAINS" :microsoft-xna-framework-rectangle))
         (contains-rect (find-symbol "CONTAINS-RECTANGLE" :microsoft-xna-framework-rectangle))
         (contains-v2 (find-symbol "CONTAINS-VECTOR2" :microsoft-xna-framework-rectangle)))
-    ;; Rectangle contains a point at its center
+    ;; Rectangle contains a point at its center (Version 18 positional/keyword interface)
     (let ((r (rect:new 0 0 100 100))
           (v (v2:new 50 50)))
       (assert (funcall contains r v))
       (format *error-output* "  [PASS] Rectangle contains center point~%"))
-    ;; Rectangle does not contain point outside
+    ;; Rectangle does not contain point outside (Version 18 positional/keyword interface)
     (let ((r (rect:new 0 0 100 100))
           (v (v2:new 200 200)))
       (assert (not (funcall contains r v)))
       (format *error-output* "  [PASS] Rectangle does NOT contain outside point~%"))
-    ;; Rectangle contains another rectangle
+    ;; Rectangle contains another rectangle (Version 18 positional/keyword interface)
     (let ((r1 (rect:new 0 0 100 100))
           (r2 (rect:new 10 10 20 20)))
       (assert (funcall contains r1 r2))
       (format *error-output* "  [PASS] Rectangle contains smaller rectangle~%"))
-    ;; Rectangle does not contain a larger rectangle
+    ;; Rectangle does not contain a larger rectangle (Version 18 positional/keyword interface)
     (let ((r1 (rect:new 0 0 50 50))
           (r2 (rect:new 0 0 100 100)))
       (assert (not (funcall contains r1 r2)))
       (format *error-output* "  [PASS] Rectangle does NOT contain larger rectangle~%"))
-    ;; Point on the edge - this is at the boundary
+    ;; Point on the edge - this is at the boundary (Version 18 positional/keyword interface)
     (let ((r (rect:new 0 0 100 100))
           (v (v2:new 0 0)))
       (assert (funcall contains r v))
       (format *error-output* "  [PASS] Rectangle contains point on edge~%"))
-    ;; Point just outside the edge
+    ;; Point just outside the edge (Version 18 positional/keyword interface)
     (let ((r (rect:new 0 0 100 100))
           (v (v2:new -1 50)))
       (assert (not (funcall contains r v)))

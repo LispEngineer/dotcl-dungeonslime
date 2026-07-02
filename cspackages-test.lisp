@@ -121,7 +121,7 @@
                     "Rectangle.Intersects non-overlapping rectangles"))
 
     ;; Rectangle.Contains - multi-overload (5 clean + 3 dirty)
-    ;; Passthrough dispatch
+    ;; Master wrapper dispatch (Version 18 positional/keyword interface)
     (let ((contains (find-symbol "CONTAINS" rect-pkg)))
       (assert-cspkg (funcall contains r-outer v-point) t
                     "Rectangle.Contains passthrough center point")
@@ -154,7 +154,7 @@
     (assert-cspkg (funcall (find-symbol "BOTTOM" rect-pkg) r-outer) 100
                   "Rectangle.Bottom of (0,0,100,100) = 100")
 
-    ;; Bad type argument to passthrough should signal an error
+    ;; Bad type argument to contains should signal an error
     (assert-cspkg-error
       (funcall (find-symbol "CONTAINS" rect-pkg) r-outer "not-a-vector")
       "Rectangle.Contains passthrough errors on bad type")
@@ -228,12 +228,12 @@
   (let* ((r (rect:new 0 0 100 100))
          (rect-pkg :microsoft-xna-framework-rectangle))
 
-    ;; Rectangle.Contains with Point (no typed overload, uses passthrough)
+    ;; Rectangle.Contains with Point (Version 18 positional/optional interface)
     (let ((p (dotnet:new "Microsoft.Xna.Framework.Point" 50 50)))
       (assert-cspkg (funcall (find-symbol "CONTAINS" rect-pkg) r p) t
                     "Rectangle.Contains Point (through passthrough)"))
 
-    ;; Rectangle.Contains(int, int) and Contains(float, float) passthrough
+    ;; Rectangle.Contains(int, int) and Contains(float, float) (Version 18 positional/optional interface)
     (assert-cspkg (funcall (find-symbol "CONTAINS" rect-pkg) r 50 50) t
                   "Rectangle.Contains(int,int) passthrough center")
     (assert-cspkg (funcall (find-symbol "CONTAINS" rect-pkg) r 200 200) nil
@@ -332,5 +332,36 @@
                   "Uri constructor via new")
     (assert-cspkg (dotnet:invoke u-typed "ToString") "http://localhost/"
                   "Uri constructor via new-string"))
+
+  ;; 4. Overload Resolution, Mixed-Mode, & Custom Condition Tests
+  (format *error-output* "--- Overload Resolution & Condition Tests ---~%")
+
+  ;; Test static mixed-mode normalize*
+  (let* ((v (v2:new 3.0e0 4.0e0))
+         (norm (v2:normalize* v)))
+    (assert-cspkg (v2:length norm) 1.0e0 "v2:normalize* returns unit vector"))
+
+  ;; Test utils:csharp-overload-not-found condition signaling on Vector2 division
+  (handler-case
+      (progn
+        (v2:/ (v2:new 1.0e0 2.0e0) "invalid-value")
+        (error "v2:/ did not signal utils:csharp-overload-not-found on invalid type"))
+    (utils:csharp-overload-not-found (e)
+      (assert-cspkg (utils:csharp-overload-class-name e) "Microsoft.Xna.Framework.Vector2" "Condition class name")
+      (assert-cspkg (utils:csharp-overload-method-name e) "/" "Condition method name")
+      (assert-cspkg (utils:csharp-overload-package-name e) "MICROSOFT-XNA-FRAMEWORK-VECTOR2" "Condition package name")
+      (let ((args (utils:csharp-overload-supplied-args e)))
+        (assert-cspkg (getf args :value2) "invalid-value" "Condition supplied-args value"))))
+
+  ;; Test sprite-batch:begin type-checking and condition signaling
+  (handler-case
+      (progn
+        ;; Pass invalid sort-mode type (integer instead of enum/dotnet-p)
+        (sprite-batch:begin nil :sort-mode 123)
+        (error "sprite-batch:begin did not signal utils:csharp-overload-not-found on invalid type"))
+    (utils:csharp-overload-not-found (e)
+      (assert-cspkg (utils:csharp-overload-method-name e) "Begin" "Condition method name for Begin")
+      (let ((args (utils:csharp-overload-supplied-args e)))
+        (assert-cspkg (getf args :sort-mode) 123 "Condition supplied-args sort-mode"))))
 
   (format *error-output* "--- C# Packages Integration Tests Completed ---~%"))

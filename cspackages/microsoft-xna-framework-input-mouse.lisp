@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Mouse
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:59:04Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:51Z
 
 (cl:in-package :cl-user)
 
@@ -22,17 +22,26 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Mouse"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Mouse")
-(cl:defconstant <creation> "2026-06-30T03:59:04Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:51Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Mouse")))
 
-(cl:defun get-state (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Input.Mouse.GetState overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "GetState" args))
+(cl:defun get-state (cl:&optional (window cl:nil supplied-window))
+  "Master wrapper for Microsoft.Xna.Framework.Input.Mouse.GetState overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-window (cl:or (cl:null window) (monoutils:dotnet-p window)))
+     (dotnet:static <type-str> "GetState" window))
+    ((cl:and (cl:not supplied-window))
+     (dotnet:static <type-str> "GetState"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-MOUSE"
+                    :class-name <type-str>
+                    :method-name "GetState"
+                    :supplied-args (cl:append (cl:when supplied-window (cl:list :window window)))))))
 
 (cl:defun get-state ()
   "Calls Microsoft.Xna.Framework.Input.Mouse.GetState GetState() -> MouseState"

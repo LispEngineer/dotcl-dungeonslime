@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:28Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:24Z
 
 (cl:in-package :cl-user)
 
@@ -143,7 +143,11 @@
    #:parse-string
    #:parse-string-number-styles
    #:parse-string-i-format-provider
+   #:parse-char]-i-format-provider
+   #:parse-byte]-i-format-provider
    #:parse-string-number-styles-i-format-provider
+   #:parse-char]-number-styles-i-format-provider
+   #:parse-byte]-number-styles-i-format-provider
    #:pow
    #:radians-to-degrees
    #:reciprocal-estimate
@@ -157,6 +161,8 @@
    #:scale-b
    #:sign
    #:sin
+   #:sin-cos
+   #:sin-cos-pi
    #:sinh
    #:sin-pi
    #:sqrt
@@ -174,8 +180,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-06-30T03:58:28Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:24Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -410,9 +416,18 @@ Parameters:
 "
   (dotnet:static <type-str> "ClampNative" (cl:the (dotnet "System.Single") value) (cl:the (dotnet "System.Single") min) (cl:the (dotnet "System.Single") max)))
 
-(cl:defun compare-to (obj cl:&rest args)
-  "Passthrough for System.Single.CompareTo overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Single") obj) "CompareTo" args))
+(cl:defun compare-to (obj value)
+  "Master wrapper for System.Single.CompareTo overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
+    ((cl:and (cl:numberp value))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "CompareTo"
+                    :supplied-args (cl:append (cl:list :value value))))))
 
 (cl:defun compare-to-object (obj value)
   "Calls System.Single.CompareTo CompareTo(Object) -> Int32. Summary: Compares this instance to a specified object and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified object.
@@ -511,9 +526,18 @@ Parameters:
 "
   (dotnet:static <type-str> "DegreesToRadians" (cl:the (dotnet "System.Single") degrees)))
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for System.Single.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Single") obj) "Equals" args))
+(cl:defun equals (obj obj)
+  "Master wrapper for System.Single.Equals overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
+    ((cl:and (cl:numberp obj))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "Equals"
+                    :supplied-args (cl:append (cl:list :obj obj))))))
 
 (cl:defun equals-object (obj obj)
   "Calls System.Single.Equals Equals(Object) -> Boolean. Summary: Returns a value indicating whether this instance is equal to a specified object.
@@ -757,9 +781,18 @@ Parameters:
 "
   (dotnet:static <type-str> "Lerp" (cl:the (dotnet "System.Single") value1) (cl:the (dotnet "System.Single") value2) (cl:the (dotnet "System.Single") amount)))
 
-(cl:defun log (cl:&rest args)
-  "Passthrough for System.Single.Log overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Log" args))
+(cl:defun log (x cl:&optional (new-base cl:nil supplied-new-base))
+  "Master wrapper for System.Single.Log overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp x) supplied-new-base (cl:numberp new-base))
+     (dotnet:static <type-str> "Log" x new-base))
+    ((cl:and (cl:numberp x) (cl:not supplied-new-base))
+     (dotnet:static <type-str> "Log" x))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "Log"
+                    :supplied-args (cl:append (cl:list :x x) (cl:when supplied-new-base (cl:list :new-base new-base)))))))
 
 (cl:defun log-single (x)
   "Calls System.Single.Log Log(Single) -> Single. Summary: Computes the natural (base-E logarithm of a value.
@@ -927,9 +960,30 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.Single") left) (cl:the (dotnet "System.Single") right)))
 
-(cl:defun parse (cl:&rest args)
-  "Passthrough for System.Single.Parse overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Parse" args))
+(cl:defun parse (s cl:&optional (style cl:nil supplied-style) (provider cl:nil supplied-provider))
+  "Master wrapper for System.Single.Parse overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "Parse" s style provider))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "Parse" s style provider))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "Parse" s style provider))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "Parse" s style))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "Parse" s style))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "Parse" s style))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "Parse" s style))
+    ((cl:and (cl:stringp s) (cl:not supplied-style) (cl:not supplied-provider))
+     (dotnet:static <type-str> "Parse" s))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "Parse"
+                    :supplied-args (cl:append (cl:list :s s) (cl:when supplied-style (cl:list :style style)) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun parse-string (s)
   "Calls System.Single.Parse Parse(String) -> Single. Summary: Converts the string representation of a number to its single-precision floating-point number equivalent.
@@ -957,6 +1011,24 @@ Parameters:
 "
   (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s) (cl:the (dotnet "System.IFormatProvider") provider)))
 
+(cl:defun parse-char]-i-format-provider (s provider)
+  "Calls System.Single.Parse Parse(Char], IFormatProvider) -> Single. Summary: Parses a span of characters into a value.
+Returns: The result of parsing s.
+Parameters:
+  - s (System.ReadOnlySpan`1[System.Char]): The span of characters to parse.
+  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about s.
+"
+  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") s) (cl:the (dotnet "System.IFormatProvider") provider)))
+
+(cl:defun parse-byte]-i-format-provider (utf8-text provider)
+  "Calls System.Single.Parse Parse(Byte], IFormatProvider) -> Single. Summary: Parses a span of UTF-8 characters into a value.
+Returns: The result of parsing utf8Text.
+Parameters:
+  - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+"
+  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") utf8-text) (cl:the (dotnet "System.IFormatProvider") provider)))
+
 (cl:defun parse-string-number-styles-i-format-provider (s style provider)
   "Calls System.Single.Parse Parse(String, NumberStyles, IFormatProvider) -> Single. Summary: Converts the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
 Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
@@ -966,6 +1038,32 @@ Parameters:
   - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
 "
   (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
+
+(cl:defun parse-char]-number-styles-i-format-provider (s style provider)
+  "Calls System.Single.Parse Parse(Char], NumberStyles, IFormatProvider) -> Single. Summary: Converts a character span that contains the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
+Returns: A single-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
+Parameters:
+  - s (System.ReadOnlySpan`1[System.Char]): A character span that contains the number to convert.
+  - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicate the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+"
+  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") s) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
+
+(cl:defun parse-byte]-number-styles-i-format-provider (utf8-text style provider)
+  "Calls System.Single.Parse Parse(Byte], NumberStyles, IFormatProvider) -> Single. Summary: Parses a span of UTF-8 characters into a value.
+Returns: The result of parsing utf8Text.
+Parameters:
+  - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+  - style (System.Globalization.NumberStyles): A bitwise combination of number styles that can be present in utf8Text.
+  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+"
+  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") utf8-text) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
+
+;; Note: System.Single.Parse also has the following overloads with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   Parse(Char], NumberStyles, IFormatProvider) -> Single
+;;   Parse(Byte], NumberStyles, IFormatProvider) -> Single
 
 (cl:defun pow (x y)
   "Summary: Computes a value raised to a given power.
@@ -1009,9 +1107,22 @@ Parameters:
 "
   (dotnet:static <type-str> "RootN" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.Int32") n)))
 
-(cl:defun round (cl:&rest args)
-  "Passthrough for System.Single.Round overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Round" args))
+(cl:defun round (x cl:&optional (digits cl:nil supplied-digits) (mode cl:nil supplied-mode))
+  "Master wrapper for System.Single.Round overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (monoutils:dotnet-p mode)))
+     (dotnet:static <type-str> "Round" x digits mode))
+    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) (cl:not supplied-mode))
+     (dotnet:static <type-str> "Round" x digits))
+    ((cl:and (cl:numberp x) supplied-digits (cl:or (cl:null digits) (monoutils:dotnet-p digits)) (cl:not supplied-mode))
+     (dotnet:static <type-str> "Round" x digits))
+    ((cl:and (cl:numberp x) (cl:not supplied-digits) (cl:not supplied-mode))
+     (dotnet:static <type-str> "Round" x))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "Round"
+                    :supplied-args (cl:append (cl:list :x x) (cl:when supplied-digits (cl:list :digits digits)) (cl:when supplied-mode (cl:list :mode mode)))))))
 
 (cl:defun round-single (x)
   "Calls System.Single.Round Round(Single) -> Single. Summary: Rounds a value to the nearest integer using the default rounding mode (System.MidpointRounding.ToEven).
@@ -1074,6 +1185,22 @@ Parameters:
 "
   (dotnet:static <type-str> "Sin" (cl:the (dotnet "System.Single") x)))
 
+(cl:defun sin-cos (x)
+  "Summary: Computes the sine and cosine of a value.
+Returns: The sine and cosine of x.
+Parameters:
+  - x (System.Single): The value, in radians, whose sine and cosine are to be computed.
+"
+  (dotnet:static <type-str> "SinCos" (cl:the (dotnet "System.Single") x)))
+
+(cl:defun sin-cos-pi (x)
+  "Summary: Computes the sine and cosine of a value.
+Returns: The sine and cosine of x.
+Parameters:
+  - x (System.Single): The value, in radians, whose sine and cosine are to be computed.
+"
+  (dotnet:static <type-str> "SinCosPi" (cl:the (dotnet "System.Single") x)))
+
 (cl:defun sinh (x)
   "Summary: Computes the hyperbolic sine of a value.
 Returns: The hyperbolic sine of x.
@@ -1122,9 +1249,22 @@ Parameters:
 "
   (dotnet:static <type-str> "TanPi" (cl:the (dotnet "System.Single") x)))
 
-(cl:defun to-string (obj cl:&rest args)
-  "Passthrough for System.Single.ToString overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Single") obj) "ToString" args))
+(cl:defun to-string (obj cl:&optional (provider cl:nil supplied-provider) (provider cl:nil supplied-provider))
+  "Master wrapper for System.Single.ToString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-provider (cl:stringp provider) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider provider))
+    ((cl:and supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)) (cl:not supplied-provider))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider))
+    ((cl:and supplied-provider (cl:stringp provider) (cl:not supplied-provider))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider))
+    ((cl:and (cl:not supplied-provider) (cl:not supplied-provider))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "ToString"
+                    :supplied-args (cl:append (cl:when supplied-provider (cl:list :provider provider)) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-string (obj)
   "Calls System.Single.ToString ToString() -> String. Summary: Converts the numeric value of this instance to its equivalent string representation.
@@ -1165,9 +1305,20 @@ Parameters:
 "
   (dotnet:static <type-str> "Truncate" (cl:the (dotnet "System.Single") x)))
 
+;; The following C# System.Single.TryFormat overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryFormat(Char], out Int32&, Char], IFormatProvider) -> Boolean
+;;   TryFormat(Byte], out Int32&, Char], IFormatProvider) -> Boolean
+
 ;; The following C# System.Single.TryParse overloads have special parameter types
 ;; (ref, out, params, or defaults) and are not yet supported:
 ;;   TryParse(String, out Single&) -> Boolean
+;;   TryParse(Char], out Single&) -> Boolean
+;;   TryParse(Byte], out Single&) -> Boolean
 ;;   TryParse(String, IFormatProvider, out Single&) -> Boolean
+;;   TryParse(Char], IFormatProvider, out Single&) -> Boolean
+;;   TryParse(Byte], IFormatProvider, out Single&) -> Boolean
 ;;   TryParse(String, NumberStyles, IFormatProvider, out Single&) -> Boolean
+;;   TryParse(Char], NumberStyles, IFormatProvider, out Single&) -> Boolean
+;;   TryParse(Byte], NumberStyles, IFormatProvider, out Single&) -> Boolean
 

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:50Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:40Z
 
 (cl:in-package :cl-user)
 
@@ -53,8 +53,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(cl:defconstant <creation> "2026-06-30T03:58:50Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:40Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -124,9 +124,18 @@
 (cl:defun begin-run (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "BeginRun"))
 
-(cl:defun dispose (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Game.Dispose overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" args))
+(cl:defun dispose (obj cl:&optional (disposing cl:nil supplied-disposing))
+  "Master wrapper for Microsoft.Xna.Framework.Game.Dispose overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-disposing (cl:typep disposing 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" disposing))
+    ((cl:and (cl:not supplied-disposing))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GAME"
+                    :class-name <type-str>
+                    :method-name "Dispose"
+                    :supplied-args (cl:append (cl:when supplied-disposing (cl:list :disposing disposing)))))))
 
 (cl:defun dispose (obj)
   "Calls Microsoft.Xna.Framework.Game.Dispose Dispose() -> Void"
@@ -169,9 +178,18 @@
 (cl:defun reset-elapsed-time (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "ResetElapsedTime"))
 
-(cl:defun run (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Game.Run overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" args))
+(cl:defun run (obj cl:&optional (run-behavior cl:nil supplied-run-behavior))
+  "Master wrapper for Microsoft.Xna.Framework.Game.Run overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-run-behavior (cl:or (cl:null run-behavior) (monoutils:dotnet-p run-behavior)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" run-behavior))
+    ((cl:and (cl:not supplied-run-behavior))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-GAME"
+                    :class-name <type-str>
+                    :method-name "Run"
+                    :supplied-args (cl:append (cl:when supplied-run-behavior (cl:list :run-behavior run-behavior)))))))
 
 (cl:defun run (obj)
   "Calls Microsoft.Xna.Framework.Game.Run Run() -> Void"

@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:02Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:06Z
 
 (cl:in-package :cl-user)
 
@@ -73,6 +73,8 @@
    #:equals-uri
    #:escape
    #:escape-data-string
+   #:escape-data-string-string
+   #:escape-data-string-char]
    #:escape-string
    #:escape-uri-string
    #:from-hex
@@ -96,14 +98,16 @@
    #:to-string
    #:unescape
    #:unescape-data-string
+   #:unescape-data-string-string
+   #:unescape-data-string-char]
   ))
 
 (cl:in-package :system-uri)
 
 (cl:defconstant <type> (monoutils:get-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-06-30T03:58:02Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:06Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -361,9 +365,18 @@ Parameters:
 "
   (dotnet:static <type-str> "Compare" (cl:the (dotnet "System.Uri") uri1) (cl:the (dotnet "System.Uri") uri2) (cl:the (dotnet "System.UriComponents") parts-to-compare) (cl:the (dotnet "System.UriFormat") compare-format) (cl:the (dotnet "System.StringComparison") comparison-type)))
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for System.Uri.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Uri") obj) "Equals" args))
+(cl:defun equals (obj comparand)
+  "Master wrapper for System.Uri.Equals overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null comparand) (monoutils:dotnet-p comparand)))
+     (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Equals" comparand))
+    ((cl:and (cl:or (cl:null comparand) (monoutils:dotnet-p comparand)))
+     (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Equals" comparand))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-URI"
+                    :class-name <type-str>
+                    :method-name "Equals"
+                    :supplied-args (cl:append (cl:list :comparand comparand))))))
 
 (cl:defun equals-object (obj comparand)
   "Calls System.Uri.Equals Equals(Object) -> Boolean. Summary: Compares two System.Uri instances for equality.
@@ -387,12 +400,33 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Escape"))
 
 (cl:defun escape-data-string (string-to-escape)
-  "Summary: Converts a string to its escaped representation.
+  "Master wrapper for System.Uri.EscapeDataString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp string-to-escape))
+     (dotnet:static <type-str> "EscapeDataString" string-to-escape))
+    ((cl:and (cl:or (cl:null string-to-escape) (monoutils:dotnet-p string-to-escape)))
+     (dotnet:static <type-str> "EscapeDataString" string-to-escape))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-URI"
+                    :class-name <type-str>
+                    :method-name "EscapeDataString"
+                    :supplied-args (cl:append (cl:list :string-to-escape string-to-escape))))))
+
+(cl:defun escape-data-string-string (string-to-escape)
+  "Calls System.Uri.EscapeDataString EscapeDataString(String) -> String. Summary: Converts a string to its escaped representation.
 Returns: The escaped representation of stringToEscape.
 Parameters:
   - string-to-escape (System.String): The string to escape.
 "
   (dotnet:static <type-str> "EscapeDataString" (cl:the (dotnet "System.String") string-to-escape)))
+
+(cl:defun escape-data-string-char] (chars-to-escape)
+  "Calls System.Uri.EscapeDataString EscapeDataString(Char]) -> String. Summary: Converts a span to its escaped representation.
+Returns: The escaped representation of charsToEscape.
+Parameters:
+  - chars-to-escape (System.ReadOnlySpan`1[System.Char]): The span to escape.
+"
+  (dotnet:static <type-str> "EscapeDataString" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") chars-to-escape)))
 
 (cl:defun escape-string (str)
   "Summary: Converts a string to its escaped representation.
@@ -568,6 +602,18 @@ Returns: The unescaped canonical representation of the System.Uri instance. All 
 ;;   TryCreate(Uri, String, out Uri&) -> Boolean
 ;;   TryCreate(Uri, Uri, out Uri&) -> Boolean
 
+;; The following C# System.Uri.TryEscapeDataString overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryEscapeDataString(Char], Char], out Int32&) -> Boolean
+
+;; The following C# System.Uri.TryFormat overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryFormat(Char], out Int32&) -> Boolean
+
+;; The following C# System.Uri.TryUnescapeDataString overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryUnescapeDataString(Char], Char], out Int32&) -> Boolean
+
 (cl:defun unescape (obj path)
   "Summary: Converts the specified string by replacing any escape sequences with their unescaped representation.
 Returns: The unescaped value of the path parameter.
@@ -577,10 +623,31 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Unescape" path))
 
 (cl:defun unescape-data-string (string-to-unescape)
-  "Summary: Converts a string to its unescaped representation.
+  "Master wrapper for System.Uri.UnescapeDataString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp string-to-unescape))
+     (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
+    ((cl:and (cl:or (cl:null string-to-unescape) (monoutils:dotnet-p string-to-unescape)))
+     (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-URI"
+                    :class-name <type-str>
+                    :method-name "UnescapeDataString"
+                    :supplied-args (cl:append (cl:list :string-to-unescape string-to-unescape))))))
+
+(cl:defun unescape-data-string-string (string-to-unescape)
+  "Calls System.Uri.UnescapeDataString UnescapeDataString(String) -> String. Summary: Converts a string to its unescaped representation.
 Returns: The unescaped representation of stringToUnescape.
 Parameters:
   - string-to-unescape (System.String): The string to unescape.
 "
   (dotnet:static <type-str> "UnescapeDataString" (cl:the (dotnet "System.String") string-to-unescape)))
+
+(cl:defun unescape-data-string-char] (chars-to-unescape)
+  "Calls System.Uri.UnescapeDataString UnescapeDataString(Char]) -> String. Summary: Converts a span to its unescaped representation.
+Returns: The unescaped representation of charsToUnescape.
+Parameters:
+  - chars-to-unescape (System.ReadOnlySpan`1[System.Char]): The span to unescape.
+"
+  (dotnet:static <type-str> "UnescapeDataString" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") chars-to-unescape)))
 

@@ -1646,6 +1646,18 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | June 30, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the exception-safe audio handling and documentation fixes. |
 | July 1, 2026 | [sprite.lisp](sprite.lisp) | Modified | Fixed `(slot-boundp spr 'region spr)` to `(slot-boundp spr 'region)` in `sprite-center-origin`. The 3-arg form is `(slot-boundp obj slot slot-name)`, but the third argument was the object itself (`spr`) instead of the slot name (`'region`). This prevented the function from correctly detecting when the region was unbound and silently skipped setting the origin to center. |
 | July 1, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the slot-boundp bug fix in sprite-center-origin. |
+| July 2, 2026 | [assembly-package-generator.lisp](assembly-package-generator.lisp) | Modified | Implemented Version 18 overload resolution: determined positional parameter prefix solely by lack of default values up to `min-len` regardless of parameter names, mapped positional parameters by index inside action generator, introduced optional positional parameters via `cl:&optional` for parameters between `min-len` and `max-mandatory-len`, and replaced runtime package name queries with compile-time literal string generation. |
+| July 2, 2026 | [cspackages-test.lisp](cspackages-test.lisp) | Modified | Updated Contains and Division test cases to align with the new positional/optional overload interface, and verified exception class name, method name, package name, and supplied-args keys/values. |
+| July 2, 2026 | [collision-test.lisp](collision-test.lisp) | Modified | Reverted Contains test assertions to use the clean positional interface instead of keywords. |
+| July 2, 2026 | [README.md](README.md) | Modified | Documented Lisp Package Generator v18 features. |
+| July 2, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added detailed technical documentation of Version 18 overload resolution rules and package-name diagnostics. |
+| July 2, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged Version 18 overload resolution improvements. |
 
-
+#### O. C# Overload Resolution Improvements (Version 18)
+- **Objective**: Fix type dispatch and runtime lookup failures for overloaded C# methods (e.g. `TimeSpan.FromMilliseconds`, `Rectangle.Contains`, operator overloads like `+`).
+- **Positional Prefix Fix**: Changed the positional parameter prefix selector `common-parameter-prefix` to ignore C# parameter names and match parameters purely by position/index if they do not have default values. This allows methods with varying parameter names across overloads to be called positionally.
+- **Optional Positional Parameters**: Introduced optional positional parameters using `cl:&optional` (with `supplied-p` variables) instead of keyword arguments for parameters between `min-len` and `max-mandatory-len`. This ensures arity-based overloads (such as operator overloads like `+`) can be called positionally, resolving keyword argument mismatch crashes (`odd number of keyword arguments`).
+- **Index-Based Parameter Mapping**: Updated the invocation code generator `format-master-overload-action` to map method parameters back to their bound variables by index instead of name. This prevents unbound variable errors in the generated master wrapper bodies.
+- **Literal Diagnostics**: Generated package names as literal string constants inside the fallback branch of master wrappers when raising `csharp-overload-not-found`, resolving diagnostic package retrieval bugs.
+- **Verification**: All 8 test suites built and passed successfully, and the game runs cleanly.
 

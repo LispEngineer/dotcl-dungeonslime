@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:35Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:29Z
 
 (cl:in-package :cl-user)
 
@@ -29,6 +29,7 @@
    #:get-custom-attributes
    #:get-custom-attributes-boolean
    #:get-custom-attributes-type-boolean
+   #:get-custom-attributes-data
    #:get-hash-code
    #:has-same-metadata-definition-as
    #:defined?
@@ -39,8 +40,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-06-30T03:58:35Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:29Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -101,9 +102,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "Equals" obj))
 
-(cl:defun get-custom-attributes (obj cl:&rest args)
-  "Passthrough for System.Reflection.MemberInfo.GetCustomAttributes overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" args))
+(cl:defun get-custom-attributes (obj inherit cl:&optional (inherit cl:nil supplied-inherit))
+  "Master wrapper for System.Reflection.MemberInfo.GetCustomAttributes overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null inherit) (monoutils:dotnet-p inherit)) supplied-inherit (cl:typep inherit 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" inherit inherit))
+    ((cl:and (cl:typep inherit 'cl:boolean) (cl:not supplied-inherit))
+     (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" inherit))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-REFLECTION-MEMBER-INFO"
+                    :class-name <type-str>
+                    :method-name "GetCustomAttributes"
+                    :supplied-args (cl:append (cl:list :inherit inherit) (cl:when supplied-inherit (cl:list :inherit inherit)))))))
 
 (cl:defun get-custom-attributes-boolean (obj inherit)
   "Calls System.Reflection.MemberInfo.GetCustomAttributes GetCustomAttributes(Boolean) -> Object[]. Summary: When overridden in a derived class, returns an array of all custom attributes applied to this member.
@@ -121,6 +131,12 @@ Parameters:
   - inherit (System.Boolean): to search this member's inheritance chain to find the attributes; otherwise, . This parameter is ignored for properties and events.
 "
   (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" attribute-type inherit))
+
+(cl:defun get-custom-attributes-data (obj)
+  "Summary: Returns a list of System.Reflection.CustomAttributeData objects representing data about the attributes that have been applied to the target member.
+Returns: A generic list of System.Reflection.CustomAttributeData objects representing data about the attributes that have been applied to the target member.
+"
+  (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributesData"))
 
 (cl:defun get-hash-code (obj)
   "Summary: Returns the hash code for this instance.

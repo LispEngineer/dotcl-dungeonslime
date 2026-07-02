@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Convert
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:06Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:09Z
 
 (cl:in-package :cl-user)
 
@@ -21,6 +21,9 @@
    #:from-base64-char-array
    #:from-base64-string
    #:from-hex-string
+   #:from-hex-string-string
+   #:from-hex-string-char]
+   #:from-hex-string-byte]
    #:get-type-code
    #:db-null?
    #:to-base64-char-array
@@ -29,6 +32,7 @@
    #:to-base64-string
    #:to-base64-string-byte[]
    #:to-base64-string-byte[]-base64-formatting-options
+   #:to-base64-string-byte]-base64-formatting-options
    #:to-base64-string-byte[]-int32-int32
    #:to-base64-string-byte[]-int32-int32-base64-formatting-options
    #:to-boolean
@@ -148,9 +152,11 @@
    #:to-double-string-i-format-provider
    #:to-hex-string
    #:to-hex-string-byte[]
+   #:to-hex-string-byte]
    #:to-hex-string-byte[]-int32-int32
    #:to-hex-string-lower
    #:to-hex-string-lower-byte[]
+   #:to-hex-string-lower-byte]
    #:to-hex-string-lower-byte[]-int32-int32
    #:to-int16
    #:to-int16-object
@@ -354,8 +360,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Convert"))
 (cl:defconstant <type-str> "System.Convert")
-(cl:defconstant <creation> "2026-06-30T03:58:06Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:09Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -365,9 +371,22 @@
 (cl:define-symbol-macro db-null (dotnet:static <type-str> "DBNull"))
 (cl:setf (cl:documentation (cl:quote db-null) (cl:quote cl:variable)) "A constant that represents a database column that is absent of data; that is, database null.")
 
-(cl:defun change-type (cl:&rest args)
-  "Passthrough for System.Convert.ChangeType overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ChangeType" args))
+(cl:defun change-type (value type-code cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ChangeType overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:or (cl:null type-code) (monoutils:dotnet-p type-code)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ChangeType" value type-code provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:or (cl:null type-code) (monoutils:dotnet-p type-code)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ChangeType" value type-code provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:or (cl:null type-code) (monoutils:dotnet-p type-code)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ChangeType" value type-code))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:or (cl:null type-code) (monoutils:dotnet-p type-code)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ChangeType" value type-code))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ChangeType"
+                    :supplied-args (cl:append (cl:list :value value) (cl:list :type-code type-code) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun change-type-object-type-code (value type-code)
   "Calls System.Convert.ChangeType ChangeType(Object, TypeCode) -> Object. Summary: Returns an object of the specified type whose value is equivalent to the specified object.
@@ -426,12 +445,50 @@ Parameters:
   (dotnet:static <type-str> "FromBase64String" (cl:the (dotnet "System.String") s)))
 
 (cl:defun from-hex-string (s)
-  "Summary: Converts the specified string, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
+  "Master wrapper for System.Convert.FromHexString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp s))
+     (dotnet:static <type-str> "FromHexString" s))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)))
+     (dotnet:static <type-str> "FromHexString" s))
+    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)))
+     (dotnet:static <type-str> "FromHexString" s))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "FromHexString"
+                    :supplied-args (cl:append (cl:list :s s))))))
+
+(cl:defun from-hex-string-string (s)
+  "Calls System.Convert.FromHexString FromHexString(String) -> Byte[]. Summary: Converts the specified string, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
 Returns: An array of 8-bit unsigned integers that is equivalent to s.
 Parameters:
   - s (System.String): The string to convert.
 "
   (dotnet:static <type-str> "FromHexString" (cl:the (dotnet "System.String") s)))
+
+(cl:defun from-hex-string-char] (chars)
+  "Calls System.Convert.FromHexString FromHexString(Char]) -> Byte[]. Summary: Converts the span, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
+Returns: An array of 8-bit unsigned integers that is equivalent to chars.
+Parameters:
+  - chars (System.ReadOnlySpan`1[System.Char]): The span to convert.
+"
+  (dotnet:static <type-str> "FromHexString" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") chars)))
+
+(cl:defun from-hex-string-byte] (utf8-source)
+  "Calls System.Convert.FromHexString FromHexString(Byte]) -> Byte[]. Summary: Converts the span, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
+Returns: An array of 8-bit unsigned integers that is equivalent to utf8Source.
+Parameters:
+  - utf8-source (System.ReadOnlySpan`1[System.Byte]): The UTF-8 span to convert.
+"
+  (dotnet:static <type-str> "FromHexString" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") utf8-source)))
+
+;; Note: System.Convert.FromHexString also has the following overloads with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   FromHexString(String, Byte], out Int32&, out Int32&) -> OperationStatus
+;;   FromHexString(Char], Byte], out Int32&, out Int32&) -> OperationStatus
+;;   FromHexString(Byte], Byte], out Int32&, out Int32&) -> OperationStatus
 
 (cl:defun get-type-code (value)
   "Summary: Returns the System.TypeCode for the specified object.
@@ -449,9 +506,18 @@ Parameters:
 "
   (dotnet:static <type-str> "IsDBNull" (cl:the (dotnet "System.Object") value)))
 
-(cl:defun to-base64-char-array (cl:&rest args)
-  "Passthrough for System.Convert.ToBase64CharArray overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToBase64CharArray" args))
+(cl:defun to-base64-char-array (in-array offset-in length out-array offset-out cl:&optional (options cl:nil supplied-options))
+  "Master wrapper for System.Convert.ToBase64CharArray overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:numberp offset-in) (cl:numberp length) (cl:or (cl:null out-array) (monoutils:dotnet-p out-array)) (cl:numberp offset-out) supplied-options (cl:or (cl:null options) (monoutils:dotnet-p options)))
+     (dotnet:static <type-str> "ToBase64CharArray" in-array offset-in length out-array offset-out options))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:numberp offset-in) (cl:numberp length) (cl:or (cl:null out-array) (monoutils:dotnet-p out-array)) (cl:numberp offset-out) (cl:not supplied-options))
+     (dotnet:static <type-str> "ToBase64CharArray" in-array offset-in length out-array offset-out))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToBase64CharArray"
+                    :supplied-args (cl:append (cl:list :in-array in-array) (cl:list :offset-in offset-in) (cl:list :length length) (cl:list :out-array out-array) (cl:list :offset-out offset-out) (cl:when supplied-options (cl:list :options options)))))))
 
 (cl:defun to-base64-char-array-byte[]-int32-int32-char[]-int32 (in-array offset-in length out-array offset-out)
   "Calls System.Convert.ToBase64CharArray ToBase64CharArray(Byte[], Int32, Int32, Char[], Int32) -> Int32. Summary: Converts a subset of an 8-bit unsigned integer array to an equivalent subset of a Unicode character array encoded with base-64 digits. Parameters specify the subsets as offsets in the input and output arrays, and the number of elements in the input array to convert.
@@ -478,9 +544,24 @@ Parameters:
 "
   (dotnet:static <type-str> "ToBase64CharArray" (cl:the (dotnet "System.Byte[]") in-array) (cl:the (dotnet "System.Int32") offset-in) (cl:the (dotnet "System.Int32") length) (cl:the (dotnet "System.Char[]") out-array) (cl:the (dotnet "System.Int32") offset-out) (cl:the (dotnet "System.Base64FormattingOptions") options)))
 
-(cl:defun to-base64-string (cl:&rest args)
-  "Passthrough for System.Convert.ToBase64String overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToBase64String" args))
+(cl:defun to-base64-string (in-array cl:&optional (options cl:nil supplied-options) (length cl:nil supplied-length) (options cl:nil supplied-options))
+  "Master wrapper for System.Convert.ToBase64String overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-options (cl:numberp options) supplied-length (cl:numberp length) supplied-options (cl:or (cl:null options) (monoutils:dotnet-p options)))
+     (dotnet:static <type-str> "ToBase64String" in-array options length options))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-options (cl:numberp options) supplied-length (cl:numberp length) (cl:not supplied-options))
+     (dotnet:static <type-str> "ToBase64String" in-array options length))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-options (cl:or (cl:null options) (monoutils:dotnet-p options)) (cl:not supplied-length) (cl:not supplied-options))
+     (dotnet:static <type-str> "ToBase64String" in-array options))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-options (cl:or (cl:null options) (monoutils:dotnet-p options)) (cl:not supplied-length) (cl:not supplied-options))
+     (dotnet:static <type-str> "ToBase64String" in-array options))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:not supplied-options) (cl:not supplied-length) (cl:not supplied-options))
+     (dotnet:static <type-str> "ToBase64String" in-array))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToBase64String"
+                    :supplied-args (cl:append (cl:list :in-array in-array) (cl:when supplied-options (cl:list :options options)) (cl:when supplied-length (cl:list :length length)) (cl:when supplied-options (cl:list :options options)))))))
 
 (cl:defun to-base64-string-byte[] (in-array)
   "Calls System.Convert.ToBase64String ToBase64String(Byte[]) -> String. Summary: Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with base-64 digits.
@@ -498,6 +579,15 @@ Parameters:
   - options (System.Base64FormattingOptions): System.Base64FormattingOptions.InsertLineBreaks to insert a line break every 76 characters, or System.Base64FormattingOptions.None to not insert line breaks.
 "
   (dotnet:static <type-str> "ToBase64String" (cl:the (dotnet "System.Byte[]") in-array) (cl:the (dotnet "System.Base64FormattingOptions") options)))
+
+(cl:defun to-base64-string-byte]-base64-formatting-options (bytes options)
+  "Calls System.Convert.ToBase64String ToBase64String(Byte], Base64FormattingOptions) -> String. Summary: Converts the 8-bit unsigned integers inside the specified read-only span into their equivalent string representation that is encoded with base-64 digits. You can optionally specify whether to insert line breaks in the return value.
+Returns: The string representation in base 64 of the elements in bytes. If the length of bytes is 0, an empty string is returned.
+Parameters:
+  - bytes (System.ReadOnlySpan`1[System.Byte]): A read-only span of 8-bit unsigned integers.
+  - options (System.Base64FormattingOptions): One of the enumeration values that specify whether to insert line breaks in the return value. The default value is System.Base64FormattingOptions.None.
+"
+  (dotnet:static <type-str> "ToBase64String" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") bytes) (cl:the (dotnet "System.Base64FormattingOptions") options)))
 
 (cl:defun to-base64-string-byte[]-int32-int32 (in-array offset length)
   "Calls System.Convert.ToBase64String ToBase64String(Byte[], Int32, Int32) -> String. Summary: Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation that is encoded with base-64 digits. Parameters specify the subset as an offset in the input array, and the number of elements in the array to convert.
@@ -520,9 +610,55 @@ Parameters:
 "
   (dotnet:static <type-str> "ToBase64String" (cl:the (dotnet "System.Byte[]") in-array) (cl:the (dotnet "System.Int32") offset) (cl:the (dotnet "System.Int32") length) (cl:the (dotnet "System.Base64FormattingOptions") options)))
 
-(cl:defun to-boolean (cl:&rest args)
-  "Passthrough for System.Convert.ToBoolean overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToBoolean" args))
+;; Note: System.Convert.ToBase64String also has the following overloads with special
+;; parameter types (ref, out, params, or defaults) that are not
+;; yet supported:
+;;   ToBase64String(Byte], Base64FormattingOptions) -> String
+
+(cl:defun to-boolean (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToBoolean overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToBoolean" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToBoolean" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToBoolean" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToBoolean"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-boolean-object (value)
   "Calls System.Convert.ToBoolean ToBoolean(Object) -> Boolean. Summary: Converts the value of a specified object to an equivalent Boolean value.
@@ -670,9 +806,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToBoolean" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-byte (cl:&rest args)
-  "Passthrough for System.Convert.ToByte overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToByte" args))
+(cl:defun to-byte (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToByte overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToByte" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToByte" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToByte" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToByte" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToByte"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-byte-object (value)
   "Calls System.Convert.ToByte ToByte(Object) -> Byte. Summary: Converts the value of the specified object to an 8-bit unsigned integer.
@@ -829,9 +1008,50 @@ Parameters:
 "
   (dotnet:static <type-str> "ToByte" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-char (cl:&rest args)
-  "Passthrough for System.Convert.ToChar overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToChar" args))
+(cl:defun to-char (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToChar overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToChar" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToChar" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToChar" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToChar"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-char-object (value)
   "Calls System.Convert.ToChar ToChar(Object) -> Char. Summary: Converts the value of the specified object to a Unicode character.
@@ -979,9 +1199,50 @@ Parameters:
 "
   (dotnet:static <type-str> "ToChar" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-date-time (cl:&rest args)
-  "Passthrough for System.Convert.ToDateTime overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToDateTime" args))
+(cl:defun to-date-time (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToDateTime overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDateTime" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDateTime" value provider))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDateTime" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToDateTime"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-date-time-date-time (value)
   "Calls System.Convert.ToDateTime ToDateTime(DateTime) -> DateTime. Summary: Returns the specified System.DateTime object; no actual conversion is performed.
@@ -1129,9 +1390,50 @@ Parameters:
 "
   (dotnet:static <type-str> "ToDateTime" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-decimal (cl:&rest args)
-  "Passthrough for System.Convert.ToDecimal overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToDecimal" args))
+(cl:defun to-decimal (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToDecimal overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDecimal" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDecimal" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDecimal" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToDecimal"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-decimal-object (value)
   "Calls System.Convert.ToDecimal ToDecimal(Object) -> Decimal. Summary: Converts the value of the specified object to an equivalent decimal number.
@@ -1279,9 +1581,50 @@ Parameters:
 "
   (dotnet:static <type-str> "ToDecimal" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-double (cl:&rest args)
-  "Passthrough for System.Convert.ToDouble overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToDouble" args))
+(cl:defun to-double (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToDouble overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDouble" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToDouble" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToDouble" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToDouble"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-double-object (value)
   "Calls System.Convert.ToDouble ToDouble(Object) -> Double. Summary: Converts the value of the specified object to a double-precision floating-point number.
@@ -1429,9 +1772,20 @@ Parameters:
 "
   (dotnet:static <type-str> "ToDouble" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-hex-string (cl:&rest args)
-  "Passthrough for System.Convert.ToHexString overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToHexString" args))
+(cl:defun to-hex-string (in-array cl:&optional (offset cl:nil supplied-offset) (length cl:nil supplied-length))
+  "Master wrapper for System.Convert.ToHexString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-offset (cl:numberp offset) supplied-length (cl:numberp length))
+     (dotnet:static <type-str> "ToHexString" in-array offset length))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:not supplied-offset) (cl:not supplied-length))
+     (dotnet:static <type-str> "ToHexString" in-array))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:not supplied-offset) (cl:not supplied-length))
+     (dotnet:static <type-str> "ToHexString" in-array))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToHexString"
+                    :supplied-args (cl:append (cl:list :in-array in-array) (cl:when supplied-offset (cl:list :offset offset)) (cl:when supplied-length (cl:list :length length)))))))
 
 (cl:defun to-hex-string-byte[] (in-array)
   "Calls System.Convert.ToHexString ToHexString(Byte[]) -> String. Summary: Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters.
@@ -1440,6 +1794,14 @@ Parameters:
   - in-array (System.Byte[]): An array of 8-bit unsigned integers.
 "
   (dotnet:static <type-str> "ToHexString" (cl:the (dotnet "System.Byte[]") in-array)))
+
+(cl:defun to-hex-string-byte] (bytes)
+  "Calls System.Convert.ToHexString ToHexString(Byte]) -> String. Summary: Converts a span of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters.
+Returns: The string representation in hex of the elements in bytes.
+Parameters:
+  - bytes (System.ReadOnlySpan`1[System.Byte]): A span of 8-bit unsigned integers.
+"
+  (dotnet:static <type-str> "ToHexString" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") bytes)))
 
 (cl:defun to-hex-string-byte[]-int32-int32 (in-array offset length)
   "Calls System.Convert.ToHexString ToHexString(Byte[], Int32, Int32) -> String. Summary: Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters. Parameters specify the subset as an offset in the input array and the number of elements in the array to convert.
@@ -1451,9 +1813,20 @@ Parameters:
 "
   (dotnet:static <type-str> "ToHexString" (cl:the (dotnet "System.Byte[]") in-array) (cl:the (dotnet "System.Int32") offset) (cl:the (dotnet "System.Int32") length)))
 
-(cl:defun to-hex-string-lower (cl:&rest args)
-  "Passthrough for System.Convert.ToHexStringLower overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToHexStringLower" args))
+(cl:defun to-hex-string-lower (in-array cl:&optional (offset cl:nil supplied-offset) (length cl:nil supplied-length))
+  "Master wrapper for System.Convert.ToHexStringLower overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) supplied-offset (cl:numberp offset) supplied-length (cl:numberp length))
+     (dotnet:static <type-str> "ToHexStringLower" in-array offset length))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:not supplied-offset) (cl:not supplied-length))
+     (dotnet:static <type-str> "ToHexStringLower" in-array))
+    ((cl:and (cl:or (cl:null in-array) (monoutils:dotnet-p in-array)) (cl:not supplied-offset) (cl:not supplied-length))
+     (dotnet:static <type-str> "ToHexStringLower" in-array))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToHexStringLower"
+                    :supplied-args (cl:append (cl:list :in-array in-array) (cl:when supplied-offset (cl:list :offset offset)) (cl:when supplied-length (cl:list :length length)))))))
 
 (cl:defun to-hex-string-lower-byte[] (in-array)
   "Calls System.Convert.ToHexStringLower ToHexStringLower(Byte[]) -> String. Summary: Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters.
@@ -1462,6 +1835,14 @@ Parameters:
   - in-array (System.Byte[]): An array of 8-bit unsigned integers.
 "
   (dotnet:static <type-str> "ToHexStringLower" (cl:the (dotnet "System.Byte[]") in-array)))
+
+(cl:defun to-hex-string-lower-byte] (bytes)
+  "Calls System.Convert.ToHexStringLower ToHexStringLower(Byte]) -> String. Summary: Converts a span of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters.
+Returns: The string representation in hex of the elements in bytes.
+Parameters:
+  - bytes (System.ReadOnlySpan`1[System.Byte]): A span of 8-bit unsigned integers.
+"
+  (dotnet:static <type-str> "ToHexStringLower" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") bytes)))
 
 (cl:defun to-hex-string-lower-byte[]-int32-int32 (in-array offset length)
   "Calls System.Convert.ToHexStringLower ToHexStringLower(Byte[], Int32, Int32) -> String. Summary: Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters. Parameters specify the subset as an offset in the input array and the number of elements in the array to convert.
@@ -1473,9 +1854,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToHexStringLower" (cl:the (dotnet "System.Byte[]") in-array) (cl:the (dotnet "System.Int32") offset) (cl:the (dotnet "System.Int32") length)))
 
-(cl:defun to-int16 (cl:&rest args)
-  "Passthrough for System.Convert.ToInt16 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToInt16" args))
+(cl:defun to-int16 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToInt16 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToInt16" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt16" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt16" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt16" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToInt16"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-int16-object (value)
   "Calls System.Convert.ToInt16 ToInt16(Object) -> Int16. Summary: Converts the value of the specified object to a 16-bit signed integer.
@@ -1632,9 +2056,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToInt16" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-int32 (cl:&rest args)
-  "Passthrough for System.Convert.ToInt32 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToInt32" args))
+(cl:defun to-int32 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToInt32 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToInt32" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt32" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt32" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt32" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToInt32"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-int32-object (value)
   "Calls System.Convert.ToInt32 ToInt32(Object) -> Int32. Summary: Converts the value of the specified object to a 32-bit signed integer.
@@ -1791,9 +2258,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToInt32" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-int64 (cl:&rest args)
-  "Passthrough for System.Convert.ToInt64 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToInt64" args))
+(cl:defun to-int64 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToInt64 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToInt64" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt64" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToInt64" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToInt64" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToInt64"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-int64-object (value)
   "Calls System.Convert.ToInt64 ToInt64(Object) -> Int64. Summary: Converts the value of the specified object to a 64-bit signed integer.
@@ -1950,9 +2460,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToInt64" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-s-byte (cl:&rest args)
-  "Passthrough for System.Convert.ToSByte overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToSByte" args))
+(cl:defun to-s-byte (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToSByte overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToSByte" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToSByte" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToSByte" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSByte" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToSByte"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-s-byte-object (value)
   "Calls System.Convert.ToSByte ToSByte(Object) -> SByte. Summary: Converts the value of the specified object to an 8-bit signed integer.
@@ -2109,9 +2662,50 @@ Parameters:
 "
   (dotnet:static <type-str> "ToSByte" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-single (cl:&rest args)
-  "Passthrough for System.Convert.ToSingle overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToSingle" args))
+(cl:defun to-single (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToSingle overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToSingle" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToSingle" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToSingle" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToSingle"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-single-object (value)
   "Calls System.Convert.ToSingle ToSingle(Object) -> Single. Summary: Converts the value of the specified object to a single-precision floating-point number.
@@ -2259,9 +2853,86 @@ Parameters:
 "
   (dotnet:static <type-str> "ToSingle" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.IFormatProvider") provider)))
 
-(cl:defun to-string (cl:&rest args)
-  "Passthrough for System.Convert.ToString overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToString" args))
+(cl:defun to-string (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToString overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:typep value 'cl:boolean) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:numberp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToString" value provider))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToString" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToString"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-string-object (value)
   "Calls System.Convert.ToString ToString(Object) -> String. Summary: Converts the value of the specified object to its equivalent string representation.
@@ -2571,9 +3242,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToString" (cl:the (dotnet "System.Int64") value) (cl:the (dotnet "System.Int32") to-base)))
 
-(cl:defun to-u-int16 (cl:&rest args)
-  "Passthrough for System.Convert.ToUInt16 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToUInt16" args))
+(cl:defun to-u-int16 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToUInt16 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToUInt16" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt16" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt16" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt16" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToUInt16"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-u-int16-object (value)
   "Calls System.Convert.ToUInt16 ToUInt16(Object) -> UInt16. Summary: Converts the value of the specified object to a 16-bit unsigned integer.
@@ -2730,9 +3444,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToUInt16" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-u-int32 (cl:&rest args)
-  "Passthrough for System.Convert.ToUInt32 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToUInt32" args))
+(cl:defun to-u-int32 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToUInt32 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToUInt32" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt32" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt32" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt32" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToUInt32"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-u-int32-object (value)
   "Calls System.Convert.ToUInt32 ToUInt32(Object) -> UInt32. Summary: Converts the value of the specified object to a 32-bit unsigned integer.
@@ -2889,9 +3646,52 @@ Parameters:
 "
   (dotnet:static <type-str> "ToUInt32" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
 
-(cl:defun to-u-int64 (cl:&rest args)
-  "Passthrough for System.Convert.ToUInt64 overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "ToUInt64" args))
+(cl:defun to-u-int64 (value cl:&optional (provider cl:nil supplied-provider))
+  "Master wrapper for System.Convert.ToUInt64 overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp value) supplied-provider (cl:numberp provider))
+     (dotnet:static <type-str> "ToUInt64" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt64" value provider))
+    ((cl:and (cl:stringp value) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+     (dotnet:static <type-str> "ToUInt64" value provider))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:stringp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:numberp value) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:typep value 'cl:boolean) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-provider))
+     (dotnet:static <type-str> "ToUInt64" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-CONVERT"
+                    :class-name <type-str>
+                    :method-name "ToUInt64"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-provider (cl:list :provider provider)))))))
 
 (cl:defun to-u-int64-object (value)
   "Calls System.Convert.ToUInt64 ToUInt64(Object) -> UInt64. Summary: Converts the value of the specified object to a 64-bit unsigned integer.
@@ -3047,4 +3847,26 @@ Parameters:
   - from-base (System.Int32): The base of the number in value, which must be 2, 8, 10, or 16.
 "
   (dotnet:static <type-str> "ToUInt64" (cl:the (dotnet "System.String") value) (cl:the (dotnet "System.Int32") from-base)))
+
+;; The following C# System.Convert.TryFromBase64Chars overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryFromBase64Chars(Char], Byte], out Int32&) -> Boolean
+
+;; The following C# System.Convert.TryFromBase64String overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryFromBase64String(String, Byte], out Int32&) -> Boolean
+
+;; The following C# System.Convert.TryToBase64Chars overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryToBase64Chars(Byte], Char], out Int32&, Base64FormattingOptions) -> Boolean
+
+;; The following C# System.Convert.TryToHexString overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryToHexString(Byte], Char], out Int32&) -> Boolean
+;;   TryToHexString(Byte], Byte], out Int32&) -> Boolean
+
+;; The following C# System.Convert.TryToHexStringLower overloads have special parameter types
+;; (ref, out, params, or defaults) and are not yet supported:
+;;   TryToHexStringLower(Byte], Char], out Int32&) -> Boolean
+;;   TryToHexStringLower(Byte], Byte], out Int32&) -> Boolean
 

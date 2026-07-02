@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T04:00:13Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:03:44Z
 
 (cl:in-package :cl-user)
 
@@ -34,8 +34,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(cl:defconstant <creation> "2026-06-30T04:00:13Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:03:44Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -90,9 +90,18 @@
 (cl:defun initialize ()
   (dotnet:static <type-str> "Initialize"))
 
-(cl:defun play (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Audio.SoundEffect.Play overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffect") obj) "Play" args))
+(cl:defun play (obj cl:&optional (volume cl:nil supplied-volume) (pitch cl:nil supplied-pitch) (pan cl:nil supplied-pan))
+  "Master wrapper for Microsoft.Xna.Framework.Audio.SoundEffect.Play overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-volume (cl:numberp volume) supplied-pitch (cl:numberp pitch) supplied-pan (cl:numberp pan))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffect") obj) "Play" volume pitch pan))
+    ((cl:and (cl:not supplied-volume) (cl:not supplied-pitch) (cl:not supplied-pan))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffect") obj) "Play"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT"
+                    :class-name <type-str>
+                    :method-name "Play"
+                    :supplied-args (cl:append (cl:when supplied-volume (cl:list :volume volume)) (cl:when supplied-pitch (cl:list :pitch pitch)) (cl:when supplied-pan (cl:list :pan pan)))))))
 
 (cl:defun play (obj)
   "Calls Microsoft.Xna.Framework.Audio.SoundEffect.Play Play() -> Boolean"

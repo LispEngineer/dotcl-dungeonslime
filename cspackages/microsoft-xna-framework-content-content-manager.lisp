@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:59:43Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:03:20Z
 
 (cl:in-package :cl-user)
 
@@ -27,18 +27,20 @@
    #:load
    #:load-localized
    #:open-stream
+   #:read-asset
    #:reload-asset
    #:reload-graphics-assets
    #:unload
    #:unload-asset
+   #:unload-assets
   ))
 
 (cl:in-package :microsoft-xna-framework-content-content-manager)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(cl:defconstant <creation> "2026-06-30T03:59:43Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:03:20Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -69,9 +71,18 @@
 (cl:defun service-provider (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "get_ServiceProvider"))
 
-(cl:defun dispose (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Content.ContentManager.Dispose overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Dispose" args))
+(cl:defun dispose (obj cl:&optional (disposing cl:nil supplied-disposing))
+  "Master wrapper for Microsoft.Xna.Framework.Content.ContentManager.Dispose overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-disposing (cl:typep disposing 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Dispose" disposing))
+    ((cl:and (cl:not supplied-disposing))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "Dispose"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-CONTENT-CONTENT-MANAGER"
+                    :class-name <type-str>
+                    :method-name "Dispose"
+                    :supplied-args (cl:append (cl:when supplied-disposing (cl:list :disposing disposing)))))))
 
 (cl:defun dispose (obj)
   "Calls Microsoft.Xna.Framework.Content.ContentManager.Dispose Dispose() -> Void"
@@ -93,6 +104,9 @@
 (cl:defun open-stream (obj asset-name)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "OpenStream" asset-name))
 
+(cl:defun read-asset (type obj asset-name record-disposable-object)
+  (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "ReadAsset" (cl:list type) asset-name record-disposable-object))
+
 (cl:defun reload-asset (type obj original-asset-name current-asset)
   (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "ReloadAsset" (cl:list type) original-asset-name current-asset))
 
@@ -104,4 +118,7 @@
 
 (cl:defun unload-asset (obj asset-name)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "UnloadAsset" asset-name))
+
+(cl:defun unload-assets (obj asset-names)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Content.ContentManager") obj) "UnloadAssets" asset-names))
 

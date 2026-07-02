@@ -439,6 +439,12 @@ C# Lisp Package Generator v17: Idiomatic Naming Conventions:
 * Maps methods/properties named `"IsNaN"` to `"nan?"`.
 * Converts C# predicate method/property names starting with `"Is"` followed by an uppercase letter (e.g. `IsEmpty`, `IsActive`) to Lisp predicates ending with a question mark `?` (e.g. `empty?`, `active?`), removing the `is-` prefix.
 
+C# Lisp Package Generator v18: Index-Based Positional Overload Dispatch:
+* Determines the positional parameter prefix of overloads based solely on the lack of default values up to `min-len`, ignoring C# parameter names. This enables positional parameter generation even when parameter names vary across C# overloads (e.g. `TimeSpan.FromMilliseconds` value vs milliseconds).
+* Maps positional parameters back by index rather than name inside the invocation block generator, avoiding unbound parameter name errors inside the master wrapper body.
+* Introduces optional positional parameters using `cl:&optional` (with `supplied-p` variables) instead of keyword arguments for parameters between `min-len` and `max-mandatory-len`, ensuring arity-based overload signatures (such as binary/unary operator overloads like `+`) can be called positionally.
+* Generates a package-name string literal constant inside the fallback branch of master wrappers when raising `csharp-overload-not-found`, providing robust package-independent diagnostics at runtime.
+
 ## Deprecated Functionality
 
 BaseCaller: This is a class that works around the missing base class

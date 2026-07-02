@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Type
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:21Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:19Z
 
 (cl:in-package :cl-user)
 
@@ -182,9 +182,13 @@
    #:get-property-impl
    #:get-required-custom-modifiers
    #:get-type
+   #:get-type*
    #:get-type-string
    #:get-type-string-boolean
    #:get-type-string-boolean-boolean
+   #:get-type-string-assembly]-type]
+   #:get-type-string-assembly]-type]-boolean
+   #:get-type-string-assembly]-type]-boolean-boolean
    #:get-type-array
    #:get-type-code
    #:get-type-code-impl
@@ -233,8 +237,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Type"))
 (cl:defconstant <type-str> "System.Type")
-(cl:defconstant <creation> "2026-06-30T03:58:21Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:19Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -552,9 +556,18 @@ Parameters:
 "
   (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "System.Type") left) (cl:the (dotnet "System.Type") right)))
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for System.Type.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "Equals" args))
+(cl:defun equals (obj o)
+  "Master wrapper for System.Type.Equals overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null o) (monoutils:dotnet-p o)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "Equals" o))
+    ((cl:and (cl:or (cl:null o) (monoutils:dotnet-p o)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "Equals" o))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "Equals"
+                    :supplied-args (cl:append (cl:list :o o))))))
 
 (cl:defun equals-object (obj o)
   "Calls System.Type.Equals Equals(Object) -> Boolean. Summary: Determines if the underlying system type of the current System.Type object is the same as the underlying system type of the specified System.Object.
@@ -604,9 +617,22 @@ Returns: A System.Reflection.TypeAttributes object representing the attribute se
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetAttributeFlagsImpl"))
 
-(cl:defun get-constructor (obj cl:&rest args)
-  "Passthrough for System.Type.GetConstructor overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetConstructor" args))
+(cl:defun get-constructor (obj types cl:&optional (types cl:nil supplied-types) (types cl:nil supplied-types) (modifiers cl:nil supplied-modifiers) (modifiers cl:nil supplied-modifiers))
+  "Master wrapper for System.Type.GetConstructor overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructor" types types types modifiers modifiers))
+    ((cl:and (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructor" types types types modifiers))
+    ((cl:and (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructor" types types))
+    ((cl:and (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-types) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructor" types))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetConstructor"
+                    :supplied-args (cl:append (cl:list :types types) (cl:when supplied-types (cl:list :types types)) (cl:when supplied-types (cl:list :types types)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)))))))
 
 (cl:defun get-constructor-type[] (obj types)
   "Calls System.Type.GetConstructor GetConstructor(Type[]) -> ConstructorInfo. Summary: Searches for a public instance constructor whose parameters match the types in the specified array.
@@ -660,9 +686,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructorImpl" binding-attr binder call-convention types modifiers))
 
-(cl:defun get-constructors (obj cl:&rest args)
-  "Passthrough for System.Type.GetConstructors overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetConstructors" args))
+(cl:defun get-constructors (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetConstructors overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructors" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetConstructors"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetConstructors"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-constructors (obj)
   "Calls System.Type.GetConstructors GetConstructors() -> ConstructorInfo[]. Summary: Returns all the public constructors defined for the current System.Type.
@@ -722,9 +757,18 @@ Returns: An array that contains the values of the underlying type constants in t
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEnumValuesAsUnderlyingType"))
 
-(cl:defun get-event (obj cl:&rest args)
-  "Passthrough for System.Type.GetEvent overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetEvent" args))
+(cl:defun get-event (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetEvent overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvent" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvent" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetEvent"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-event-string (obj name)
   "Calls System.Type.GetEvent GetEvent(String) -> EventInfo. Summary: Returns the System.Reflection.EventInfo object representing the specified public event.
@@ -743,9 +787,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvent" name binding-attr))
 
-(cl:defun get-events (obj cl:&rest args)
-  "Passthrough for System.Type.GetEvents overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetEvents" args))
+(cl:defun get-events (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetEvents overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvents" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvents"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetEvents"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-events (obj)
   "Calls System.Type.GetEvents GetEvents() -> EventInfo[]. Summary: Returns all the public events that are declared or inherited by the current System.Type.
@@ -761,9 +814,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetEvents" binding-attr))
 
-(cl:defun get-field (obj cl:&rest args)
-  "Passthrough for System.Type.GetField overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetField" args))
+(cl:defun get-field (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetField overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetField" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetField" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetField"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-field-string (obj name)
   "Calls System.Type.GetField GetField(String) -> FieldInfo. Summary: Searches for the public field with the specified name.
@@ -782,9 +844,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetField" name binding-attr))
 
-(cl:defun get-fields (obj cl:&rest args)
-  "Passthrough for System.Type.GetFields overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetFields" args))
+(cl:defun get-fields (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetFields overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetFields" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetFields"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetFields"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-fields (obj)
   "Calls System.Type.GetFields GetFields() -> FieldInfo[]. Summary: Returns all the public fields of the current System.Type.
@@ -842,9 +913,18 @@ Returns: The hash code for this instance.
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetHashCode"))
 
-(cl:defun get-interface (obj cl:&rest args)
-  "Passthrough for System.Type.GetInterface overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetInterface" args))
+(cl:defun get-interface (obj name cl:&optional (ignore-case cl:nil supplied-ignore-case))
+  "Master wrapper for System.Type.GetInterface overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-ignore-case (cl:typep ignore-case 'cl:boolean))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetInterface" name ignore-case))
+    ((cl:and (cl:stringp name) (cl:not supplied-ignore-case))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetInterface" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetInterface"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-ignore-case (cl:list :ignore-case ignore-case)))))))
 
 (cl:defun get-interface-string (obj name)
   "Calls System.Type.GetInterface GetInterface(String) -> Type. Summary: Searches for the interface with the specified name.
@@ -877,9 +957,20 @@ Returns: An array of System.Type objects representing all the interfaces impleme
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetInterfaces"))
 
-(cl:defun get-member (obj cl:&rest args)
-  "Passthrough for System.Type.GetMember overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetMember" args))
+(cl:defun get-member (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr) (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetMember overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMember" name binding-attr binding-attr))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMember" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr) (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMember" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetMember"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-member-string (obj name)
   "Calls System.Type.GetMember GetMember(String) -> MemberInfo[]. Summary: Searches for the public members with the specified name.
@@ -908,9 +999,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMember" name type binding-attr))
 
-(cl:defun get-members (obj cl:&rest args)
-  "Passthrough for System.Type.GetMembers overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetMembers" args))
+(cl:defun get-members (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetMembers overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMembers" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMembers"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetMembers"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-members (obj)
   "Calls System.Type.GetMembers GetMembers() -> MemberInfo[]. Summary: Returns all the public members of the current System.Type.
@@ -934,9 +1034,38 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMemberWithSameMetadataDefinitionAs" member))
 
-(cl:defun get-method (obj cl:&rest args)
-  "Passthrough for System.Type.GetMethod overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetMethod" args))
+(cl:defun get-method (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr) (types cl:nil supplied-types) (modifiers cl:nil supplied-modifiers) (modifiers cl:nil supplied-modifiers) (modifiers cl:nil supplied-modifiers) (modifiers cl:nil supplied-modifiers))
+  "Master wrapper for System.Type.GetMethod overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:numberp binding-attr) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers modifiers modifiers modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers modifiers modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:numberp binding-attr) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers modifiers modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:numberp binding-attr) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:numberp binding-attr) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:numberp binding-attr) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr types))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetMethod"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-types (cl:list :types types)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)))))))
 
 (cl:defun get-method-string (obj name)
   "Calls System.Type.GetMethod GetMethod(String) -> MethodInfo. Summary: Searches for the public method with the specified name.
@@ -1068,9 +1197,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethod" name generic-parameter-count binding-attr binder call-convention types modifiers))
 
-(cl:defun get-method-impl (obj cl:&rest args)
-  "Passthrough for System.Type.GetMethodImpl overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetMethodImpl" args))
+(cl:defun get-method-impl (obj name binding-attr binder call-convention types modifiers cl:&optional (modifiers cl:nil supplied-modifiers))
+  "Master wrapper for System.Type.GetMethodImpl overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) (cl:numberp binding-attr) (cl:or (cl:null binder) (monoutils:dotnet-p binder)) (cl:or (cl:null call-convention) (monoutils:dotnet-p call-convention)) (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethodImpl" name binding-attr binder call-convention types modifiers modifiers))
+    ((cl:and (cl:stringp name) (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:or (cl:null binder) (monoutils:dotnet-p binder)) (cl:or (cl:null call-convention) (monoutils:dotnet-p call-convention)) (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethodImpl" name binding-attr binder call-convention types modifiers))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetMethodImpl"
+                    :supplied-args (cl:append (cl:list :name name) (cl:list :binding-attr binding-attr) (cl:list :binder binder) (cl:list :call-convention call-convention) (cl:list :types types) (cl:list :modifiers modifiers) (cl:when supplied-modifiers (cl:list :modifiers modifiers)))))))
 
 (cl:defun get-method-impl-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[] (obj name binding-attr binder call-convention types modifiers)
   "Calls System.Type.GetMethodImpl GetMethodImpl(String, BindingFlags, Binder, CallingConventions, Type[], ParameterModifier[]) -> MethodInfo. Summary: When overridden in a derived class, searches for the specified method whose parameters match the specified argument types and modifiers, using the specified binding constraints and the specified calling convention.
@@ -1099,9 +1237,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethodImpl" name generic-parameter-count binding-attr binder call-convention types modifiers))
 
-(cl:defun get-methods (obj cl:&rest args)
-  "Passthrough for System.Type.GetMethods overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetMethods" args))
+(cl:defun get-methods (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetMethods overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethods" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethods"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetMethods"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-methods (obj)
   "Calls System.Type.GetMethods GetMethods() -> MethodInfo[]. Summary: Returns all the public methods of the current System.Type.
@@ -1117,9 +1264,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetMethods" binding-attr))
 
-(cl:defun get-nested-type (obj cl:&rest args)
-  "Passthrough for System.Type.GetNestedType overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetNestedType" args))
+(cl:defun get-nested-type (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetNestedType overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetNestedType" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetNestedType" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetNestedType"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-nested-type-string (obj name)
   "Calls System.Type.GetNestedType GetNestedType(String) -> Type. Summary: Searches for the public nested type with the specified name.
@@ -1138,9 +1294,18 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetNestedType" name binding-attr))
 
-(cl:defun get-nested-types (obj cl:&rest args)
-  "Passthrough for System.Type.GetNestedTypes overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetNestedTypes" args))
+(cl:defun get-nested-types (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetNestedTypes overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetNestedTypes" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetNestedTypes"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetNestedTypes"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-nested-types (obj)
   "Calls System.Type.GetNestedTypes GetNestedTypes() -> Type[]. Summary: Returns the public types nested in the current System.Type.
@@ -1162,9 +1327,18 @@ Returns: An array of System.Type objects that identify the optional custom modif
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetOptionalCustomModifiers"))
 
-(cl:defun get-properties (obj cl:&rest args)
-  "Passthrough for System.Type.GetProperties overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetProperties" args))
+(cl:defun get-properties (obj cl:&optional (binding-attr cl:nil supplied-binding-attr))
+  "Master wrapper for System.Type.GetProperties overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperties" binding-attr))
+    ((cl:and (cl:not supplied-binding-attr))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperties"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetProperties"
+                    :supplied-args (cl:append (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)))))))
 
 (cl:defun get-properties (obj)
   "Calls System.Type.GetProperties GetProperties() -> PropertyInfo[]. Summary: Returns all the public properties of the current System.Type.
@@ -1180,9 +1354,28 @@ Parameters:
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperties" binding-attr))
 
-(cl:defun get-property (obj cl:&rest args)
-  "Passthrough for System.Type.GetProperty overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetProperty" args))
+(cl:defun get-property (obj name cl:&optional (binding-attr cl:nil supplied-binding-attr) (types cl:nil supplied-types) (modifiers cl:nil supplied-modifiers) (types cl:nil supplied-types) (modifiers cl:nil supplied-modifiers))
+  "Master wrapper for System.Type.GetProperty overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr types modifiers types modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) supplied-modifiers (cl:or (cl:null modifiers) (monoutils:dotnet-p modifiers)) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr types modifiers))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) supplied-types (cl:or (cl:null types) (monoutils:dotnet-p types)) (cl:not supplied-modifiers) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr types))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr))
+    ((cl:and (cl:stringp name) supplied-binding-attr (cl:or (cl:null binding-attr) (monoutils:dotnet-p binding-attr)) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name binding-attr))
+    ((cl:and (cl:stringp name) (cl:not supplied-binding-attr) (cl:not supplied-types) (cl:not supplied-modifiers) (cl:not supplied-types) (cl:not supplied-modifiers))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetProperty" name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetProperty"
+                    :supplied-args (cl:append (cl:list :name name) (cl:when supplied-binding-attr (cl:list :binding-attr binding-attr)) (cl:when supplied-types (cl:list :types types)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)) (cl:when supplied-types (cl:list :types types)) (cl:when supplied-modifiers (cl:list :modifiers modifiers)))))))
 
 (cl:defun get-property-string (obj name)
   "Calls System.Type.GetProperty GetProperty(String) -> PropertyInfo. Summary: Searches for the public property with the specified name.
@@ -1272,9 +1465,32 @@ Returns: An array of System.Type objects that identify the required custom modif
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetRequiredCustomModifiers"))
 
-(cl:defun get-type (obj cl:&rest args)
-  "Passthrough for System.Type.GetType overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "GetType" args))
+(cl:defun get-type (obj)
+  "Summary: Gets the current System.Type.
+Returns: The current System.Type.
+"
+  (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetType"))
+
+(cl:defun get-type* (type-name cl:&optional (throw-on-error cl:nil supplied-throw-on-error) (ignore-case cl:nil supplied-ignore-case) (throw-on-error cl:nil supplied-throw-on-error) (ignore-case cl:nil supplied-ignore-case))
+  "Master wrapper for System.Type.GetType overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp type-name) supplied-throw-on-error (cl:or (cl:null throw-on-error) (monoutils:dotnet-p throw-on-error)) supplied-ignore-case (cl:or (cl:null ignore-case) (monoutils:dotnet-p ignore-case)) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) supplied-ignore-case (cl:typep ignore-case 'cl:boolean))
+     (dotnet:static <type-str> "GetType" type-name throw-on-error ignore-case throw-on-error ignore-case))
+    ((cl:and (cl:stringp type-name) supplied-throw-on-error (cl:or (cl:null throw-on-error) (monoutils:dotnet-p throw-on-error)) supplied-ignore-case (cl:or (cl:null ignore-case) (monoutils:dotnet-p ignore-case)) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) (cl:not supplied-ignore-case))
+     (dotnet:static <type-str> "GetType" type-name throw-on-error ignore-case throw-on-error))
+    ((cl:and (cl:stringp type-name) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) supplied-ignore-case (cl:typep ignore-case 'cl:boolean) (cl:not supplied-throw-on-error) (cl:not supplied-ignore-case))
+     (dotnet:static <type-str> "GetType" type-name throw-on-error ignore-case))
+    ((cl:and (cl:stringp type-name) supplied-throw-on-error (cl:or (cl:null throw-on-error) (monoutils:dotnet-p throw-on-error)) supplied-ignore-case (cl:or (cl:null ignore-case) (monoutils:dotnet-p ignore-case)) (cl:not supplied-throw-on-error) (cl:not supplied-ignore-case))
+     (dotnet:static <type-str> "GetType" type-name throw-on-error ignore-case))
+    ((cl:and (cl:stringp type-name) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) (cl:not supplied-ignore-case) (cl:not supplied-throw-on-error) (cl:not supplied-ignore-case))
+     (dotnet:static <type-str> "GetType" type-name throw-on-error))
+    ((cl:and (cl:stringp type-name) (cl:not supplied-throw-on-error) (cl:not supplied-ignore-case) (cl:not supplied-throw-on-error) (cl:not supplied-ignore-case))
+     (dotnet:static <type-str> "GetType" type-name))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetType"
+                    :supplied-args (cl:append (cl:list :type-name type-name) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)) (cl:when supplied-ignore-case (cl:list :ignore-case ignore-case)) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)) (cl:when supplied-ignore-case (cl:list :ignore-case ignore-case)))))))
 
 (cl:defun get-type (obj)
   "Calls System.Type.GetType GetType() -> Type. Summary: Gets the current System.Type.
@@ -1309,6 +1525,39 @@ Parameters:
 "
   (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Boolean") throw-on-error) (cl:the (dotnet "System.Boolean") ignore-case)))
 
+(cl:defun get-type-string-assembly]-type] (type-name assembly-resolver type-resolver)
+  "Calls System.Type.GetType GetType(String, Assembly], Type]) -> Type. Summary: Gets the type with the specified name, optionally providing custom methods to resolve the assembly and the type.
+Returns: The type with the specified name, or if the type is not found.
+Parameters:
+  - type-name (System.String): The name of the type to get. If the typeResolver parameter is provided, the type name can be any string that typeResolver is capable of resolving. If the assemblyResolver parameter is provided or if standard type resolution is used, typeName must be an assembly-qualified name (see System.Type.AssemblyQualifiedName), unless the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, in which case it's sufficient to supply the type name qualified by its namespace.
+  - assembly-resolver (System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]): A method that locates and returns the assembly that is specified in typeName. The assembly name is passed to assemblyResolver as an System.Reflection.AssemblyName object. If typeName does not contain the name of an assembly, assemblyResolver is not called. If assemblyResolver is not supplied, standard assembly resolution is performed. Caution: Don't pass methods from unknown or untrusted callers. Doing so could result in elevation of privilege for malicious code. Use only methods that you provide or that you are familiar with.
+  - type-resolver (System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]): A method that locates and returns the type that is specified by typeName from the assembly that is returned by assemblyResolver or by standard assembly resolution. If no assembly is provided, the typeResolver method can provide one. The method also takes a parameter that specifies whether to perform a case-insensitive search; is passed to that parameter. Caution: Don't pass methods from unknown or untrusted callers.
+"
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]") assembly-resolver) (cl:the (dotnet "System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]") type-resolver)))
+
+(cl:defun get-type-string-assembly]-type]-boolean (type-name assembly-resolver type-resolver throw-on-error)
+  "Calls System.Type.GetType GetType(String, Assembly], Type], Boolean) -> Type. Summary: Gets the type with the specified name, specifying whether to throw an exception if the type is not found, and optionally providing custom methods to resolve the assembly and the type.
+Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
+Parameters:
+  - type-name (System.String): The name of the type to get. If the typeResolver parameter is provided, the type name can be any string that typeResolver is capable of resolving. If the assemblyResolver parameter is provided or if standard type resolution is used, typeName must be an assembly-qualified name (see System.Type.AssemblyQualifiedName), unless the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, in which case it's sufficient to supply the type name qualified by its namespace.
+  - assembly-resolver (System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]): A method that locates and returns the assembly that is specified in typeName. The assembly name is passed to assemblyResolver as an System.Reflection.AssemblyName object. If typeName does not contain the name of an assembly, assemblyResolver is not called. If assemblyResolver is not supplied, standard assembly resolution is performed. Caution: Don't pass methods from unknown or untrusted callers. Doing so could result in elevation of privilege for malicious code. Use only methods that you provide or that you are familiar with.
+  - type-resolver (System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]): A method that locates and returns the type that is specified by typeName from the assembly that is returned by assemblyResolver or by standard assembly resolution. If no assembly is provided, the method can provide one. The method also takes a parameter that specifies whether to perform a case-insensitive search; is passed to that parameter. Caution: Don't pass methods from unknown or untrusted callers.
+  - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
+"
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]") assembly-resolver) (cl:the (dotnet "System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]") type-resolver) (cl:the (dotnet "System.Boolean") throw-on-error)))
+
+(cl:defun get-type-string-assembly]-type]-boolean-boolean (type-name assembly-resolver type-resolver throw-on-error ignore-case)
+  "Calls System.Type.GetType GetType(String, Assembly], Type], Boolean, Boolean) -> Type. Summary: Gets the type with the specified name, specifying whether to perform a case-sensitive search and whether to throw an exception if the type is not found, and optionally providing custom methods to resolve the assembly and the type.
+Returns: The type with the specified name. If the type is not found, the throwOnError parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwOnError. See the Exceptions section.
+Parameters:
+  - type-name (System.String): The name of the type to get. If the typeResolver parameter is provided, the type name can be any string that typeResolver is capable of resolving. If the assemblyResolver parameter is provided or if standard type resolution is used, typeName must be an assembly-qualified name (see System.Type.AssemblyQualifiedName), unless the type is in the currently executing assembly or in mscorlib.dll/System.Private.CoreLib.dll, in which case it's sufficient to supply the type name qualified by its namespace.
+  - assembly-resolver (System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]): A method that locates and returns the assembly that is specified in typeName. The assembly name is passed to assemblyResolver as an System.Reflection.AssemblyName object. If typeName does not contain the name of an assembly, assemblyResolver is not called. If assemblyResolver is not supplied, standard assembly resolution is performed. Caution: Don't pass methods from unknown or untrusted callers. Doing so could result in elevation of privilege for malicious code. Use only methods that you provide or that you are familiar with.
+  - type-resolver (System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]): A method that locates and returns the type that is specified by typeName from the assembly that is returned by assemblyResolver or by standard assembly resolution. If no assembly is provided, the method can provide one. The method also takes a parameter that specifies whether to perform a case-insensitive search; the value of ignoreCase is passed to that parameter. Caution: Don't pass methods from unknown or untrusted callers.
+  - throw-on-error (System.Boolean): to throw an exception if the type cannot be found; to return . Specifying also suppresses some other exception conditions, but not all of them. See the Exceptions section.
+  - ignore-case (System.Boolean): to perform a case-insensitive search for typeName, to perform a case-sensitive search for typeName.
+"
+  (dotnet:static <type-str> "GetType" (cl:the (dotnet "System.String") type-name) (cl:the (dotnet "System.Func`2[System.Reflection.AssemblyName, System.Reflection.Assembly]") assembly-resolver) (cl:the (dotnet "System.Func`4[System.Reflection.Assembly, System.String, System.Boolean, System.Type]") type-resolver) (cl:the (dotnet "System.Boolean") throw-on-error) (cl:the (dotnet "System.Boolean") ignore-case)))
+
 (cl:defun get-type-array (args)
   "Summary: Gets the types of the objects in the specified array.
 Returns: An array of System.Type objects representing the types of the corresponding elements in args.
@@ -1331,9 +1580,22 @@ Returns: The type code of the underlying type.
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "GetTypeCodeImpl"))
 
-(cl:defun get-type-from-clsid (cl:&rest args)
-  "Passthrough for System.Type.GetTypeFromCLSID overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "GetTypeFromCLSID" args))
+(cl:defun get-type-from-clsid (clsid cl:&optional (throw-on-error cl:nil supplied-throw-on-error) (throw-on-error cl:nil supplied-throw-on-error))
+  "Master wrapper for System.Type.GetTypeFromCLSID overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null clsid) (monoutils:dotnet-p clsid)) supplied-throw-on-error (cl:stringp throw-on-error) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean))
+     (dotnet:static <type-str> "GetTypeFromCLSID" clsid throw-on-error throw-on-error))
+    ((cl:and (cl:or (cl:null clsid) (monoutils:dotnet-p clsid)) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromCLSID" clsid throw-on-error))
+    ((cl:and (cl:or (cl:null clsid) (monoutils:dotnet-p clsid)) supplied-throw-on-error (cl:stringp throw-on-error) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromCLSID" clsid throw-on-error))
+    ((cl:and (cl:or (cl:null clsid) (monoutils:dotnet-p clsid)) (cl:not supplied-throw-on-error) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromCLSID" clsid))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetTypeFromCLSID"
+                    :supplied-args (cl:append (cl:list :clsid clsid) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)))))))
 
 (cl:defun get-type-from-clsid-guid (clsid)
   "Calls System.Type.GetTypeFromCLSID GetTypeFromCLSID(Guid) -> Type. Summary: Gets the type associated with the specified class identifier (CLSID).
@@ -1379,9 +1641,22 @@ Parameters:
 "
   (dotnet:static <type-str> "GetTypeFromHandle" (cl:the (dotnet "System.RuntimeTypeHandle") handle)))
 
-(cl:defun get-type-from-prog-id (cl:&rest args)
-  "Passthrough for System.Type.GetTypeFromProgID overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "GetTypeFromProgID" args))
+(cl:defun get-type-from-prog-id (prog-id cl:&optional (throw-on-error cl:nil supplied-throw-on-error) (throw-on-error cl:nil supplied-throw-on-error))
+  "Master wrapper for System.Type.GetTypeFromProgID overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp prog-id) supplied-throw-on-error (cl:stringp throw-on-error) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean))
+     (dotnet:static <type-str> "GetTypeFromProgID" prog-id throw-on-error throw-on-error))
+    ((cl:and (cl:stringp prog-id) supplied-throw-on-error (cl:typep throw-on-error 'cl:boolean) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromProgID" prog-id throw-on-error))
+    ((cl:and (cl:stringp prog-id) supplied-throw-on-error (cl:stringp throw-on-error) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromProgID" prog-id throw-on-error))
+    ((cl:and (cl:stringp prog-id) (cl:not supplied-throw-on-error) (cl:not supplied-throw-on-error))
+     (dotnet:static <type-str> "GetTypeFromProgID" prog-id))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "GetTypeFromProgID"
+                    :supplied-args (cl:append (cl:list :prog-id prog-id) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)) (cl:when supplied-throw-on-error (cl:list :throw-on-error throw-on-error)))))))
 
 (cl:defun get-type-from-prog-id-string (prog-id)
   "Calls System.Type.GetTypeFromProgID GetTypeFromProgID(String) -> Type. Summary: Gets the type associated with the specified program identifier (ProgID), returning null if an error is encountered while loading the System.Type.
@@ -1433,9 +1708,20 @@ Returns: if the System.Type is an array, a pointer, or is passed by reference; o
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "HasElementTypeImpl"))
 
-(cl:defun invoke-member (obj cl:&rest args)
-  "Passthrough for System.Type.InvokeMember overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "InvokeMember" args))
+(cl:defun invoke-member (obj name invoke-attr binder target args cl:&optional (culture cl:nil supplied-culture) (culture cl:nil supplied-culture) (named-parameters cl:nil supplied-named-parameters))
+  "Master wrapper for System.Type.InvokeMember overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:stringp name) (cl:or (cl:null invoke-attr) (monoutils:dotnet-p invoke-attr)) (cl:or (cl:null binder) (monoutils:dotnet-p binder)) (cl:or (cl:null target) (monoutils:dotnet-p target)) (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) supplied-named-parameters (cl:or (cl:null named-parameters) (monoutils:dotnet-p named-parameters)))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args culture culture named-parameters))
+    ((cl:and (cl:stringp name) (cl:or (cl:null invoke-attr) (monoutils:dotnet-p invoke-attr)) (cl:or (cl:null binder) (monoutils:dotnet-p binder)) (cl:or (cl:null target) (monoutils:dotnet-p target)) (cl:or (cl:null args) (monoutils:dotnet-p args)) supplied-culture (cl:or (cl:null culture) (monoutils:dotnet-p culture)) (cl:not supplied-culture) (cl:not supplied-named-parameters))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args culture))
+    ((cl:and (cl:stringp name) (cl:or (cl:null invoke-attr) (monoutils:dotnet-p invoke-attr)) (cl:or (cl:null binder) (monoutils:dotnet-p binder)) (cl:or (cl:null target) (monoutils:dotnet-p target)) (cl:or (cl:null args) (monoutils:dotnet-p args)) (cl:not supplied-culture) (cl:not supplied-culture) (cl:not supplied-named-parameters))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "InvokeMember" name invoke-attr binder target args))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "InvokeMember"
+                    :supplied-args (cl:append (cl:list :name name) (cl:list :invoke-attr invoke-attr) (cl:list :binder binder) (cl:list :target target) (cl:list :args args) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-culture (cl:list :culture culture)) (cl:when supplied-named-parameters (cl:list :named-parameters named-parameters)))))))
 
 (cl:defun invoke-member-string-binding-flags-binder-object-object[] (obj name invoke-attr binder target args)
   "Calls System.Type.InvokeMember InvokeMember(String, BindingFlags, Binder, Object, Object[]) -> Object. Summary: Invokes the specified member, using the specified binding constraints and matching the specified argument list.
@@ -1573,9 +1859,18 @@ Returns: if the System.Type is a value type; otherwise, .
 "
   (dotnet:invoke (cl:the (dotnet "System.Type") obj) "IsValueTypeImpl"))
 
-(cl:defun make-array-type (obj cl:&rest args)
-  "Passthrough for System.Type.MakeArrayType overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Type") obj) "MakeArrayType" args))
+(cl:defun make-array-type (obj cl:&optional (rank cl:nil supplied-rank))
+  "Master wrapper for System.Type.MakeArrayType overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-rank (cl:numberp rank))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "MakeArrayType" rank))
+    ((cl:and (cl:not supplied-rank))
+     (dotnet:invoke (cl:the (dotnet "System.Type") obj) "MakeArrayType"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "SYSTEM-TYPE"
+                    :class-name <type-str>
+                    :method-name "MakeArrayType"
+                    :supplied-args (cl:append (cl:when supplied-rank (cl:list :rank rank)))))))
 
 (cl:defun make-array-type (obj)
   "Calls System.Type.MakeArrayType MakeArrayType() -> Type. Summary: Returns a System.Type object representing a one-dimensional array of the current type, with a lower bound of zero.

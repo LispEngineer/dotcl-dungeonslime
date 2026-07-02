@@ -280,7 +280,16 @@ and files in this repository.
   * Implements idiomatic Common Lisp naming conventions (version 17), mapping `NaN` constant fields to `nan` (generating constant wrappers as `+nan+`), mapping `IsNaN` to `nan?`, and transforming `IsSomething` predicate method/property names starting with `"Is"` followed by an uppercase letter to a `something?` question-mark suffix.
   * Refactored in DotCL 0.1.14 to wrap warnings and errors (such as unmatched filters or execution errors)
     using `utils:format-red` for high-visibility terminal printing.
-  * `package-generator-tests.lisp`: Unit test suite verifying the naming
+  * Implements Version 18 overload resolution rules: determines the positional parameter
+    prefix of overloads solely by the lack of default values up to `min-len` regardless
+    of parameter names, maps positional parameters back by index inside the invocation
+    block generator, introduces optional positional parameters using `cl:&optional` (with
+    `supplied-p` variables) instead of keyword arguments for parameters between `min-len`
+    and `max-mandatory-len`, and generates package-name string literal constants in fallback
+    conditions.
+
+
+* `package-generator-tests.lisp`: Unit test suite verifying the naming
     conversion, string splitting, member filtering, and constructor classification behaviors of
     the assembly package generator, as well as testing the generated
     operator overloads (`=`, `/=`, `+`, `<`, `<=`, `>`, `>=`) on

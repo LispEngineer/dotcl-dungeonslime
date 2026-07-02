@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:38Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:32Z
 
 (cl:in-package :cl-user)
 
@@ -48,6 +48,7 @@
    #:barycentric
    #:catmull-rom
    #:ceiling
+   #:ceiling*
    #:ceiling-vector2
    #:clamp
    #:distance
@@ -60,6 +61,7 @@
    #:equals-object
    #:equals-vector2
    #:floor
+   #:floor*
    #:floor-vector2
    #:get-hash-code
    #:hermite
@@ -75,16 +77,20 @@
    #:multiply-vector2-single
    #:negate
    #:normalize
+   #:normalize*
    #:normalize-vector2
    #:not=
    #:reflect
    #:rotate
+   #:rotate*
    #:rotate-single
    #:rotate-vector2-single
    #:rotate-around
+   #:rotate-around*
    #:rotate-around-vector2-single
    #:rotate-around-vector2-vector2-single
    #:round
+   #:round*
    #:round-vector2
    #:smooth-step
    #:subtract
@@ -101,8 +107,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-06-30T03:58:38Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:32Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -129,14 +135,18 @@
 
 (cl:defconstant +zero+ (dotnet:static <type-str> "Zero"))
 
-(cl:defun - (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime."
+(cl:defun - (value cl:&optional (value2 cl:nil supplied-value2))
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 1) (monoutils:dotnet-p (cl:nth 0 args)))
-     (cl:apply (cl:function --vector2) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function --vector2-vector2) args))
-    (cl:t (cl:error "Microsoft.Xna.Framework.Vector2.-: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-value2 (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "op_Subtraction" value value2))
+    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-value2))
+     (dotnet:static <type-str> "op_UnaryNegation" value))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "-"
+                    :supplied-args (cl:append (cl:list :value value) (cl:when supplied-value2 (cl:list :value2 value2)))))))
 
 (cl:defun --vector2 (value)
   "Calls Microsoft.Xna.Framework.Vector2.- -(Vector2) -> Vector2"
@@ -146,16 +156,20 @@
   "Calls Microsoft.Xna.Framework.Vector2.- -(Vector2, Vector2) -> Vector2"
   (dotnet:static <type-str> "op_Subtraction" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
-(cl:defun * (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime."
+(cl:defun * (value1 value2)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function *-vector2-vector2) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (cl:numberp (cl:nth 1 args)))
-     (cl:apply (cl:function *-vector2-single) args))
-    ((cl:and (cl:= (cl:length args) 2) (cl:numberp (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function *-single-vector2) args))
-    (cl:t (cl:error "Microsoft.Xna.Framework.Vector2.*: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "*"
+                    :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 (cl:defun *-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2.* *(Vector2, Vector2) -> Vector2"
@@ -169,14 +183,18 @@
   "Calls Microsoft.Xna.Framework.Vector2.* *(Single, Vector2) -> Vector2"
   (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "System.Single") scale-factor) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
-(cl:defun / (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime."
+(cl:defun / (value1 value2)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (monoutils:dotnet-p (cl:nth 1 args)))
-     (cl:apply (cl:function /-vector2-vector2) args))
-    ((cl:and (cl:= (cl:length args) 2) (monoutils:dotnet-p (cl:nth 0 args)) (cl:numberp (cl:nth 1 args)))
-     (cl:apply (cl:function /-vector2-single) args))
-    (cl:t (cl:error "Microsoft.Xna.Framework.Vector2./: no matching overload found for args: ~S" args))))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "op_Division" value1 value2))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+     (dotnet:static <type-str> "op_Division" value1 value2))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "/"
+                    :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 (cl:defun /-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2./ /(Vector2, Vector2) -> Vector2"
@@ -216,9 +234,11 @@
 ;; yet supported:
 ;;   CatmullRom(ref Vector2&, ref Vector2&, ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
-(cl:defun ceiling (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Ceiling overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling" args))
+(cl:defun ceiling (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling"))
+
+(cl:defun ceiling* (value)
+  (dotnet:static <type-str> "Ceiling" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 (cl:defun ceiling (obj)
   "Calls Microsoft.Xna.Framework.Vector2.Ceiling Ceiling() -> Void"
@@ -261,9 +281,18 @@
 ;; yet supported:
 ;;   DistanceSquared(ref Vector2&, ref Vector2&, out Single&) -> Void
 
-(cl:defun divide (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Divide overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Divide" args))
+(cl:defun divide (value1 value2)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Divide overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "Divide" value1 value2))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+     (dotnet:static <type-str> "Divide" value1 value2))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "Divide"
+                    :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 (cl:defun divide-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2.Divide Divide(Vector2, Vector2) -> Vector2"
@@ -287,9 +316,18 @@
 ;; yet supported:
 ;;   Dot(ref Vector2&, ref Vector2&, out Single&) -> Void
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" args))
+(cl:defun equals (obj obj)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Equals overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
+    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "Equals"
+                    :supplied-args (cl:append (cl:list :obj obj))))))
 
 (cl:defun equals-object (obj obj)
   "Calls Microsoft.Xna.Framework.Vector2.Equals Equals(Object) -> Boolean"
@@ -299,9 +337,11 @@
   "Calls Microsoft.Xna.Framework.Vector2.Equals Equals(Vector2) -> Boolean"
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" other))
 
-(cl:defun floor (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Floor overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor" args))
+(cl:defun floor (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor"))
+
+(cl:defun floor* (value)
+  (dotnet:static <type-str> "Floor" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 (cl:defun floor (obj)
   "Calls Microsoft.Xna.Framework.Vector2.Floor Floor() -> Void"
@@ -368,9 +408,18 @@
 ;; yet supported:
 ;;   Min(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
-(cl:defun multiply (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Multiply overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Multiply" args))
+(cl:defun multiply (value1 value2)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Multiply overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+     (dotnet:static <type-str> "Multiply" value1 value2))
+    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+     (dotnet:static <type-str> "Multiply" value1 value2))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "Multiply"
+                    :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 (cl:defun multiply-vector2-vector2 (value1 value2)
   "Calls Microsoft.Xna.Framework.Vector2.Multiply Multiply(Vector2, Vector2) -> Vector2"
@@ -394,9 +443,11 @@
 ;; yet supported:
 ;;   Negate(ref Vector2&, out Vector2&) -> Void
 
-(cl:defun normalize (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Normalize overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize" args))
+(cl:defun normalize (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
+
+(cl:defun normalize* (value)
+  (dotnet:static <type-str> "Normalize" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 (cl:defun normalize (obj)
   "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize() -> Void"
@@ -422,9 +473,11 @@
 ;; yet supported:
 ;;   Reflect(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
-(cl:defun rotate (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Rotate overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" args))
+(cl:defun rotate (obj radians)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" radians))
+
+(cl:defun rotate* (value radians)
+  (dotnet:static <type-str> "Rotate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") radians)))
 
 (cl:defun rotate-single (obj radians)
   "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Single) -> Void"
@@ -434,9 +487,11 @@
   "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Vector2, Single) -> Vector2"
   (dotnet:static <type-str> "Rotate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") radians)))
 
-(cl:defun rotate-around (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.RotateAround overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" args))
+(cl:defun rotate-around (obj origin radians)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" origin radians))
+
+(cl:defun rotate-around* (value origin radians)
+  (dotnet:static <type-str> "RotateAround" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") origin) (cl:the (dotnet "System.Single") radians)))
 
 (cl:defun rotate-around-vector2-single (obj origin radians)
   "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Single) -> Void"
@@ -446,9 +501,11 @@
   "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Vector2, Single) -> Vector2"
   (dotnet:static <type-str> "RotateAround" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") origin) (cl:the (dotnet "System.Single") radians)))
 
-(cl:defun round (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Round overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round" args))
+(cl:defun round (obj)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round"))
+
+(cl:defun round* (value)
+  (dotnet:static <type-str> "Round" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 (cl:defun round (obj)
   "Calls Microsoft.Xna.Framework.Vector2.Round Round() -> Void"
@@ -488,9 +545,18 @@
 (cl:defun to-string (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "ToString"))
 
-(cl:defun transform (cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Transform overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:static) <type-str> "Transform" args))
+(cl:defun transform (position matrix)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Transform overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and (cl:or (cl:null position) (monoutils:dotnet-p position)) (cl:or (cl:null matrix) (monoutils:dotnet-p matrix)))
+     (dotnet:static <type-str> "Transform" position matrix))
+    ((cl:and (cl:or (cl:null position) (monoutils:dotnet-p position)) (cl:or (cl:null matrix) (monoutils:dotnet-p matrix)))
+     (dotnet:static <type-str> "Transform" position matrix))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "Transform"
+                    :supplied-args (cl:append (cl:list :position position) (cl:list :matrix matrix))))))
 
 (cl:defun transform-vector2-matrix (position matrix)
   "Calls Microsoft.Xna.Framework.Vector2.Transform Transform(Vector2, Matrix) -> Vector2"

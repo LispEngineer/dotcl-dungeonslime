@@ -279,8 +279,8 @@
           (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
       ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
       (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
-        ;; FIXME: Use v2:normalize-vector2 which is a static C# method that returns a new struct.
-        (let ((normal (v2:normalize-vector2 (v2:new normal-x normal-y))))
+        ;; Use v2:normalize* which is the new generated static C# master wrapper.
+        (let ((normal (v2:normalize* (v2:new normal-x normal-y))))
           (setf (bat-vel game) (v2:reflect (bat-vel game) normal))
           (play-sound-effect (audio-controller game) (bounce-sound game))))
       ;; Update the bat position
@@ -335,7 +335,7 @@
     (dotnet:invoke gd "Clear" c)
 
     ;; Prepare for rendering
-    (sprite-batch-begin sb :sampler-state sampler-state:+point-clamp+)
+    (sprite-batch:begin sb :sampler-state sampler-state:+point-clamp+)
 
     ;; Draw the tilemap
     (draw (tilemap game) sb)

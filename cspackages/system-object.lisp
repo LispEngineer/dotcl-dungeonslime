@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Object
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:25Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:22Z
 
 (cl:in-package :cl-user)
 
@@ -14,6 +14,7 @@
    #:<version>
    #:new
    #:equals
+   #:equals*
    #:equals-object
    #:equals-object-object
    #:finalize
@@ -28,8 +29,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Object"))
 (cl:defconstant <type-str> "System.Object")
-(cl:defconstant <creation> "2026-06-30T03:58:25Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:22Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -41,9 +42,22 @@
 "
   (dotnet:new <type-str>))
 
-(cl:defun equals (obj cl:&rest args)
-  "Passthrough for System.Object.Equals overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "System.Object") obj) "Equals" args))
+(cl:defun equals (obj obj)
+  "Summary: Determines whether the specified object is equal to the current object.
+Returns: if the specified object is equal to the current object; otherwise, .
+Parameters:
+  - obj (System.Object): The object to compare with the current object.
+"
+  (dotnet:invoke (cl:the (dotnet "System.Object") obj) "Equals" obj))
+
+(cl:defun equals* (obj-a obj-b)
+  "Summary: Determines whether the specified object instances are considered equal.
+Returns: if the objects are considered equal; otherwise, . If both objA and objB are null, the method returns .
+Parameters:
+  - obj-a (System.Object): The first object to compare.
+  - obj-b (System.Object): The second object to compare.
+"
+  (dotnet:static <type-str> "Equals" (cl:the (dotnet "System.Object") obj-a) (cl:the (dotnet "System.Object") obj-b)))
 
 (cl:defun equals-object (obj obj)
   "Calls System.Object.Equals Equals(Object) -> Boolean. Summary: Determines whether the specified object is equal to the current object.

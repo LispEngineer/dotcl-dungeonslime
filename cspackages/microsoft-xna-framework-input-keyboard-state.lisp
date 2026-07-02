@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 17
-;;; Creation Date: 2026-06-30T03:58:58Z
+;;; Generator Version: 18
+;;; Creation Date: 2026-07-02T19:02:46Z
 
 (cl:in-package :cl-user)
 
@@ -34,8 +34,8 @@
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(cl:defconstant <creation> "2026-06-30T03:58:58Z")
-(cl:defconstant <version> 17)
+(cl:defconstant <creation> "2026-07-02T19:02:46Z")
+(cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -72,9 +72,18 @@
 (cl:defun get-pressed-key-count (obj)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeyCount"))
 
-(cl:defun get-pressed-keys (obj cl:&rest args)
-  "Passthrough for Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys overloads. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:invoke) (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" args))
+(cl:defun get-pressed-keys (obj cl:&optional (keys cl:nil supplied-keys))
+  "Master wrapper for Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys overloads. Dispatches at runtime."
+  (cl:cond
+    ((cl:and supplied-keys (cl:or (cl:null keys) (monoutils:dotnet-p keys)))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" keys))
+    ((cl:and (cl:not supplied-keys))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys"))
+    (cl:t (cl:error 'utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-KEYBOARD-STATE"
+                    :class-name <type-str>
+                    :method-name "GetPressedKeys"
+                    :supplied-args (cl:append (cl:when supplied-keys (cl:list :keys keys)))))))
 
 (cl:defun get-pressed-keys (obj)
   "Calls Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys GetPressedKeys() -> Keys[]"

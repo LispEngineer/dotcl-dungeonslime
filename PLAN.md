@@ -46,6 +46,16 @@ Obviously, this is wrong. This is as of v14
 
 # Miscellaneous
 
+* Have the package generator do two more things:
+  * Generate a packages.lisp file with all the package information separate from the
+    generated packages.
+  * Generate a `utils.lisp` in its own namespace which can be used by all the
+    other packages (in the target directory).
+    * This could contain any helper methods that would have been elsewhere.
+    * This could be stored in a `cspackages-utils.lisp-template` (so it doesn't
+      get compiled by accident).
+    * This should have its own version number.
+
 * Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
   new features about building a whole system.
 
