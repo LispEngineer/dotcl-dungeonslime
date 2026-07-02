@@ -44,6 +44,18 @@ Obviously, this is wrong. This is as of v14
   * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
 
 
+# Split out Package Generator
+
+I'd like you to make a plan to split out the assembly package generator code and tests into a new project in the
+directory ../package-generator please. This package should contain all the code to generate the C# Lisp Packages exactly a
+it works today. It should generate an executable that can also be installed by dotnet (like the `dotcl` command is
+installed by dotnet). The goal for the first version would be to make as few changes to the existing code as possible,
+however taking out tests that reference anything but standard DotNet assemblies is fine (e.g., MonoGame). The second part
+of the plan should be to remove the package generator and all the attendant tests from the current DungeonSlime repository
+The system can keep DungeonSlime tests that test MonoGame generated packages though, since those will not be in the packag
+generator tests anymore.
+
+
 # Miscellaneous
 
 * Have the package generator do two more things:
