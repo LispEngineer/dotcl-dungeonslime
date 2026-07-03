@@ -28,6 +28,11 @@ This is heavily a work in progress. The code may not be as clean as I
 would like, but this is primarily a proof of concept for creating another
 game in SANO-san's awesome DotCL Common Lisp later.
 
+## Package Generator
+
+This package uses [my C# lisp package generator](https://github.com/LispEngineer/dotcl-package-generator)
+which originally was a part of this code, but is now standalone.
+
 
 # How to Use
 
