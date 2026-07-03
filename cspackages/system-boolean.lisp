@@ -1,41 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-boolean
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:false-string
-   #:true-string
-   #:compare-to
-   #:compare-to-object
-   #:compare-to-boolean
-   #:equals
-   #:equals-object
-   #:equals-boolean
-   #:get-hash-code
-   #:get-type-code
-   #:parse
-   #:parse-string
-   #:parse-char]
-   #:to-string
-   #:to-string-i-format-provider
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-boolean)
 
 (cl:defconstant <type> (monoutils:get-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

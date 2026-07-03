@@ -1,65 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-rectangle
-  (:use :cl)
-  (:shadow
-   #:=
-   #:union
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-point-point
-   #:new-int32-int32-int32-int32
-   #:+empty+
-   #:bottom
-   #:center
-   #:empty?
-   #:left
-   #:location
-   #:right
-   #:size
-   #:top
-   #:=
-   #:contains
-   #:contains-point
-   #:contains-vector2
-   #:contains-rectangle
-   #:contains-int32-int32
-   #:contains-single-single
-   #:equals
-   #:equals-object
-   #:equals-rectangle
-   #:get-hash-code
-   #:inflate
-   #:inflate-int32-int32
-   #:inflate-single-single
-   #:intersect
-   #:intersects
-   #:not=
-   #:offset
-   #:offset-point
-   #:offset-vector2
-   #:offset-int32-int32
-   #:offset-single-single
-   #:to-string
-   #:union
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-rectangle)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Rectangle"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

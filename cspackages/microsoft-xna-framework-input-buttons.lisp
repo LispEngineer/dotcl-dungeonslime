@@ -1,51 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Buttons
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-input-buttons
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:+a+
-   #:+b+
-   #:+back+
-   #:+big-button+
-   #:+d-pad-down+
-   #:+d-pad-left+
-   #:+d-pad-right+
-   #:+d-pad-up+
-   #:+left-shoulder+
-   #:+left-stick+
-   #:+left-thumbstick-down+
-   #:+left-thumbstick-left+
-   #:+left-thumbstick-right+
-   #:+left-thumbstick-up+
-   #:+left-trigger+
-   #:+none+
-   #:+right-shoulder+
-   #:+right-stick+
-   #:+right-thumbstick-down+
-   #:+right-thumbstick-left+
-   #:+right-thumbstick-right+
-   #:+right-thumbstick-up+
-   #:+right-trigger+
-   #:+start+
-   #:+x+
-   #:+y+
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-input-buttons)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Buttons"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Buttons")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

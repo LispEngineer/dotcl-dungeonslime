@@ -1,84 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-io-path
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:alt-directory-separator-char
-   #:directory-separator-char
-   #:invalid-path-chars
-   #:path-separator
-   #:volume-separator-char
-   #:change-extension
-   #:combine
-   #:combine-string]
-   #:combine-string-string
-   #:combine-string-string-string
-   #:combine-string-string-string-string
-   #:ends-in-directory-separator
-   #:ends-in-directory-separator-char]
-   #:ends-in-directory-separator-string
-   #:exists
-   #:get-directory-name
-   #:get-directory-name-string
-   #:get-directory-name-char]
-   #:get-extension
-   #:get-extension-string
-   #:get-extension-char]
-   #:get-file-name
-   #:get-file-name-string
-   #:get-file-name-char]
-   #:get-file-name-without-extension
-   #:get-file-name-without-extension-string
-   #:get-file-name-without-extension-char]
-   #:get-full-path
-   #:get-full-path-string
-   #:get-full-path-string-string
-   #:get-invalid-file-name-chars
-   #:get-invalid-path-chars
-   #:get-path-root
-   #:get-path-root-string
-   #:get-path-root-char]
-   #:get-random-file-name
-   #:get-relative-path
-   #:get-temp-file-name
-   #:get-temp-path
-   #:has-extension
-   #:has-extension-string
-   #:has-extension-char]
-   #:path-fully-qualified?
-   #:path-fully-qualified?-string
-   #:path-fully-qualified?-char]
-   #:path-rooted?
-   #:path-rooted?-string
-   #:path-rooted?-char]
-   #:join
-   #:join-string]
-   #:join-char]-char]
-   #:join-string-string
-   #:join-char]-char]-char]
-   #:join-string-string-string
-   #:join-char]-char]-char]-char]
-   #:join-string-string-string-string
-   #:trim-ending-directory-separator
-   #:trim-ending-directory-separator-string
-   #:trim-ending-directory-separator-char]
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-io-path)
 
 (cl:defconstant <type> (monoutils:get-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

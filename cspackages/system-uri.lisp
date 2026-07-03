@@ -1,113 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-uri
-  (:use :cl)
-  (:shadow
-   #:=
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-string
-   #:new-string-boolean
-   #:new-string-uri-kind
-   #:new-uri-string
-   #:new-serialization-info-streaming-context
-   #:new-uri-uri
-   #:new-uri-string-boolean
-   #:+scheme-delimiter+
-   #:+uri-scheme-file+
-   #:+uri-scheme-ftp+
-   #:+uri-scheme-ftps+
-   #:+uri-scheme-gopher+
-   #:+uri-scheme-http+
-   #:+uri-scheme-https+
-   #:+uri-scheme-mailto+
-   #:+uri-scheme-net-pipe+
-   #:+uri-scheme-net-tcp+
-   #:+uri-scheme-news+
-   #:+uri-scheme-nntp+
-   #:+uri-scheme-sftp+
-   #:+uri-scheme-ssh+
-   #:+uri-scheme-telnet+
-   #:+uri-scheme-ws+
-   #:+uri-scheme-wss+
-   #:absolute-path
-   #:absolute-uri
-   #:authority
-   #:dns-safe-host
-   #:fragment
-   #:host
-   #:host-name-type
-   #:idn-host
-   #:absolute-uri?
-   #:default-port?
-   #:file?
-   #:loopback?
-   #:unc?
-   #:local-path
-   #:original-string
-   #:path-and-query
-   #:port
-   #:query
-   #:scheme
-   #:segments
-   #:user-escaped
-   #:user-info
-   #:=
-   #:canonicalize
-   #:check-host-name
-   #:check-scheme-name
-   #:check-security
-   #:compare
-   #:equals
-   #:equals-object
-   #:equals-uri
-   #:escape
-   #:escape-data-string
-   #:escape-data-string-string
-   #:escape-data-string-char]
-   #:escape-string
-   #:escape-uri-string
-   #:from-hex
-   #:get-components
-   #:get-hash-code
-   #:get-left-part
-   #:get-object-data
-   #:hex-escape
-   #:bad-file-system-character?
-   #:base-of?
-   #:excluded-character?
-   #:hex-digit?
-   #:hex-encoding?
-   #:reserved-character?
-   #:well-formed-original-string?
-   #:well-formed-uri-string?
-   #:make-relative
-   #:make-relative-uri
-   #:not=
-   #:parse
-   #:to-string
-   #:unescape
-   #:unescape-data-string
-   #:unescape-data-string-string
-   #:unescape-data-string-char]
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-uri)
 
 (cl:defconstant <type> (monoutils:get-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

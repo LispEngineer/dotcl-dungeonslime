@@ -1,41 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePad
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-input-game-pad
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:maximum-game-pad-count
-   #:get-capabilities
-   #:get-capabilities-player-index
-   #:get-capabilities-int32
-   #:get-state
-   #:get-state-player-index
-   #:get-state-int32
-   #:get-state-player-index-game-pad-dead-zone
-   #:get-state-int32-game-pad-dead-zone
-   #:get-state-player-index-game-pad-dead-zone-game-pad-dead-zone
-   #:get-state-int32-game-pad-dead-zone-game-pad-dead-zone
-   #:set-vibration
-   #:set-vibration-player-index-single-single
-   #:set-vibration-int32-single-single
-   #:set-vibration-player-index-single-single-single-single
-   #:set-vibration-int32-single-single-single-single
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.GamePad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePad")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

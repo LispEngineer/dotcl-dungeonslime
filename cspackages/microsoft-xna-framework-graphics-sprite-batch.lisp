@@ -1,48 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteBatch
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-graphics-sprite-batch
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-graphics-device
-   #:new-graphics-device-int32
-   #:begin
-   #:dispose
-   #:draw
-   #:draw-texture2-d-vector2-color
-   #:draw-texture2-d-rectangle-color
-   #:draw-texture2-d-vector2-rectangle]-color
-   #:draw-texture2-d-rectangle-rectangle]-color
-   #:draw-texture2-d-rectangle-rectangle]-color-single-vector2-sprite-effects-single
-   #:draw-texture2-d-vector2-rectangle]-color-single-vector2-vector2-sprite-effects-single
-   #:draw-texture2-d-vector2-rectangle]-color-single-vector2-single-sprite-effects-single
-   #:draw-string
-   #:draw-string-sprite-font-string-vector2-color
-   #:draw-string-sprite-font-string-builder-vector2-color
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-single-sprite-effects-single
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-vector2-sprite-effects-single
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-single-sprite-effects-single
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-vector2-sprite-effects-single
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-vector2-sprite-effects-single-boolean
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-vector2-sprite-effects-single-boolean
-   #:end
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-batch)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteBatch"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteBatch")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

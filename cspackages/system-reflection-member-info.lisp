@@ -1,47 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-reflection-member-info
-  (:use :cl)
-  (:shadow
-   #:=
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:custom-attributes
-   #:declaring-type
-   #:collectible?
-   #:member-type
-   #:metadata-token
-   #:module
-   #:name
-   #:reflected-type
-   #:=
-   #:equals
-   #:get-custom-attributes
-   #:get-custom-attributes-boolean
-   #:get-custom-attributes-type-boolean
-   #:get-custom-attributes-data
-   #:get-hash-code
-   #:has-same-metadata-definition-as
-   #:defined?
-   #:not=
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-reflection-member-info)
 
 (cl:defconstant <type> (monoutils:get-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

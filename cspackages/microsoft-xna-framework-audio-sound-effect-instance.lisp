@@ -1,42 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffectInstance
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-audio-sound-effect-instance
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:disposed?
-   #:looped?
-   #:pan
-   #:pitch
-   #:state
-   #:volume
-   #:apply3-d
-   #:apply3-d-audio-listener-audio-emitter
-   #:apply3-d-audio-listener[]-audio-emitter
-   #:dispose
-   #:dispose-boolean
-   #:finalize
-   #:pause
-   #:play
-   #:resume
-   #:stop
-   #:stop-boolean
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect-instance)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffectInstance")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

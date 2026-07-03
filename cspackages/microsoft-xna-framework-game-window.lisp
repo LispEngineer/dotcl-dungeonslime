@@ -1,49 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameWindow
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-game-window
-  (:use :cl)
-  (:shadow
-   #:position
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:allow-alt-f4
-   #:allow-user-resizing
-   #:client-bounds
-   #:current-orientation
-   #:handle
-   #:borderless?
-   #:position
-   #:screen-device-name
-   #:title
-   #:begin-screen-device-change
-   #:end-screen-device-change
-   #:end-screen-device-change-string
-   #:end-screen-device-change-string-int32-int32
-   #:on-activated
-   #:on-deactivated
-   #:on-orientation-changed
-   #:on-paint
-   #:on-screen-device-name-changed
-   #:set-supported-orientations
-   #:set-title
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-game-window)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameWindow"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameWindow")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

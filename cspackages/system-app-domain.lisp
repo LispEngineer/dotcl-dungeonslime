@@ -1,90 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-app-domain
-  (:use :cl)
-  (:shadow
-   #:load
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:current-domain
-   #:monitoring-survived-process-memory-size
-   #:base-directory
-   #:dynamic-directory
-   #:friendly-name
-   #:id
-   #:fully-trusted?
-   #:homogenous?
-   #:monitoring-survived-memory-size
-   #:monitoring-total-allocated-memory-size
-   #:monitoring-total-processor-time
-   #:permission-set
-   #:relative-search-path
-   #:setup-information
-   #:shadow-copy-files
-   #:append-private-path
-   #:apply-policy
-   #:clear-private-path
-   #:clear-shadow-copy-path
-   #:create-domain
-   #:create-instance
-   #:create-instance-string-string
-   #:create-instance-string-string-object[]
-   #:create-instance-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
-   #:create-instance-and-unwrap
-   #:create-instance-and-unwrap-string-string
-   #:create-instance-and-unwrap-string-string-object[]
-   #:create-instance-and-unwrap-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
-   #:create-instance-from
-   #:create-instance-from-string-string
-   #:create-instance-from-string-string-object[]
-   #:create-instance-from-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
-   #:create-instance-from-and-unwrap
-   #:create-instance-from-and-unwrap-string-string
-   #:create-instance-from-and-unwrap-string-string-object[]
-   #:create-instance-from-and-unwrap-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
-   #:execute-assembly
-   #:execute-assembly-string
-   #:execute-assembly-string-string[]
-   #:execute-assembly-string-string[]-byte[]-assembly-hash-algorithm
-   #:execute-assembly-by-name
-   #:get-assemblies
-   #:get-current-thread-id
-   #:get-data
-   #:compatibility-switch-set?
-   #:default-app-domain?
-   #:finalizing-for-unload?
-   #:load
-   #:load-byte[]
-   #:load-assembly-name
-   #:load-string
-   #:load-byte[]-byte[]
-   #:reflection-only-get-assemblies
-   #:set-cache-path
-   #:set-data
-   #:set-dynamic-base
-   #:set-principal-policy
-   #:set-shadow-copy-files
-   #:set-shadow-copy-path
-   #:set-thread-principal
-   #:to-string
-   #:unload
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-app-domain)
 
 (cl:defconstant <type> (monoutils:get-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

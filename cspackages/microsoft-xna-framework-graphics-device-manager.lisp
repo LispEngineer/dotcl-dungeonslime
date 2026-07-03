@@ -1,51 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GraphicsDeviceManager
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-graphics-device-manager
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:default-back-buffer-height
-   #:default-back-buffer-width
-   #:graphics-device
-   #:graphics-profile
-   #:hardware-mode-switch
-   #:full-screen?
-   #:prefer-half-pixel-offset
-   #:prefer-multi-sampling
-   #:preferred-back-buffer-format
-   #:preferred-back-buffer-height
-   #:preferred-back-buffer-width
-   #:preferred-depth-stencil-format
-   #:supported-orientations
-   #:synchronize-with-vertical-retrace
-   #:apply-changes
-   #:begin-draw
-   #:dispose
-   #:dispose-boolean
-   #:end-draw
-   #:finalize
-   #:on-device-created
-   #:on-device-disposing
-   #:on-device-reset
-   #:on-device-resetting
-   #:toggle-full-screen
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-graphics-device-manager)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GraphicsDeviceManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GraphicsDeviceManager")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

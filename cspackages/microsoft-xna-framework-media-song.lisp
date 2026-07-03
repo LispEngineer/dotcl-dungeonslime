@@ -1,50 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.Song
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-media-song
-  (:use :cl)
-  (:shadow
-   #:position
-   #:=
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:album
-   #:artist
-   #:duration
-   #:genre
-   #:disposed?
-   #:protected?
-   #:rated?
-   #:name
-   #:play-count
-   #:position
-   #:rating
-   #:track-number
-   #:=
-   #:dispose
-   #:equals
-   #:equals-song
-   #:equals-object
-   #:finalize
-   #:from-uri
-   #:get-hash-code
-   #:not=
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-media-song)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.Song"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

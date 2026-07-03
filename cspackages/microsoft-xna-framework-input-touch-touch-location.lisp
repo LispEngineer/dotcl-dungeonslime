@@ -1,44 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchLocation
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-input-touch-touch-location
-  (:use :cl)
-  (:shadow
-   #:position
-   #:=
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-int32-touch-location-state-vector2
-   #:new-int32-touch-location-state-vector2-touch-location-state-vector2
-   #:id
-   #:position
-   #:pressure
-   #:state
-   #:=
-   #:equals
-   #:equals-object
-   #:equals-touch-location
-   #:get-hash-code
-   #:high-frequency-event?
-   #:not=
-   #:to-string
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-location)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchLocation")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

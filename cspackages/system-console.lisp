@@ -1,108 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :system-console
-  (:use :cl)
-  (:shadow
-   #:error
-   #:read
-   #:read-line
-   #:write
-   #:write-char
-   #:write-string
-   #:write-line
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:caps-lock
-   #:error
-   #:in
-   #:error-redirected?
-   #:input-redirected?
-   #:output-redirected?
-   #:key-available
-   #:largest-window-height
-   #:largest-window-width
-   #:number-lock
-   #:out
-   #:beep
-   #:beep-int32-int32
-   #:clear
-   #:get-cursor-position
-   #:move-buffer-area
-   #:move-buffer-area-int32-int32-int32-int32-int32-int32
-   #:move-buffer-area-int32-int32-int32-int32-int32-int32-char-console-color-console-color
-   #:open-standard-error
-   #:open-standard-error-int32
-   #:open-standard-input
-   #:open-standard-input-int32
-   #:open-standard-output
-   #:open-standard-output-int32
-   #:read
-   #:read-key
-   #:read-key-boolean
-   #:read-line
-   #:reset-color
-   #:set-buffer-size
-   #:set-cursor-position
-   #:set-error
-   #:set-in
-   #:set-out
-   #:set-window-position
-   #:set-window-size
-   #:write
-   #:write-boolean
-   #:write-char
-   #:write-char[]
-   #:write-double
-   #:write-decimal
-   #:write-single
-   #:write-int32
-   #:write-u-int32
-   #:write-int64
-   #:write-u-int64
-   #:write-object
-   #:write-string
-   #:write-char]
-   #:write-string-object
-   #:write-string-object]
-   #:write-string-object-object
-   #:write-char[]-int32-int32
-   #:write-string-object-object-object
-   #:write-line
-   #:write-line-boolean
-   #:write-line-char
-   #:write-line-char[]
-   #:write-line-decimal
-   #:write-line-double
-   #:write-line-single
-   #:write-line-int32
-   #:write-line-u-int32
-   #:write-line-int64
-   #:write-line-u-int64
-   #:write-line-object
-   #:write-line-string
-   #:write-line-char]
-   #:write-line-string-object
-   #:write-line-string-object]
-   #:write-line-char[]-int32-int32
-   #:write-line-string-object-object
-   #:write-line-string-object-object-object
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :system-console)
 
 (cl:defconstant <type> (monoutils:get-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

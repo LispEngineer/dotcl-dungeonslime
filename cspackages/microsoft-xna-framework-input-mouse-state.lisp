@@ -1,47 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-input-mouse-state
-  (:use :cl)
-  (:shadow
-   #:position
-   #:=
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state
-   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state-int32
-   #:horizontal-scroll-wheel-value
-   #:left-button
-   #:middle-button
-   #:position
-   #:right-button
-   #:scroll-wheel-value
-   #:x
-   #:x-button1
-   #:x-button2
-   #:y
-   #:=
-   #:equals
-   #:get-hash-code
-   #:not=
-   #:to-string
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-input-mouse-state)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.MouseState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

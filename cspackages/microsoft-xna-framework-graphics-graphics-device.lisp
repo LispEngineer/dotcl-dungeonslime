@@ -1,89 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-graphics-graphics-device
-  (:use :cl)
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-graphics-adapter-graphics-profile-presentation-parameters
-   #:new-graphics-adapter-graphics-profile-boolean-presentation-parameters
-   #:adapter
-   #:blend-factor
-   #:blend-state
-   #:depth-stencil-state
-   #:display-mode
-   #:graphics-debug
-   #:graphics-device-status
-   #:graphics-profile
-   #:indices
-   #:content-lost?
-   #:disposed?
-   #:metrics
-   #:presentation-parameters
-   #:rasterizer-state
-   #:render-target-count
-   #:resources-lost
-   #:sampler-states
-   #:scissor-rectangle
-   #:textures
-   #:use-half-pixel-offset
-   #:vertex-sampler-states
-   #:vertex-textures
-   #:viewport
-   #:clear
-   #:clear-color
-   #:clear-clear-options-color-single-int32
-   #:clear-clear-options-vector4-single-int32
-   #:dispose
-   #:dispose-boolean
-   #:draw-indexed-primitives
-   #:draw-indexed-primitives-primitive-type-int32-int32-int32
-   #:draw-indexed-primitives-primitive-type-int32-int32-int32-int32-int32
-   #:draw-instanced-primitives
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32-int32
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32-int32-int32
-   #:draw-primitives
-   #:draw-user-indexed-primitives
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32-vertex-declaration
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32-vertex-declaration
-   #:draw-user-primitives
-   #:draw-user-primitives-primitive-type-t[]-int32-int32
-   #:draw-user-primitives-primitive-type-t[]-int32-int32-vertex-declaration
-   #:finalize
-   #:get-back-buffer-data
-   #:get-back-buffer-data-t[]
-   #:get-back-buffer-data-t[]-int32-int32
-   #:get-back-buffer-data-rectangle]-t[]-int32-int32
-   #:get-render-targets
-   #:get-render-targets-render-target-binding[]
-   #:present
-   #:reset
-   #:reset-presentation-parameters
-   #:set-render-target
-   #:set-render-target-render-target2-d
-   #:set-render-target-render-target-cube-cube-map-face
-   #:set-vertex-buffer
-   #:set-vertex-buffer-vertex-buffer
-   #:set-vertex-buffer-vertex-buffer-int32
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

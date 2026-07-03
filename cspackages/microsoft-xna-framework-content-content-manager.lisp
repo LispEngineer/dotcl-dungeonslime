@@ -1,46 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-content-content-manager
-  (:use :cl)
-  (:shadow
-   #:load
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-i-service-provider
-   #:new-i-service-provider-string
-   #:loaded-assets
-   #:root-directory
-   #:service-provider
-   #:dispose
-   #:dispose-boolean
-   #:finalize
-   #:load
-   #:load-localized
-   #:open-stream
-   #:read-asset
-   #:reload-asset
-   #:reload-graphics-assets
-   #:unload
-   #:unload-asset
-   #:unload-assets
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-content-content-manager)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

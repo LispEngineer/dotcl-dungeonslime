@@ -1,114 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 21
-;;; Creation Date: 2026-07-03T12:03:34Z
-
-(cl:in-package :cl-user)
-
-(cl:defpackage :microsoft-xna-framework-vector2
-  (:use :cl)
-  (:shadow
-   #:-
-   #:*
-   #:/
-   #:+
-   #:=
-   #:ceiling
-   #:floor
-   #:length
-   #:max
-   #:min
-   #:round
-  )
-  (:export
-   #:<type>
-   #:<type-str>
-   #:<creation>
-   #:<version>
-   #:new
-   #:new-single
-   #:new-single-single
-   #:+one+
-   #:+unit-x+
-   #:+unit-y+
-   #:+zero+
-   #:-
-   #:--vector2
-   #:--vector2-vector2
-   #:*
-   #:*-vector2-vector2
-   #:*-vector2-single
-   #:*-single-vector2
-   #:/
-   #:/-vector2-vector2
-   #:/-vector2-single
-   #:+
-   #:=
-   #:add
-   #:barycentric
-   #:catmull-rom
-   #:ceiling
-   #:ceiling*
-   #:ceiling-vector2
-   #:clamp
-   #:distance
-   #:distance-squared
-   #:divide
-   #:divide-vector2-vector2
-   #:divide-vector2-single
-   #:dot
-   #:equals
-   #:equals-object
-   #:equals-vector2
-   #:floor
-   #:floor*
-   #:floor-vector2
-   #:get-hash-code
-   #:hermite
-   #:implicit-cast
-   #:length
-   #:length-squared
-   #:lerp
-   #:lerp-precise
-   #:max
-   #:min
-   #:multiply
-   #:multiply-vector2-vector2
-   #:multiply-vector2-single
-   #:negate
-   #:normalize
-   #:normalize*
-   #:normalize-vector2
-   #:not=
-   #:reflect
-   #:rotate
-   #:rotate*
-   #:rotate-single
-   #:rotate-vector2-single
-   #:rotate-around
-   #:rotate-around*
-   #:rotate-around-vector2-single
-   #:rotate-around-vector2-vector2-single
-   #:round
-   #:round*
-   #:round-vector2
-   #:smooth-step
-   #:subtract
-   #:to-numerics
-   #:to-point
-   #:to-string
-   #:transform
-   #:transform-vector2-matrix
-   #:transform-vector2-quaternion
-   #:transform-normal
-  ))
+;;; Generator Version: 22
+;;; Creation Date: 2026-07-03T12:55:23Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-03T12:03:34Z")
-(cl:defconstant <version> 21)
+(cl:defconstant <creation> "2026-07-03T12:55:23Z")
+(cl:defconstant <version> 22)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
