@@ -28,6 +28,11 @@ cspackages:
 	# Requires the dotcl-packagegen tool to be installed (see ../package-generator,
 	# `make deploy`). The generated cspackages/ are vendored/committed, so this
 	# target only needs to be re-run when regenerating or adding new classes.
+	#
+	# Additionally this can only be run after make build, because it references the
+	# assemblies that are copied to the output (MonoGame). At least the first part
+	# of the build. Or, it needs to look at the actual location of the MonoGame
+	# assembly. So, there is a bootstrapping problem with the current implementation.
 	mkdir -p obj $(OUT_DIR)
 	# System.Console
 	dotcl-packagegen --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
