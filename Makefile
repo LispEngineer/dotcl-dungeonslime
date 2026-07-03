@@ -26,83 +26,81 @@ build-actual:
 
 cspackages:
 	# Requires the dotcl-packagegen tool to be installed (see ../package-generator,
-	# `make deploy`). The generated cspackages/ are vendored/committed, so this
-	# target only needs to be re-run when regenerating or adding new classes.
+	# `make deploy`), version >= 2.18.0 (single-pass CLI). The generated cspackages/
+	# are vendored/committed, so this target only needs to be re-run when
+	# regenerating or adding new classes.
 	#
 	# Additionally this can only be run after make build, because it references the
 	# assemblies that are copied to the output (MonoGame). At least the first part
 	# of the build. Or, it needs to look at the actual location of the MonoGame
 	# assembly. So, there is a bootstrapping problem with the current implementation.
-	mkdir -p obj $(OUT_DIR)
-	# System.Console
-	dotcl-packagegen --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
-	dotcl-packagegen --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output $(OUT_DIR)
-	# System.Runtime
-	dotcl-packagegen --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.TimeSpan --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.UriKind --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Uri --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Convert --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.AppDomain --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.IO.Path --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Boolean --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Type --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Object --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Single --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Double --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Reflection.MemberInfo --output $(OUT_DIR)
-	# MonoGame.Framework
-	dotcl-packagegen --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Rectangle --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Point --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameTime --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Game --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameWindow --output $(OUT_DIR)
-  #
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keyboard --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.KeyboardState --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keys --output $(OUT_DIR)
 	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Mouse --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.MouseState --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.ButtonState --output $(OUT_DIR)
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePad --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadState --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadDPad --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadThumbSticks --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadTriggers --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Buttons --output $(OUT_DIR)
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchPanel --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchCollection --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchLocation --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.GestureSample --output $(OUT_DIR)
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Color --output $(OUT_DIR) --constant-properties "*"
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Content.ContentManager --output $(OUT_DIR)
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GraphicsDeviceManager --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteEffects --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteSortMode --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SamplerState --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.GraphicsDevice --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteBatch --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont.Glyph --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.PresentationParameters --output $(OUT_DIR)
-	#
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.PlayerIndex --output $(OUT_DIR)
-  #
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffect --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffectInstance --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundState --output $(OUT_DIR) --constant-properties "*"
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.Song --output $(OUT_DIR)
-	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.MediaPlayer --output $(OUT_DIR)
-	# Add more classes here:
-	# dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class X --output $(OUT_DIR)
+	# One single-pass invocation reflects metadata and generates every class's
+	# package below, all sharing one creation timestamp. Metadata files
+	# (System.Console.lispy.metadata, etc.) now land in $(OUT_DIR) alongside the
+	# generated packages, rather than a separate obj/ directory. Groups below, in
+	# order: System.Console, System.Runtime, then MonoGame.Framework (core,
+	# Input/Keyboard, Input/Mouse, Input/GamePad, Input/Touch, Graphics, Audio,
+	# Media). Add more classes by adding another --class line (optionally with its
+	# own --constant-properties) to the appropriate --assembly group below.
+	mkdir -p $(OUT_DIR)
+	dotcl-packagegen --out-dir $(OUT_DIR) \
+	    --assembly $(REF_DIR)System.Console.dll \
+	      --class System.Console \
+	    --assembly $(REF_DIR)System.Runtime.dll \
+	      --class System.TimeSpan --constant-properties "*" \
+	      --class System.UriKind --constant-properties "*" \
+	      --class System.Uri --constant-properties "*" \
+	      --class System.Convert \
+	      --class System.AppDomain \
+	      --class System.IO.Path \
+	      --class System.Boolean \
+	      --class System.Type \
+	      --class System.Object \
+	      --class System.Single \
+	      --class System.Double \
+	      --class System.Reflection.MemberInfo \
+	    --assembly $(BIN_DIR)MonoGame.Framework.dll \
+	      --class Microsoft.Xna.Framework.Vector2 --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.Rectangle --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.Point --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.GameTime \
+	      --class Microsoft.Xna.Framework.Game \
+	      --class Microsoft.Xna.Framework.GameWindow \
+	      --class Microsoft.Xna.Framework.Input.Keyboard \
+	      --class Microsoft.Xna.Framework.Input.KeyboardState \
+	      --class Microsoft.Xna.Framework.Input.Keys \
+	      --class Microsoft.Xna.Framework.Input.Mouse \
+	      --class Microsoft.Xna.Framework.Input.MouseState \
+	      --class Microsoft.Xna.Framework.Input.ButtonState \
+	      --class Microsoft.Xna.Framework.Input.GamePad \
+	      --class Microsoft.Xna.Framework.Input.GamePadState \
+	      --class Microsoft.Xna.Framework.Input.GamePadDPad \
+	      --class Microsoft.Xna.Framework.Input.GamePadThumbSticks \
+	      --class Microsoft.Xna.Framework.Input.GamePadTriggers \
+	      --class Microsoft.Xna.Framework.Input.Buttons \
+	      --class Microsoft.Xna.Framework.Input.Touch.TouchPanel \
+	      --class Microsoft.Xna.Framework.Input.Touch.TouchCollection \
+	      --class Microsoft.Xna.Framework.Input.Touch.TouchLocation \
+	      --class Microsoft.Xna.Framework.Input.Touch.GestureSample \
+	      --class Microsoft.Xna.Framework.Color --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.Content.ContentManager \
+	      --class Microsoft.Xna.Framework.GraphicsDeviceManager \
+	      --class Microsoft.Xna.Framework.Graphics.SpriteEffects \
+	      --class Microsoft.Xna.Framework.Graphics.SpriteSortMode \
+	      --class Microsoft.Xna.Framework.Graphics.SamplerState --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.Graphics.GraphicsDevice \
+	      --class Microsoft.Xna.Framework.Graphics.SpriteBatch \
+	      --class Microsoft.Xna.Framework.Graphics.SpriteFont \
+	      --class Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph \
+	      --class Microsoft.Xna.Framework.Graphics.PresentationParameters \
+	      --class Microsoft.Xna.Framework.PlayerIndex \
+	      --class Microsoft.Xna.Framework.Audio.SoundEffect \
+	      --class Microsoft.Xna.Framework.Audio.SoundEffectInstance \
+	      --class Microsoft.Xna.Framework.Audio.SoundState --constant-properties "*" \
+	      --class Microsoft.Xna.Framework.Media.Song \
+	      --class Microsoft.Xna.Framework.Media.MediaPlayer
+	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages
 	./revert-cspackages-timestamps.sh
