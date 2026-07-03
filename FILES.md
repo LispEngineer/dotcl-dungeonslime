@@ -286,6 +286,13 @@ and files in this repository.
 
 * `check_parens.py`: Python utility to programmatically verify parentheses balance in Common Lisp source files.
 
+* `revert-cspackages-timestamps.sh`: Shell script that, after regenerating
+  `cspackages/` (e.g. via `make cspackages`), reverts any file whose only
+  diff from `HEAD` is the generator's embedded `Creation Date` comment and
+  `<creation>` defconstant timestamp, leaving files with genuine content
+  changes untouched. Supports `--dry-run`. Lets `cspackages/` be regenerated
+  frequently without polluting git history with timestamp-only diffs.
+
 * `DungeonSlime.csproj`: This is the C# Project file for the game. Its
   mystical incantations produce the final standalone binary. For more
   details, see the [BUILD-GUIDE.md](doc/BUILD-GUIDE.md).
