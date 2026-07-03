@@ -103,7 +103,9 @@ cspackages:
 	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.MediaPlayer --output $(OUT_DIR)
 	# Add more classes here:
 	# dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class X --output $(OUT_DIR)
-
+	#
+	# Cleaning up unchanged packages
+	./revert-cspackages-timestamps.sh
 
 test:
 	$(EXECUTABLE) --test
