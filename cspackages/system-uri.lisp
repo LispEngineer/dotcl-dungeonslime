@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-uri)
 
-(cl:defconstant <type> (monoutils:get-type "System.Uri"))
+(cl:defconstant <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -269,11 +269,11 @@ Parameters:
 (cl:defun equals (obj comparand)
   "Master wrapper for System.Uri.Equals overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null comparand) (monoutils:dotnet-p comparand)))
+    ((cl:and (cl:or (cl:null comparand) (dotnet:object-type comparand)))
      (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Equals" comparand))
-    ((cl:and (cl:or (cl:null comparand) (monoutils:dotnet-p comparand)))
+    ((cl:and (cl:or (cl:null comparand) (dotnet:object-type comparand)))
      (dotnet:invoke (cl:the (dotnet "System.Uri") obj) "Equals" comparand))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
                     :class-name <type-str>
                     :method-name "Equals"
@@ -305,9 +305,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp string-to-escape))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
-    ((cl:and (cl:or (cl:null string-to-escape) (monoutils:dotnet-p string-to-escape)))
+    ((cl:and (cl:or (cl:null string-to-escape) (dotnet:object-type string-to-escape)))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
                     :class-name <type-str>
                     :method-name "EscapeDataString"
@@ -528,9 +528,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp string-to-unescape))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
-    ((cl:and (cl:or (cl:null string-to-unescape) (monoutils:dotnet-p string-to-unescape)))
+    ((cl:and (cl:or (cl:null string-to-unescape) (dotnet:object-type string-to-unescape)))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
                     :class-name <type-str>
                     :method-name "UnescapeDataString"

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard-state)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.KeyboardState"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -48,11 +48,11 @@
 (cl:defun get-pressed-keys (obj cl:&optional (keys cl:nil supplied-keys))
   "Master wrapper for Microsoft.Xna.Framework.Input.KeyboardState.GetPressedKeys overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and supplied-keys (cl:or (cl:null keys) (monoutils:dotnet-p keys)))
+    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:object-type keys)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys" keys))
     ((cl:and (cl:not supplied-keys))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj) "GetPressedKeys"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-KEYBOARD-STATE"
                     :class-name <type-str>
                     :method-name "GetPressedKeys"

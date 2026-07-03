@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.UriKind
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-uri-kind)
 
-(cl:defconstant <type> (monoutils:get-type "System.UriKind"))
+(cl:defconstant <type> (dotnet:resolve-type "System.UriKind"))
 (cl:defconstant <type-str> "System.UriKind")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

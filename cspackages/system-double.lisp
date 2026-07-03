@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Double
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-double)
 
-(cl:defconstant <type> (monoutils:get-type "System.Double"))
+(cl:defconstant <type> (dotnet:resolve-type "System.Double"))
 (cl:defconstant <type-str> "System.Double")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -246,11 +246,11 @@ Parameters:
 (cl:defun compare-to (obj value)
   "Master wrapper for System.Double.CompareTo overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "CompareTo" value))
     ((cl:and (cl:numberp value))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "CompareTo" value))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "CompareTo"
@@ -356,11 +356,11 @@ Parameters:
 (cl:defun equals (obj obj)
   "Master wrapper for System.Double.Equals overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "Equals" obj))
     ((cl:and (cl:numberp obj))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "Equals" obj))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "Equals"
@@ -615,7 +615,7 @@ Parameters:
      (dotnet:static <type-str> "Log" x new-base))
     ((cl:and (cl:numberp x) (cl:not supplied-new-base))
      (dotnet:static <type-str> "Log" x))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "Log"
@@ -790,23 +790,23 @@ Parameters:
 (cl:defun parse (s cl:&optional (style cl:nil supplied-style) (provider cl:nil supplied-provider))
   "Master wrapper for System.Double.Parse overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (monoutils:dotnet-p s)) supplied-style (cl:or (cl:null style) (monoutils:dotnet-p style)) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
     ((cl:and (cl:stringp s) (cl:not supplied-style) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "Parse"
@@ -937,15 +937,15 @@ Parameters:
 (cl:defun round (x cl:&optional (digits cl:nil supplied-digits) (mode cl:nil supplied-mode))
   "Master wrapper for System.Double.Round overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (monoutils:dotnet-p mode)))
+    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (dotnet:object-type mode)))
      (dotnet:static <type-str> "Round" x digits mode))
     ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x digits))
-    ((cl:and (cl:numberp x) supplied-digits (cl:or (cl:null digits) (monoutils:dotnet-p digits)) (cl:not supplied-mode))
+    ((cl:and (cl:numberp x) supplied-digits (cl:or (cl:null digits) (dotnet:object-type digits)) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x digits))
     ((cl:and (cl:numberp x) (cl:not supplied-digits) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "Round"
@@ -1079,15 +1079,15 @@ Parameters:
 (cl:defun to-string (obj cl:&optional (format cl:nil supplied-format) (provider cl:nil supplied-provider))
   "Master wrapper for System.Double.ToString overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and supplied-format (cl:stringp format) supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+    ((cl:and supplied-format (cl:stringp format) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "ToString" format provider))
     ((cl:and supplied-format (cl:stringp format) (cl:not supplied-provider))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "ToString" format))
-    ((cl:and supplied-format (cl:or (cl:null format) (monoutils:dotnet-p format)) (cl:not supplied-provider))
+    ((cl:and supplied-format (cl:or (cl:null format) (dotnet:object-type format)) (cl:not supplied-provider))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "ToString" format))
     ((cl:and (cl:not supplied-format) (cl:not supplied-provider))
      (dotnet:invoke (cl:the (dotnet "System.Double") obj) "ToString"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"
                     :class-name <type-str>
                     :method-name "ToString"

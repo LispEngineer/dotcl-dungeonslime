@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffectInstance
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect-instance)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffectInstance")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -48,11 +48,11 @@
 (cl:defun apply3-d (obj listener emitter)
   "Master wrapper for Microsoft.Xna.Framework.Audio.SoundEffectInstance.Apply3D overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null listener) (monoutils:dotnet-p listener)) (cl:or (cl:null emitter) (monoutils:dotnet-p emitter)))
+    ((cl:and (cl:or (cl:null listener) (dotnet:object-type listener)) (cl:or (cl:null emitter) (dotnet:object-type emitter)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Apply3D" listener emitter))
-    ((cl:and (cl:or (cl:null listener) (monoutils:dotnet-p listener)) (cl:or (cl:null emitter) (monoutils:dotnet-p emitter)))
+    ((cl:and (cl:or (cl:null listener) (dotnet:object-type listener)) (cl:or (cl:null emitter) (dotnet:object-type emitter)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Apply3D" listener emitter))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT-INSTANCE"
                     :class-name <type-str>
                     :method-name "Apply3D"
@@ -73,7 +73,7 @@
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Dispose" disposing))
     ((cl:and (cl:not supplied-disposing))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Dispose"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT-INSTANCE"
                     :class-name <type-str>
                     :method-name "Dispose"
@@ -106,7 +106,7 @@
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Stop" immediate))
     ((cl:and (cl:not supplied-immediate))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj) "Stop"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT-INSTANCE"
                     :class-name <type-str>
                     :method-name "Stop"

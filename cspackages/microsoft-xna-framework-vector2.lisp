@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Vector2"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -38,11 +38,11 @@
 (cl:defun - (value cl:&optional (value2 cl:nil supplied-value2))
   "Master wrapper for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) supplied-value2 (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) supplied-value2 (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Subtraction" value value2))
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:not supplied-value2))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:not supplied-value2))
      (dotnet:static <type-str> "op_UnaryNegation" value))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "-"
@@ -59,13 +59,13 @@
 (cl:defun * (value1 value2)
   "Master wrapper for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
-    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "*"
@@ -86,11 +86,11 @@
 (cl:defun / (value1 value2)
   "Master wrapper for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Division" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
      (dotnet:static <type-str> "op_Division" value1 value2))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "/"
@@ -184,11 +184,11 @@
 (cl:defun divide (value1 value2)
   "Master wrapper for Microsoft.Xna.Framework.Vector2.Divide overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "Divide" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
      (dotnet:static <type-str> "Divide" value1 value2))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "Divide"
@@ -219,11 +219,11 @@
 (cl:defun equals (obj obj)
   "Master wrapper for Microsoft.Xna.Framework.Vector2.Equals overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "Equals"
@@ -311,11 +311,11 @@
 (cl:defun multiply (value1 value2)
   "Master wrapper for Microsoft.Xna.Framework.Vector2.Multiply overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:or (cl:null value2) (monoutils:dotnet-p value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "Multiply" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (monoutils:dotnet-p value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
      (dotnet:static <type-str> "Multiply" value1 value2))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "Multiply"
@@ -448,11 +448,11 @@
 (cl:defun transform (position matrix)
   "Master wrapper for Microsoft.Xna.Framework.Vector2.Transform overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null position) (monoutils:dotnet-p position)) (cl:or (cl:null matrix) (monoutils:dotnet-p matrix)))
+    ((cl:and (cl:or (cl:null position) (dotnet:object-type position)) (cl:or (cl:null matrix) (dotnet:object-type matrix)))
      (dotnet:static <type-str> "Transform" position matrix))
-    ((cl:and (cl:or (cl:null position) (monoutils:dotnet-p position)) (cl:or (cl:null matrix) (monoutils:dotnet-p matrix)))
+    ((cl:and (cl:or (cl:null position) (dotnet:object-type position)) (cl:or (cl:null matrix) (dotnet:object-type matrix)))
      (dotnet:static <type-str> "Transform" position matrix))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "Transform"

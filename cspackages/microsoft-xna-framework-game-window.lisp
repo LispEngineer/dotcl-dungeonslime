@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameWindow
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-game-window)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.GameWindow"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.GameWindow"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameWindow")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -70,7 +70,7 @@
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "EndScreenDeviceChange" screen-device-name client-width client-height))
     ((cl:and (cl:stringp screen-device-name) (cl:not supplied-client-width) (cl:not supplied-client-height))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj) "EndScreenDeviceChange" screen-device-name))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-GAME-WINDOW"
                     :class-name <type-str>
                     :method-name "EndScreenDeviceChange"

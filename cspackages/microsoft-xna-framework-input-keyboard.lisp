@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Input.Keyboard"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -18,11 +18,11 @@
 (cl:defun get-state (cl:&optional (player-index cl:nil supplied-player-index))
   "Master wrapper for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and supplied-player-index (cl:or (cl:null player-index) (monoutils:dotnet-p player-index)))
+    ((cl:and supplied-player-index (cl:or (cl:null player-index) (dotnet:object-type player-index)))
      (dotnet:static <type-str> "GetState" player-index))
     ((cl:and (cl:not supplied-player-index))
      (dotnet:static <type-str> "GetState"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-KEYBOARD"
                     :class-name <type-str>
                     :method-name "GetState"

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -37,13 +37,13 @@
 (cl:defun play (song cl:&optional (start-position cl:nil supplied-start-position))
   "Master wrapper for Microsoft.Xna.Framework.Media.MediaPlayer.Play overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null song) (monoutils:dotnet-p song)) supplied-start-position (cl:or (cl:null start-position) (monoutils:dotnet-p start-position)))
+    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:or (cl:null start-position) (dotnet:object-type start-position)))
      (dotnet:static <type-str> "Play" song start-position))
-    ((cl:and (cl:or (cl:null song) (monoutils:dotnet-p song)) supplied-start-position (cl:numberp start-position))
+    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:numberp start-position))
      (dotnet:static <type-str> "Play" song start-position))
-    ((cl:and (cl:or (cl:null song) (monoutils:dotnet-p song)) (cl:not supplied-start-position))
+    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) (cl:not supplied-start-position))
      (dotnet:static <type-str> "Play" song))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-MEDIA-MEDIA-PLAYER"
                     :class-name <type-str>
                     :method-name "Play"

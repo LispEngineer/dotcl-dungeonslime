@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-io-path)
 
-(cl:defconstant <type> (monoutils:get-type "System.IO.Path"))
+(cl:defconstant <type> (dotnet:resolve-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -48,9 +48,9 @@ Parameters:
      (dotnet:static <type-str> "Combine" paths path2 path3))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Combine" paths path2))
-    ((cl:and (cl:or (cl:null paths) (monoutils:dotnet-p paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Combine" paths))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "Combine"
@@ -102,11 +102,11 @@ Parameters:
 (cl:defun ends-in-directory-separator (path)
   "Master wrapper for System.IO.Path.EndsInDirectorySeparator overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "EndsInDirectorySeparator" path))
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "EndsInDirectorySeparator" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "EndsInDirectorySeparator"
@@ -141,9 +141,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetDirectoryName" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "GetDirectoryName" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetDirectoryName"
@@ -170,9 +170,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetExtension" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "GetExtension" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetExtension"
@@ -199,9 +199,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetFileName" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "GetFileName" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetFileName"
@@ -228,9 +228,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetFileNameWithoutExtension" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "GetFileNameWithoutExtension" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetFileNameWithoutExtension"
@@ -259,7 +259,7 @@ Parameters:
      (dotnet:static <type-str> "GetFullPath" path base-path))
     ((cl:and (cl:stringp path) (cl:not supplied-base-path))
      (dotnet:static <type-str> "GetFullPath" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetFullPath"
@@ -299,9 +299,9 @@ Returns: An array containing the characters that are not allowed in path names.
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetPathRoot" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "GetPathRoot" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "GetPathRoot"
@@ -355,9 +355,9 @@ Returns: The path to the temporary folder, ending with a System.IO.Path.Director
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "HasExtension" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "HasExtension" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "HasExtension"
@@ -384,9 +384,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "IsPathFullyQualified" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "IsPathFullyQualified" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "IsPathFullyQualified"
@@ -413,9 +413,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "IsPathRooted" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "IsPathRooted" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "IsPathRooted"
@@ -440,21 +440,21 @@ Parameters:
 (cl:defun join (paths cl:&optional (path2 cl:nil supplied-path2) (path3 cl:nil supplied-path3) (path4 cl:nil supplied-path4))
   "Master wrapper for System.IO.Path.Join overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null paths) (monoutils:dotnet-p paths)) supplied-path2 (cl:or (cl:null path2) (monoutils:dotnet-p path2)) supplied-path3 (cl:or (cl:null path3) (monoutils:dotnet-p path3)) supplied-path4 (cl:or (cl:null path4) (monoutils:dotnet-p path4)))
+    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) supplied-path3 (cl:or (cl:null path3) (dotnet:object-type path3)) supplied-path4 (cl:or (cl:null path4) (dotnet:object-type path4)))
      (dotnet:static <type-str> "Join" paths path2 path3 path4))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) supplied-path3 (cl:stringp path3) supplied-path4 (cl:stringp path4))
      (dotnet:static <type-str> "Join" paths path2 path3 path4))
-    ((cl:and (cl:or (cl:null paths) (monoutils:dotnet-p paths)) supplied-path2 (cl:or (cl:null path2) (monoutils:dotnet-p path2)) supplied-path3 (cl:or (cl:null path3) (monoutils:dotnet-p path3)) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) supplied-path3 (cl:or (cl:null path3) (dotnet:object-type path3)) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2 path3))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) supplied-path3 (cl:stringp path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2 path3))
-    ((cl:and (cl:or (cl:null paths) (monoutils:dotnet-p paths)) supplied-path2 (cl:or (cl:null path2) (monoutils:dotnet-p path2)) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2))
-    ((cl:and (cl:or (cl:null paths) (monoutils:dotnet-p paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "Join"
@@ -538,9 +538,9 @@ Parameters:
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "TrimEndingDirectorySeparator" path))
-    ((cl:and (cl:or (cl:null path) (monoutils:dotnet-p path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
      (dotnet:static <type-str> "TrimEndingDirectorySeparator" path))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
                     :class-name <type-str>
                     :method-name "TrimEndingDirectorySeparator"

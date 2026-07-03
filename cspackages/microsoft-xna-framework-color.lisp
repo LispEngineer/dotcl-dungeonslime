@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-color)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Color"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -386,13 +386,13 @@
 (cl:defun * (value scale)
   "Master wrapper for Microsoft.Xna.Framework.Color.* overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:numberp scale))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:numberp scale))
      (dotnet:static <type-str> "op_Multiply" value scale))
-    ((cl:and (cl:numberp value) (cl:or (cl:null scale) (monoutils:dotnet-p scale)))
+    ((cl:and (cl:numberp value) (cl:or (cl:null scale) (dotnet:object-type scale)))
      (dotnet:static <type-str> "op_Multiply" value scale))
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)) (cl:or (cl:null scale) (monoutils:dotnet-p scale)))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:or (cl:null scale) (dotnet:object-type scale)))
      (dotnet:static <type-str> "op_Multiply" value scale))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
                     :class-name <type-str>
                     :method-name "*"
@@ -423,11 +423,11 @@
 (cl:defun equals (obj obj)
   "Master wrapper for Microsoft.Xna.Framework.Color.Equals overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj) "Equals" obj))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
                     :class-name <type-str>
                     :method-name "Equals"
@@ -446,9 +446,9 @@
   (cl:cond
     ((cl:and (cl:numberp vector) supplied-g (cl:numberp g) supplied-b (cl:numberp b) supplied-a (cl:numberp a))
      (dotnet:static <type-str> "FromNonPremultiplied" vector g b a))
-    ((cl:and (cl:or (cl:null vector) (monoutils:dotnet-p vector)) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
+    ((cl:and (cl:or (cl:null vector) (dotnet:object-type vector)) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
      (dotnet:static <type-str> "FromNonPremultiplied" vector))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
                     :class-name <type-str>
                     :method-name "FromNonPremultiplied"

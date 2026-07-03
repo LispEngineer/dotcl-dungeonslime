@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-boolean)
 
-(cl:defconstant <type> (monoutils:get-type "System.Boolean"))
+(cl:defconstant <type> (dotnet:resolve-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -27,11 +27,11 @@
 (cl:defun compare-to (obj obj)
   "Master wrapper for System.Boolean.CompareTo overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "CompareTo" obj))
     ((cl:and (cl:typep obj 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "CompareTo" obj))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-BOOLEAN"
                     :class-name <type-str>
                     :method-name "CompareTo"
@@ -56,11 +56,11 @@ Parameters:
 (cl:defun equals (obj obj)
   "Master wrapper for System.Boolean.Equals overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (monoutils:dotnet-p obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "Equals" obj))
     ((cl:and (cl:typep obj 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "Equals" obj))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-BOOLEAN"
                     :class-name <type-str>
                     :method-name "Equals"
@@ -99,9 +99,9 @@ Returns: The enumerated constant System.TypeCode.Boolean.
   (cl:cond
     ((cl:and (cl:stringp value))
      (dotnet:static <type-str> "Parse" value))
-    ((cl:and (cl:or (cl:null value) (monoutils:dotnet-p value)))
+    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)))
      (dotnet:static <type-str> "Parse" value))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-BOOLEAN"
                     :class-name <type-str>
                     :method-name "Parse"
@@ -126,11 +126,11 @@ Parameters:
 (cl:defun to-string (obj cl:&optional (provider cl:nil supplied-provider))
   "Master wrapper for System.Boolean.ToString overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and supplied-provider (cl:or (cl:null provider) (monoutils:dotnet-p provider)))
+    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "ToString" provider))
     ((cl:and (cl:not supplied-provider))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj) "ToString"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-BOOLEAN"
                     :class-name <type-str>
                     :method-name "ToString"

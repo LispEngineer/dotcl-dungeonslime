@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :microsoft-xna-framework-game)
 
-(cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Game"))
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Game"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -85,7 +85,7 @@
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose" disposing))
     ((cl:and (cl:not supplied-disposing))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Dispose"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-GAME"
                     :class-name <type-str>
                     :method-name "Dispose"
@@ -135,11 +135,11 @@
 (cl:defun run (obj cl:&optional (run-behavior cl:nil supplied-run-behavior))
   "Master wrapper for Microsoft.Xna.Framework.Game.Run overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and supplied-run-behavior (cl:or (cl:null run-behavior) (monoutils:dotnet-p run-behavior)))
+    ((cl:and supplied-run-behavior (cl:or (cl:null run-behavior) (dotnet:object-type run-behavior)))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run" run-behavior))
     ((cl:and (cl:not supplied-run-behavior))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj) "Run"))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-GAME"
                     :class-name <type-str>
                     :method-name "Run"

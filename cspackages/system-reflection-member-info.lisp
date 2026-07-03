@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 22
-;;; Creation Date: 2026-07-03T12:55:23Z
+;;; Generator Version: 23
+;;; Creation Date: 2026-07-03T13:50:10Z
 
 (cl:in-package :system-reflection-member-info)
 
-(cl:defconstant <type> (monoutils:get-type "System.Reflection.MemberInfo"))
+(cl:defconstant <type> (dotnet:resolve-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-07-03T12:55:23Z")
-(cl:defconstant <version> 22)
+(cl:defconstant <creation> "2026-07-03T13:50:10Z")
+(cl:defconstant <version> 23)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -72,11 +72,11 @@ Parameters:
 (cl:defun get-custom-attributes (obj inherit cl:&optional (inherit cl:nil supplied-inherit))
   "Master wrapper for System.Reflection.MemberInfo.GetCustomAttributes overloads. Dispatches at runtime."
   (cl:cond
-    ((cl:and (cl:or (cl:null inherit) (monoutils:dotnet-p inherit)) supplied-inherit (cl:typep inherit 'cl:boolean))
+    ((cl:and (cl:or (cl:null inherit) (dotnet:object-type inherit)) supplied-inherit (cl:typep inherit 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" inherit inherit))
     ((cl:and (cl:typep inherit 'cl:boolean) (cl:not supplied-inherit))
      (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj) "GetCustomAttributes" inherit))
-    (cl:t (cl:error 'utils:csharp-overload-not-found
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-REFLECTION-MEMBER-INFO"
                     :class-name <type-str>
                     :method-name "GetCustomAttributes"
