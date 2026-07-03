@@ -232,8 +232,13 @@ and files in this repository.
   compilation and REPL usage while remaining safe for standalone executable
   environments.
 
-* `dungeon-slime.asd`: ASDF system definition file for this game. Simplified to load
-  all components in a linear build order.
+* `dungeon-slime.asd`: ASDF system definition file for this game. Loads all
+  components in a linear build order. Reads `cspackages/csharp-assembly-packages.asd`
+  (the self-contained system emitted by `dotcl-packagegen` v21+) to get the generated
+  C# wrapper files' authoritative file list and dependency graph, and splices them
+  into this system's own `:components` (rather than depending on that system via
+  ASDF `:depends-on`, which fails under this project's build pipeline — see
+  [implementation-notes.md](doc/implementation-notes.md)).
 
 * `explore.lisp`: Just some functions I load into the REPL to explore
   the areas of DotCL.

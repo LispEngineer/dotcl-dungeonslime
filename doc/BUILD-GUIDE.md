@@ -117,6 +117,22 @@ These custom variables define parameters utilized by the imported Lisp build tar
 
 ## 2. The Compilation and Execution Pipeline
 
+*(Note: as of DotCL 0.1.15 this project builds via the `DotCL.Runtime` NuGet
+package's `DotCL.Runtime.ProjectCore.targets` rather than a sibling `../dotcl`
+checkout — the target names below (`DotclResolveDeps`/`DotclCompileRoot`) are
+from the older sibling-repo pipeline this doc was originally written against,
+but the two-stage split described here still holds under the current
+NuGet-based targets, now named `_DotCLResolveDeps` and `_DotCLCompileRoot`.
+See [implementation-notes.md](implementation-notes.md), section "Wiring
+dungeon-slime.asd to the Generator's Self-Contained .asd", for an important
+consequence of this split: `_DotCLResolveDeps` compiles a project's ASDF
+`:depends-on` graph *before* the game's own .NET assembly references (e.g.
+`MonoGame.Framework.dll`) are loaded, while only `_DotCLCompileRoot` has them
+loaded. Any Lisp code that resolves .NET types at load time — as the
+generated `cspackages/*.lisp` wrapper files do — must therefore be a plain
+component of the root system's own `:components`, not a `:depends-on`
+system, or the build fails with `DOTNET: type not found`.)*
+
 When you run `dotnet build`, the build pipeline processes the project in two main stages:
 
 ### Stage 1: The Lisp Build (Custom Targets)

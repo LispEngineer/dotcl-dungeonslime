@@ -31,7 +31,30 @@ game in SANO-san's awesome DotCL Common Lisp later.
 ## Package Generator
 
 This package uses [my C# lisp package generator](https://github.com/LispEngineer/dotcl-package-generator)
-which originally was a part of this code, but is now standalone.
+(`dotcl-packagegen`), which originally was a part of this code, but is now standalone.
+
+As of generator version 21+ (this project currently uses v23), `make cspackages`
+produces a fully self-contained `cspackages/csharp-assembly-packages.asd` alongside the
+generated `.lisp` files, in addition to the usual `packages.lisp` and
+`csharp-assembly-utils.lisp`. That `.asd` is loadable entirely on its own
+(`(asdf:load-system "csharp-assembly-packages")`), with no dependency on anything in
+this project.
+
+`dungeon-slime.asd` doesn't just point at that `.asd` and add it to its own
+`:depends-on`, though — the generated `.lisp` files call `dotnet:resolve-type` at
+load time (to look up MonoGame/System types), which only succeeds once
+`MonoGame.Framework.dll` has already been loaded into the process. Under this
+project's DotCL/MSBuild build pipeline, an ordinary `:depends-on` system dependency
+gets compiled in an earlier build phase than the one that loads the game's own
+.NET assembly references, so `dotnet:resolve-type` would fail during the build.
+Instead, `dungeon-slime.asd` `read`s `cspackages/csharp-assembly-packages.asd`'s own
+`:components` form directly — the authoritative file list and dependency graph,
+straight from the generator — and splices those files into `dungeon-slime`'s own
+component list (in the same build phase as the rest of the game, after the file
+that loads the MonoGame assembly). See
+["Wiring dungeon-slime.asd to the Generator's Self-Contained .asd"](doc/implementation-notes.md)
+in the implementation notes for the full story, including the build failure this
+was designed around.
 
 
 # How to Use

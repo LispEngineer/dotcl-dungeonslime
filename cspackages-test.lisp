@@ -341,16 +341,16 @@
          (norm (v2:normalize* v)))
     (assert-cspkg (v2:length norm) 1.0e0 "v2:normalize* returns unit vector"))
 
-  ;; Test utils:csharp-overload-not-found condition signaling on Vector2 division
+  ;; Test csharp-assembly-utils:csharp-overload-not-found condition signaling on Vector2 division
   (handler-case
       (progn
         (v2:/ (v2:new 1.0e0 2.0e0) "invalid-value")
-        (error "v2:/ did not signal utils:csharp-overload-not-found on invalid type"))
-    (utils:csharp-overload-not-found (e)
-      (assert-cspkg (utils:csharp-overload-class-name e) "Microsoft.Xna.Framework.Vector2" "Condition class name")
-      (assert-cspkg (utils:csharp-overload-method-name e) "/" "Condition method name")
-      (assert-cspkg (utils:csharp-overload-package-name e) "MICROSOFT-XNA-FRAMEWORK-VECTOR2" "Condition package name")
-      (let ((args (utils:csharp-overload-supplied-args e)))
+        (error "v2:/ did not signal csharp-assembly-utils:csharp-overload-not-found on invalid type"))
+    (csharp-assembly-utils:csharp-overload-not-found (e)
+      (assert-cspkg (csharp-assembly-utils:csharp-overload-class-name e) "Microsoft.Xna.Framework.Vector2" "Condition class name")
+      (assert-cspkg (csharp-assembly-utils:csharp-overload-method-name e) "/" "Condition method name")
+      (assert-cspkg (csharp-assembly-utils:csharp-overload-package-name e) "MICROSOFT-XNA-FRAMEWORK-VECTOR2" "Condition package name")
+      (let ((args (csharp-assembly-utils:csharp-overload-supplied-args e)))
         (assert-cspkg (getf args :value2) "invalid-value" "Condition supplied-args value"))))
 
   ;; Test sprite-batch:begin type-checking and condition signaling
@@ -358,10 +358,10 @@
       (progn
         ;; Pass invalid sort-mode type (integer instead of enum/dotnet-p)
         (sprite-batch:begin nil :sort-mode 123)
-        (error "sprite-batch:begin did not signal utils:csharp-overload-not-found on invalid type"))
-    (utils:csharp-overload-not-found (e)
-      (assert-cspkg (utils:csharp-overload-method-name e) "Begin" "Condition method name for Begin")
-      (let ((args (utils:csharp-overload-supplied-args e)))
+        (error "sprite-batch:begin did not signal csharp-assembly-utils:csharp-overload-not-found on invalid type"))
+    (csharp-assembly-utils:csharp-overload-not-found (e)
+      (assert-cspkg (csharp-assembly-utils:csharp-overload-method-name e) "Begin" "Condition method name for Begin")
+      (let ((args (csharp-assembly-utils:csharp-overload-supplied-args e)))
         (assert-cspkg (getf args :sort-mode) 123 "Condition supplied-args sort-mode"))))
 
   (format *error-output* "--- C# Packages Integration Tests Completed ---~%"))

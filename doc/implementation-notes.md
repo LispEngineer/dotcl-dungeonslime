@@ -740,3 +740,256 @@ PulseAudio) is frequently restricted, causing OpenAL device initialization to fa
   [audio-controller.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/audio-controller.lisp) are wrapped in `handler-case` and guard against `nil`
   inputs, ensuring volume adjustments or collision triggers do not crash during silent runs.
 
+
+# Wiring `dungeon-slime.asd` to the Generator's Self-Contained `.asd` (Package Generator v23)
+
+Starting with generator v21, `dotcl-packagegen` (`../package-generator`) emits
+its own ASDF system definition, `cspackages/csharp-assembly-packages.asd`,
+alongside the generated `.lisp` files. By v23 that generated system is fully
+self-contained (its own `packages.lisp` and `csharp-assembly-utils.lisp`, no
+dependency on anything in this project). Before this change, `dungeon-slime.asd`
+had no such file to build against, so it worked around the gap with an
+`eval-when`-computed `*cspackages-components*` list that raw-scanned the
+`cspackages/` directory for `*.lisp` files and spliced each one into
+`dungeon-slime`'s own `:components`, guessing `:depends-on ("packages" "utils"
+"monoutils")` for every one of them (an assumption that was already wrong by
+v23 — the generated files don't reference this project's `utils`/`monoutils`
+at all, they depend on the generator's own `packages` and
+`csharp-assembly-utils`). This is the change referenced in the commit
+"Use package generator v23 ... Next: update the .asd."
+
+## 1. The ASDF `:depends-on` Approach That Doesn't Work
+
+The obvious "correct" fix looks like turning `csharp-assembly-packages` into a
+real ASDF system dependency:
+
+```lisp
+(defsystem "dungeon-slime"
+  :depends-on ("csharp-assembly-packages" "dotnet-class" "dotcl-thread" "dotcl-repl" "anaphora")
+  :components (...))
+```
+
+with `cspackages/` registered on `asdf:*central-registry*` (the same idiom
+`load-repl.lisp` already uses for the project root) so ASDF can find
+`csharp-assembly-packages.asd` by name. This reads cleanly, drops the
+`:depends-on` splicing needed on every consumer component (`mg-classes`,
+`poc-test`, `input-manager`, `audio-controller`, `cspackages-test`,
+`typed-calls-test`), and is exactly what you'd do for a normal Quicklisp-style
+library dependency.
+
+**It does not work under the DotCL/MSBuild build pipeline used by this
+project (`DotCL.Runtime.ProjectCore.targets`, DotCL.Runtime 0.1.15+).** That
+pipeline compiles a project's Lisp system in two separate MSBuild targets,
+run in this order:
+
+1. **`_DotCLResolveDeps`** — runs the `DotclResolveDeps` MSBuild task, which
+   walks the target `.asd`'s `:depends-on` graph and compiles each
+   dependency into its own standalone `.fasl` (via `DotCL.Build.Tasks.dll`,
+   in-process, using only the `DotCL.Runtime.dll` + `dotcl.core` base image
+   plus whatever Quicklisp systems `build-setup.lisp` registers). The
+   resulting per-dependency FASLs get bundled by the subsequent
+   `_DotCLBundleDeps` target.
+2. **`_DotCLCompileRoot`** — runs the `DotclCompileProject` MSBuild task,
+   which compiles the **root system's own `:components`** (i.e., the actual
+   `.lisp` files listed directly under `dungeon-slime`'s `:components`, not
+   under its dependencies) into a single `DungeonSlime.fasl`.
+
+Critically, only `_DotCLCompileRoot` loads the *consuming project's own* .NET
+assembly references (`MonoGame.Framework.dll` etc.) into the Lisp runtime's
+type-resolution context before compiling. `_DotCLResolveDeps` does not — it's
+built for portable, assembly-agnostic Lisp libraries (the kind you'd pull
+from Quicklisp), and has no notion of "this specific game's referenced NuGet
+assemblies."
+
+The generated `cspackages/*.lisp` files, however, call `dotnet:resolve-type`
+directly at the top level, e.g. (from `cspackages/microsoft-xna-framework-vector2.lisp`):
+
+```lisp
+(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
+```
+
+This runs at load time (and inside an `eval-when` for `EnsureDotNetTypeClass`
+right below it), so it needs `Microsoft.Xna.Framework.Vector2` to already be a
+resolvable .NET type — i.e., `MonoGame.Framework.dll` must already be loaded
+into the process. When `csharp-assembly-packages` is a `:depends-on` of
+`dungeon-slime`, ASDF/DotCL compiles it during `_DotCLResolveDeps`, before
+that assembly is loaded, and the build fails hard:
+
+```
+error : dotcl resolve-deps failed for .../dungeon-slime.asd:
+  DOTNET: type not found: Microsoft.Xna.Framework.Vector2
+```
+
+This was confirmed experimentally (not just inferred from reading the
+targets file): switching to the `:depends-on` form above reproduced this
+exact error during `_DotCLResolveDeps`, on a project that otherwise built
+fine before generator v21 introduced the possibility of doing this.
+
+**Interesting near-miss**: simply moving the generated files' *splice
+position* earlier in `dungeon-slime`'s own `:components` list (still as
+plain components of the root system, not a `:depends-on`) reproduces the
+*same* `DOTNET: type not found` error, but this time inside
+`_DotCLCompileRoot` instead of `_DotCLResolveDeps`. That's because
+`_DotCLCompileRoot` compiles the root's components strictly in a topologically
+valid order derived from their `:depends-on` edges (not necessarily the
+literal list order), and `type-aliases.lisp` — the file in this project that
+actually loads `MonoGame.Framework.dll` (see `type-aliases.lisp`'s "Loading
+assembly" logging) — must be compiled, and must run its `eval-when` assembly
+load, strictly before any cspackages file that resolves a MonoGame type. So
+the constraint isn't "cspackages must be a same-system component instead of a
+system dependency" in isolation — it's specifically "cspackages must be
+ordered, with an explicit ASDF dependency edge, after `type-aliases`", full
+stop, regardless of which mechanism is used to include the files. A
+`:depends-on` system dependency can never satisfy that, because the whole
+dependency graph is resolved and compiled as a unit *before* the root
+system's own `type-aliases.lisp` gets anywhere near running.
+
+## 2. The Fix: Splice, But Derive From the Generator's Own `.asd`
+
+`dungeon-slime.asd` keeps the "splice generated files into the root system's
+own `:components`" shape (so they compile inside `_DotCLCompileRoot`, which
+does have the assembly loaded), but instead of directory-scanning
+`cspackages/` and guessing dependency names, it now `read`s
+`cspackages/csharp-assembly-packages.asd` itself (with `*read-eval* nil`) and
+pulls the real `:components` form back out of it:
+
+```lisp
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter *cspackages-components*
+    (let* (...
+           (cspackages-asd (uiop:subpathname cspackages-dir "csharp-assembly-packages.asd")))
+      (if (uiop:file-exists-p cspackages-asd)
+          (let* ((*read-eval* nil)
+                 (defsystem-form (with-open-file (s cspackages-asd) (read s)))
+                 (generated-components (getf (cddr defsystem-form) :components)))
+            (mapcar (lambda (comp)
+                      (destructuring-bind (kind name &key depends-on) comp
+                        (list kind (concatenate 'string "cspackages/" name)
+                              :pathname (uiop:subpathname cspackages-dir (concatenate 'string name ".lisp"))
+                              :depends-on (cons "type-aliases"
+                                                 (mapcar (lambda (d) (concatenate 'string "cspackages/" d))
+                                                         depends-on)))))
+                    generated-components))
+          nil))))
+```
+
+Each generated component name is prefixed with `"cspackages/"` (so
+`"packages"` and `"csharp-assembly-utils"` can't collide with this project's
+own `packages.lisp`/`utils.lisp` components), its `:pathname` is pointed at
+the real file under `cspackages/`, and its `:depends-on` is rewritten to use
+the same `"cspackages/"`-prefixed names for its declared dependencies (so
+`system-console`'s real dependency on `packages` and `csharp-assembly-utils`
+becomes a dependency on `cspackages/packages` and
+`cspackages/csharp-assembly-utils` — the actual generator-declared graph, not
+a guess), **plus** an explicit extra dependency on `"type-aliases"` so every
+spliced file is guaranteed to compile after the MonoGame assembly is loaded.
+
+This list is spliced into `dungeon-slime`'s `:components` in the same
+position the old scan-based version used (after `packages`, `settings`,
+`type-aliases`, `monoutils`, `utils`; before `constants` and everything
+else), and every consumer component that references cspackages symbols
+(`mg-classes`, `poc-test`, `typed-calls-test`, `input-manager`,
+`audio-controller`, `cspackages-test`) still splices in
+`(mapcar (lambda (comp) (second comp)) *cspackages-components*)` as extra
+`:depends-on` entries, exactly as before — that part of the old mechanism was
+correct and is retained.
+
+## 3. Why the Pre-Declared Stub Packages in `packages.lisp` Are Still Needed
+
+While investigating this, the block of ~40 `(defpackage
+:microsoft-xna-framework-vector2)`-style empty package stubs at the top of
+`packages.lisp` looked like leftover cruft from the old, unordered directory
+scan — the comment above them literally says "so local-nicknames doesn't
+crash." It's tempting to delete them once the splice above gives cspackages
+files a real, ordered dependency graph. **Don't** — they're independently
+load-bearing, for a different reason:
+
+* `packages.lisp` (this project's own, not the generated one) is the very
+  first component in `dungeon-slime`'s `:components`, and it defines
+  `:local-nicknames` (e.g. `(:v2 :microsoft-xna-framework-vector2)`) for
+  packages like `:mg-classes` and `:dungeon-slime` — those local-nicknames
+  need the *target* package to already exist as an object when
+  `packages.lisp` is compiled, even though none of its symbols need to be
+  bound or exported yet.
+* `type-aliases.lisp` (which loads `MonoGame.Framework.dll`) `:depends-on
+  ("packages" "settings")` — it must run *after* this project's own
+  `packages.lisp`.
+* The real `cspackages/packages.lisp` (which defines those same package
+  objects with their full, generator-produced `:export` lists) can only
+  compile *after* `type-aliases.lisp` has loaded the assembly (per the
+  constraint in section 1).
+
+That's a cycle if `packages.lisp` needed the *real* cspackages packages to
+exist: `packages.lisp` → (needed by) `type-aliases.lisp` → (needed by)
+`cspackages/packages.lisp` → (needed by, for real exports) `packages.lisp`.
+The stub `(defpackage :microsoft-xna-framework-vector2)` forms break the
+cycle: they give `packages.lisp`'s local-nicknames a package object to point
+at immediately, and later, once `cspackages/packages.lisp` actually compiles,
+Common Lisp's `defpackage` semantics let it reopen and extend that same
+package object with its real `:export` list — a package can be `defpackage`'d
+more than once, and later `:export` clauses add to what's already there
+rather than replacing it, as long as nothing conflicts.
+
+Two related stub packages, `:system-object` and `:system-type`, additionally
+carry a couple of explicit `:export` forms (`get-type`, `full-name`) in the
+pre-declaration block. These predate generator v23 (which now exports both
+symbols directly from the real generated packages), so they're redundant
+today, but harmless — re-exporting an already-exported symbol is a no-op —
+and were left as-is to keep this change minimal.
+
+## 4. A Real Bug Found Along the Way: Wrong Condition Class in Overload Tests
+
+While tracing exactly which package each generated file's error-handling code
+referenced, `utils.lisp` turned out to define its own
+`(cl:define-condition csharp-overload-not-found (cl:error) ...)`, exported
+from the `:utils` package. But `cspackages/csharp-assembly-utils.lisp` (the
+generator's own shared runtime support file, self-contained since v23)
+defines an identically-named-but-different condition class,
+`csharp-assembly-utils:csharp-overload-not-found`, and **every** generated
+wrapper's overload dispatcher signals *that* one:
+
+```lisp
+;; cspackages/microsoft-xna-framework-vector2.lisp
+(cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found ...))
+```
+
+`cspackages-test.lisp`'s overload-resolution tests, however, were written
+against the older `utils:csharp-overload-not-found`:
+
+```lisp
+(handler-case
+    (progn
+      (v2:/ (v2:new 1.0e0 2.0e0) "invalid-value")
+      (error "..."))
+  (utils:csharp-overload-not-found (e) ...))       ; <- wrong condition class!
+```
+
+Since `utils:csharp-overload-not-found` and
+`csharp-assembly-utils:csharp-overload-not-found` are two distinct,
+unrelated condition classes (both directly subclass `cl:error`; neither
+inherits from the other), this `handler-case` clause could never actually
+catch what `v2:/` signals. In practice this meant the `(error "...")` inside
+the `handler-case` body would itself propagate uncaught up through the whole
+`handler-case` form (since the handler clause never matches), rather than
+the intended assertions on the condition's slots ever running.
+
+**Fix**: deleted the dead-code duplicate condition definition from
+`utils.lisp` (and its now-pointless `:export` entries from the `:utils`
+package in `packages.lisp`), and updated `cspackages-test.lisp` to catch
+`csharp-assembly-utils:csharp-overload-not-found` instead. Verified via
+`make test`: the "Condition class name" / "Condition method name" /
+"Condition package name" / "Condition supplied-args ..." assertions inside
+both overload-resolution test blocks (`Vector2 /` and `sprite-batch:begin`)
+now report `PASS`, confirming the handler is actually exercised.
+
+## 5. Verification
+
+* `find . -name "*.lisp" -o -name "*.asd" | xargs python3 check_parens.py`
+  (`make check-parens`) on all touched files.
+* `dotnet build DungeonSlime.csproj -v d -c Debug` (`make build`) — succeeds
+  cleanly, 0 warnings, 0 errors.
+* `make test` — full `test-harness.lisp` run passes, including the
+  newly-exercised overload-condition assertions above.
+* `make repl` equivalent (`dotcl --eval '(load "load-repl.lisp")' ...`) —
+  loads the whole system, boots a `game-1` instance, and exposes `*mg-game*`
+  with no package or condition errors.

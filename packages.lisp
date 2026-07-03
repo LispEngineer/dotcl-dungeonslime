@@ -6,7 +6,13 @@
 (in-package :cl-user)
 (format *error-output* "[packages.lisp] Defining packages in package ~S~%" *package*)
 
-;; Pre-declare empty C# packages so local-nicknames doesn't crash
+;; Pre-declare empty C# packages so local-nicknames doesn't crash. This is
+;; required because type-aliases.lisp (which loads MonoGame.Framework.dll,
+;; needed by the generated cspackages files' dotnet:resolve-type calls) must
+;; load after this file, but the real cspackages/packages.lisp (with full
+;; exports) can only load after the assembly is loaded -- so these stubs let
+;; the local-nicknames below resolve to a package object that gets its real
+;; exports filled in later when cspackages/packages.lisp reopens it.
 ;; Recreate this with: fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/'
 (defpackage :microsoft-xna-framework-audio-sound-effect-instance)
 (defpackage :microsoft-xna-framework-audio-sound-effect)
@@ -73,12 +79,7 @@
             #:format-red
             #:path-combine
             #:file-exists-and-readable-p
-            #:qualify-path
-            #:csharp-overload-not-found
-            #:csharp-overload-package-name
-            #:csharp-overload-class-name
-            #:csharp-overload-method-name
-            #:csharp-overload-supplied-args))
+            #:qualify-path))
 
 (defpackage :monoutils
   (:use :cl)
