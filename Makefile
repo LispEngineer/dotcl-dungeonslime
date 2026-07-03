@@ -25,76 +25,79 @@ build-actual:
 	dotnet build DungeonSlime.csproj -v d -c Debug
 
 cspackages:
+	# Requires the dotcl-packagegen tool to be installed (see ../package-generator,
+	# `make deploy`). The generated cspackages/ are vendored/committed, so this
+	# target only needs to be re-run when regenerating or adding new classes.
 	mkdir -p obj $(OUT_DIR)
 	# System.Console
-	$(EXECUTABLE)  --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
-	$(EXECUTABLE)  --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output $(OUT_DIR)
+	dotcl-packagegen --assembly $(REF_DIR)System.Console.dll --output obj/System.Console.lispy.metadata
+	dotcl-packagegen --assembly-metadata obj/System.Console.lispy.metadata --class System.Console --output $(OUT_DIR)
 	# System.Runtime
-	$(EXECUTABLE)  --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.TimeSpan --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.UriKind --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Uri --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Convert --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.AppDomain --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.IO.Path --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Boolean --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Type --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Object --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Single --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Double --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Reflection.MemberInfo --output $(OUT_DIR)
+	dotcl-packagegen --assembly $(REF_DIR)System.Runtime.dll --output obj/System.Runtime.lispy.metadata
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.TimeSpan --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.UriKind --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Uri --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Convert --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.AppDomain --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.IO.Path --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Boolean --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Type --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Object --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Single --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Double --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/System.Runtime.lispy.metadata --class System.Reflection.MemberInfo --output $(OUT_DIR)
 	# MonoGame.Framework
-	$(EXECUTABLE)  --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Rectangle --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Point --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameTime --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Game --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameWindow --output $(OUT_DIR)
+	dotcl-packagegen --assembly $(BIN_DIR)MonoGame.Framework.dll --output obj/MonoGame.Framework.lispy.metadata
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Vector2 --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Rectangle --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Point --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameTime --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Game --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GameWindow --output $(OUT_DIR)
   #
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keyboard --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.KeyboardState --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keys --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keyboard --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.KeyboardState --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Keys --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Mouse --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.MouseState --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.ButtonState --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Mouse --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.MouseState --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.ButtonState --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePad --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadState --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadDPad --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadThumbSticks --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadTriggers --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Buttons --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePad --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadState --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadDPad --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadThumbSticks --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.GamePadTriggers --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Buttons --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchPanel --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchCollection --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchLocation --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.GestureSample --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchPanel --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchCollection --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.TouchLocation --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Input.Touch.GestureSample --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Color --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Color --output $(OUT_DIR) --constant-properties "*"
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Content.ContentManager --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Content.ContentManager --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GraphicsDeviceManager --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteEffects --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteSortMode --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SamplerState --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.GraphicsDevice --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteBatch --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont.Glyph --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.PresentationParameters --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.GraphicsDeviceManager --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteEffects --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteSortMode --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SamplerState --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.GraphicsDevice --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteBatch --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.SpriteFont.Glyph --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Graphics.PresentationParameters --output $(OUT_DIR)
 	#
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.PlayerIndex --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.PlayerIndex --output $(OUT_DIR)
   #
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffect --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffectInstance --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundState --output $(OUT_DIR) --constant-properties "*"
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.Song --output $(OUT_DIR)
-	$(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.MediaPlayer --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffect --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundEffectInstance --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Audio.SoundState --output $(OUT_DIR) --constant-properties "*"
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.Song --output $(OUT_DIR)
+	dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class Microsoft.Xna.Framework.Media.MediaPlayer --output $(OUT_DIR)
 	# Add more classes here:
-	# $(EXECUTABLE)  --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class X --output $(OUT_DIR)
+	# dotcl-packagegen --assembly-metadata obj/MonoGame.Framework.lispy.metadata --class X --output $(OUT_DIR)
 
 
 test:

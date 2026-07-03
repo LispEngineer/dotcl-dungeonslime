@@ -1,7 +1,7 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
 ;;; Generator Version: 18
-;;; Creation Date: 2026-07-02T19:02:24Z
+;;; Creation Date: 2026-07-03T01:18:17Z
 
 (cl:in-package :cl-user)
 
@@ -180,7 +180,7 @@
 
 (cl:defconstant <type> (monoutils:get-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-07-02T19:02:24Z")
+(cl:defconstant <creation> "2026-07-03T01:18:17Z")
 (cl:defconstant <version> 18)
 
 ;; Register C# Type with CLOS

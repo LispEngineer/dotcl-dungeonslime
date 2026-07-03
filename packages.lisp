@@ -123,13 +123,6 @@
             #:*no-lisp-repl*
             #:*background-repl*))
 
-(defpackage :assembly-package-generator
-  (:use :cl)
-  (:export #:run-assembly-package-generator
-            #:generate-assembly-packages
-            #:camel-to-kebab
-            #:split-string))
-
 (defpackage :clr-generic
   (:use :cl)
   (:export #:defc#generic
@@ -201,7 +194,7 @@
       #:load-font #:measure-string #:draw-string))
 
 (defpackage :dungeon-slime-tests
-  (:use :cl :dungeon-slime :assembly-package-generator :csharp :utils :clr-generic :monoutils :mg-classes)
+  (:use :cl :dungeon-slime :csharp :utils :clr-generic :monoutils :mg-classes)
   (:local-nicknames
     (:v2 :microsoft-xna-framework-vector2)
     (:rect :microsoft-xna-framework-rectangle)
