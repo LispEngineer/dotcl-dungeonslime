@@ -8,19 +8,6 @@ to do with this game & framework.
 
 # Open Bugs
 
-* See the Vector2 package - It defines two `normalize` functions in a row.
-Obviously, this is wrong. This is as of v14
-
-```lisp
-(defun normalize (obj &rest args)
-  "Passthrough for Microsoft.Xna.Framework.Vector2.Normalize overloads. Dispatches at runtime."
-  (apply #'dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize" args))
-
-(defun normalize (obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize() -> Void"
-  (dotnet:invoke (the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
-```
-
 * If the standalone game is exited using the GUI of the game (currently
   by pressing `ESC`), it gives this error:
   ```
@@ -44,29 +31,7 @@ Obviously, this is wrong. This is as of v14
   * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
 
 
-# Split out Package Generator
-
-I'd like you to make a plan to split out the assembly package generator code and tests into a new project in the
-directory ../package-generator please. This package should contain all the code to generate the C# Lisp Packages exactly as
-it works today. It should generate an executable that can also be installed by dotnet (like the `dotcl` command is
-installed by dotnet). The goal for the first version would be to make as few changes to the existing code as possible,
-however taking out tests that reference anything but standard DotNet assemblies is fine (e.g., MonoGame). The second part
-of the plan should be to remove the package generator and all the attendant tests from the current DungeonSlime repository
-The system can keep DungeonSlime tests that test MonoGame generated packages though, since those will not be in the package
-generator tests anymore.
-
-
 # Miscellaneous
-
-* Have the package generator do two more things:
-  * Generate a packages.lisp file with all the package information separate from the
-    generated packages.
-  * Generate a `utils.lisp` in its own namespace which can be used by all the
-    other packages (in the target directory).
-    * This could contain any helper methods that would have been elsewhere.
-    * This could be stored in a `cspackages-utils.lisp-template` (so it doesn't
-      get compiled by accident).
-    * This should have its own version number.
 
 * Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
   new features about building a whole system.
@@ -78,28 +43,6 @@ generator tests anymore.
     the generic dispatch mechanism works - and prove it with tests
 
 * **DONE** Remove my custom `Vector2` code and use the package generator's code
-
-* Improve C# class package generator:
-  * **DONE** Version 10: Added method overload support with clean/dirty classification,
-    type-suffixed naming, passthrough &rest dispatch, value-type typed-call optimization,
-    and dirty overload documentation.
-  * Handle dirty overloads (ref/out) with -ref suffix naming and
-    out→multiple-values mapping in a future version.
-  * **DONE** Version 11: Make constructors work in the package generator code, using the name `new` with support for overload resolution (passthrough + type-suffixed functions) and struct parameterless constructor injection.
-  * **DONE** Change `/=` to `not=` in the Lispy style
-  * Consider casting mutator parameters to the correct type, e.g.,
-    `(#!!System.Convert.ToByte 37)`, or `(dotnet:box 37 "System.Byte")`
-    in the mutator function implementation
-  * Add documentation comments that indicate the return type and
-    expected input type(s) of any parameters.
-  * Change IsSomething methods to `something?` methods
-  * Change `ToSomething` methods to `->something`
-  * Handle multiple classes at a time for a single assembly
-  * **DONE** Register classes/types with DotCL's CLOS dispatch system
-  * Add the assembly version (and other versions?) from which the class package was made
-  * Change `GetSomething` methods to ???
-  * Make operator overloads take N parameters - assuming they are all the same type
-    * This needs more consideration
 
 * **DONE** Package generator for `Color` has non-static constants.
   * Consider forcing them to be made as defconstant, forcing the
@@ -120,15 +63,11 @@ generator tests anymore.
   * Use the new `invoke-generic`
   * Use the new C# `defmethod` dispatching
 
-* Make the `AssemblyToLispy` tests less fragile
-  * I upgraded from 10.0.8 to 10.0.9 DotNet and the tests broke.
-  * Remove hardcoded paths and find the assemblies in some automated fashion?
-
 * Implement build improvements:
   * Automatically vendor all libraries used
     * [See Dependency Management](https://github.com/LispEngineer/rlgdx#dependency-management)
       in my `rlgdx` project (built upon ABCL) for ideas
-  * Automatically find and include all necessary files for the 
+  * Automatically find and include all necessary files for the (SENTENCE FRAGMENT!)
   * Build & package for Windows on Linux
   * Build, test & package on Windows for Windows and Linux
 
@@ -140,18 +79,6 @@ generator tests anymore.
 
 * Build a MultiInvoke which does invoke on each one along the way, for example,
   `(multi-invoke mg-game "Window" "ClientBounds" "Width")`.
-
-* Implement a system to convert a CLOS class to a CLR/C# class somehow,
-  or really, create a C# proxy for the CLOS class.
-  (I'm still noodling ways to do that.)
-  * Make it as generic as possible.
-  * Maybe a base CLOS class that implements functionality to create that
-    proxy on the fly, and has a reference to the proxy for reuse.
-
-* Implement nice helpers for the C# MonoGame classes & calls:
-  * Easy access to various Enumerations 
-    (e.g., [`Keys`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Input.Keys.html))
-  * Easy access to static classes and methods
 
 * Look into the performance of the various `dotnet:` calls in the main
   event loop (e.g., `Update()` and `Draw()`). See if there is optimization
