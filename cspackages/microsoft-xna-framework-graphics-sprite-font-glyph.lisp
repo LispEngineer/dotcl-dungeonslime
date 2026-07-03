@@ -1,11 +1,11 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph
-;;; Generator Version: 18
-;;; Creation Date: 2026-07-03T04:39:56Z
+;;; Generator Version: 20
+;;; Creation Date: 2026-07-03T05:19:00Z
 
 (cl:in-package :cl-user)
 
-(cl:defpackage :microsoft-xna-framework-graphics-sprite-font+-glyph
+(cl:defpackage :microsoft-xna-framework-graphics-sprite-font-glyph
   (:use :cl)
   (:export
    #:<type>
@@ -17,12 +17,12 @@
    #:to-string
   ))
 
-(cl:in-package :microsoft-xna-framework-graphics-sprite-font+-glyph)
+(cl:in-package :microsoft-xna-framework-graphics-sprite-font-glyph)
 
 (cl:defconstant <type> (monoutils:get-type "Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph")
-(cl:defconstant <creation> "2026-07-03T04:39:56Z")
-(cl:defconstant <version> 18)
+(cl:defconstant <creation> "2026-07-03T05:19:00Z")
+(cl:defconstant <version> 20)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
