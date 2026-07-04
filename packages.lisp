@@ -167,6 +167,9 @@
     (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch)
     (:gdm :microsoft-xna-framework-graphics-device-manager)
     (:cm :microsoft-xna-framework-content-content-manager)
+    ;; Local nickname added for Chapter 18: Texture Sampling and Tiling Backgrounds.
+    ;; This allows using wrapper-based properties like sprite-font:line-spacing instead of dotnet:invoke.
+    (:sprite-font :microsoft-xna-framework-graphics-sprite-font)
   )
   (:export 
     ;; Constants

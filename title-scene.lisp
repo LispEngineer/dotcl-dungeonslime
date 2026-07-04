@@ -23,24 +23,46 @@
    (prompt-text
     :accessor prompt-text
     :initform "Press Enter To Start"
-    :documentation "The prompt string instructing the user how to start.")))
+    :documentation "The prompt string instructing the user how to start.")
+   ;; Added for Chapter 18: Texture Sampling and Tiling Backgrounds.
+   (background-texture
+    :accessor background-texture
+    :initform nil
+    :documentation "The loaded Texture2D representing the scrolling background pattern.")
+   (background-offset-x
+    :accessor background-offset-x
+    :initarg :background-offset-x
+    :initform 0.0f0
+    :documentation "Horizontal offset for scrolling the background pattern.")
+   (background-offset-y
+    :accessor background-offset-y
+    :initarg :background-offset-y
+    :initform 0.0f0
+    :documentation "Vertical offset for scrolling the background pattern.")))
 
 (defmethod load-content ((scene title-scene))
-  "Loads the title screen sprite fonts using the scene's private ContentManager."
+  "Loads the title screen sprite fonts and background texture using the scene's private ContentManager."
   (format *error-output* "[title-scene:load-content] Loading title screen assets...~%")
   (setf (title-font scene) (load-font (scene-content scene) :name "fonts/04B_30_5x"))
-  (setf (prompt-font scene) (load-font (scene-content scene) :name "fonts/04B_30")))
+  (setf (prompt-font scene) (load-font (scene-content scene) :name "fonts/04B_30"))
+  ;; Load repeating background pattern texture using content manager wrapper
+  (setf (background-texture scene)
+        (cm:load "Microsoft.Xna.Framework.Graphics.Texture2D"
+                 (scene-content scene)
+                 "images/background-pattern")))
 
 (defmethod update ((scene title-scene) gt)
   "Checks keyboard and gamepad inputs to trigger transition to the gameplay scene.
-   Exits the game if the Escape key is pressed."
+   Exits the game if the Escape key is pressed. Updates background scrolling offsets."
   (let* ((game (scene-game scene))
          (kb (im-keyboard (input-manager game)))
-         (gp-pad (aref (im-game-pads (input-manager game)) 0)))
-    ;; Check for Exit on Escape key
+         (gp-pad (aref (im-game-pads (input-manager game)) 0))
+         ;; Calculate delta time using TimeSpan wrapper
+         (dt (coerce (ts:total-seconds (game-time:elapsed-game-time gt)) 'single-float)))
+    ;; Check for Exit on Escape key using Game wrapper
     (when (was-key-just-pressed kb key:+escape+)
       (format *error-output* "[title-scene:update] Escape pressed; exiting game...~%")
-      (dotnet:invoke (monogame game) "Exit")
+      (game:exit (monogame game))
       (return-from update))
       
     ;; Transition to gameplay scene on keyboard Enter or Space, or GamePad Start or A
@@ -49,27 +71,56 @@
               (was-button-just-pressed gp-pad button:+start+)
               (was-button-just-pressed gp-pad button:+a+))
       (format *error-output* "[title-scene:update] Transitioning to gameplay scene...~%")
-      (change-scene game (make-instance 'gameplay-scene :game game)))))
+      (change-scene game (make-instance 'gameplay-scene :game game))
+      (return-from update))
+
+    ;; Update scrolling offset diagonally at 120 pixels per second
+    (when (background-texture scene)
+      (let* ((tex (background-texture scene))
+             (w (float (width tex) 0.0f0))
+             (h (float (height tex) 0.0f0))
+             (scroll-speed 120.0f0)
+             (offset-delta (* scroll-speed dt)))
+        ;; Use mod to wrap the offsets seamlessly within texture dimensions
+        (setf (background-offset-x scene) (mod (- (background-offset-x scene) offset-delta) w))
+        (setf (background-offset-y scene) (mod (- (background-offset-y scene) offset-delta) h))))))
 
 (defmethod draw ((scene title-scene) gt)
-  "Clears screen to dark blue and draws centered title text (split in two lines) and smaller pulsing prompt."
+  "Clears screen to dark blue, draws scrolling tiled background pattern (if loaded),
+   and draws centered title text with a pulsing prompt using wrapper functions."
   (let* ((game (scene-game scene))
          (gd (graphics-device game))
          (sb (sprite-batch game))
          (title-font (title-font scene))
          (prompt-font (prompt-font scene))
          (lines (title-lines scene))
-         (prompt (prompt-text scene)))
-    ;; Clear graphics device to a dark blue color (RGB: 24, 33, 58)
-    (dotnet:invoke gd "Clear" (color:new 24 33 58))
+         (prompt (prompt-text scene))
+         (bg-tex (background-texture scene)))
+    ;; Clear graphics device to a dark blue color (RGB: 24, 33, 58) using GraphicsDevice wrapper
+    (gd:clear gd (color:new 24 33 58))
 
-    ;; Render assets
+    ;; 1. Draw tiled background pattern using PointWrap sampler state
+    (when bg-tex
+      (sprite-batch:begin sb :sampler-state sampler-state:+point-wrap+)
+      (let* ((win-w (getf (window-info game) :width 800))
+             (win-h (getf (window-info game) :height 480))
+             (dest-rect (rect:new 0 0 win-w win-h))
+             ;; Round offsets to nearest integer pixel to avoid scaling artifacts
+             (ox (round (background-offset-x scene)))
+             (oy (round (background-offset-y scene)))
+             (src-rect (rect:new ox oy win-w win-h)))
+        ;; Use SpriteBatch wrapper to draw with destination and source rectangles
+        (sprite-batch:draw-texture2-d-rectangle-rectangle]-color sb bg-tex dest-rect src-rect color:+white+))
+      (sprite-batch:end sb))
+
+    ;; 2. Draw text and UI elements using PointClamp sampler state
     (sprite-batch:begin sb :sampler-state sampler-state:+point-clamp+)
 
-    ;; 1. Draw centered title text (two lines, white, 5x font)
+    ;; Draw centered title text (two lines, white, 5x font)
     (when (and title-font lines)
       (let ((win-w (getf (window-info game) :width 800))
-            (line-spacing (float (dotnet:invoke title-font "LineSpacing") 0.0f0))
+            ;; Get line spacing using SpriteFont wrapper
+            (line-spacing (float (sprite-font:line-spacing title-font) 0.0f0))
             (start-y 70.0f0))
         (loop for line in lines
               for idx from 0
@@ -78,17 +129,17 @@
                         (pos-y (+ start-y (* idx line-spacing))))
                    (draw-string sb title-font line (v2:new pos-x pos-y) color:+white+)))))
 
-    ;; 2. Draw centered pulsing prompt text (smaller 1x font)
+    ;; Draw centered pulsing prompt text (smaller 1x font)
     (when (and prompt-font prompt)
       (let* ((prompt-size (measure-string prompt-font prompt))
              (win-w (getf (window-info game) :width 800))
              (pos-x (float (/ (- win-w (x prompt-size)) 2) 0.0f0))
              (pos-y 380.0f0)
-             ;; Pulse text color alpha using sine function over time
-             (secs (dotnet:invoke (dotnet:invoke gt "TotalGameTime") "TotalSeconds"))
+             ;; Pulse text color alpha using sine function over total game time (using time wrappers)
+             (secs (ts:total-seconds (game-time:total-game-time gt)))
              (alpha-factor (float (+ 0.6f0 (* 0.4f0 (sin (* secs 4.0e0)))) 0.0f0))
              (alpha-val (round (* 255 alpha-factor)))
              (text-color (color:new 255 255 255 alpha-val)))
         (draw-string sb prompt-font prompt (v2:new pos-x pos-y) text-color)))
 
-    (dotnet:invoke sb "End")))
+    (sprite-batch:end sb)))

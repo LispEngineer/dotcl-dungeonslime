@@ -977,7 +977,6 @@ the intended assertions on the condition's slots ever running.
 **Fix**: deleted the dead-code duplicate condition definition from
 `utils.lisp` (and its now-pointless `:export` entries from the `:utils`
 package in `packages.lisp`), and updated `cspackages-test.lisp` to catch
-`csharp-assembly-utils:csharp-overload-not-found` instead. Verified via
 `make test`: the "Condition class name" / "Condition method name" /
 "Condition package name" / "Condition supplied-args ..." assertions inside
 both overload-resolution test blocks (`Vector2 /` and `sprite-batch:begin`)
@@ -994,3 +993,44 @@ now report `PASS`, confirming the handler is actually exercised.
 * `make repl` equivalent (`dotcl --eval '(load "load-repl.lisp")' ...`) —
   loads the whole system, boots a `game-1` instance, and exposes `*mg-game*`
   with no package or condition errors.
+
+
+# Chapter 18: Texture Sampling and Tiling Backgrounds
+
+## Scrolling Offset and Wrapping with `mod`
+
+Rather than using C# `Vector2` mutation for tracking background offsets which would allocate on
+the heap or require custom interop every frame, the offsets are tracked as simple Lisp float
+slots (`background-offset-x` and `background-offset-y`) on the `title-scene` class.
+The scrolling offset is updated in the `update` method by multiplying the scroll speed (120
+pixels/sec) by delta time. Wrapping is implemented using the standard Common Lisp `mod` function
+against the background texture's width and height. This leverages Lisp's built-in mathematical
+semantics to keep offsets bounded cleanly.
+
+## Multi-Pass Rendering with Different Sampler States
+
+MonoGame requires a separate `SpriteBatch.Begin` and `SpriteBatch.End` block when rendering with
+different `SamplerState` values.
+In `title-scene:draw`, the rendering is split into two sequential passes:
+1. **Tiling Background**: Rendered with `sampler-state:+point-wrap+`. A destination rectangle
+   is created covering the entire screen window size. A source rectangle of the same size
+   starting at the rounded offsets `(ox, oy)` is passed. The GPU handles repeating/wrapping
+   the texture automatically.
+2. **Foreground UI and Text**: Rendered with `sampler-state:+point-clamp+` to keep the title
+   screen fonts and prompt text crisp without tiling.
+
+## Full Wrapper Integration (No direct `dotnet:invoke`)
+
+To align with the project's strict architecture guidelines, all direct `dotnet:invoke` and
+`dotnet:static` calls have been eliminated from `title-scene.lisp` by importing and leveraging
+the generated type wrappers from `cspackages/`:
+- `cm:load` is used to load the texture asset.
+- `gd:clear` clears the screen.
+- `sprite-font:line-spacing` determines line offsets.
+- `ts:total-seconds` and `game-time:total-game-time`/`elapsed-game-time` handle timing.
+- `sprite-batch:end` closes rendering passes.
+- `game:exit` handles clean shutdown.
+To support `sprite-font:line-spacing` without namespaces, the
+`(:sprite-font :microsoft-xna-framework-graphics-sprite-font)` local nickname was added to the
+`:dungeon-slime` package definition in `packages.lisp`.
+

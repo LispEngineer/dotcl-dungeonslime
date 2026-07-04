@@ -321,6 +321,11 @@ MonoGame Dungeon Slime features:
    * Custom `gameplay-scene` housing the slime-eating-bat gameplay loop.
    * Return to title screen on Escape from the gameplay scene; exit only from the title screen.
    * Explicit scene disposal and CLR garbage collection invocation.
+* All Chapter 18 content (Texture Sampling)
+   * Scrolling tiled background pattern on the title screen using `sampler-state:+point-wrap+`.
+   * Two separate `sprite-batch` rendering blocks in a single frame to apply different sampler states (`PointWrap` for tiling background, `PointClamp` for crisp UI/text rendering).
+   * Scrolling offsets updated using delta time and wrapped seamlessly via Common Lisp's standard `mod` function.
+   * Fully uses the generated `cspackages/` wrappers to avoid direct C# or `dotnet:` interop calls.
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses

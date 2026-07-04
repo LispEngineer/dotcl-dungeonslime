@@ -88,7 +88,8 @@ and files in this repository.
 
 * `packages.lisp`: Defines the Lisp packages used across the project. Pre-declares C# package
   stubs and the third-party `:anaphora` package at the top of the file to support local nicknames
-  and prevent compiler reader/lookup failures during compilation of early packages.
+  and prevent compiler reader/lookup failures during compilation of early packages. Also registers
+  the `:sprite-font` local nickname for wrapper property access.
 
 
 * `test-harness.lisp`: Runs all the other tests sprinkled all throughout
@@ -183,7 +184,7 @@ and files in this repository.
 
 * `scene.lisp`: Base abstract class for scenes. Defines the lifecycle protocol (initialize, load-content, unload-content, update, draw, dispose) specialized on CLOS scene subclasses, and sets up scene-private ContentManagers.
 
-* `title-scene.lisp`: Subclass of `scene` representing the game's start/title screen. Displays the game logo and title text, and renders a pulsing "Press Enter to Play" prompt. Transitions to the gameplay scene on user input.
+* `title-scene.lisp`: Subclass of `scene` representing the game's start/title screen. Displays the game logo and title text, renders a pulsing "Press Enter to Play" prompt, and draws a scrolling tiled background pattern using wrapper packages. Transitions to the gameplay scene on user input.
 
 * `gameplay-scene.lisp`: Subclass of `scene` encapsulating the main gameplay logic (slime-eating-bat, boundaries, collision). Manages gameplay-specific sprites, tilemap, score, sound effects, and music.
 

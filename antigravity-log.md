@@ -1689,6 +1689,12 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | July 4, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the Scene Management implementation session. |
 | July 4, 2026 | [scene-test.lisp](scene-test.lisp) | Modified | Fixed parenthesis mismatch in run-scene-tests. |
 | July 4, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Modified | Extended let* block in update method to keep game and kb in scope. Added assign-random-bat-position to randomize bat position within a 15% inner margin of the play field boundaries and ensure it starts at least 20% of the screen diagonal distance away from the slime. |
+| July 4, 2026 | [packages.lisp](packages.lisp) | Modified | Added the `:sprite-font` local nickname mapping to `:microsoft-xna-framework-graphics-sprite-font` for wrapper access. |
+| July 4, 2026 | [title-scene.lisp](title-scene.lisp) | Modified | Implemented scrolling background pattern using PointWrap, and refactored all direct `dotnet:invoke` calls to generated wrapper packages. |
+| July 4, 2026 | [README.md](README.md) | Modified | Documented Chapter 18 Texture Sampling features. |
+| July 4, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added technical implementation details for Chapter 18 background tiling and wrapper refactoring. |
+| July 4, 2026 | [FILES.md](FILES.md) | Modified | Updated descriptions for packages.lisp and title-scene.lisp. |
+| July 4, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged Chapter 18 Texture Sampling and wrapper refactoring. |
 
 ### 2. Explanations Log
 
@@ -1706,4 +1712,13 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
   - Split "DUNGEON SLIME" into two separate lines, rendering "DUNGEON" and "SLIME" centered horizontally in white using the larger `fonts/04B_30_5x` font.
   - Configured the pulsing prompt ("Press Enter To Start") to use the standard smaller `fonts/04B_30` font, positioned near the bottom of the screen.
 - **Bat Starting Position Restriction**: Added `assign-random-bat-position` to `gameplay-scene.lisp` which calculates a random coordinate bounded inside a 15% inner margin of the play field `room-bounds` (e.g. `[0.15 * width, 0.85 * width]` and `[0.15 * height, 0.85 * height]`). Updated the positioning logic to use rejection sampling to guarantee that any generated position is also at least 20% of the play field diagonal distance (`0.20 * sqrt(w^2 + h^2)`) away from the slime's current position. This function is called on scene initialization and whenever the bat is eaten to prevent it from spawning too close to any wall or too close to the player.
+
+#### Texture Sampling and Tiling Backgrounds (Chapter 18)
+- **Objective**: Implement a repeating, scrolling background pattern on the title screen using texture wrapping and fully integrate generated wrapper packages.
+- **Scrolling Offsets**: Background scrolling position is tracked in Lisp-native float slots (`background-offset-x` and `background-offset-y`) rather than mutating a C# `Vector2` struct. Offsets are updated based on a scrolling speed of `120.0f0` pixels per second and delta time, wrapping seamlessly within the background texture's boundaries using Lisp's standard `mod` function.
+- **Tiling via PointWrap**: Implemented multi-pass rendering by splitting drawing into two separate `SpriteBatch` blocks:
+  1. The background pattern is rendered under `sampler-state:+point-wrap+` using `sprite-batch:draw-texture2-d-rectangle-rectangle]-color`. A destination rectangle covers the entire screen, and a source rectangle of the same dimensions is offset by the rounded scrolling variables, prompting the GPU to wrap coordinates and tile the texture automatically.
+  2. Foreground text/UI elements are drawn under `sampler-state:+point-clamp+` to keep the pixel-art fonts crisp and restrict them from tiling.
+- **Removing dotnet:invoke**: Fully migrated all direct `dotnet:invoke` calls in `title-scene.lisp` to their corresponding generated wrappers in the `cspackages/` directory (including `cm:load` for loading assets, `gd:clear` for screen clearing, `sprite-font:line-spacing` for font properties, `game-time:elapsed-game-time`/`total-game-time` and `ts:total-seconds` for timing, `game:exit` for game termination, and `sprite-batch:end` for batch completion).
+
 
