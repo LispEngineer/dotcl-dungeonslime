@@ -38,7 +38,34 @@
     :accessor background-offset-y
     :initarg :background-offset-y
     :initform 0.0f0
-    :documentation "Vertical offset for scrolling the background pattern.")))
+    :documentation "Vertical offset for scrolling the background pattern."))
+  ;; Chapter 20: UI with Gum
+  (ui-sound-effect
+   :accessor ui-sound-effect
+   :initarg :ui-sound-effect
+   :initform nil
+   :documentation "Type: (MonoGame) SoundEffect")
+  (title-screen-buttons-panel
+   :accessor title-screen-buttons-panel
+   :initarg :title-screen-buttons-panel
+   :initform nil
+   :documentation "Type: Gum.Forms.Controls.Panel")
+  (options-panel
+   :accessor options-panel
+   :initarg :options-panel
+   :initform nil
+   :documentation "Type: Gum.Forms.Controls.Panel")
+  (options-button
+   :accessor options-button
+   :initarg :options-button
+   :initform nil
+   :documentation "Type: Gum.Forms.Controls.Button")
+  (options-back-button
+   :accessor options-back-button
+   :initarg :options-back-button
+   :initform nil
+   :documentation "Type: Gum.Forms.Controls.Button")
+) ; title-scene
 
 (defmethod load-content ((scene title-scene))
   "Loads the title screen sprite fonts and background texture using the scene's private ContentManager."
