@@ -40,6 +40,10 @@
 (defmethod initialize ((game game-1))
   "Initialize the game, call core initialize, and set the starting title scene."
   (call-next-method game)
+  ;; TODO: Start playing the background music (missed from Chapter 17)
+  ;; Initialize the Gum UI service
+  (initialize-gum game)
+  ;; Start the game with the title scene
   (change-scene game (make-instance 'title-scene :game game)))
 
 (defmethod load-content ((game game-1))
@@ -53,3 +57,10 @@
 (defmethod draw ((game game-1) gt)
   "Delegate draw calls to the core loop."
   (call-next-method game gt))
+
+(defmethod initialize-gum ((game game-1))
+  "Handles the initialization of the Gum UI service"
+  ;; Initialize the Gum service. The parameter specifies
+  ;; the version of the default visuals to use. V3 is the latest
+  ;; version.
+  (initialize gs:default (monogame game) default-visuals-version:+v3+))

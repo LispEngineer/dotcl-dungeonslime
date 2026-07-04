@@ -54,8 +54,8 @@
                   '(:file "packages")
                   '(:file "settings" :depends-on ("packages")) ;; Load this file early, it contains declaims
                   '(:file "type-aliases" :depends-on ("packages" "settings"))
-                  '(:file "monoutils" :depends-on ("packages"))
-                  '(:file "utils" :depends-on ("packages")))
+                  '(:file "monoutils" :depends-on ("packages" "type-aliases"))
+                  '(:file "utils" :depends-on ("packages" "type-aliases")))
                  *cspackages-components*
                  (list
                   '(:file "constants")

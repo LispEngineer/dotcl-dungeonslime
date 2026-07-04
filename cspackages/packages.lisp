@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Creation Date: 2026-07-04T17:11:53Z
 
 (cl:in-package :cl-user)
 
@@ -2634,5 +2634,22 @@
    #:receive-input
    #:update-state
    #:update-thumb-position-to-cursor-drag
+  ))
+
+;;; Source File: gum-forms-default-visuals-version.lisp
+;;; C# Class: Gum.Forms.DefaultVisualsVersion
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-default-visuals-version
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:+newest+
+   #:+v1+
+   #:+v2+
+   #:+v3+
+   #:value__
   ))
 

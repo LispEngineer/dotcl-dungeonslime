@@ -109,7 +109,8 @@ cspackages:
 				--class Gum.Forms.Controls.Button \
 				--class MonoGameGum.GueDeriving.TextRuntime \
 				--class Gum.Forms.Controls.Label \
-				--class Gum.Forms.Controls.Slider
+				--class Gum.Forms.Controls.Slider \
+				--class Gum.Forms.DefaultVisualsVersion
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages
