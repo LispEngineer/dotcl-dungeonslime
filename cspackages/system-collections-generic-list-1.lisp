@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.Generic.List`1
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T19:51:37Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :system-collections-generic-list-1)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Collections.Generic.List`1"))
 (cl:defconstant <type-str> "System.Collections.Generic.List`1")
-(cl:defconstant <creation> "2026-07-04T19:51:37Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

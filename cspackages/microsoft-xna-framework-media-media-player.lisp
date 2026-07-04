@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -24,6 +24,30 @@
 (cl:define-symbol-macro queue (dotnet:static <type-str> "Queue"))
 
 (cl:define-symbol-macro state (dotnet:static <type-str> "State"))
+
+(cl:defun muted? ()
+  (dotnet:static <type-str> "IsMuted"))
+
+(cl:defun (cl:setf muted?) (new-value)
+  (cl:setf (dotnet:static <type-str> "IsMuted") new-value))
+
+(cl:defun repeating? ()
+  (dotnet:static <type-str> "IsRepeating"))
+
+(cl:defun (cl:setf repeating?) (new-value)
+  (cl:setf (dotnet:static <type-str> "IsRepeating") new-value))
+
+(cl:defun shuffled? ()
+  (dotnet:static <type-str> "IsShuffled"))
+
+(cl:defun (cl:setf shuffled?) (new-value)
+  (cl:setf (dotnet:static <type-str> "IsShuffled") new-value))
+
+(cl:defun volume ()
+  (dotnet:static <type-str> "Volume"))
+
+(cl:defun (cl:setf volume) (new-value)
+  (cl:setf (dotnet:static <type-str> "Volume") new-value))
 
 (cl:defun move-next ()
   (dotnet:static <type-str> "MoveNext"))

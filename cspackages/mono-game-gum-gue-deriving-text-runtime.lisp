@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:defconstant <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-04T16:57:01Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -207,6 +207,30 @@
 
 (cl:defun (cl:setf default-width-units) (new-value obj!)
   (cl:setf (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.TextRuntime") obj!) "DefaultWidthUnits") new-value))
+
+(cl:defun assign-font-in-constructor ()
+  (dotnet:static <type-str> "AssignFontInConstructor"))
+
+(cl:defun (cl:setf assign-font-in-constructor) (new-value)
+  (cl:setf (dotnet:static <type-str> "AssignFontInConstructor") new-value))
+
+(cl:defun default-custom-font ()
+  (dotnet:static <type-str> "DefaultCustomFont"))
+
+(cl:defun (cl:setf default-custom-font) (new-value)
+  (cl:setf (dotnet:static <type-str> "DefaultCustomFont") new-value))
+
+(cl:defun default-font ()
+  (dotnet:static <type-str> "DefaultFont"))
+
+(cl:defun (cl:setf default-font) (new-value)
+  (cl:setf (dotnet:static <type-str> "DefaultFont") new-value))
+
+(cl:defun default-font-size ()
+  (dotnet:static <type-str> "DefaultFontSize"))
+
+(cl:defun (cl:setf default-font-size) (new-value)
+  (cl:setf (dotnet:static <type-str> "DefaultFontSize") new-value))
 
 (cl:defun add-to-managers (obj!)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.TextRuntime") obj!) "AddToManagers"))

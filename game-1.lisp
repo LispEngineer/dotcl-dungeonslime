@@ -85,4 +85,27 @@
   ;; This is also a List`1
   (list:add-range gum-fwe:game-pads-for-ui-control (gs:gamepads gs:default))
 
+  ; // Customize the tab reverse UI navigation to also trigger when the keyboard
+  ; // Up arrow key is pushed.
+  ; FrameworkElement.TabReverseKeyCombos.Add(
+  ;     new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Up });
+  ; // Customize the tab UI navigation to also trigger when the keyboard
+  ; // Down arrow key is pushed.
+  ; FrameworkElement.TabKeyCombos.Add(
+  ;     new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Down });
+
+  ;; new KeyCombo() { PushedKey = ... } is pure syntax sugar. The compiler desugars it to:
+  ;; var tmp = new KeyCombo();   // parameterless constructor
+  ;; tmp.PushedKey = Keys.Up;    // then field/property assignment(s)
+  ;; FrameworkElement.TabReverseKeyCombos.Add(tmp);
+
+  (let ((kc (key-combo:new)))
+    (setf (key-combo:pushed-key kc) key:+up+)
+    (list:add (gum-fwe:tab-reverse-key-combos) kc)
+    (setf (key-combo:pushed-key kc) key:+down+)
+    (list:add (gum-fwe:tab-key-combos) kc)
+  ) ;; let kc
+
+
+
 ) ; initialize-gum

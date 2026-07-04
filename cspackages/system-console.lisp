@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :system-console)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -47,6 +47,134 @@
 
 (cl:define-symbol-macro out (dotnet:static <type-str> "Out"))
 (cl:setf (cl:documentation (cl:quote out) (cl:quote cl:variable)) "Gets the standard output stream.")
+
+(cl:defun background-color ()
+  "Gets or sets the background color of the console."
+  (dotnet:static <type-str> "BackgroundColor"))
+
+(cl:defun (cl:setf background-color) (new-value)
+  "Gets or sets the background color of the console."
+  (cl:setf (dotnet:static <type-str> "BackgroundColor") new-value))
+
+(cl:defun buffer-height ()
+  "Gets or sets the height of the buffer area."
+  (dotnet:static <type-str> "BufferHeight"))
+
+(cl:defun (cl:setf buffer-height) (new-value)
+  "Gets or sets the height of the buffer area."
+  (cl:setf (dotnet:static <type-str> "BufferHeight") new-value))
+
+(cl:defun buffer-width ()
+  "Gets or sets the width of the buffer area."
+  (dotnet:static <type-str> "BufferWidth"))
+
+(cl:defun (cl:setf buffer-width) (new-value)
+  "Gets or sets the width of the buffer area."
+  (cl:setf (dotnet:static <type-str> "BufferWidth") new-value))
+
+(cl:defun cursor-left ()
+  "Gets or sets the column position of the cursor within the buffer area."
+  (dotnet:static <type-str> "CursorLeft"))
+
+(cl:defun (cl:setf cursor-left) (new-value)
+  "Gets or sets the column position of the cursor within the buffer area."
+  (cl:setf (dotnet:static <type-str> "CursorLeft") new-value))
+
+(cl:defun cursor-size ()
+  "Gets or sets the height of the cursor within a character cell."
+  (dotnet:static <type-str> "CursorSize"))
+
+(cl:defun (cl:setf cursor-size) (new-value)
+  "Gets or sets the height of the cursor within a character cell."
+  (cl:setf (dotnet:static <type-str> "CursorSize") new-value))
+
+(cl:defun cursor-top ()
+  "Gets or sets the row position of the cursor within the buffer area."
+  (dotnet:static <type-str> "CursorTop"))
+
+(cl:defun (cl:setf cursor-top) (new-value)
+  "Gets or sets the row position of the cursor within the buffer area."
+  (cl:setf (dotnet:static <type-str> "CursorTop") new-value))
+
+(cl:defun cursor-visible ()
+  "Gets or sets a value indicating whether the cursor is visible."
+  (dotnet:static <type-str> "CursorVisible"))
+
+(cl:defun (cl:setf cursor-visible) (new-value)
+  "Gets or sets a value indicating whether the cursor is visible."
+  (cl:setf (dotnet:static <type-str> "CursorVisible") new-value))
+
+(cl:defun foreground-color ()
+  "Gets or sets the foreground color of the console."
+  (dotnet:static <type-str> "ForegroundColor"))
+
+(cl:defun (cl:setf foreground-color) (new-value)
+  "Gets or sets the foreground color of the console."
+  (cl:setf (dotnet:static <type-str> "ForegroundColor") new-value))
+
+(cl:defun input-encoding ()
+  "Gets or sets the encoding the console uses to read input."
+  (dotnet:static <type-str> "InputEncoding"))
+
+(cl:defun (cl:setf input-encoding) (new-value)
+  "Gets or sets the encoding the console uses to read input."
+  (cl:setf (dotnet:static <type-str> "InputEncoding") new-value))
+
+(cl:defun output-encoding ()
+  "Gets or sets the encoding the console uses to write output."
+  (dotnet:static <type-str> "OutputEncoding"))
+
+(cl:defun (cl:setf output-encoding) (new-value)
+  "Gets or sets the encoding the console uses to write output."
+  (cl:setf (dotnet:static <type-str> "OutputEncoding") new-value))
+
+(cl:defun title ()
+  "Gets or sets the title to display in the console title bar."
+  (dotnet:static <type-str> "Title"))
+
+(cl:defun (cl:setf title) (new-value)
+  "Gets or sets the title to display in the console title bar."
+  (cl:setf (dotnet:static <type-str> "Title") new-value))
+
+(cl:defun treat-control-c-as-input ()
+  "Gets or sets a value indicating whether the combination of the System.ConsoleModifiers.Control modifier key and System.ConsoleKey.C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system."
+  (dotnet:static <type-str> "TreatControlCAsInput"))
+
+(cl:defun (cl:setf treat-control-c-as-input) (new-value)
+  "Gets or sets a value indicating whether the combination of the System.ConsoleModifiers.Control modifier key and System.ConsoleKey.C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system."
+  (cl:setf (dotnet:static <type-str> "TreatControlCAsInput") new-value))
+
+(cl:defun window-height ()
+  "Gets or sets the height of the console window area."
+  (dotnet:static <type-str> "WindowHeight"))
+
+(cl:defun (cl:setf window-height) (new-value)
+  "Gets or sets the height of the console window area."
+  (cl:setf (dotnet:static <type-str> "WindowHeight") new-value))
+
+(cl:defun window-left ()
+  "Gets or sets the leftmost position of the console window area relative to the screen buffer."
+  (dotnet:static <type-str> "WindowLeft"))
+
+(cl:defun (cl:setf window-left) (new-value)
+  "Gets or sets the leftmost position of the console window area relative to the screen buffer."
+  (cl:setf (dotnet:static <type-str> "WindowLeft") new-value))
+
+(cl:defun window-top ()
+  "Gets or sets the top position of the console window area relative to the screen buffer."
+  (dotnet:static <type-str> "WindowTop"))
+
+(cl:defun (cl:setf window-top) (new-value)
+  "Gets or sets the top position of the console window area relative to the screen buffer."
+  (cl:setf (dotnet:static <type-str> "WindowTop") new-value))
+
+(cl:defun window-width ()
+  "Gets or sets the width of the console window."
+  (dotnet:static <type-str> "WindowWidth"))
+
+(cl:defun (cl:setf window-width) (new-value)
+  "Gets or sets the width of the console window."
+  (cl:setf (dotnet:static <type-str> "WindowWidth") new-value))
 
 (cl:defun beep (cl:&optional (frequency cl:nil supplied-frequency) (duration cl:nil supplied-duration))
   "Master wrapper for System.Console.Beep overloads. Dispatches at runtime.

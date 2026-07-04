@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :system-app-domain)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -20,6 +20,14 @@
 
 (cl:define-symbol-macro monitoring-survived-process-memory-size (dotnet:static <type-str> "MonitoringSurvivedProcessMemorySize"))
 (cl:setf (cl:documentation (cl:quote monitoring-survived-process-memory-size) (cl:quote cl:variable)) "Gets the total bytes that survived from the last collection for all application domains in the process.")
+
+(cl:defun monitoring-is-enabled ()
+  "Gets or sets a value that indicates whether CPU and memory monitoring of application domains is enabled for the current process. Once monitoring is enabled for a process, it cannot be disabled."
+  (dotnet:static <type-str> "MonitoringIsEnabled"))
+
+(cl:defun (cl:setf monitoring-is-enabled) (new-value)
+  "Gets or sets a value that indicates whether CPU and memory monitoring of application domains is enabled for the current process. Once monitoring is enabled for a process, it cannot be disabled."
+  (cl:setf (dotnet:static <type-str> "MonitoringIsEnabled") new-value))
 
 (cl:defun base-directory (obj!)
   "Gets the base directory that the assembly resolver uses to probe for assemblies."

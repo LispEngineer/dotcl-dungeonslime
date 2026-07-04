@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:defconstant <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-04T16:57:01Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

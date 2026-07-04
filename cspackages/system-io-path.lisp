@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :system-io-path)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

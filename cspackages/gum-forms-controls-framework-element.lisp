@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-04T16:57:01Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -76,6 +76,48 @@ new(InteractiveGue)
 (cl:define-symbol-macro game-pads-for-ui-control (dotnet:static <type-str> "GamePadsForUiControl"))
 
 (cl:define-symbol-macro keyboards-for-ui-control (dotnet:static <type-str> "KeyboardsForUiControl"))
+
+(cl:defun click-combos ()
+  (dotnet:static <type-str> "ClickCombos"))
+
+(cl:defun (cl:setf click-combos) (new-value)
+  (cl:setf (dotnet:static <type-str> "ClickCombos") new-value))
+
+(cl:defun main-cursor ()
+  (dotnet:static <type-str> "MainCursor"))
+
+(cl:defun (cl:setf main-cursor) (new-value)
+  (cl:setf (dotnet:static <type-str> "MainCursor") new-value))
+
+(cl:defun main-keyboard ()
+  (dotnet:static <type-str> "MainKeyboard"))
+
+(cl:defun (cl:setf main-keyboard) (new-value)
+  (cl:setf (dotnet:static <type-str> "MainKeyboard") new-value))
+
+(cl:defun modal-root ()
+  (dotnet:static <type-str> "ModalRoot"))
+
+(cl:defun (cl:setf modal-root) (new-value)
+  (cl:setf (dotnet:static <type-str> "ModalRoot") new-value))
+
+(cl:defun popup-root ()
+  (dotnet:static <type-str> "PopupRoot"))
+
+(cl:defun (cl:setf popup-root) (new-value)
+  (cl:setf (dotnet:static <type-str> "PopupRoot") new-value))
+
+(cl:defun tab-key-combos ()
+  (dotnet:static <type-str> "TabKeyCombos"))
+
+(cl:defun (cl:setf tab-key-combos) (new-value)
+  (cl:setf (dotnet:static <type-str> "TabKeyCombos") new-value))
+
+(cl:defun tab-reverse-key-combos ()
+  (dotnet:static <type-str> "TabReverseKeyCombos"))
+
+(cl:defun (cl:setf tab-reverse-key-combos) (new-value)
+  (cl:setf (dotnet:static <type-str> "TabReverseKeyCombos") new-value))
 
 (cl:defun absolute-left (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "get_AbsoluteLeft"))

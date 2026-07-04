@@ -17,6 +17,7 @@
 (cl:defpackage :csharp-assembly-utils)
 (cl:defpackage :gum-forms-controls-button)
 (cl:defpackage :gum-forms-controls-framework-element)
+(cl:defpackage :gum-forms-controls-key-combo)
 (cl:defpackage :gum-forms-controls-label)
 (cl:defpackage :gum-forms-controls-panel)
 (cl:defpackage :gum-forms-controls-slider)
@@ -199,6 +200,7 @@
     (:gum-cl :rendering-library-content-content-loader)
     (:gum-fwe :gum-forms-controls-framework-element)
     (:list :system-collections-generic-list-1)
+    (:key-combo :gum-forms-controls-key-combo)
   )
   (:export 
     ;; Constants

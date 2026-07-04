@@ -113,6 +113,7 @@ cspackages:
 				--class Gum.Forms.Controls.Slider \
 				--class Gum.Forms.DefaultVisualsVersion \
         --class RenderingLibrary.Content.ContentLoader \
+        --class Gum.Forms.Controls.KeyCombo \
 			--assembly $(REF_DIR)System.Collections.dll \
         --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]

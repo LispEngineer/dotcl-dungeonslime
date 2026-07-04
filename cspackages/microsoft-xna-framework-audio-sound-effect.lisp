@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -32,6 +32,30 @@ new(Byte[], Int32, Int32, Int32, AudioChannels, Int32, Int32)
                     :class-name <type-str>
                     :method-name "new"
                     :supplied-args (cl:append (cl:list :buffer buffer) (cl:list :sample-rate sample-rate) (cl:list :channels channels) (cl:when supplied-sample-rate2 (cl:list :sample-rate2 sample-rate2)) (cl:when supplied-channels2 (cl:list :channels2 channels2)) (cl:when supplied-loop-start (cl:list :loop-start loop-start)) (cl:when supplied-loop-length (cl:list :loop-length loop-length)))))))
+
+(cl:defun distance-scale ()
+  (dotnet:static <type-str> "DistanceScale"))
+
+(cl:defun (cl:setf distance-scale) (new-value)
+  (cl:setf (dotnet:static <type-str> "DistanceScale") new-value))
+
+(cl:defun doppler-scale ()
+  (dotnet:static <type-str> "DopplerScale"))
+
+(cl:defun (cl:setf doppler-scale) (new-value)
+  (cl:setf (dotnet:static <type-str> "DopplerScale") new-value))
+
+(cl:defun master-volume ()
+  (dotnet:static <type-str> "MasterVolume"))
+
+(cl:defun (cl:setf master-volume) (new-value)
+  (cl:setf (dotnet:static <type-str> "MasterVolume") new-value))
+
+(cl:defun speed-of-sound ()
+  (dotnet:static <type-str> "SpeedOfSound"))
+
+(cl:defun (cl:setf speed-of-sound) (new-value)
+  (cl:setf (dotnet:static <type-str> "SpeedOfSound") new-value))
 
 (cl:defun duration (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffect") obj!) "get_Duration"))

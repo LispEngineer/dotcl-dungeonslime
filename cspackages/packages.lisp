@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T19:51:37Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :cl-user)
 
@@ -51,6 +51,22 @@
    #:largest-window-width
    #:number-lock
    #:out
+   #:background-color
+   #:buffer-height
+   #:buffer-width
+   #:cursor-left
+   #:cursor-size
+   #:cursor-top
+   #:cursor-visible
+   #:foreground-color
+   #:input-encoding
+   #:output-encoding
+   #:title
+   #:treat-control-c-as-input
+   #:window-height
+   #:window-left
+   #:window-top
+   #:window-width
    #:beep
    #:clear
    #:get-cursor-position
@@ -324,6 +340,7 @@
    #:<version>
    #:current-domain
    #:monitoring-survived-process-memory-size
+   #:monitoring-is-enabled
    #:base-directory
    #:dynamic-directory
    #:friendly-name
@@ -1423,6 +1440,7 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:window-handle
    #:get-state
    #:set-cursor
    #:set-position
@@ -1642,6 +1660,14 @@
    #:<creation>
    #:<version>
    #:gesture-available?
+   #:display-height
+   #:display-orientation
+   #:display-width
+   #:enabled-gestures
+   #:enable-high-frequency-touch
+   #:enable-mouse-gestures
+   #:enable-mouse-touch-point
+   #:window-handle
    #:get-capabilities
    #:get-state
    #:read-gesture
@@ -2046,6 +2072,7 @@
    #:<creation>
    #:<version>
    #:new
+   #:discard-color
    #:adapter
    #:blend-factor
    #:blend-state
@@ -2205,6 +2232,10 @@
    #:<creation>
    #:<version>
    #:new
+   #:distance-scale
+   #:doppler-scale
+   #:master-volume
+   #:speed-of-sound
    #:duration
    #:disposed?
    #:name
@@ -2310,6 +2341,10 @@
    #:play-position
    #:queue
    #:state
+   #:muted?
+   #:repeating?
+   #:shuffled?
+   #:volume
    #:move-next
    #:move-previous
    #:pause
@@ -2435,6 +2470,13 @@
    #:default-forms-templates
    #:game-pads-for-ui-control
    #:keyboards-for-ui-control
+   #:click-combos
+   #:main-cursor
+   #:main-keyboard
+   #:modal-root
+   #:popup-root
+   #:tab-key-combos
+   #:tab-reverse-key-combos
    #:absolute-left
    #:absolute-top
    #:actual-height
@@ -2557,6 +2599,10 @@
    #:default-height-units
    #:default-width
    #:default-width-units
+   #:assign-font-in-constructor
+   #:default-custom-font
+   #:default-font
+   #:default-font-size
    #:alpha
    #:bitmap-font
    #:blend
@@ -2683,6 +2729,22 @@
    #:load-content
    #:standardize-case-sensitive
    #:try-load-content
+  ))
+
+;;; Source File: gum-forms-controls-key-combo.lisp
+;;; C# Class: Gum.Forms.Controls.KeyCombo
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-key-combo
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:held-key
+   #:triggered-on-repeat?
+   #:pushed-key
   ))
 
 ;;; Source File: system-collections-generic-list-1.lisp

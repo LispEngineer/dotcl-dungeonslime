@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Panel
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :gum-forms-controls-panel)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Panel"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Panel")
-(cl:defconstant <creation> "2026-07-04T16:57:01Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

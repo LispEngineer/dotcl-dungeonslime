@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchPanel
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-panel)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchPanel"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchPanel")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -16,6 +16,54 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchPanel")))
 
 (cl:define-symbol-macro gesture-available? (dotnet:static <type-str> "IsGestureAvailable"))
+
+(cl:defun display-height ()
+  (dotnet:static <type-str> "DisplayHeight"))
+
+(cl:defun (cl:setf display-height) (new-value)
+  (cl:setf (dotnet:static <type-str> "DisplayHeight") new-value))
+
+(cl:defun display-orientation ()
+  (dotnet:static <type-str> "DisplayOrientation"))
+
+(cl:defun (cl:setf display-orientation) (new-value)
+  (cl:setf (dotnet:static <type-str> "DisplayOrientation") new-value))
+
+(cl:defun display-width ()
+  (dotnet:static <type-str> "DisplayWidth"))
+
+(cl:defun (cl:setf display-width) (new-value)
+  (cl:setf (dotnet:static <type-str> "DisplayWidth") new-value))
+
+(cl:defun enabled-gestures ()
+  (dotnet:static <type-str> "EnabledGestures"))
+
+(cl:defun (cl:setf enabled-gestures) (new-value)
+  (cl:setf (dotnet:static <type-str> "EnabledGestures") new-value))
+
+(cl:defun enable-high-frequency-touch ()
+  (dotnet:static <type-str> "EnableHighFrequencyTouch"))
+
+(cl:defun (cl:setf enable-high-frequency-touch) (new-value)
+  (cl:setf (dotnet:static <type-str> "EnableHighFrequencyTouch") new-value))
+
+(cl:defun enable-mouse-gestures ()
+  (dotnet:static <type-str> "EnableMouseGestures"))
+
+(cl:defun (cl:setf enable-mouse-gestures) (new-value)
+  (cl:setf (dotnet:static <type-str> "EnableMouseGestures") new-value))
+
+(cl:defun enable-mouse-touch-point ()
+  (dotnet:static <type-str> "EnableMouseTouchPoint"))
+
+(cl:defun (cl:setf enable-mouse-touch-point) (new-value)
+  (cl:setf (dotnet:static <type-str> "EnableMouseTouchPoint") new-value))
+
+(cl:defun window-handle ()
+  (dotnet:static <type-str> "WindowHandle"))
+
+(cl:defun (cl:setf window-handle) (new-value)
+  (cl:setf (dotnet:static <type-str> "WindowHandle") new-value))
 
 (cl:defun get-capabilities ()
   (dotnet:static <type-str> "GetCapabilities"))

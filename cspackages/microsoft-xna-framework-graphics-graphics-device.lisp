@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Generator Version: 31
+;;; Creation Date: 2026-07-04T20:26:18Z
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-04T15:34:33Z")
-(cl:defconstant <version> 30)
+(cl:defconstant <creation> "2026-07-04T20:26:18Z")
+(cl:defconstant <version> 31)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -32,6 +32,12 @@ new(GraphicsAdapter, GraphicsProfile, Boolean, PresentationParameters)
                     :class-name <type-str>
                     :method-name "new"
                     :supplied-args (cl:append (cl:list :adapter adapter) (cl:list :graphics-profile graphics-profile) (cl:list :presentation-parameters presentation-parameters) (cl:when supplied-presentation-parameters2 (cl:list :presentation-parameters2 presentation-parameters2)))))))
+
+(cl:defun discard-color ()
+  (dotnet:static <type-str> "DiscardColor"))
+
+(cl:defun (cl:setf discard-color) (new-value)
+  (cl:setf (dotnet:static <type-str> "DiscardColor") new-value))
 
 (cl:defun adapter (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "get_Adapter"))
