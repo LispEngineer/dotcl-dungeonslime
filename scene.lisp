@@ -24,14 +24,16 @@
 
 (defmethod initialize-instance :after ((scene scene) &key game)
   "Initializes the scene's private ContentManager using the global game's service provider.
-   If the game content manager is not bound or nil (e.g. in unit tests), ContentManager creation is skipped."
+   If the game content manager is not bound or nil (e.g. in unit tests), ContentManager creation is skipped.
+   Dynamically inherits the main game ContentManager's RootDirectory to support both standard and REPL runs."
   (unless game
     (error "A scene must be initialized with a :game parameter referencing the core game."))
   (when (and (typep game 'core) (slot-boundp game 'content) (content game))
-    (setf (scene-content scene)
-          (cm:new-i-service-provider-string
-           (cm:service-provider (content game))
-           +content-default+))))
+    (let ((root-dir (dotnet:invoke (content game) "RootDirectory")))
+      (setf (scene-content scene)
+            (cm:new-i-service-provider-string
+             (cm:service-provider (content game))
+             root-dir)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Scene Lifecycle Methods
