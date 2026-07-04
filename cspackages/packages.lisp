@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T19:23:09Z
+;;; Creation Date: 2026-07-04T19:51:37Z
 
 (cl:in-package :cl-user)
 
@@ -2683,5 +2683,60 @@
    #:load-content
    #:standardize-case-sensitive
    #:try-load-content
+  ))
+
+;;; Source File: system-collections-generic-list-1.lisp
+;;; C# Class: System.Collections.Generic.List`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-list-1
+  (:use :cl)
+  (:shadow
+   #:count
+   #:find
+   #:remove
+   #:reverse
+   #:sort
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:capacity
+   #:count
+   #:item
+   #:add
+   #:add-range
+   #:as-read-only
+   #:binary-search
+   #:clear
+   #:contains
+   #:convert-all
+   #:copy-to
+   #:ensure-capacity
+   #:exists
+   #:find
+   #:find-all
+   #:find-index
+   #:find-last
+   #:find-last-index
+   #:for-each
+   #:get-enumerator
+   #:get-range
+   #:index-of
+   #:insert
+   #:insert-range
+   #:last-index-of
+   #:remove
+   #:remove-all
+   #:remove-at
+   #:remove-range
+   #:reverse
+   #:slice
+   #:sort
+   #:to-array
+   #:trim-excess
+   #:true-for-all
   ))
 

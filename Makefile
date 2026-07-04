@@ -112,7 +112,9 @@ cspackages:
 				--class Gum.Forms.Controls.Label \
 				--class Gum.Forms.Controls.Slider \
 				--class Gum.Forms.DefaultVisualsVersion \
-        --class RenderingLibrary.Content.ContentLoader
+        --class RenderingLibrary.Content.ContentLoader \
+			--assembly $(REF_DIR)System.Collections.dll \
+        --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages

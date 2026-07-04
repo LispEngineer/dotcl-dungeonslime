@@ -65,11 +65,18 @@
   ;; version.
   (gs:initialize gs:default (monogame game) default-visuals-version:+v3+)
 
-  (format *error-output* "Gum content loader: ~A~%" (gs:content-loader gs:default))
   ; // Tell the Gum service which content manager to use. We will tell it to
   ; // use the global content manager from our Core.
   ; GumService.Default.ContentLoader.XnaContentManager = Core.Content;
   ;; Remember: "Core" is the name of the base class of our game-1 class
+  (format *error-output* "[game-1.lisp:initialize-gum] Gum content loader: ~A~%" (gs:content-loader gs:default))
   (setf (gum-cl:xna-content-manager (gs:content-loader gs:default)) (content game))
+
+  ; // Register keyboard input for UI control.
+  ; FrameworkElement.KeyboardsForUiControl.Add(GumService.Default.Keyboard);
+  ;; gum-fwe:
+  (format *error-output* "[game-1.lisp:initialize-gum] Gum FwE Kb4UIC: ~A~%" gum-fwe:keyboards-for-ui-control)
+  ;; This is a List`1 class
+  (list:add gum-fwe:keyboards-for-ui-control (gs:keyboard gs:default))
 
 ) ; initialize-gum

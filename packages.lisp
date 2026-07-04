@@ -67,6 +67,7 @@
 (cl:defpackage :rendering-library-content-i-content-loader)
 (cl:defpackage :system-app-domain)
 (cl:defpackage :system-boolean)
+(cl:defpackage :system-collections-generic-list-1)
 (cl:defpackage :system-console)
 (cl:defpackage :system-convert)
 (cl:defpackage :system-double)
@@ -196,6 +197,8 @@
     (:gs :mono-game-gum-gum-service)
     (:default-visuals-version :gum-forms-default-visuals-version)
     (:gum-cl :rendering-library-content-content-loader)
+    (:gum-fwe :gum-forms-controls-framework-element)
+    (:list :system-collections-generic-list-1)
   )
   (:export 
     ;; Constants
