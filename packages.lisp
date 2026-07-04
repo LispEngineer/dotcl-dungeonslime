@@ -63,6 +63,8 @@
 (cl:defpackage :microsoft-xna-framework-vector2)
 (cl:defpackage :mono-game-gum-gue-deriving-text-runtime)
 (cl:defpackage :mono-game-gum-gum-service)
+(cl:defpackage :rendering-library-content-content-loader)
+(cl:defpackage :rendering-library-content-i-content-loader)
 (cl:defpackage :system-app-domain)
 (cl:defpackage :system-boolean)
 (cl:defpackage :system-console)
@@ -77,7 +79,7 @@
 (cl:defpackage :system-uri-kind)
 (cl:defpackage :system-uri)
 
-;; Some special packages ;;;;;;;;
+;; Some special packages ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Without this, during compilation, we get:
 ;; /home/dfields/.nuget/packages/dotcl.runtime/0.1.15/buildTransitive/DotCL.Runtime.ProjectCore.targets(92,5): error dotcl compile-project failed for /home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd: Symbol "GET-TYPE" is not external in package "OBJECT"
@@ -193,6 +195,7 @@
     ;; Gum-related
     (:gs :mono-game-gum-gum-service)
     (:default-visuals-version :gum-forms-default-visuals-version)
+    (:gum-cl :rendering-library-content-content-loader)
   )
   (:export 
     ;; Constants

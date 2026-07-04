@@ -63,4 +63,13 @@
   ;; Initialize the Gum service. The parameter specifies
   ;; the version of the default visuals to use. V3 is the latest
   ;; version.
-  (gs:initialize gs:default (monogame game) default-visuals-version:+v3+))
+  (gs:initialize gs:default (monogame game) default-visuals-version:+v3+)
+
+  (format *error-output* "Gum content loader: ~A~%" (gs:content-loader gs:default))
+  ; // Tell the Gum service which content manager to use. We will tell it to
+  ; // use the global content manager from our Core.
+  ; GumService.Default.ContentLoader.XnaContentManager = Core.Content;
+  ;; Remember: "Core" is the name of the base class of our game-1 class
+  (setf (gum-cl:xna-content-manager (gs:content-loader gs:default)) (content game))
+
+) ; initialize-gum

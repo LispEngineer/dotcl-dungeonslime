@@ -1,15 +1,13 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.Anchor
 ;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T16:57:01Z
+;;; Creation Date: 2026-07-04T19:23:09Z
 
 (cl:in-package :gum-wireframe-anchor)
 
-(cl:format cl:*error-output* "gum-wireframe-anchor~%")
-
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Wireframe.Anchor"))
 (cl:defconstant <type-str> "Gum.Wireframe.Anchor")
-(cl:defconstant <creation> "2026-07-04T16:57:01Z")
+(cl:defconstant <creation> "2026-07-04T19:23:09Z")
 (cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS

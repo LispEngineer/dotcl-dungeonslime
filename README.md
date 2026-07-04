@@ -425,3 +425,10 @@ the `--base` argument to see it work (in C#).
 # Credits
 
 The font `04B_30.ttf` is the correct pixel font from [FontSpace (04b03 font)](https://www.fontspace.com/04b30-font-f735), which is used as `Content/fonts/04B_30.ttf` in this project.
+
+
+# Chapter 20 Notes
+
+[Source Code](https://github.com/MonoGame/MonoGame.Samples/blob/3.8.4/Tutorials/learn-monogame-2d/src/20-Implementing-UI-With-Gum/DungeonSlime/Game1.cs)
+
+* `Core` is just the `Game1` class renamed

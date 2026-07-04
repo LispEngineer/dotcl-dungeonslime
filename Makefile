@@ -102,6 +102,7 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Media.MediaPlayer \
 			--assembly $(BIN_DIR)GumCommon.dll \
 				--class Gum.Wireframe.Anchor \
+        --class RenderingLibrary.Content.IContentLoader \
 			--assembly $(BIN_DIR)MonoGameGum.dll \
 			  --class MonoGameGum.GumService \
 				--class Gum.Forms.Controls.FrameworkElement \
@@ -110,7 +111,8 @@ cspackages:
 				--class MonoGameGum.GueDeriving.TextRuntime \
 				--class Gum.Forms.Controls.Label \
 				--class Gum.Forms.Controls.Slider \
-				--class Gum.Forms.DefaultVisualsVersion
+				--class Gum.Forms.DefaultVisualsVersion \
+        --class RenderingLibrary.Content.ContentLoader
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages

@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T17:11:53Z
+;;; Creation Date: 2026-07-04T19:23:09Z
 
 (cl:in-package :cl-user)
 
@@ -2342,6 +2342,20 @@
    #:value__
   ))
 
+;;; Source File: rendering-library-content-i-content-loader.lisp
+;;; C# Class: RenderingLibrary.Content.IContentLoader
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-content-i-content-loader
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:load-content
+   #:try-load-content
+  ))
+
 ;;; Source File: mono-game-gum-gum-service.lisp
 ;;; C# Class: MonoGameGum.GumService
 ;;; Constant Properties: (none)
@@ -2651,5 +2665,23 @@
    #:+v2+
    #:+v3+
    #:value__
+  ))
+
+;;; Source File: rendering-library-content-content-loader.lisp
+;;; C# Class: RenderingLibrary.Content.ContentLoader
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-content-content-loader
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:system-managers
+   #:xna-content-manager
+   #:load-content
+   #:standardize-case-sensitive
+   #:try-load-content
   ))
 
