@@ -206,6 +206,9 @@ The Common Lisp libraries in use are:
 
 The NuGet (.NET) libraries in use are:
 * [MonoGame](https://monogame.net/)
+* [Gum](https://docs.flatredball.com/gum)
+  * [Gum MonoGame Integration](https://docs.flatredball.com/gum/code/getting-started/tutorials/gum-project-forms-tutorial/setup#full-code)
+  * [Gum GitHub](https://github.com/vchelaru/gum)
 
 ## Other Libraries of Interest but Not in Use
 
