@@ -89,7 +89,8 @@
     (setf (bat-vel scene) velocity)))
 
 (defun assign-random-bat-position (scene)
-  "Assigns a random position to the bat, ensuring it is not within 15% of the edge of the play field."
+  "Assigns a random position to the bat, ensuring it is not within 15% of the edge of the play field
+   and is at least 20% of the play field diagonal distance away from the slime."
   (let* ((bounds (room-bounds scene))
          (w (float (dotnet:invoke bounds "Width") 0.0f0))
          (h (float (dotnet:invoke bounds "Height") 0.0f0))
@@ -97,9 +98,18 @@
          (max-x (* 0.85f0 w))
          (min-y (* 0.15f0 h))
          (max-y (* 0.85f0 h))
-         (rand-x (+ min-x (random (- max-x min-x))))
-         (rand-y (+ min-y (random (- max-y min-y)))))
-    (setf (bat-pos scene) (v2:new rand-x rand-y))))
+         (diag-sq (+ (* w w) (* h h)))
+         (min-dist-sq (* 0.04f0 diag-sq)) ; 20% of diagonal squared
+         (sp (slime-pos scene)))
+    (loop
+      (let* ((rand-x (+ min-x (random (- max-x min-x))))
+             (rand-y (+ min-y (random (- max-y min-y))))
+             (dx (- rand-x (x sp)))
+             (dy (- rand-y (y sp)))
+             (dist-sq (+ (* dx dx) (* dy dy))))
+        (when (>= dist-sq min-dist-sq)
+          (setf (bat-pos scene) (v2:new rand-x rand-y))
+          (return))))))
 
 (defmethod initialize ((scene gameplay-scene))
   "Initialize gameplay assets. First loads content via call-next-method,

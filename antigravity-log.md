@@ -1688,7 +1688,7 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | July 4, 2026 | [FILES.md](FILES.md) | Modified | Added file descriptions for new scene-related files. |
 | July 4, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the Scene Management implementation session. |
 | July 4, 2026 | [scene-test.lisp](scene-test.lisp) | Modified | Fixed parenthesis mismatch in run-scene-tests. |
-| July 4, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Modified | Extended let* block in update method to keep game and kb in scope. Added assign-random-bat-position to randomize bat position within a 15% inner margin of the play field boundaries on both game initialization and collision repositioning. |
+| July 4, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Modified | Extended let* block in update method to keep game and kb in scope. Added assign-random-bat-position to randomize bat position within a 15% inner margin of the play field boundaries and ensure it starts at least 20% of the screen diagonal distance away from the slime. |
 
 ### 2. Explanations Log
 
@@ -1705,4 +1705,5 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
   - Modified the background color to a dark blue color (RGB: 24, 33, 58) matching the tutorial screenshot.
   - Split "DUNGEON SLIME" into two separate lines, rendering "DUNGEON" and "SLIME" centered horizontally in white using the larger `fonts/04B_30_5x` font.
   - Configured the pulsing prompt ("Press Enter To Start") to use the standard smaller `fonts/04B_30` font, positioned near the bottom of the screen.
-- **Bat Starting Position Restriction**: Added `assign-random-bat-position` to `gameplay-scene.lisp` which calculates a random coordinate bounded inside a 15% inner margin of the play field `room-bounds` (e.g. `[0.15 * width, 0.85 * width]` and `[0.15 * height, 0.85 * height]`). This function is called on scene initialization and whenever the bat is eaten to prevent it from spawning too close to any wall/edge.
+- **Bat Starting Position Restriction**: Added `assign-random-bat-position` to `gameplay-scene.lisp` which calculates a random coordinate bounded inside a 15% inner margin of the play field `room-bounds` (e.g. `[0.15 * width, 0.85 * width]` and `[0.15 * height, 0.85 * height]`). Updated the positioning logic to use rejection sampling to guarantee that any generated position is also at least 20% of the play field diagonal distance (`0.20 * sqrt(w^2 + h^2)`) away from the slime's current position. This function is called on scene initialization and whenever the bat is eaten to prevent it from spawning too close to any wall or too close to the player.
+
