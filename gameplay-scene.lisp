@@ -226,7 +226,7 @@
     (when (was-key-just-pressed kb key:+escape+)
       (format *error-output* "[gameplay-scene:update] Escape pressed; returning to title screen...~%")
       (change-scene scene (make-instance 'title-scene :game game))
-      (return-from update)))
+      (return-from update))
 
   ;; Send our updates to our other objects
   (update (slime scene) gt)
@@ -327,7 +327,7 @@
           (setf (bat-pos scene)
                 (v2:new (float (* column (tile-width ts) (x (scale tm))) 0.0e0)
                         (float (* row (tile-height ts) (y (scale tm))) 0.0e0)))
-          (assign-random-bat-velocity scene))))))
+          (assign-random-bat-velocity scene)))))))
 
 (defmethod draw ((scene gameplay-scene) gt)
   "Clears screen to pulsing color, renders tilemap, slime, bat, and score text."
