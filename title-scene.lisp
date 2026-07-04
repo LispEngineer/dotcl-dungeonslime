@@ -113,7 +113,7 @@
              (oy (round (background-offset-y scene)))
              (src-rect (rect:new ox oy win-w win-h)))
         ;; Use SpriteBatch wrapper to draw with destination and source rectangles
-        (sprite-batch:draw-texture2-d-rectangle-rectangle]-color sb bg-tex dest-rect src-rect color:+white+))
+        (sprite-batch:draw sb bg-tex dest-rect src-rect color:+white+))
       (sprite-batch:end sb))
 
     ;; 2. Draw text and UI elements using PointClamp sampler state

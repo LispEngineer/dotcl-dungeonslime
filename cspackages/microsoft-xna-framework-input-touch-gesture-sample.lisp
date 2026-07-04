@@ -1,43 +1,53 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.GestureSample
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-gesture-sample)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.GestureSample"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.GestureSample")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.GestureSample")))
 
-(cl:defun new (cl:&rest args)
-  "Passthrough constructor for Microsoft.Xna.Framework.Input.Touch.GestureSample. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:new) <type-str> args))
+(cl:defun new (cl:&optional (gesture-type cl:nil supplied-gesture-type) (timestamp cl:nil supplied-timestamp) (position cl:nil supplied-position) (position2 cl:nil supplied-position2) (delta cl:nil supplied-delta) (delta2 cl:nil supplied-delta2))
+  "Master wrapper for Microsoft.Xna.Framework.Input.Touch.GestureSample constructor overloads. Dispatches at runtime.
 
-(cl:defun new-gesture-type-time-span-vector2-vector2-vector2-vector2 (gesture-type timestamp position position2 delta delta2)
-  "Calls Microsoft.Xna.Framework.Input.Touch.GestureSample constructor new(GestureType, TimeSpan, Vector2, Vector2, Vector2, Vector2)"
-  (dotnet:new <type-str> gesture-type timestamp position position2 delta delta2))
+new()
 
-(cl:defun delta (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_Delta"))
+new(GestureType, TimeSpan, Vector2, Vector2, Vector2, Vector2)
+"
+  (cl:cond
+    ((cl:and supplied-gesture-type (cl:or (cl:null gesture-type) (dotnet:object-type gesture-type)) supplied-timestamp (cl:or (cl:null timestamp) (dotnet:object-type timestamp)) supplied-position (cl:or (cl:null position) (dotnet:object-type position)) supplied-position2 (cl:or (cl:null position2) (dotnet:object-type position2)) supplied-delta (cl:or (cl:null delta) (dotnet:object-type delta)) supplied-delta2 (cl:or (cl:null delta2) (dotnet:object-type delta2)))
+     (dotnet:new <type-str> gesture-type timestamp position position2 delta delta2))
+    ((cl:and (cl:not supplied-gesture-type) (cl:not supplied-timestamp) (cl:not supplied-position) (cl:not supplied-position2) (cl:not supplied-delta) (cl:not supplied-delta2))
+     (dotnet:new <type-str>))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-TOUCH-GESTURE-SAMPLE"
+                    :class-name <type-str>
+                    :method-name "new"
+                    :supplied-args (cl:append (cl:when supplied-gesture-type (cl:list :gesture-type gesture-type)) (cl:when supplied-timestamp (cl:list :timestamp timestamp)) (cl:when supplied-position (cl:list :position position)) (cl:when supplied-position2 (cl:list :position2 position2)) (cl:when supplied-delta (cl:list :delta delta)) (cl:when supplied-delta2 (cl:list :delta2 delta2)))))))
 
-(cl:defun delta2 (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_Delta2"))
+(cl:defun delta (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_Delta"))
 
-(cl:defun gesture-type (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_GestureType"))
+(cl:defun delta2 (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_Delta2"))
 
-(cl:defun position (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_Position"))
+(cl:defun gesture-type (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_GestureType"))
 
-(cl:defun position2 (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_Position2"))
+(cl:defun position (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_Position"))
 
-(cl:defun timestamp (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj) "get_Timestamp"))
+(cl:defun position2 (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_Position2"))
+
+(cl:defun timestamp (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.GestureSample") obj!) "get_Timestamp"))
 

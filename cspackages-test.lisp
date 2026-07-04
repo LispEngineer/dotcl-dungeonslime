@@ -310,7 +310,7 @@
   ;; TimeSpan Constructors (Struct, multi-overload)
   (let* ((t-def (ts:new))
          (t-param (ts:new 5000))
-         (t-typed (ts:new-int64 5000)))
+         (t-typed (ts:new 5000))) ;; This second test is no longer needed since constructor consolidation
 
     (assert-cspkg (ts:= t-def (ts:from-ticks 0)) t
                   "TimeSpan default constructor")

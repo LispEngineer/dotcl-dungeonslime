@@ -99,7 +99,9 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Audio.SoundEffectInstance \
 	      --class Microsoft.Xna.Framework.Audio.SoundState --constant-properties "*" \
 	      --class Microsoft.Xna.Framework.Media.Song \
-	      --class Microsoft.Xna.Framework.Media.MediaPlayer
+	      --class Microsoft.Xna.Framework.Media.MediaPlayer \
+			--assembly $(BIN_DIR)GumCommon.dll \
+			--assembly $(BIN_DIR)MonoGameGum.dll
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages

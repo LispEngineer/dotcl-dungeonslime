@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :cl-user)
 
@@ -33,8 +33,6 @@
    #:read
    #:read-line
    #:write
-   #:write-char
-   #:write-string
    #:write-line
   )
   (:export
@@ -54,21 +52,14 @@
    #:number-lock
    #:out
    #:beep
-   #:beep-int32-int32
    #:clear
    #:get-cursor-position
    #:move-buffer-area
-   #:move-buffer-area-int32-int32-int32-int32-int32-int32
-   #:move-buffer-area-int32-int32-int32-int32-int32-int32-char-console-color-console-color
    #:open-standard-error
-   #:open-standard-error-int32
    #:open-standard-input
-   #:open-standard-input-int32
    #:open-standard-output
-   #:open-standard-output-int32
    #:read
    #:read-key
-   #:read-key-boolean
    #:read-line
    #:reset-color
    #:set-buffer-size
@@ -79,43 +70,7 @@
    #:set-window-position
    #:set-window-size
    #:write
-   #:write-boolean
-   #:write-char
-   #:write-char[]
-   #:write-double
-   #:write-decimal
-   #:write-single
-   #:write-int32
-   #:write-u-int32
-   #:write-int64
-   #:write-u-int64
-   #:write-object
-   #:write-string
-   #:write-char]
-   #:write-string-object
-   #:write-string-object]
-   #:write-string-object-object
-   #:write-char[]-int32-int32
-   #:write-string-object-object-object
    #:write-line
-   #:write-line-boolean
-   #:write-line-char
-   #:write-line-char[]
-   #:write-line-decimal
-   #:write-line-double
-   #:write-line-single
-   #:write-line-int32
-   #:write-line-u-int32
-   #:write-line-int64
-   #:write-line-u-int64
-   #:write-line-object
-   #:write-line-string
-   #:write-line-char]
-   #:write-line-string-object
-   #:write-line-string-object]
-   #:write-line-char[]-int32-int32
-   #:write-line-string-object-object
-   #:write-line-string-object-object-object
   ))
 
 ;;; Source File: system-time-span.lisp
@@ -140,11 +95,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-int64
-   #:new-int32-int32-int32
-   #:new-int32-int32-int32-int32
-   #:new-int32-int32-int32-int32-int32
-   #:new-int32-int32-int32-int32-int32-int32
    #:+hours-per-day+
    #:+microseconds-per-day+
    #:+microseconds-per-hour+
@@ -186,17 +136,9 @@
    #:total-nanoseconds
    #:total-seconds
    #:-
-   #:--time-span
-   #:--time-span-time-span
    #:*
-   #:*-time-span-double
-   #:*-double-time-span
    #:/
-   #:/-time-span-double
-   #:/-time-span-time-span
    #:+
-   #:+-time-span
-   #:+-time-span-time-span
    #:<
    #:<=
    #:=
@@ -205,60 +147,25 @@
    #:add
    #:compare
    #:compare-to
-   #:compare-to-object
-   #:compare-to-time-span
    #:divide
-   #:divide-double
-   #:divide-time-span
    #:duration
    #:equals
    #:equals*
-   #:equals-object
-   #:equals-time-span
-   #:equals-time-span-time-span
    #:from-days
-   #:from-days-double
-   #:from-days-int32
-   #:from-days-int32-int32-int64-int64-int64-int64
    #:from-hours
-   #:from-hours-int32
-   #:from-hours-double
-   #:from-hours-int32-int64-int64-int64-int64
    #:from-microseconds
-   #:from-microseconds-int64
-   #:from-microseconds-double
    #:from-milliseconds
-   #:from-milliseconds-int64
-   #:from-milliseconds-double
-   #:from-milliseconds-int64-int64
    #:from-minutes
-   #:from-minutes-int64
-   #:from-minutes-double
-   #:from-minutes-int64-int64-int64-int64
    #:from-seconds
-   #:from-seconds-int64
-   #:from-seconds-double
-   #:from-seconds-int64-int64-int64
    #:from-ticks
    #:get-hash-code
    #:multiply
    #:negate
    #:not=
    #:parse
-   #:parse-string
-   #:parse-string-i-format-provider
-   #:parse-char]-i-format-provider
    #:parse-exact
-   #:parse-exact-string-string-i-format-provider
-   #:parse-exact-string-string[]-i-format-provider
-   #:parse-exact-string-string-i-format-provider-time-span-styles
-   #:parse-exact-char]-char]-i-format-provider-time-span-styles
-   #:parse-exact-string-string[]-i-format-provider-time-span-styles
-   #:parse-exact-char]-string[]-i-format-provider-time-span-styles
    #:subtract
    #:to-string
-   #:to-string-string
-   #:to-string-string-i-format-provider
   ))
 
 ;;; Source File: system-uri-kind.lisp
@@ -274,6 +181,7 @@
    #:+absolute+
    #:+relative+
    #:+relative-or-absolute+
+   #:value__
   ))
 
 ;;; Source File: system-uri.lisp
@@ -290,13 +198,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-string
-   #:new-string-boolean
-   #:new-string-uri-kind
-   #:new-uri-string
-   #:new-serialization-info-streaming-context
-   #:new-uri-uri
-   #:new-uri-string-boolean
    #:+scheme-delimiter+
    #:+uri-scheme-file+
    #:+uri-scheme-ftp+
@@ -343,12 +244,8 @@
    #:check-security
    #:compare
    #:equals
-   #:equals-object
-   #:equals-uri
    #:escape
    #:escape-data-string
-   #:escape-data-string-string
-   #:escape-data-string-char]
    #:escape-string
    #:escape-uri-string
    #:from-hex
@@ -372,8 +269,6 @@
    #:to-string
    #:unescape
    #:unescape-data-string
-   #:unescape-data-string-string
-   #:unescape-data-string-char]
   ))
 
 ;;; Source File: system-convert.lisp
@@ -388,346 +283,30 @@
    #:<version>
    #:db-null
    #:change-type
-   #:change-type-object-type-code
-   #:change-type-object-type
-   #:change-type-object-type-code-i-format-provider
-   #:change-type-object-type-i-format-provider
    #:from-base64-char-array
    #:from-base64-string
    #:from-hex-string
-   #:from-hex-string-string
-   #:from-hex-string-char]
-   #:from-hex-string-byte]
    #:get-type-code
    #:db-null?
    #:to-base64-char-array
-   #:to-base64-char-array-byte[]-int32-int32-char[]-int32
-   #:to-base64-char-array-byte[]-int32-int32-char[]-int32-base64-formatting-options
    #:to-base64-string
-   #:to-base64-string-byte[]
-   #:to-base64-string-byte[]-base64-formatting-options
-   #:to-base64-string-byte]-base64-formatting-options
-   #:to-base64-string-byte[]-int32-int32
-   #:to-base64-string-byte[]-int32-int32-base64-formatting-options
    #:to-boolean
-   #:to-boolean-object
-   #:to-boolean-boolean
-   #:to-boolean-s-byte
-   #:to-boolean-char
-   #:to-boolean-byte
-   #:to-boolean-int16
-   #:to-boolean-u-int16
-   #:to-boolean-int32
-   #:to-boolean-u-int32
-   #:to-boolean-int64
-   #:to-boolean-u-int64
-   #:to-boolean-string
-   #:to-boolean-single
-   #:to-boolean-double
-   #:to-boolean-decimal
-   #:to-boolean-date-time
-   #:to-boolean-object-i-format-provider
-   #:to-boolean-string-i-format-provider
    #:to-byte
-   #:to-byte-object
-   #:to-byte-boolean
-   #:to-byte-byte
-   #:to-byte-char
-   #:to-byte-s-byte
-   #:to-byte-int16
-   #:to-byte-u-int16
-   #:to-byte-int32
-   #:to-byte-u-int32
-   #:to-byte-int64
-   #:to-byte-u-int64
-   #:to-byte-single
-   #:to-byte-double
-   #:to-byte-decimal
-   #:to-byte-string
-   #:to-byte-date-time
-   #:to-byte-object-i-format-provider
-   #:to-byte-string-i-format-provider
-   #:to-byte-string-int32
    #:to-char
-   #:to-char-object
-   #:to-char-boolean
-   #:to-char-char
-   #:to-char-s-byte
-   #:to-char-byte
-   #:to-char-int16
-   #:to-char-u-int16
-   #:to-char-int32
-   #:to-char-u-int32
-   #:to-char-int64
-   #:to-char-u-int64
-   #:to-char-string
-   #:to-char-single
-   #:to-char-double
-   #:to-char-decimal
-   #:to-char-date-time
-   #:to-char-object-i-format-provider
-   #:to-char-string-i-format-provider
    #:to-date-time
-   #:to-date-time-date-time
-   #:to-date-time-object
-   #:to-date-time-string
-   #:to-date-time-s-byte
-   #:to-date-time-byte
-   #:to-date-time-int16
-   #:to-date-time-u-int16
-   #:to-date-time-int32
-   #:to-date-time-u-int32
-   #:to-date-time-int64
-   #:to-date-time-u-int64
-   #:to-date-time-boolean
-   #:to-date-time-char
-   #:to-date-time-single
-   #:to-date-time-double
-   #:to-date-time-decimal
-   #:to-date-time-object-i-format-provider
-   #:to-date-time-string-i-format-provider
    #:to-decimal
-   #:to-decimal-object
-   #:to-decimal-s-byte
-   #:to-decimal-byte
-   #:to-decimal-char
-   #:to-decimal-int16
-   #:to-decimal-u-int16
-   #:to-decimal-int32
-   #:to-decimal-u-int32
-   #:to-decimal-int64
-   #:to-decimal-u-int64
-   #:to-decimal-single
-   #:to-decimal-double
-   #:to-decimal-string
-   #:to-decimal-decimal
-   #:to-decimal-boolean
-   #:to-decimal-date-time
-   #:to-decimal-object-i-format-provider
-   #:to-decimal-string-i-format-provider
    #:to-double
-   #:to-double-object
-   #:to-double-s-byte
-   #:to-double-byte
-   #:to-double-int16
-   #:to-double-char
-   #:to-double-u-int16
-   #:to-double-int32
-   #:to-double-u-int32
-   #:to-double-int64
-   #:to-double-u-int64
-   #:to-double-single
-   #:to-double-double
-   #:to-double-decimal
-   #:to-double-string
-   #:to-double-boolean
-   #:to-double-date-time
-   #:to-double-object-i-format-provider
-   #:to-double-string-i-format-provider
    #:to-hex-string
-   #:to-hex-string-byte[]
-   #:to-hex-string-byte]
-   #:to-hex-string-byte[]-int32-int32
    #:to-hex-string-lower
-   #:to-hex-string-lower-byte[]
-   #:to-hex-string-lower-byte]
-   #:to-hex-string-lower-byte[]-int32-int32
    #:to-int16
-   #:to-int16-object
-   #:to-int16-boolean
-   #:to-int16-char
-   #:to-int16-s-byte
-   #:to-int16-byte
-   #:to-int16-u-int16
-   #:to-int16-int32
-   #:to-int16-u-int32
-   #:to-int16-int16
-   #:to-int16-int64
-   #:to-int16-u-int64
-   #:to-int16-single
-   #:to-int16-double
-   #:to-int16-decimal
-   #:to-int16-string
-   #:to-int16-date-time
-   #:to-int16-object-i-format-provider
-   #:to-int16-string-i-format-provider
-   #:to-int16-string-int32
    #:to-int32
-   #:to-int32-object
-   #:to-int32-boolean
-   #:to-int32-char
-   #:to-int32-s-byte
-   #:to-int32-byte
-   #:to-int32-int16
-   #:to-int32-u-int16
-   #:to-int32-u-int32
-   #:to-int32-int32
-   #:to-int32-int64
-   #:to-int32-u-int64
-   #:to-int32-single
-   #:to-int32-double
-   #:to-int32-decimal
-   #:to-int32-string
-   #:to-int32-date-time
-   #:to-int32-object-i-format-provider
-   #:to-int32-string-i-format-provider
-   #:to-int32-string-int32
    #:to-int64
-   #:to-int64-object
-   #:to-int64-boolean
-   #:to-int64-char
-   #:to-int64-s-byte
-   #:to-int64-byte
-   #:to-int64-int16
-   #:to-int64-u-int16
-   #:to-int64-int32
-   #:to-int64-u-int32
-   #:to-int64-u-int64
-   #:to-int64-int64
-   #:to-int64-single
-   #:to-int64-double
-   #:to-int64-decimal
-   #:to-int64-string
-   #:to-int64-date-time
-   #:to-int64-object-i-format-provider
-   #:to-int64-string-i-format-provider
-   #:to-int64-string-int32
    #:to-s-byte
-   #:to-s-byte-object
-   #:to-s-byte-boolean
-   #:to-s-byte-s-byte
-   #:to-s-byte-char
-   #:to-s-byte-byte
-   #:to-s-byte-int16
-   #:to-s-byte-u-int16
-   #:to-s-byte-int32
-   #:to-s-byte-u-int32
-   #:to-s-byte-int64
-   #:to-s-byte-u-int64
-   #:to-s-byte-single
-   #:to-s-byte-double
-   #:to-s-byte-decimal
-   #:to-s-byte-string
-   #:to-s-byte-date-time
-   #:to-s-byte-object-i-format-provider
-   #:to-s-byte-string-i-format-provider
-   #:to-s-byte-string-int32
    #:to-single
-   #:to-single-object
-   #:to-single-s-byte
-   #:to-single-byte
-   #:to-single-char
-   #:to-single-int16
-   #:to-single-u-int16
-   #:to-single-int32
-   #:to-single-u-int32
-   #:to-single-int64
-   #:to-single-u-int64
-   #:to-single-single
-   #:to-single-double
-   #:to-single-decimal
-   #:to-single-string
-   #:to-single-boolean
-   #:to-single-date-time
-   #:to-single-object-i-format-provider
-   #:to-single-string-i-format-provider
    #:to-string
-   #:to-string-object
-   #:to-string-boolean
-   #:to-string-char
-   #:to-string-s-byte
-   #:to-string-byte
-   #:to-string-int16
-   #:to-string-u-int16
-   #:to-string-int32
-   #:to-string-u-int32
-   #:to-string-int64
-   #:to-string-u-int64
-   #:to-string-single
-   #:to-string-double
-   #:to-string-decimal
-   #:to-string-date-time
-   #:to-string-string
-   #:to-string-object-i-format-provider
-   #:to-string-boolean-i-format-provider
-   #:to-string-char-i-format-provider
-   #:to-string-s-byte-i-format-provider
-   #:to-string-byte-i-format-provider
-   #:to-string-int16-i-format-provider
-   #:to-string-u-int16-i-format-provider
-   #:to-string-int32-i-format-provider
-   #:to-string-u-int32-i-format-provider
-   #:to-string-int64-i-format-provider
-   #:to-string-u-int64-i-format-provider
-   #:to-string-single-i-format-provider
-   #:to-string-double-i-format-provider
-   #:to-string-decimal-i-format-provider
-   #:to-string-date-time-i-format-provider
-   #:to-string-string-i-format-provider
-   #:to-string-byte-int32
-   #:to-string-int16-int32
-   #:to-string-int32-int32
-   #:to-string-int64-int32
    #:to-u-int16
-   #:to-u-int16-object
-   #:to-u-int16-boolean
-   #:to-u-int16-char
-   #:to-u-int16-s-byte
-   #:to-u-int16-byte
-   #:to-u-int16-int16
-   #:to-u-int16-int32
-   #:to-u-int16-u-int16
-   #:to-u-int16-u-int32
-   #:to-u-int16-int64
-   #:to-u-int16-u-int64
-   #:to-u-int16-single
-   #:to-u-int16-double
-   #:to-u-int16-decimal
-   #:to-u-int16-string
-   #:to-u-int16-date-time
-   #:to-u-int16-object-i-format-provider
-   #:to-u-int16-string-i-format-provider
-   #:to-u-int16-string-int32
    #:to-u-int32
-   #:to-u-int32-object
-   #:to-u-int32-boolean
-   #:to-u-int32-char
-   #:to-u-int32-s-byte
-   #:to-u-int32-byte
-   #:to-u-int32-int16
-   #:to-u-int32-u-int16
-   #:to-u-int32-int32
-   #:to-u-int32-u-int32
-   #:to-u-int32-int64
-   #:to-u-int32-u-int64
-   #:to-u-int32-single
-   #:to-u-int32-double
-   #:to-u-int32-decimal
-   #:to-u-int32-string
-   #:to-u-int32-date-time
-   #:to-u-int32-object-i-format-provider
-   #:to-u-int32-string-i-format-provider
-   #:to-u-int32-string-int32
    #:to-u-int64
-   #:to-u-int64-object
-   #:to-u-int64-boolean
-   #:to-u-int64-char
-   #:to-u-int64-s-byte
-   #:to-u-int64-byte
-   #:to-u-int64-int16
-   #:to-u-int64-u-int16
-   #:to-u-int64-int32
-   #:to-u-int64-u-int32
-   #:to-u-int64-int64
-   #:to-u-int64-u-int64
-   #:to-u-int64-single
-   #:to-u-int64-double
-   #:to-u-int64-decimal
-   #:to-u-int64-string
-   #:to-u-int64-date-time
-   #:to-u-int64-object-i-format-provider
-   #:to-u-int64-string-i-format-provider
-   #:to-u-int64-string-int32
   ))
 
 ;;; Source File: system-app-domain.lisp
@@ -764,25 +343,10 @@
    #:clear-shadow-copy-path
    #:create-domain
    #:create-instance
-   #:create-instance-string-string
-   #:create-instance-string-string-object[]
-   #:create-instance-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
    #:create-instance-and-unwrap
-   #:create-instance-and-unwrap-string-string
-   #:create-instance-and-unwrap-string-string-object[]
-   #:create-instance-and-unwrap-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
    #:create-instance-from
-   #:create-instance-from-string-string
-   #:create-instance-from-string-string-object[]
-   #:create-instance-from-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
    #:create-instance-from-and-unwrap
-   #:create-instance-from-and-unwrap-string-string
-   #:create-instance-from-and-unwrap-string-string-object[]
-   #:create-instance-from-and-unwrap-string-string-boolean-binding-flags-binder-object[]-culture-info-object[]
    #:execute-assembly
-   #:execute-assembly-string
-   #:execute-assembly-string-string[]
-   #:execute-assembly-string-string[]-byte[]-assembly-hash-algorithm
    #:execute-assembly-by-name
    #:get-assemblies
    #:get-current-thread-id
@@ -791,10 +355,6 @@
    #:default-app-domain?
    #:finalizing-for-unload?
    #:load
-   #:load-byte[]
-   #:load-assembly-name
-   #:load-string
-   #:load-byte[]-byte[]
    #:reflection-only-get-assemblies
    #:set-cache-path
    #:set-data
@@ -824,58 +384,25 @@
    #:volume-separator-char
    #:change-extension
    #:combine
-   #:combine-string]
-   #:combine-string-string
-   #:combine-string-string-string
-   #:combine-string-string-string-string
    #:ends-in-directory-separator
-   #:ends-in-directory-separator-char]
-   #:ends-in-directory-separator-string
    #:exists
    #:get-directory-name
-   #:get-directory-name-string
-   #:get-directory-name-char]
    #:get-extension
-   #:get-extension-string
-   #:get-extension-char]
    #:get-file-name
-   #:get-file-name-string
-   #:get-file-name-char]
    #:get-file-name-without-extension
-   #:get-file-name-without-extension-string
-   #:get-file-name-without-extension-char]
    #:get-full-path
-   #:get-full-path-string
-   #:get-full-path-string-string
    #:get-invalid-file-name-chars
    #:get-invalid-path-chars
    #:get-path-root
-   #:get-path-root-string
-   #:get-path-root-char]
    #:get-random-file-name
    #:get-relative-path
    #:get-temp-file-name
    #:get-temp-path
    #:has-extension
-   #:has-extension-string
-   #:has-extension-char]
    #:path-fully-qualified?
-   #:path-fully-qualified?-string
-   #:path-fully-qualified?-char]
    #:path-rooted?
-   #:path-rooted?-string
-   #:path-rooted?-char]
    #:join
-   #:join-string]
-   #:join-char]-char]
-   #:join-string-string
-   #:join-char]-char]-char]
-   #:join-string-string-string
-   #:join-char]-char]-char]-char]
-   #:join-string-string-string-string
    #:trim-ending-directory-separator
-   #:trim-ending-directory-separator-string
-   #:trim-ending-directory-separator-char]
   ))
 
 ;;; Source File: system-boolean.lisp
@@ -892,18 +419,11 @@
    #:false-string
    #:true-string
    #:compare-to
-   #:compare-to-object
-   #:compare-to-boolean
    #:equals
-   #:equals-object
-   #:equals-boolean
    #:get-hash-code
    #:get-type-code
    #:parse
-   #:parse-string
-   #:parse-char]
    #:to-string
-   #:to-string-i-format-provider
   ))
 
 ;;; Source File: system-type.lisp
@@ -999,20 +519,13 @@
    #:underlying-system-type
    #:=
    #:equals
-   #:equals-object
-   #:equals-type
    #:find-interfaces
    #:find-members
    #:get-array-rank
    #:get-attribute-flags-impl
    #:get-constructor
-   #:get-constructor-type[]
-   #:get-constructor-binding-flags-type[]
-   #:get-constructor-binding-flags-binder-type[]-parameter-modifier[]
-   #:get-constructor-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
    #:get-constructor-impl
    #:get-constructors
-   #:get-constructors-binding-flags
    #:get-default-members
    #:get-element-type
    #:get-enum-name
@@ -1021,15 +534,9 @@
    #:get-enum-values
    #:get-enum-values-as-underlying-type
    #:get-event
-   #:get-event-string
-   #:get-event-string-binding-flags
    #:get-events
-   #:get-events-binding-flags
    #:get-field
-   #:get-field-string
-   #:get-field-string-binding-flags
    #:get-fields
-   #:get-fields-binding-flags
    #:get-function-pointer-calling-conventions
    #:get-function-pointer-parameter-types
    #:get-function-pointer-return-type
@@ -1038,81 +545,32 @@
    #:get-generic-type-definition
    #:get-hash-code
    #:get-interface
-   #:get-interface-string
-   #:get-interface-string-boolean
    #:get-interface-map
    #:get-interfaces
    #:get-member
-   #:get-member-string
-   #:get-member-string-binding-flags
-   #:get-member-string-member-types-binding-flags
    #:get-members
-   #:get-members-binding-flags
    #:get-member-with-same-metadata-definition-as
    #:get-method
-   #:get-method-string
-   #:get-method-string-binding-flags
-   #:get-method-string-type[]
-   #:get-method-string-binding-flags-type[]
-   #:get-method-string-type[]-parameter-modifier[]
-   #:get-method-string-int32-type[]
-   #:get-method-string-int32-type[]-parameter-modifier[]
-   #:get-method-string-int32-binding-flags-type[]
-   #:get-method-string-binding-flags-binder-type[]-parameter-modifier[]
-   #:get-method-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
-   #:get-method-string-int32-binding-flags-binder-type[]-parameter-modifier[]
-   #:get-method-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
    #:get-method-impl
-   #:get-method-impl-string-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
-   #:get-method-impl-string-int32-binding-flags-binder-calling-conventions-type[]-parameter-modifier[]
    #:get-methods
-   #:get-methods-binding-flags
    #:get-nested-type
-   #:get-nested-type-string
-   #:get-nested-type-string-binding-flags
    #:get-nested-types
-   #:get-nested-types-binding-flags
    #:get-optional-custom-modifiers
    #:get-properties
-   #:get-properties-binding-flags
    #:get-property
-   #:get-property-string
-   #:get-property-string-binding-flags
-   #:get-property-string-type
-   #:get-property-string-type[]
-   #:get-property-string-type-type[]
-   #:get-property-string-type-type[]-parameter-modifier[]
-   #:get-property-string-binding-flags-binder-type-type[]-parameter-modifier[]
    #:get-property-impl
    #:get-required-custom-modifiers
    #:get-type
    #:get-type*
-   #:get-type-string
-   #:get-type-string-boolean
-   #:get-type-string-boolean-boolean
-   #:get-type-string-assembly]-type]
-   #:get-type-string-assembly]-type]-boolean
-   #:get-type-string-assembly]-type]-boolean-boolean
    #:get-type-array
    #:get-type-code
    #:get-type-code-impl
    #:get-type-from-clsid
-   #:get-type-from-clsid-guid
-   #:get-type-from-clsid-guid-boolean
-   #:get-type-from-clsid-guid-string
-   #:get-type-from-clsid-guid-string-boolean
    #:get-type-from-handle
    #:get-type-from-prog-id
-   #:get-type-from-prog-id-string
-   #:get-type-from-prog-id-string-boolean
-   #:get-type-from-prog-id-string-string
-   #:get-type-from-prog-id-string-string-boolean
    #:get-type-handle
    #:has-element-type-impl
    #:invoke-member
-   #:invoke-member-string-binding-flags-binder-object-object[]
-   #:invoke-member-string-binding-flags-binder-object-object[]-culture-info
-   #:invoke-member-string-binding-flags-binder-object-object[]-parameter-modifier[]-culture-info-string[]
    #:array-impl?
    #:assignable-from?
    #:assignable-to?
@@ -1128,7 +586,6 @@
    #:subclass-of?
    #:value-type-impl?
    #:make-array-type
-   #:make-array-type-int32
    #:make-by-ref-type
    #:make-generic-method-parameter
    #:make-pointer-type
@@ -1150,8 +607,6 @@
    #:new
    #:equals
    #:equals*
-   #:equals-object
-   #:equals-object-object
    #:finalize
    #:get-hash-code
    #:get-type
@@ -1234,8 +689,6 @@
    #:clamp
    #:clamp-native
    #:compare-to
-   #:compare-to-object
-   #:compare-to-single
    #:convert-to-integer
    #:convert-to-integer-native
    #:copy-sign
@@ -1247,8 +700,6 @@
    #:create-truncating
    #:degrees-to-radians
    #:equals
-   #:equals-object
-   #:equals-single
    #:exp
    #:exp10
    #:exp10-m1
@@ -1278,8 +729,6 @@
    #:subnormal?
    #:lerp
    #:log
-   #:log-single
-   #:log-single-single
    #:log10
    #:log10-p1
    #:log2
@@ -1298,24 +747,12 @@
    #:multiply-add-estimate
    #:not=
    #:parse
-   #:parse-string
-   #:parse-string-number-styles
-   #:parse-string-i-format-provider
-   #:parse-char]-i-format-provider
-   #:parse-byte]-i-format-provider
-   #:parse-string-number-styles-i-format-provider
-   #:parse-char]-number-styles-i-format-provider
-   #:parse-byte]-number-styles-i-format-provider
    #:pow
    #:radians-to-degrees
    #:reciprocal-estimate
    #:reciprocal-sqrt-estimate
    #:root-n
    #:round
-   #:round-single
-   #:round-single-int32
-   #:round-single-midpoint-rounding
-   #:round-single-int32-midpoint-rounding
    #:scale-b
    #:sign
    #:sin
@@ -1328,9 +765,6 @@
    #:tanh
    #:tan-pi
    #:to-string
-   #:to-string-i-format-provider
-   #:to-string-string
-   #:to-string-string-i-format-provider
    #:truncate
   ))
 
@@ -1408,8 +842,6 @@
    #:clamp
    #:clamp-native
    #:compare-to
-   #:compare-to-object
-   #:compare-to-double
    #:convert-to-integer
    #:convert-to-integer-native
    #:copy-sign
@@ -1421,8 +853,6 @@
    #:create-truncating
    #:degrees-to-radians
    #:equals
-   #:equals-object
-   #:equals-double
    #:exp
    #:exp10
    #:exp10-m1
@@ -1452,8 +882,6 @@
    #:subnormal?
    #:lerp
    #:log
-   #:log-double
-   #:log-double-double
    #:log10
    #:log10-p1
    #:log2
@@ -1472,24 +900,12 @@
    #:multiply-add-estimate
    #:not=
    #:parse
-   #:parse-string
-   #:parse-string-number-styles
-   #:parse-string-i-format-provider
-   #:parse-char]-i-format-provider
-   #:parse-byte]-i-format-provider
-   #:parse-string-number-styles-i-format-provider
-   #:parse-char]-number-styles-i-format-provider
-   #:parse-byte]-number-styles-i-format-provider
    #:pow
    #:radians-to-degrees
    #:reciprocal-estimate
    #:reciprocal-sqrt-estimate
    #:root-n
    #:round
-   #:round-double
-   #:round-double-int32
-   #:round-double-midpoint-rounding
-   #:round-double-int32-midpoint-rounding
    #:scale-b
    #:sign
    #:sin
@@ -1502,9 +918,6 @@
    #:tanh
    #:tan-pi
    #:to-string
-   #:to-string-string
-   #:to-string-i-format-provider
-   #:to-string-string-i-format-provider
    #:truncate
   ))
 
@@ -1533,8 +946,6 @@
    #:=
    #:equals
    #:get-custom-attributes
-   #:get-custom-attributes-boolean
-   #:get-custom-attributes-type-boolean
    #:get-custom-attributes-data
    #:get-hash-code
    #:has-same-metadata-definition-as
@@ -1566,22 +977,15 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-single
-   #:new-single-single
+   #:x
+   #:y
    #:+one+
    #:+unit-x+
    #:+unit-y+
    #:+zero+
    #:-
-   #:--vector2
-   #:--vector2-vector2
    #:*
-   #:*-vector2-vector2
-   #:*-vector2-single
-   #:*-single-vector2
    #:/
-   #:/-vector2-vector2
-   #:/-vector2-single
    #:+
    #:=
    #:add
@@ -1589,20 +993,14 @@
    #:catmull-rom
    #:ceiling
    #:ceiling*
-   #:ceiling-vector2
    #:clamp
    #:distance
    #:distance-squared
    #:divide
-   #:divide-vector2-vector2
-   #:divide-vector2-single
    #:dot
    #:equals
-   #:equals-object
-   #:equals-vector2
    #:floor
    #:floor*
-   #:floor-vector2
    #:get-hash-code
    #:hermite
    #:implicit-cast
@@ -1613,33 +1011,23 @@
    #:max
    #:min
    #:multiply
-   #:multiply-vector2-vector2
-   #:multiply-vector2-single
    #:negate
    #:normalize
    #:normalize*
-   #:normalize-vector2
    #:not=
    #:reflect
    #:rotate
    #:rotate*
-   #:rotate-single
-   #:rotate-vector2-single
    #:rotate-around
    #:rotate-around*
-   #:rotate-around-vector2-single
-   #:rotate-around-vector2-vector2-single
    #:round
    #:round*
-   #:round-vector2
    #:smooth-step
    #:subtract
    #:to-numerics
    #:to-point
    #:to-string
    #:transform
-   #:transform-vector2-matrix
-   #:transform-vector2-quaternion
    #:transform-normal
   ))
 
@@ -1658,8 +1046,10 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-point-point
-   #:new-int32-int32-int32-int32
+   #:height
+   #:width
+   #:x
+   #:y
    #:+empty+
    #:bottom
    #:center
@@ -1671,26 +1061,13 @@
    #:top
    #:=
    #:contains
-   #:contains-point
-   #:contains-vector2
-   #:contains-rectangle
-   #:contains-int32-int32
-   #:contains-single-single
    #:equals
-   #:equals-object
-   #:equals-rectangle
    #:get-hash-code
    #:inflate
-   #:inflate-int32-int32
-   #:inflate-single-single
    #:intersect
    #:intersects
    #:not=
    #:offset
-   #:offset-point
-   #:offset-vector2
-   #:offset-int32-int32
-   #:offset-single-single
    #:to-string
    #:union
   ))
@@ -1713,8 +1090,8 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-int32
-   #:new-int32-int32
+   #:x
+   #:y
    #:+zero+
    #:-
    #:*
@@ -1722,8 +1099,6 @@
    #:+
    #:=
    #:equals
-   #:equals-object
-   #:equals-point
    #:get-hash-code
    #:not=
    #:to-string
@@ -1741,8 +1116,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-time-span-time-span
-   #:new-time-span-time-span-boolean
    #:elapsed-game-time
    #:running-slowly?
    #:total-game-time
@@ -1774,7 +1147,6 @@
    #:begin-draw
    #:begin-run
    #:dispose
-   #:dispose-boolean
    #:draw
    #:end-draw
    #:end-run
@@ -1787,7 +1159,6 @@
    #:on-exiting
    #:reset-elapsed-time
    #:run
-   #:run-game-run-behavior
    #:run-one-frame
    #:suppress-draw
    #:tick
@@ -1820,8 +1191,6 @@
    #:title
    #:begin-screen-device-change
    #:end-screen-device-change
-   #:end-screen-device-change-string
-   #:end-screen-device-change-string-int32-int32
    #:on-activated
    #:on-deactivated
    #:on-orientation-changed
@@ -1842,7 +1211,6 @@
    #:<creation>
    #:<version>
    #:get-state
-   #:get-state-player-index
   ))
 
 ;;; Source File: microsoft-xna-framework-input-keyboard-state.lisp
@@ -1867,7 +1235,6 @@
    #:get-hash-code
    #:get-pressed-key-count
    #:get-pressed-keys
-   #:get-pressed-keys-keys[]
    #:key-down?
    #:key-up?
    #:not=
@@ -2043,6 +1410,7 @@
    #:+y+
    #:+z+
    #:+zoom+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-input-mouse.lisp
@@ -2056,7 +1424,6 @@
    #:<creation>
    #:<version>
    #:get-state
-   #:get-state-game-window
    #:set-cursor
    #:set-position
   ))
@@ -2076,8 +1443,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state
-   #:new-int32-int32-int32-button-state-button-state-button-state-button-state-button-state-int32
    #:horizontal-scroll-wheel-value
    #:left-button
    #:middle-button
@@ -2107,6 +1472,7 @@
    #:<version>
    #:+pressed+
    #:+released+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-input-game-pad.lisp
@@ -2121,20 +1487,8 @@
    #:<version>
    #:maximum-game-pad-count
    #:get-capabilities
-   #:get-capabilities-player-index
-   #:get-capabilities-int32
    #:get-state
-   #:get-state-player-index
-   #:get-state-int32
-   #:get-state-player-index-game-pad-dead-zone
-   #:get-state-int32-game-pad-dead-zone
-   #:get-state-player-index-game-pad-dead-zone-game-pad-dead-zone
-   #:get-state-int32-game-pad-dead-zone-game-pad-dead-zone
    #:set-vibration
-   #:set-vibration-player-index-single-single
-   #:set-vibration-int32-single-single
-   #:set-vibration-player-index-single-single-single-single
-   #:set-vibration-int32-single-single-single-single
   ))
 
 ;;; Source File: microsoft-xna-framework-input-game-pad-state.lisp
@@ -2151,9 +1505,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-game-pad-thumb-sticks-game-pad-triggers-game-pad-buttons-game-pad-d-pad
-   #:new-vector2-vector2-single-single-buttons
-   #:new-vector2-vector2-single-single-buttons[]
    #:default
    #:buttons
    #:d-pad
@@ -2184,7 +1535,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-button-state-button-state-button-state-button-state
    #:down
    #:left
    #:right
@@ -2210,7 +1560,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-vector2-vector2
    #:left
    #:right
    #:=
@@ -2234,7 +1583,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-single-single
    #:left
    #:right
    #:=
@@ -2280,6 +1628,7 @@
    #:+start+
    #:+x+
    #:+y+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-input-touch-touch-panel.lisp
@@ -2295,7 +1644,6 @@
    #:gesture-available?
    #:get-capabilities
    #:get-state
-   #:get-state-game-window
    #:read-gesture
   ))
 
@@ -2314,7 +1662,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-touch-location[]
    #:count
    #:connected?
    #:read-only?
@@ -2345,16 +1692,12 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-int32-touch-location-state-vector2
-   #:new-int32-touch-location-state-vector2-touch-location-state-vector2
    #:id
    #:position
    #:pressure
    #:state
    #:=
    #:equals
-   #:equals-object
-   #:equals-touch-location
    #:get-hash-code
    #:high-frequency-event?
    #:not=
@@ -2375,7 +1718,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-gesture-type-time-span-vector2-vector2-vector2-vector2
    #:delta
    #:delta2
    #:gesture-type
@@ -2399,16 +1741,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-u-int32
-   #:new-vector4
-   #:new-vector3
-   #:new-color-int32
-   #:new-color-single
-   #:new-single-single-single
-   #:new-int32-int32-int32
-   #:new-single-single-single-single
-   #:new-int32-int32-int32-int32
-   #:new-byte-byte-byte-byte
    #:+alice-blue+
    #:+antique-white+
    #:+aqua+
@@ -2557,16 +1889,9 @@
    #:packed-value
    #:r
    #:*
-   #:*-color-single
-   #:*-single-color
-   #:*-color-color
    #:=
    #:equals
-   #:equals-object
-   #:equals-color
    #:from-non-premultiplied
-   #:from-non-premultiplied-vector4
-   #:from-non-premultiplied-int32-int32-int32-int32
    #:get-hash-code
    #:implicit-cast
    #:lerp
@@ -2593,13 +1918,10 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-i-service-provider
-   #:new-i-service-provider-string
    #:loaded-assets
    #:root-directory
    #:service-provider
    #:dispose
-   #:dispose-boolean
    #:finalize
    #:load
    #:load-localized
@@ -2640,7 +1962,6 @@
    #:apply-changes
    #:begin-draw
    #:dispose
-   #:dispose-boolean
    #:end-draw
    #:finalize
    #:on-device-created
@@ -2663,6 +1984,7 @@
    #:+flip-horizontally+
    #:+flip-vertically+
    #:+none+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-sort-mode.lisp
@@ -2680,6 +2002,7 @@
    #:+front-to-back+
    #:+immediate+
    #:+texture+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sampler-state.lisp
@@ -2723,8 +2046,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-graphics-adapter-graphics-profile-presentation-parameters
-   #:new-graphics-adapter-graphics-profile-boolean-presentation-parameters
    #:adapter
    #:blend-factor
    #:blend-state
@@ -2749,43 +2070,19 @@
    #:vertex-textures
    #:viewport
    #:clear
-   #:clear-color
-   #:clear-clear-options-color-single-int32
-   #:clear-clear-options-vector4-single-int32
    #:dispose
-   #:dispose-boolean
    #:draw-indexed-primitives
-   #:draw-indexed-primitives-primitive-type-int32-int32-int32
-   #:draw-indexed-primitives-primitive-type-int32-int32-int32-int32-int32
    #:draw-instanced-primitives
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32-int32
-   #:draw-instanced-primitives-primitive-type-int32-int32-int32-int32-int32-int32
    #:draw-primitives
    #:draw-user-indexed-primitives
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int16[]-int32-int32-vertex-declaration
-   #:draw-user-indexed-primitives-primitive-type-t[]-int32-int32-int32[]-int32-int32-vertex-declaration
    #:draw-user-primitives
-   #:draw-user-primitives-primitive-type-t[]-int32-int32
-   #:draw-user-primitives-primitive-type-t[]-int32-int32-vertex-declaration
    #:finalize
    #:get-back-buffer-data
-   #:get-back-buffer-data-t[]
-   #:get-back-buffer-data-t[]-int32-int32
-   #:get-back-buffer-data-rectangle]-t[]-int32-int32
    #:get-render-targets
-   #:get-render-targets-render-target-binding[]
    #:present
    #:reset
-   #:reset-presentation-parameters
    #:set-render-target
-   #:set-render-target-render-target2-d
-   #:set-render-target-render-target-cube-cube-map-face
    #:set-vertex-buffer
-   #:set-vertex-buffer-vertex-buffer
-   #:set-vertex-buffer-vertex-buffer-int32
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-batch.lisp
@@ -2799,27 +2096,10 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-graphics-device
-   #:new-graphics-device-int32
    #:begin
    #:dispose
    #:draw
-   #:draw-texture2-d-vector2-color
-   #:draw-texture2-d-rectangle-color
-   #:draw-texture2-d-vector2-rectangle]-color
-   #:draw-texture2-d-rectangle-rectangle]-color
-   #:draw-texture2-d-rectangle-rectangle]-color-single-vector2-sprite-effects-single
-   #:draw-texture2-d-vector2-rectangle]-color-single-vector2-vector2-sprite-effects-single
-   #:draw-texture2-d-vector2-rectangle]-color-single-vector2-single-sprite-effects-single
    #:draw-string
-   #:draw-string-sprite-font-string-vector2-color
-   #:draw-string-sprite-font-string-builder-vector2-color
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-single-sprite-effects-single
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-vector2-sprite-effects-single
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-single-sprite-effects-single
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-vector2-sprite-effects-single
-   #:draw-string-sprite-font-string-vector2-color-single-vector2-vector2-sprite-effects-single-boolean
-   #:draw-string-sprite-font-string-builder-vector2-color-single-vector2-vector2-sprite-effects-single-boolean
    #:end
   ))
 
@@ -2842,8 +2122,6 @@
    #:texture
    #:get-glyphs
    #:measure-string
-   #:measure-string-string
-   #:measure-string-string-builder
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-font-glyph.lisp
@@ -2851,6 +2129,9 @@
 ;;; Constant Properties: (none)
 (cl:defpackage :microsoft-xna-framework-graphics-sprite-font-glyph
   (:use :cl)
+  (:shadow
+   #:character
+  )
   (:export
    #:<type>
    #:<type-str>
@@ -2858,6 +2139,13 @@
    #:<version>
    #:new
    #:empty
+   #:bounds-in-texture
+   #:character
+   #:cropping
+   #:left-side-bearing
+   #:right-side-bearing
+   #:width
+   #:width-including-bearings
    #:to-string
   ))
 
@@ -2903,6 +2191,7 @@
    #:+one+
    #:+three+
    #:+two+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-audio-sound-effect.lisp
@@ -2916,8 +2205,6 @@
    #:<creation>
    #:<version>
    #:new
-   #:new-byte[]-int32-audio-channels
-   #:new-byte[]-int32-int32-int32-audio-channels-int32-int32
    #:duration
    #:disposed?
    #:name
@@ -2930,7 +2217,6 @@
    #:get-sample-size-in-bytes
    #:initialize
    #:play
-   #:play-single-single-single
   ))
 
 ;;; Source File: microsoft-xna-framework-audio-sound-effect-instance.lisp
@@ -2950,16 +2236,12 @@
    #:state
    #:volume
    #:apply3-d
-   #:apply3-d-audio-listener-audio-emitter
-   #:apply3-d-audio-listener[]-audio-emitter
    #:dispose
-   #:dispose-boolean
    #:finalize
    #:pause
    #:play
    #:resume
    #:stop
-   #:stop-boolean
   ))
 
 ;;; Source File: microsoft-xna-framework-audio-sound-state.lisp
@@ -2975,6 +2257,7 @@
    #:+paused+
    #:+playing+
    #:+stopped+
+   #:value__
   ))
 
 ;;; Source File: microsoft-xna-framework-media-song.lisp
@@ -3006,8 +2289,6 @@
    #:=
    #:dispose
    #:equals
-   #:equals-song
-   #:equals-object
    #:finalize
    #:from-uri
    #:get-hash-code
@@ -3033,9 +2314,6 @@
    #:move-previous
    #:pause
    #:play
-   #:play-song
-   #:play-song-time-span]
-   #:play-song-collection-int32
    #:resume
    #:stop
   ))

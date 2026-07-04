@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :system-console)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -49,7 +49,17 @@
 (cl:setf (cl:documentation (cl:quote out) (cl:quote cl:variable)) "Gets the standard output stream.")
 
 (cl:defun beep (cl:&optional (frequency cl:nil supplied-frequency) (duration cl:nil supplied-duration))
-  "Master wrapper for System.Console.Beep overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.Beep overloads. Dispatches at runtime.
+
+Beep() -> Void
+  Summary: Plays the sound of a beep through the console speaker.
+
+Beep(Int32, Int32) -> Void
+  Summary: Plays the sound of a beep of a specified frequency and duration through the console speaker.
+  Parameters:
+    - frequency (System.Int32): The frequency of the beep, ranging from 37 to 32767 hertz.
+    - duration (System.Int32): The duration of the beep measured in milliseconds.
+"
   (cl:cond
     ((cl:and supplied-frequency (cl:numberp frequency) supplied-duration (cl:numberp duration))
      (dotnet:static <type-str> "Beep" frequency duration))
@@ -60,19 +70,6 @@
                     :class-name <type-str>
                     :method-name "Beep"
                     :supplied-args (cl:append (cl:when supplied-frequency (cl:list :frequency frequency)) (cl:when supplied-duration (cl:list :duration duration)))))))
-
-(cl:defun beep ()
-  "Calls System.Console.Beep Beep() -> Void. Summary: Plays the sound of a beep through the console speaker.
-"
-  (dotnet:static <type-str> "Beep"))
-
-(cl:defun beep-int32-int32 (frequency duration)
-  "Calls System.Console.Beep Beep(Int32, Int32) -> Void. Summary: Plays the sound of a beep of a specified frequency and duration through the console speaker.
-Parameters:
-  - frequency (System.Int32): The frequency of the beep, ranging from 37 to 32767 hertz.
-  - duration (System.Int32): The duration of the beep measured in milliseconds.
-"
-  (dotnet:static <type-str> "Beep" (cl:the (dotnet "System.Int32") frequency) (cl:the (dotnet "System.Int32") duration)))
 
 (cl:defun clear ()
   "Summary: Clears the console buffer and corresponding console window of display information.
@@ -86,7 +83,31 @@ Returns: The column and row position of the cursor.
   (dotnet:static <type-str> "GetCursorPosition"))
 
 (cl:defun move-buffer-area (source-left source-top source-width source-height target-left target-top cl:&optional (source-char cl:nil supplied-source-char) (source-fore-color cl:nil supplied-source-fore-color) (source-back-color cl:nil supplied-source-back-color))
-  "Master wrapper for System.Console.MoveBufferArea overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.MoveBufferArea overloads. Dispatches at runtime.
+
+MoveBufferArea(Int32, Int32, Int32, Int32, Int32, Int32) -> Void
+  Summary: Copies a specified source area of the screen buffer to a specified destination area.
+  Parameters:
+    - source-left (System.Int32): The leftmost column of the source area.
+    - source-top (System.Int32): The topmost row of the source area.
+    - source-width (System.Int32): The number of columns in the source area.
+    - source-height (System.Int32): The number of rows in the source area.
+    - target-left (System.Int32): The leftmost column of the destination area.
+    - target-top (System.Int32): The topmost row of the destination area.
+
+MoveBufferArea(Int32, Int32, Int32, Int32, Int32, Int32, Char, ConsoleColor, ConsoleColor) -> Void
+  Summary: Copies a specified source area of the screen buffer to a specified destination area.
+  Parameters:
+    - source-left (System.Int32): The leftmost column of the source area.
+    - source-top (System.Int32): The topmost row of the source area.
+    - source-width (System.Int32): The number of columns in the source area.
+    - source-height (System.Int32): The number of rows in the source area.
+    - target-left (System.Int32): The leftmost column of the destination area.
+    - target-top (System.Int32): The topmost row of the destination area.
+    - source-char (System.Char): The character used to fill the source area.
+    - source-fore-color (System.ConsoleColor): The foreground color used to fill the source area.
+    - source-back-color (System.ConsoleColor): The background color used to fill the source area.
+"
   (cl:cond
     ((cl:and (cl:numberp source-left) (cl:numberp source-top) (cl:numberp source-width) (cl:numberp source-height) (cl:numberp target-left) (cl:numberp target-top) supplied-source-char (cl:or (cl:null source-char) (dotnet:object-type source-char)) supplied-source-fore-color (cl:or (cl:null source-fore-color) (dotnet:object-type source-fore-color)) supplied-source-back-color (cl:or (cl:null source-back-color) (dotnet:object-type source-back-color)))
      (dotnet:static <type-str> "MoveBufferArea" source-left source-top source-width source-height target-left target-top source-char source-fore-color source-back-color))
@@ -98,35 +119,19 @@ Returns: The column and row position of the cursor.
                     :method-name "MoveBufferArea"
                     :supplied-args (cl:append (cl:list :source-left source-left) (cl:list :source-top source-top) (cl:list :source-width source-width) (cl:list :source-height source-height) (cl:list :target-left target-left) (cl:list :target-top target-top) (cl:when supplied-source-char (cl:list :source-char source-char)) (cl:when supplied-source-fore-color (cl:list :source-fore-color source-fore-color)) (cl:when supplied-source-back-color (cl:list :source-back-color source-back-color)))))))
 
-(cl:defun move-buffer-area-int32-int32-int32-int32-int32-int32 (source-left source-top source-width source-height target-left target-top)
-  "Calls System.Console.MoveBufferArea MoveBufferArea(Int32, Int32, Int32, Int32, Int32, Int32) -> Void. Summary: Copies a specified source area of the screen buffer to a specified destination area.
-Parameters:
-  - source-left (System.Int32): The leftmost column of the source area.
-  - source-top (System.Int32): The topmost row of the source area.
-  - source-width (System.Int32): The number of columns in the source area.
-  - source-height (System.Int32): The number of rows in the source area.
-  - target-left (System.Int32): The leftmost column of the destination area.
-  - target-top (System.Int32): The topmost row of the destination area.
-"
-  (dotnet:static <type-str> "MoveBufferArea" (cl:the (dotnet "System.Int32") source-left) (cl:the (dotnet "System.Int32") source-top) (cl:the (dotnet "System.Int32") source-width) (cl:the (dotnet "System.Int32") source-height) (cl:the (dotnet "System.Int32") target-left) (cl:the (dotnet "System.Int32") target-top)))
-
-(cl:defun move-buffer-area-int32-int32-int32-int32-int32-int32-char-console-color-console-color (source-left source-top source-width source-height target-left target-top source-char source-fore-color source-back-color)
-  "Calls System.Console.MoveBufferArea MoveBufferArea(Int32, Int32, Int32, Int32, Int32, Int32, Char, ConsoleColor, ConsoleColor) -> Void. Summary: Copies a specified source area of the screen buffer to a specified destination area.
-Parameters:
-  - source-left (System.Int32): The leftmost column of the source area.
-  - source-top (System.Int32): The topmost row of the source area.
-  - source-width (System.Int32): The number of columns in the source area.
-  - source-height (System.Int32): The number of rows in the source area.
-  - target-left (System.Int32): The leftmost column of the destination area.
-  - target-top (System.Int32): The topmost row of the destination area.
-  - source-char (System.Char): The character used to fill the source area.
-  - source-fore-color (System.ConsoleColor): The foreground color used to fill the source area.
-  - source-back-color (System.ConsoleColor): The background color used to fill the source area.
-"
-  (dotnet:static <type-str> "MoveBufferArea" (cl:the (dotnet "System.Int32") source-left) (cl:the (dotnet "System.Int32") source-top) (cl:the (dotnet "System.Int32") source-width) (cl:the (dotnet "System.Int32") source-height) (cl:the (dotnet "System.Int32") target-left) (cl:the (dotnet "System.Int32") target-top) (cl:the (dotnet "System.Char") source-char) (cl:the (dotnet "System.ConsoleColor") source-fore-color) (cl:the (dotnet "System.ConsoleColor") source-back-color)))
-
 (cl:defun open-standard-error (cl:&optional (buffer-size cl:nil supplied-buffer-size))
-  "Master wrapper for System.Console.OpenStandardError overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.OpenStandardError overloads. Dispatches at runtime.
+
+OpenStandardError() -> Stream
+  Summary: Acquires the standard error stream.
+  Returns: The standard error stream.
+
+OpenStandardError(Int32) -> Stream
+  Summary: Acquires the standard error stream, which is set to a specified buffer size.
+  Returns: The standard error stream.
+  Parameters:
+    - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
+"
   (cl:cond
     ((cl:and supplied-buffer-size (cl:numberp buffer-size))
      (dotnet:static <type-str> "OpenStandardError" buffer-size))
@@ -138,22 +143,19 @@ Parameters:
                     :method-name "OpenStandardError"
                     :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
-(cl:defun open-standard-error ()
-  "Calls System.Console.OpenStandardError OpenStandardError() -> Stream. Summary: Acquires the standard error stream.
-Returns: The standard error stream.
-"
-  (dotnet:static <type-str> "OpenStandardError"))
-
-(cl:defun open-standard-error-int32 (buffer-size)
-  "Calls System.Console.OpenStandardError OpenStandardError(Int32) -> Stream. Summary: Acquires the standard error stream, which is set to a specified buffer size.
-Returns: The standard error stream.
-Parameters:
-  - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
-"
-  (dotnet:static <type-str> "OpenStandardError" (cl:the (dotnet "System.Int32") buffer-size)))
-
 (cl:defun open-standard-input (cl:&optional (buffer-size cl:nil supplied-buffer-size))
-  "Master wrapper for System.Console.OpenStandardInput overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.OpenStandardInput overloads. Dispatches at runtime.
+
+OpenStandardInput() -> Stream
+  Summary: Acquires the standard input stream.
+  Returns: The standard input stream.
+
+OpenStandardInput(Int32) -> Stream
+  Summary: Acquires the standard input stream, which is set to a specified buffer size.
+  Returns: The standard input stream.
+  Parameters:
+    - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
+"
   (cl:cond
     ((cl:and supplied-buffer-size (cl:numberp buffer-size))
      (dotnet:static <type-str> "OpenStandardInput" buffer-size))
@@ -165,22 +167,19 @@ Parameters:
                     :method-name "OpenStandardInput"
                     :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
-(cl:defun open-standard-input ()
-  "Calls System.Console.OpenStandardInput OpenStandardInput() -> Stream. Summary: Acquires the standard input stream.
-Returns: The standard input stream.
-"
-  (dotnet:static <type-str> "OpenStandardInput"))
-
-(cl:defun open-standard-input-int32 (buffer-size)
-  "Calls System.Console.OpenStandardInput OpenStandardInput(Int32) -> Stream. Summary: Acquires the standard input stream, which is set to a specified buffer size.
-Returns: The standard input stream.
-Parameters:
-  - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
-"
-  (dotnet:static <type-str> "OpenStandardInput" (cl:the (dotnet "System.Int32") buffer-size)))
-
 (cl:defun open-standard-output (cl:&optional (buffer-size cl:nil supplied-buffer-size))
-  "Master wrapper for System.Console.OpenStandardOutput overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.OpenStandardOutput overloads. Dispatches at runtime.
+
+OpenStandardOutput() -> Stream
+  Summary: Acquires the standard output stream.
+  Returns: The standard output stream.
+
+OpenStandardOutput(Int32) -> Stream
+  Summary: Acquires the standard output stream, which is set to a specified buffer size.
+  Returns: The standard output stream.
+  Parameters:
+    - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
+"
   (cl:cond
     ((cl:and supplied-buffer-size (cl:numberp buffer-size))
      (dotnet:static <type-str> "OpenStandardOutput" buffer-size))
@@ -192,20 +191,6 @@ Parameters:
                     :method-name "OpenStandardOutput"
                     :supplied-args (cl:append (cl:when supplied-buffer-size (cl:list :buffer-size buffer-size)))))))
 
-(cl:defun open-standard-output ()
-  "Calls System.Console.OpenStandardOutput OpenStandardOutput() -> Stream. Summary: Acquires the standard output stream.
-Returns: The standard output stream.
-"
-  (dotnet:static <type-str> "OpenStandardOutput"))
-
-(cl:defun open-standard-output-int32 (buffer-size)
-  "Calls System.Console.OpenStandardOutput OpenStandardOutput(Int32) -> Stream. Summary: Acquires the standard output stream, which is set to a specified buffer size.
-Returns: The standard output stream.
-Parameters:
-  - buffer-size (System.Int32): This parameter has no effect, but its value must be greater than or equal to zero.
-"
-  (dotnet:static <type-str> "OpenStandardOutput" (cl:the (dotnet "System.Int32") buffer-size)))
-
 (cl:defun read ()
   "Summary: Reads the next character from the standard input stream.
 Returns: The next character from the input stream, or negative one (-1) if there are currently no more characters to be read.
@@ -213,7 +198,18 @@ Returns: The next character from the input stream, or negative one (-1) if there
   (dotnet:static <type-str> "Read"))
 
 (cl:defun read-key (cl:&optional (intercept cl:nil supplied-intercept))
-  "Master wrapper for System.Console.ReadKey overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.ReadKey overloads. Dispatches at runtime.
+
+ReadKey() -> ConsoleKeyInfo
+  Summary: Obtains the next character or function key pressed by the user. The pressed key is displayed in the console window.
+  Returns: An object that describes the System.ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key. The System.ConsoleKeyInfo object also describes, in a bitwise combination of System.ConsoleModifiers values, whether one or more Shift, Alt, or Ctrl modifier keys was pressed simultaneously with the console key.
+
+ReadKey(Boolean) -> ConsoleKeyInfo
+  Summary: Obtains the next character or function key pressed by the user. The pressed key is optionally displayed in the console window.
+  Returns: An object that describes the System.ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key. The System.ConsoleKeyInfo object also describes, in a bitwise combination of System.ConsoleModifiers values, whether one or more Shift, Alt, or Ctrl modifier keys was pressed simultaneously with the console key.
+  Parameters:
+    - intercept (System.Boolean): Determines whether to display the pressed key in the console window. to not display the pressed key; otherwise, .
+"
   (cl:cond
     ((cl:and supplied-intercept (cl:typep intercept 'cl:boolean))
      (dotnet:static <type-str> "ReadKey" intercept))
@@ -224,20 +220,6 @@ Returns: The next character from the input stream, or negative one (-1) if there
                     :class-name <type-str>
                     :method-name "ReadKey"
                     :supplied-args (cl:append (cl:when supplied-intercept (cl:list :intercept intercept)))))))
-
-(cl:defun read-key ()
-  "Calls System.Console.ReadKey ReadKey() -> ConsoleKeyInfo. Summary: Obtains the next character or function key pressed by the user. The pressed key is displayed in the console window.
-Returns: An object that describes the System.ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key. The System.ConsoleKeyInfo object also describes, in a bitwise combination of System.ConsoleModifiers values, whether one or more Shift, Alt, or Ctrl modifier keys was pressed simultaneously with the console key.
-"
-  (dotnet:static <type-str> "ReadKey"))
-
-(cl:defun read-key-boolean (intercept)
-  "Calls System.Console.ReadKey ReadKey(Boolean) -> ConsoleKeyInfo. Summary: Obtains the next character or function key pressed by the user. The pressed key is optionally displayed in the console window.
-Returns: An object that describes the System.ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key. The System.ConsoleKeyInfo object also describes, in a bitwise combination of System.ConsoleModifiers values, whether one or more Shift, Alt, or Ctrl modifier keys was pressed simultaneously with the console key.
-Parameters:
-  - intercept (System.Boolean): Determines whether to display the pressed key in the console window. to not display the pressed key; otherwise, .
-"
-  (dotnet:static <type-str> "ReadKey" (cl:the (dotnet "System.Boolean") intercept)))
 
 (cl:defun read-line ()
   "Summary: Reads the next line of characters from the standard input stream.
@@ -304,7 +286,106 @@ Parameters:
   (dotnet:static <type-str> "SetWindowSize" (cl:the (dotnet "System.Int32") width) (cl:the (dotnet "System.Int32") height)))
 
 (cl:defun write (value cl:&optional (arg0 cl:nil supplied-arg0) (arg1 cl:nil supplied-arg1) (arg2 cl:nil supplied-arg2))
-  "Master wrapper for System.Console.Write overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.Write overloads. Dispatches at runtime.
+
+Write(Boolean) -> Void
+  Summary: Writes the text representation of the specified Boolean value to the standard output stream.
+  Parameters:
+    - value (System.Boolean): The value to write.
+
+Write(Char) -> Void
+  Summary: Writes the specified Unicode character value to the standard output stream.
+  Parameters:
+    - value (System.Char): The value to write.
+
+Write(Char[]) -> Void
+  Summary: Writes the specified array of Unicode characters to the standard output stream.
+  Parameters:
+    - buffer (System.Char[]): A Unicode character array.
+
+Write(Double) -> Void
+  Summary: Writes the text representation of the specified double-precision floating-point value to the standard output stream.
+  Parameters:
+    - value (System.Double): The value to write.
+
+Write(Decimal) -> Void
+  Summary: Writes the text representation of the specified System.Decimal value to the standard output stream.
+  Parameters:
+    - value (System.Decimal): The value to write.
+
+Write(Single) -> Void
+  Summary: Writes the text representation of the specified single-precision floating-point value to the standard output stream.
+  Parameters:
+    - value (System.Single): The value to write.
+
+Write(Int32) -> Void
+  Summary: Writes the text representation of the specified 32-bit signed integer value to the standard output stream.
+  Parameters:
+    - value (System.Int32): The value to write.
+
+Write(UInt32) -> Void
+  Summary: Writes the text representation of the specified 32-bit unsigned integer value to the standard output stream.
+  Parameters:
+    - value (System.UInt32): The value to write.
+
+Write(Int64) -> Void
+  Summary: Writes the text representation of the specified 64-bit signed integer value to the standard output stream.
+  Parameters:
+    - value (System.Int64): The value to write.
+
+Write(UInt64) -> Void
+  Summary: Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.
+  Parameters:
+    - value (System.UInt64): The value to write.
+
+Write(Object) -> Void
+  Summary: Writes the text representation of the specified object to the standard output stream.
+  Parameters:
+    - value (System.Object): The value to write, or .
+
+Write(String) -> Void
+  Summary: Writes the specified string value to the standard output stream.
+  Parameters:
+    - value (System.String): The value to write.
+
+Write(Char]) -> Void
+  Parameters:
+    - value (System.ReadOnlySpan`1[System.Char]): 
+
+Write(String, Object) -> Void
+  Summary: Writes the text representation of the specified object to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): An object to write using format.
+
+Write(String, Object]) -> Void
+  Summary: Writes the text representation of the specified span of objects to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
+
+Write(String, Object, Object) -> Void
+  Summary: Writes the text representation of the specified objects to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): The first object to write using format.
+    - arg1 (System.Object): The second object to write using format.
+
+Write(Char[], Int32, Int32) -> Void
+  Summary: Writes the specified subarray of Unicode characters to the standard output stream.
+  Parameters:
+    - buffer (System.Char[]): An array of Unicode characters.
+    - index (System.Int32): The starting position in buffer.
+    - count (System.Int32): The number of characters to write.
+
+Write(String, Object, Object, Object) -> Void
+  Summary: Writes the text representation of the specified objects to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): The first object to write using format.
+    - arg1 (System.Object): The second object to write using format.
+    - arg2 (System.Object): The third object to write using format.
+"
   (cl:cond
     ((cl:and (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (dotnet:object-type arg0)) supplied-arg1 (cl:or (cl:null arg1) (dotnet:object-type arg1)) supplied-arg2 (cl:or (cl:null arg2) (dotnet:object-type arg2)))
      (dotnet:static <type-str> "Write" value arg0 arg1 arg2))
@@ -348,147 +429,115 @@ Parameters:
                     :method-name "Write"
                     :supplied-args (cl:append (cl:list :value value) (cl:when supplied-arg0 (cl:list :arg0 arg0)) (cl:when supplied-arg1 (cl:list :arg1 arg1)) (cl:when supplied-arg2 (cl:list :arg2 arg2)))))))
 
-(cl:defun write-boolean (value)
-  "Calls System.Console.Write Write(Boolean) -> Void. Summary: Writes the text representation of the specified Boolean value to the standard output stream.
-Parameters:
-  - value (System.Boolean): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Boolean") value)))
-
-(cl:defun write-char (value)
-  "Calls System.Console.Write Write(Char) -> Void. Summary: Writes the specified Unicode character value to the standard output stream.
-Parameters:
-  - value (System.Char): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Char") value)))
-
-(cl:defun write-char[] (buffer)
-  "Calls System.Console.Write Write(Char[]) -> Void. Summary: Writes the specified array of Unicode characters to the standard output stream.
-Parameters:
-  - buffer (System.Char[]): A Unicode character array.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Char[]") buffer)))
-
-(cl:defun write-double (value)
-  "Calls System.Console.Write Write(Double) -> Void. Summary: Writes the text representation of the specified double-precision floating-point value to the standard output stream.
-Parameters:
-  - value (System.Double): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Double") value)))
-
-(cl:defun write-decimal (value)
-  "Calls System.Console.Write Write(Decimal) -> Void. Summary: Writes the text representation of the specified System.Decimal value to the standard output stream.
-Parameters:
-  - value (System.Decimal): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Decimal") value)))
-
-(cl:defun write-single (value)
-  "Calls System.Console.Write Write(Single) -> Void. Summary: Writes the text representation of the specified single-precision floating-point value to the standard output stream.
-Parameters:
-  - value (System.Single): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Single") value)))
-
-(cl:defun write-int32 (value)
-  "Calls System.Console.Write Write(Int32) -> Void. Summary: Writes the text representation of the specified 32-bit signed integer value to the standard output stream.
-Parameters:
-  - value (System.Int32): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Int32") value)))
-
-(cl:defun write-u-int32 (value)
-  "Calls System.Console.Write Write(UInt32) -> Void. Summary: Writes the text representation of the specified 32-bit unsigned integer value to the standard output stream.
-Parameters:
-  - value (System.UInt32): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.UInt32") value)))
-
-(cl:defun write-int64 (value)
-  "Calls System.Console.Write Write(Int64) -> Void. Summary: Writes the text representation of the specified 64-bit signed integer value to the standard output stream.
-Parameters:
-  - value (System.Int64): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Int64") value)))
-
-(cl:defun write-u-int64 (value)
-  "Calls System.Console.Write Write(UInt64) -> Void. Summary: Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.
-Parameters:
-  - value (System.UInt64): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.UInt64") value)))
-
-(cl:defun write-object (value)
-  "Calls System.Console.Write Write(Object) -> Void. Summary: Writes the text representation of the specified object to the standard output stream.
-Parameters:
-  - value (System.Object): The value to write, or .
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Object") value)))
-
-(cl:defun write-string (value)
-  "Calls System.Console.Write Write(String) -> Void. Summary: Writes the specified string value to the standard output stream.
-Parameters:
-  - value (System.String): The value to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") value)))
-
-(cl:defun write-char] (value)
-  "Calls System.Console.Write Write(Char]) -> Void. Parameters:
-  - value (System.ReadOnlySpan`1[System.Char]): 
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") value)))
-
-(cl:defun write-string-object (format arg0)
-  "Calls System.Console.Write Write(String, Object) -> Void. Summary: Writes the text representation of the specified object to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): An object to write using format.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0)))
-
-(cl:defun write-string-object] (format arg)
-  "Calls System.Console.Write Write(String, Object]) -> Void. Summary: Writes the text representation of the specified span of objects to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.ReadOnlySpan`1[System.Object]") arg)))
-
-(cl:defun write-string-object-object (format arg0 arg1)
-  "Calls System.Console.Write Write(String, Object, Object) -> Void. Summary: Writes the text representation of the specified objects to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): The first object to write using format.
-  - arg1 (System.Object): The second object to write using format.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0) (cl:the (dotnet "System.Object") arg1)))
-
-(cl:defun write-char[]-int32-int32 (buffer index count)
-  "Calls System.Console.Write Write(Char[], Int32, Int32) -> Void. Summary: Writes the specified subarray of Unicode characters to the standard output stream.
-Parameters:
-  - buffer (System.Char[]): An array of Unicode characters.
-  - index (System.Int32): The starting position in buffer.
-  - count (System.Int32): The number of characters to write.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.Char[]") buffer) (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "System.Int32") count)))
-
-(cl:defun write-string-object-object-object (format arg0 arg1 arg2)
-  "Calls System.Console.Write Write(String, Object, Object, Object) -> Void. Summary: Writes the text representation of the specified objects to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): The first object to write using format.
-  - arg1 (System.Object): The second object to write using format.
-  - arg2 (System.Object): The third object to write using format.
-"
-  (dotnet:static <type-str> "Write" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0) (cl:the (dotnet "System.Object") arg1) (cl:the (dotnet "System.Object") arg2)))
-
 ;; Note: System.Console.Write also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
 ;; yet supported:
 ;;   Write(String, params Object[]) -> Void
 
 (cl:defun write-line (cl:&optional (value cl:nil supplied-value) (arg0 cl:nil supplied-arg0) (count cl:nil supplied-count) (arg2 cl:nil supplied-arg2))
-  "Master wrapper for System.Console.WriteLine overloads. Dispatches at runtime."
+  "Master wrapper for System.Console.WriteLine overloads. Dispatches at runtime.
+
+WriteLine() -> Void
+  Summary: Writes the current line terminator to the standard output stream.
+
+WriteLine(Boolean) -> Void
+  Summary: Writes the text representation of the specified Boolean value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Boolean): The value to write.
+
+WriteLine(Char) -> Void
+  Summary: Writes the specified Unicode character, followed by the current line terminator, value to the standard output stream.
+  Parameters:
+    - value (System.Char): The value to write.
+
+WriteLine(Char[]) -> Void
+  Summary: Writes the specified array of Unicode characters, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - buffer (System.Char[]): A Unicode character array.
+
+WriteLine(Decimal) -> Void
+  Summary: Writes the text representation of the specified System.Decimal value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Decimal): The value to write.
+
+WriteLine(Double) -> Void
+  Summary: Writes the text representation of the specified double-precision floating-point value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Double): The value to write.
+
+WriteLine(Single) -> Void
+  Summary: Writes the text representation of the specified single-precision floating-point value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Single): The value to write.
+
+WriteLine(Int32) -> Void
+  Summary: Writes the text representation of the specified 32-bit signed integer value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Int32): The value to write.
+
+WriteLine(UInt32) -> Void
+  Summary: Writes the text representation of the specified 32-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.UInt32): The value to write.
+
+WriteLine(Int64) -> Void
+  Summary: Writes the text representation of the specified 64-bit signed integer value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Int64): The value to write.
+
+WriteLine(UInt64) -> Void
+  Summary: Writes the text representation of the specified 64-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.UInt64): The value to write.
+
+WriteLine(Object) -> Void
+  Summary: Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.Object): The value to write.
+
+WriteLine(String) -> Void
+  Summary: Writes the specified string value, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - value (System.String): The value to write.
+
+WriteLine(Char]) -> Void
+  Parameters:
+    - value (System.ReadOnlySpan`1[System.Char]): 
+
+WriteLine(String, Object) -> Void
+  Summary: Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): An object to write using format.
+
+WriteLine(String, Object]) -> Void
+  Summary: Writes the text representation of the specified span of objects, followed by the current line terminator, to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
+
+WriteLine(Char[], Int32, Int32) -> Void
+  Summary: Writes the specified subarray of Unicode characters, followed by the current line terminator, to the standard output stream.
+  Parameters:
+    - buffer (System.Char[]): An array of Unicode characters.
+    - index (System.Int32): The starting position in buffer.
+    - count (System.Int32): The number of characters to write.
+
+WriteLine(String, Object, Object) -> Void
+  Summary: Writes the text representation of the specified objects, followed by the current line terminator, to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): The first object to write using format.
+    - arg1 (System.Object): The second object to write using format.
+
+WriteLine(String, Object, Object, Object) -> Void
+  Summary: Writes the text representation of the specified objects, followed by the current line terminator, to the standard output stream using the specified format information.
+  Parameters:
+    - format (System.String): A composite format string.
+    - arg0 (System.Object): The first object to write using format.
+    - arg1 (System.Object): The second object to write using format.
+    - arg2 (System.Object): The third object to write using format.
+"
   (cl:cond
     ((cl:and supplied-value (cl:stringp value) supplied-arg0 (cl:or (cl:null arg0) (dotnet:object-type arg0)) supplied-count (cl:or (cl:null count) (dotnet:object-type count)) supplied-arg2 (cl:or (cl:null arg2) (dotnet:object-type arg2)))
      (dotnet:static <type-str> "WriteLine" value arg0 count arg2))
@@ -533,145 +582,6 @@ Parameters:
                     :class-name <type-str>
                     :method-name "WriteLine"
                     :supplied-args (cl:append (cl:when supplied-value (cl:list :value value)) (cl:when supplied-arg0 (cl:list :arg0 arg0)) (cl:when supplied-count (cl:list :count count)) (cl:when supplied-arg2 (cl:list :arg2 arg2)))))))
-
-(cl:defun write-line ()
-  "Calls System.Console.WriteLine WriteLine() -> Void. Summary: Writes the current line terminator to the standard output stream.
-"
-  (dotnet:static <type-str> "WriteLine"))
-
-(cl:defun write-line-boolean (value)
-  "Calls System.Console.WriteLine WriteLine(Boolean) -> Void. Summary: Writes the text representation of the specified Boolean value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Boolean): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Boolean") value)))
-
-(cl:defun write-line-char (value)
-  "Calls System.Console.WriteLine WriteLine(Char) -> Void. Summary: Writes the specified Unicode character, followed by the current line terminator, value to the standard output stream.
-Parameters:
-  - value (System.Char): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Char") value)))
-
-(cl:defun write-line-char[] (buffer)
-  "Calls System.Console.WriteLine WriteLine(Char[]) -> Void. Summary: Writes the specified array of Unicode characters, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - buffer (System.Char[]): A Unicode character array.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Char[]") buffer)))
-
-(cl:defun write-line-decimal (value)
-  "Calls System.Console.WriteLine WriteLine(Decimal) -> Void. Summary: Writes the text representation of the specified System.Decimal value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Decimal): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Decimal") value)))
-
-(cl:defun write-line-double (value)
-  "Calls System.Console.WriteLine WriteLine(Double) -> Void. Summary: Writes the text representation of the specified double-precision floating-point value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Double): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Double") value)))
-
-(cl:defun write-line-single (value)
-  "Calls System.Console.WriteLine WriteLine(Single) -> Void. Summary: Writes the text representation of the specified single-precision floating-point value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Single): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Single") value)))
-
-(cl:defun write-line-int32 (value)
-  "Calls System.Console.WriteLine WriteLine(Int32) -> Void. Summary: Writes the text representation of the specified 32-bit signed integer value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Int32): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Int32") value)))
-
-(cl:defun write-line-u-int32 (value)
-  "Calls System.Console.WriteLine WriteLine(UInt32) -> Void. Summary: Writes the text representation of the specified 32-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.UInt32): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.UInt32") value)))
-
-(cl:defun write-line-int64 (value)
-  "Calls System.Console.WriteLine WriteLine(Int64) -> Void. Summary: Writes the text representation of the specified 64-bit signed integer value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Int64): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Int64") value)))
-
-(cl:defun write-line-u-int64 (value)
-  "Calls System.Console.WriteLine WriteLine(UInt64) -> Void. Summary: Writes the text representation of the specified 64-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.UInt64): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.UInt64") value)))
-
-(cl:defun write-line-object (value)
-  "Calls System.Console.WriteLine WriteLine(Object) -> Void. Summary: Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.Object): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Object") value)))
-
-(cl:defun write-line-string (value)
-  "Calls System.Console.WriteLine WriteLine(String) -> Void. Summary: Writes the specified string value, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - value (System.String): The value to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") value)))
-
-(cl:defun write-line-char] (value)
-  "Calls System.Console.WriteLine WriteLine(Char]) -> Void. Parameters:
-  - value (System.ReadOnlySpan`1[System.Char]): 
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") value)))
-
-(cl:defun write-line-string-object (format arg0)
-  "Calls System.Console.WriteLine WriteLine(String, Object) -> Void. Summary: Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): An object to write using format.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0)))
-
-(cl:defun write-line-string-object] (format arg)
-  "Calls System.Console.WriteLine WriteLine(String, Object]) -> Void. Summary: Writes the text representation of the specified span of objects, followed by the current line terminator, to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg (System.ReadOnlySpan`1[System.Object]): A span of objects to write using format.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.ReadOnlySpan`1[System.Object]") arg)))
-
-(cl:defun write-line-char[]-int32-int32 (buffer index count)
-  "Calls System.Console.WriteLine WriteLine(Char[], Int32, Int32) -> Void. Summary: Writes the specified subarray of Unicode characters, followed by the current line terminator, to the standard output stream.
-Parameters:
-  - buffer (System.Char[]): An array of Unicode characters.
-  - index (System.Int32): The starting position in buffer.
-  - count (System.Int32): The number of characters to write.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.Char[]") buffer) (cl:the (dotnet "System.Int32") index) (cl:the (dotnet "System.Int32") count)))
-
-(cl:defun write-line-string-object-object (format arg0 arg1)
-  "Calls System.Console.WriteLine WriteLine(String, Object, Object) -> Void. Summary: Writes the text representation of the specified objects, followed by the current line terminator, to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): The first object to write using format.
-  - arg1 (System.Object): The second object to write using format.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0) (cl:the (dotnet "System.Object") arg1)))
-
-(cl:defun write-line-string-object-object-object (format arg0 arg1 arg2)
-  "Calls System.Console.WriteLine WriteLine(String, Object, Object, Object) -> Void. Summary: Writes the text representation of the specified objects, followed by the current line terminator, to the standard output stream using the specified format information.
-Parameters:
-  - format (System.String): A composite format string.
-  - arg0 (System.Object): The first object to write using format.
-  - arg1 (System.Object): The second object to write using format.
-  - arg2 (System.Object): The third object to write using format.
-"
-  (dotnet:static <type-str> "WriteLine" (cl:the (dotnet "System.String") format) (cl:the (dotnet "System.Object") arg0) (cl:the (dotnet "System.Object") arg1) (cl:the (dotnet "System.Object") arg2)))
 
 ;; Note: System.Console.WriteLine also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not

@@ -1,42 +1,125 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
 
-(cl:defun new (cl:&rest args)
-  "Passthrough constructor for Microsoft.Xna.Framework.Vector2. Dispatches at runtime."
-  (cl:apply (cl:function dotnet:new) <type-str> args))
+(cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
+  "Master wrapper for Microsoft.Xna.Framework.Vector2 constructor overloads. Dispatches at runtime.
 
-(cl:defun new-single (value)
-  "Calls Microsoft.Xna.Framework.Vector2 constructor new(Single)"
-  (dotnet:new <type-str> value))
+new()
 
-(cl:defun new-single-single (x y)
-  "Calls Microsoft.Xna.Framework.Vector2 constructor new(Single, Single)"
-  (dotnet:new <type-str> x y))
+new(Single)
 
+new(Single, Single)
+"
+  (cl:cond
+    ((cl:and supplied-value (cl:numberp value) supplied-y (cl:numberp y))
+     (dotnet:new <type-str> value y))
+    ((cl:and supplied-value (cl:numberp value) (cl:not supplied-y))
+     (dotnet:new <type-str> value))
+    ((cl:and (cl:not supplied-value) (cl:not supplied-y))
+     (dotnet:new <type-str>))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
+                    :class-name <type-str>
+                    :method-name "new"
+                    :supplied-args (cl:append (cl:when supplied-value (cl:list :value value)) (cl:when supplied-y (cl:list :y y)))))))
+
+;; WARNING: this is a single, permanently-cached boxed .NET object --
+;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Vector2 is a mutable
+;; value type (struct) with settable properties/fields, mutating this
+;; object -- through this binding, or through ANY other reference that
+;; aliases the same boxed instance -- permanently corrupts it for every
+;; future reference to this constant, for the life of the program.
+;; There is currently no supported way to obtain an independent,
+;; safely-mutable copy of this value from Lisp; construct a fresh
+;; instance via the type's own constructor (new) if you need to mutate
+;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
+;; section and doc/generator-design-notes.md for the full explanation.
 (cl:defconstant +one+ (dotnet:static <type-str> "One"))
 
+;; WARNING: this is a single, permanently-cached boxed .NET object --
+;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Vector2 is a mutable
+;; value type (struct) with settable properties/fields, mutating this
+;; object -- through this binding, or through ANY other reference that
+;; aliases the same boxed instance -- permanently corrupts it for every
+;; future reference to this constant, for the life of the program.
+;; There is currently no supported way to obtain an independent,
+;; safely-mutable copy of this value from Lisp; construct a fresh
+;; instance via the type's own constructor (new) if you need to mutate
+;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
+;; section and doc/generator-design-notes.md for the full explanation.
 (cl:defconstant +unit-x+ (dotnet:static <type-str> "UnitX"))
 
+;; WARNING: this is a single, permanently-cached boxed .NET object --
+;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Vector2 is a mutable
+;; value type (struct) with settable properties/fields, mutating this
+;; object -- through this binding, or through ANY other reference that
+;; aliases the same boxed instance -- permanently corrupts it for every
+;; future reference to this constant, for the life of the program.
+;; There is currently no supported way to obtain an independent,
+;; safely-mutable copy of this value from Lisp; construct a fresh
+;; instance via the type's own constructor (new) if you need to mutate
+;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
+;; section and doc/generator-design-notes.md for the full explanation.
 (cl:defconstant +unit-y+ (dotnet:static <type-str> "UnitY"))
 
+;; WARNING: this is a single, permanently-cached boxed .NET object --
+;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Vector2 is a mutable
+;; value type (struct) with settable properties/fields, mutating this
+;; object -- through this binding, or through ANY other reference that
+;; aliases the same boxed instance -- permanently corrupts it for every
+;; future reference to this constant, for the life of the program.
+;; There is currently no supported way to obtain an independent,
+;; safely-mutable copy of this value from Lisp; construct a fresh
+;; instance via the type's own constructor (new) if you need to mutate
+;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
+;; section and doc/generator-design-notes.md for the full explanation.
 (cl:defconstant +zero+ (dotnet:static <type-str> "Zero"))
 
+(cl:defun x (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "X"))
+
+;; Note: obj! here is a boxed reference to a .NET value type (struct).
+;; This setf mutates that exact boxed instance in place -- it does NOT
+;; silently discard the change. However, if obj! is an alias of a shared
+;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; that shared instance for every other reference to it too. See
+;; FEATURES.md's "Struct Boxing Caveat" section for details.
+(cl:defun (cl:setf x) (new-value obj!)
+  (cl:setf (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "X") new-value))
+
+(cl:defun y (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Y"))
+
+;; Note: obj! here is a boxed reference to a .NET value type (struct).
+;; This setf mutates that exact boxed instance in place -- it does NOT
+;; silently discard the change. However, if obj! is an alias of a shared
+;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; that shared instance for every other reference to it too. See
+;; FEATURES.md's "Struct Boxing Caveat" section for details.
+(cl:defun (cl:setf y) (new-value obj!)
+  (cl:setf (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Y") new-value))
+
 (cl:defun - (value cl:&optional (value2 cl:nil supplied-value2))
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.- overloads. Dispatches at runtime.
+
+-(Vector2) -> Vector2
+
+-(Vector2, Vector2) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) supplied-value2 (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Subtraction" value value2))
@@ -48,16 +131,15 @@
                     :method-name "-"
                     :supplied-args (cl:append (cl:list :value value) (cl:when supplied-value2 (cl:list :value2 value2)))))))
 
-(cl:defun --vector2 (value)
-  "Calls Microsoft.Xna.Framework.Vector2.- -(Vector2) -> Vector2"
-  (dotnet:static <type-str> "op_UnaryNegation" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
-(cl:defun --vector2-vector2 (value1 value2)
-  "Calls Microsoft.Xna.Framework.Vector2.- -(Vector2, Vector2) -> Vector2"
-  (dotnet:static <type-str> "op_Subtraction" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
-
 (cl:defun * (value1 value2)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.* overloads. Dispatches at runtime.
+
+*(Vector2, Vector2) -> Vector2
+
+*(Vector2, Single) -> Vector2
+
+*(Single, Vector2) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
@@ -71,20 +153,13 @@
                     :method-name "*"
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
-(cl:defun *-vector2-vector2 (value1 value2)
-  "Calls Microsoft.Xna.Framework.Vector2.* *(Vector2, Vector2) -> Vector2"
-  (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
-
-(cl:defun *-vector2-single (value scale-factor)
-  "Calls Microsoft.Xna.Framework.Vector2.* *(Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") scale-factor)))
-
-(cl:defun *-single-vector2 (scale-factor value)
-  "Calls Microsoft.Xna.Framework.Vector2.* *(Single, Vector2) -> Vector2"
-  (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "System.Single") scale-factor) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
 (cl:defun / (value1 value2)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2./ overloads. Dispatches at runtime.
+
+/(Vector2, Vector2) -> Vector2
+
+/(Vector2, Single) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "op_Division" value1 value2))
@@ -95,14 +170,6 @@
                     :class-name <type-str>
                     :method-name "/"
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
-
-(cl:defun /-vector2-vector2 (value1 value2)
-  "Calls Microsoft.Xna.Framework.Vector2./ /(Vector2, Vector2) -> Vector2"
-  (dotnet:static <type-str> "op_Division" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
-
-(cl:defun /-vector2-single (value1 divider)
-  "Calls Microsoft.Xna.Framework.Vector2./ /(Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "op_Division" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "System.Single") divider)))
 
 (cl:defun + (value1 value2)
   (dotnet:static <type-str> "op_Addition" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
@@ -134,18 +201,10 @@
 ;; yet supported:
 ;;   CatmullRom(ref Vector2&, ref Vector2&, ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
-(cl:defun ceiling (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling"))
+(cl:defun ceiling (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Ceiling"))
 
 (cl:defun ceiling* (value)
-  (dotnet:static <type-str> "Ceiling" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
-(cl:defun ceiling (obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Ceiling Ceiling() -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Ceiling"))
-
-(cl:defun ceiling-vector2 (value)
-  "Calls Microsoft.Xna.Framework.Vector2.Ceiling Ceiling(Vector2) -> Vector2"
   (dotnet:static <type-str> "Ceiling" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Ceiling also has the following overloads with special
@@ -182,7 +241,12 @@
 ;;   DistanceSquared(ref Vector2&, ref Vector2&, out Single&) -> Void
 
 (cl:defun divide (value1 value2)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.Divide overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Divide overloads. Dispatches at runtime.
+
+Divide(Vector2, Vector2) -> Vector2
+
+Divide(Vector2, Single) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "Divide" value1 value2))
@@ -193,14 +257,6 @@
                     :class-name <type-str>
                     :method-name "Divide"
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
-
-(cl:defun divide-vector2-vector2 (value1 value2)
-  "Calls Microsoft.Xna.Framework.Vector2.Divide Divide(Vector2, Vector2) -> Vector2"
-  (dotnet:static <type-str> "Divide" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
-
-(cl:defun divide-vector2-single (value1 divider)
-  "Calls Microsoft.Xna.Framework.Vector2.Divide Divide(Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "Divide" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "System.Single") divider)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Divide also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -216,39 +272,28 @@
 ;; yet supported:
 ;;   Dot(ref Vector2&, ref Vector2&, out Single&) -> Void
 
-(cl:defun equals (obj obj)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.Equals overloads. Dispatches at runtime."
+(cl:defun equals (obj! obj)
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Equals overloads. Dispatches at runtime.
+
+Equals(Object) -> Boolean
+
+Equals(Vector2) -> Boolean
+"
   (cl:cond
     ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
-     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Equals" obj))
     ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
-     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
                     :class-name <type-str>
                     :method-name "Equals"
                     :supplied-args (cl:append (cl:list :obj obj))))))
 
-(cl:defun equals-object (obj obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Equals Equals(Object) -> Boolean"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" obj))
-
-(cl:defun equals-vector2 (obj other)
-  "Calls Microsoft.Xna.Framework.Vector2.Equals Equals(Vector2) -> Boolean"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Equals" other))
-
-(cl:defun floor (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor"))
+(cl:defun floor (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Floor"))
 
 (cl:defun floor* (value)
-  (dotnet:static <type-str> "Floor" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
-(cl:defun floor (obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Floor Floor() -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Floor"))
-
-(cl:defun floor-vector2 (value)
-  "Calls Microsoft.Xna.Framework.Vector2.Floor Floor(Vector2) -> Vector2"
   (dotnet:static <type-str> "Floor" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Floor also has the following overloads with special
@@ -256,8 +301,8 @@
 ;; yet supported:
 ;;   Floor(ref Vector2&, out Vector2&) -> Void
 
-(cl:defun get-hash-code (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "GetHashCode"))
+(cl:defun get-hash-code (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "GetHashCode"))
 
 (cl:defun hermite (value1 tangent1 value2 tangent2 amount)
   (dotnet:static <type-str> "Hermite" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") tangent1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") tangent2) (cl:the (dotnet "System.Single") amount)))
@@ -270,11 +315,11 @@
 (cl:defun implicit-cast (value)
   (dotnet:static <type-str> "op_Implicit" (cl:the (dotnet "System.Numerics.Vector2") value)))
 
-(cl:defun length (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Length"))
+(cl:defun length (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Length"))
 
-(cl:defun length-squared (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "LengthSquared"))
+(cl:defun length-squared (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "LengthSquared"))
 
 (cl:defun lerp (value1 value2 amount)
   (dotnet:static <type-str> "Lerp" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "System.Single") amount)))
@@ -309,7 +354,12 @@
 ;;   Min(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
 (cl:defun multiply (value1 value2)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.Multiply overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Multiply overloads. Dispatches at runtime.
+
+Multiply(Vector2, Vector2) -> Vector2
+
+Multiply(Vector2, Single) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
      (dotnet:static <type-str> "Multiply" value1 value2))
@@ -320,14 +370,6 @@
                     :class-name <type-str>
                     :method-name "Multiply"
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
-
-(cl:defun multiply-vector2-vector2 (value1 value2)
-  "Calls Microsoft.Xna.Framework.Vector2.Multiply Multiply(Vector2, Vector2) -> Vector2"
-  (dotnet:static <type-str> "Multiply" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
-
-(cl:defun multiply-vector2-single (value1 scale-factor)
-  "Calls Microsoft.Xna.Framework.Vector2.Multiply Multiply(Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "Multiply" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "System.Single") scale-factor)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Multiply also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -343,18 +385,10 @@
 ;; yet supported:
 ;;   Negate(ref Vector2&, out Vector2&) -> Void
 
-(cl:defun normalize (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
+(cl:defun normalize (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Normalize"))
 
 (cl:defun normalize* (value)
-  (dotnet:static <type-str> "Normalize" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
-(cl:defun normalize (obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize() -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Normalize"))
-
-(cl:defun normalize-vector2 (value)
-  "Calls Microsoft.Xna.Framework.Vector2.Normalize Normalize(Vector2) -> Vector2"
   (dotnet:static <type-str> "Normalize" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Normalize also has the following overloads with special
@@ -373,46 +407,22 @@
 ;; yet supported:
 ;;   Reflect(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
-(cl:defun rotate (obj radians)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" radians))
+(cl:defun rotate (obj! radians)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Rotate" radians))
 
 (cl:defun rotate* (value radians)
   (dotnet:static <type-str> "Rotate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") radians)))
 
-(cl:defun rotate-single (obj radians)
-  "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Single) -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Rotate" radians))
-
-(cl:defun rotate-vector2-single (value radians)
-  "Calls Microsoft.Xna.Framework.Vector2.Rotate Rotate(Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "Rotate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "System.Single") radians)))
-
-(cl:defun rotate-around (obj origin radians)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" origin radians))
+(cl:defun rotate-around (obj! origin radians)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "RotateAround" origin radians))
 
 (cl:defun rotate-around* (value origin radians)
   (dotnet:static <type-str> "RotateAround" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") origin) (cl:the (dotnet "System.Single") radians)))
 
-(cl:defun rotate-around-vector2-single (obj origin radians)
-  "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Single) -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "RotateAround" origin radians))
-
-(cl:defun rotate-around-vector2-vector2-single (value origin radians)
-  "Calls Microsoft.Xna.Framework.Vector2.RotateAround RotateAround(Vector2, Vector2, Single) -> Vector2"
-  (dotnet:static <type-str> "RotateAround" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") origin) (cl:the (dotnet "System.Single") radians)))
-
-(cl:defun round (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round"))
+(cl:defun round (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Round"))
 
 (cl:defun round* (value)
-  (dotnet:static <type-str> "Round" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
-
-(cl:defun round (obj)
-  "Calls Microsoft.Xna.Framework.Vector2.Round Round() -> Void"
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "Round"))
-
-(cl:defun round-vector2 (value)
-  "Calls Microsoft.Xna.Framework.Vector2.Round Round(Vector2) -> Vector2"
   (dotnet:static <type-str> "Round" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Round also has the following overloads with special
@@ -436,17 +446,22 @@
 ;; yet supported:
 ;;   Subtract(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
-(cl:defun to-numerics (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "ToNumerics"))
+(cl:defun to-numerics (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "ToNumerics"))
 
-(cl:defun to-point (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "ToPoint"))
+(cl:defun to-point (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "ToPoint"))
 
-(cl:defun to-string (obj)
-  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj) "ToString"))
+(cl:defun to-string (obj!)
+  (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "ToString"))
 
 (cl:defun transform (position matrix)
-  "Master wrapper for Microsoft.Xna.Framework.Vector2.Transform overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Vector2.Transform overloads. Dispatches at runtime.
+
+Transform(Vector2, Matrix) -> Vector2
+
+Transform(Vector2, Quaternion) -> Vector2
+"
   (cl:cond
     ((cl:and (cl:or (cl:null position) (dotnet:object-type position)) (cl:or (cl:null matrix) (dotnet:object-type matrix)))
      (dotnet:static <type-str> "Transform" position matrix))
@@ -457,14 +472,6 @@
                     :class-name <type-str>
                     :method-name "Transform"
                     :supplied-args (cl:append (cl:list :position position) (cl:list :matrix matrix))))))
-
-(cl:defun transform-vector2-matrix (position matrix)
-  "Calls Microsoft.Xna.Framework.Vector2.Transform Transform(Vector2, Matrix) -> Vector2"
-  (dotnet:static <type-str> "Transform" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") position) (cl:the (dotnet "Microsoft.Xna.Framework.Matrix") matrix)))
-
-(cl:defun transform-vector2-quaternion (value rotation)
-  "Calls Microsoft.Xna.Framework.Vector2.Transform Transform(Vector2, Quaternion) -> Vector2"
-  (dotnet:static <type-str> "Transform" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value) (cl:the (dotnet "Microsoft.Xna.Framework.Quaternion") rotation)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Transform also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not

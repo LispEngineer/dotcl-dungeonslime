@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -16,7 +16,12 @@
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard")))
 
 (cl:defun get-state (cl:&optional (player-index cl:nil supplied-player-index))
-  "Master wrapper for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime.
+
+GetState() -> KeyboardState
+
+GetState(PlayerIndex) -> KeyboardState
+"
   (cl:cond
     ((cl:and supplied-player-index (cl:or (cl:null player-index) (dotnet:object-type player-index)))
      (dotnet:static <type-str> "GetState" player-index))
@@ -27,12 +32,4 @@
                     :class-name <type-str>
                     :method-name "GetState"
                     :supplied-args (cl:append (cl:when supplied-player-index (cl:list :player-index player-index)))))))
-
-(cl:defun get-state ()
-  "Calls Microsoft.Xna.Framework.Input.Keyboard.GetState GetState() -> KeyboardState"
-  (dotnet:static <type-str> "GetState"))
-
-(cl:defun get-state-player-index (player-index)
-  "Calls Microsoft.Xna.Framework.Input.Keyboard.GetState GetState(PlayerIndex) -> KeyboardState"
-  (dotnet:static <type-str> "GetState" (cl:the (dotnet "Microsoft.Xna.Framework.PlayerIndex") player-index)))
 

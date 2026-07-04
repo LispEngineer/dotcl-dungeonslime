@@ -31,7 +31,7 @@
   (when (and (typep game 'core) (slot-boundp game 'content) (content game))
     (let ((root-dir (dotnet:invoke (content game) "RootDirectory")))
       (setf (scene-content scene)
-            (cm:new-i-service-provider-string
+            (cm:new
              (cm:service-provider (content game))
              root-dir)))))
 

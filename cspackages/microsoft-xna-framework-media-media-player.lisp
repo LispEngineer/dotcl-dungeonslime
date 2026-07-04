@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -35,7 +35,14 @@
   (dotnet:static <type-str> "Pause"))
 
 (cl:defun play (song cl:&optional (start-position cl:nil supplied-start-position))
-  "Master wrapper for Microsoft.Xna.Framework.Media.MediaPlayer.Play overloads. Dispatches at runtime."
+  "Master wrapper for Microsoft.Xna.Framework.Media.MediaPlayer.Play overloads. Dispatches at runtime.
+
+Play(Song) -> Void
+
+Play(Song, TimeSpan]) -> Void
+
+Play(SongCollection, Int32) -> Void
+"
   (cl:cond
     ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:or (cl:null start-position) (dotnet:object-type start-position)))
      (dotnet:static <type-str> "Play" song start-position))
@@ -48,18 +55,6 @@
                     :class-name <type-str>
                     :method-name "Play"
                     :supplied-args (cl:append (cl:list :song song) (cl:when supplied-start-position (cl:list :start-position start-position)))))))
-
-(cl:defun play-song (song)
-  "Calls Microsoft.Xna.Framework.Media.MediaPlayer.Play Play(Song) -> Void"
-  (dotnet:static <type-str> "Play" (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song)))
-
-(cl:defun play-song-time-span] (song start-position)
-  "Calls Microsoft.Xna.Framework.Media.MediaPlayer.Play Play(Song, TimeSpan]) -> Void"
-  (dotnet:static <type-str> "Play" (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") song) (cl:the (dotnet "System.Nullable`1[System.TimeSpan]") start-position)))
-
-(cl:defun play-song-collection-int32 (collection index)
-  "Calls Microsoft.Xna.Framework.Media.MediaPlayer.Play Play(SongCollection, Int32) -> Void"
-  (dotnet:static <type-str> "Play" (cl:the (dotnet "Microsoft.Xna.Framework.Media.SongCollection") collection) (cl:the (dotnet "System.Int32") index)))
 
 ;; Note: Microsoft.Xna.Framework.Media.MediaPlayer.Play also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not

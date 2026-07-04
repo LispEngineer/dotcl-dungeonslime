@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 23
-;;; Creation Date: 2026-07-03T13:50:10Z
+;;; Generator Version: 30
+;;; Creation Date: 2026-07-04T15:34:33Z
 
 (cl:in-package :system-single)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-07-03T13:50:10Z")
-(cl:defconstant <version> 23)
+(cl:defconstant <creation> "2026-07-04T15:34:33Z")
+(cl:defconstant <version> 30)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -243,34 +243,31 @@ Parameters:
 "
   (dotnet:static <type-str> "ClampNative" (cl:the (dotnet "System.Single") value) (cl:the (dotnet "System.Single") min) (cl:the (dotnet "System.Single") max)))
 
-(cl:defun compare-to (obj value)
-  "Master wrapper for System.Single.CompareTo overloads. Dispatches at runtime."
+(cl:defun compare-to (obj! value)
+  "Master wrapper for System.Single.CompareTo overloads. Dispatches at runtime.
+
+CompareTo(Object) -> Int32
+  Summary: Compares this instance to a specified object and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified object.
+  Returns: A signed number indicating the relative values of this instance and value. Return Value Description Less than zero This instance is less than value, or this instance is not a number (System.Single.NaN) and value is a number. Zero This instance is equal to value, or this instance and value are both not a number (System.Single.NaN), System.Single.PositiveInfinity, or System.Single.NegativeInfinity. Greater than zero This instance is greater than value, OR this instance is a number and value is not a number (System.Single.NaN), OR value is .
+  Parameters:
+    - value (System.Object): An object to compare, or .
+
+CompareTo(Single) -> Int32
+  Summary: Compares this instance to a specified single-precision floating-point number and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified single-precision floating-point number.
+  Returns: A signed number indicating the relative values of this instance and value. Return Value Description Less than zero This instance is less than value, or this instance is not a number (System.Single.NaN) and value is a number. Zero This instance is equal to value, or both this instance and value are not a number (System.Single.NaN), System.Single.PositiveInfinity, or System.Single.NegativeInfinity. Greater than zero This instance is greater than value, or this instance is a number and value is not a number (System.Single.NaN).
+  Parameters:
+    - value (System.Single): A single-precision floating-point number to compare.
+"
   (cl:cond
     ((cl:and (cl:or (cl:null value) (dotnet:object-type value)))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "CompareTo" value))
     ((cl:and (cl:numberp value))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "CompareTo" value))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-SINGLE"
                     :class-name <type-str>
                     :method-name "CompareTo"
                     :supplied-args (cl:append (cl:list :value value))))))
-
-(cl:defun compare-to-object (obj value)
-  "Calls System.Single.CompareTo CompareTo(Object) -> Int32. Summary: Compares this instance to a specified object and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified object.
-Returns: A signed number indicating the relative values of this instance and value. Return Value Description Less than zero This instance is less than value, or this instance is not a number (System.Single.NaN) and value is a number. Zero This instance is equal to value, or this instance and value are both not a number (System.Single.NaN), System.Single.PositiveInfinity, or System.Single.NegativeInfinity. Greater than zero This instance is greater than value, OR this instance is a number and value is not a number (System.Single.NaN), OR value is .
-Parameters:
-  - value (System.Object): An object to compare, or .
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
-
-(cl:defun compare-to-single (obj value)
-  "Calls System.Single.CompareTo CompareTo(Single) -> Int32. Summary: Compares this instance to a specified single-precision floating-point number and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified single-precision floating-point number.
-Returns: A signed number indicating the relative values of this instance and value. Return Value Description Less than zero This instance is less than value, or this instance is not a number (System.Single.NaN) and value is a number. Zero This instance is equal to value, or both this instance and value are not a number (System.Single.NaN), System.Single.PositiveInfinity, or System.Single.NegativeInfinity. Greater than zero This instance is greater than value, or this instance is a number and value is not a number (System.Single.NaN).
-Parameters:
-  - value (System.Single): A single-precision floating-point number to compare.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "CompareTo" value))
 
 (cl:defun convert-to-integer (type value)
   "Summary: Converts a value to a specified integer type using saturation on overflow
@@ -353,34 +350,31 @@ Parameters:
 "
   (dotnet:static <type-str> "DegreesToRadians" (cl:the (dotnet "System.Single") degrees)))
 
-(cl:defun equals (obj obj)
-  "Master wrapper for System.Single.Equals overloads. Dispatches at runtime."
+(cl:defun equals (obj! obj)
+  "Master wrapper for System.Single.Equals overloads. Dispatches at runtime.
+
+Equals(Object) -> Boolean
+  Summary: Returns a value indicating whether this instance is equal to a specified object.
+  Returns: if obj is an instance of System.Single and equals the value of this instance; otherwise, .
+  Parameters:
+    - obj (System.Object): An object to compare with this instance.
+
+Equals(Single) -> Boolean
+  Summary: Returns a value indicating whether this instance and a specified System.Single object represent the same value.
+  Returns: if obj is equal to this instance; otherwise, .
+  Parameters:
+    - obj (System.Single): An object to compare with this instance.
+"
   (cl:cond
     ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "Equals" obj))
     ((cl:and (cl:numberp obj))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-SINGLE"
                     :class-name <type-str>
                     :method-name "Equals"
                     :supplied-args (cl:append (cl:list :obj obj))))))
-
-(cl:defun equals-object (obj obj)
-  "Calls System.Single.Equals Equals(Object) -> Boolean. Summary: Returns a value indicating whether this instance is equal to a specified object.
-Returns: if obj is an instance of System.Single and equals the value of this instance; otherwise, .
-Parameters:
-  - obj (System.Object): An object to compare with this instance.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
-
-(cl:defun equals-single (obj obj)
-  "Calls System.Single.Equals Equals(Single) -> Boolean. Summary: Returns a value indicating whether this instance and a specified System.Single object represent the same value.
-Returns: if obj is equal to this instance; otherwise, .
-Parameters:
-  - obj (System.Single): An object to compare with this instance.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "Equals" obj))
 
 (cl:defun exp (x)
   "Summary: Computes E raised to a given power.
@@ -448,17 +442,17 @@ Parameters:
 "
   (dotnet:static <type-str> "FusedMultiplyAdd" (cl:the (dotnet "System.Single") left) (cl:the (dotnet "System.Single") right) (cl:the (dotnet "System.Single") addend)))
 
-(cl:defun get-hash-code (obj)
+(cl:defun get-hash-code (obj!)
   "Summary: Returns the hash code for this instance.
 Returns: A 32-bit signed integer hash code.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "GetHashCode"))
+  (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "GetHashCode"))
 
-(cl:defun get-type-code (obj)
+(cl:defun get-type-code (obj!)
   "Summary: Returns the System.TypeCode for value type System.Single.
 Returns: The enumerated constant, System.TypeCode.Single.
 "
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "GetTypeCode"))
+  (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "GetTypeCode"))
 
 (cl:defun hypot (x y)
   "Summary: Computes the hypotenuse given two values representing the lengths of the shorter sides in a right-angled triangle.
@@ -609,7 +603,21 @@ Parameters:
   (dotnet:static <type-str> "Lerp" (cl:the (dotnet "System.Single") value1) (cl:the (dotnet "System.Single") value2) (cl:the (dotnet "System.Single") amount)))
 
 (cl:defun log (x cl:&optional (new-base cl:nil supplied-new-base))
-  "Master wrapper for System.Single.Log overloads. Dispatches at runtime."
+  "Master wrapper for System.Single.Log overloads. Dispatches at runtime.
+
+Log(Single) -> Single
+  Summary: Computes the natural (base-E logarithm of a value.
+  Returns: The natural logarithm of x.
+  Parameters:
+    - x (System.Single): The value whose natural logarithm is to be computed.
+
+Log(Single, Single) -> Single
+  Summary: Computes the logarithm of a value in the specified base.
+  Returns: The base-newBase logarithm of x.
+  Parameters:
+    - x (System.Single): The value whose logarithm is to be computed.
+    - new-base (System.Single): The base in which the logarithm is to be computed.
+"
   (cl:cond
     ((cl:and (cl:numberp x) supplied-new-base (cl:numberp new-base))
      (dotnet:static <type-str> "Log" x new-base))
@@ -620,23 +628,6 @@ Parameters:
                     :class-name <type-str>
                     :method-name "Log"
                     :supplied-args (cl:append (cl:list :x x) (cl:when supplied-new-base (cl:list :new-base new-base)))))))
-
-(cl:defun log-single (x)
-  "Calls System.Single.Log Log(Single) -> Single. Summary: Computes the natural (base-E logarithm of a value.
-Returns: The natural logarithm of x.
-Parameters:
-  - x (System.Single): The value whose natural logarithm is to be computed.
-"
-  (dotnet:static <type-str> "Log" (cl:the (dotnet "System.Single") x)))
-
-(cl:defun log-single-single (x new-base)
-  "Calls System.Single.Log Log(Single, Single) -> Single. Summary: Computes the logarithm of a value in the specified base.
-Returns: The base-newBase logarithm of x.
-Parameters:
-  - x (System.Single): The value whose logarithm is to be computed.
-  - new-base (System.Single): The base in which the logarithm is to be computed.
-"
-  (dotnet:static <type-str> "Log" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.Single") new-base)))
 
 (cl:defun log10 (x)
   "Summary: Computes the base-10 logarithm of a value.
@@ -788,7 +779,66 @@ Parameters:
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.Single") left) (cl:the (dotnet "System.Single") right)))
 
 (cl:defun parse (s cl:&optional (style cl:nil supplied-style) (provider cl:nil supplied-provider))
-  "Master wrapper for System.Single.Parse overloads. Dispatches at runtime."
+  "Master wrapper for System.Single.Parse overloads. Dispatches at runtime.
+
+Parse(String) -> Single
+  Summary: Converts the string representation of a number to its single-precision floating-point number equivalent.
+  Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
+  Parameters:
+    - s (System.String): A string that contains a number to convert.
+
+Parse(String, NumberStyles) -> Single
+  Summary: Converts the string representation of a number in a specified style to its single-precision floating-point number equivalent.
+  Returns: A single-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
+  Parameters:
+    - s (System.String): A string that contains a number to convert.
+    - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+
+Parse(String, IFormatProvider) -> Single
+  Summary: Converts the string representation of a number in a specified culture-specific format to its single-precision floating-point number equivalent.
+  Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
+  Parameters:
+    - s (System.String): A string that contains a number to convert.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+
+Parse(Char], IFormatProvider) -> Single
+  Summary: Parses a span of characters into a value.
+  Returns: The result of parsing s.
+  Parameters:
+    - s (System.ReadOnlySpan`1[System.Char]): The span of characters to parse.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about s.
+
+Parse(Byte], IFormatProvider) -> Single
+  Summary: Parses a span of UTF-8 characters into a value.
+  Returns: The result of parsing utf8Text.
+  Parameters:
+    - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+
+Parse(String, NumberStyles, IFormatProvider) -> Single
+  Summary: Converts the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
+  Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
+  Parameters:
+    - s (System.String): A string that contains a number to convert.
+    - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+
+Parse(Char], NumberStyles, IFormatProvider) -> Single
+  Summary: Converts a character span that contains the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
+  Returns: A single-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
+  Parameters:
+    - s (System.ReadOnlySpan`1[System.Char]): A character span that contains the number to convert.
+    - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicate the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+
+Parse(Byte], NumberStyles, IFormatProvider) -> Single
+  Summary: Parses a span of UTF-8 characters into a value.
+  Returns: The result of parsing utf8Text.
+  Parameters:
+    - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+    - style (System.Globalization.NumberStyles): A bitwise combination of number styles that can be present in utf8Text.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+"
   (cl:cond
     ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:static <type-str> "Parse" s style provider))
@@ -811,80 +861,6 @@ Parameters:
                     :class-name <type-str>
                     :method-name "Parse"
                     :supplied-args (cl:append (cl:list :s s) (cl:when supplied-style (cl:list :style style)) (cl:when supplied-provider (cl:list :provider provider)))))))
-
-(cl:defun parse-string (s)
-  "Calls System.Single.Parse Parse(String) -> Single. Summary: Converts the string representation of a number to its single-precision floating-point number equivalent.
-Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
-Parameters:
-  - s (System.String): A string that contains a number to convert.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s)))
-
-(cl:defun parse-string-number-styles (s style)
-  "Calls System.Single.Parse Parse(String, NumberStyles) -> Single. Summary: Converts the string representation of a number in a specified style to its single-precision floating-point number equivalent.
-Returns: A single-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
-Parameters:
-  - s (System.String): A string that contains a number to convert.
-  - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s) (cl:the (dotnet "System.Globalization.NumberStyles") style)))
-
-(cl:defun parse-string-i-format-provider (s provider)
-  "Calls System.Single.Parse Parse(String, IFormatProvider) -> Single. Summary: Converts the string representation of a number in a specified culture-specific format to its single-precision floating-point number equivalent.
-Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
-Parameters:
-  - s (System.String): A string that contains a number to convert.
-  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s) (cl:the (dotnet "System.IFormatProvider") provider)))
-
-(cl:defun parse-char]-i-format-provider (s provider)
-  "Calls System.Single.Parse Parse(Char], IFormatProvider) -> Single. Summary: Parses a span of characters into a value.
-Returns: The result of parsing s.
-Parameters:
-  - s (System.ReadOnlySpan`1[System.Char]): The span of characters to parse.
-  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about s.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") s) (cl:the (dotnet "System.IFormatProvider") provider)))
-
-(cl:defun parse-byte]-i-format-provider (utf8-text provider)
-  "Calls System.Single.Parse Parse(Byte], IFormatProvider) -> Single. Summary: Parses a span of UTF-8 characters into a value.
-Returns: The result of parsing utf8Text.
-Parameters:
-  - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
-  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") utf8-text) (cl:the (dotnet "System.IFormatProvider") provider)))
-
-(cl:defun parse-string-number-styles-i-format-provider (s style provider)
-  "Calls System.Single.Parse Parse(String, NumberStyles, IFormatProvider) -> Single. Summary: Converts the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
-Returns: A single-precision floating-point number equivalent to the numeric value or symbol specified in s.
-Parameters:
-  - s (System.String): A string that contains a number to convert.
-  - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
-  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.String") s) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
-
-(cl:defun parse-char]-number-styles-i-format-provider (s style provider)
-  "Calls System.Single.Parse Parse(Char], NumberStyles, IFormatProvider) -> Single. Summary: Converts a character span that contains the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent.
-Returns: A single-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
-Parameters:
-  - s (System.ReadOnlySpan`1[System.Char]): A character span that contains the number to convert.
-  - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicate the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
-  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Char]") s) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
-
-(cl:defun parse-byte]-number-styles-i-format-provider (utf8-text style provider)
-  "Calls System.Single.Parse Parse(Byte], NumberStyles, IFormatProvider) -> Single. Summary: Parses a span of UTF-8 characters into a value.
-Returns: The result of parsing utf8Text.
-Parameters:
-  - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
-  - style (System.Globalization.NumberStyles): A bitwise combination of number styles that can be present in utf8Text.
-  - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
-"
-  (dotnet:static <type-str> "Parse" (cl:the (dotnet "System.ReadOnlySpan`1[System.Byte]") utf8-text) (cl:the (dotnet "System.Globalization.NumberStyles") style) (cl:the (dotnet "System.IFormatProvider") provider)))
 
 ;; Note: System.Single.Parse also has the following overloads with special
 ;; parameter types (ref, out, params, or defaults) that are not
@@ -935,7 +911,36 @@ Parameters:
   (dotnet:static <type-str> "RootN" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.Int32") n)))
 
 (cl:defun round (x cl:&optional (digits cl:nil supplied-digits) (mode cl:nil supplied-mode))
-  "Master wrapper for System.Single.Round overloads. Dispatches at runtime."
+  "Master wrapper for System.Single.Round overloads. Dispatches at runtime.
+
+Round(Single) -> Single
+  Summary: Rounds a value to the nearest integer using the default rounding mode (System.MidpointRounding.ToEven).
+  Returns: The result of rounding x to the nearest integer using the default rounding mode.
+  Parameters:
+    - x (System.Single): The value to round.
+
+Round(Single, Int32) -> Single
+  Summary: Rounds a value to a specified number of fractional-digits using the default rounding mode (System.MidpointRounding.ToEven).
+  Returns: The result of rounding x to digits fractional-digits using the default rounding mode.
+  Parameters:
+    - x (System.Single): The value to round.
+    - digits (System.Int32): The number of fractional digits to which x should be rounded.
+
+Round(Single, MidpointRounding) -> Single
+  Summary: Rounds a value to the nearest integer using the specified rounding mode.
+  Returns: The result of rounding x to the nearest integer using mode.
+  Parameters:
+    - x (System.Single): The value to round.
+    - mode (System.MidpointRounding): The mode under which x should be rounded.
+
+Round(Single, Int32, MidpointRounding) -> Single
+  Summary: Rounds a value to a specified number of fractional-digits using the default rounding mode (System.MidpointRounding.ToEven).
+  Returns: The result of rounding x to digits fractional-digits using mode.
+  Parameters:
+    - x (System.Single): The value to round.
+    - digits (System.Int32): The number of fractional digits to which x should be rounded.
+    - mode (System.MidpointRounding): The mode under which x should be rounded.
+"
   (cl:cond
     ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (dotnet:object-type mode)))
      (dotnet:static <type-str> "Round" x digits mode))
@@ -950,42 +955,6 @@ Parameters:
                     :class-name <type-str>
                     :method-name "Round"
                     :supplied-args (cl:append (cl:list :x x) (cl:when supplied-digits (cl:list :digits digits)) (cl:when supplied-mode (cl:list :mode mode)))))))
-
-(cl:defun round-single (x)
-  "Calls System.Single.Round Round(Single) -> Single. Summary: Rounds a value to the nearest integer using the default rounding mode (System.MidpointRounding.ToEven).
-Returns: The result of rounding x to the nearest integer using the default rounding mode.
-Parameters:
-  - x (System.Single): The value to round.
-"
-  (dotnet:static <type-str> "Round" (cl:the (dotnet "System.Single") x)))
-
-(cl:defun round-single-int32 (x digits)
-  "Calls System.Single.Round Round(Single, Int32) -> Single. Summary: Rounds a value to a specified number of fractional-digits using the default rounding mode (System.MidpointRounding.ToEven).
-Returns: The result of rounding x to digits fractional-digits using the default rounding mode.
-Parameters:
-  - x (System.Single): The value to round.
-  - digits (System.Int32): The number of fractional digits to which x should be rounded.
-"
-  (dotnet:static <type-str> "Round" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.Int32") digits)))
-
-(cl:defun round-single-midpoint-rounding (x mode)
-  "Calls System.Single.Round Round(Single, MidpointRounding) -> Single. Summary: Rounds a value to the nearest integer using the specified rounding mode.
-Returns: The result of rounding x to the nearest integer using mode.
-Parameters:
-  - x (System.Single): The value to round.
-  - mode (System.MidpointRounding): The mode under which x should be rounded.
-"
-  (dotnet:static <type-str> "Round" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.MidpointRounding") mode)))
-
-(cl:defun round-single-int32-midpoint-rounding (x digits mode)
-  "Calls System.Single.Round Round(Single, Int32, MidpointRounding) -> Single. Summary: Rounds a value to a specified number of fractional-digits using the default rounding mode (System.MidpointRounding.ToEven).
-Returns: The result of rounding x to digits fractional-digits using mode.
-Parameters:
-  - x (System.Single): The value to round.
-  - digits (System.Int32): The number of fractional digits to which x should be rounded.
-  - mode (System.MidpointRounding): The mode under which x should be rounded.
-"
-  (dotnet:static <type-str> "Round" (cl:the (dotnet "System.Single") x) (cl:the (dotnet "System.Int32") digits) (cl:the (dotnet "System.MidpointRounding") mode)))
 
 (cl:defun scale-b (x n)
   "Summary: Computes the product of a value and its base-radix raised to the specified power.
@@ -1076,53 +1045,46 @@ Parameters:
 "
   (dotnet:static <type-str> "TanPi" (cl:the (dotnet "System.Single") x)))
 
-(cl:defun to-string (obj cl:&optional (provider cl:nil supplied-provider) (provider cl:nil supplied-provider))
-  "Master wrapper for System.Single.ToString overloads. Dispatches at runtime."
+(cl:defun to-string (obj! cl:&optional (provider cl:nil supplied-provider) (provider2 cl:nil supplied-provider2))
+  "Master wrapper for System.Single.ToString overloads. Dispatches at runtime.
+
+ToString() -> String
+  Summary: Converts the numeric value of this instance to its equivalent string representation.
+  Returns: The string representation of the value of this instance.
+
+ToString(IFormatProvider) -> String
+  Summary: Converts the numeric value of this instance to its equivalent string representation using the specified culture-specific format information.
+  Returns: The string representation of the value of this instance as specified by provider.
+  Parameters:
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
+
+ToString(String) -> String
+  Summary: Converts the numeric value of this instance to its equivalent string representation, using the specified format.
+  Returns: The string representation of the value of this instance as specified by format.
+  Parameters:
+    - format (System.String): A numeric format string.
+
+ToString(String, IFormatProvider) -> String
+  Summary: Converts the numeric value of this instance to its equivalent string representation using the specified format and culture-specific format information.
+  Returns: The string representation of the value of this instance as specified by format and provider.
+  Parameters:
+    - format (System.String): A numeric format string.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
+"
   (cl:cond
-    ((cl:and supplied-provider (cl:stringp provider) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider provider))
-    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)) (cl:not supplied-provider))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider))
-    ((cl:and supplied-provider (cl:stringp provider) (cl:not supplied-provider))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider))
-    ((cl:and (cl:not supplied-provider) (cl:not supplied-provider))
-     (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString"))
+    ((cl:and supplied-provider (cl:stringp provider) supplied-provider2 (cl:or (cl:null provider2) (dotnet:object-type provider2)))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider provider2))
+    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)) (cl:not supplied-provider2))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider))
+    ((cl:and supplied-provider (cl:stringp provider) (cl:not supplied-provider2))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider))
+    ((cl:and (cl:not supplied-provider) (cl:not supplied-provider2))
+     (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString"))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-SINGLE"
                     :class-name <type-str>
                     :method-name "ToString"
-                    :supplied-args (cl:append (cl:when supplied-provider (cl:list :provider provider)) (cl:when supplied-provider (cl:list :provider provider)))))))
-
-(cl:defun to-string (obj)
-  "Calls System.Single.ToString ToString() -> String. Summary: Converts the numeric value of this instance to its equivalent string representation.
-Returns: The string representation of the value of this instance.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString"))
-
-(cl:defun to-string-i-format-provider (obj provider)
-  "Calls System.Single.ToString ToString(IFormatProvider) -> String. Summary: Converts the numeric value of this instance to its equivalent string representation using the specified culture-specific format information.
-Returns: The string representation of the value of this instance as specified by provider.
-Parameters:
-  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" provider))
-
-(cl:defun to-string-string (obj format)
-  "Calls System.Single.ToString ToString(String) -> String. Summary: Converts the numeric value of this instance to its equivalent string representation, using the specified format.
-Returns: The string representation of the value of this instance as specified by format.
-Parameters:
-  - format (System.String): A numeric format string.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" format))
-
-(cl:defun to-string-string-i-format-provider (obj format provider)
-  "Calls System.Single.ToString ToString(String, IFormatProvider) -> String. Summary: Converts the numeric value of this instance to its equivalent string representation using the specified format and culture-specific format information.
-Returns: The string representation of the value of this instance as specified by format and provider.
-Parameters:
-  - format (System.String): A numeric format string.
-  - provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
-"
-  (dotnet:invoke (cl:the (dotnet "System.Single") obj) "ToString" format provider))
+                    :supplied-args (cl:append (cl:when supplied-provider (cl:list :provider provider)) (cl:when supplied-provider2 (cl:list :provider2 provider2)))))))
 
 (cl:defun truncate (x)
   "Summary: Truncates a value.

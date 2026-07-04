@@ -165,20 +165,20 @@
 
   ;; Normalize (3, 4) -> (0.6, 0.8), length should be 1.0
   (let* ((v (v2:new 3.0e0 4.0e0))
-         (n (v2:normalize-vector2 v))
+         (n (v2:normalize* v))
          (len (dotnet:invoke n "Length")))
     ;; Use approximate comparison for floating point
     (assert (< (abs (- len 1.0e0)) 0.0001e0))
-    (format *error-output* "  [PASS] v2:normalize-vector2 (3,4) has length ~A (expected ~A)~%" len 1.0e0))
+    (format *error-output* "  [PASS] v2:normalize* (3,4) has length ~A (expected ~A)~%" len 1.0e0))
 
   ;; Normalize zero vector -> NaN when using Vector2's static normalize
   (let* ((v (v2:new 0.0e0 0.0e0))
-         (n (v2:normalize-vector2 v)))
+         (n (v2:normalize* v)))
     ;; Should return +v2-0+ (Vector2.Zero)
-    (format *error-output* "  [info] v2:normalize-vector2 zero vector returned: ~A~%" n)
+    (format *error-output* "  [info] v2:normalize* zero vector returned: ~A~%" n)
     (assert (single:nan? (x n)))
     (assert (single:nan? (y n)))
-    (format *error-output* "  [PASS] v2:normalize-vector2 zero vector returns NaN for both parts~%"))
+    (format *error-output* "  [PASS] v2:normalize* zero vector returns NaN for both parts~%"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; rect-intersects (via generated microsoft-xna-framework-rectangle package)
