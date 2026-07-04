@@ -88,14 +88,26 @@
          (velocity (v2:* direction +movement-speed+)))
     (setf (bat-vel scene) velocity)))
 
+(defun assign-random-bat-position (scene)
+  "Assigns a random position to the bat, ensuring it is not within 15% of the edge of the play field."
+  (let* ((bounds (room-bounds scene))
+         (w (float (dotnet:invoke bounds "Width") 0.0f0))
+         (h (float (dotnet:invoke bounds "Height") 0.0f0))
+         (min-x (* 0.15f0 w))
+         (max-x (* 0.85f0 w))
+         (min-y (* 0.15f0 h))
+         (max-y (* 0.85f0 h))
+         (rand-x (+ min-x (random (- max-x min-x))))
+         (rand-y (+ min-y (random (- max-y min-y)))))
+    (setf (bat-pos scene) (v2:new rand-x rand-y))))
+
 (defmethod initialize ((scene gameplay-scene))
   "Initialize gameplay assets. First loads content via call-next-method,
    then sets up initial bat state and score coordinates."
   (call-next-method scene)
   (let* ((game (scene-game scene)))
-    ;; Set initial position of the bat
-    (setf (bat-pos scene)
-          (v2:new (+ 10 (width (slime scene))) 0.0e0))
+    ;; Set initial position of the bat (ensuring it is not within 15% of the edge of the play field)
+    (assign-random-bat-position scene)
     ;; Assign random velocity
     (assign-random-bat-velocity scene)
     ;; Precompute score text position and origin
@@ -318,16 +330,8 @@
       (when (circle-intersects slime-bounds-adjusted bat-bounds)
         (play-sound-effect (audio-controller game) (collect-sound scene))
         (setf (score scene) (+ (score scene) 100))
-        (let* ((tm (tilemap scene))
-               (ts (tileset tm))
-               (total-columns (columns tm))
-               (total-rows (rows tm))
-               (column (+ 1 (random (- total-columns 2))))
-               (row (+ 1 (random (- total-rows 2)))))
-          (setf (bat-pos scene)
-                (v2:new (float (* column (tile-width ts) (x (scale tm))) 0.0e0)
-                        (float (* row (tile-height ts) (y (scale tm))) 0.0e0)))
-          (assign-random-bat-velocity scene)))))))
+        (assign-random-bat-position scene)
+        (assign-random-bat-velocity scene))))))
 
 (defmethod draw ((scene gameplay-scene) gt)
   "Clears screen to pulsing color, renders tilemap, slime, bat, and score text."
