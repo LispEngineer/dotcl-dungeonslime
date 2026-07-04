@@ -179,13 +179,15 @@ and files in this repository.
 
 * `tilemap-test.lisp`: Tests the tileset splitting and tilemap loading logic.
 
-* `game-1.lisp`: An extension of the `core` class above that actually implements the MonoGame
-  Dungeon Slime logic. It rotates the background color between black and red (adjustable speed
-  via `color-cycle-period`) for REPL testing. It includes the `+tilemap-filename+` constant,
-  loading tilemaps with coerced integer bounds. It manages audio triggers for bouncing/collecting
-  sound effects and loops the background theme music. Refactored to utilize `cspackages`
-  constructor capabilities, replacing raw `dotnet:new` and the custom `(vector2 ...)`
-  instantiations with `v2:new`, `system-uri:new`, and `color:new`.
+* `game-1.lisp`: A subclass of the `core` class that serves as the bootstrap game shell. It initializes the window and immediately transitions to the starting `title-scene`.
+
+* `scene.lisp`: Base abstract class for scenes. Defines the lifecycle protocol (initialize, load-content, unload-content, update, draw, dispose) specialized on CLOS scene subclasses, and sets up scene-private ContentManagers.
+
+* `title-scene.lisp`: Subclass of `scene` representing the game's start/title screen. Displays the game logo and title text, and renders a pulsing "Press Enter to Play" prompt. Transitions to the gameplay scene on user input.
+
+* `gameplay-scene.lisp`: Subclass of `scene` encapsulating the main gameplay logic (slime-eating-bat, boundaries, collision). Manages gameplay-specific sprites, tilemap, score, sound effects, and music.
+
+* `scene-test.lisp`: Unit tests for the scene management lifecycle, transition mechanics, and resource disposal protocols using mock scenes.
 
 * `game-repl.lisp`: Provides functions to launch a background thread which
   operates a Lisp REPL. Sorta klugey for now but works.

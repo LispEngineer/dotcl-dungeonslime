@@ -33,6 +33,9 @@
   (format *error-output* "[test-harness.lisp] Running Collision tests...~%")
   (run-collision-tests)
 
+  (format *error-output* "[test-harness.lisp] Running Scene tests...~%")
+  (run-scene-tests)
+
   (format *error-output* "[test-harness.lisp] Running Texture Atlas tests...~%")
   (dungeon-slime::test-texture-atlas-from-file)
 

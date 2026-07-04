@@ -303,11 +303,17 @@ MonoGame Dungeon Slime features:
    * Global mute state (`M` key) and volume controls (`+` / `-` keys)
 * All Chapter 16 content (SpriteFonts)
    * `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string` helpers
-   * Score tracking system with `score` slot on `game-1`
+   * Score tracking system (migrated to `gameplay-scene`)
    * Score increments by 100 when slime collides with bat
-   * Score text rendered in top-left corner using `04B_30.ttf` monospace font
-     (system font `AdwaitaMono-Regular.ttf` — tutorial download 404s)
+   * Score text rendered in top-left corner using `04B_30.ttf` pixel font
    * SpriteFont loaded via proper MonoGame content pipeline
+* All Chapter 17 content (Scene Management)
+   * Pure CLOS-based scene lifecycle (`scene` class) specializing `initialize`, `load-content`, `update`, `draw`, and `dispose`.
+   * Staged transition queue (`active-scene` and `next-scene` slots on `core`) to prevent frame-middle transitions.
+   * Custom `title-scene` displaying a title, centered logo, and pulsing "Press Enter to Play" text.
+   * Custom `gameplay-scene` housing the slime-eating-bat gameplay loop.
+   * Return to title screen on Escape from the gameplay scene; exit only from the title screen.
+   * Explicit scene disposal and CLR garbage collection invocation.
 
 Basic in-game REPL:
 * Launches a super simplistic REPL background thread that uses
@@ -399,7 +405,4 @@ the `--base` argument to see it work (in C#).
 
 # Credits
 
-The font Adwaita is used as `Content/fonts/04B_30.ttf` and is
-[licensed](https://gitlab.gnome.org/GNOME/adwaita-fonts/-/blob/main/LICENSE)
-permissively. This choice was made by OpenCode in a seemingly aribtrary
-manner, but it works and is permitted in my interpretation.
+The font `04B_30.ttf` is the correct pixel font from [FontSpace (04b03 font)](https://www.fontspace.com/04b30-font-f735), which is used as `Content/fonts/04B_30.ttf` in this project.

@@ -61,7 +61,15 @@
     ;; This provides centralized audio management with tracking
     :allocation :class
     :accessor audio-controller
-    :documentation "The AudioController instance providing centralized audio management.")))
+    :documentation "The AudioController instance providing centralized audio management.")
+   (active-scene
+    :accessor active-scene
+    :initform nil
+    :documentation "The currently active scene.")
+   (next-scene
+    :accessor next-scene
+    :initform nil
+    :documentation "Staged next scene to switch to.")))
 
 (defmethod initialize-instance :after ((game core) &key)
   ;; This code runs immediately after a core object is created
@@ -149,20 +157,71 @@
   (format *error-output* "[core:load-content] Game.LoadContent() complete~%"))
 
 (defmethod update ((game core) gt) ;; GameTime
-  "Updates the input manager, then calls the monogame base class."
+  "Updates the input manager, processes queued scene transitions, updates the active scene,
+   and finally calls the monogame base class."
   ;; Update input states first so they're ready for the current frame
   (input-manager-update (input-manager game) gt)
   ;; Update audio controller
   (update-audio (audio-controller game))
+  
+  ;; Process queued scene transitions at the start of the update cycle
+  (when (next-scene game)
+    (transition-scene game))
+    
+  ;; Update the active scene if there is one
+  (let ((active (active-scene game)))
+    (when active
+      (update active gt)))
+      
   (dotnet:call-base (monogame game) "Update" gt))
 
 (defmethod draw ((game core) gt) ;; GameTime
-  "Just calls the monogame base class equivalent."
+  "Draws the active scene, then calls the monogame base class equivalent."
+  (let ((active (active-scene game)))
+    (when active
+      (draw active gt)))
   (dotnet:call-base (monogame game) "Draw" gt))
 
+(defmethod change-scene ((game core) next)
+  "Queue a transition to a new scene."
+  (format *error-output* "[core:change-scene] Queuing next scene: ~A~%" next)
+  (setf (next-scene game) next))
+
+(defmethod transition-scene ((game core))
+  "Gracefully transition from active-scene to next-scene.
+   Disposes the old scene, updates the reference, clears the queue,
+   forces CLR GC to reclaim memory, and initializes the new scene."
+  (let ((next (next-scene game)))
+    (format *error-output* "[core:transition-scene] Transitioning to ~A~%" next)
+    ;; 1. Dispose of the current active scene
+    (let ((active (active-scene game)))
+      (when active
+        (dispose active)))
+    ;; 2. Update the reference to the new scene (discarding the reference to the old one)
+    (setf (active-scene game) next)
+    ;; 3. Clear next-scene slot
+    (setf (next-scene game) nil)
+    ;; 4. Force GC collection now that the old scene is unreferenced
+    (format *error-output* "[core:transition-scene] Invoking GC.Collect()~%")
+    (dotnet:static "System.GC" "Collect")
+    ;; 5. Initialize the new active scene
+    (when next
+      (initialize next))))
+
 (defmethod dispose ((game core))
-  "Calls the base class's Dispose after doing our own disposing.
-   Note that in the C# class, Dispose() is NOT virtual."
+  "Disposes of active and staged scenes, then unloads main content and audio."
+  ;; Dispose of any active scene
+  (let ((active (active-scene game)))
+    (when active
+      (format *error-output* "[core:dispose] Disposing active scene...~%")
+      (dispose active)
+      (setf (active-scene game) nil)))
+  ;; Dispose of any queued next scene
+  (let ((next (next-scene game)))
+    (when next
+      (format *error-output* "[core:dispose] Disposing staged next scene...~%")
+      (dispose next)
+      (setf (next-scene game) nil)))
   ;; Unload the content first
   (format *error-output* "[core:dispose] unloading content...~%")
   (cm:unload (content game))

@@ -443,9 +443,10 @@ and character region settings matching the `.spritefont` XML description.
 
 The font file `04B_30.ttf` is referenced by name in the `.spritefont` file.
 Note: The MonoGame tutorial's download link for this font (docs.monogame.net)
-returns a 404 error. Instead, `AdwaitaMono-Regular.ttf` from the system fonts
-was copied and renamed to `04B_30.ttf` as a drop-in replacement. Both are
-monospaced TrueType fonts.
+returns a 404 error. Rather than using the temporary AdwaitaMono system font fallback,
+the correct original `04B_30.ttf` pixel font has been copied from the user's Downloads
+folder. Credit and license details for this font can be found on its
+[FontSpace Page](https://www.fontspace.com/04b30-font-f735).
 
 ## Score Origin Computation
 

@@ -1664,3 +1664,33 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 - **Literal Diagnostics**: Generated package names as literal string constants inside the fallback branch of master wrappers when raising `csharp-overload-not-found`, resolving diagnostic package retrieval bugs.
 - **Verification**: All 8 test suites built and passed successfully, and the game runs cleanly.
 
+
+
+## Session: July 4, 2026
+
+### 1. File Modifications Log
+
+| Date | File | Action | Description |
+|---|---|---|---|
+| July 4, 2026 | [Content/fonts/04B_30.ttf](Content/fonts/04B_30.ttf) | Modified | Replaced temporary system font fallback with the correct original pixel font copied from ~/Downloads. |
+| July 4, 2026 | [packages.lisp](packages.lisp) | Modified | Exported `scene`, `title-scene`, `gameplay-scene`, `active-scene`, `next-scene`, and `change-scene`. |
+| July 4, 2026 | [dungeon-slime.asd](dungeon-slime.asd) | Modified | Added `scene.lisp`, `title-scene.lisp`, `gameplay-scene.lisp`, and `scene-test.lisp` components. |
+| July 4, 2026 | [mg-core.lisp](mg-core.lisp) | Modified | Added slots `active-scene` and `next-scene` to `core`. Updated `update`, `draw`, and `dispose` to delegate to the active scene. Implemented `change-scene` and `transition-scene`. |
+| July 4, 2026 | [scene.lisp](scene.lisp) | Created | Implemented base abstract scene class and lifecycle protocol. |
+| July 4, 2026 | [title-scene.lisp](title-scene.lisp) | Created | Implemented start/title screen rendering and transition handling. |
+| July 4, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Created | Implemented gameplay scene housing slime-vs-bat gameplay logic and boundary checks. |
+| July 4, 2026 | [game-1.lisp](game-1.lisp) | Modified | Simplified to a bootstrap container class that triggers the title scene. |
+| July 4, 2026 | [scene-test.lisp](scene-test.lisp) | Created | Implemented unit tests for scene lifecycle and transitions. |
+| July 4, 2026 | [test-harness.lisp](test-harness.lisp) | Modified | Hooked up `run-scene-tests` to `run-all-tests`. |
+| July 4, 2026 | [README.md](README.md) | Modified | Documented Chapter 17 Scene Management features and updated Font credits to point to its FontSpace page. |
+| July 4, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Updated font installation and credit details. |
+| July 4, 2026 | [FILES.md](FILES.md) | Modified | Added file descriptions for new scene-related files. |
+| July 4, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the Scene Management implementation session. |
+
+### 2. Explanations Log
+
+#### CLOS-Based Scene Management (Chapter 17)
+- **Objective**: Implement a modular screen management architecture separating the title screen from main gameplay logic in a highly Lisp-idiomatic CLOS manner.
+- **Disposal & Garbage Collection**: Designed a Lisp-native `dispose` method on the base `scene` class that unloads the scene's private `.NET` `ContentManager` using `(cm:unload (scene-content scene))` and `(cm:dispose (scene-content scene))`. In the core scene transition, the old scene reference is overwritten/cleared, and `(dotnet:static "System.GC" "Collect")` is called to force deterministic reclamation of graphics assets.
+- **Bootstrapping**: Simplified `game-1` to only call base MonoGame initialization and queue the start screen `title-scene` as the next scene.
+- **Font Replacement**: Overwrote the system `Adwaita` font fallback with the original `04B_30.ttf` pixel font and credited its author.

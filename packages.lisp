@@ -179,6 +179,8 @@
     #:make-game
     ;; Classes and Methods
     #:core #:monogame #:window-info #:graphics #:graphics-device #:sprite-batch #:content #:audio-controller
+    #:active-scene #:next-scene #:change-scene
+    #:scene #:title-scene #:gameplay-scene
     #:initialize #:load-content #:update #:draw #:dispose #:begin-run #:end-run #:run
     #:update-audio #:play-sound-effect #:play-song #:pause-audio #:resume-audio #:toggle-mute #:adjust-volume #:dispose-audio
     #:game-1 #:slime #:bat #:bat-pos #:bat-vel
