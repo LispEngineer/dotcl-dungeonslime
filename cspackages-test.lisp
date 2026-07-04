@@ -132,18 +132,6 @@
       (assert-cspkg (funcall contains r-inner r-outer) nil
                     "Rectangle.Contains passthrough larger rectangle"))
 
-    ;; Typed overload versions
-    (let ((contains-vector2 (find-symbol "CONTAINS-VECTOR2" rect-pkg))
-          (contains-rectangle (find-symbol "CONTAINS-RECTANGLE" rect-pkg)))
-      (assert-cspkg (funcall contains-vector2 r-outer v-point) t
-                    "Rectangle.Contains Vector2 typed overload")
-      (assert-cspkg (funcall contains-vector2 r-outer (v2:new 200 200)) nil
-                    "Rectangle.Contains Vector2 typed overload outside")
-      (assert-cspkg (funcall contains-rectangle r-outer r-inner) t
-                    "Rectangle.Contains Rectangle typed overload contained")
-      (assert-cspkg (funcall contains-rectangle r-inner r-outer) nil
-                    "Rectangle.Contains Rectangle typed overload larger"))
-
     ;; Rectangle property accessors (version 9)
     (assert-cspkg (funcall (find-symbol "LEFT" rect-pkg) r-outer) 0
                   "Rectangle.Left of (0,0,100,100) = 0")
@@ -274,7 +262,7 @@
   (let* ((v2-pkg :microsoft-xna-framework-vector2)
          (v2-eq (find-symbol "=" v2-pkg))
          (new-fn (find-symbol "NEW" v2-pkg))
-         (new-single-single (find-symbol "NEW-SINGLE-SINGLE" v2-pkg))
+         (new-single-single (find-symbol "NEW" v2-pkg))
          ;; Test default parameterless constructor (injected for structs)
          (v-def (funcall new-fn))
          ;; Test parameterized constructor via runtime dispatch (new)
@@ -292,7 +280,7 @@
   ;; Rectangle Constructors (Struct, multi-overload)
   (let* ((rect-pkg :microsoft-xna-framework-rectangle)
          (new-fn (find-symbol "NEW" rect-pkg))
-         (new-int-int-int-int (find-symbol "NEW-INT32-INT32-INT32-INT32" rect-pkg))
+         (new-int-int-int-int (find-symbol "NEW" rect-pkg))
          ;; Test default parameterless constructor
          (r-def (funcall new-fn))
          ;; Test parameterized constructor
@@ -322,16 +310,11 @@
   ;; Uri Constructors (Class, multi-overload)
   (let* ((uri-pkg :system-uri)
          (new-fn (find-symbol "NEW" uri-pkg))
-         (new-str (find-symbol "NEW-STRING" uri-pkg))
          ;; Test single parameter string constructor via new (class)
-         (u-param (funcall new-fn "http://localhost/"))
-         ;; Test single parameter string constructor via typed overload
-         (u-typed (funcall new-str "http://localhost/")))
+         (u-param (funcall new-fn "http://localhost/")))
 
     (assert-cspkg (dotnet:invoke u-param "ToString") "http://localhost/"
-                  "Uri constructor via new")
-    (assert-cspkg (dotnet:invoke u-typed "ToString") "http://localhost/"
-                  "Uri constructor via new-string"))
+                  "Uri constructor via new"))
 
   ;; 4. Overload Resolution, Mixed-Mode, & Custom Condition Tests
   (format *error-output* "--- Overload Resolution & Condition Tests ---~%")

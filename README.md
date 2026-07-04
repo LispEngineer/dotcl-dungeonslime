@@ -33,7 +33,7 @@ game in SANO-san's awesome DotCL Common Lisp later.
 This package uses [my C# lisp package generator](https://github.com/LispEngineer/dotcl-package-generator)
 (`dotcl-packagegen`), which originally was a part of this code, but is now standalone.
 
-As of generator version 21+ (this project currently uses v23), `make cspackages`
+As of generator version 21+ (this project currently uses v30), `make cspackages`
 produces a fully self-contained `cspackages/csharp-assembly-packages.asd` alongside the
 generated `.lisp` files, in addition to the usual `packages.lisp` and
 `csharp-assembly-utils.lisp`. That `.asd` is loadable entirely on its own
@@ -55,6 +55,13 @@ that loads the MonoGame assembly). See
 ["Wiring dungeon-slime.asd to the Generator's Self-Contained .asd"](doc/implementation-notes.md)
 in the implementation notes for the full story, including the build failure this
 was designed around.
+
+### Installation and Use
+
+Please clone the package generator and run `make deploy` to get the
+`dotcl-packagegen` command line tool installed. This is needed by the
+build system if you wish to run `make cspackages`. If you do not edit
+the `cspackages`, you do not need to install the tool.
 
 
 # How to Use
