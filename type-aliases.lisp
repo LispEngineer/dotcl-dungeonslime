@@ -7,6 +7,12 @@
 (require :dotnet-class)
 (require "asdf")
 
+;; The compiled game/test executable never runs asdf:load-system on this
+;; project (unlike load-repl.lisp's REPL path), so nothing registers this
+;; project's directory with ASDF. Without this, asdf:system-source-directory
+;; below signals MISSING-COMPONENT at load time.
+(push '*default-pathname-defaults* asdf:*central-registry*)
+
 (format *error-output* "[type-aliases.lisp] Loading in package ~S~%" *package*)
 
 ;; Type aliases visible at compile-time too: dotnet:define-class resolves
@@ -72,34 +78,22 @@
       sys-dir outdir-file bin-dir dll-path)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Register classes for CLOS C# Class integration and Type Resolution
+;; Register classes for CLOS C# Class integration
 ;; 1. First load all the necessary assemblies
 ;; 2. Then register the classes with the CLOS type system
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (defparameter *content-directory* nil
-    "The resolved content directory path used in REPL contexts.")
-
-  (defparameter dotnet-assemblies
-    '("MonoGame.Framework.dll"
-      "GumCommon.dll"
-      "MonoGameGum.dll")
-    "These are all the external assemblies loaded so that classes are registered
-     for method dispatch and type resolution.")
-
-  (defparameter runtime-assemblies
-    '("DungeonSlime.dll"
-     )
-    "These are all the external assemblies loaded so that classes are registered
-     for method dispatch and type resolution.")
-
-  (defparameter csharp-classes
-    '("Microsoft.Xna.Framework.Vector2"
-      "Microsoft.Xna.Framework.Rectangle")
-    "Classes to be used for C# CLOS generic dispatch methods")
-) ; eval-when always
+    "The resolved content directory path used in REPL contexts."))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter dotnet-assemblies
+    '("MonoGame.Framework.dll"
+      "MonoGameGum.dll"
+      "GumCommon.dll")
+    "These are all the external assemblies loaded so that classes are registered
+     for method dispatch.")
+
   (when (find-package :asdf)
     (format *error-output* "[type-aliases.lisp] Loading assemblies...~%")
     (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
@@ -116,37 +110,33 @@
                 (progn
                   (format *error-output* "[type-aliases.lisp] Loading assembly: ~S~%" assembly)
                   (dotnet:load-assembly (namestring path)))
-                (format *error-output* "[type-aliases.lisp] Warning: Assembly not found at ~A~%" path))))))
-    (format *error-output* "[type-aliases.lisp] ...finished loading assemblies.~%"))
-) ; eval-when always
+                (format *error-output* "[type-aliases.lisp] Warning: Assembly not found at ~A~%" path))))))))
 
 (eval-when (:load-toplevel :execute)
   ;; Load the runtime assembly for this project so that custom C# types
   ;; (like MonoUtilsRegistrar) are resolvable during REPL sessions.
   (when (find-package :asdf)
-    (format *error-output* "[type-aliases.lisp] Loading runtime assemblies...~%")
     (let* ((sys-dir (asdf:system-source-directory "dungeon-slime"))
-	   (_ (format *error-output* "A2~%"))
            (outdir-file (merge-pathnames "obj/dotcl-outdir.txt" sys-dir))
-	   (_ (format *error-output* "A3~%"))
            (bin-dir (when (probe-file outdir-file)
                       (with-open-file (s outdir-file)
                         (read-line s)))))
-      (format *error-output* "A4~%")
       (when bin-dir
-	(dolist (assembly runtime-assemblies)
-          (let ((path (merge-pathnames (concatenate 'string bin-dir assembly) sys-dir)))
-            (if (probe-file path)
-                (progn
-                  (format *error-output* "[type-aliases.lisp] Loading runtime assembly: ~A~%" assembly)
-                  (dotnet:load-assembly (namestring path)))
-                (format *error-output* "[type-aliases.lisp] Warning: Runtime assembly ~A not found at ~A~%" assembly path)))))
-    (format *error-output* "[type-aliases.lisp] ...finished loading runtime assemblies.~%")))
+        (let ((path (merge-pathnames (concatenate 'string bin-dir "DungeonSlime.dll") sys-dir)))
+          (if (probe-file path)
+              (progn
+                (format *error-output* "[type-aliases.lisp] Loading runtime assembly: DungeonSlime.dll~%")
+                (dotnet:load-assembly (namestring path)))
+              (format *error-output* "[type-aliases.lisp] Warning: Runtime assembly DungeonSlime.dll not found at ~A~%" path))))))
+
+  (defparameter csharp-classes
+    '("Microsoft.Xna.Framework.Vector2"
+      "Microsoft.Xna.Framework.Rectangle")
+    "Classes to be used for C# CLOS generic dispatch methods")
 
   (dolist (cls csharp-classes)
     (format *error-output* "[type-aliases.lisp] Registering class: ~S~%" cls)
-    (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type cls)))
-) ; eval-when load and execute
+    (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass" (dotnet:resolve-type cls))))
 
 (format *error-output* "[type-aliases.lisp] Load complete in package ~S.~%" *package*)
 

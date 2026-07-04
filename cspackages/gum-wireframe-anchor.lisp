@@ -5,6 +5,8 @@
 
 (cl:in-package :gum-wireframe-anchor)
 
+(cl:format cl:*error-output* "gum-wireframe-anchor~%")
+
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Wireframe.Anchor"))
 (cl:defconstant <type-str> "Gum.Wireframe.Anchor")
 (cl:defconstant <creation> "2026-07-04T16:57:01Z")

@@ -44,4 +44,6 @@
 
 (eval-when (:load-toplevel :execute)
   (format *error-output* "[monoutils.lisp] Initializing MonoUtilsRegistrar...~%")
-  (dotnet:static "MonoUtilsRegistrar" "Initialize"))
+  (dotnet:static "MonoUtilsRegistrar" "Initialize")
+  (format *error-output* "[monoutils.lisp] ...MonoUtilsRegistrar initialized.~%")
+  )
