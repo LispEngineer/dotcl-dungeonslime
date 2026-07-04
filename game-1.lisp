@@ -83,6 +83,6 @@
   ; FrameworkElement.GamePadsForUiControl.AddRange(GumService.Default.Gamepads);
   (format *error-output* "[game-1.lisp:initialize-gum] Gum FwE GP4UIC: ~A~%" gum-fwe:game-pads-for-ui-control)
   ;; This is also a List`1
-  (list:add-range gum-fwe:keyboards-for-ui-control (gs:gamepads gs:default))
+  (list:add-range gum-fwe:game-pads-for-ui-control (gs:gamepads gs:default))
 
 ) ; initialize-gum
