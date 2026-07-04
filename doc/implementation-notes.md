@@ -1034,3 +1034,19 @@ To support `sprite-font:line-spacing` without namespaces, the
 `(:sprite-font :microsoft-xna-framework-graphics-sprite-font)` local nickname was added to the
 `:dungeon-slime` package definition in `packages.lisp`.
 
+## Dynamic Viewport Resolution Support
+
+To support high-resolution displays (such as the default `1280x720` window size defined in
+`constants.lisp`), the `title-scene:draw` method does not use static size config values from
+`window-info` (which would fallback to `800x480` when `window-info` is unbound). Instead, it
+queries the active `GraphicsDevice` viewport directly via `(gd:viewport gd)`.
+By passing the viewport object to the generic `width` and `height` functions, the actual
+rendering backbuffer resolution is retrieved dynamically. These bounds are then used for:
+- Sizing the destination and source rectangles to ensure the tiled background covers the
+  entire window space.
+- Correctly calculating the horizontal centering (`win-w`) of all title lines and prompt text.
+- Scaling the vertical offsets (`start-y` and `pos-y`) proportionally relative to `win-h` (using
+  `15%` and `80%` height factors respectively) to maintain a consistent UI layout at any window
+  resolution.
+
+

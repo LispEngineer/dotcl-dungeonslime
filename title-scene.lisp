@@ -74,12 +74,12 @@
       (change-scene game (make-instance 'gameplay-scene :game game))
       (return-from update))
 
-    ;; Update scrolling offset diagonally at 120 pixels per second
+    ;; Update scrolling offset diagonally at 30 pixels per second
     (when (background-texture scene)
       (let* ((tex (background-texture scene))
              (w (float (width tex) 0.0f0))
              (h (float (height tex) 0.0f0))
-             (scroll-speed 120.0f0)
+             (scroll-speed 30.0f0) ;; FIXME: Make a +constant+
              (offset-delta (* scroll-speed dt)))
         ;; Use mod to wrap the offsets seamlessly within texture dimensions
         (setf (background-offset-x scene) (mod (- (background-offset-x scene) offset-delta) w))
@@ -87,7 +87,8 @@
 
 (defmethod draw ((scene title-scene) gt)
   "Clears screen to dark blue, draws scrolling tiled background pattern (if loaded),
-   and draws centered title text with a pulsing prompt using wrapper functions."
+   and draws centered title text with a pulsing prompt using wrapper functions.
+   Dynamically queries viewport size to support full-resolution tiling and layout."
   (let* ((game (scene-game scene))
          (gd (graphics-device game))
          (sb (sprite-batch game))
@@ -95,16 +96,18 @@
          (prompt-font (prompt-font scene))
          (lines (title-lines scene))
          (prompt (prompt-text scene))
-         (bg-tex (background-texture scene)))
+         (bg-tex (background-texture scene))
+         ;; Retrieve actual viewport dimensions dynamically to support any window resolution
+         (vp (gd:viewport gd))
+         (win-w (width vp))
+         (win-h (height vp)))
     ;; Clear graphics device to a dark blue color (RGB: 24, 33, 58) using GraphicsDevice wrapper
     (gd:clear gd (color:new 24 33 58))
 
     ;; 1. Draw tiled background pattern using PointWrap sampler state
     (when bg-tex
       (sprite-batch:begin sb :sampler-state sampler-state:+point-wrap+)
-      (let* ((win-w (getf (window-info game) :width 800))
-             (win-h (getf (window-info game) :height 480))
-             (dest-rect (rect:new 0 0 win-w win-h))
+      (let* ((dest-rect (rect:new 0 0 win-w win-h))
              ;; Round offsets to nearest integer pixel to avoid scaling artifacts
              (ox (round (background-offset-x scene)))
              (oy (round (background-offset-y scene)))
@@ -118,10 +121,8 @@
 
     ;; Draw centered title text (two lines, white, 5x font)
     (when (and title-font lines)
-      (let ((win-w (getf (window-info game) :width 800))
-            ;; Get line spacing using SpriteFont wrapper
-            (line-spacing (float (sprite-font:line-spacing title-font) 0.0f0))
-            (start-y 70.0f0))
+      (let ((line-spacing (float (sprite-font:line-spacing title-font) 0.0f0))
+            (start-y (* win-h 0.15f0)))
         (loop for line in lines
               for idx from 0
               do (let* ((size (measure-string title-font line))
@@ -132,9 +133,8 @@
     ;; Draw centered pulsing prompt text (smaller 1x font)
     (when (and prompt-font prompt)
       (let* ((prompt-size (measure-string prompt-font prompt))
-             (win-w (getf (window-info game) :width 800))
              (pos-x (float (/ (- win-w (x prompt-size)) 2) 0.0f0))
-             (pos-y 380.0f0)
+             (pos-y (* win-h 0.8f0))
              ;; Pulse text color alpha using sine function over total game time (using time wrappers)
              (secs (ts:total-seconds (game-time:total-game-time gt)))
              (alpha-factor (float (+ 0.6f0 (* 0.4f0 (sin (* secs 4.0e0)))) 0.0f0))

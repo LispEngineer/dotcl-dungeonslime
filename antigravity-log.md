@@ -1721,4 +1721,7 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
   2. Foreground text/UI elements are drawn under `sampler-state:+point-clamp+` to keep the pixel-art fonts crisp and restrict them from tiling.
 - **Removing dotnet:invoke**: Fully migrated all direct `dotnet:invoke` calls in `title-scene.lisp` to their corresponding generated wrappers in the `cspackages/` directory (including `cm:load` for loading assets, `gd:clear` for screen clearing, `sprite-font:line-spacing` for font properties, `game-time:elapsed-game-time`/`total-game-time` and `ts:total-seconds` for timing, `game:exit` for game termination, and `sprite-batch:end` for batch completion).
 
+- **Dynamic Viewport Dimensions**: Fixed a layout and tiling issue where the background and text centering did not scale to fill the full resolution window (`1280x720`). Replaced static fallback values from `window-info` (which defaulted to `800x480` due to `window-info` being `nil`) with dynamic queries of the active graphics device viewport bounds. Using `(gd:viewport gd)` and the `width`/`height` generic functions, the code now dynamically fetches the actual backbuffer rendering dimensions, extending the tiled background to cover the entire screen and centering all text elements correctly.
+
+
 
