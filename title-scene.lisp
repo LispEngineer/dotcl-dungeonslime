@@ -32,7 +32,7 @@
         (dotnet:invoke-generic (scene-content scene) "Load"
                                '("Microsoft.Xna.Framework.Graphics.Texture2D")
                                "images/logo"))
-  (setf (title-font scene) (load-font (scene-content scene))))
+  (setf (title-font scene) (load-font (scene-content scene) :name "fonts/04B_30_5x")))
 
 (defmethod update ((scene title-scene) gt)
   "Checks keyboard and gamepad inputs to trigger transition to the gameplay scene.
