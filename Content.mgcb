@@ -34,6 +34,20 @@
 /processorParam:Quality=Best
 /build:Content/audio/theme.ogg
 
+#begin Content/fonts/04B_30_5x.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Content/fonts/04B_30_5x.spritefont
+
+#begin Content/fonts/04B_30.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Content/fonts/04B_30.spritefont
+
 #begin Content/images/atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -75,12 +89,4 @@
 
 #begin Content/tilemap-definition.lisp
 /copy:Content/tilemap-definition.lisp
-
-#begin Content/fonts/04B_30.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:FontSize=17.5
-/processorParam:UseKerning=true
-/processorParam:CharacterRegions=32,126
-/build:Content/fonts/04B_30.spritefont
 
