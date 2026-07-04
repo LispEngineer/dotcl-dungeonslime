@@ -129,6 +129,13 @@ You can use the provided `Makefile` to build, test, and run the project:
 * **Run MonoGame Content Builder**: `make mgcb`
 * **Check Lisp parentheses balance:** `make check-parens`
 
+> NOTE:
+> **Font Rebuilds:** If you edit or replace the raw `.ttf` font file under `Content/fonts/`,
+  the MonoGame Content Builder (MGCB) task will not automatically recompile it during `make build` 
+  because MGCB only monitors changes to the `.spritefont` XML descriptor. To force a rebuild of 
+  the font asset, you must touch the `.spritefont` file to update its timestamp:
+> `touch Content/fonts/04B_30.spritefont`
+
 Or manually run the steps:
 
 1. To build: `dotnet build DungeonSlime.csproj -v d -c Debug`

@@ -11,13 +11,16 @@
   or changes to code made.
 * Update documentation with any changes, especially these files:
   * Update the `README.md` file with documentation on new features.
-  * Update `implementation-notes.md` with anything that may be a bit
-    tricky to understand or reimplement/reuse later.
+  * Update `doc/implementation-notes.md` with anything that may be a bit
+    tricky to understand or reimplement/reuse later, or any bugs that
+    were identified with unusual causes, etc.
   * Update `FILES.md` with a brief description of any new files,
     or significant changes to the content of files.
   * Update `antigravity-log.md` with any explanation you provide me,
     and a log of any changes you make to any files.
-    * Create this file if it does not exist
+    * Create this file if it does not exist in this repository
+    * Do not update a central file `~/.gemini/antigravity-cli/...`
+      instead of the local file.
 * Do NOT make any changes to DotCL source code unless explicitly
   directed by the user. All the work for this project is to be done
   on this DungeonSlime code only.
