@@ -106,6 +106,17 @@
     (list:add (gum-fwe:tab-key-combos) kc)
   ) ;; let kc
 
+  ; // The assets created for the UI were done so at 1/4th the size to keep the size of the
+  ; // texture atlas small.  So we will set the default canvas size to be 1/4th the size of
+  ; // the game's resolution then tell gum to zoom in by a factor of 4.
+  ; GumService.Default.CanvasWidth = GraphicsDevice.PresentationParameters.BackBufferWidth / 4.0f;
+  ; GumService.Default.CanvasHeight = GraphicsDevice.PresentationParameters.BackBufferHeight / 4.0f;
+  ; GumService.Default.Renderer.Camera.Zoom = 4.0f;
 
-
+  (setf (gs:canvas-width gs:default) (*  (pp:back-buffer-width (gd:presentation-parameters (graphics-device game))) 0.25f0))
+  (setf (gs:canvas-height gs:default) (*  (pp:back-buffer-height (gd:presentation-parameters (graphics-device game))) 0.25f0))
+  (format *error-output* "[game-1.lisp:initialize-gum] Renderer: ~A~%" (gs:renderer gs:default))
+  (format *error-output* "[game-1.lisp:initialize-gum] Camera: ~A~%" (renderer:camera (gs:renderer gs:default)))
+  ;; TODO: I really badly need threading macros
+  (setf (gum-camera:zoom (renderer:camera (gs:renderer gs:default))) 4.0f0)
 ) ; initialize-gum

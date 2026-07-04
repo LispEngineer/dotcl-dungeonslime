@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Creation Date: 2026-07-04T22:15:34Z
 
 (cl:in-package :cl-user)
 
@@ -2391,6 +2391,41 @@
    #:try-load-content
   ))
 
+;;; Source File: rendering-library-camera.lisp
+;;; C# Class: RenderingLibrary.Camera
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-camera
+  (:use :cl)
+  (:shadow
+   #:position
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:position
+   #:pixel-perfect-offset-x
+   #:pixel-perfect-offset-y
+   #:absolute-bottom
+   #:absolute-left
+   #:absolute-right
+   #:absolute-top
+   #:camera-center-on-screen
+   #:client-height
+   #:client-left
+   #:client-top
+   #:client-width
+   #:rendering-x-offset
+   #:rendering-y-offset
+   #:x
+   #:y
+   #:zoom
+   #:get-transformation-matrix
+   #:get-transformation-matrix*
+  ))
+
 ;;; Source File: mono-game-gum-gum-service.lisp
 ;;; C# Class: MonoGameGum.GumService
 ;;; Constant Properties: (none)
@@ -2745,6 +2780,52 @@
    #:held-key
    #:triggered-on-repeat?
    #:pushed-key
+  ))
+
+;;; Source File: rendering-library-graphics-renderer.lisp
+;;; C# Class: RenderingLibrary.Graphics.Renderer
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-graphics-renderer
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:single-pixel-source-rectangle
+   #:lock-object
+   #:render-using-hierarchy
+   #:custom-effect-manager
+   #:self
+   #:using-effect
+   #:apply-camera-zoom-on-world-translation
+   #:linearize-textures
+   #:normal-blend-state
+   #:texture-filter
+   #:use-basic-effect-rendering
+   #:use-custom-effect-rendering
+   #:camera
+   #:dotted-line-texture
+   #:graphics-device
+   #:using-premultiplied-alpha?
+   #:layers
+   #:main-layer
+   #:single-pixel-texture
+   #:sprite-renderer
+   #:add-layer
+   #:begin
+   #:clear-performance-recording-variables
+   #:draw
+   #:end
+   #:equals
+   #:force-end
+   #:initialize
+   #:insert-layer
+   #:remove-layer
+   #:remove-renderable
+   #:try-get-single-pixel-texture
+   #:uninitialize
   ))
 
 ;;; Source File: system-collections-generic-list-1.lisp

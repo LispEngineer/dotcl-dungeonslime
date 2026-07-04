@@ -103,6 +103,7 @@ cspackages:
 			--assembly $(BIN_DIR)GumCommon.dll \
 				--class Gum.Wireframe.Anchor \
         --class RenderingLibrary.Content.IContentLoader \
+        --class RenderingLibrary.Camera \
 			--assembly $(BIN_DIR)MonoGameGum.dll \
 			  --class MonoGameGum.GumService \
 				--class Gum.Forms.Controls.FrameworkElement \
@@ -114,6 +115,7 @@ cspackages:
 				--class Gum.Forms.DefaultVisualsVersion \
         --class RenderingLibrary.Content.ContentLoader \
         --class Gum.Forms.Controls.KeyCombo \
+        --class RenderingLibrary.Graphics.Renderer \
 			--assembly $(REF_DIR)System.Collections.dll \
         --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]

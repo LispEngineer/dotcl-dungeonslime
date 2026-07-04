@@ -64,8 +64,10 @@
 (cl:defpackage :microsoft-xna-framework-vector2)
 (cl:defpackage :mono-game-gum-gue-deriving-text-runtime)
 (cl:defpackage :mono-game-gum-gum-service)
+(cl:defpackage :rendering-library-camera)
 (cl:defpackage :rendering-library-content-content-loader)
 (cl:defpackage :rendering-library-content-i-content-loader)
+(cl:defpackage :rendering-library-graphics-renderer)
 (cl:defpackage :system-app-domain)
 (cl:defpackage :system-boolean)
 (cl:defpackage :system-collections-generic-list-1)
@@ -201,6 +203,8 @@
     (:gum-fwe :gum-forms-controls-framework-element)
     (:list :system-collections-generic-list-1)
     (:key-combo :gum-forms-controls-key-combo)
+    (:renderer :rendering-library-graphics-renderer)
+    (:gum-camera :rendering-library-camera)
   )
   (:export 
     ;; Constants
