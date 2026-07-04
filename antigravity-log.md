@@ -1686,6 +1686,8 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | July 4, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Updated font installation and credit details. |
 | July 4, 2026 | [FILES.md](FILES.md) | Modified | Added file descriptions for new scene-related files. |
 | July 4, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the Scene Management implementation session. |
+| July 4, 2026 | [scene-test.lisp](scene-test.lisp) | Modified | Fixed parenthesis mismatch in run-scene-tests. |
+| July 4, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Modified | Extended let* block in update method to keep game and kb in scope across the entire gameplay update logic, fixing runtime unbound-variable errors. |
 
 ### 2. Explanations Log
 
@@ -1695,3 +1697,4 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 - **Bootstrapping**: Simplified `game-1` to only call base MonoGame initialization and queue the start screen `title-scene` as the next scene.
 - **Font Replacement**: Overwrote the system `Adwaita` font fallback with the original `04B_30.ttf` pixel font and credited its author.
 - **REPL Asset Loading Fix**: Fixed a crash in the REPL where the scene-specific `ContentManager` instances failed to resolve asset paths like `images/logo`. Modified `scene.lisp`'s `:after` `initialize-instance` method to query and inherit the `RootDirectory` property dynamically from the game's main `ContentManager` rather than hardcoding `"Content"`. This ensures the fully qualified `*content-directory*` path set by `load-repl.lisp` propagates to all scenes when running under the REPL environment.
+- **Gameplay Update Scope Fix**: Corrected a runtime unbound-variable error (`#<UNBOUND-VARIABLE: GAME>`) that prevented collision detection and scoring from executing. The closing parenthesis of the initial `let*` block in `update ((scene gameplay-scene) gt)` was misplaced, causing all subsequent movement checks and collision calculations to run outside the scope of `game` and `kb`. Extended the `let*` block to wrap the entire method body.

@@ -8,6 +8,9 @@ to do with this game & framework.
 
 # Open Bugs
 
+* Make a new bat start away from the edges by at least some amount, so it
+  doesn't immediately start the game with the "bat hits wall" noise.
+
 * If the standalone game is exited using the GUI of the game (currently
   by pressing `ESC`), it gives this error:
   ```
