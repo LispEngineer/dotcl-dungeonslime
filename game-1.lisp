@@ -63,4 +63,4 @@
   ;; Initialize the Gum service. The parameter specifies
   ;; the version of the default visuals to use. V3 is the latest
   ;; version.
-  (initialize gs:default (monogame game) default-visuals-version:+v3+))
+  (gs:initialize gs:default (monogame game) default-visuals-version:+v3+))
