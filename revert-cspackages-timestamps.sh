@@ -31,7 +31,7 @@ CSPACKAGES_DIR="cspackages"
 
 # Matches the +/- diff lines for the two timestamp fields emitted by the
 # generator. Escaped parenthesis for the defconstant form.
-TIMESTAMP_LINE_RE='^[+-];;; Creation Date:|^[+-]\(cl:defconstant <creation>'
+TIMESTAMP_LINE_RE='^[+-];;; Creation Date:|^[+-]\(cl:defconstant <creation>|^[+-]Generation date:'
 
 reverted=0
 kept=0
