@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 30
-;;; Creation Date: 2026-07-04T15:34:33Z
+;;; Creation Date: 2026-07-04T16:57:01Z
 
 (cl:in-package :cl-user)
 
@@ -2316,5 +2316,323 @@
    #:play
    #:resume
    #:stop
+  ))
+
+;;; Source File: gum-wireframe-anchor.lisp
+;;; C# Class: Gum.Wireframe.Anchor
+;;; Constant Properties: (none)
+(cl:defpackage :gum-wireframe-anchor
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:+bottom+
+   #:+bottom-left+
+   #:+bottom-right+
+   #:+center+
+   #:+center-horizontally+
+   #:+center-vertically+
+   #:+left+
+   #:+right+
+   #:+top+
+   #:+top-left+
+   #:+top-right+
+   #:value__
+  ))
+
+;;; Source File: mono-game-gum-gum-service.lisp
+;;; C# Class: MonoGameGum.GumService
+;;; Constant Properties: (none)
+(cl:defpackage :mono-game-gum-gum-service
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:default
+   #:canvas-height
+   #:canvas-width
+   #:content-loader
+   #:cursor
+   #:deferred-queue
+   #:game
+   #:gamepads
+   #:game-time
+   #:initialized?
+   #:keyboard
+   #:last-load-result
+   #:localization-service
+   #:modal-root
+   #:popup-root
+   #:renderer
+   #:root
+   #:synchronization-context
+   #:system-managers
+   #:draw
+   #:enable-hot-reload
+   #:initialize
+   #:initialize-for-testing
+   #:load-animations
+   #:refresh-styles
+   #:uninitialize
+   #:update
+   #:use-gamepad-defaults
+   #:use-keyboard-defaults
+   #:use-single-threaded-async
+  ))
+
+;;; Source File: gum-forms-controls-framework-element.lisp
+;;; C# Class: Gum.Forms.Controls.FrameworkElement
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-framework-element
+  (:use :cl)
+  (:shadow
+   #:close
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:+disabled-focused-state+
+   #:+disabled-focused-state-name+
+   #:+disabled-state+
+   #:+disabled-state-name+
+   #:+enabled-state+
+   #:+enabled-state-name+
+   #:+focused-state+
+   #:+focused-state-name+
+   #:+highlighted-focused-state+
+   #:+highlighted-focused-state-name+
+   #:+highlighted-state+
+   #:+highlighted-state-name+
+   #:+horizontal-state-name+
+   #:+pushed-state+
+   #:+pushed-state-name+
+   #:+selected-highlighted-state-name+
+   #:+selected-state-name+
+   #:+vertical-state-name+
+   #:default-forms-components
+   #:default-forms-templates
+   #:game-pads-for-ui-control
+   #:keyboards-for-ui-control
+   #:absolute-left
+   #:absolute-top
+   #:actual-height
+   #:actual-width
+   #:binding-context
+   #:custom-cursor
+   #:gamepad-tabbing-focus-behavior
+   #:height
+   #:height-units
+   #:enabled?
+   #:focused?
+   #:tab-navigation-enabled?
+   #:using-left-and-right-gamepad-directions-for-navigation?
+   #:visible?
+   #:max-height
+   #:max-width
+   #:min-height
+   #:min-width
+   #:name
+   #:parent-framework-element
+   #:tool-tip
+   #:visual
+   #:width
+   #:width-units
+   #:x
+   #:x-origin
+   #:x-units
+   #:y
+   #:y-origin
+   #:y-units
+   #:add-child
+   #:anchor
+   #:apply-runtime-properties
+   #:call-loaded
+   #:clear-binding
+   #:close
+   #:dock
+   #:get-desired-state
+   #:get-desired-state-with-checked
+   #:get-graphical-ui-element-for
+   #:get-graphical-ui-element-for-framework-element
+   #:get-if-gamepad-or-keyboard-primary-push-input-is-held
+   #:get-if-is-on-this-or-child-visual
+   #:get-if-push-input-is-held
+   #:get-state
+   #:get-visual
+   #:get-visual<>
+   #:handle-gamepad-navigation
+   #:handle-keyboard-focus-update
+   #:handle-tab
+   #:handle-tab*
+   #:handle-visual-binding-context-changed
+   #:data-bound?
+   #:on-binding-context-changed
+   #:on-property-changed
+   #:push-value-to-view-model
+   #:raise-key-down
+   #:react-to-visual-changed
+   #:react-to-visual-removed
+   #:refresh-internal-visual-references
+   #:register-runtime-property
+   #:register-runtime-property<>
+   #:remove-child
+   #:reposition-to-keep-in-screen
+   #:save-runtime-properties
+   #:set-binding
+   #:show
+   #:to-string
+   #:update-state
+   #:update-state-recursively
+  ))
+
+;;; Source File: gum-forms-controls-panel.lisp
+;;; C# Class: Gum.Forms.Controls.Panel
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-panel
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:children
+   #:react-to-visual-changed
+  ))
+
+;;; Source File: gum-forms-controls-button.lisp
+;;; C# Class: Gum.Forms.Controls.Button
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-button
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:+button-category-name+
+   #:text
+   #:apply-runtime-properties
+   #:react-to-visual-changed
+   #:refresh-internal-visual-references
+   #:save-runtime-properties
+   #:set-text-no-translate
+   #:update-state
+  ))
+
+;;; Source File: mono-game-gum-gue-deriving-text-runtime.lisp
+;;; C# Class: MonoGameGum.GueDeriving.TextRuntime
+;;; Constant Properties: (none)
+(cl:defpackage :mono-game-gum-gue-deriving-text-runtime
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:default-height
+   #:default-height-units
+   #:default-width
+   #:default-width-units
+   #:alpha
+   #:bitmap-font
+   #:blend
+   #:blend-state
+   #:blue
+   #:color
+   #:custom-font-file
+   #:font
+   #:font-family
+   #:font-scale
+   #:font-size
+   #:green
+   #:horizontal-alignment
+   #:bold?
+   #:italic?
+   #:line-height-multiplier
+   #:max-letters-to-show
+   #:max-number-of-lines
+   #:outline-thickness
+   #:overlap-direction
+   #:red
+   #:text
+   #:text-overflow-horizontal-mode
+   #:text-rendering-position-mode
+   #:use-custom-font
+   #:use-font-smoothing
+   #:vertical-alignment
+   #:wrapped-text
+   #:add-to-managers
+   #:clone
+   #:get-character-index-at-position
+   #:set-text-no-translate
+  ))
+
+;;; Source File: gum-forms-controls-label.lisp
+;;; C# Class: Gum.Forms.Controls.Label
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-label
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:text
+   #:text-component
+   #:apply-runtime-properties
+   #:react-to-visual-changed
+   #:refresh-internal-visual-references
+   #:save-runtime-properties
+   #:set-text-no-translate
+  ))
+
+;;; Source File: gum-forms-controls-slider.lisp
+;;; C# Class: Gum.Forms.Controls.Slider
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-slider
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:+slider-category-name+
+   #:ignored-keys
+   #:snap-to-tick-enabled?
+   #:thumb-grabbed?
+   #:next-in-tab-sequence
+   #:parent-input-receiver
+   #:taking-input
+   #:ticks-frequency
+   #:apply-runtime-properties
+   #:do-keyboard-action
+   #:handle-char-entered
+   #:handle-key-down
+   #:handle-thumb-push
+   #:lose-focus
+   #:on-focus-update
+   #:on-focus-update-preview
+   #:on-gain-focus
+   #:on-lose-focus
+   #:on-maximum-changed
+   #:on-minimum-changed
+   #:on-value-changed
+   #:react-to-visual-changed
+   #:react-to-visual-removed
+   #:receive-input
+   #:update-state
+   #:update-thumb-position-to-cursor-drag
   ))
 
