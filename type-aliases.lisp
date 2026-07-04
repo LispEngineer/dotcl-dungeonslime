@@ -87,6 +87,12 @@
     "These are all the external assemblies loaded so that classes are registered
      for method dispatch and type resolution.")
 
+  (defparameter runtime-assemblies
+    '("DungeonSlime.dll"
+     )
+    "These are all the external assemblies loaded so that classes are registered
+     for method dispatch and type resolution.")
+
   (defparameter csharp-classes
     '("Microsoft.Xna.Framework.Vector2"
       "Microsoft.Xna.Framework.Rectangle")
@@ -128,14 +134,14 @@
                         (read-line s)))))
       (format *error-output* "A4~%")
       (when bin-dir
-	(dolist (assembly dotnet-assemblies)
+	(dolist (assembly runtime-assemblies)
           (let ((path (merge-pathnames (concatenate 'string bin-dir assembly) sys-dir)))
             (if (probe-file path)
                 (progn
                   (format *error-output* "[type-aliases.lisp] Loading runtime assembly: ~A~%" assembly)
                   (dotnet:load-assembly (namestring path)))
                 (format *error-output* "[type-aliases.lisp] Warning: Runtime assembly ~A not found at ~A~%" assembly path)))))
-    (format *error-output* "[type-aliases.lisp] ...finished loading assemblies.~%")))
+    (format *error-output* "[type-aliases.lisp] ...finished loading runtime assemblies.~%")))
 
   (dolist (cls csharp-classes)
     (format *error-output* "[type-aliases.lisp] Registering class: ~S~%" cls)
