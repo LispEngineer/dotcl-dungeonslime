@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteEffects
-;;; Generator Version: 34
-;;; Creation Date: 2026-07-05T17:29:36Z
+;;; Generator Version: 35
+;;; Creation Date: 2026-07-05T18:06:58Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-effects)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteEffects"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteEffects")
-(cl:defconstant <creation> "2026-07-05T17:29:36Z")
-(cl:defconstant <version> 34)
+(cl:defconstant <creation> "2026-07-05T18:06:58Z")
+(cl:defconstant <version> 35)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
