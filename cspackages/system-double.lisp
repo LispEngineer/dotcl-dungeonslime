@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Double
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :system-double)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Double"))
 (cl:defconstant <type-str> "System.Double")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

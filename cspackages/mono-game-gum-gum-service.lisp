@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:defconstant <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -79,6 +79,13 @@
 
 (cl:defun system-managers (obj!)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "get_SystemManagers"))
+
+(cl:defun add-hot-reload-completed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "MonoGameGum.GumService") obj!) "HotReloadCompleted" handler))
+
+(cl:defun remove-hot-reload-completed (obj! handler)
+  "Pass the exact same HANDLER object given to add-hot-reload-completed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "MonoGameGum.GumService") obj!) "HotReloadCompleted" handler))
 
 (cl:defun draw (obj!)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Draw"))

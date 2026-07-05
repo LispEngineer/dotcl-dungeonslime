@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GraphicsDeviceManager
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :microsoft-xna-framework-graphics-device-manager)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.GraphicsDeviceManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GraphicsDeviceManager")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -90,6 +90,48 @@
 
 (cl:defun (cl:setf synchronize-with-vertical-retrace) (new-value obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "set_SynchronizeWithVerticalRetrace" new-value))
+
+(cl:defun add-device-created (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceCreated" handler))
+
+(cl:defun remove-device-created (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-created -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceCreated" handler))
+
+(cl:defun add-device-disposing (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceDisposing" handler))
+
+(cl:defun remove-device-disposing (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-disposing -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceDisposing" handler))
+
+(cl:defun add-device-reset (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceReset" handler))
+
+(cl:defun remove-device-reset (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-reset -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceReset" handler))
+
+(cl:defun add-device-resetting (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceResetting" handler))
+
+(cl:defun remove-device-resetting (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-resetting -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "DeviceResetting" handler))
+
+(cl:defun add-disposed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "Disposed" handler))
+
+(cl:defun remove-disposed (obj! handler)
+  "Pass the exact same HANDLER object given to add-disposed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "Disposed" handler))
+
+(cl:defun add-preparing-device-settings (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "PreparingDeviceSettings" handler))
+
+(cl:defun remove-preparing-device-settings (obj! handler)
+  "Pass the exact same HANDLER object given to add-preparing-device-settings -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "PreparingDeviceSettings" handler))
 
 (cl:defun apply-changes (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GraphicsDeviceManager") obj!) "ApplyChanges"))

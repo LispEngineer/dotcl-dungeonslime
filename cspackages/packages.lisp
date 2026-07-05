@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T22:15:34Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :cl-user)
 
@@ -382,6 +382,24 @@
    #:set-thread-principal
    #:to-string
    #:unload
+   #:add-assembly-load
+   #:remove-assembly-load
+   #:add-assembly-resolve
+   #:remove-assembly-resolve
+   #:add-domain-unload
+   #:remove-domain-unload
+   #:add-first-chance-exception
+   #:remove-first-chance-exception
+   #:add-process-exit
+   #:remove-process-exit
+   #:add-reflection-only-assembly-resolve
+   #:remove-reflection-only-assembly-resolve
+   #:add-resource-resolve
+   #:remove-resource-resolve
+   #:add-type-resolve
+   #:remove-type-resolve
+   #:add-unhandled-exception
+   #:remove-unhandled-exception
   ))
 
 ;;; Source File: system-io-path.lisp
@@ -1181,6 +1199,14 @@
    #:tick
    #:unload-content
    #:update
+   #:add-activated
+   #:remove-activated
+   #:add-deactivated
+   #:remove-deactivated
+   #:add-disposed
+   #:remove-disposed
+   #:add-exiting
+   #:remove-exiting
   ))
 
 ;;; Source File: microsoft-xna-framework-game-window.lisp
@@ -1215,6 +1241,20 @@
    #:on-screen-device-name-changed
    #:set-supported-orientations
    #:set-title
+   #:add-client-size-changed
+   #:remove-client-size-changed
+   #:add-file-drop
+   #:remove-file-drop
+   #:add-key-down
+   #:remove-key-down
+   #:add-key-up
+   #:remove-key-up
+   #:add-orientation-changed
+   #:remove-orientation-changed
+   #:add-screen-device-name-changed
+   #:remove-screen-device-name-changed
+   #:add-text-input
+   #:remove-text-input
   ))
 
 ;;; Source File: microsoft-xna-framework-input-keyboard.lisp
@@ -1995,6 +2035,18 @@
    #:on-device-reset
    #:on-device-resetting
    #:toggle-full-screen
+   #:add-device-created
+   #:remove-device-created
+   #:add-device-disposing
+   #:remove-device-disposing
+   #:add-device-reset
+   #:remove-device-reset
+   #:add-device-resetting
+   #:remove-device-resetting
+   #:add-disposed
+   #:remove-disposed
+   #:add-preparing-device-settings
+   #:remove-preparing-device-settings
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-effects.lisp
@@ -2110,6 +2162,18 @@
    #:reset
    #:set-render-target
    #:set-vertex-buffer
+   #:add-device-lost
+   #:remove-device-lost
+   #:add-device-reset
+   #:remove-device-reset
+   #:add-device-resetting
+   #:remove-device-resetting
+   #:add-disposing
+   #:remove-disposing
+   #:add-resource-created
+   #:remove-resource-created
+   #:add-resource-destroyed
+   #:remove-resource-destroyed
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-batch.lisp
@@ -2377,6 +2441,27 @@
    #:value__
   ))
 
+;;; Source File: gum-wireframe-dock.lisp
+;;; C# Class: Gum.Wireframe.Dock
+;;; Constant Properties: (none)
+(cl:defpackage :gum-wireframe-dock
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:+bottom+
+   #:+fill+
+   #:+fill-horizontally+
+   #:+fill-vertically+
+   #:+left+
+   #:+right+
+   #:+size-to-children+
+   #:+top+
+   #:value__
+  ))
+
 ;;; Source File: rendering-library-content-i-content-loader.lisp
 ;;; C# Class: RenderingLibrary.Content.IContentLoader
 ;;; Constant Properties: (none)
@@ -2467,6 +2552,8 @@
    #:use-gamepad-defaults
    #:use-keyboard-defaults
    #:use-single-threaded-async
+   #:add-hot-reload-completed
+   #:remove-hot-reload-completed
   ))
 
 ;;; Source File: gum-forms-controls-framework-element.lisp
@@ -2582,6 +2669,26 @@
    #:to-string
    #:update-state
    #:update-state-recursively
+   #:add-after-refresh-styles
+   #:remove-after-refresh-styles
+   #:add-before-refresh-styles
+   #:remove-before-refresh-styles
+   #:add-binding-context-changed
+   #:remove-binding-context-changed
+   #:add-got-focus
+   #:remove-got-focus
+   #:add-key-down
+   #:remove-key-down
+   #:add-loaded
+   #:remove-loaded
+   #:add-lost-focus
+   #:remove-lost-focus
+   #:add-property-changed
+   #:remove-property-changed
+   #:add-tool-tip-closing
+   #:remove-tool-tip-closing
+   #:add-tool-tip-opening
+   #:remove-tool-tip-opening
   ))
 
 ;;; Source File: gum-forms-controls-panel.lisp
@@ -2618,6 +2725,46 @@
    #:save-runtime-properties
    #:set-text-no-translate
    #:update-state
+  ))
+
+;;; Source File: gum-forms-controls-primitives-button-base.lisp
+;;; C# Class: Gum.Forms.Controls.Primitives.ButtonBase
+;;; Constant Properties: (none)
+(cl:defpackage :gum-forms-controls-primitives-button-base
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:click-gamepad-button
+   #:ignored-keys
+   #:focused?
+   #:next-in-tab-sequence
+   #:parent-input-receiver
+   #:taking-input
+   #:do-keyboard-action
+   #:get-if-push-input-is-held
+   #:handle-char-entered
+   #:handle-key-down
+   #:lose-focus
+   #:on-click
+   #:on-focus-update
+   #:on-focus-update-preview
+   #:on-gain-focus
+   #:on-lose-focus
+   #:perform-click
+   #:react-to-visual-changed
+   #:receive-input
+   #:add-click
+   #:remove-click
+   #:add-controller-button-pushed
+   #:remove-controller-button-pushed
+   #:add-focus-update
+   #:remove-focus-update
+   #:add-push
+   #:remove-push
   ))
 
 ;;; Source File: mono-game-gum-gue-deriving-text-runtime.lisp
@@ -2729,6 +2876,10 @@
    #:receive-input
    #:update-state
    #:update-thumb-position-to-cursor-drag
+   #:add-controller-button-pushed
+   #:remove-controller-button-pushed
+   #:add-focus-update
+   #:remove-focus-update
   ))
 
 ;;; Source File: gum-forms-default-visuals-version.lisp
@@ -2826,6 +2977,21 @@
    #:remove-renderable
    #:try-get-single-pixel-texture
    #:uninitialize
+  ))
+
+;;; Source File: mono-game-gum-graphical-ui-element-extension-methods.lisp
+;;; C# Class: MonoGameGum.GraphicalUiElementExtensionMethods
+;;; Constant Properties: (none)
+(cl:defpackage :mono-game-gum-graphical-ui-element-extension-methods
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:add-child
+   #:add-to-root
+   #:remove-from-root
   ))
 
 ;;; Source File: system-collections-generic-list-1.lisp

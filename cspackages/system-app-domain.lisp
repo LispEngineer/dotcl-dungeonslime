@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :system-app-domain)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -80,6 +80,78 @@
 (cl:defun shadow-copy-files (obj!)
   "Gets an indication whether the application domain is configured to shadow copy files."
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "get_ShadowCopyFiles"))
+
+(cl:defun add-assembly-load (obj! handler)
+  "Occurs when an assembly is loaded."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "AssemblyLoad" handler))
+
+(cl:defun remove-assembly-load (obj! handler)
+  "Pass the exact same HANDLER object given to add-assembly-load -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "AssemblyLoad" handler))
+
+(cl:defun add-assembly-resolve (obj! handler)
+  "Occurs when the resolution of an assembly fails."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "AssemblyResolve" handler))
+
+(cl:defun remove-assembly-resolve (obj! handler)
+  "Pass the exact same HANDLER object given to add-assembly-resolve -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "AssemblyResolve" handler))
+
+(cl:defun add-domain-unload (obj! handler)
+  "Occurs when an System.AppDomain is about to be unloaded."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "DomainUnload" handler))
+
+(cl:defun remove-domain-unload (obj! handler)
+  "Pass the exact same HANDLER object given to add-domain-unload -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "DomainUnload" handler))
+
+(cl:defun add-first-chance-exception (obj! handler)
+  "Occurs when an exception is thrown in managed code, before the runtime searches the call stack for an exception handler in the application domain."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "FirstChanceException" handler))
+
+(cl:defun remove-first-chance-exception (obj! handler)
+  "Pass the exact same HANDLER object given to add-first-chance-exception -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "FirstChanceException" handler))
+
+(cl:defun add-process-exit (obj! handler)
+  "Occurs when the default application domain's parent process exits."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "ProcessExit" handler))
+
+(cl:defun remove-process-exit (obj! handler)
+  "Pass the exact same HANDLER object given to add-process-exit -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "ProcessExit" handler))
+
+(cl:defun add-reflection-only-assembly-resolve (obj! handler)
+  "Occurs when the resolution of an assembly fails in the reflection-only context."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "ReflectionOnlyAssemblyResolve" handler))
+
+(cl:defun remove-reflection-only-assembly-resolve (obj! handler)
+  "Pass the exact same HANDLER object given to add-reflection-only-assembly-resolve -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "ReflectionOnlyAssemblyResolve" handler))
+
+(cl:defun add-resource-resolve (obj! handler)
+  "Occurs when the resolution of a resource fails because the resource is not a valid linked or embedded resource in the assembly."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "ResourceResolve" handler))
+
+(cl:defun remove-resource-resolve (obj! handler)
+  "Pass the exact same HANDLER object given to add-resource-resolve -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "ResourceResolve" handler))
+
+(cl:defun add-type-resolve (obj! handler)
+  "Occurs when the resolution of a type fails."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "TypeResolve" handler))
+
+(cl:defun remove-type-resolve (obj! handler)
+  "Pass the exact same HANDLER object given to add-type-resolve -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "TypeResolve" handler))
+
+(cl:defun add-unhandled-exception (obj! handler)
+  "Occurs when an exception is not caught."
+  (dotnet:add-event (cl:the (dotnet "System.AppDomain") obj!) "UnhandledException" handler))
+
+(cl:defun remove-unhandled-exception (obj! handler)
+  "Pass the exact same HANDLER object given to add-unhandled-exception -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "UnhandledException" handler))
 
 (cl:defun append-private-path (obj! path)
   "Summary: Appends the specified directory name to the private path list.

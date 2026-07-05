@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -280,6 +280,76 @@ new(InteractiveGue)
 
 (cl:defun (cl:setf y-units) (new-value obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "set_YUnits" new-value))
+
+(cl:defun add-after-refresh-styles (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "AfterRefreshStyles" handler))
+
+(cl:defun remove-after-refresh-styles (obj! handler)
+  "Pass the exact same HANDLER object given to add-after-refresh-styles -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "AfterRefreshStyles" handler))
+
+(cl:defun add-before-refresh-styles (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "BeforeRefreshStyles" handler))
+
+(cl:defun remove-before-refresh-styles (obj! handler)
+  "Pass the exact same HANDLER object given to add-before-refresh-styles -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "BeforeRefreshStyles" handler))
+
+(cl:defun add-binding-context-changed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "BindingContextChanged" handler))
+
+(cl:defun remove-binding-context-changed (obj! handler)
+  "Pass the exact same HANDLER object given to add-binding-context-changed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "BindingContextChanged" handler))
+
+(cl:defun add-got-focus (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "GotFocus" handler))
+
+(cl:defun remove-got-focus (obj! handler)
+  "Pass the exact same HANDLER object given to add-got-focus -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "GotFocus" handler))
+
+(cl:defun add-key-down (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "KeyDown" handler))
+
+(cl:defun remove-key-down (obj! handler)
+  "Pass the exact same HANDLER object given to add-key-down -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "KeyDown" handler))
+
+(cl:defun add-loaded (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "Loaded" handler))
+
+(cl:defun remove-loaded (obj! handler)
+  "Pass the exact same HANDLER object given to add-loaded -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "Loaded" handler))
+
+(cl:defun add-lost-focus (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "LostFocus" handler))
+
+(cl:defun remove-lost-focus (obj! handler)
+  "Pass the exact same HANDLER object given to add-lost-focus -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "LostFocus" handler))
+
+(cl:defun add-property-changed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "PropertyChanged" handler))
+
+(cl:defun remove-property-changed (obj! handler)
+  "Pass the exact same HANDLER object given to add-property-changed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "PropertyChanged" handler))
+
+(cl:defun add-tool-tip-closing (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "ToolTipClosing" handler))
+
+(cl:defun remove-tool-tip-closing (obj! handler)
+  "Pass the exact same HANDLER object given to add-tool-tip-closing -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "ToolTipClosing" handler))
+
+(cl:defun add-tool-tip-opening (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "ToolTipOpening" handler))
+
+(cl:defun remove-tool-tip-opening (obj! handler)
+  "Pass the exact same HANDLER object given to add-tool-tip-opening -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "ToolTipOpening" handler))
 
 (cl:defun add-child (obj! child)
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.AddChild overloads. Dispatches at runtime.

@@ -20,9 +20,11 @@
 (cl:defpackage :gum-forms-controls-key-combo)
 (cl:defpackage :gum-forms-controls-label)
 (cl:defpackage :gum-forms-controls-panel)
+(cl:defpackage :gum-forms-controls-primitives-button-base)
 (cl:defpackage :gum-forms-controls-slider)
 (cl:defpackage :gum-forms-default-visuals-version)
 (cl:defpackage :gum-wireframe-anchor)
+(cl:defpackage :gum-wireframe-dock)
 (cl:defpackage :microsoft-xna-framework-audio-sound-effect-instance)
 (cl:defpackage :microsoft-xna-framework-audio-sound-effect)
 (cl:defpackage :microsoft-xna-framework-audio-sound-state)
@@ -62,6 +64,7 @@
 (cl:defpackage :microsoft-xna-framework-point)
 (cl:defpackage :microsoft-xna-framework-rectangle)
 (cl:defpackage :microsoft-xna-framework-vector2)
+(cl:defpackage :mono-game-gum-graphical-ui-element-extension-methods)
 (cl:defpackage :mono-game-gum-gue-deriving-text-runtime)
 (cl:defpackage :mono-game-gum-gum-service)
 (cl:defpackage :rendering-library-camera)
@@ -205,7 +208,13 @@
     (:key-combo :gum-forms-controls-key-combo)
     (:renderer :rendering-library-graphics-renderer)
     (:gum-camera :rendering-library-camera)
-  )
+    (:panel :gum-forms-controls-panel)
+    (:dock :gum-wireframe-dock)
+    (:uibutton :gum-forms-controls-button)
+    (:buibutton :gum-forms-controls-primitives-button-base)
+    (:anchor :gum-wireframe-anchor)
+    (:gfe :gum-forms-controls-framework-element)
+  ) ; end local-nicknames
   (:export 
     ;; Constants
     #:+window-defaults+ #:+content-default+ #:+false+

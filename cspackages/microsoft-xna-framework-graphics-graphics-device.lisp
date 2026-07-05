@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -137,6 +137,48 @@ new(GraphicsAdapter, GraphicsProfile, Boolean, PresentationParameters)
 
 (cl:defun (cl:setf viewport) (new-value obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "set_Viewport" new-value))
+
+(cl:defun add-device-lost (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceLost" handler))
+
+(cl:defun remove-device-lost (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-lost -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceLost" handler))
+
+(cl:defun add-device-reset (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceReset" handler))
+
+(cl:defun remove-device-reset (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-reset -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceReset" handler))
+
+(cl:defun add-device-resetting (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceResetting" handler))
+
+(cl:defun remove-device-resetting (obj! handler)
+  "Pass the exact same HANDLER object given to add-device-resetting -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "DeviceResetting" handler))
+
+(cl:defun add-disposing (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "Disposing" handler))
+
+(cl:defun remove-disposing (obj! handler)
+  "Pass the exact same HANDLER object given to add-disposing -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "Disposing" handler))
+
+(cl:defun add-resource-created (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "ResourceCreated" handler))
+
+(cl:defun remove-resource-created (obj! handler)
+  "Pass the exact same HANDLER object given to add-resource-created -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "ResourceCreated" handler))
+
+(cl:defun add-resource-destroyed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "ResourceDestroyed" handler))
+
+(cl:defun remove-resource-destroyed (obj! handler)
+  "Pass the exact same HANDLER object given to add-resource-destroyed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "ResourceDestroyed" handler))
 
 (cl:defun clear (obj! color cl:&optional (color2 cl:nil supplied-color2) (depth cl:nil supplied-depth) (stencil cl:nil supplied-stencil))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice.Clear overloads. Dispatches at runtime.

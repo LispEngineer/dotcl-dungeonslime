@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameWindow
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :microsoft-xna-framework-game-window)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.GameWindow"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameWindow")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -59,6 +59,55 @@
 
 (cl:defun (cl:setf title) (new-value obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "set_Title" new-value))
+
+(cl:defun add-client-size-changed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "ClientSizeChanged" handler))
+
+(cl:defun remove-client-size-changed (obj! handler)
+  "Pass the exact same HANDLER object given to add-client-size-changed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "ClientSizeChanged" handler))
+
+(cl:defun add-file-drop (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "FileDrop" handler))
+
+(cl:defun remove-file-drop (obj! handler)
+  "Pass the exact same HANDLER object given to add-file-drop -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "FileDrop" handler))
+
+(cl:defun add-key-down (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "KeyDown" handler))
+
+(cl:defun remove-key-down (obj! handler)
+  "Pass the exact same HANDLER object given to add-key-down -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "KeyDown" handler))
+
+(cl:defun add-key-up (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "KeyUp" handler))
+
+(cl:defun remove-key-up (obj! handler)
+  "Pass the exact same HANDLER object given to add-key-up -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "KeyUp" handler))
+
+(cl:defun add-orientation-changed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "OrientationChanged" handler))
+
+(cl:defun remove-orientation-changed (obj! handler)
+  "Pass the exact same HANDLER object given to add-orientation-changed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "OrientationChanged" handler))
+
+(cl:defun add-screen-device-name-changed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "ScreenDeviceNameChanged" handler))
+
+(cl:defun remove-screen-device-name-changed (obj! handler)
+  "Pass the exact same HANDLER object given to add-screen-device-name-changed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "ScreenDeviceNameChanged" handler))
+
+(cl:defun add-text-input (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "TextInput" handler))
+
+(cl:defun remove-text-input (obj! handler)
+  "Pass the exact same HANDLER object given to add-text-input -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "TextInput" handler))
 
 (cl:defun begin-screen-device-change (obj! will-be-full-screen)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.GameWindow") obj!) "BeginScreenDeviceChange" will-be-full-screen))

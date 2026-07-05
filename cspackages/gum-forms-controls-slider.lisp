@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Slider
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :gum-forms-controls-slider)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Slider"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Slider")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -64,6 +64,20 @@ new(InteractiveGue)
 
 (cl:defun (cl:setf ticks-frequency) (new-value obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "set_TicksFrequency" new-value))
+
+(cl:defun add-controller-button-pushed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "ControllerButtonPushed" handler))
+
+(cl:defun remove-controller-button-pushed (obj! handler)
+  "Pass the exact same HANDLER object given to add-controller-button-pushed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "ControllerButtonPushed" handler))
+
+(cl:defun add-focus-update (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "FocusUpdate" handler))
+
+(cl:defun remove-focus-update (obj! handler)
+  "Pass the exact same HANDLER object given to add-focus-update -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "FocusUpdate" handler))
 
 (cl:defun apply-runtime-properties (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "ApplyRuntimeProperties"))

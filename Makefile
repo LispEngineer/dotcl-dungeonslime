@@ -102,6 +102,7 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Media.MediaPlayer \
 			--assembly $(BIN_DIR)GumCommon.dll \
 				--class Gum.Wireframe.Anchor \
+				--class Gum.Wireframe.Dock \
         --class RenderingLibrary.Content.IContentLoader \
         --class RenderingLibrary.Camera \
 			--assembly $(BIN_DIR)MonoGameGum.dll \
@@ -109,6 +110,7 @@ cspackages:
 				--class Gum.Forms.Controls.FrameworkElement \
 				--class Gum.Forms.Controls.Panel \
 				--class Gum.Forms.Controls.Button \
+        --class Gum.Forms.Controls.Primitives.ButtonBase \
 				--class MonoGameGum.GueDeriving.TextRuntime \
 				--class Gum.Forms.Controls.Label \
 				--class Gum.Forms.Controls.Slider \
@@ -116,12 +118,16 @@ cspackages:
         --class RenderingLibrary.Content.ContentLoader \
         --class Gum.Forms.Controls.KeyCombo \
         --class RenderingLibrary.Graphics.Renderer \
+        --class MonoGameGum.GraphicalUiElementExtensionMethods \
 			--assembly $(REF_DIR)System.Collections.dll \
         --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages
 	./revert-cspackages-timestamps.sh
+	#
+	# Package list for top level packages.lisp
+	echo "" ; fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/' ; echo ""
 
 test:
 	$(EXECUTABLE) --test

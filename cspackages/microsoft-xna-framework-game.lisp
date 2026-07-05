@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 31
-;;; Creation Date: 2026-07-04T20:26:18Z
+;;; Generator Version: 32
+;;; Creation Date: 2026-07-05T03:51:54Z
 
 (cl:in-package :microsoft-xna-framework-game)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Game"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(cl:defconstant <creation> "2026-07-04T20:26:18Z")
-(cl:defconstant <version> 31)
+(cl:defconstant <creation> "2026-07-05T03:51:54Z")
+(cl:defconstant <version> 32)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -71,6 +71,34 @@
 
 (cl:defun window (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "get_Window"))
+
+(cl:defun add-activated (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Activated" handler))
+
+(cl:defun remove-activated (obj! handler)
+  "Pass the exact same HANDLER object given to add-activated -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Activated" handler))
+
+(cl:defun add-deactivated (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Deactivated" handler))
+
+(cl:defun remove-deactivated (obj! handler)
+  "Pass the exact same HANDLER object given to add-deactivated -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Deactivated" handler))
+
+(cl:defun add-disposed (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Disposed" handler))
+
+(cl:defun remove-disposed (obj! handler)
+  "Pass the exact same HANDLER object given to add-disposed -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Disposed" handler))
+
+(cl:defun add-exiting (obj! handler)
+  (dotnet:add-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Exiting" handler))
+
+(cl:defun remove-exiting (obj! handler)
+  "Pass the exact same HANDLER object given to add-exiting -- removal is by identity, not by behavioral equivalence."
+  (dotnet:remove-event (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Exiting" handler))
 
 (cl:defun begin-draw (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "BeginDraw"))

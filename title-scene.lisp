@@ -169,3 +169,52 @@
         (draw-string sb prompt-font prompt (v2:new pos-x pos-y) text-color)))
 
     (sprite-batch:end sb)))
+
+(defun handle-start-clicked ()
+  "A C# Event Handler invoked when the Start button is clicked"
+  ;; Play the UI sound effect
+  ; TODO: Core.Audio.PlaySoundEffect(_uiSoundEffect); audio-controller
+  ;; Switch to the Game Scene
+  ;; TODO: CODE ME
+  (format t "Start Clicked~%"))
+
+(defun handle-options-clicked ()
+  "A C# Event Handler invoked when the Start button is clicked"
+  ;; TODO: CODE ME
+  (format t "Options Clicked~%"))
+
+(defmethod create-title-panel ((scene title-scene))
+  "Builds the main menu panel with start and options buttons."
+  
+  ;; Create a container to hold the buttons
+  ;; A panel is also a gum-forms-controls-framework-element, nickname :gfe
+  (setf (title-screen-buttons-panel scene) (panel:new))
+  (gfe:dock (title-screen-buttons-panel scene) dock:+fill+)
+  (mono-game-gum-graphical-ui-element-extension-methods:add-to-root (title-screen-buttons-panel scene))
+
+  (let ((button (uibutton:new)))
+    (setf (start-button scene) button)
+    (gfe:anchor anchor:+bottom-left+)
+    ;; A button is also a gum-forms-controls-framework-element, nickname :gfe
+    (setf (gfe:x button) 50)
+    (setf (gfe:y button) -12)
+    (setf (gfe:width button) 70)
+    (setf (uibutton:text button) "Start")
+    ;; TODO: startButton.Click += HandleStartClicked;
+    (buibutton:add-click button handle-start-clicked)
+    (gfe:add-child (title-screen-buttons-panel scene) button))
+
+  (let ((button (uibutton:new)))
+    (setf (options-button scene) button)
+    (gfe:anchor anchor:+bottom-right+)
+    (setf (gfe:x button) -50)
+    (setf (gfe:y button) -12)
+    (setf (gfe:width button) 70)
+    (setf (uibutton:text button) "Options")
+    ;; TODO: optionsButton.Click += HandleOptionsClicked;
+    (buibutton:add-click button handle-options-clicked)
+    (gfe:add-child (title-screen-buttons-panel scene) button))
+
+  (setf (gfe:focused? (start-button scene)) t))
+
+
