@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.Dock
-;;; Generator Version: 32
-;;; Creation Date: 2026-07-05T03:51:54Z
+;;; Generator Version: 34
+;;; Creation Date: 2026-07-05T17:29:36Z
 
 (cl:in-package :gum-wireframe-dock)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Wireframe.Dock"))
 (cl:defconstant <type-str> "Gum.Wireframe.Dock")
-(cl:defconstant <creation> "2026-07-05T03:51:54Z")
-(cl:defconstant <version> 32)
+(cl:defconstant <creation> "2026-07-05T17:29:36Z")
+(cl:defconstant <version> 34)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

@@ -44,7 +44,7 @@ cspackages:
 	# Media). Add more classes by adding another --class line (optionally with its
 	# own --constant-properties) to the appropriate --assembly group below.
 	mkdir -p $(OUT_DIR)
-	dotcl-packagegen --out-dir $(OUT_DIR) \
+	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric \
 	    --assembly $(REF_DIR)System.Console.dll \
 	      --class System.Console \
 	    --assembly $(REF_DIR)System.Runtime.dll \
@@ -108,12 +108,12 @@ cspackages:
 			--assembly $(BIN_DIR)MonoGameGum.dll \
 			  --class MonoGameGum.GumService \
 				--class Gum.Forms.Controls.FrameworkElement \
-				--class Gum.Forms.Controls.Panel \
-				--class Gum.Forms.Controls.Button \
+				--class Gum.Forms.Controls.Panel --export-parents --export-interfaces \
+				--class Gum.Forms.Controls.Button --export-parents --export-interfaces \
         --class Gum.Forms.Controls.Primitives.ButtonBase \
 				--class MonoGameGum.GueDeriving.TextRuntime \
-				--class Gum.Forms.Controls.Label \
-				--class Gum.Forms.Controls.Slider \
+				--class Gum.Forms.Controls.Label --export-parents --export-interfaces \
+				--class Gum.Forms.Controls.Slider --export-parents --export-interfaces \
 				--class Gum.Forms.DefaultVisualsVersion \
         --class RenderingLibrary.Content.ContentLoader \
         --class Gum.Forms.Controls.KeyCombo \
