@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GraphicalUiElementExtensionMethods
-;;; Generator Version: 35
-;;; Creation Date: 2026-07-05T18:06:58Z
+;;; Generator Version: 37
+;;; Creation Date: 2026-07-05T18:56:35Z
 
 (cl:in-package :mono-game-gum-graphical-ui-element-extension-methods)
 
 (cl:defconstant <type> (dotnet:resolve-type "MonoGameGum.GraphicalUiElementExtensionMethods"))
 (cl:defconstant <type-str> "MonoGameGum.GraphicalUiElementExtensionMethods")
-(cl:defconstant <creation> "2026-07-05T18:06:58Z")
-(cl:defconstant <version> 35)
+(cl:defconstant <creation> "2026-07-05T18:56:35Z")
+(cl:defconstant <version> 37)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

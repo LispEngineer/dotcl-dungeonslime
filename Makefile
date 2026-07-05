@@ -43,8 +43,11 @@ cspackages:
 	# Input/Keyboard, Input/Mouse, Input/GamePad, Input/Touch, Graphics, Audio,
 	# Media). Add more classes by adding another --class line (optionally with its
 	# own --constant-properties) to the appropriate --assembly group below.
+  #
+  # ObjectModel is required for System.ComponentModel.INotifyPropertyChanged
 	mkdir -p $(OUT_DIR)
 	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric \
+      --assembly $(REF_DIR)System.ObjectModel.dll \
 	    --assembly $(REF_DIR)System.Console.dll \
 	      --class System.Console \
 	    --assembly $(REF_DIR)System.Runtime.dll \

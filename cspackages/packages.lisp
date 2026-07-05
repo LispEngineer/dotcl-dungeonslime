@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 35
-;;; Creation Date: 2026-07-05T18:06:58Z
+;;; Generator Version: 37
+;;; Creation Date: 2026-07-05T18:56:35Z
 
 (cl:in-package :cl-user)
 
@@ -145,6 +145,24 @@
    #:set-shadow-copy-files
    #:set-shadow-copy-path
    #:set-thread-principal
+   #:add-assembly-load
+   #:remove-assembly-load
+   #:add-assembly-resolve
+   #:remove-assembly-resolve
+   #:add-domain-unload
+   #:remove-domain-unload
+   #:add-first-chance-exception
+   #:remove-first-chance-exception
+   #:add-process-exit
+   #:remove-process-exit
+   #:add-reflection-only-assembly-resolve
+   #:remove-reflection-only-assembly-resolve
+   #:add-resource-resolve
+   #:remove-resource-resolve
+   #:add-type-resolve
+   #:remove-type-resolve
+   #:add-unhandled-exception
+   #:remove-unhandled-exception
    #:get-type-code
    #:assembly
    #:assembly-qualified-name
@@ -347,6 +365,14 @@
    #:tick
    #:unload-content
    #:update
+   #:add-activated
+   #:remove-activated
+   #:add-deactivated
+   #:remove-deactivated
+   #:add-disposed
+   #:remove-disposed
+   #:add-exiting
+   #:remove-exiting
    #:allow-alt-f4
    #:allow-user-resizing
    #:client-bounds
@@ -363,6 +389,20 @@
    #:on-screen-device-name-changed
    #:set-supported-orientations
    #:set-title
+   #:add-client-size-changed
+   #:remove-client-size-changed
+   #:add-file-drop
+   #:remove-file-drop
+   #:add-key-down
+   #:remove-key-down
+   #:add-key-up
+   #:remove-key-up
+   #:add-orientation-changed
+   #:remove-orientation-changed
+   #:add-screen-device-name-changed
+   #:remove-screen-device-name-changed
+   #:add-text-input
+   #:remove-text-input
    #:caps-lock
    #:item
    #:num-lock
@@ -436,6 +476,16 @@
    #:on-device-reset
    #:on-device-resetting
    #:toggle-full-screen
+   #:add-device-created
+   #:remove-device-created
+   #:add-device-disposing
+   #:remove-device-disposing
+   #:add-device-reset
+   #:remove-device-reset
+   #:add-device-resetting
+   #:remove-device-resetting
+   #:add-preparing-device-settings
+   #:remove-preparing-device-settings
    #:address-u
    #:address-v
    #:address-w
@@ -476,6 +526,14 @@
    #:reset
    #:set-render-target
    #:set-vertex-buffer
+   #:add-device-lost
+   #:remove-device-lost
+   #:add-disposing
+   #:remove-disposing
+   #:add-resource-created
+   #:remove-resource-created
+   #:add-resource-destroyed
+   #:remove-resource-destroyed
    #:begin
    #:draw-string
    #:end
@@ -560,6 +618,8 @@
    #:use-gamepad-defaults
    #:use-keyboard-defaults
    #:use-single-threaded-async
+   #:add-hot-reload-completed
+   #:remove-hot-reload-completed
    #:actual-height
    #:actual-width
    #:binding-context
@@ -616,6 +676,24 @@
    #:show
    #:update-state
    #:update-state-recursively
+   #:add-after-refresh-styles
+   #:remove-after-refresh-styles
+   #:add-before-refresh-styles
+   #:remove-before-refresh-styles
+   #:add-binding-context-changed
+   #:remove-binding-context-changed
+   #:add-got-focus
+   #:remove-got-focus
+   #:add-loaded
+   #:remove-loaded
+   #:add-lost-focus
+   #:remove-lost-focus
+   #:add-property-changed
+   #:remove-property-changed
+   #:add-tool-tip-closing
+   #:remove-tool-tip-closing
+   #:add-tool-tip-opening
+   #:remove-tool-tip-opening
    #:children
    #:text
    #:set-text-no-translate
@@ -635,6 +713,14 @@
    #:on-lose-focus
    #:perform-click
    #:receive-input
+   #:add-click
+   #:remove-click
+   #:add-controller-button-pushed
+   #:remove-controller-button-pushed
+   #:add-focus-update
+   #:remove-focus-update
+   #:add-push
+   #:remove-push
    #:default-height
    #:default-height-units
    #:default-width

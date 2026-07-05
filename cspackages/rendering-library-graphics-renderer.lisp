@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.Renderer
-;;; Generator Version: 35
-;;; Creation Date: 2026-07-05T18:06:58Z
+;;; Generator Version: 37
+;;; Creation Date: 2026-07-05T18:56:35Z
 
 (cl:in-package :rendering-library-graphics-renderer)
 
 (cl:defconstant <type> (dotnet:resolve-type "RenderingLibrary.Graphics.Renderer"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.Renderer")
-(cl:defconstant <creation> "2026-07-05T18:06:58Z")
-(cl:defconstant <version> 35)
+(cl:defconstant <creation> "2026-07-05T18:56:35Z")
+(cl:defconstant <version> 37)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

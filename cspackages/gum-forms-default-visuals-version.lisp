@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.DefaultVisualsVersion
-;;; Generator Version: 35
-;;; Creation Date: 2026-07-05T18:06:58Z
+;;; Generator Version: 37
+;;; Creation Date: 2026-07-05T18:56:35Z
 
 (cl:in-package :gum-forms-default-visuals-version)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.DefaultVisualsVersion"))
 (cl:defconstant <type-str> "Gum.Forms.DefaultVisualsVersion")
-(cl:defconstant <creation> "2026-07-05T18:06:58Z")
-(cl:defconstant <version> 35)
+(cl:defconstant <creation> "2026-07-05T18:56:35Z")
+(cl:defconstant <version> 37)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

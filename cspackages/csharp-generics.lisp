@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 35
-;;; Creation Date: 2026-07-05T18:06:58Z
+;;; Generator Version: 37
+;;; Creation Date: 2026-07-05T18:56:35Z
 
 (cl:in-package :csharp-generics)
 
@@ -580,6 +580,96 @@ System.AppDomain: set-shadow-copy-path (system-app-domain:set-shadow-copy-path)
 (cl:defgeneric set-thread-principal (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.AppDomain: set-thread-principal (system-app-domain:set-thread-principal)
+"))
+
+(cl:defgeneric add-assembly-load (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-assembly-load (system-app-domain:add-assembly-load)
+"))
+
+(cl:defgeneric remove-assembly-load (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-assembly-load (system-app-domain:remove-assembly-load)
+"))
+
+(cl:defgeneric add-assembly-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-assembly-resolve (system-app-domain:add-assembly-resolve)
+"))
+
+(cl:defgeneric remove-assembly-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-assembly-resolve (system-app-domain:remove-assembly-resolve)
+"))
+
+(cl:defgeneric add-domain-unload (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-domain-unload (system-app-domain:add-domain-unload)
+"))
+
+(cl:defgeneric remove-domain-unload (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-domain-unload (system-app-domain:remove-domain-unload)
+"))
+
+(cl:defgeneric add-first-chance-exception (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-first-chance-exception (system-app-domain:add-first-chance-exception)
+"))
+
+(cl:defgeneric remove-first-chance-exception (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-first-chance-exception (system-app-domain:remove-first-chance-exception)
+"))
+
+(cl:defgeneric add-process-exit (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-process-exit (system-app-domain:add-process-exit)
+"))
+
+(cl:defgeneric remove-process-exit (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-process-exit (system-app-domain:remove-process-exit)
+"))
+
+(cl:defgeneric add-reflection-only-assembly-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-reflection-only-assembly-resolve (system-app-domain:add-reflection-only-assembly-resolve)
+"))
+
+(cl:defgeneric remove-reflection-only-assembly-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-reflection-only-assembly-resolve (system-app-domain:remove-reflection-only-assembly-resolve)
+"))
+
+(cl:defgeneric add-resource-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-resource-resolve (system-app-domain:add-resource-resolve)
+"))
+
+(cl:defgeneric remove-resource-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-resource-resolve (system-app-domain:remove-resource-resolve)
+"))
+
+(cl:defgeneric add-type-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-type-resolve (system-app-domain:add-type-resolve)
+"))
+
+(cl:defgeneric remove-type-resolve (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-type-resolve (system-app-domain:remove-type-resolve)
+"))
+
+(cl:defgeneric add-unhandled-exception (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: add-unhandled-exception (system-app-domain:add-unhandled-exception)
+"))
+
+(cl:defgeneric remove-unhandled-exception (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.AppDomain: remove-unhandled-exception (system-app-domain:remove-unhandled-exception)
 "))
 
 (cl:defgeneric get-type-code (obj! cl:&rest args)
@@ -1651,6 +1741,48 @@ Microsoft.Xna.Framework.Game: update (microsoft-xna-framework-game:update)
 MonoGameGum.GumService: update (mono-game-gum-gum-service:update)
 "))
 
+(cl:defgeneric add-activated (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: add-activated (microsoft-xna-framework-game:add-activated)
+"))
+
+(cl:defgeneric remove-activated (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: remove-activated (microsoft-xna-framework-game:remove-activated)
+"))
+
+(cl:defgeneric add-deactivated (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: add-deactivated (microsoft-xna-framework-game:add-deactivated)
+"))
+
+(cl:defgeneric remove-deactivated (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: remove-deactivated (microsoft-xna-framework-game:remove-deactivated)
+"))
+
+(cl:defgeneric add-disposed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: add-disposed (microsoft-xna-framework-game:add-disposed)
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-disposed (microsoft-xna-framework-graphics-device-manager:add-disposed)
+"))
+
+(cl:defgeneric remove-disposed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: remove-disposed (microsoft-xna-framework-game:remove-disposed)
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-disposed (microsoft-xna-framework-graphics-device-manager:remove-disposed)
+"))
+
+(cl:defgeneric add-exiting (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: add-exiting (microsoft-xna-framework-game:add-exiting)
+"))
+
+(cl:defgeneric remove-exiting (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Game: remove-exiting (microsoft-xna-framework-game:remove-exiting)
+"))
+
 (cl:defgeneric allow-alt-f4 (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.GameWindow: allow-alt-f4 (microsoft-xna-framework-game-window:allow-alt-f4)
@@ -1734,6 +1866,78 @@ Microsoft.Xna.Framework.GameWindow: set-supported-orientations (microsoft-xna-fr
 (cl:defgeneric set-title (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.GameWindow: set-title (microsoft-xna-framework-game-window:set-title)
+"))
+
+(cl:defgeneric add-client-size-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-client-size-changed (microsoft-xna-framework-game-window:add-client-size-changed)
+"))
+
+(cl:defgeneric remove-client-size-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-client-size-changed (microsoft-xna-framework-game-window:remove-client-size-changed)
+"))
+
+(cl:defgeneric add-file-drop (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-file-drop (microsoft-xna-framework-game-window:add-file-drop)
+"))
+
+(cl:defgeneric remove-file-drop (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-file-drop (microsoft-xna-framework-game-window:remove-file-drop)
+"))
+
+(cl:defgeneric add-key-down (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-key-down (microsoft-xna-framework-game-window:add-key-down)
+Gum.Forms.Controls.FrameworkElement: add-key-down (gum-forms-controls-framework-element:add-key-down)
+"))
+
+(cl:defgeneric remove-key-down (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-key-down (microsoft-xna-framework-game-window:remove-key-down)
+Gum.Forms.Controls.FrameworkElement: remove-key-down (gum-forms-controls-framework-element:remove-key-down)
+"))
+
+(cl:defgeneric add-key-up (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-key-up (microsoft-xna-framework-game-window:add-key-up)
+"))
+
+(cl:defgeneric remove-key-up (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-key-up (microsoft-xna-framework-game-window:remove-key-up)
+"))
+
+(cl:defgeneric add-orientation-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-orientation-changed (microsoft-xna-framework-game-window:add-orientation-changed)
+"))
+
+(cl:defgeneric remove-orientation-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-orientation-changed (microsoft-xna-framework-game-window:remove-orientation-changed)
+"))
+
+(cl:defgeneric add-screen-device-name-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-screen-device-name-changed (microsoft-xna-framework-game-window:add-screen-device-name-changed)
+"))
+
+(cl:defgeneric remove-screen-device-name-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-screen-device-name-changed (microsoft-xna-framework-game-window:remove-screen-device-name-changed)
+"))
+
+(cl:defgeneric add-text-input (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: add-text-input (microsoft-xna-framework-game-window:add-text-input)
+"))
+
+(cl:defgeneric remove-text-input (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GameWindow: remove-text-input (microsoft-xna-framework-game-window:remove-text-input)
 "))
 
 (cl:defgeneric caps-lock (obj! cl:&rest args)
@@ -2118,6 +2322,60 @@ Microsoft.Xna.Framework.GraphicsDeviceManager: on-device-resetting (microsoft-xn
 Microsoft.Xna.Framework.GraphicsDeviceManager: toggle-full-screen (microsoft-xna-framework-graphics-device-manager:toggle-full-screen)
 "))
 
+(cl:defgeneric add-device-created (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-device-created (microsoft-xna-framework-graphics-device-manager:add-device-created)
+"))
+
+(cl:defgeneric remove-device-created (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-device-created (microsoft-xna-framework-graphics-device-manager:remove-device-created)
+"))
+
+(cl:defgeneric add-device-disposing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-device-disposing (microsoft-xna-framework-graphics-device-manager:add-device-disposing)
+"))
+
+(cl:defgeneric remove-device-disposing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-device-disposing (microsoft-xna-framework-graphics-device-manager:remove-device-disposing)
+"))
+
+(cl:defgeneric add-device-reset (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-device-reset (microsoft-xna-framework-graphics-device-manager:add-device-reset)
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-device-reset (microsoft-xna-framework-graphics-graphics-device:add-device-reset)
+"))
+
+(cl:defgeneric remove-device-reset (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-device-reset (microsoft-xna-framework-graphics-device-manager:remove-device-reset)
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-device-reset (microsoft-xna-framework-graphics-graphics-device:remove-device-reset)
+"))
+
+(cl:defgeneric add-device-resetting (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-device-resetting (microsoft-xna-framework-graphics-device-manager:add-device-resetting)
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-device-resetting (microsoft-xna-framework-graphics-graphics-device:add-device-resetting)
+"))
+
+(cl:defgeneric remove-device-resetting (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-device-resetting (microsoft-xna-framework-graphics-device-manager:remove-device-resetting)
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-device-resetting (microsoft-xna-framework-graphics-graphics-device:remove-device-resetting)
+"))
+
+(cl:defgeneric add-preparing-device-settings (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: add-preparing-device-settings (microsoft-xna-framework-graphics-device-manager:add-preparing-device-settings)
+"))
+
+(cl:defgeneric remove-preparing-device-settings (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.GraphicsDeviceManager: remove-preparing-device-settings (microsoft-xna-framework-graphics-device-manager:remove-preparing-device-settings)
+"))
+
 (cl:defgeneric address-u (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.SamplerState: address-u (microsoft-xna-framework-graphics-sampler-state:address-u)
@@ -2320,6 +2578,46 @@ Microsoft.Xna.Framework.Graphics.GraphicsDevice: set-render-target (microsoft-xn
 (cl:defgeneric set-vertex-buffer (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.GraphicsDevice: set-vertex-buffer (microsoft-xna-framework-graphics-graphics-device:set-vertex-buffer)
+"))
+
+(cl:defgeneric add-device-lost (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-device-lost (microsoft-xna-framework-graphics-graphics-device:add-device-lost)
+"))
+
+(cl:defgeneric remove-device-lost (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-device-lost (microsoft-xna-framework-graphics-graphics-device:remove-device-lost)
+"))
+
+(cl:defgeneric add-disposing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-disposing (microsoft-xna-framework-graphics-graphics-device:add-disposing)
+"))
+
+(cl:defgeneric remove-disposing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-disposing (microsoft-xna-framework-graphics-graphics-device:remove-disposing)
+"))
+
+(cl:defgeneric add-resource-created (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-resource-created (microsoft-xna-framework-graphics-graphics-device:add-resource-created)
+"))
+
+(cl:defgeneric remove-resource-created (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-resource-created (microsoft-xna-framework-graphics-graphics-device:remove-resource-created)
+"))
+
+(cl:defgeneric add-resource-destroyed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: add-resource-destroyed (microsoft-xna-framework-graphics-graphics-device:add-resource-destroyed)
+"))
+
+(cl:defgeneric remove-resource-destroyed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: remove-resource-destroyed (microsoft-xna-framework-graphics-graphics-device:remove-resource-destroyed)
 "))
 
 (cl:defgeneric begin (obj! cl:&rest args)
@@ -2750,6 +3048,16 @@ MonoGameGum.GumService: use-keyboard-defaults (mono-game-gum-gum-service:use-key
 MonoGameGum.GumService: use-single-threaded-async (mono-game-gum-gum-service:use-single-threaded-async)
 "))
 
+(cl:defgeneric add-hot-reload-completed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+MonoGameGum.GumService: add-hot-reload-completed (mono-game-gum-gum-service:add-hot-reload-completed)
+"))
+
+(cl:defgeneric remove-hot-reload-completed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+MonoGameGum.GumService: remove-hot-reload-completed (mono-game-gum-gum-service:remove-hot-reload-completed)
+"))
+
 (cl:defgeneric actual-height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: actual-height (gum-forms-controls-framework-element:actual-height)
@@ -3047,6 +3355,96 @@ Gum.Forms.Controls.Slider: update-state (gum-forms-controls-slider:update-state)
 Gum.Forms.Controls.FrameworkElement: update-state-recursively (gum-forms-controls-framework-element:update-state-recursively)
 "))
 
+(cl:defgeneric add-after-refresh-styles (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-after-refresh-styles (gum-forms-controls-framework-element:add-after-refresh-styles)
+"))
+
+(cl:defgeneric remove-after-refresh-styles (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-after-refresh-styles (gum-forms-controls-framework-element:remove-after-refresh-styles)
+"))
+
+(cl:defgeneric add-before-refresh-styles (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-before-refresh-styles (gum-forms-controls-framework-element:add-before-refresh-styles)
+"))
+
+(cl:defgeneric remove-before-refresh-styles (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-before-refresh-styles (gum-forms-controls-framework-element:remove-before-refresh-styles)
+"))
+
+(cl:defgeneric add-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-binding-context-changed (gum-forms-controls-framework-element:add-binding-context-changed)
+"))
+
+(cl:defgeneric remove-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-binding-context-changed (gum-forms-controls-framework-element:remove-binding-context-changed)
+"))
+
+(cl:defgeneric add-got-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-got-focus (gum-forms-controls-framework-element:add-got-focus)
+"))
+
+(cl:defgeneric remove-got-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-got-focus (gum-forms-controls-framework-element:remove-got-focus)
+"))
+
+(cl:defgeneric add-loaded (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-loaded (gum-forms-controls-framework-element:add-loaded)
+"))
+
+(cl:defgeneric remove-loaded (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-loaded (gum-forms-controls-framework-element:remove-loaded)
+"))
+
+(cl:defgeneric add-lost-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-lost-focus (gum-forms-controls-framework-element:add-lost-focus)
+"))
+
+(cl:defgeneric remove-lost-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-lost-focus (gum-forms-controls-framework-element:remove-lost-focus)
+"))
+
+(cl:defgeneric add-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-framework-element:add-property-changed)
+"))
+
+(cl:defgeneric remove-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-property-changed (gum-forms-controls-framework-element:remove-property-changed)
+"))
+
+(cl:defgeneric add-tool-tip-closing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-tool-tip-closing (gum-forms-controls-framework-element:add-tool-tip-closing)
+"))
+
+(cl:defgeneric remove-tool-tip-closing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-tool-tip-closing (gum-forms-controls-framework-element:remove-tool-tip-closing)
+"))
+
+(cl:defgeneric add-tool-tip-opening (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-tool-tip-opening (gum-forms-controls-framework-element:add-tool-tip-opening)
+"))
+
+(cl:defgeneric remove-tool-tip-opening (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-tool-tip-opening (gum-forms-controls-framework-element:remove-tool-tip-opening)
+"))
+
 (cl:defgeneric children (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Panel: children (gum-forms-controls-panel:children)
@@ -3157,6 +3555,50 @@ Gum.Forms.Controls.Primitives.ButtonBase: perform-click (gum-forms-controls-prim
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Primitives.ButtonBase: receive-input (gum-forms-controls-primitives-button-base:receive-input)
 Gum.Forms.Controls.Slider: receive-input (gum-forms-controls-slider:receive-input)
+"))
+
+(cl:defgeneric add-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: add-click (gum-forms-controls-primitives-button-base:add-click)
+"))
+
+(cl:defgeneric remove-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: remove-click (gum-forms-controls-primitives-button-base:remove-click)
+"))
+
+(cl:defgeneric add-controller-button-pushed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: add-controller-button-pushed (gum-forms-controls-primitives-button-base:add-controller-button-pushed)
+Gum.Forms.Controls.Slider: add-controller-button-pushed (gum-forms-controls-slider:add-controller-button-pushed)
+"))
+
+(cl:defgeneric remove-controller-button-pushed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: remove-controller-button-pushed (gum-forms-controls-primitives-button-base:remove-controller-button-pushed)
+Gum.Forms.Controls.Slider: remove-controller-button-pushed (gum-forms-controls-slider:remove-controller-button-pushed)
+"))
+
+(cl:defgeneric add-focus-update (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: add-focus-update (gum-forms-controls-primitives-button-base:add-focus-update)
+Gum.Forms.Controls.Slider: add-focus-update (gum-forms-controls-slider:add-focus-update)
+"))
+
+(cl:defgeneric remove-focus-update (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: remove-focus-update (gum-forms-controls-primitives-button-base:remove-focus-update)
+Gum.Forms.Controls.Slider: remove-focus-update (gum-forms-controls-slider:remove-focus-update)
+"))
+
+(cl:defgeneric add-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: add-push (gum-forms-controls-primitives-button-base:add-push)
+"))
+
+(cl:defgeneric remove-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.ButtonBase: remove-push (gum-forms-controls-primitives-button-base:remove-push)
 "))
 
 (cl:defgeneric default-height (obj! cl:&rest args)
@@ -4376,20 +4818,18 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 "))
 
 ;; System.Console (system-console)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Console|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Console|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; System.TimeSpan (system-time-span)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TimeSpan|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TimeSpan|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod days ((obj! dotcl-internal::|TimeSpan|) cl:&rest args)
   (cl:apply (cl:function system-time-span:days) obj! args))
 (cl:defmethod hours ((obj! dotcl-internal::|TimeSpan|) cl:&rest args)
@@ -4442,24 +4882,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-time-span:to-string) obj! args))
 
 ;; System.UriKind (system-uri-kind)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|UriKind|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|UriKind|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|UriKind|) cl:&rest args)
   (cl:apply (cl:function system-uri-kind:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|UriKind|) cl:&rest args)
   (cl:apply (cl:function (cl:setf system-uri-kind:value__)) new-value obj! args))
 
 ;; System.Uri (system-uri)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Uri|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Uri|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod absolute-path ((obj! dotcl-internal::|Uri|) cl:&rest args)
   (cl:apply (cl:function system-uri:absolute-path) obj! args))
 (cl:defmethod absolute-uri ((obj! dotcl-internal::|Uri|) cl:&rest args)
@@ -4540,20 +4978,18 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-uri:unescape) obj! args))
 
 ;; System.Convert (system-convert)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Convert|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Convert|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; System.AppDomain (system-app-domain)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|AppDomain|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|AppDomain|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod base-directory ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
   (cl:apply (cl:function system-app-domain:base-directory) obj! args))
 (cl:defmethod dynamic-directory ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
@@ -4630,22 +5066,56 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-app-domain:set-thread-principal) obj! args))
 (cl:defmethod to-string ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
   (cl:apply (cl:function system-app-domain:to-string) obj! args))
+(cl:defmethod add-assembly-load ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-assembly-load) obj! args))
+(cl:defmethod remove-assembly-load ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-assembly-load) obj! args))
+(cl:defmethod add-assembly-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-assembly-resolve) obj! args))
+(cl:defmethod remove-assembly-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-assembly-resolve) obj! args))
+(cl:defmethod add-domain-unload ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-domain-unload) obj! args))
+(cl:defmethod remove-domain-unload ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-domain-unload) obj! args))
+(cl:defmethod add-first-chance-exception ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-first-chance-exception) obj! args))
+(cl:defmethod remove-first-chance-exception ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-first-chance-exception) obj! args))
+(cl:defmethod add-process-exit ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-process-exit) obj! args))
+(cl:defmethod remove-process-exit ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-process-exit) obj! args))
+(cl:defmethod add-reflection-only-assembly-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-reflection-only-assembly-resolve) obj! args))
+(cl:defmethod remove-reflection-only-assembly-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-reflection-only-assembly-resolve) obj! args))
+(cl:defmethod add-resource-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-resource-resolve) obj! args))
+(cl:defmethod remove-resource-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-resource-resolve) obj! args))
+(cl:defmethod add-type-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-type-resolve) obj! args))
+(cl:defmethod remove-type-resolve ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-type-resolve) obj! args))
+(cl:defmethod add-unhandled-exception ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:add-unhandled-exception) obj! args))
+(cl:defmethod remove-unhandled-exception ((obj! dotcl-internal::|AppDomain|) cl:&rest args)
+  (cl:apply (cl:function system-app-domain:remove-unhandled-exception) obj! args))
 
 ;; System.IO.Path (system-io-path)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Path|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Path|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; System.Boolean (system-boolean)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Boolean|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Boolean|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod compare-to ((obj! dotcl-internal::|Boolean|) cl:&rest args)
   (cl:apply (cl:function system-boolean:compare-to) obj! args))
 (cl:defmethod equals ((obj! dotcl-internal::|Boolean|) cl:&rest args)
@@ -4658,12 +5128,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-boolean:to-string) obj! args))
 
 ;; System.Type (system-type)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Type|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Type|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod assembly ((obj! dotcl-internal::|Type|) cl:&rest args)
   (cl:apply (cl:function system-type:assembly) obj! args))
 (cl:defmethod assembly-qualified-name ((obj! dotcl-internal::|Type|) cl:&rest args)
@@ -4932,12 +5401,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-type:to-string) obj! args))
 
 ;; System.Object (system-object)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Object|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Object|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod equals ((obj! dotcl-internal::|Object|) cl:&rest args)
   (cl:apply (cl:function system-object:equals) obj! args))
 (cl:defmethod finalize ((obj! dotcl-internal::|Object|) cl:&rest args)
@@ -4952,12 +5420,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-object:to-string) obj! args))
 
 ;; System.Single (system-single)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Single|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Single|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod compare-to ((obj! dotcl-internal::|Single|) cl:&rest args)
   (cl:apply (cl:function system-single:compare-to) obj! args))
 (cl:defmethod equals ((obj! dotcl-internal::|Single|) cl:&rest args)
@@ -4970,12 +5437,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-single:to-string) obj! args))
 
 ;; System.Double (system-double)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Double|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Double|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod compare-to ((obj! dotcl-internal::|Double|) cl:&rest args)
   (cl:apply (cl:function system-double:compare-to) obj! args))
 (cl:defmethod equals ((obj! dotcl-internal::|Double|) cl:&rest args)
@@ -4988,12 +5454,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-double:to-string) obj! args))
 
 ;; System.Reflection.MemberInfo (system-reflection-member-info)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MemberInfo|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MemberInfo|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod custom-attributes ((obj! dotcl-internal::|MemberInfo|) cl:&rest args)
   (cl:apply (cl:function system-reflection-member-info:custom-attributes) obj! args))
 (cl:defmethod declaring-type ((obj! dotcl-internal::|MemberInfo|) cl:&rest args)
@@ -5024,12 +5489,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-reflection-member-info:defined?) obj! args))
 
 ;; Microsoft.Xna.Framework.Vector2 (microsoft-xna-framework-vector2)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Vector2|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Vector2|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod x ((obj! dotcl-internal::|Vector2|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-vector2:x) obj! args))
 (cl:defmethod y ((obj! dotcl-internal::|Vector2|) cl:&rest args)
@@ -5066,12 +5530,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-vector2:y)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Rectangle (microsoft-xna-framework-rectangle)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Rectangle|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Rectangle|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod height ((obj! dotcl-internal::|Rectangle|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-rectangle:height) obj! args))
 (cl:defmethod width ((obj! dotcl-internal::|Rectangle|) cl:&rest args)
@@ -5124,12 +5587,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-rectangle:size)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Point (microsoft-xna-framework-point)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Point|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Point|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod x ((obj! dotcl-internal::|Point|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-point:x) obj! args))
 (cl:defmethod y ((obj! dotcl-internal::|Point|) cl:&rest args)
@@ -5148,12 +5610,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-point:y)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GameTime (microsoft-xna-framework-game-time)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GameTime|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GameTime|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod elapsed-game-time ((obj! dotcl-internal::|GameTime|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game-time:elapsed-game-time) obj! args))
 (cl:defmethod running-slowly? ((obj! dotcl-internal::|GameTime|) cl:&rest args)
@@ -5168,12 +5629,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game-time:total-game-time)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Game (microsoft-xna-framework-game)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Game|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Game|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod components ((obj! dotcl-internal::|Game|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game:components) obj! args))
 (cl:defmethod content ((obj! dotcl-internal::|Game|) cl:&rest args)
@@ -5238,6 +5698,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-game:unload-content) obj! args))
 (cl:defmethod update ((obj! dotcl-internal::|Game|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game:update) obj! args))
+(cl:defmethod add-activated ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:add-activated) obj! args))
+(cl:defmethod remove-activated ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:remove-activated) obj! args))
+(cl:defmethod add-deactivated ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:add-deactivated) obj! args))
+(cl:defmethod remove-deactivated ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:remove-deactivated) obj! args))
+(cl:defmethod add-disposed ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:add-disposed) obj! args))
+(cl:defmethod remove-disposed ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:remove-disposed) obj! args))
+(cl:defmethod add-exiting ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:add-exiting) obj! args))
+(cl:defmethod remove-exiting ((obj! dotcl-internal::|Game|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game:remove-exiting) obj! args))
 (cl:defmethod (cl:setf content) (new-value (obj! dotcl-internal::|Game|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game:content)) new-value obj! args))
 (cl:defmethod (cl:setf inactive-sleep-time) (new-value (obj! dotcl-internal::|Game|) cl:&rest args)
@@ -5252,12 +5728,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game:target-elapsed-time)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GameWindow (microsoft-xna-framework-game-window)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GameWindow|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GameWindow|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod allow-alt-f4 ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game-window:allow-alt-f4) obj! args))
 (cl:defmethod allow-user-resizing ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
@@ -5294,6 +5769,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-game-window:set-supported-orientations) obj! args))
 (cl:defmethod set-title ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game-window:set-title) obj! args))
+(cl:defmethod add-client-size-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-client-size-changed) obj! args))
+(cl:defmethod remove-client-size-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-client-size-changed) obj! args))
+(cl:defmethod add-file-drop ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-file-drop) obj! args))
+(cl:defmethod remove-file-drop ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-file-drop) obj! args))
+(cl:defmethod add-key-down ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-key-down) obj! args))
+(cl:defmethod remove-key-down ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-key-down) obj! args))
+(cl:defmethod add-key-up ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-key-up) obj! args))
+(cl:defmethod remove-key-up ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-key-up) obj! args))
+(cl:defmethod add-orientation-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-orientation-changed) obj! args))
+(cl:defmethod remove-orientation-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-orientation-changed) obj! args))
+(cl:defmethod add-screen-device-name-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-screen-device-name-changed) obj! args))
+(cl:defmethod remove-screen-device-name-changed ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-screen-device-name-changed) obj! args))
+(cl:defmethod add-text-input ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:add-text-input) obj! args))
+(cl:defmethod remove-text-input ((obj! dotcl-internal::|GameWindow|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-game-window:remove-text-input) obj! args))
 (cl:defmethod (cl:setf allow-alt-f4) (new-value (obj! dotcl-internal::|GameWindow|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game-window:allow-alt-f4)) new-value obj! args))
 (cl:defmethod (cl:setf allow-user-resizing) (new-value (obj! dotcl-internal::|GameWindow|) cl:&rest args)
@@ -5306,20 +5809,21 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game-window:title)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Keyboard (microsoft-xna-framework-input-keyboard)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Keyboard|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Keyboard|.
+;; Known simple-name conflict(s) among the types visible to the package
+;; generator (ACTUAL = also generated in this batch, so DotCL's
+;; simple-name/FullName naming race is guaranteed to happen; POSSIBLE =
+;; merely seen in the provided assemblies' metadata, not generated here):
+;;   POSSIBLE: MonoGameGum.Input.Keyboard
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; Microsoft.Xna.Framework.Input.KeyboardState (microsoft-xna-framework-input-keyboard-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|KeyboardState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|KeyboardState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod caps-lock ((obj! dotcl-internal::|KeyboardState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-keyboard-state:caps-lock) obj! args))
 (cl:defmethod item ((obj! dotcl-internal::|KeyboardState|) cl:&rest args)
@@ -5340,32 +5844,32 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-keyboard-state:key-up?) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Keys (microsoft-xna-framework-input-keys)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Keys|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Keys|.
+;; Known simple-name conflict(s) among the types visible to the package
+;; generator (ACTUAL = also generated in this batch, so DotCL's
+;; simple-name/FullName naming race is guaranteed to happen; POSSIBLE =
+;; merely seen in the provided assemblies' metadata, not generated here):
+;;   POSSIBLE: Gum.Forms.Input.Keys
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|Keys|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-keys:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|Keys|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-keys:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Mouse (microsoft-xna-framework-input-mouse)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Mouse|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Mouse|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; Microsoft.Xna.Framework.Input.MouseState (microsoft-xna-framework-input-mouse-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MouseState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MouseState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod horizontal-scroll-wheel-value ((obj! dotcl-internal::|MouseState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-mouse-state:horizontal-scroll-wheel-value) obj! args))
 (cl:defmethod left-button ((obj! dotcl-internal::|MouseState|) cl:&rest args)
@@ -5394,32 +5898,32 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-mouse-state:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.ButtonState (microsoft-xna-framework-input-button-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ButtonState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ButtonState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|ButtonState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-button-state:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|ButtonState|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-button-state:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePad (microsoft-xna-framework-input-game-pad)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePad|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePad|.
+;; Known simple-name conflict(s) among the types visible to the package
+;; generator (ACTUAL = also generated in this batch, so DotCL's
+;; simple-name/FullName naming race is guaranteed to happen; POSSIBLE =
+;; merely seen in the provided assemblies' metadata, not generated here):
+;;   POSSIBLE: MonoGameGum.Input.GamePad
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; Microsoft.Xna.Framework.Input.GamePadState (microsoft-xna-framework-input-game-pad-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod buttons ((obj! dotcl-internal::|GamePadState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-state:buttons) obj! args))
 (cl:defmethod d-pad ((obj! dotcl-internal::|GamePadState|) cl:&rest args)
@@ -5444,12 +5948,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-state:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadDPad (microsoft-xna-framework-input-game-pad-d-pad)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadDPad|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadDPad|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod down ((obj! dotcl-internal::|GamePadDPad|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-d-pad:down) obj! args))
 (cl:defmethod left ((obj! dotcl-internal::|GamePadDPad|) cl:&rest args)
@@ -5466,12 +5969,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-d-pad:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadThumbSticks (microsoft-xna-framework-input-game-pad-thumb-sticks)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadThumbSticks|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadThumbSticks|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod left ((obj! dotcl-internal::|GamePadThumbSticks|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-thumb-sticks:left) obj! args))
 (cl:defmethod right ((obj! dotcl-internal::|GamePadThumbSticks|) cl:&rest args)
@@ -5484,12 +5986,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-thumb-sticks:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadTriggers (microsoft-xna-framework-input-game-pad-triggers)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadTriggers|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GamePadTriggers|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod left ((obj! dotcl-internal::|GamePadTriggers|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-triggers:left) obj! args))
 (cl:defmethod right ((obj! dotcl-internal::|GamePadTriggers|) cl:&rest args)
@@ -5502,32 +6003,29 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-triggers:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Buttons (microsoft-xna-framework-input-buttons)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Buttons|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Buttons|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|Buttons|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-buttons:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|Buttons|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-buttons:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchPanel (microsoft-xna-framework-input-touch-touch-panel)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchPanel|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchPanel|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchCollection (microsoft-xna-framework-input-touch-touch-collection)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchCollection|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchCollection|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod count ((obj! dotcl-internal::|TouchCollection|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-collection:count) obj! args))
 (cl:defmethod connected? ((obj! dotcl-internal::|TouchCollection|) cl:&rest args)
@@ -5558,12 +6056,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-touch-touch-collection:item)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchLocation (microsoft-xna-framework-input-touch-touch-location)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchLocation|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TouchLocation|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod id ((obj! dotcl-internal::|TouchLocation|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-location:id) obj! args))
 (cl:defmethod position ((obj! dotcl-internal::|TouchLocation|) cl:&rest args)
@@ -5582,12 +6079,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-location:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.GestureSample (microsoft-xna-framework-input-touch-gesture-sample)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GestureSample|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GestureSample|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod delta ((obj! dotcl-internal::|GestureSample|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-gesture-sample:delta) obj! args))
 (cl:defmethod delta2 ((obj! dotcl-internal::|GestureSample|) cl:&rest args)
@@ -5602,12 +6098,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-touch-gesture-sample:timestamp) obj! args))
 
 ;; Microsoft.Xna.Framework.Color (microsoft-xna-framework-color)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Color|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Color|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod a ((obj! dotcl-internal::|Color|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-color:a) obj! args))
 (cl:defmethod b ((obj! dotcl-internal::|Color|) cl:&rest args)
@@ -5640,12 +6135,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-color:r)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Content.ContentManager (microsoft-xna-framework-content-content-manager)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ContentManager|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ContentManager|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod loaded-assets ((obj! dotcl-internal::|ContentManager|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-content-content-manager:loaded-assets) obj! args))
 (cl:defmethod root-directory ((obj! dotcl-internal::|ContentManager|) cl:&rest args)
@@ -5670,12 +6164,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-content-content-manager:root-directory)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GraphicsDeviceManager (microsoft-xna-framework-graphics-device-manager)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicsDeviceManager|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicsDeviceManager|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod graphics-device ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:graphics-device) obj! args))
 (cl:defmethod graphics-profile ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
@@ -5720,6 +6213,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:on-device-resetting) obj! args))
 (cl:defmethod toggle-full-screen ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:toggle-full-screen) obj! args))
+(cl:defmethod add-device-created ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-device-created) obj! args))
+(cl:defmethod remove-device-created ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-device-created) obj! args))
+(cl:defmethod add-device-disposing ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-device-disposing) obj! args))
+(cl:defmethod remove-device-disposing ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-device-disposing) obj! args))
+(cl:defmethod add-device-reset ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-device-reset) obj! args))
+(cl:defmethod remove-device-reset ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-device-reset) obj! args))
+(cl:defmethod add-device-resetting ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-device-resetting) obj! args))
+(cl:defmethod remove-device-resetting ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-device-resetting) obj! args))
+(cl:defmethod add-disposed ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-disposed) obj! args))
+(cl:defmethod remove-disposed ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-disposed) obj! args))
+(cl:defmethod add-preparing-device-settings ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:add-preparing-device-settings) obj! args))
+(cl:defmethod remove-preparing-device-settings ((obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:remove-preparing-device-settings) obj! args))
 (cl:defmethod (cl:setf graphics-profile) (new-value (obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-device-manager:graphics-profile)) new-value obj! args))
 (cl:defmethod (cl:setf hardware-mode-switch) (new-value (obj! dotcl-internal::|GraphicsDeviceManager|) cl:&rest args)
@@ -5744,36 +6261,33 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-device-manager:synchronize-with-vertical-retrace)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteEffects (microsoft-xna-framework-graphics-sprite-effects)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteEffects|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteEffects|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|SpriteEffects|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-effects:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|SpriteEffects|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-effects:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteSortMode (microsoft-xna-framework-graphics-sprite-sort-mode)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteSortMode|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteSortMode|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|SpriteSortMode|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-sort-mode:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|SpriteSortMode|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-sort-mode:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SamplerState (microsoft-xna-framework-graphics-sampler-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SamplerState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SamplerState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod address-u ((obj! dotcl-internal::|SamplerState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sampler-state:address-u) obj! args))
 (cl:defmethod address-v ((obj! dotcl-internal::|SamplerState|) cl:&rest args)
@@ -5818,12 +6332,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sampler-state:mip-map-level-of-detail-bias)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.GraphicsDevice (microsoft-xna-framework-graphics-graphics-device)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicsDevice|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicsDevice|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod adapter ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:adapter) obj! args))
 (cl:defmethod blend-factor ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
@@ -5892,6 +6405,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:set-render-target) obj! args))
 (cl:defmethod set-vertex-buffer ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:set-vertex-buffer) obj! args))
+(cl:defmethod add-device-lost ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-device-lost) obj! args))
+(cl:defmethod remove-device-lost ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-device-lost) obj! args))
+(cl:defmethod add-device-reset ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-device-reset) obj! args))
+(cl:defmethod remove-device-reset ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-device-reset) obj! args))
+(cl:defmethod add-device-resetting ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-device-resetting) obj! args))
+(cl:defmethod remove-device-resetting ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-device-resetting) obj! args))
+(cl:defmethod add-disposing ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-disposing) obj! args))
+(cl:defmethod remove-disposing ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-disposing) obj! args))
+(cl:defmethod add-resource-created ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-resource-created) obj! args))
+(cl:defmethod remove-resource-created ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-resource-created) obj! args))
+(cl:defmethod add-resource-destroyed ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:add-resource-destroyed) obj! args))
+(cl:defmethod remove-resource-destroyed ((obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:remove-resource-destroyed) obj! args))
 (cl:defmethod (cl:setf blend-factor) (new-value (obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-graphics-device:blend-factor)) new-value obj! args))
 (cl:defmethod (cl:setf blend-state) (new-value (obj! dotcl-internal::|GraphicsDevice|) cl:&rest args)
@@ -5914,12 +6451,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-graphics-device:viewport)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteBatch (microsoft-xna-framework-graphics-sprite-batch)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteBatch|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteBatch|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod begin ((obj! dotcl-internal::|SpriteBatch|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:begin) obj! args))
 (cl:defmethod dispose ((obj! dotcl-internal::|SpriteBatch|) cl:&rest args)
@@ -5932,12 +6468,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:end) obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteFont (microsoft-xna-framework-graphics-sprite-font)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteFont|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SpriteFont|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod characters ((obj! dotcl-internal::|SpriteFont|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-font:characters) obj! args))
 (cl:defmethod default-character ((obj! dotcl-internal::|SpriteFont|) cl:&rest args)
@@ -5962,12 +6497,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-font:spacing)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph (microsoft-xna-framework-graphics-sprite-font-glyph)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Glyph|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Glyph|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod bounds-in-texture ((obj! dotcl-internal::|Glyph|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-font-glyph:bounds-in-texture) obj! args))
 (cl:defmethod character ((obj! dotcl-internal::|Glyph|) cl:&rest args)
@@ -6000,12 +6534,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-font-glyph:width-including-bearings)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.PresentationParameters (microsoft-xna-framework-graphics-presentation-parameters)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|PresentationParameters|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|PresentationParameters|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod back-buffer-format ((obj! dotcl-internal::|PresentationParameters|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-presentation-parameters:back-buffer-format) obj! args))
 (cl:defmethod back-buffer-height ((obj! dotcl-internal::|PresentationParameters|) cl:&rest args)
@@ -6058,24 +6591,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-presentation-parameters:render-target-usage)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.PlayerIndex (microsoft-xna-framework-player-index)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|PlayerIndex|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|PlayerIndex|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|PlayerIndex|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-player-index:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|PlayerIndex|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-player-index:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundEffect (microsoft-xna-framework-audio-sound-effect)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundEffect|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundEffect|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod duration ((obj! dotcl-internal::|SoundEffect|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-effect:duration) obj! args))
 (cl:defmethod disposed? ((obj! dotcl-internal::|SoundEffect|) cl:&rest args)
@@ -6094,12 +6625,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-effect:name)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundEffectInstance (microsoft-xna-framework-audio-sound-effect-instance)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundEffectInstance|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundEffectInstance|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod disposed? ((obj! dotcl-internal::|SoundEffectInstance|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-effect-instance:disposed?) obj! args))
 (cl:defmethod looped? ((obj! dotcl-internal::|SoundEffectInstance|) cl:&rest args)
@@ -6136,24 +6666,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-effect-instance:volume)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundState (microsoft-xna-framework-audio-sound-state)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundState|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|SoundState|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|SoundState|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-state:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|SoundState|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-state:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Media.Song (microsoft-xna-framework-media-song)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Song|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Song|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod album ((obj! dotcl-internal::|Song|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-media-song:album) obj! args))
 (cl:defmethod artist ((obj! dotcl-internal::|Song|) cl:&rest args)
@@ -6188,52 +6716,47 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-media-song:get-hash-code) obj! args))
 
 ;; Microsoft.Xna.Framework.Media.MediaPlayer (microsoft-xna-framework-media-media-player)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MediaPlayer|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|MediaPlayer|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; Gum.Wireframe.Anchor (gum-wireframe-anchor)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Anchor|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Anchor|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|Anchor|) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-anchor:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|Anchor|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-wireframe-anchor:value__)) new-value obj! args))
 
 ;; Gum.Wireframe.Dock (gum-wireframe-dock)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Dock|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Dock|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|Dock|) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-dock:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|Dock|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-wireframe-dock:value__)) new-value obj! args))
 
 ;; RenderingLibrary.Content.IContentLoader (rendering-library-content-i-content-loader)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IContentLoader|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IContentLoader|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; RenderingLibrary.Camera (rendering-library-camera)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Camera|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Camera|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod position ((obj! dotcl-internal::|Camera|) cl:&rest args)
   (cl:apply (cl:function rendering-library-camera:position) obj! args))
 (cl:defmethod absolute-bottom ((obj! dotcl-internal::|Camera|) cl:&rest args)
@@ -6290,12 +6813,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-camera:zoom)) new-value obj! args))
 
 ;; MonoGameGum.GumService (mono-game-gum-gum-service)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GumService|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GumService|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod canvas-height ((obj! dotcl-internal::|GumService|) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gum-service:canvas-height) obj! args))
 (cl:defmethod canvas-width ((obj! dotcl-internal::|GumService|) cl:&rest args)
@@ -6354,18 +6876,21 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function mono-game-gum-gum-service:use-keyboard-defaults) obj! args))
 (cl:defmethod use-single-threaded-async ((obj! dotcl-internal::|GumService|) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gum-service:use-single-threaded-async) obj! args))
+(cl:defmethod add-hot-reload-completed ((obj! dotcl-internal::|GumService|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gum-service:add-hot-reload-completed) obj! args))
+(cl:defmethod remove-hot-reload-completed ((obj! dotcl-internal::|GumService|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gum-service:remove-hot-reload-completed) obj! args))
 (cl:defmethod (cl:setf canvas-height) (new-value (obj! dotcl-internal::|GumService|) cl:&rest args)
   (cl:apply (cl:function (cl:setf mono-game-gum-gum-service:canvas-height)) new-value obj! args))
 (cl:defmethod (cl:setf canvas-width) (new-value (obj! dotcl-internal::|GumService|) cl:&rest args)
   (cl:apply (cl:function (cl:setf mono-game-gum-gum-service:canvas-width)) new-value obj! args))
 
 ;; Gum.Forms.Controls.FrameworkElement (gum-forms-controls-framework-element)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|FrameworkElement|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|FrameworkElement|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod absolute-left ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-framework-element:absolute-left) obj! args))
 (cl:defmethod absolute-top ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
@@ -6496,6 +7021,46 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-forms-controls-framework-element:update-state) obj! args))
 (cl:defmethod update-state-recursively ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-framework-element:update-state-recursively) obj! args))
+(cl:defmethod add-after-refresh-styles ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-after-refresh-styles) obj! args))
+(cl:defmethod remove-after-refresh-styles ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-after-refresh-styles) obj! args))
+(cl:defmethod add-before-refresh-styles ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-before-refresh-styles) obj! args))
+(cl:defmethod remove-before-refresh-styles ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-before-refresh-styles) obj! args))
+(cl:defmethod add-binding-context-changed ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-binding-context-changed) obj! args))
+(cl:defmethod remove-binding-context-changed ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-binding-context-changed) obj! args))
+(cl:defmethod add-got-focus ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-got-focus) obj! args))
+(cl:defmethod remove-got-focus ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-got-focus) obj! args))
+(cl:defmethod add-key-down ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-key-down) obj! args))
+(cl:defmethod remove-key-down ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-key-down) obj! args))
+(cl:defmethod add-loaded ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-loaded) obj! args))
+(cl:defmethod remove-loaded ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-loaded) obj! args))
+(cl:defmethod add-lost-focus ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-lost-focus) obj! args))
+(cl:defmethod remove-lost-focus ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-lost-focus) obj! args))
+(cl:defmethod add-property-changed ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-property-changed) obj! args))
+(cl:defmethod remove-property-changed ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-property-changed) obj! args))
+(cl:defmethod add-tool-tip-closing ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-tool-tip-closing) obj! args))
+(cl:defmethod remove-tool-tip-closing ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-tool-tip-closing) obj! args))
+(cl:defmethod add-tool-tip-opening ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-tool-tip-opening) obj! args))
+(cl:defmethod remove-tool-tip-opening ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-tool-tip-opening) obj! args))
 (cl:defmethod (cl:setf binding-context) (new-value (obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-controls-framework-element:binding-context)) new-value obj! args))
 (cl:defmethod (cl:setf custom-cursor) (new-value (obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
@@ -6546,24 +7111,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-framework-element:y-units)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Panel (gum-forms-controls-panel)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Panel|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Panel|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod children ((obj! dotcl-internal::|Panel|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-panel:children) obj! args))
 (cl:defmethod react-to-visual-changed ((obj! dotcl-internal::|Panel|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-panel:react-to-visual-changed) obj! args))
 
 ;; Gum.Forms.Controls.Button (gum-forms-controls-button)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Button|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Button|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod text ((obj! dotcl-internal::|Button|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-button:text) obj! args))
 (cl:defmethod apply-runtime-properties ((obj! dotcl-internal::|Button|) cl:&rest args)
@@ -6582,12 +7145,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-button:text)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Primitives.ButtonBase (gum-forms-controls-primitives-button-base)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ButtonBase|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ButtonBase|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod click-gamepad-button ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-primitives-button-base:click-gamepad-button) obj! args))
 (cl:defmethod ignored-keys ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
@@ -6626,6 +7188,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-forms-controls-primitives-button-base:react-to-visual-changed) obj! args))
 (cl:defmethod receive-input ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-primitives-button-base:receive-input) obj! args))
+(cl:defmethod add-click ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:add-click) obj! args))
+(cl:defmethod remove-click ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:remove-click) obj! args))
+(cl:defmethod add-controller-button-pushed ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:add-controller-button-pushed) obj! args))
+(cl:defmethod remove-controller-button-pushed ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:remove-controller-button-pushed) obj! args))
+(cl:defmethod add-focus-update ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:add-focus-update) obj! args))
+(cl:defmethod remove-focus-update ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:remove-focus-update) obj! args))
+(cl:defmethod add-push ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:add-push) obj! args))
+(cl:defmethod remove-push ((obj! dotcl-internal::|ButtonBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-button-base:remove-push) obj! args))
 (cl:defmethod (cl:setf click-gamepad-button) (new-value (obj! dotcl-internal::|ButtonBase|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-button-base:click-gamepad-button)) new-value obj! args))
 (cl:defmethod (cl:setf focused?) (new-value (obj! dotcl-internal::|ButtonBase|) cl:&rest args)
@@ -6634,12 +7212,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-button-base:next-in-tab-sequence)) new-value obj! args))
 
 ;; MonoGameGum.GueDeriving.TextRuntime (mono-game-gum-gue-deriving-text-runtime)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TextRuntime|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|TextRuntime|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod default-height ((obj! dotcl-internal::|TextRuntime|) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gue-deriving-text-runtime:default-height) obj! args))
 (cl:defmethod default-height-units ((obj! dotcl-internal::|TextRuntime|) cl:&rest args)
@@ -6776,12 +7353,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-text-runtime:vertical-alignment)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Label (gum-forms-controls-label)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Label|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Label|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod text ((obj! dotcl-internal::|Label|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-label:text) obj! args))
 (cl:defmethod text-component ((obj! dotcl-internal::|Label|) cl:&rest args)
@@ -6800,12 +7376,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-label:text)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Slider (gum-forms-controls-slider)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Slider|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Slider|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod ignored-keys ((obj! dotcl-internal::|Slider|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-slider:ignored-keys) obj! args))
 (cl:defmethod snap-to-tick-enabled? ((obj! dotcl-internal::|Slider|) cl:&rest args)
@@ -6856,6 +7431,14 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-forms-controls-slider:update-state) obj! args))
 (cl:defmethod update-thumb-position-to-cursor-drag ((obj! dotcl-internal::|Slider|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-slider:update-thumb-position-to-cursor-drag) obj! args))
+(cl:defmethod add-controller-button-pushed ((obj! dotcl-internal::|Slider|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-slider:add-controller-button-pushed) obj! args))
+(cl:defmethod remove-controller-button-pushed ((obj! dotcl-internal::|Slider|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-slider:remove-controller-button-pushed) obj! args))
+(cl:defmethod add-focus-update ((obj! dotcl-internal::|Slider|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-slider:add-focus-update) obj! args))
+(cl:defmethod remove-focus-update ((obj! dotcl-internal::|Slider|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-slider:remove-focus-update) obj! args))
 (cl:defmethod (cl:setf snap-to-tick-enabled?) (new-value (obj! dotcl-internal::|Slider|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-controls-slider:snap-to-tick-enabled?)) new-value obj! args))
 (cl:defmethod (cl:setf next-in-tab-sequence) (new-value (obj! dotcl-internal::|Slider|) cl:&rest args)
@@ -6864,24 +7447,22 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-slider:ticks-frequency)) new-value obj! args))
 
 ;; Gum.Forms.DefaultVisualsVersion (gum-forms-default-visuals-version)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|DefaultVisualsVersion|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|DefaultVisualsVersion|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod value__ ((obj! dotcl-internal::|DefaultVisualsVersion|) cl:&rest args)
   (cl:apply (cl:function gum-forms-default-visuals-version:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! dotcl-internal::|DefaultVisualsVersion|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-default-visuals-version:value__)) new-value obj! args))
 
 ;; RenderingLibrary.Content.ContentLoader (rendering-library-content-content-loader)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ContentLoader|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ContentLoader|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod system-managers ((obj! dotcl-internal::|ContentLoader|) cl:&rest args)
   (cl:apply (cl:function rendering-library-content-content-loader:system-managers) obj! args))
 (cl:defmethod xna-content-manager ((obj! dotcl-internal::|ContentLoader|) cl:&rest args)
@@ -6892,12 +7473,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-content-content-loader:xna-content-manager)) new-value obj! args))
 
 ;; Gum.Forms.Controls.KeyCombo (gum-forms-controls-key-combo)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|KeyCombo|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|KeyCombo|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod held-key ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-key-combo:held-key) obj! args))
 (cl:defmethod triggered-on-repeat? ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
@@ -6912,12 +7492,11 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-key-combo:pushed-key)) new-value obj! args))
 
 ;; RenderingLibrary.Graphics.Renderer (rendering-library-graphics-renderer)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Renderer|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Renderer|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod single-pixel-source-rectangle ((obj! dotcl-internal::|Renderer|) cl:&rest args)
   (cl:apply (cl:function rendering-library-graphics-renderer:single-pixel-source-rectangle) obj! args))
 (cl:defmethod camera ((obj! dotcl-internal::|Renderer|) cl:&rest args)
@@ -6970,20 +7549,18 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-graphics-renderer:single-pixel-texture)) new-value obj! args))
 
 ;; MonoGameGum.GraphicalUiElementExtensionMethods (mono-game-gum-graphical-ui-element-extension-methods)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicalUiElementExtensionMethods|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicalUiElementExtensionMethods|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 
 ;; System.Collections.Generic.List`1 (system-collections-generic-list-1)
-;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|List`1|. If another
-;; --defgeneric-opted-in class in this batch also simplifies to that
-;; name (a same-named type from a different namespace), only one of
-;; them keeps this symbol at load time -- dispatch for the other would
-;; be wrong. See doc/make-everything-defgeneric.md's "Static specializer
-;; collision caveat".
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|List`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
 (cl:defmethod capacity ((obj! dotcl-internal::|List`1|) cl:&rest args)
   (cl:apply (cl:function system-collections-generic-list-1:capacity) obj! args))
 (cl:defmethod count ((obj! dotcl-internal::|List`1|) cl:&rest args)
