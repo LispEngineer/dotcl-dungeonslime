@@ -189,32 +189,32 @@
   ;; Create a container to hold the buttons
   ;; A panel is also a gum-forms-controls-framework-element, nickname :gfe
   (setf (title-screen-buttons-panel scene) (panel:new))
-  (gfe:dock (title-screen-buttons-panel scene) dock:+fill+)
-  (mono-game-gum-graphical-ui-element-extension-methods:add-to-root (title-screen-buttons-panel scene))
+  (cs:dock (title-screen-buttons-panel scene) dock:+fill+)
+  (cs:add-to-root (title-screen-buttons-panel scene))
 
   (let ((button (uibutton:new)))
     (setf (start-button scene) button)
-    (gfe:anchor anchor:+bottom-left+)
+    (cs:anchor anchor:+bottom-left+)
     ;; A button is also a gum-forms-controls-framework-element, nickname :gfe
-    (setf (gfe:x button) 50)
-    (setf (gfe:y button) -12)
-    (setf (gfe:width button) 70)
-    (setf (uibutton:text button) "Start")
+    (setf (cs:x button) 50)
+    (setf (cs:y button) -12)
+    (setf (cs:width button) 70)
+    (setf (cs:text button) "Start")
     ;; TODO: startButton.Click += HandleStartClicked;
-    (buibutton:add-click button handle-start-clicked)
-    (gfe:add-child (title-screen-buttons-panel scene) button))
+    (cs:add-click button handle-start-clicked)
+    (cs:add-child (title-screen-buttons-panel scene) button))
 
   (let ((button (uibutton:new)))
     (setf (options-button scene) button)
-    (gfe:anchor anchor:+bottom-right+)
-    (setf (gfe:x button) -50)
-    (setf (gfe:y button) -12)
-    (setf (gfe:width button) 70)
-    (setf (uibutton:text button) "Options")
+    (cs:anchor anchor:+bottom-right+)
+    (setf (cs:x button) -50)
+    (setf (cs:y button) -12)
+    (setf (cs:width button) 70)
+    (setf (cs:text button) "Options")
     ;; TODO: optionsButton.Click += HandleOptionsClicked;
-    (buibutton:add-click button handle-options-clicked)
-    (gfe:add-child (title-screen-buttons-panel scene) button))
+    (cs:add-click button handle-options-clicked)
+    (cs:add-child (title-screen-buttons-panel scene) button))
 
-  (setf (gfe:focused? (start-button scene)) t))
+  (setf (cs:focused? (start-button scene)) t))
 
 

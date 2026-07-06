@@ -218,6 +218,8 @@
     (:buibutton :gum-forms-controls-primitives-button-base)
     (:anchor :gum-wireframe-anchor)
     (:gfe :gum-forms-controls-framework-element)
+    ;; The main generic interface
+    (:cs :csharp-generics)
   ) ; end local-nicknames
   (:export 
     ;; Constants
