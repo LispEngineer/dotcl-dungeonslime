@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :system-reflection-member-info)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -131,4 +131,18 @@ Parameters:
   - right (System.Reflection.MemberInfo): The System.Reflection.MemberInfo to compare to left.
 "
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.Reflection.MemberInfo") left) (cl:the (dotnet "System.Reflection.MemberInfo") right)))
+
+;; Extension methods (exact match on this == System.Reflection.MemberInfo):
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttribute(MemberInfo) -> T -- skipped (generic type arguments/parameters not yet supported)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttribute(MemberInfo, Boolean) -> T -- skipped (generic type arguments/parameters not yet supported)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo) -> IEnumerable -- skipped (generic type arguments/parameters not yet supported)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo, Boolean) -> IEnumerable -- skipped (generic type arguments/parameters not yet supported)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo) -> Attribute] -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo, Boolean) -> Attribute] -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo, Type) -> Attribute] -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttributes(MemberInfo, Type, Boolean) -> Attribute] -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::IsDefined(MemberInfo, Type) -> Boolean -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::IsDefined(MemberInfo, Type, Boolean) -> Boolean -- skipped (this class already declares its own member of this name)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttribute(MemberInfo, Type) -> Attribute -- skipped (ambiguous -- more than one extension method maps to Lisp name get-custom-attribute)
+;;   System.Reflection.CustomAttributeExtensions::GetCustomAttribute(MemberInfo, Type, Boolean) -> Attribute -- skipped (ambiguous -- more than one extension method maps to Lisp name get-custom-attribute)
 

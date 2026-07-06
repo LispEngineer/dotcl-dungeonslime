@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.KeyCombo
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :gum-forms-controls-key-combo)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.KeyCombo")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -53,4 +53,18 @@
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf pushed-key) (new-value obj!)
   (cl:setf (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.KeyCombo") obj!) "PushedKey") new-value))
+
+;; Extension methods (exact match on this == Gum.Forms.Controls.KeyCombo):
+(cl:defun combo-down? (obj!)
+  "Extension method from Gum.Forms.Controls.KeyComboExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.KeyComboExtensions" "IsComboDown" obj!))
+
+(cl:defun combo-pushed? (obj!)
+  "Extension method from Gum.Forms.Controls.KeyComboExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.KeyComboExtensions" "IsComboPushed" obj!))
+
+(cl:defun combo-released? (obj!)
+  "Extension method from Gum.Forms.Controls.KeyComboExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.KeyComboExtensions" "IsComboReleased" obj!))
+
 

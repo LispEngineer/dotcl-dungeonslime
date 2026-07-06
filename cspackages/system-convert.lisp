@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Convert
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :system-convert)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Convert"))
 (cl:defconstant <type-str> "System.Convert")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

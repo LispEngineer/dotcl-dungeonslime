@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchPanel
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-panel)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchPanel"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchPanel")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

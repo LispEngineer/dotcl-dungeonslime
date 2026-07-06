@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :csharp-generics)
 
@@ -9,6 +9,18 @@
 ;;; computed at generation time -- see doc/make-everything-defgeneric.md's
 ;;; "Static specializer collision caveat" before relying on this with
 ;;; two same-simple-name classes in one batch.
+
+(cl:defgeneric add-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.ComponentModel.INotifyPropertyChanged: add-property-changed (system-component-model-i-notify-property-changed:add-property-changed)
+Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-framework-element:add-property-changed)
+"))
+
+(cl:defgeneric remove-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.ComponentModel.INotifyPropertyChanged: remove-property-changed (system-component-model-i-notify-property-changed:remove-property-changed)
+Gum.Forms.Controls.FrameworkElement: remove-property-changed (gum-forms-controls-framework-element:remove-property-changed)
+"))
 
 (cl:defgeneric days (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
@@ -1335,6 +1347,51 @@ System.Type: make-by-ref-type (system-type:make-by-ref-type)
 System.Type: make-pointer-type (system-type:make-pointer-type)
 "))
 
+(cl:defgeneric get-type-info (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-type-info (system-type:get-type-info)
+"))
+
+(cl:defgeneric get-runtime-event (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-event (system-type:get-runtime-event)
+"))
+
+(cl:defgeneric get-runtime-events (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-events (system-type:get-runtime-events)
+"))
+
+(cl:defgeneric get-runtime-field (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-field (system-type:get-runtime-field)
+"))
+
+(cl:defgeneric get-runtime-fields (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-fields (system-type:get-runtime-fields)
+"))
+
+(cl:defgeneric get-runtime-method (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-method (system-type:get-runtime-method)
+"))
+
+(cl:defgeneric get-runtime-methods (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-methods (system-type:get-runtime-methods)
+"))
+
+(cl:defgeneric get-runtime-properties (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-properties (system-type:get-runtime-properties)
+"))
+
+(cl:defgeneric get-runtime-property (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Type: get-runtime-property (system-type:get-runtime-property)
+"))
+
 (cl:defgeneric finalize (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.Object: finalize (system-object:finalize)
@@ -1465,6 +1522,11 @@ Microsoft.Xna.Framework.Vector2: to-numerics (microsoft-xna-framework-vector2:to
 Microsoft.Xna.Framework.Vector2: to-point (microsoft-xna-framework-vector2:to-point)
 "))
 
+(cl:defgeneric to-system-numerics (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Vector2: to-system-numerics (microsoft-xna-framework-vector2:to-system-numerics)
+"))
+
 (cl:defgeneric height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: height (microsoft-xna-framework-rectangle:height)
@@ -1544,6 +1606,12 @@ Microsoft.Xna.Framework.Rectangle: intersects (microsoft-xna-framework-rectangle
 (cl:defgeneric offset (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: offset (microsoft-xna-framework-rectangle:offset)
+"))
+
+(cl:defgeneric to-system-drawing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Rectangle: to-system-drawing (microsoft-xna-framework-rectangle:to-system-drawing)
+Microsoft.Xna.Framework.Color: to-system-drawing (microsoft-xna-framework-color:to-system-drawing)
 "))
 
 (cl:defgeneric to-vector2 (obj! cl:&rest args)
@@ -1913,11 +1981,13 @@ Microsoft.Xna.Framework.GameWindow: remove-key-up (microsoft-xna-framework-game-
 (cl:defgeneric add-orientation-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.GameWindow: add-orientation-changed (microsoft-xna-framework-game-window:add-orientation-changed)
+Gum.Forms.Controls.Primitives.RangeBase: add-orientation-changed (gum-forms-controls-primitives-range-base:add-orientation-changed)
 "))
 
 (cl:defgeneric remove-orientation-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.GameWindow: remove-orientation-changed (microsoft-xna-framework-game-window:remove-orientation-changed)
+Gum.Forms.Controls.Primitives.RangeBase: remove-orientation-changed (gum-forms-controls-primitives-range-base:remove-orientation-changed)
 "))
 
 (cl:defgeneric add-screen-device-name-changed (obj! cl:&rest args)
@@ -2192,6 +2262,16 @@ Microsoft.Xna.Framework.Color: to-vector3 (microsoft-xna-framework-color:to-vect
 (cl:defgeneric to-vector4 (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Color: to-vector4 (microsoft-xna-framework-color:to-vector4)
+"))
+
+(cl:defgeneric adjust (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Color: adjust (microsoft-xna-framework-color:adjust)
+"))
+
+(cl:defgeneric to-grayscale (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Color: to-grayscale (microsoft-xna-framework-color:to-grayscale)
 "))
 
 (cl:defgeneric loaded-assets (obj! cl:&rest args)
@@ -2916,6 +2996,53 @@ RenderingLibrary.Camera: zoom (rendering-library-camera:zoom)
 RenderingLibrary.Camera: get-transformation-matrix (rendering-library-camera:get-transformation-matrix)
 "))
 
+(cl:defgeneric get-scissor-rectangle-for (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Camera: get-scissor-rectangle-for (rendering-library-camera:get-scissor-rectangle-for)
+"))
+
+(cl:defgeneric parent-input-receiver (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: parent-input-receiver (gum-wireframe-i-input-receiver:parent-input-receiver)
+Gum.Forms.Controls.Primitives.ButtonBase: parent-input-receiver (gum-forms-controls-primitives-button-base:parent-input-receiver)
+Gum.Forms.Controls.Slider: parent-input-receiver (gum-forms-controls-slider:parent-input-receiver)
+"))
+
+(cl:defgeneric do-keyboard-action (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: do-keyboard-action (gum-wireframe-i-input-receiver:do-keyboard-action)
+Gum.Forms.Controls.Primitives.ButtonBase: do-keyboard-action (gum-forms-controls-primitives-button-base:do-keyboard-action)
+Gum.Forms.Controls.Slider: do-keyboard-action (gum-forms-controls-slider:do-keyboard-action)
+"))
+
+(cl:defgeneric on-focus-update (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: on-focus-update (gum-wireframe-i-input-receiver:on-focus-update)
+Gum.Forms.Controls.Primitives.ButtonBase: on-focus-update (gum-forms-controls-primitives-button-base:on-focus-update)
+Gum.Forms.Controls.Slider: on-focus-update (gum-forms-controls-slider:on-focus-update)
+"))
+
+(cl:defgeneric on-focus-update-preview (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: on-focus-update-preview (gum-wireframe-i-input-receiver:on-focus-update-preview)
+Gum.Forms.Controls.Primitives.ButtonBase: on-focus-update-preview (gum-forms-controls-primitives-button-base:on-focus-update-preview)
+Gum.Forms.Controls.Slider: on-focus-update-preview (gum-forms-controls-slider:on-focus-update-preview)
+"))
+
+(cl:defgeneric on-gain-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: on-gain-focus (gum-wireframe-i-input-receiver:on-gain-focus)
+Gum.Forms.Controls.Primitives.ButtonBase: on-gain-focus (gum-forms-controls-primitives-button-base:on-gain-focus)
+Gum.Forms.Controls.Slider: on-gain-focus (gum-forms-controls-slider:on-gain-focus)
+"))
+
+(cl:defgeneric on-lose-focus (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.IInputReceiver: on-lose-focus (gum-wireframe-i-input-receiver:on-lose-focus)
+Gum.Forms.Controls.Primitives.ButtonBase: on-lose-focus (gum-forms-controls-primitives-button-base:on-lose-focus)
+Gum.Forms.Controls.Slider: on-lose-focus (gum-forms-controls-slider:on-lose-focus)
+"))
+
 (cl:defgeneric canvas-height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GumService: canvas-height (mono-game-gum-gum-service:canvas-height)
@@ -3091,6 +3218,7 @@ Gum.Forms.Controls.FrameworkElement: height-units (gum-forms-controls-framework-
 (cl:defgeneric enabled? (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: enabled? (gum-forms-controls-framework-element:enabled?)
+Gum.Forms.Controls.Primitives.RangeBase: enabled? (gum-forms-controls-primitives-range-base:enabled?)
 "))
 
 (cl:defgeneric focused? (obj! cl:&rest args)
@@ -3296,12 +3424,14 @@ Gum.Forms.Controls.Button: react-to-visual-changed (gum-forms-controls-button:re
 Gum.Forms.Controls.Primitives.ButtonBase: react-to-visual-changed (gum-forms-controls-primitives-button-base:react-to-visual-changed)
 Gum.Forms.Controls.Label: react-to-visual-changed (gum-forms-controls-label:react-to-visual-changed)
 Gum.Forms.Controls.Slider: react-to-visual-changed (gum-forms-controls-slider:react-to-visual-changed)
+Gum.Forms.Controls.Primitives.RangeBase: react-to-visual-changed (gum-forms-controls-primitives-range-base:react-to-visual-changed)
 "))
 
 (cl:defgeneric react-to-visual-removed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: react-to-visual-removed (gum-forms-controls-framework-element:react-to-visual-removed)
 Gum.Forms.Controls.Slider: react-to-visual-removed (gum-forms-controls-slider:react-to-visual-removed)
+Gum.Forms.Controls.Primitives.RangeBase: react-to-visual-removed (gum-forms-controls-primitives-range-base:react-to-visual-removed)
 "))
 
 (cl:defgeneric refresh-internal-visual-references (obj! cl:&rest args)
@@ -3309,6 +3439,7 @@ Gum.Forms.Controls.Slider: react-to-visual-removed (gum-forms-controls-slider:re
 Gum.Forms.Controls.FrameworkElement: refresh-internal-visual-references (gum-forms-controls-framework-element:refresh-internal-visual-references)
 Gum.Forms.Controls.Button: refresh-internal-visual-references (gum-forms-controls-button:refresh-internal-visual-references)
 Gum.Forms.Controls.Label: refresh-internal-visual-references (gum-forms-controls-label:refresh-internal-visual-references)
+Gum.Forms.Controls.Primitives.RangeBase: refresh-internal-visual-references (gum-forms-controls-primitives-range-base:refresh-internal-visual-references)
 "))
 
 (cl:defgeneric register-runtime-property (obj! cl:&rest args)
@@ -3415,16 +3546,6 @@ Gum.Forms.Controls.FrameworkElement: add-lost-focus (gum-forms-controls-framewor
 Gum.Forms.Controls.FrameworkElement: remove-lost-focus (gum-forms-controls-framework-element:remove-lost-focus)
 "))
 
-(cl:defgeneric add-property-changed (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-framework-element:add-property-changed)
-"))
-
-(cl:defgeneric remove-property-changed (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: remove-property-changed (gum-forms-controls-framework-element:remove-property-changed)
-"))
-
 (cl:defgeneric add-tool-tip-closing (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: add-tool-tip-closing (gum-forms-controls-framework-element:add-tool-tip-closing)
@@ -3443,6 +3564,26 @@ Gum.Forms.Controls.FrameworkElement: add-tool-tip-opening (gum-forms-controls-fr
 (cl:defgeneric remove-tool-tip-opening (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: remove-tool-tip-opening (gum-forms-controls-framework-element:remove-tool-tip-opening)
+"))
+
+(cl:defgeneric get-framework-element (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: get-framework-element (gum-forms-controls-framework-element:get-framework-element)
+"))
+
+(cl:defgeneric get-parent-input-receiver (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: get-parent-input-receiver (gum-forms-controls-framework-element:get-parent-input-receiver)
+"))
+
+(cl:defgeneric remove-from-root (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: remove-from-root (gum-forms-controls-framework-element:remove-from-root)
+"))
+
+(cl:defgeneric add-to-root (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.FrameworkElement: add-to-root (gum-forms-controls-framework-element:add-to-root)
 "))
 
 (cl:defgeneric children (obj! cl:&rest args)
@@ -3481,22 +3622,10 @@ Gum.Forms.Controls.Primitives.ButtonBase: next-in-tab-sequence (gum-forms-contro
 Gum.Forms.Controls.Slider: next-in-tab-sequence (gum-forms-controls-slider:next-in-tab-sequence)
 "))
 
-(cl:defgeneric parent-input-receiver (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: parent-input-receiver (gum-forms-controls-primitives-button-base:parent-input-receiver)
-Gum.Forms.Controls.Slider: parent-input-receiver (gum-forms-controls-slider:parent-input-receiver)
-"))
-
 (cl:defgeneric taking-input (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Primitives.ButtonBase: taking-input (gum-forms-controls-primitives-button-base:taking-input)
 Gum.Forms.Controls.Slider: taking-input (gum-forms-controls-slider:taking-input)
-"))
-
-(cl:defgeneric do-keyboard-action (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: do-keyboard-action (gum-forms-controls-primitives-button-base:do-keyboard-action)
-Gum.Forms.Controls.Slider: do-keyboard-action (gum-forms-controls-slider:do-keyboard-action)
 "))
 
 (cl:defgeneric handle-char-entered (obj! cl:&rest args)
@@ -3520,30 +3649,6 @@ Gum.Forms.Controls.Slider: lose-focus (gum-forms-controls-slider:lose-focus)
 (cl:defgeneric on-click (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Primitives.ButtonBase: on-click (gum-forms-controls-primitives-button-base:on-click)
-"))
-
-(cl:defgeneric on-focus-update (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: on-focus-update (gum-forms-controls-primitives-button-base:on-focus-update)
-Gum.Forms.Controls.Slider: on-focus-update (gum-forms-controls-slider:on-focus-update)
-"))
-
-(cl:defgeneric on-focus-update-preview (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: on-focus-update-preview (gum-forms-controls-primitives-button-base:on-focus-update-preview)
-Gum.Forms.Controls.Slider: on-focus-update-preview (gum-forms-controls-slider:on-focus-update-preview)
-"))
-
-(cl:defgeneric on-gain-focus (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: on-gain-focus (gum-forms-controls-primitives-button-base:on-gain-focus)
-Gum.Forms.Controls.Slider: on-gain-focus (gum-forms-controls-slider:on-gain-focus)
-"))
-
-(cl:defgeneric on-lose-focus (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: on-lose-focus (gum-forms-controls-primitives-button-base:on-lose-focus)
-Gum.Forms.Controls.Slider: on-lose-focus (gum-forms-controls-slider:on-lose-focus)
 "))
 
 (cl:defgeneric perform-click (obj! cl:&rest args)
@@ -3784,26 +3889,31 @@ Gum.Forms.Controls.Slider: ticks-frequency (gum-forms-controls-slider:ticks-freq
 (cl:defgeneric handle-thumb-push (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Slider: handle-thumb-push (gum-forms-controls-slider:handle-thumb-push)
+Gum.Forms.Controls.Primitives.RangeBase: handle-thumb-push (gum-forms-controls-primitives-range-base:handle-thumb-push)
 "))
 
 (cl:defgeneric on-maximum-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Slider: on-maximum-changed (gum-forms-controls-slider:on-maximum-changed)
+Gum.Forms.Controls.Primitives.RangeBase: on-maximum-changed (gum-forms-controls-primitives-range-base:on-maximum-changed)
 "))
 
 (cl:defgeneric on-minimum-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Slider: on-minimum-changed (gum-forms-controls-slider:on-minimum-changed)
+Gum.Forms.Controls.Primitives.RangeBase: on-minimum-changed (gum-forms-controls-primitives-range-base:on-minimum-changed)
 "))
 
 (cl:defgeneric on-value-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Slider: on-value-changed (gum-forms-controls-slider:on-value-changed)
+Gum.Forms.Controls.Primitives.RangeBase: on-value-changed (gum-forms-controls-primitives-range-base:on-value-changed)
 "))
 
 (cl:defgeneric update-thumb-position-to-cursor-drag (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Slider: update-thumb-position-to-cursor-drag (gum-forms-controls-slider:update-thumb-position-to-cursor-drag)
+Gum.Forms.Controls.Primitives.RangeBase: update-thumb-position-to-cursor-drag (gum-forms-controls-primitives-range-base:update-thumb-position-to-cursor-drag)
 "))
 
 (cl:defgeneric xna-content-manager (obj! cl:&rest args)
@@ -3824,6 +3934,21 @@ Gum.Forms.Controls.KeyCombo: triggered-on-repeat? (gum-forms-controls-key-combo:
 (cl:defgeneric pushed-key (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.KeyCombo: pushed-key (gum-forms-controls-key-combo:pushed-key)
+"))
+
+(cl:defgeneric combo-down? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.KeyCombo: combo-down? (gum-forms-controls-key-combo:combo-down?)
+"))
+
+(cl:defgeneric combo-pushed? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.KeyCombo: combo-pushed? (gum-forms-controls-key-combo:combo-pushed?)
+"))
+
+(cl:defgeneric combo-released? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.KeyCombo: combo-released? (gum-forms-controls-key-combo:combo-released?)
 "))
 
 (cl:defgeneric single-pixel-source-rectangle (obj! cl:&rest args)
@@ -3899,6 +4024,96 @@ RenderingLibrary.Graphics.Renderer: remove-renderable (rendering-library-graphic
 (cl:defgeneric try-get-single-pixel-texture (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Graphics.Renderer: try-get-single-pixel-texture (rendering-library-graphics-renderer:try-get-single-pixel-texture)
+"))
+
+(cl:defgeneric move-to-point-enabled? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: move-to-point-enabled? (gum-forms-controls-primitives-range-base:move-to-point-enabled?)
+"))
+
+(cl:defgeneric large-change (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: large-change (gum-forms-controls-primitives-range-base:large-change)
+"))
+
+(cl:defgeneric maximum (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: maximum (gum-forms-controls-primitives-range-base:maximum)
+"))
+
+(cl:defgeneric minimum (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: minimum (gum-forms-controls-primitives-range-base:minimum)
+"))
+
+(cl:defgeneric orientation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: orientation (gum-forms-controls-primitives-range-base:orientation)
+"))
+
+(cl:defgeneric small-change (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: small-change (gum-forms-controls-primitives-range-base:small-change)
+"))
+
+(cl:defgeneric track (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: track (gum-forms-controls-primitives-range-base:track)
+"))
+
+(cl:defgeneric value (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: value (gum-forms-controls-primitives-range-base:value)
+"))
+
+(cl:defgeneric apply-value-considering-snapping (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: apply-value-considering-snapping (gum-forms-controls-primitives-range-base:apply-value-considering-snapping)
+"))
+
+(cl:defgeneric get-current-sign-relative-to-value (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: get-current-sign-relative-to-value (gum-forms-controls-primitives-range-base:get-current-sign-relative-to-value)
+"))
+
+(cl:defgeneric raise-value-change-completed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: raise-value-change-completed (gum-forms-controls-primitives-range-base:raise-value-change-completed)
+"))
+
+(cl:defgeneric raise-value-changed-by-ui (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: raise-value-changed-by-ui (gum-forms-controls-primitives-range-base:raise-value-changed-by-ui)
+"))
+
+(cl:defgeneric add-value-change-completed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: add-value-change-completed (gum-forms-controls-primitives-range-base:add-value-change-completed)
+"))
+
+(cl:defgeneric remove-value-change-completed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: remove-value-change-completed (gum-forms-controls-primitives-range-base:remove-value-change-completed)
+"))
+
+(cl:defgeneric add-value-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: add-value-changed (gum-forms-controls-primitives-range-base:add-value-changed)
+"))
+
+(cl:defgeneric remove-value-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: remove-value-changed (gum-forms-controls-primitives-range-base:remove-value-changed)
+"))
+
+(cl:defgeneric add-value-changed-by-ui (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: add-value-changed-by-ui (gum-forms-controls-primitives-range-base:add-value-changed-by-ui)
+"))
+
+(cl:defgeneric remove-value-changed-by-ui (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: remove-value-changed-by-ui (gum-forms-controls-primitives-range-base:remove-value-changed-by-ui)
 "))
 
 (cl:defgeneric capacity (obj! cl:&rest args)
@@ -4526,6 +4741,7 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf height-units) (cl:setf (gum-forms-
 (cl:defgeneric (cl:setf enabled?) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: (cl:setf enabled?) (cl:setf (gum-forms-controls-framework-element:enabled? ...))
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf enabled?) (cl:setf (gum-forms-controls-primitives-range-base:enabled? ...))
 "))
 
 (cl:defgeneric (cl:setf focused?) (new-value obj! cl:&rest args)
@@ -4812,10 +5028,56 @@ RenderingLibrary.Graphics.Renderer: (cl:setf using-premultiplied-alpha?) (cl:set
 RenderingLibrary.Graphics.Renderer: (cl:setf single-pixel-texture) (cl:setf (rendering-library-graphics-renderer:single-pixel-texture ...))
 "))
 
+(cl:defgeneric (cl:setf move-to-point-enabled?) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf move-to-point-enabled?) (cl:setf (gum-forms-controls-primitives-range-base:move-to-point-enabled? ...))
+"))
+
+(cl:defgeneric (cl:setf large-change) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf large-change) (cl:setf (gum-forms-controls-primitives-range-base:large-change ...))
+"))
+
+(cl:defgeneric (cl:setf maximum) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf maximum) (cl:setf (gum-forms-controls-primitives-range-base:maximum ...))
+"))
+
+(cl:defgeneric (cl:setf minimum) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf minimum) (cl:setf (gum-forms-controls-primitives-range-base:minimum ...))
+"))
+
+(cl:defgeneric (cl:setf orientation) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf orientation) (cl:setf (gum-forms-controls-primitives-range-base:orientation ...))
+"))
+
+(cl:defgeneric (cl:setf small-change) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf small-change) (cl:setf (gum-forms-controls-primitives-range-base:small-change ...))
+"))
+
+(cl:defgeneric (cl:setf value) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf value) (cl:setf (gum-forms-controls-primitives-range-base:value ...))
+"))
+
 (cl:defgeneric (cl:setf capacity) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collections-generic-list-1:capacity ...))
 "))
+
+;; System.ComponentModel.INotifyPropertyChanged (system-component-model-i-notify-property-changed)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|INotifyPropertyChanged|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod add-property-changed ((obj! dotcl-internal::|INotifyPropertyChanged|) cl:&rest args)
+  (cl:apply (cl:function system-component-model-i-notify-property-changed:add-property-changed) obj! args))
+(cl:defmethod remove-property-changed ((obj! dotcl-internal::|INotifyPropertyChanged|) cl:&rest args)
+  (cl:apply (cl:function system-component-model-i-notify-property-changed:remove-property-changed) obj! args))
 
 ;; System.Console (system-console)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Console|.
@@ -5399,6 +5661,24 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-type:make-pointer-type) obj! args))
 (cl:defmethod to-string ((obj! dotcl-internal::|Type|) cl:&rest args)
   (cl:apply (cl:function system-type:to-string) obj! args))
+(cl:defmethod get-type-info ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-type-info) obj! args))
+(cl:defmethod get-runtime-event ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-event) obj! args))
+(cl:defmethod get-runtime-events ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-events) obj! args))
+(cl:defmethod get-runtime-field ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-field) obj! args))
+(cl:defmethod get-runtime-fields ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-fields) obj! args))
+(cl:defmethod get-runtime-method ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-method) obj! args))
+(cl:defmethod get-runtime-methods ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-methods) obj! args))
+(cl:defmethod get-runtime-properties ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-properties) obj! args))
+(cl:defmethod get-runtime-property ((obj! dotcl-internal::|Type|) cl:&rest args)
+  (cl:apply (cl:function system-type:get-runtime-property) obj! args))
 
 ;; System.Object (system-object)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Object|.
@@ -5524,6 +5804,8 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-vector2:to-point) obj! args))
 (cl:defmethod to-string ((obj! dotcl-internal::|Vector2|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-vector2:to-string) obj! args))
+(cl:defmethod to-system-numerics ((obj! dotcl-internal::|Vector2|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-vector2:to-system-numerics) obj! args))
 (cl:defmethod (cl:setf x) (new-value (obj! dotcl-internal::|Vector2|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-vector2:x)) new-value obj! args))
 (cl:defmethod (cl:setf y) (new-value (obj! dotcl-internal::|Vector2|) cl:&rest args)
@@ -5573,6 +5855,8 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-rectangle:offset) obj! args))
 (cl:defmethod to-string ((obj! dotcl-internal::|Rectangle|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-rectangle:to-string) obj! args))
+(cl:defmethod to-system-drawing ((obj! dotcl-internal::|Rectangle|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-rectangle:to-system-drawing) obj! args))
 (cl:defmethod (cl:setf height) (new-value (obj! dotcl-internal::|Rectangle|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-rectangle:height)) new-value obj! args))
 (cl:defmethod (cl:setf width) (new-value (obj! dotcl-internal::|Rectangle|) cl:&rest args)
@@ -6123,6 +6407,12 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-color:to-vector3) obj! args))
 (cl:defmethod to-vector4 ((obj! dotcl-internal::|Color|) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-color:to-vector4) obj! args))
+(cl:defmethod adjust ((obj! dotcl-internal::|Color|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-color:adjust) obj! args))
+(cl:defmethod to-grayscale ((obj! dotcl-internal::|Color|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-color:to-grayscale) obj! args))
+(cl:defmethod to-system-drawing ((obj! dotcl-internal::|Color|) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-color:to-system-drawing) obj! args))
 (cl:defmethod (cl:setf a) (new-value (obj! dotcl-internal::|Color|) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-color:a)) new-value obj! args))
 (cl:defmethod (cl:setf b) (new-value (obj! dotcl-internal::|Color|) cl:&rest args)
@@ -6789,6 +7079,8 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function rendering-library-camera:zoom) obj! args))
 (cl:defmethod get-transformation-matrix ((obj! dotcl-internal::|Camera|) cl:&rest args)
   (cl:apply (cl:function rendering-library-camera:get-transformation-matrix) obj! args))
+(cl:defmethod get-scissor-rectangle-for ((obj! dotcl-internal::|Camera|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-camera:get-scissor-rectangle-for) obj! args))
 (cl:defmethod (cl:setf position) (new-value (obj! dotcl-internal::|Camera|) cl:&rest args)
   (cl:apply (cl:function (cl:setf rendering-library-camera:position)) new-value obj! args))
 (cl:defmethod (cl:setf absolute-left) (new-value (obj! dotcl-internal::|Camera|) cl:&rest args)
@@ -6811,6 +7103,25 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-camera:y)) new-value obj! args))
 (cl:defmethod (cl:setf zoom) (new-value (obj! dotcl-internal::|Camera|) cl:&rest args)
   (cl:apply (cl:function (cl:setf rendering-library-camera:zoom)) new-value obj! args))
+
+;; Gum.Wireframe.IInputReceiver (gum-wireframe-i-input-receiver)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IInputReceiver|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod parent-input-receiver ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:parent-input-receiver) obj! args))
+(cl:defmethod do-keyboard-action ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:do-keyboard-action) obj! args))
+(cl:defmethod on-focus-update ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:on-focus-update) obj! args))
+(cl:defmethod on-focus-update-preview ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:on-focus-update-preview) obj! args))
+(cl:defmethod on-gain-focus ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:on-gain-focus) obj! args))
+(cl:defmethod on-lose-focus ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-i-input-receiver:on-lose-focus) obj! args))
 
 ;; MonoGameGum.GumService (mono-game-gum-gum-service)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GumService|.
@@ -7061,6 +7372,14 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-forms-controls-framework-element:add-tool-tip-opening) obj! args))
 (cl:defmethod remove-tool-tip-opening ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-framework-element:remove-tool-tip-opening) obj! args))
+(cl:defmethod get-framework-element ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:get-framework-element) obj! args))
+(cl:defmethod get-parent-input-receiver ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:get-parent-input-receiver) obj! args))
+(cl:defmethod remove-from-root ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:remove-from-root) obj! args))
+(cl:defmethod add-to-root ((obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-framework-element:add-to-root) obj! args))
 (cl:defmethod (cl:setf binding-context) (new-value (obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-controls-framework-element:binding-context)) new-value obj! args))
 (cl:defmethod (cl:setf custom-cursor) (new-value (obj! dotcl-internal::|FrameworkElement|) cl:&rest args)
@@ -7484,6 +7803,12 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-forms-controls-key-combo:triggered-on-repeat?) obj! args))
 (cl:defmethod pushed-key ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-key-combo:pushed-key) obj! args))
+(cl:defmethod combo-down? ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-key-combo:combo-down?) obj! args))
+(cl:defmethod combo-pushed? ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-key-combo:combo-pushed?) obj! args))
+(cl:defmethod combo-released? ((obj! dotcl-internal::|KeyCombo|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-key-combo:combo-released?) obj! args))
 (cl:defmethod (cl:setf held-key) (new-value (obj! dotcl-internal::|KeyCombo|) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-controls-key-combo:held-key)) new-value obj! args))
 (cl:defmethod (cl:setf triggered-on-repeat?) (new-value (obj! dotcl-internal::|KeyCombo|) cl:&rest args)
@@ -7554,6 +7879,87 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; provided assemblies reduces to this same simple name.
 ;; See doc/make-everything-defgeneric.md's "Static specializer collision
 ;; caveat" for the full mechanism and a worked example.
+
+;; Gum.Forms.Controls.Primitives.RangeBase (gum-forms-controls-primitives-range-base)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|RangeBase|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod enabled? ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:enabled?) obj! args))
+(cl:defmethod move-to-point-enabled? ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:move-to-point-enabled?) obj! args))
+(cl:defmethod large-change ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:large-change) obj! args))
+(cl:defmethod maximum ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:maximum) obj! args))
+(cl:defmethod minimum ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:minimum) obj! args))
+(cl:defmethod orientation ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:orientation) obj! args))
+(cl:defmethod small-change ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:small-change) obj! args))
+(cl:defmethod track ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:track) obj! args))
+(cl:defmethod value ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:value) obj! args))
+(cl:defmethod apply-value-considering-snapping ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:apply-value-considering-snapping) obj! args))
+(cl:defmethod get-current-sign-relative-to-value ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:get-current-sign-relative-to-value) obj! args))
+(cl:defmethod handle-thumb-push ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:handle-thumb-push) obj! args))
+(cl:defmethod on-maximum-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:on-maximum-changed) obj! args))
+(cl:defmethod on-minimum-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:on-minimum-changed) obj! args))
+(cl:defmethod on-value-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:on-value-changed) obj! args))
+(cl:defmethod raise-value-change-completed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:raise-value-change-completed) obj! args))
+(cl:defmethod raise-value-changed-by-ui ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:raise-value-changed-by-ui) obj! args))
+(cl:defmethod react-to-visual-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:react-to-visual-changed) obj! args))
+(cl:defmethod react-to-visual-removed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:react-to-visual-removed) obj! args))
+(cl:defmethod refresh-internal-visual-references ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:refresh-internal-visual-references) obj! args))
+(cl:defmethod update-thumb-position-to-cursor-drag ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:update-thumb-position-to-cursor-drag) obj! args))
+(cl:defmethod add-orientation-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:add-orientation-changed) obj! args))
+(cl:defmethod remove-orientation-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:remove-orientation-changed) obj! args))
+(cl:defmethod add-value-change-completed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:add-value-change-completed) obj! args))
+(cl:defmethod remove-value-change-completed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:remove-value-change-completed) obj! args))
+(cl:defmethod add-value-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:add-value-changed) obj! args))
+(cl:defmethod remove-value-changed ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:remove-value-changed) obj! args))
+(cl:defmethod add-value-changed-by-ui ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:add-value-changed-by-ui) obj! args))
+(cl:defmethod remove-value-changed-by-ui ((obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function gum-forms-controls-primitives-range-base:remove-value-changed-by-ui) obj! args))
+(cl:defmethod (cl:setf enabled?) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:enabled?)) new-value obj! args))
+(cl:defmethod (cl:setf move-to-point-enabled?) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:move-to-point-enabled?)) new-value obj! args))
+(cl:defmethod (cl:setf large-change) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:large-change)) new-value obj! args))
+(cl:defmethod (cl:setf maximum) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:maximum)) new-value obj! args))
+(cl:defmethod (cl:setf minimum) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:minimum)) new-value obj! args))
+(cl:defmethod (cl:setf orientation) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:orientation)) new-value obj! args))
+(cl:defmethod (cl:setf small-change) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:small-change)) new-value obj! args))
+(cl:defmethod (cl:setf value) (new-value (obj! dotcl-internal::|RangeBase|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-range-base:value)) new-value obj! args))
 
 ;; System.Collections.Generic.List`1 (system-collections-generic-list-1)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|List`1|.

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -644,4 +644,25 @@ Show(Layer) -> Void
 
 (cl:defun update-state-recursively (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "UpdateStateRecursively"))
+
+;; Extension methods (exact match on this == Gum.Forms.Controls.FrameworkElement):
+;;   Gum.Forms.Controls.FrameworkElementExt::GetFrameworkElement(FrameworkElement, String) -> T -- skipped (generic type arguments/parameters not yet supported)
+;;   Gum.Forms.Controls.FrameworkElementExt::SetBinding(FrameworkElement, String, Object]]) -> Void -- skipped (generic type arguments/parameters not yet supported)
+;;   Gum.Forms.Controls.FrameworkElementExt::SetBinding(FrameworkElement, String, LambdaExpression) -> Void -- skipped (this class already declares its own member of this name)
+(cl:defun get-framework-element (obj! name)
+  "Extension method from Gum.Forms.Controls.FrameworkElementExt (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.FrameworkElementExt" "GetFrameworkElement" obj! name))
+
+(cl:defun get-parent-input-receiver (obj!)
+  "Extension method from Gum.Forms.Controls.FrameworkElementExt (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.FrameworkElementExt" "GetParentInputReceiver" obj!))
+
+(cl:defun remove-from-root (obj!)
+  "Extension method from Gum.Forms.Controls.FrameworkElementExt (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.Controls.FrameworkElementExt" "RemoveFromRoot" obj!))
+
+(cl:defun add-to-root (obj!)
+  "Extension method from MonoGameGum.GraphicalUiElementExtensionMethods (assembly MonoGameGum.dll)."
+  (dotnet:static "MonoGameGum.GraphicalUiElementExtensionMethods" "AddToRoot" obj!))
+
 

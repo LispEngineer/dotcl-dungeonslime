@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:defconstant <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

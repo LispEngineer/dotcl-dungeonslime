@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :microsoft-xna-framework-color)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -2072,4 +2072,18 @@ FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
 
 (cl:defun to-vector4 (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "ToVector4"))
+
+;; Extension methods (exact match on this == Microsoft.Xna.Framework.Color):
+(cl:defun adjust (obj! amount)
+  "Extension method from Gum.Forms.DefaultVisuals.V3.ColorExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.DefaultVisuals.V3.ColorExtensions" "Adjust" obj! amount))
+
+(cl:defun to-grayscale (obj!)
+  "Extension method from Gum.Forms.DefaultVisuals.V3.ColorExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "Gum.Forms.DefaultVisuals.V3.ColorExtensions" "ToGrayscale" obj!))
+
+(cl:defun to-system-drawing (obj!)
+  "Extension method from RenderingLibrary.Graphics.XNAExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "RenderingLibrary.Graphics.XNAExtensions" "ToSystemDrawing" obj!))
+
 

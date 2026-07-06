@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 37
-;;; Creation Date: 2026-07-05T18:56:35Z
+;;; Generator Version: 39
+;;; Creation Date: 2026-07-06T21:35:35Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-05T18:56:35Z")
-(cl:defconstant <version> 37)
+(cl:defconstant <creation> "2026-07-06T21:35:35Z")
+(cl:defconstant <version> 39)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
@@ -492,4 +492,10 @@ Transform(Vector2, Quaternion) -> Vector2
 ;;   TransformNormal(ref Vector2&, ref Matrix&, out Vector2&) -> Void
 ;;   TransformNormal(Vector2[], ref Matrix&, Vector2[]) -> Void
 ;;   TransformNormal(Vector2[], Int32, ref Matrix&, Vector2[], Int32, Int32) -> Void
+
+;; Extension methods (exact match on this == Microsoft.Xna.Framework.Vector2):
+(cl:defun to-system-numerics (obj!)
+  "Extension method from RenderingLibrary.Graphics.XNAExtensions (assembly MonoGameGum.dll)."
+  (dotnet:static "RenderingLibrary.Graphics.XNAExtensions" "ToSystemNumerics" obj!))
+
 
