@@ -432,3 +432,21 @@ The font `04B_30.ttf` is the correct pixel font from [FontSpace (04b03 font)](ht
 [Source Code](https://github.com/MonoGame/MonoGame.Samples/blob/3.8.4/Tutorials/learn-monogame-2d/src/20-Implementing-UI-With-Gum/DungeonSlime/Game1.cs)
 
 * `Core` is just the `Game1` class renamed
+
+
+# Some Helpful REPL Commands
+
+## Package Generator Metadata
+
+After `make repl`:
+
+```lisp
+;; Find stuff in the metadata - a CL list of plists
+(defparameter y (safe-read-form-from-file "cspackages/MonoGameGum.lispy.metadata")) 
+;; All the classes FQN
+(mapcar (lambda (i) (getf i :fully-qualified-name)) y)
+;; All the classes names
+(mapcar (lambda (i) (getf i :name)) y)
+;; A single class
+(find "ContainerRuntime" y :test #'string= :key (lambda (plist) (getf plist :name)))
+```

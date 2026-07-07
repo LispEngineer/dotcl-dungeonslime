@@ -16,6 +16,7 @@
 ;; Recreate this with: fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/'
 (cl:defpackage :csharp-assembly-utils)
 (cl:defpackage :csharp-generics)
+(cl:defpackage :gum-collections-graphical-ui-element-collection)
 (cl:defpackage :gum-forms-controls-button)
 (cl:defpackage :gum-forms-controls-framework-element)
 (cl:defpackage :gum-forms-controls-key-combo)
@@ -27,7 +28,9 @@
 (cl:defpackage :gum-forms-default-visuals-version)
 (cl:defpackage :gum-wireframe-anchor)
 (cl:defpackage :gum-wireframe-dock)
+(cl:defpackage :gum-wireframe-graphical-ui-element)
 (cl:defpackage :gum-wireframe-i-input-receiver)
+(cl:defpackage :gum-wireframe-interactive-gue)
 (cl:defpackage :microsoft-xna-framework-audio-sound-effect-instance)
 (cl:defpackage :microsoft-xna-framework-audio-sound-effect)
 (cl:defpackage :microsoft-xna-framework-audio-sound-state)
@@ -68,12 +71,17 @@
 (cl:defpackage :microsoft-xna-framework-rectangle)
 (cl:defpackage :microsoft-xna-framework-vector2)
 (cl:defpackage :mono-game-gum-graphical-ui-element-extension-methods)
+(cl:defpackage :mono-game-gum-gue-deriving-container-runtime)
 (cl:defpackage :mono-game-gum-gue-deriving-text-runtime)
 (cl:defpackage :mono-game-gum-gum-service)
 (cl:defpackage :rendering-library-camera)
 (cl:defpackage :rendering-library-content-content-loader)
 (cl:defpackage :rendering-library-content-i-content-loader)
+(cl:defpackage :rendering-library-graphics-i-renderable-ipso)
+(cl:defpackage :rendering-library-graphics-i-renderable)
+(cl:defpackage :rendering-library-graphics-i-visible)
 (cl:defpackage :rendering-library-graphics-renderer)
+(cl:defpackage :rendering-library-i-positioned-sized-object)
 (cl:defpackage :system-app-domain)
 (cl:defpackage :system-boolean)
 (cl:defpackage :system-collections-generic-list-1)
@@ -89,6 +97,7 @@
 (cl:defpackage :system-type)
 (cl:defpackage :system-uri-kind)
 (cl:defpackage :system-uri)
+
 
 ;; Some special packages ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

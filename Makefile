@@ -45,6 +45,8 @@ cspackages:
 	# own --constant-properties) to the appropriate --assembly group below.
   #
   # ObjectModel is required for System.ComponentModel.INotifyPropertyChanged
+  # MonoGameGum.GueDeriving.ContainerRuntime is the "Root" class in GumService.Default.Root.Children.Clear();
+  # Gum.Collections.GraphicalUiElementCollection is the "Children" class in the above.
 	mkdir -p $(OUT_DIR)
 	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric \
       --assembly $(REF_DIR)System.ObjectModel.dll \
@@ -108,6 +110,8 @@ cspackages:
 				--class Gum.Wireframe.Dock \
         --class RenderingLibrary.Content.IContentLoader \
         --class RenderingLibrary.Camera \
+        --class Gum.Collections.GraphicalUiElementCollection --export-parents --export-interfaces \
+        --class 'RenderingLibrary.Graphics.ObservableCollectionNoReset`1' \
 			--assembly $(BIN_DIR)MonoGameGum.dll \
 			  --class MonoGameGum.GumService \
 				--class Gum.Forms.Controls.FrameworkElement \
@@ -122,6 +126,7 @@ cspackages:
         --class Gum.Forms.Controls.KeyCombo \
         --class RenderingLibrary.Graphics.Renderer \
         --class MonoGameGum.GraphicalUiElementExtensionMethods \
+        --class MonoGameGum.GueDeriving.ContainerRuntime --export-parents --export-interfaces \
 			--assembly $(REF_DIR)System.Collections.dll \
         --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]

@@ -66,6 +66,17 @@
     :initform nil
     :documentation "Type: Gum.Forms.Controls.Button")))  ; title-scene
 
+(defmethod initialize ((scene title-scene))
+  "Set up everything we need for this scene.
+   Note that (due to AI implementing chapter 17) this is not very similar
+   to the initialize in the tutorial:
+   https://docs.monogame.net/articles/tutorials/building_2d_games/17_scenes/index.html#title-scene-methods
+   https://docs.monogame.net/articles/tutorials/building_2d_games/20_implementing_ui_with_gum/index.html?tabs=vscode#integrating-with-the-game-loop"
+   ;; Initialize the base scene - which will call load-content
+   (call-next-method scene)
+   ;; Initialize the UI
+   (initialize-ui scene))
+
 (defmethod load-content ((scene title-scene))
   "Loads the title screen sprite fonts and background texture using the scene's private ContentManager."
   (format *error-output* "[title-scene:load-content] Loading title screen assets...~%")
@@ -75,8 +86,13 @@
   (setf (background-texture scene)
         (cm:load "Microsoft.Xna.Framework.Graphics.Texture2D"
                  (scene-content scene)
-                 "images/background-pattern")))
-
+                 "images/background-pattern"))
+  ;; Load sound effect for UI interactions
+  (setf (ui-sound-effect scene)
+      (cm:load sound-effect:<type-str> ; FIXME: can we use <type> here?
+                (scene-content scene)
+                "audio/ui"))) ; FIXME: Magic string
+  
 (defmethod update ((scene title-scene) gt)
   "Checks keyboard and gamepad inputs to trigger transition to the gameplay scene.
    Exits the game if the Escape key is pressed. Updates background scrolling offsets."
@@ -90,7 +106,7 @@
       (format *error-output* "[title-scene:update] Escape pressed; exiting game...~%")
       (game:exit (monogame game))
       (return-from update))
-      
+
     ;; Transition to gameplay scene on keyboard Enter or Space, or GamePad Start or A
     (when (or (was-key-just-pressed kb key:+enter+)
               (was-key-just-pressed kb key:+space+)
@@ -109,7 +125,10 @@
              (offset-delta (* scroll-speed dt)))
         ;; Use mod to wrap the offsets seamlessly within texture dimensions
         (setf (background-offset-x scene) (mod (- (background-offset-x scene) offset-delta) w))
-        (setf (background-offset-y scene) (mod (- (background-offset-y scene) offset-delta) h))))))
+        (setf (background-offset-y scene) (mod (- (background-offset-y scene) offset-delta) h))))
+
+    ;; Update the Gum UI
+    (cs:update gs:default gt)))
 
 (defmethod draw ((scene title-scene) gt)
   "Clears screen to dark blue, draws scrolling tiled background pattern (if loaded),
@@ -168,19 +187,46 @@
              (text-color (color:new 255 255 255 alpha-val)))
         (draw-string sb prompt-font prompt (v2:new pos-x pos-y) text-color)))
 
-    (sprite-batch:end sb)))
+    (sprite-batch:end sb))
 
-(defun handle-start-clicked ()
-  "A C# Event Handler invoked when the Start button is clicked"
-  ;; Play the UI sound effect
-  ; TODO: Core.Audio.PlaySoundEffect(_uiSoundEffect); audio-controller
-  ;; Switch to the Game Scene
-  ;; TODO: CODE ME
-  (format t "Start Clicked~%"))
+  ;; Draw the GUI, if necessary
+  (draw-gui scene))
 
-(defun handle-options-clicked ()
-  "A C# Event Handler invoked when the Start button is clicked"
+(defmethod draw-gui ((scene title-scene))
+  "Draws the GUI scene"
+  (cs:draw gs:default))
+
+(defun handle-start-clicked (sender args)
+  "A C# Event Handler invoked when the Start button is clicked.
+   Expected types:
+   sender: C# System.Object
+   args: C# System.EventArgs"
   ;; TODO: CODE ME
+  ; // A UI interaction occurred, play the sound effect
+  ; Core.Audio.PlaySoundEffect(_uiSoundEffect);
+
+  ; // Change to the game scene to start the game.
+  ; Core.ChangeScene(new GameScene());
+  ;; TODO: CODE ME
+  (format t "Start Clicked: sender: ~A, args: ~A~%" sender args))
+
+(defun handle-options-clicked (sender args)
+  "A C# Event Handler invoked when the Start button is clicked.
+   Expected types:
+   sender: C# System.Object
+   args: C# System.EventArgs"
+  ;; TODO: CODE ME
+  ; // A UI interaction occurred, play the sound effect
+  ; Core.Audio.PlaySoundEffect(_uiSoundEffect);
+  
+  ; // Set the title panel to be invisible.
+  ; _titleScreenButtonsPanel.IsVisible = false;
+
+  ; // Set the options panel to be visible.
+  ; _optionsPanel.IsVisible = true;
+
+  ; // Give the back button on the options panel focus.
+  ; _optionsBackButton.IsFocused = true;
   (format t "Options Clicked~%"))
 
 (defmethod create-title-panel ((scene title-scene))
@@ -191,30 +237,48 @@
   (setf (title-screen-buttons-panel scene) (panel:new))
   (cs:dock (title-screen-buttons-panel scene) dock:+fill+)
   (cs:add-to-root (title-screen-buttons-panel scene))
+  (setf (cs:visible? (title-screen-buttons-panel scene)) t)
 
-  (let ((button (uibutton:new)))
-    (setf (start-button scene) button)
-    (cs:anchor anchor:+bottom-left+)
+  (let* ((button (uibutton:new))
+         (start-button button))
+    (cs:anchor button anchor:+bottom-left+)
     ;; A button is also a gum-forms-controls-framework-element, nickname :gfe
     (setf (cs:x button) 50)
     (setf (cs:y button) -12)
     (setf (cs:width button) 70)
     (setf (cs:text button) "Start")
     ;; TODO: startButton.Click += HandleStartClicked;
-    (cs:add-click button handle-start-clicked)
-    (cs:add-child (title-screen-buttons-panel scene) button))
+    (cs:add-click button #'handle-start-clicked) ; Reminder: #'something == (function something)
+    (cs:add-child (title-screen-buttons-panel scene) button)
+    ;; This previously was called after the options button was set up.
+    ;; Let's see if it works here.
+    (setf (cs:focused? start-button) t))
 
   (let ((button (uibutton:new)))
     (setf (options-button scene) button)
-    (cs:anchor anchor:+bottom-right+)
+    (cs:anchor button anchor:+bottom-right+)
     (setf (cs:x button) -50)
     (setf (cs:y button) -12)
     (setf (cs:width button) 70)
     (setf (cs:text button) "Options")
     ;; TODO: optionsButton.Click += HandleOptionsClicked;
-    (cs:add-click button handle-options-clicked)
-    (cs:add-child (title-screen-buttons-panel scene) button))
+    (cs:add-click button #'handle-options-clicked)
+    (cs:add-child (title-screen-buttons-panel scene) button)))
 
-  (setf (cs:focused? (start-button scene)) t))
+(defmethod initialize-ui ((scene title-scene))
+  "Set up the title-scene UI"
+  ; Clear out any previous UI in case we came here from
+  ; a different screen:
+  (format *error-output* "[title-scene.lisp initialize-ui] GumService.Default.Root: ~A~%" (cs:root gs:default)) ;=> #<DOTNET MonoGameGum.GueDeriving.ContainerRuntime Main Root>
+  (format *error-output* "[title-scene.lisp initialize-ui] GumService.Default.Root.Children: ~A~%" (cs:children (cs:root gs:default))) ;=> #<DOTNET Gum.Collections.GraphicalUiElementCollection Gum.Collections.GraphicalUiElementCollection>
+  ;; cs:clear cannot be called as the current package generator does not generate ancestors of generics (yet) as of v39
+  ;; (cs:clear (cs:children (cs:root gs:default)))
+  (dotnet:invoke (cs:children (cs:root gs:default)) "Clear")
 
+  ;; Set up this scene's UI panels
+  (create-title-panel scene)
+  ; CreateOptionsPanel();
+  ;; FIXME: CODE ME
+)
+  
 

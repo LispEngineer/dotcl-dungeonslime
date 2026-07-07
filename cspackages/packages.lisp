@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 39
-;;; Creation Date: 2026-07-06T21:35:35Z
+;;; Creation Date: 2026-07-07T00:23:35Z
 
 (cl:in-package :cl-user)
 
@@ -608,12 +608,227 @@
    #:zoom
    #:get-transformation-matrix
    #:get-scissor-rectangle-for
+   #:clear-items
+   #:insert-item
+   #:move-item
+   #:remove-item
+   #:set-item
    #:parent-input-receiver
    #:do-keyboard-action
    #:on-focus-update
    #:on-focus-update-preview
    #:on-gain-focus
    #:on-lose-focus
+   #:expose-children-events
+   #:forms-control-as-object
+   #:has-events
+   #:enabled?
+   #:enabled-recursively?
+   #:outside-of-bounds-hit-testing-enabled?
+   #:raise-children-events-outside-of-bounds
+   #:call-click
+   #:call-right-click
+   #:has-cursor-over
+   #:in-parent-chain?
+   #:remove-from-managers
+   #:try-call-dragging
+   #:try-call-hover-over
+   #:try-call-push
+   #:try-call-remove-as-pushed
+   #:try-call-roll-off
+   #:try-call-roll-on
+   #:try-call-roll-over
+   #:add-click
+   #:remove-click
+   #:add-click-preview
+   #:remove-click-preview
+   #:add-double-click
+   #:remove-double-click
+   #:add-dragging
+   #:remove-dragging
+   #:add-enabled-change
+   #:remove-enabled-change
+   #:add-hover-over
+   #:remove-hover-over
+   #:add-lose-push
+   #:remove-lose-push
+   #:add-mouse-wheel-scroll
+   #:remove-mouse-wheel-scroll
+   #:add-push
+   #:remove-push
+   #:add-push-preview
+   #:remove-push-preview
+   #:add-removed-as-pushed
+   #:remove-removed-as-pushed
+   #:add-right-click
+   #:remove-right-click
+   #:add-roll-off
+   #:remove-roll-off
+   #:add-roll-on
+   #:remove-roll-on
+   #:add-roll-over
+   #:remove-roll-over
+   #:add-roll-over-bubbling
+   #:remove-roll-over-bubbling
+   #:batch-key
+   #:wrap
+   #:end-batch
+   #:pre-render
+   #:render
+   #:start-batch
+   #:alpha
+   #:children
+   #:clips-children
+   #:color-operation
+   #:render-target?
+   #:parent
+   #:set-parent-direct
+   #:in-render-target-recursively?
+   #:get-absolute-bottom
+   #:get-absolute-center-x
+   #:get-absolute-center-y
+   #:get-absolute-flip-horizontal
+   #:get-absolute-left
+   #:get-absolute-right
+   #:get-absolute-rotation-matrix
+   #:get-absolute-top
+   #:get-absolute-x
+   #:get-absolute-y
+   #:get-rotation-matrix
+   #:get-top-parent
+   #:absolute-visible
+   #:visible
+   #:get-absolute-visible
+   #:flip-horizontal
+   #:rotation
+   #:tag
+   #:z
+   #:get-position
+   #:set-position
+   #:absolute-x
+   #:absolute-y
+   #:animation-controller
+   #:animations
+   #:auto-grid-horizontal-cells
+   #:auto-grid-vertical-cells
+   #:binding-context
+   #:binding-context-binding
+   #:binding-context-binding-property-owner
+   #:categories
+   #:children-layout
+   #:component
+   #:contained-elements
+   #:effective-managers
+   #:effective-parent-gue
+   #:element-gue-containing-this
+   #:element-save
+   #:explicit-i-visible-parent
+   #:height-units
+   #:ignored-by-parent-size
+   #:font-dirty?
+   #:fully-created?
+   #:layout-suspended?
+   #:layer
+   #:managers
+   #:max-height
+   #:max-width
+   #:min-height
+   #:min-width
+   #:parent-gue
+   #:renderable-component
+   #:stacked-row-or-column-dimensions
+   #:stacked-row-or-column-index
+   #:stack-spacing
+   #:states
+   #:text-overflow-vertical-mode
+   #:texture-address
+   #:texture-height
+   #:texture-height-scale
+   #:texture-left
+   #:texture-top
+   #:texture-width
+   #:texture-width-scale
+   #:use-fixed-stack-children-size
+   #:what-this-contains
+   #:width-units
+   #:wraps-children
+   #:x-origin
+   #:x-units
+   #:y-origin
+   #:y-units
+   #:add-category
+   #:add-child
+   #:add-exposed-variable
+   #:add-states
+   #:add-to-managers
+   #:after-full-creation
+   #:anchor
+   #:animate-self
+   #:apply-state
+   #:apply-state-recursive
+   #:clear-dirty-layout-state
+   #:clear-managers
+   #:create-children-recursively
+   #:dock
+   #:get-absolute-height
+   #:get-absolute-width
+   #:get-anchor
+   #:get-child-by-name
+   #:get-child-by-name-recursively
+   #:get-child-by-type
+   #:get-child-by-type-recursively
+   #:get-dock
+   #:get-graphical-ui-element-by-name
+   #:get-if-dimensions-depend-on-children
+   #:get-parent-by-name-recursively
+   #:get-parent-by-type-recursively
+   #:interpolate-between
+   #:exposed-variable?
+   #:point-inside?
+   #:move-to-layer
+   #:notify-property-changed
+   #:play-animation
+   #:push-value-to-view-model
+   #:refresh-styles
+   #:refresh-text-overflow-vertical-mode
+   #:remove-child
+   #:resume-layout
+   #:set-binding
+   #:set-contained-object
+   #:set-gue-values
+   #:set-initial-state
+   #:set-property
+   #:stop-animation
+   #:suspend-layout
+   #:update-font-recursive
+   #:update-height
+   #:update-layout
+   #:update-texture-values-from
+   #:update-to-font-values
+   #:update-width
+   #:add-binding-context-changed
+   #:remove-binding-context-changed
+   #:add-inherited-binding-context-changed
+   #:remove-inherited-binding-context-changed
+   #:add-parent-changed
+   #:remove-parent-changed
+   #:add-position-changed
+   #:remove-position-changed
+   #:add-size-changed
+   #:remove-size-changed
+   #:add-visible-changed
+   #:remove-visible-changed
+   #:do-ui-activity-recursively
+   #:add-exposed-variables-recursively
+   #:add-states-and-categories-recursively-to-gue
+   #:apply-variable-references
+   #:create-graphical-component
+   #:set-states-and-categories-recursively
+   #:set-variables-recursively
+   #:export-layout-json
+   #:to-layout-json
+   #:add-to-root
+   #:remove-from-root
    #:canvas-height
    #:canvas-width
    #:content-loader
@@ -635,7 +850,6 @@
    #:enable-hot-reload
    #:initialize-for-testing
    #:load-animations
-   #:refresh-styles
    #:uninitialize
    #:use-gamepad-defaults
    #:use-keyboard-defaults
@@ -644,33 +858,18 @@
    #:remove-hot-reload-completed
    #:actual-height
    #:actual-width
-   #:binding-context
    #:custom-cursor
    #:gamepad-tabbing-focus-behavior
-   #:height-units
-   #:enabled?
    #:focused?
    #:tab-navigation-enabled?
    #:using-left-and-right-gamepad-directions-for-navigation?
-   #:max-height
-   #:max-width
-   #:min-height
-   #:min-width
    #:parent-framework-element
    #:tool-tip
    #:visual
-   #:width-units
-   #:x-origin
-   #:x-units
-   #:y-origin
-   #:y-units
-   #:add-child
-   #:anchor
    #:apply-runtime-properties
    #:call-loaded
    #:clear-binding
    #:close
-   #:dock
    #:get-desired-state
    #:get-desired-state-with-checked
    #:get-if-gamepad-or-keyboard-primary-push-input-is-held
@@ -685,16 +884,13 @@
    #:data-bound?
    #:on-binding-context-changed
    #:on-property-changed
-   #:push-value-to-view-model
    #:raise-key-down
    #:react-to-visual-changed
    #:react-to-visual-removed
    #:refresh-internal-visual-references
    #:register-runtime-property
-   #:remove-child
    #:reposition-to-keep-in-screen
    #:save-runtime-properties
-   #:set-binding
    #:show
    #:update-state
    #:update-state-recursively
@@ -702,8 +898,6 @@
    #:remove-after-refresh-styles
    #:add-before-refresh-styles
    #:remove-before-refresh-styles
-   #:add-binding-context-changed
-   #:remove-binding-context-changed
    #:add-got-focus
    #:remove-got-focus
    #:add-loaded
@@ -716,9 +910,6 @@
    #:remove-tool-tip-opening
    #:get-framework-element
    #:get-parent-input-receiver
-   #:remove-from-root
-   #:add-to-root
-   #:children
    #:text
    #:set-text-no-translate
    #:click-gamepad-button
@@ -731,19 +922,14 @@
    #:on-click
    #:perform-click
    #:receive-input
-   #:add-click
-   #:remove-click
    #:add-controller-button-pushed
    #:remove-controller-button-pushed
    #:add-focus-update
    #:remove-focus-update
-   #:add-push
-   #:remove-push
    #:default-height
    #:default-height-units
    #:default-width
    #:default-width-units
-   #:alpha
    #:bitmap-font
    #:blend
    #:blue
@@ -769,7 +955,6 @@
    #:use-font-smoothing
    #:vertical-alignment
    #:wrapped-text
-   #:add-to-managers
    #:get-character-index-at-position
    #:text-component
    #:snap-to-tick-enabled?
@@ -3362,6 +3547,26 @@
    #:get-scissor-rectangle-for
   ))
 
+;;; Source File: gum-collections-graphical-ui-element-collection.lisp
+;;; C# Class: Gum.Collections.GraphicalUiElementCollection
+;;; Constant Properties: (none)
+(cl:defpackage :gum-collections-graphical-ui-element-collection
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:empty
+   #:read-only?
+   #:clear-items
+   #:insert-item
+   #:move-item
+   #:remove-item
+   #:set-item
+  ))
+
 ;;; Source File: gum-wireframe-i-input-receiver.lisp
 ;;; C# Class: Gum.Wireframe.IInputReceiver
 ;;; Constant Properties: (none)
@@ -3378,6 +3583,360 @@
    #:on-focus-update-preview
    #:on-gain-focus
    #:on-lose-focus
+  ))
+
+;;; Source File: gum-wireframe-interactive-gue.lisp
+;;; C# Class: Gum.Wireframe.InteractiveGue
+;;; Constant Properties: (none)
+(cl:defpackage :gum-wireframe-interactive-gue
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:current-game-time
+   #:current-input-receiver
+   #:last-visual-pushed
+   #:expose-children-events
+   #:forms-control-as-object
+   #:has-events
+   #:enabled?
+   #:enabled-recursively?
+   #:outside-of-bounds-hit-testing-enabled?
+   #:raise-children-events-outside-of-bounds
+   #:add-next-click-action
+   #:add-next-push-action
+   #:call-click
+   #:call-right-click
+   #:clear-next-click-actions
+   #:has-cursor-over
+   #:in-parent-chain?
+   #:over-children?
+   #:remove-from-managers
+   #:to-string
+   #:try-call-dragging
+   #:try-call-hover-over
+   #:try-call-push
+   #:try-call-remove-as-pushed
+   #:try-call-roll-off
+   #:try-call-roll-on
+   #:try-call-roll-over
+   #:add-click
+   #:remove-click
+   #:add-click-preview
+   #:remove-click-preview
+   #:add-double-click
+   #:remove-double-click
+   #:add-dragging
+   #:remove-dragging
+   #:add-enabled-change
+   #:remove-enabled-change
+   #:add-hover-over
+   #:remove-hover-over
+   #:add-lose-push
+   #:remove-lose-push
+   #:add-mouse-wheel-scroll
+   #:remove-mouse-wheel-scroll
+   #:add-push
+   #:remove-push
+   #:add-push-preview
+   #:remove-push-preview
+   #:add-removed-as-pushed
+   #:remove-removed-as-pushed
+   #:add-right-click
+   #:remove-right-click
+   #:add-roll-off
+   #:remove-roll-off
+   #:add-roll-on
+   #:remove-roll-on
+   #:add-roll-over
+   #:remove-roll-over
+   #:add-roll-over-bubbling
+   #:remove-roll-over-bubbling
+  ))
+
+;;; Source File: rendering-library-graphics-i-renderable.lisp
+;;; C# Class: RenderingLibrary.Graphics.IRenderable
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-graphics-i-renderable
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:batch-key
+   #:blend-state
+   #:wrap
+   #:end-batch
+   #:pre-render
+   #:render
+   #:start-batch
+  ))
+
+;;; Source File: rendering-library-graphics-i-renderable-ipso.lisp
+;;; C# Class: RenderingLibrary.Graphics.IRenderableIpso
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-graphics-i-renderable-ipso
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:alpha
+   #:children
+   #:clips-children
+   #:color-operation
+   #:render-target?
+   #:parent
+   #:set-parent-direct
+   #:in-render-target-recursively?
+   #:get-absolute-bottom
+   #:get-absolute-center-x
+   #:get-absolute-center-y
+   #:get-absolute-flip-horizontal
+   #:get-absolute-left
+   #:get-absolute-right
+   #:get-absolute-rotation-matrix
+   #:get-absolute-top
+   #:get-absolute-x
+   #:get-absolute-y
+   #:get-rotation-matrix
+   #:get-top-parent
+   #:has-cursor-over
+  ))
+
+;;; Source File: rendering-library-graphics-i-visible.lisp
+;;; C# Class: RenderingLibrary.Graphics.IVisible
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-graphics-i-visible
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:absolute-visible
+   #:parent
+   #:visible
+   #:get-absolute-visible
+  ))
+
+;;; Source File: rendering-library-i-positioned-sized-object.lisp
+;;; C# Class: RenderingLibrary.IPositionedSizedObject
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-i-positioned-sized-object
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:flip-horizontal
+   #:height
+   #:name
+   #:rotation
+   #:tag
+   #:width
+   #:x
+   #:y
+   #:z
+   #:get-position
+   #:set-position
+  ))
+
+;;; Source File: gum-wireframe-graphical-ui-element.lisp
+;;; C# Class: Gum.Wireframe.GraphicalUiElement
+;;; Constant Properties: (none)
+(cl:defpackage :gum-wireframe-graphical-ui-element
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:add-renderable-to-managers
+   #:apply-markup
+   #:children-updating-parent-layout-calls
+   #:clone-renderable-function
+   #:get-type-call-count
+   #:global-font-scale
+   #:all-layout-suspended?
+   #:property-unsubscribe-call-count
+   #:remove-renderable-from-managers
+   #:save-forms-runtime-properties-action
+   #:set-property-on-renderable
+   #:show-line-rectangles
+   #:throw-exceptions-for-missing-files
+   #:update-font-from-properties
+   #:update-forms-state-action
+   #:update-layout-call-count
+   #:are-updates-applied-when-invisible
+   #:canvas-height
+   #:canvas-width
+   #:missing-file-behavior
+   #:absolute-bottom
+   #:absolute-left
+   #:absolute-right
+   #:absolute-top
+   #:absolute-visible
+   #:absolute-x
+   #:absolute-y
+   #:animation-controller
+   #:animations
+   #:auto-grid-horizontal-cells
+   #:auto-grid-vertical-cells
+   #:batch-key
+   #:binding-context
+   #:binding-context-binding
+   #:binding-context-binding-property-owner
+   #:categories
+   #:children
+   #:children-layout
+   #:clips-children
+   #:component
+   #:contained-elements
+   #:effective-managers
+   #:effective-parent-gue
+   #:element-gue-containing-this
+   #:element-save
+   #:explicit-i-visible-parent
+   #:flip-horizontal
+   #:height
+   #:height-units
+   #:ignored-by-parent-size
+   #:font-dirty?
+   #:fully-created?
+   #:layout-suspended?
+   #:outside-of-bounds-hit-testing-enabled?
+   #:render-target?
+   #:layer
+   #:managers
+   #:max-height
+   #:max-width
+   #:min-height
+   #:min-width
+   #:name
+   #:parent
+   #:parent-gue
+   #:renderable-component
+   #:rotation
+   #:stacked-row-or-column-dimensions
+   #:stacked-row-or-column-index
+   #:stack-spacing
+   #:states
+   #:tag
+   #:text-overflow-vertical-mode
+   #:texture-address
+   #:texture-height
+   #:texture-height-scale
+   #:texture-left
+   #:texture-top
+   #:texture-width
+   #:texture-width-scale
+   #:use-fixed-stack-children-size
+   #:visible
+   #:what-this-contains
+   #:width
+   #:width-units
+   #:wrap
+   #:wraps-children
+   #:x
+   #:x-origin
+   #:x-units
+   #:y
+   #:y-origin
+   #:y-units
+   #:z
+   #:add-category
+   #:add-child
+   #:add-exposed-variable
+   #:add-states
+   #:add-to-managers
+   #:after-full-creation
+   #:anchor
+   #:animate-self
+   #:apply-state
+   #:apply-state-recursive
+   #:clear-dirty-layout-state
+   #:clear-managers
+   #:clone
+   #:convert-value
+   #:create-children-recursively
+   #:dock
+   #:end-batch
+   #:fill-list-with-children-by-type-recursively
+   #:get-absolute-height
+   #:get-absolute-width
+   #:get-anchor
+   #:get-child-by-name
+   #:get-child-by-name-recursively
+   #:get-child-by-type
+   #:get-child-by-type-recursively
+   #:get-dock
+   #:get-graphical-ui-element-by-name
+   #:get-if-dimensions-depend-on-children
+   #:get-parent-by-name-recursively
+   #:get-parent-by-type-recursively
+   #:interpolate-between
+   #:exposed-variable?
+   #:point-inside?
+   #:move-to-layer
+   #:notify-property-changed
+   #:play-animation
+   #:pre-render
+   #:push-value-to-view-model
+   #:refresh-styles
+   #:refresh-text-overflow-vertical-mode
+   #:remove-child
+   #:remove-from-managers
+   #:render
+   #:resume-layout
+   #:set-binding
+   #:set-contained-object
+   #:set-gue-values
+   #:set-initial-state
+   #:set-property
+   #:set-property-through-reflection
+   #:start-batch
+   #:stop-animation
+   #:suspend-layout
+   #:to-string
+   #:update-font-recursive
+   #:update-height
+   #:update-layout
+   #:update-texture-values-from
+   #:update-to-font-values
+   #:update-width
+   #:add-binding-context-changed
+   #:remove-binding-context-changed
+   #:add-inherited-binding-context-changed
+   #:remove-inherited-binding-context-changed
+   #:add-parent-changed
+   #:remove-parent-changed
+   #:add-position-changed
+   #:remove-position-changed
+   #:add-property-changed
+   #:remove-property-changed
+   #:add-size-changed
+   #:remove-size-changed
+   #:add-visible-changed
+   #:remove-visible-changed
+   #:do-ui-activity-recursively
+   #:add-exposed-variables-recursively
+   #:add-states-and-categories-recursively-to-gue
+   #:apply-variable-references
+   #:create-graphical-component
+   #:set-states-and-categories-recursively
+   #:set-variables-recursively
+   #:export-layout-json
+   #:to-layout-json
+   #:add-to-root
+   #:remove-from-root
   ))
 
 ;;; Source File: mono-game-gum-gum-service.lisp
@@ -3870,6 +4429,25 @@
    #:remove-from-root
   ))
 
+;;; Source File: mono-game-gum-gue-deriving-container-runtime.lisp
+;;; C# Class: MonoGameGum.GueDeriving.ContainerRuntime
+;;; Constant Properties: (none)
+(cl:defpackage :mono-game-gum-gue-deriving-container-runtime
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:alpha
+   #:batch-key
+   #:blend
+   #:blend-state
+   #:render-target?
+   #:add-to-managers
+  ))
+
 ;;; Source File: gum-forms-controls-primitives-range-base.lisp
 ;;; C# Class: Gum.Forms.Controls.Primitives.RangeBase
 ;;; Constant Properties: (none)
@@ -3969,6 +4547,69 @@
 
 ;;; ===== Re-exports from parent/interface packages =====
 
+;;; gum-wireframe-interactive-gue: re-exports inherited members from gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable, rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible, rendering-library-i-positioned-sized-object, system-component-model-i-notify-property-changed
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-visible): absolute-visible
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): batch-key
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable-ipso): children
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable-ipso): clips-children
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): flip-horizontal
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): height
+;;; Skipped (gum-wireframe-interactive-gue declares its own): outside-of-bounds-hit-testing-enabled?
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable-ipso): render-target?
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): name
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible): parent
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): rotation
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): tag
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-visible): visible
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): width
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): wrap
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): x
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): y
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-i-positioned-sized-object): z
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): end-batch
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): pre-render
+;;; Skipped (gum-wireframe-interactive-gue declares its own): remove-from-managers
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): render
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable): start-batch
+;;; Skipped (gum-wireframe-interactive-gue declares its own): to-string
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, system-component-model-i-notify-property-changed): add-property-changed
+;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, system-component-model-i-notify-property-changed): remove-property-changed
+;;; Skipped (gum-wireframe-interactive-gue declares its own): has-cursor-over
+(cl:import '(gum-wireframe-graphical-ui-element::add-renderable-to-managers gum-wireframe-graphical-ui-element::apply-markup gum-wireframe-graphical-ui-element::children-updating-parent-layout-calls gum-wireframe-graphical-ui-element::clone-renderable-function gum-wireframe-graphical-ui-element::get-type-call-count gum-wireframe-graphical-ui-element::global-font-scale gum-wireframe-graphical-ui-element::all-layout-suspended? gum-wireframe-graphical-ui-element::property-unsubscribe-call-count gum-wireframe-graphical-ui-element::remove-renderable-from-managers gum-wireframe-graphical-ui-element::save-forms-runtime-properties-action gum-wireframe-graphical-ui-element::set-property-on-renderable gum-wireframe-graphical-ui-element::show-line-rectangles gum-wireframe-graphical-ui-element::throw-exceptions-for-missing-files gum-wireframe-graphical-ui-element::update-font-from-properties gum-wireframe-graphical-ui-element::update-forms-state-action gum-wireframe-graphical-ui-element::update-layout-call-count gum-wireframe-graphical-ui-element::are-updates-applied-when-invisible gum-wireframe-graphical-ui-element::canvas-height gum-wireframe-graphical-ui-element::canvas-width gum-wireframe-graphical-ui-element::missing-file-behavior gum-wireframe-graphical-ui-element::absolute-bottom gum-wireframe-graphical-ui-element::absolute-left gum-wireframe-graphical-ui-element::absolute-right gum-wireframe-graphical-ui-element::absolute-top gum-wireframe-graphical-ui-element::absolute-x gum-wireframe-graphical-ui-element::absolute-y gum-wireframe-graphical-ui-element::animation-controller gum-wireframe-graphical-ui-element::animations gum-wireframe-graphical-ui-element::auto-grid-horizontal-cells gum-wireframe-graphical-ui-element::auto-grid-vertical-cells gum-wireframe-graphical-ui-element::binding-context gum-wireframe-graphical-ui-element::binding-context-binding gum-wireframe-graphical-ui-element::binding-context-binding-property-owner gum-wireframe-graphical-ui-element::categories gum-wireframe-graphical-ui-element::children-layout gum-wireframe-graphical-ui-element::component gum-wireframe-graphical-ui-element::contained-elements gum-wireframe-graphical-ui-element::effective-managers gum-wireframe-graphical-ui-element::effective-parent-gue gum-wireframe-graphical-ui-element::element-gue-containing-this gum-wireframe-graphical-ui-element::element-save gum-wireframe-graphical-ui-element::explicit-i-visible-parent gum-wireframe-graphical-ui-element::height-units gum-wireframe-graphical-ui-element::ignored-by-parent-size gum-wireframe-graphical-ui-element::font-dirty? gum-wireframe-graphical-ui-element::fully-created? gum-wireframe-graphical-ui-element::layout-suspended? gum-wireframe-graphical-ui-element::layer gum-wireframe-graphical-ui-element::managers gum-wireframe-graphical-ui-element::max-height gum-wireframe-graphical-ui-element::max-width gum-wireframe-graphical-ui-element::min-height gum-wireframe-graphical-ui-element::min-width gum-wireframe-graphical-ui-element::parent-gue gum-wireframe-graphical-ui-element::renderable-component gum-wireframe-graphical-ui-element::stacked-row-or-column-dimensions gum-wireframe-graphical-ui-element::stacked-row-or-column-index gum-wireframe-graphical-ui-element::stack-spacing gum-wireframe-graphical-ui-element::states gum-wireframe-graphical-ui-element::text-overflow-vertical-mode gum-wireframe-graphical-ui-element::texture-address gum-wireframe-graphical-ui-element::texture-height gum-wireframe-graphical-ui-element::texture-height-scale gum-wireframe-graphical-ui-element::texture-left gum-wireframe-graphical-ui-element::texture-top gum-wireframe-graphical-ui-element::texture-width gum-wireframe-graphical-ui-element::texture-width-scale gum-wireframe-graphical-ui-element::use-fixed-stack-children-size gum-wireframe-graphical-ui-element::what-this-contains gum-wireframe-graphical-ui-element::width-units gum-wireframe-graphical-ui-element::wraps-children gum-wireframe-graphical-ui-element::x-origin gum-wireframe-graphical-ui-element::x-units gum-wireframe-graphical-ui-element::y-origin gum-wireframe-graphical-ui-element::y-units gum-wireframe-graphical-ui-element::add-category gum-wireframe-graphical-ui-element::add-child gum-wireframe-graphical-ui-element::add-exposed-variable gum-wireframe-graphical-ui-element::add-states gum-wireframe-graphical-ui-element::add-to-managers gum-wireframe-graphical-ui-element::after-full-creation gum-wireframe-graphical-ui-element::anchor gum-wireframe-graphical-ui-element::animate-self gum-wireframe-graphical-ui-element::apply-state gum-wireframe-graphical-ui-element::apply-state-recursive gum-wireframe-graphical-ui-element::clear-dirty-layout-state gum-wireframe-graphical-ui-element::clear-managers gum-wireframe-graphical-ui-element::clone gum-wireframe-graphical-ui-element::convert-value gum-wireframe-graphical-ui-element::create-children-recursively gum-wireframe-graphical-ui-element::dock gum-wireframe-graphical-ui-element::fill-list-with-children-by-type-recursively gum-wireframe-graphical-ui-element::get-absolute-height gum-wireframe-graphical-ui-element::get-absolute-width gum-wireframe-graphical-ui-element::get-anchor gum-wireframe-graphical-ui-element::get-child-by-name gum-wireframe-graphical-ui-element::get-child-by-name-recursively gum-wireframe-graphical-ui-element::get-child-by-type gum-wireframe-graphical-ui-element::get-child-by-type-recursively gum-wireframe-graphical-ui-element::get-dock gum-wireframe-graphical-ui-element::get-graphical-ui-element-by-name gum-wireframe-graphical-ui-element::get-if-dimensions-depend-on-children gum-wireframe-graphical-ui-element::get-parent-by-name-recursively gum-wireframe-graphical-ui-element::get-parent-by-type-recursively gum-wireframe-graphical-ui-element::interpolate-between gum-wireframe-graphical-ui-element::exposed-variable? gum-wireframe-graphical-ui-element::point-inside? gum-wireframe-graphical-ui-element::move-to-layer gum-wireframe-graphical-ui-element::notify-property-changed gum-wireframe-graphical-ui-element::play-animation gum-wireframe-graphical-ui-element::push-value-to-view-model gum-wireframe-graphical-ui-element::refresh-styles gum-wireframe-graphical-ui-element::refresh-text-overflow-vertical-mode gum-wireframe-graphical-ui-element::remove-child gum-wireframe-graphical-ui-element::resume-layout gum-wireframe-graphical-ui-element::set-binding gum-wireframe-graphical-ui-element::set-contained-object gum-wireframe-graphical-ui-element::set-gue-values gum-wireframe-graphical-ui-element::set-initial-state gum-wireframe-graphical-ui-element::set-property gum-wireframe-graphical-ui-element::set-property-through-reflection gum-wireframe-graphical-ui-element::stop-animation gum-wireframe-graphical-ui-element::suspend-layout gum-wireframe-graphical-ui-element::update-font-recursive gum-wireframe-graphical-ui-element::update-height gum-wireframe-graphical-ui-element::update-layout gum-wireframe-graphical-ui-element::update-texture-values-from gum-wireframe-graphical-ui-element::update-to-font-values gum-wireframe-graphical-ui-element::update-width gum-wireframe-graphical-ui-element::add-binding-context-changed gum-wireframe-graphical-ui-element::remove-binding-context-changed gum-wireframe-graphical-ui-element::add-inherited-binding-context-changed gum-wireframe-graphical-ui-element::remove-inherited-binding-context-changed gum-wireframe-graphical-ui-element::add-parent-changed gum-wireframe-graphical-ui-element::remove-parent-changed gum-wireframe-graphical-ui-element::add-position-changed gum-wireframe-graphical-ui-element::remove-position-changed gum-wireframe-graphical-ui-element::add-size-changed gum-wireframe-graphical-ui-element::remove-size-changed gum-wireframe-graphical-ui-element::add-visible-changed gum-wireframe-graphical-ui-element::remove-visible-changed gum-wireframe-graphical-ui-element::do-ui-activity-recursively gum-wireframe-graphical-ui-element::add-exposed-variables-recursively gum-wireframe-graphical-ui-element::add-states-and-categories-recursively-to-gue gum-wireframe-graphical-ui-element::apply-variable-references gum-wireframe-graphical-ui-element::create-graphical-component gum-wireframe-graphical-ui-element::set-states-and-categories-recursively gum-wireframe-graphical-ui-element::set-variables-recursively gum-wireframe-graphical-ui-element::export-layout-json gum-wireframe-graphical-ui-element::to-layout-json gum-wireframe-graphical-ui-element::add-to-root gum-wireframe-graphical-ui-element::remove-from-root rendering-library-graphics-i-renderable::blend-state rendering-library-graphics-i-renderable-ipso::alpha rendering-library-graphics-i-renderable-ipso::color-operation rendering-library-graphics-i-renderable-ipso::set-parent-direct rendering-library-graphics-i-renderable-ipso::in-render-target-recursively? rendering-library-graphics-i-renderable-ipso::get-absolute-bottom rendering-library-graphics-i-renderable-ipso::get-absolute-center-x rendering-library-graphics-i-renderable-ipso::get-absolute-center-y rendering-library-graphics-i-renderable-ipso::get-absolute-flip-horizontal rendering-library-graphics-i-renderable-ipso::get-absolute-left rendering-library-graphics-i-renderable-ipso::get-absolute-right rendering-library-graphics-i-renderable-ipso::get-absolute-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-absolute-top rendering-library-graphics-i-renderable-ipso::get-absolute-x rendering-library-graphics-i-renderable-ipso::get-absolute-y rendering-library-graphics-i-renderable-ipso::get-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-top-parent rendering-library-graphics-i-visible::get-absolute-visible rendering-library-i-positioned-sized-object::get-position rendering-library-i-positioned-sized-object::set-position) ':gum-wireframe-interactive-gue)
+(cl:export '(gum-wireframe-interactive-gue::add-renderable-to-managers gum-wireframe-interactive-gue::apply-markup gum-wireframe-interactive-gue::children-updating-parent-layout-calls gum-wireframe-interactive-gue::clone-renderable-function gum-wireframe-interactive-gue::get-type-call-count gum-wireframe-interactive-gue::global-font-scale gum-wireframe-interactive-gue::all-layout-suspended? gum-wireframe-interactive-gue::property-unsubscribe-call-count gum-wireframe-interactive-gue::remove-renderable-from-managers gum-wireframe-interactive-gue::save-forms-runtime-properties-action gum-wireframe-interactive-gue::set-property-on-renderable gum-wireframe-interactive-gue::show-line-rectangles gum-wireframe-interactive-gue::throw-exceptions-for-missing-files gum-wireframe-interactive-gue::update-font-from-properties gum-wireframe-interactive-gue::update-forms-state-action gum-wireframe-interactive-gue::update-layout-call-count gum-wireframe-interactive-gue::are-updates-applied-when-invisible gum-wireframe-interactive-gue::canvas-height gum-wireframe-interactive-gue::canvas-width gum-wireframe-interactive-gue::missing-file-behavior gum-wireframe-interactive-gue::absolute-bottom gum-wireframe-interactive-gue::absolute-left gum-wireframe-interactive-gue::absolute-right gum-wireframe-interactive-gue::absolute-top gum-wireframe-interactive-gue::absolute-x gum-wireframe-interactive-gue::absolute-y gum-wireframe-interactive-gue::animation-controller gum-wireframe-interactive-gue::animations gum-wireframe-interactive-gue::auto-grid-horizontal-cells gum-wireframe-interactive-gue::auto-grid-vertical-cells gum-wireframe-interactive-gue::binding-context gum-wireframe-interactive-gue::binding-context-binding gum-wireframe-interactive-gue::binding-context-binding-property-owner gum-wireframe-interactive-gue::categories gum-wireframe-interactive-gue::children-layout gum-wireframe-interactive-gue::component gum-wireframe-interactive-gue::contained-elements gum-wireframe-interactive-gue::effective-managers gum-wireframe-interactive-gue::effective-parent-gue gum-wireframe-interactive-gue::element-gue-containing-this gum-wireframe-interactive-gue::element-save gum-wireframe-interactive-gue::explicit-i-visible-parent gum-wireframe-interactive-gue::height-units gum-wireframe-interactive-gue::ignored-by-parent-size gum-wireframe-interactive-gue::font-dirty? gum-wireframe-interactive-gue::fully-created? gum-wireframe-interactive-gue::layout-suspended? gum-wireframe-interactive-gue::layer gum-wireframe-interactive-gue::managers gum-wireframe-interactive-gue::max-height gum-wireframe-interactive-gue::max-width gum-wireframe-interactive-gue::min-height gum-wireframe-interactive-gue::min-width gum-wireframe-interactive-gue::parent-gue gum-wireframe-interactive-gue::renderable-component gum-wireframe-interactive-gue::stacked-row-or-column-dimensions gum-wireframe-interactive-gue::stacked-row-or-column-index gum-wireframe-interactive-gue::stack-spacing gum-wireframe-interactive-gue::states gum-wireframe-interactive-gue::text-overflow-vertical-mode gum-wireframe-interactive-gue::texture-address gum-wireframe-interactive-gue::texture-height gum-wireframe-interactive-gue::texture-height-scale gum-wireframe-interactive-gue::texture-left gum-wireframe-interactive-gue::texture-top gum-wireframe-interactive-gue::texture-width gum-wireframe-interactive-gue::texture-width-scale gum-wireframe-interactive-gue::use-fixed-stack-children-size gum-wireframe-interactive-gue::what-this-contains gum-wireframe-interactive-gue::width-units gum-wireframe-interactive-gue::wraps-children gum-wireframe-interactive-gue::x-origin gum-wireframe-interactive-gue::x-units gum-wireframe-interactive-gue::y-origin gum-wireframe-interactive-gue::y-units gum-wireframe-interactive-gue::add-category gum-wireframe-interactive-gue::add-child gum-wireframe-interactive-gue::add-exposed-variable gum-wireframe-interactive-gue::add-states gum-wireframe-interactive-gue::add-to-managers gum-wireframe-interactive-gue::after-full-creation gum-wireframe-interactive-gue::anchor gum-wireframe-interactive-gue::animate-self gum-wireframe-interactive-gue::apply-state gum-wireframe-interactive-gue::apply-state-recursive gum-wireframe-interactive-gue::clear-dirty-layout-state gum-wireframe-interactive-gue::clear-managers gum-wireframe-interactive-gue::clone gum-wireframe-interactive-gue::convert-value gum-wireframe-interactive-gue::create-children-recursively gum-wireframe-interactive-gue::dock gum-wireframe-interactive-gue::fill-list-with-children-by-type-recursively gum-wireframe-interactive-gue::get-absolute-height gum-wireframe-interactive-gue::get-absolute-width gum-wireframe-interactive-gue::get-anchor gum-wireframe-interactive-gue::get-child-by-name gum-wireframe-interactive-gue::get-child-by-name-recursively gum-wireframe-interactive-gue::get-child-by-type gum-wireframe-interactive-gue::get-child-by-type-recursively gum-wireframe-interactive-gue::get-dock gum-wireframe-interactive-gue::get-graphical-ui-element-by-name gum-wireframe-interactive-gue::get-if-dimensions-depend-on-children gum-wireframe-interactive-gue::get-parent-by-name-recursively gum-wireframe-interactive-gue::get-parent-by-type-recursively gum-wireframe-interactive-gue::interpolate-between gum-wireframe-interactive-gue::exposed-variable? gum-wireframe-interactive-gue::point-inside? gum-wireframe-interactive-gue::move-to-layer gum-wireframe-interactive-gue::notify-property-changed gum-wireframe-interactive-gue::play-animation gum-wireframe-interactive-gue::push-value-to-view-model gum-wireframe-interactive-gue::refresh-styles gum-wireframe-interactive-gue::refresh-text-overflow-vertical-mode gum-wireframe-interactive-gue::remove-child gum-wireframe-interactive-gue::resume-layout gum-wireframe-interactive-gue::set-binding gum-wireframe-interactive-gue::set-contained-object gum-wireframe-interactive-gue::set-gue-values gum-wireframe-interactive-gue::set-initial-state gum-wireframe-interactive-gue::set-property gum-wireframe-interactive-gue::set-property-through-reflection gum-wireframe-interactive-gue::stop-animation gum-wireframe-interactive-gue::suspend-layout gum-wireframe-interactive-gue::update-font-recursive gum-wireframe-interactive-gue::update-height gum-wireframe-interactive-gue::update-layout gum-wireframe-interactive-gue::update-texture-values-from gum-wireframe-interactive-gue::update-to-font-values gum-wireframe-interactive-gue::update-width gum-wireframe-interactive-gue::add-binding-context-changed gum-wireframe-interactive-gue::remove-binding-context-changed gum-wireframe-interactive-gue::add-inherited-binding-context-changed gum-wireframe-interactive-gue::remove-inherited-binding-context-changed gum-wireframe-interactive-gue::add-parent-changed gum-wireframe-interactive-gue::remove-parent-changed gum-wireframe-interactive-gue::add-position-changed gum-wireframe-interactive-gue::remove-position-changed gum-wireframe-interactive-gue::add-size-changed gum-wireframe-interactive-gue::remove-size-changed gum-wireframe-interactive-gue::add-visible-changed gum-wireframe-interactive-gue::remove-visible-changed gum-wireframe-interactive-gue::do-ui-activity-recursively gum-wireframe-interactive-gue::add-exposed-variables-recursively gum-wireframe-interactive-gue::add-states-and-categories-recursively-to-gue gum-wireframe-interactive-gue::apply-variable-references gum-wireframe-interactive-gue::create-graphical-component gum-wireframe-interactive-gue::set-states-and-categories-recursively gum-wireframe-interactive-gue::set-variables-recursively gum-wireframe-interactive-gue::export-layout-json gum-wireframe-interactive-gue::to-layout-json gum-wireframe-interactive-gue::add-to-root gum-wireframe-interactive-gue::remove-from-root gum-wireframe-interactive-gue::blend-state gum-wireframe-interactive-gue::alpha gum-wireframe-interactive-gue::color-operation gum-wireframe-interactive-gue::set-parent-direct gum-wireframe-interactive-gue::in-render-target-recursively? gum-wireframe-interactive-gue::get-absolute-bottom gum-wireframe-interactive-gue::get-absolute-center-x gum-wireframe-interactive-gue::get-absolute-center-y gum-wireframe-interactive-gue::get-absolute-flip-horizontal gum-wireframe-interactive-gue::get-absolute-left gum-wireframe-interactive-gue::get-absolute-right gum-wireframe-interactive-gue::get-absolute-rotation-matrix gum-wireframe-interactive-gue::get-absolute-top gum-wireframe-interactive-gue::get-absolute-x gum-wireframe-interactive-gue::get-absolute-y gum-wireframe-interactive-gue::get-rotation-matrix gum-wireframe-interactive-gue::get-top-parent gum-wireframe-interactive-gue::get-absolute-visible gum-wireframe-interactive-gue::get-position gum-wireframe-interactive-gue::set-position) ':gum-wireframe-interactive-gue)
+
+;;; rendering-library-graphics-i-renderable-ipso: re-exports inherited members from rendering-library-graphics-i-renderable, rendering-library-graphics-i-visible, rendering-library-i-positioned-sized-object
+;;; Skipped (rendering-library-graphics-i-renderable-ipso declares its own): parent
+(cl:import '(rendering-library-graphics-i-renderable::batch-key rendering-library-graphics-i-renderable::blend-state rendering-library-graphics-i-renderable::wrap rendering-library-graphics-i-renderable::end-batch rendering-library-graphics-i-renderable::pre-render rendering-library-graphics-i-renderable::render rendering-library-graphics-i-renderable::start-batch rendering-library-graphics-i-visible::absolute-visible rendering-library-graphics-i-visible::visible rendering-library-graphics-i-visible::get-absolute-visible rendering-library-i-positioned-sized-object::flip-horizontal rendering-library-i-positioned-sized-object::height rendering-library-i-positioned-sized-object::name rendering-library-i-positioned-sized-object::rotation rendering-library-i-positioned-sized-object::tag rendering-library-i-positioned-sized-object::width rendering-library-i-positioned-sized-object::x rendering-library-i-positioned-sized-object::y rendering-library-i-positioned-sized-object::z rendering-library-i-positioned-sized-object::get-position rendering-library-i-positioned-sized-object::set-position) ':rendering-library-graphics-i-renderable-ipso)
+(cl:export '(rendering-library-graphics-i-renderable-ipso::batch-key rendering-library-graphics-i-renderable-ipso::blend-state rendering-library-graphics-i-renderable-ipso::wrap rendering-library-graphics-i-renderable-ipso::end-batch rendering-library-graphics-i-renderable-ipso::pre-render rendering-library-graphics-i-renderable-ipso::render rendering-library-graphics-i-renderable-ipso::start-batch rendering-library-graphics-i-renderable-ipso::absolute-visible rendering-library-graphics-i-renderable-ipso::visible rendering-library-graphics-i-renderable-ipso::get-absolute-visible rendering-library-graphics-i-renderable-ipso::flip-horizontal rendering-library-graphics-i-renderable-ipso::height rendering-library-graphics-i-renderable-ipso::name rendering-library-graphics-i-renderable-ipso::rotation rendering-library-graphics-i-renderable-ipso::tag rendering-library-graphics-i-renderable-ipso::width rendering-library-graphics-i-renderable-ipso::x rendering-library-graphics-i-renderable-ipso::y rendering-library-graphics-i-renderable-ipso::z rendering-library-graphics-i-renderable-ipso::get-position rendering-library-graphics-i-renderable-ipso::set-position) ':rendering-library-graphics-i-renderable-ipso)
+
+;;; gum-wireframe-graphical-ui-element: re-exports inherited members from rendering-library-graphics-i-renderable, rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible, rendering-library-i-positioned-sized-object, system-component-model-i-notify-property-changed
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): batch-key
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): wrap
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): end-batch
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): pre-render
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): render
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): start-batch
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): children
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): clips-children
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): render-target?
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): parent
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): absolute-visible
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): visible
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): flip-horizontal
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): height
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): name
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): rotation
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): tag
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): width
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): x
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): y
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): z
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): add-property-changed
+;;; Skipped (gum-wireframe-graphical-ui-element declares its own): remove-property-changed
+(cl:import '(rendering-library-graphics-i-renderable::blend-state rendering-library-graphics-i-renderable-ipso::alpha rendering-library-graphics-i-renderable-ipso::color-operation rendering-library-graphics-i-renderable-ipso::set-parent-direct rendering-library-graphics-i-renderable-ipso::in-render-target-recursively? rendering-library-graphics-i-renderable-ipso::get-absolute-bottom rendering-library-graphics-i-renderable-ipso::get-absolute-center-x rendering-library-graphics-i-renderable-ipso::get-absolute-center-y rendering-library-graphics-i-renderable-ipso::get-absolute-flip-horizontal rendering-library-graphics-i-renderable-ipso::get-absolute-left rendering-library-graphics-i-renderable-ipso::get-absolute-right rendering-library-graphics-i-renderable-ipso::get-absolute-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-absolute-top rendering-library-graphics-i-renderable-ipso::get-absolute-x rendering-library-graphics-i-renderable-ipso::get-absolute-y rendering-library-graphics-i-renderable-ipso::get-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-top-parent rendering-library-graphics-i-renderable-ipso::has-cursor-over rendering-library-graphics-i-visible::get-absolute-visible rendering-library-i-positioned-sized-object::get-position rendering-library-i-positioned-sized-object::set-position) ':gum-wireframe-graphical-ui-element)
+(cl:export '(gum-wireframe-graphical-ui-element::blend-state gum-wireframe-graphical-ui-element::alpha gum-wireframe-graphical-ui-element::color-operation gum-wireframe-graphical-ui-element::set-parent-direct gum-wireframe-graphical-ui-element::in-render-target-recursively? gum-wireframe-graphical-ui-element::get-absolute-bottom gum-wireframe-graphical-ui-element::get-absolute-center-x gum-wireframe-graphical-ui-element::get-absolute-center-y gum-wireframe-graphical-ui-element::get-absolute-flip-horizontal gum-wireframe-graphical-ui-element::get-absolute-left gum-wireframe-graphical-ui-element::get-absolute-right gum-wireframe-graphical-ui-element::get-absolute-rotation-matrix gum-wireframe-graphical-ui-element::get-absolute-top gum-wireframe-graphical-ui-element::get-absolute-x gum-wireframe-graphical-ui-element::get-absolute-y gum-wireframe-graphical-ui-element::get-rotation-matrix gum-wireframe-graphical-ui-element::get-top-parent gum-wireframe-graphical-ui-element::has-cursor-over gum-wireframe-graphical-ui-element::get-absolute-visible gum-wireframe-graphical-ui-element::get-position gum-wireframe-graphical-ui-element::set-position) ':gum-wireframe-graphical-ui-element)
+
 ;;; gum-forms-controls-panel: re-exports inherited members from gum-forms-controls-framework-element, system-component-model-i-notify-property-changed
 ;;; Skipped (gum-forms-controls-panel declares its own): react-to-visual-changed
 ;;; Skipped (ambiguous across ancestors: gum-forms-controls-framework-element, system-component-model-i-notify-property-changed): add-property-changed
@@ -4031,6 +4672,40 @@
 (cl:shadowing-import '(gum-forms-controls-framework-element::close) ':gum-forms-controls-slider)
 (cl:import '(gum-forms-controls-primitives-range-base::move-to-point-enabled? gum-forms-controls-primitives-range-base::large-change gum-forms-controls-primitives-range-base::maximum gum-forms-controls-primitives-range-base::minimum gum-forms-controls-primitives-range-base::orientation gum-forms-controls-primitives-range-base::small-change gum-forms-controls-primitives-range-base::track gum-forms-controls-primitives-range-base::value gum-forms-controls-primitives-range-base::apply-value-considering-snapping gum-forms-controls-primitives-range-base::get-current-sign-relative-to-value gum-forms-controls-primitives-range-base::raise-value-change-completed gum-forms-controls-primitives-range-base::raise-value-changed-by-ui gum-forms-controls-primitives-range-base::add-orientation-changed gum-forms-controls-primitives-range-base::remove-orientation-changed gum-forms-controls-primitives-range-base::add-value-change-completed gum-forms-controls-primitives-range-base::remove-value-change-completed gum-forms-controls-primitives-range-base::add-value-changed gum-forms-controls-primitives-range-base::remove-value-changed gum-forms-controls-primitives-range-base::add-value-changed-by-ui gum-forms-controls-primitives-range-base::remove-value-changed-by-ui gum-forms-controls-framework-element::+disabled-focused-state+ gum-forms-controls-framework-element::+disabled-focused-state-name+ gum-forms-controls-framework-element::+disabled-state+ gum-forms-controls-framework-element::+disabled-state-name+ gum-forms-controls-framework-element::+enabled-state+ gum-forms-controls-framework-element::+enabled-state-name+ gum-forms-controls-framework-element::+focused-state+ gum-forms-controls-framework-element::+focused-state-name+ gum-forms-controls-framework-element::+highlighted-focused-state+ gum-forms-controls-framework-element::+highlighted-focused-state-name+ gum-forms-controls-framework-element::+highlighted-state+ gum-forms-controls-framework-element::+highlighted-state-name+ gum-forms-controls-framework-element::+horizontal-state-name+ gum-forms-controls-framework-element::+pushed-state+ gum-forms-controls-framework-element::+pushed-state-name+ gum-forms-controls-framework-element::+selected-highlighted-state-name+ gum-forms-controls-framework-element::+selected-state-name+ gum-forms-controls-framework-element::+vertical-state-name+ gum-forms-controls-framework-element::default-forms-components gum-forms-controls-framework-element::default-forms-templates gum-forms-controls-framework-element::game-pads-for-ui-control gum-forms-controls-framework-element::keyboards-for-ui-control gum-forms-controls-framework-element::click-combos gum-forms-controls-framework-element::main-cursor gum-forms-controls-framework-element::main-keyboard gum-forms-controls-framework-element::modal-root gum-forms-controls-framework-element::popup-root gum-forms-controls-framework-element::tab-key-combos gum-forms-controls-framework-element::tab-reverse-key-combos gum-forms-controls-framework-element::absolute-left gum-forms-controls-framework-element::absolute-top gum-forms-controls-framework-element::actual-height gum-forms-controls-framework-element::actual-width gum-forms-controls-framework-element::binding-context gum-forms-controls-framework-element::custom-cursor gum-forms-controls-framework-element::gamepad-tabbing-focus-behavior gum-forms-controls-framework-element::height gum-forms-controls-framework-element::height-units gum-forms-controls-framework-element::focused? gum-forms-controls-framework-element::tab-navigation-enabled? gum-forms-controls-framework-element::using-left-and-right-gamepad-directions-for-navigation? gum-forms-controls-framework-element::visible? gum-forms-controls-framework-element::max-height gum-forms-controls-framework-element::max-width gum-forms-controls-framework-element::min-height gum-forms-controls-framework-element::min-width gum-forms-controls-framework-element::name gum-forms-controls-framework-element::parent-framework-element gum-forms-controls-framework-element::tool-tip gum-forms-controls-framework-element::visual gum-forms-controls-framework-element::width gum-forms-controls-framework-element::width-units gum-forms-controls-framework-element::x gum-forms-controls-framework-element::x-origin gum-forms-controls-framework-element::x-units gum-forms-controls-framework-element::y gum-forms-controls-framework-element::y-origin gum-forms-controls-framework-element::y-units gum-forms-controls-framework-element::add-child gum-forms-controls-framework-element::anchor gum-forms-controls-framework-element::call-loaded gum-forms-controls-framework-element::clear-binding gum-forms-controls-framework-element::dock gum-forms-controls-framework-element::get-desired-state gum-forms-controls-framework-element::get-desired-state-with-checked gum-forms-controls-framework-element::get-graphical-ui-element-for gum-forms-controls-framework-element::get-graphical-ui-element-for-framework-element gum-forms-controls-framework-element::get-if-gamepad-or-keyboard-primary-push-input-is-held gum-forms-controls-framework-element::get-if-is-on-this-or-child-visual gum-forms-controls-framework-element::get-if-push-input-is-held gum-forms-controls-framework-element::get-state gum-forms-controls-framework-element::get-visual gum-forms-controls-framework-element::get-visual<> gum-forms-controls-framework-element::handle-gamepad-navigation gum-forms-controls-framework-element::handle-keyboard-focus-update gum-forms-controls-framework-element::handle-tab gum-forms-controls-framework-element::handle-tab* gum-forms-controls-framework-element::handle-visual-binding-context-changed gum-forms-controls-framework-element::data-bound? gum-forms-controls-framework-element::on-binding-context-changed gum-forms-controls-framework-element::on-property-changed gum-forms-controls-framework-element::push-value-to-view-model gum-forms-controls-framework-element::raise-key-down gum-forms-controls-framework-element::register-runtime-property gum-forms-controls-framework-element::register-runtime-property<> gum-forms-controls-framework-element::remove-child gum-forms-controls-framework-element::reposition-to-keep-in-screen gum-forms-controls-framework-element::save-runtime-properties gum-forms-controls-framework-element::set-binding gum-forms-controls-framework-element::show gum-forms-controls-framework-element::to-string gum-forms-controls-framework-element::update-state-recursively gum-forms-controls-framework-element::add-after-refresh-styles gum-forms-controls-framework-element::remove-after-refresh-styles gum-forms-controls-framework-element::add-before-refresh-styles gum-forms-controls-framework-element::remove-before-refresh-styles gum-forms-controls-framework-element::add-binding-context-changed gum-forms-controls-framework-element::remove-binding-context-changed gum-forms-controls-framework-element::add-got-focus gum-forms-controls-framework-element::remove-got-focus gum-forms-controls-framework-element::add-key-down gum-forms-controls-framework-element::remove-key-down gum-forms-controls-framework-element::add-loaded gum-forms-controls-framework-element::remove-loaded gum-forms-controls-framework-element::add-lost-focus gum-forms-controls-framework-element::remove-lost-focus gum-forms-controls-framework-element::add-tool-tip-closing gum-forms-controls-framework-element::remove-tool-tip-closing gum-forms-controls-framework-element::add-tool-tip-opening gum-forms-controls-framework-element::remove-tool-tip-opening gum-forms-controls-framework-element::get-framework-element gum-forms-controls-framework-element::get-parent-input-receiver gum-forms-controls-framework-element::remove-from-root gum-forms-controls-framework-element::add-to-root) ':gum-forms-controls-slider)
 (cl:export '(gum-forms-controls-slider::move-to-point-enabled? gum-forms-controls-slider::large-change gum-forms-controls-slider::maximum gum-forms-controls-slider::minimum gum-forms-controls-slider::orientation gum-forms-controls-slider::small-change gum-forms-controls-slider::track gum-forms-controls-slider::value gum-forms-controls-slider::apply-value-considering-snapping gum-forms-controls-slider::get-current-sign-relative-to-value gum-forms-controls-slider::raise-value-change-completed gum-forms-controls-slider::raise-value-changed-by-ui gum-forms-controls-slider::add-orientation-changed gum-forms-controls-slider::remove-orientation-changed gum-forms-controls-slider::add-value-change-completed gum-forms-controls-slider::remove-value-change-completed gum-forms-controls-slider::add-value-changed gum-forms-controls-slider::remove-value-changed gum-forms-controls-slider::add-value-changed-by-ui gum-forms-controls-slider::remove-value-changed-by-ui gum-forms-controls-slider::+disabled-focused-state+ gum-forms-controls-slider::+disabled-focused-state-name+ gum-forms-controls-slider::+disabled-state+ gum-forms-controls-slider::+disabled-state-name+ gum-forms-controls-slider::+enabled-state+ gum-forms-controls-slider::+enabled-state-name+ gum-forms-controls-slider::+focused-state+ gum-forms-controls-slider::+focused-state-name+ gum-forms-controls-slider::+highlighted-focused-state+ gum-forms-controls-slider::+highlighted-focused-state-name+ gum-forms-controls-slider::+highlighted-state+ gum-forms-controls-slider::+highlighted-state-name+ gum-forms-controls-slider::+horizontal-state-name+ gum-forms-controls-slider::+pushed-state+ gum-forms-controls-slider::+pushed-state-name+ gum-forms-controls-slider::+selected-highlighted-state-name+ gum-forms-controls-slider::+selected-state-name+ gum-forms-controls-slider::+vertical-state-name+ gum-forms-controls-slider::default-forms-components gum-forms-controls-slider::default-forms-templates gum-forms-controls-slider::game-pads-for-ui-control gum-forms-controls-slider::keyboards-for-ui-control gum-forms-controls-slider::click-combos gum-forms-controls-slider::main-cursor gum-forms-controls-slider::main-keyboard gum-forms-controls-slider::modal-root gum-forms-controls-slider::popup-root gum-forms-controls-slider::tab-key-combos gum-forms-controls-slider::tab-reverse-key-combos gum-forms-controls-slider::absolute-left gum-forms-controls-slider::absolute-top gum-forms-controls-slider::actual-height gum-forms-controls-slider::actual-width gum-forms-controls-slider::binding-context gum-forms-controls-slider::custom-cursor gum-forms-controls-slider::gamepad-tabbing-focus-behavior gum-forms-controls-slider::height gum-forms-controls-slider::height-units gum-forms-controls-slider::focused? gum-forms-controls-slider::tab-navigation-enabled? gum-forms-controls-slider::using-left-and-right-gamepad-directions-for-navigation? gum-forms-controls-slider::visible? gum-forms-controls-slider::max-height gum-forms-controls-slider::max-width gum-forms-controls-slider::min-height gum-forms-controls-slider::min-width gum-forms-controls-slider::name gum-forms-controls-slider::parent-framework-element gum-forms-controls-slider::tool-tip gum-forms-controls-slider::visual gum-forms-controls-slider::width gum-forms-controls-slider::width-units gum-forms-controls-slider::x gum-forms-controls-slider::x-origin gum-forms-controls-slider::x-units gum-forms-controls-slider::y gum-forms-controls-slider::y-origin gum-forms-controls-slider::y-units gum-forms-controls-slider::add-child gum-forms-controls-slider::anchor gum-forms-controls-slider::call-loaded gum-forms-controls-slider::clear-binding gum-forms-controls-slider::close gum-forms-controls-slider::dock gum-forms-controls-slider::get-desired-state gum-forms-controls-slider::get-desired-state-with-checked gum-forms-controls-slider::get-graphical-ui-element-for gum-forms-controls-slider::get-graphical-ui-element-for-framework-element gum-forms-controls-slider::get-if-gamepad-or-keyboard-primary-push-input-is-held gum-forms-controls-slider::get-if-is-on-this-or-child-visual gum-forms-controls-slider::get-if-push-input-is-held gum-forms-controls-slider::get-state gum-forms-controls-slider::get-visual gum-forms-controls-slider::get-visual<> gum-forms-controls-slider::handle-gamepad-navigation gum-forms-controls-slider::handle-keyboard-focus-update gum-forms-controls-slider::handle-tab gum-forms-controls-slider::handle-tab* gum-forms-controls-slider::handle-visual-binding-context-changed gum-forms-controls-slider::data-bound? gum-forms-controls-slider::on-binding-context-changed gum-forms-controls-slider::on-property-changed gum-forms-controls-slider::push-value-to-view-model gum-forms-controls-slider::raise-key-down gum-forms-controls-slider::register-runtime-property gum-forms-controls-slider::register-runtime-property<> gum-forms-controls-slider::remove-child gum-forms-controls-slider::reposition-to-keep-in-screen gum-forms-controls-slider::save-runtime-properties gum-forms-controls-slider::set-binding gum-forms-controls-slider::show gum-forms-controls-slider::to-string gum-forms-controls-slider::update-state-recursively gum-forms-controls-slider::add-after-refresh-styles gum-forms-controls-slider::remove-after-refresh-styles gum-forms-controls-slider::add-before-refresh-styles gum-forms-controls-slider::remove-before-refresh-styles gum-forms-controls-slider::add-binding-context-changed gum-forms-controls-slider::remove-binding-context-changed gum-forms-controls-slider::add-got-focus gum-forms-controls-slider::remove-got-focus gum-forms-controls-slider::add-key-down gum-forms-controls-slider::remove-key-down gum-forms-controls-slider::add-loaded gum-forms-controls-slider::remove-loaded gum-forms-controls-slider::add-lost-focus gum-forms-controls-slider::remove-lost-focus gum-forms-controls-slider::add-tool-tip-closing gum-forms-controls-slider::remove-tool-tip-closing gum-forms-controls-slider::add-tool-tip-opening gum-forms-controls-slider::remove-tool-tip-opening gum-forms-controls-slider::get-framework-element gum-forms-controls-slider::get-parent-input-receiver gum-forms-controls-slider::remove-from-root gum-forms-controls-slider::add-to-root) ':gum-forms-controls-slider)
+
+;;; mono-game-gum-gue-deriving-container-runtime: re-exports inherited members from gum-wireframe-interactive-gue, rendering-library-graphics-i-renderable, rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible, rendering-library-i-positioned-sized-object, system-component-model-i-notify-property-changed, gum-wireframe-graphical-ui-element
+;;; Skipped (ambiguous across ancestors: gum-wireframe-interactive-gue, gum-wireframe-graphical-ui-element): outside-of-bounds-hit-testing-enabled?
+;;; Skipped (ambiguous across ancestors: gum-wireframe-interactive-gue, rendering-library-graphics-i-renderable-ipso): has-cursor-over
+;;; Skipped (ambiguous across ancestors: gum-wireframe-interactive-gue, gum-wireframe-graphical-ui-element): remove-from-managers
+;;; Skipped (ambiguous across ancestors: gum-wireframe-interactive-gue, gum-wireframe-graphical-ui-element): to-string
+;;; Skipped (mono-game-gum-gue-deriving-container-runtime declares its own): batch-key
+;;; Skipped (mono-game-gum-gue-deriving-container-runtime declares its own): blend-state
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable, gum-wireframe-graphical-ui-element): wrap
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable, gum-wireframe-graphical-ui-element): end-batch
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable, gum-wireframe-graphical-ui-element): pre-render
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable, gum-wireframe-graphical-ui-element): render
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable, gum-wireframe-graphical-ui-element): start-batch
+;;; Skipped (mono-game-gum-gue-deriving-container-runtime declares its own): alpha
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable-ipso, gum-wireframe-graphical-ui-element): children
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable-ipso, gum-wireframe-graphical-ui-element): clips-children
+;;; Skipped (mono-game-gum-gue-deriving-container-runtime declares its own): render-target?
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible, gum-wireframe-graphical-ui-element): parent
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-visible, gum-wireframe-graphical-ui-element): absolute-visible
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-i-visible, gum-wireframe-graphical-ui-element): visible
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): flip-horizontal
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): height
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): name
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): rotation
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): tag
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): width
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): x
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): y
+;;; Skipped (ambiguous across ancestors: rendering-library-i-positioned-sized-object, gum-wireframe-graphical-ui-element): z
+;;; Skipped (ambiguous across ancestors: system-component-model-i-notify-property-changed, gum-wireframe-graphical-ui-element): add-property-changed
+;;; Skipped (ambiguous across ancestors: system-component-model-i-notify-property-changed, gum-wireframe-graphical-ui-element): remove-property-changed
+;;; Skipped (mono-game-gum-gue-deriving-container-runtime declares its own): add-to-managers
+(cl:import '(gum-wireframe-interactive-gue::current-game-time gum-wireframe-interactive-gue::current-input-receiver gum-wireframe-interactive-gue::last-visual-pushed gum-wireframe-interactive-gue::expose-children-events gum-wireframe-interactive-gue::forms-control-as-object gum-wireframe-interactive-gue::has-events gum-wireframe-interactive-gue::enabled? gum-wireframe-interactive-gue::enabled-recursively? gum-wireframe-interactive-gue::raise-children-events-outside-of-bounds gum-wireframe-interactive-gue::add-next-click-action gum-wireframe-interactive-gue::add-next-push-action gum-wireframe-interactive-gue::call-click gum-wireframe-interactive-gue::call-right-click gum-wireframe-interactive-gue::clear-next-click-actions gum-wireframe-interactive-gue::in-parent-chain? gum-wireframe-interactive-gue::over-children? gum-wireframe-interactive-gue::try-call-dragging gum-wireframe-interactive-gue::try-call-hover-over gum-wireframe-interactive-gue::try-call-push gum-wireframe-interactive-gue::try-call-remove-as-pushed gum-wireframe-interactive-gue::try-call-roll-off gum-wireframe-interactive-gue::try-call-roll-on gum-wireframe-interactive-gue::try-call-roll-over gum-wireframe-interactive-gue::add-click gum-wireframe-interactive-gue::remove-click gum-wireframe-interactive-gue::add-click-preview gum-wireframe-interactive-gue::remove-click-preview gum-wireframe-interactive-gue::add-double-click gum-wireframe-interactive-gue::remove-double-click gum-wireframe-interactive-gue::add-dragging gum-wireframe-interactive-gue::remove-dragging gum-wireframe-interactive-gue::add-enabled-change gum-wireframe-interactive-gue::remove-enabled-change gum-wireframe-interactive-gue::add-hover-over gum-wireframe-interactive-gue::remove-hover-over gum-wireframe-interactive-gue::add-lose-push gum-wireframe-interactive-gue::remove-lose-push gum-wireframe-interactive-gue::add-mouse-wheel-scroll gum-wireframe-interactive-gue::remove-mouse-wheel-scroll gum-wireframe-interactive-gue::add-push gum-wireframe-interactive-gue::remove-push gum-wireframe-interactive-gue::add-push-preview gum-wireframe-interactive-gue::remove-push-preview gum-wireframe-interactive-gue::add-removed-as-pushed gum-wireframe-interactive-gue::remove-removed-as-pushed gum-wireframe-interactive-gue::add-right-click gum-wireframe-interactive-gue::remove-right-click gum-wireframe-interactive-gue::add-roll-off gum-wireframe-interactive-gue::remove-roll-off gum-wireframe-interactive-gue::add-roll-on gum-wireframe-interactive-gue::remove-roll-on gum-wireframe-interactive-gue::add-roll-over gum-wireframe-interactive-gue::remove-roll-over gum-wireframe-interactive-gue::add-roll-over-bubbling gum-wireframe-interactive-gue::remove-roll-over-bubbling rendering-library-graphics-i-renderable-ipso::color-operation rendering-library-graphics-i-renderable-ipso::set-parent-direct rendering-library-graphics-i-renderable-ipso::in-render-target-recursively? rendering-library-graphics-i-renderable-ipso::get-absolute-bottom rendering-library-graphics-i-renderable-ipso::get-absolute-center-x rendering-library-graphics-i-renderable-ipso::get-absolute-center-y rendering-library-graphics-i-renderable-ipso::get-absolute-flip-horizontal rendering-library-graphics-i-renderable-ipso::get-absolute-left rendering-library-graphics-i-renderable-ipso::get-absolute-right rendering-library-graphics-i-renderable-ipso::get-absolute-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-absolute-top rendering-library-graphics-i-renderable-ipso::get-absolute-x rendering-library-graphics-i-renderable-ipso::get-absolute-y rendering-library-graphics-i-renderable-ipso::get-rotation-matrix rendering-library-graphics-i-renderable-ipso::get-top-parent rendering-library-graphics-i-visible::get-absolute-visible rendering-library-i-positioned-sized-object::get-position rendering-library-i-positioned-sized-object::set-position gum-wireframe-graphical-ui-element::add-renderable-to-managers gum-wireframe-graphical-ui-element::apply-markup gum-wireframe-graphical-ui-element::children-updating-parent-layout-calls gum-wireframe-graphical-ui-element::clone-renderable-function gum-wireframe-graphical-ui-element::get-type-call-count gum-wireframe-graphical-ui-element::global-font-scale gum-wireframe-graphical-ui-element::all-layout-suspended? gum-wireframe-graphical-ui-element::property-unsubscribe-call-count gum-wireframe-graphical-ui-element::remove-renderable-from-managers gum-wireframe-graphical-ui-element::save-forms-runtime-properties-action gum-wireframe-graphical-ui-element::set-property-on-renderable gum-wireframe-graphical-ui-element::show-line-rectangles gum-wireframe-graphical-ui-element::throw-exceptions-for-missing-files gum-wireframe-graphical-ui-element::update-font-from-properties gum-wireframe-graphical-ui-element::update-forms-state-action gum-wireframe-graphical-ui-element::update-layout-call-count gum-wireframe-graphical-ui-element::are-updates-applied-when-invisible gum-wireframe-graphical-ui-element::canvas-height gum-wireframe-graphical-ui-element::canvas-width gum-wireframe-graphical-ui-element::missing-file-behavior gum-wireframe-graphical-ui-element::absolute-bottom gum-wireframe-graphical-ui-element::absolute-left gum-wireframe-graphical-ui-element::absolute-right gum-wireframe-graphical-ui-element::absolute-top gum-wireframe-graphical-ui-element::absolute-x gum-wireframe-graphical-ui-element::absolute-y gum-wireframe-graphical-ui-element::animation-controller gum-wireframe-graphical-ui-element::animations gum-wireframe-graphical-ui-element::auto-grid-horizontal-cells gum-wireframe-graphical-ui-element::auto-grid-vertical-cells gum-wireframe-graphical-ui-element::binding-context gum-wireframe-graphical-ui-element::binding-context-binding gum-wireframe-graphical-ui-element::binding-context-binding-property-owner gum-wireframe-graphical-ui-element::categories gum-wireframe-graphical-ui-element::children-layout gum-wireframe-graphical-ui-element::component gum-wireframe-graphical-ui-element::contained-elements gum-wireframe-graphical-ui-element::effective-managers gum-wireframe-graphical-ui-element::effective-parent-gue gum-wireframe-graphical-ui-element::element-gue-containing-this gum-wireframe-graphical-ui-element::element-save gum-wireframe-graphical-ui-element::explicit-i-visible-parent gum-wireframe-graphical-ui-element::height-units gum-wireframe-graphical-ui-element::ignored-by-parent-size gum-wireframe-graphical-ui-element::font-dirty? gum-wireframe-graphical-ui-element::fully-created? gum-wireframe-graphical-ui-element::layout-suspended? gum-wireframe-graphical-ui-element::layer gum-wireframe-graphical-ui-element::managers gum-wireframe-graphical-ui-element::max-height gum-wireframe-graphical-ui-element::max-width gum-wireframe-graphical-ui-element::min-height gum-wireframe-graphical-ui-element::min-width gum-wireframe-graphical-ui-element::parent-gue gum-wireframe-graphical-ui-element::renderable-component gum-wireframe-graphical-ui-element::stacked-row-or-column-dimensions gum-wireframe-graphical-ui-element::stacked-row-or-column-index gum-wireframe-graphical-ui-element::stack-spacing gum-wireframe-graphical-ui-element::states gum-wireframe-graphical-ui-element::text-overflow-vertical-mode gum-wireframe-graphical-ui-element::texture-address gum-wireframe-graphical-ui-element::texture-height gum-wireframe-graphical-ui-element::texture-height-scale gum-wireframe-graphical-ui-element::texture-left gum-wireframe-graphical-ui-element::texture-top gum-wireframe-graphical-ui-element::texture-width gum-wireframe-graphical-ui-element::texture-width-scale gum-wireframe-graphical-ui-element::use-fixed-stack-children-size gum-wireframe-graphical-ui-element::what-this-contains gum-wireframe-graphical-ui-element::width-units gum-wireframe-graphical-ui-element::wraps-children gum-wireframe-graphical-ui-element::x-origin gum-wireframe-graphical-ui-element::x-units gum-wireframe-graphical-ui-element::y-origin gum-wireframe-graphical-ui-element::y-units gum-wireframe-graphical-ui-element::add-category gum-wireframe-graphical-ui-element::add-child gum-wireframe-graphical-ui-element::add-exposed-variable gum-wireframe-graphical-ui-element::add-states gum-wireframe-graphical-ui-element::after-full-creation gum-wireframe-graphical-ui-element::anchor gum-wireframe-graphical-ui-element::animate-self gum-wireframe-graphical-ui-element::apply-state gum-wireframe-graphical-ui-element::apply-state-recursive gum-wireframe-graphical-ui-element::clear-dirty-layout-state gum-wireframe-graphical-ui-element::clear-managers gum-wireframe-graphical-ui-element::clone gum-wireframe-graphical-ui-element::convert-value gum-wireframe-graphical-ui-element::create-children-recursively gum-wireframe-graphical-ui-element::dock gum-wireframe-graphical-ui-element::fill-list-with-children-by-type-recursively gum-wireframe-graphical-ui-element::get-absolute-height gum-wireframe-graphical-ui-element::get-absolute-width gum-wireframe-graphical-ui-element::get-anchor gum-wireframe-graphical-ui-element::get-child-by-name gum-wireframe-graphical-ui-element::get-child-by-name-recursively gum-wireframe-graphical-ui-element::get-child-by-type gum-wireframe-graphical-ui-element::get-child-by-type-recursively gum-wireframe-graphical-ui-element::get-dock gum-wireframe-graphical-ui-element::get-graphical-ui-element-by-name gum-wireframe-graphical-ui-element::get-if-dimensions-depend-on-children gum-wireframe-graphical-ui-element::get-parent-by-name-recursively gum-wireframe-graphical-ui-element::get-parent-by-type-recursively gum-wireframe-graphical-ui-element::interpolate-between gum-wireframe-graphical-ui-element::exposed-variable? gum-wireframe-graphical-ui-element::point-inside? gum-wireframe-graphical-ui-element::move-to-layer gum-wireframe-graphical-ui-element::notify-property-changed gum-wireframe-graphical-ui-element::play-animation gum-wireframe-graphical-ui-element::push-value-to-view-model gum-wireframe-graphical-ui-element::refresh-styles gum-wireframe-graphical-ui-element::refresh-text-overflow-vertical-mode gum-wireframe-graphical-ui-element::remove-child gum-wireframe-graphical-ui-element::resume-layout gum-wireframe-graphical-ui-element::set-binding gum-wireframe-graphical-ui-element::set-contained-object gum-wireframe-graphical-ui-element::set-gue-values gum-wireframe-graphical-ui-element::set-initial-state gum-wireframe-graphical-ui-element::set-property gum-wireframe-graphical-ui-element::set-property-through-reflection gum-wireframe-graphical-ui-element::stop-animation gum-wireframe-graphical-ui-element::suspend-layout gum-wireframe-graphical-ui-element::update-font-recursive gum-wireframe-graphical-ui-element::update-height gum-wireframe-graphical-ui-element::update-layout gum-wireframe-graphical-ui-element::update-texture-values-from gum-wireframe-graphical-ui-element::update-to-font-values gum-wireframe-graphical-ui-element::update-width gum-wireframe-graphical-ui-element::add-binding-context-changed gum-wireframe-graphical-ui-element::remove-binding-context-changed gum-wireframe-graphical-ui-element::add-inherited-binding-context-changed gum-wireframe-graphical-ui-element::remove-inherited-binding-context-changed gum-wireframe-graphical-ui-element::add-parent-changed gum-wireframe-graphical-ui-element::remove-parent-changed gum-wireframe-graphical-ui-element::add-position-changed gum-wireframe-graphical-ui-element::remove-position-changed gum-wireframe-graphical-ui-element::add-size-changed gum-wireframe-graphical-ui-element::remove-size-changed gum-wireframe-graphical-ui-element::add-visible-changed gum-wireframe-graphical-ui-element::remove-visible-changed gum-wireframe-graphical-ui-element::do-ui-activity-recursively gum-wireframe-graphical-ui-element::add-exposed-variables-recursively gum-wireframe-graphical-ui-element::add-states-and-categories-recursively-to-gue gum-wireframe-graphical-ui-element::apply-variable-references gum-wireframe-graphical-ui-element::create-graphical-component gum-wireframe-graphical-ui-element::set-states-and-categories-recursively gum-wireframe-graphical-ui-element::set-variables-recursively gum-wireframe-graphical-ui-element::export-layout-json gum-wireframe-graphical-ui-element::to-layout-json gum-wireframe-graphical-ui-element::add-to-root gum-wireframe-graphical-ui-element::remove-from-root) ':mono-game-gum-gue-deriving-container-runtime)
+(cl:export '(mono-game-gum-gue-deriving-container-runtime::current-game-time mono-game-gum-gue-deriving-container-runtime::current-input-receiver mono-game-gum-gue-deriving-container-runtime::last-visual-pushed mono-game-gum-gue-deriving-container-runtime::expose-children-events mono-game-gum-gue-deriving-container-runtime::forms-control-as-object mono-game-gum-gue-deriving-container-runtime::has-events mono-game-gum-gue-deriving-container-runtime::enabled? mono-game-gum-gue-deriving-container-runtime::enabled-recursively? mono-game-gum-gue-deriving-container-runtime::raise-children-events-outside-of-bounds mono-game-gum-gue-deriving-container-runtime::add-next-click-action mono-game-gum-gue-deriving-container-runtime::add-next-push-action mono-game-gum-gue-deriving-container-runtime::call-click mono-game-gum-gue-deriving-container-runtime::call-right-click mono-game-gum-gue-deriving-container-runtime::clear-next-click-actions mono-game-gum-gue-deriving-container-runtime::in-parent-chain? mono-game-gum-gue-deriving-container-runtime::over-children? mono-game-gum-gue-deriving-container-runtime::try-call-dragging mono-game-gum-gue-deriving-container-runtime::try-call-hover-over mono-game-gum-gue-deriving-container-runtime::try-call-push mono-game-gum-gue-deriving-container-runtime::try-call-remove-as-pushed mono-game-gum-gue-deriving-container-runtime::try-call-roll-off mono-game-gum-gue-deriving-container-runtime::try-call-roll-on mono-game-gum-gue-deriving-container-runtime::try-call-roll-over mono-game-gum-gue-deriving-container-runtime::add-click mono-game-gum-gue-deriving-container-runtime::remove-click mono-game-gum-gue-deriving-container-runtime::add-click-preview mono-game-gum-gue-deriving-container-runtime::remove-click-preview mono-game-gum-gue-deriving-container-runtime::add-double-click mono-game-gum-gue-deriving-container-runtime::remove-double-click mono-game-gum-gue-deriving-container-runtime::add-dragging mono-game-gum-gue-deriving-container-runtime::remove-dragging mono-game-gum-gue-deriving-container-runtime::add-enabled-change mono-game-gum-gue-deriving-container-runtime::remove-enabled-change mono-game-gum-gue-deriving-container-runtime::add-hover-over mono-game-gum-gue-deriving-container-runtime::remove-hover-over mono-game-gum-gue-deriving-container-runtime::add-lose-push mono-game-gum-gue-deriving-container-runtime::remove-lose-push mono-game-gum-gue-deriving-container-runtime::add-mouse-wheel-scroll mono-game-gum-gue-deriving-container-runtime::remove-mouse-wheel-scroll mono-game-gum-gue-deriving-container-runtime::add-push mono-game-gum-gue-deriving-container-runtime::remove-push mono-game-gum-gue-deriving-container-runtime::add-push-preview mono-game-gum-gue-deriving-container-runtime::remove-push-preview mono-game-gum-gue-deriving-container-runtime::add-removed-as-pushed mono-game-gum-gue-deriving-container-runtime::remove-removed-as-pushed mono-game-gum-gue-deriving-container-runtime::add-right-click mono-game-gum-gue-deriving-container-runtime::remove-right-click mono-game-gum-gue-deriving-container-runtime::add-roll-off mono-game-gum-gue-deriving-container-runtime::remove-roll-off mono-game-gum-gue-deriving-container-runtime::add-roll-on mono-game-gum-gue-deriving-container-runtime::remove-roll-on mono-game-gum-gue-deriving-container-runtime::add-roll-over mono-game-gum-gue-deriving-container-runtime::remove-roll-over mono-game-gum-gue-deriving-container-runtime::add-roll-over-bubbling mono-game-gum-gue-deriving-container-runtime::remove-roll-over-bubbling mono-game-gum-gue-deriving-container-runtime::color-operation mono-game-gum-gue-deriving-container-runtime::set-parent-direct mono-game-gum-gue-deriving-container-runtime::in-render-target-recursively? mono-game-gum-gue-deriving-container-runtime::get-absolute-bottom mono-game-gum-gue-deriving-container-runtime::get-absolute-center-x mono-game-gum-gue-deriving-container-runtime::get-absolute-center-y mono-game-gum-gue-deriving-container-runtime::get-absolute-flip-horizontal mono-game-gum-gue-deriving-container-runtime::get-absolute-left mono-game-gum-gue-deriving-container-runtime::get-absolute-right mono-game-gum-gue-deriving-container-runtime::get-absolute-rotation-matrix mono-game-gum-gue-deriving-container-runtime::get-absolute-top mono-game-gum-gue-deriving-container-runtime::get-absolute-x mono-game-gum-gue-deriving-container-runtime::get-absolute-y mono-game-gum-gue-deriving-container-runtime::get-rotation-matrix mono-game-gum-gue-deriving-container-runtime::get-top-parent mono-game-gum-gue-deriving-container-runtime::get-absolute-visible mono-game-gum-gue-deriving-container-runtime::get-position mono-game-gum-gue-deriving-container-runtime::set-position mono-game-gum-gue-deriving-container-runtime::add-renderable-to-managers mono-game-gum-gue-deriving-container-runtime::apply-markup mono-game-gum-gue-deriving-container-runtime::children-updating-parent-layout-calls mono-game-gum-gue-deriving-container-runtime::clone-renderable-function mono-game-gum-gue-deriving-container-runtime::get-type-call-count mono-game-gum-gue-deriving-container-runtime::global-font-scale mono-game-gum-gue-deriving-container-runtime::all-layout-suspended? mono-game-gum-gue-deriving-container-runtime::property-unsubscribe-call-count mono-game-gum-gue-deriving-container-runtime::remove-renderable-from-managers mono-game-gum-gue-deriving-container-runtime::save-forms-runtime-properties-action mono-game-gum-gue-deriving-container-runtime::set-property-on-renderable mono-game-gum-gue-deriving-container-runtime::show-line-rectangles mono-game-gum-gue-deriving-container-runtime::throw-exceptions-for-missing-files mono-game-gum-gue-deriving-container-runtime::update-font-from-properties mono-game-gum-gue-deriving-container-runtime::update-forms-state-action mono-game-gum-gue-deriving-container-runtime::update-layout-call-count mono-game-gum-gue-deriving-container-runtime::are-updates-applied-when-invisible mono-game-gum-gue-deriving-container-runtime::canvas-height mono-game-gum-gue-deriving-container-runtime::canvas-width mono-game-gum-gue-deriving-container-runtime::missing-file-behavior mono-game-gum-gue-deriving-container-runtime::absolute-bottom mono-game-gum-gue-deriving-container-runtime::absolute-left mono-game-gum-gue-deriving-container-runtime::absolute-right mono-game-gum-gue-deriving-container-runtime::absolute-top mono-game-gum-gue-deriving-container-runtime::absolute-x mono-game-gum-gue-deriving-container-runtime::absolute-y mono-game-gum-gue-deriving-container-runtime::animation-controller mono-game-gum-gue-deriving-container-runtime::animations mono-game-gum-gue-deriving-container-runtime::auto-grid-horizontal-cells mono-game-gum-gue-deriving-container-runtime::auto-grid-vertical-cells mono-game-gum-gue-deriving-container-runtime::binding-context mono-game-gum-gue-deriving-container-runtime::binding-context-binding mono-game-gum-gue-deriving-container-runtime::binding-context-binding-property-owner mono-game-gum-gue-deriving-container-runtime::categories mono-game-gum-gue-deriving-container-runtime::children-layout mono-game-gum-gue-deriving-container-runtime::component mono-game-gum-gue-deriving-container-runtime::contained-elements mono-game-gum-gue-deriving-container-runtime::effective-managers mono-game-gum-gue-deriving-container-runtime::effective-parent-gue mono-game-gum-gue-deriving-container-runtime::element-gue-containing-this mono-game-gum-gue-deriving-container-runtime::element-save mono-game-gum-gue-deriving-container-runtime::explicit-i-visible-parent mono-game-gum-gue-deriving-container-runtime::height-units mono-game-gum-gue-deriving-container-runtime::ignored-by-parent-size mono-game-gum-gue-deriving-container-runtime::font-dirty? mono-game-gum-gue-deriving-container-runtime::fully-created? mono-game-gum-gue-deriving-container-runtime::layout-suspended? mono-game-gum-gue-deriving-container-runtime::layer mono-game-gum-gue-deriving-container-runtime::managers mono-game-gum-gue-deriving-container-runtime::max-height mono-game-gum-gue-deriving-container-runtime::max-width mono-game-gum-gue-deriving-container-runtime::min-height mono-game-gum-gue-deriving-container-runtime::min-width mono-game-gum-gue-deriving-container-runtime::parent-gue mono-game-gum-gue-deriving-container-runtime::renderable-component mono-game-gum-gue-deriving-container-runtime::stacked-row-or-column-dimensions mono-game-gum-gue-deriving-container-runtime::stacked-row-or-column-index mono-game-gum-gue-deriving-container-runtime::stack-spacing mono-game-gum-gue-deriving-container-runtime::states mono-game-gum-gue-deriving-container-runtime::text-overflow-vertical-mode mono-game-gum-gue-deriving-container-runtime::texture-address mono-game-gum-gue-deriving-container-runtime::texture-height mono-game-gum-gue-deriving-container-runtime::texture-height-scale mono-game-gum-gue-deriving-container-runtime::texture-left mono-game-gum-gue-deriving-container-runtime::texture-top mono-game-gum-gue-deriving-container-runtime::texture-width mono-game-gum-gue-deriving-container-runtime::texture-width-scale mono-game-gum-gue-deriving-container-runtime::use-fixed-stack-children-size mono-game-gum-gue-deriving-container-runtime::what-this-contains mono-game-gum-gue-deriving-container-runtime::width-units mono-game-gum-gue-deriving-container-runtime::wraps-children mono-game-gum-gue-deriving-container-runtime::x-origin mono-game-gum-gue-deriving-container-runtime::x-units mono-game-gum-gue-deriving-container-runtime::y-origin mono-game-gum-gue-deriving-container-runtime::y-units mono-game-gum-gue-deriving-container-runtime::add-category mono-game-gum-gue-deriving-container-runtime::add-child mono-game-gum-gue-deriving-container-runtime::add-exposed-variable mono-game-gum-gue-deriving-container-runtime::add-states mono-game-gum-gue-deriving-container-runtime::after-full-creation mono-game-gum-gue-deriving-container-runtime::anchor mono-game-gum-gue-deriving-container-runtime::animate-self mono-game-gum-gue-deriving-container-runtime::apply-state mono-game-gum-gue-deriving-container-runtime::apply-state-recursive mono-game-gum-gue-deriving-container-runtime::clear-dirty-layout-state mono-game-gum-gue-deriving-container-runtime::clear-managers mono-game-gum-gue-deriving-container-runtime::clone mono-game-gum-gue-deriving-container-runtime::convert-value mono-game-gum-gue-deriving-container-runtime::create-children-recursively mono-game-gum-gue-deriving-container-runtime::dock mono-game-gum-gue-deriving-container-runtime::fill-list-with-children-by-type-recursively mono-game-gum-gue-deriving-container-runtime::get-absolute-height mono-game-gum-gue-deriving-container-runtime::get-absolute-width mono-game-gum-gue-deriving-container-runtime::get-anchor mono-game-gum-gue-deriving-container-runtime::get-child-by-name mono-game-gum-gue-deriving-container-runtime::get-child-by-name-recursively mono-game-gum-gue-deriving-container-runtime::get-child-by-type mono-game-gum-gue-deriving-container-runtime::get-child-by-type-recursively mono-game-gum-gue-deriving-container-runtime::get-dock mono-game-gum-gue-deriving-container-runtime::get-graphical-ui-element-by-name mono-game-gum-gue-deriving-container-runtime::get-if-dimensions-depend-on-children mono-game-gum-gue-deriving-container-runtime::get-parent-by-name-recursively mono-game-gum-gue-deriving-container-runtime::get-parent-by-type-recursively mono-game-gum-gue-deriving-container-runtime::interpolate-between mono-game-gum-gue-deriving-container-runtime::exposed-variable? mono-game-gum-gue-deriving-container-runtime::point-inside? mono-game-gum-gue-deriving-container-runtime::move-to-layer mono-game-gum-gue-deriving-container-runtime::notify-property-changed mono-game-gum-gue-deriving-container-runtime::play-animation mono-game-gum-gue-deriving-container-runtime::push-value-to-view-model mono-game-gum-gue-deriving-container-runtime::refresh-styles mono-game-gum-gue-deriving-container-runtime::refresh-text-overflow-vertical-mode mono-game-gum-gue-deriving-container-runtime::remove-child mono-game-gum-gue-deriving-container-runtime::resume-layout mono-game-gum-gue-deriving-container-runtime::set-binding mono-game-gum-gue-deriving-container-runtime::set-contained-object mono-game-gum-gue-deriving-container-runtime::set-gue-values mono-game-gum-gue-deriving-container-runtime::set-initial-state mono-game-gum-gue-deriving-container-runtime::set-property mono-game-gum-gue-deriving-container-runtime::set-property-through-reflection mono-game-gum-gue-deriving-container-runtime::stop-animation mono-game-gum-gue-deriving-container-runtime::suspend-layout mono-game-gum-gue-deriving-container-runtime::update-font-recursive mono-game-gum-gue-deriving-container-runtime::update-height mono-game-gum-gue-deriving-container-runtime::update-layout mono-game-gum-gue-deriving-container-runtime::update-texture-values-from mono-game-gum-gue-deriving-container-runtime::update-to-font-values mono-game-gum-gue-deriving-container-runtime::update-width mono-game-gum-gue-deriving-container-runtime::add-binding-context-changed mono-game-gum-gue-deriving-container-runtime::remove-binding-context-changed mono-game-gum-gue-deriving-container-runtime::add-inherited-binding-context-changed mono-game-gum-gue-deriving-container-runtime::remove-inherited-binding-context-changed mono-game-gum-gue-deriving-container-runtime::add-parent-changed mono-game-gum-gue-deriving-container-runtime::remove-parent-changed mono-game-gum-gue-deriving-container-runtime::add-position-changed mono-game-gum-gue-deriving-container-runtime::remove-position-changed mono-game-gum-gue-deriving-container-runtime::add-size-changed mono-game-gum-gue-deriving-container-runtime::remove-size-changed mono-game-gum-gue-deriving-container-runtime::add-visible-changed mono-game-gum-gue-deriving-container-runtime::remove-visible-changed mono-game-gum-gue-deriving-container-runtime::do-ui-activity-recursively mono-game-gum-gue-deriving-container-runtime::add-exposed-variables-recursively mono-game-gum-gue-deriving-container-runtime::add-states-and-categories-recursively-to-gue mono-game-gum-gue-deriving-container-runtime::apply-variable-references mono-game-gum-gue-deriving-container-runtime::create-graphical-component mono-game-gum-gue-deriving-container-runtime::set-states-and-categories-recursively mono-game-gum-gue-deriving-container-runtime::set-variables-recursively mono-game-gum-gue-deriving-container-runtime::export-layout-json mono-game-gum-gue-deriving-container-runtime::to-layout-json mono-game-gum-gue-deriving-container-runtime::add-to-root mono-game-gum-gue-deriving-container-runtime::remove-from-root) ':mono-game-gum-gue-deriving-container-runtime)
 
 ;;; gum-forms-controls-primitives-range-base: re-exports inherited members from gum-forms-controls-framework-element, system-component-model-i-notify-property-changed
 ;;; Skipped (gum-forms-controls-primitives-range-base declares its own): enabled?

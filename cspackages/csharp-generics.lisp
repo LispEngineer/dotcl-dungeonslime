@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 39
-;;; Creation Date: 2026-07-06T21:35:35Z
+;;; Creation Date: 2026-07-07T00:23:35Z
 
 (cl:in-package :csharp-generics)
 
@@ -13,12 +13,14 @@
 (cl:defgeneric add-property-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.ComponentModel.INotifyPropertyChanged: add-property-changed (system-component-model-i-notify-property-changed:add-property-changed)
+Gum.Wireframe.GraphicalUiElement: add-property-changed (gum-wireframe-graphical-ui-element:add-property-changed)
 Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-framework-element:add-property-changed)
 "))
 
 (cl:defgeneric remove-property-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.ComponentModel.INotifyPropertyChanged: remove-property-changed (system-component-model-i-notify-property-changed:remove-property-changed)
+Gum.Wireframe.GraphicalUiElement: remove-property-changed (gum-wireframe-graphical-ui-element:remove-property-changed)
 Gum.Forms.Controls.FrameworkElement: remove-property-changed (gum-forms-controls-framework-element:remove-property-changed)
 "))
 
@@ -209,6 +211,8 @@ Microsoft.Xna.Framework.Input.GamePadTriggers: to-string (microsoft-xna-framewor
 Microsoft.Xna.Framework.Input.Touch.TouchLocation: to-string (microsoft-xna-framework-input-touch-touch-location:to-string)
 Microsoft.Xna.Framework.Color: to-string (microsoft-xna-framework-color:to-string)
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: to-string (microsoft-xna-framework-graphics-sprite-font-glyph:to-string)
+Gum.Wireframe.InteractiveGue: to-string (gum-wireframe-interactive-gue:to-string)
+Gum.Wireframe.GraphicalUiElement: to-string (gum-wireframe-graphical-ui-element:to-string)
 Gum.Forms.Controls.FrameworkElement: to-string (gum-forms-controls-framework-element:to-string)
 "))
 
@@ -1429,6 +1433,8 @@ System.Reflection.MemberInfo: metadata-token (system-reflection-member-info:meta
 System.Reflection.MemberInfo: name (system-reflection-member-info:name)
 Microsoft.Xna.Framework.Audio.SoundEffect: name (microsoft-xna-framework-audio-sound-effect:name)
 Microsoft.Xna.Framework.Media.Song: name (microsoft-xna-framework-media-song:name)
+RenderingLibrary.IPositionedSizedObject: name (rendering-library-i-positioned-sized-object:name)
+Gum.Wireframe.GraphicalUiElement: name (gum-wireframe-graphical-ui-element:name)
 Gum.Forms.Controls.FrameworkElement: name (gum-forms-controls-framework-element:name)
 "))
 
@@ -1459,6 +1465,8 @@ Microsoft.Xna.Framework.Rectangle: x (microsoft-xna-framework-rectangle:x)
 Microsoft.Xna.Framework.Point: x (microsoft-xna-framework-point:x)
 Microsoft.Xna.Framework.Input.MouseState: x (microsoft-xna-framework-input-mouse-state:x)
 RenderingLibrary.Camera: x (rendering-library-camera:x)
+RenderingLibrary.IPositionedSizedObject: x (rendering-library-i-positioned-sized-object:x)
+Gum.Wireframe.GraphicalUiElement: x (gum-wireframe-graphical-ui-element:x)
 Gum.Forms.Controls.FrameworkElement: x (gum-forms-controls-framework-element:x)
 "))
 
@@ -1469,6 +1477,8 @@ Microsoft.Xna.Framework.Rectangle: y (microsoft-xna-framework-rectangle:y)
 Microsoft.Xna.Framework.Point: y (microsoft-xna-framework-point:y)
 Microsoft.Xna.Framework.Input.MouseState: y (microsoft-xna-framework-input-mouse-state:y)
 RenderingLibrary.Camera: y (rendering-library-camera:y)
+RenderingLibrary.IPositionedSizedObject: y (rendering-library-i-positioned-sized-object:y)
+Gum.Wireframe.GraphicalUiElement: y (gum-wireframe-graphical-ui-element:y)
 Gum.Forms.Controls.FrameworkElement: y (gum-forms-controls-framework-element:y)
 "))
 
@@ -1530,6 +1540,8 @@ Microsoft.Xna.Framework.Vector2: to-system-numerics (microsoft-xna-framework-vec
 (cl:defgeneric height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: height (microsoft-xna-framework-rectangle:height)
+RenderingLibrary.IPositionedSizedObject: height (rendering-library-i-positioned-sized-object:height)
+Gum.Wireframe.GraphicalUiElement: height (gum-wireframe-graphical-ui-element:height)
 Gum.Forms.Controls.FrameworkElement: height (gum-forms-controls-framework-element:height)
 "))
 
@@ -1537,6 +1549,8 @@ Gum.Forms.Controls.FrameworkElement: height (gum-forms-controls-framework-elemen
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: width (microsoft-xna-framework-rectangle:width)
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: width (microsoft-xna-framework-graphics-sprite-font-glyph:width)
+RenderingLibrary.IPositionedSizedObject: width (rendering-library-i-positioned-sized-object:width)
+Gum.Wireframe.GraphicalUiElement: width (gum-wireframe-graphical-ui-element:width)
 Gum.Forms.Controls.FrameworkElement: width (gum-forms-controls-framework-element:width)
 "))
 
@@ -2142,6 +2156,7 @@ System.Collections.Generic.List`1: count (system-collections-generic-list-1:coun
 (cl:defgeneric read-only? (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Input.Touch.TouchCollection: read-only? (microsoft-xna-framework-input-touch-touch-collection:read-only?)
+Gum.Collections.GraphicalUiElementCollection: read-only? (gum-collections-graphical-ui-element-collection:read-only?)
 "))
 
 (cl:defgeneric clear (obj! cl:&rest args)
@@ -2519,7 +2534,9 @@ Microsoft.Xna.Framework.Graphics.GraphicsDevice: blend-factor (microsoft-xna-fra
 (cl:defgeneric blend-state (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.GraphicsDevice: blend-state (microsoft-xna-framework-graphics-graphics-device:blend-state)
+RenderingLibrary.Graphics.IRenderable: blend-state (rendering-library-graphics-i-renderable:blend-state)
 MonoGameGum.GueDeriving.TextRuntime: blend-state (mono-game-gum-gue-deriving-text-runtime:blend-state)
+MonoGameGum.GueDeriving.ContainerRuntime: blend-state (mono-game-gum-gue-deriving-container-runtime:blend-state)
 "))
 
 (cl:defgeneric depth-stencil-state (obj! cl:&rest args)
@@ -2840,6 +2857,7 @@ Microsoft.Xna.Framework.Graphics.PresentationParameters: render-target-usage (mi
 (cl:defgeneric clone (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.PresentationParameters: clone (microsoft-xna-framework-graphics-presentation-parameters:clone)
+Gum.Wireframe.GraphicalUiElement: clone (gum-wireframe-graphical-ui-element:clone)
 MonoGameGum.GueDeriving.TextRuntime: clone (mono-game-gum-gue-deriving-text-runtime:clone)
 "))
 
@@ -2932,22 +2950,26 @@ Microsoft.Xna.Framework.Media.Song: track-number (microsoft-xna-framework-media-
 (cl:defgeneric absolute-bottom (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Camera: absolute-bottom (rendering-library-camera:absolute-bottom)
+Gum.Wireframe.GraphicalUiElement: absolute-bottom (gum-wireframe-graphical-ui-element:absolute-bottom)
 "))
 
 (cl:defgeneric absolute-left (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Camera: absolute-left (rendering-library-camera:absolute-left)
+Gum.Wireframe.GraphicalUiElement: absolute-left (gum-wireframe-graphical-ui-element:absolute-left)
 Gum.Forms.Controls.FrameworkElement: absolute-left (gum-forms-controls-framework-element:absolute-left)
 "))
 
 (cl:defgeneric absolute-right (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Camera: absolute-right (rendering-library-camera:absolute-right)
+Gum.Wireframe.GraphicalUiElement: absolute-right (gum-wireframe-graphical-ui-element:absolute-right)
 "))
 
 (cl:defgeneric absolute-top (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Camera: absolute-top (rendering-library-camera:absolute-top)
+Gum.Wireframe.GraphicalUiElement: absolute-top (gum-wireframe-graphical-ui-element:absolute-top)
 Gum.Forms.Controls.FrameworkElement: absolute-top (gum-forms-controls-framework-element:absolute-top)
 "))
 
@@ -3001,6 +3023,31 @@ RenderingLibrary.Camera: get-transformation-matrix (rendering-library-camera:get
 RenderingLibrary.Camera: get-scissor-rectangle-for (rendering-library-camera:get-scissor-rectangle-for)
 "))
 
+(cl:defgeneric clear-items (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Collections.GraphicalUiElementCollection: clear-items (gum-collections-graphical-ui-element-collection:clear-items)
+"))
+
+(cl:defgeneric insert-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Collections.GraphicalUiElementCollection: insert-item (gum-collections-graphical-ui-element-collection:insert-item)
+"))
+
+(cl:defgeneric move-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Collections.GraphicalUiElementCollection: move-item (gum-collections-graphical-ui-element-collection:move-item)
+"))
+
+(cl:defgeneric remove-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Collections.GraphicalUiElementCollection: remove-item (gum-collections-graphical-ui-element-collection:remove-item)
+"))
+
+(cl:defgeneric set-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Collections.GraphicalUiElementCollection: set-item (gum-collections-graphical-ui-element-collection:set-item)
+"))
+
 (cl:defgeneric parent-input-receiver (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Wireframe.IInputReceiver: parent-input-receiver (gum-wireframe-i-input-receiver:parent-input-receiver)
@@ -3041,6 +3088,1111 @@ Gum.Forms.Controls.Slider: on-gain-focus (gum-forms-controls-slider:on-gain-focu
 Gum.Wireframe.IInputReceiver: on-lose-focus (gum-wireframe-i-input-receiver:on-lose-focus)
 Gum.Forms.Controls.Primitives.ButtonBase: on-lose-focus (gum-forms-controls-primitives-button-base:on-lose-focus)
 Gum.Forms.Controls.Slider: on-lose-focus (gum-forms-controls-slider:on-lose-focus)
+"))
+
+(cl:defgeneric expose-children-events (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: expose-children-events (gum-wireframe-interactive-gue:expose-children-events)
+"))
+
+(cl:defgeneric forms-control-as-object (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: forms-control-as-object (gum-wireframe-interactive-gue:forms-control-as-object)
+"))
+
+(cl:defgeneric has-events (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: has-events (gum-wireframe-interactive-gue:has-events)
+"))
+
+(cl:defgeneric enabled? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: enabled? (gum-wireframe-interactive-gue:enabled?)
+Gum.Forms.Controls.FrameworkElement: enabled? (gum-forms-controls-framework-element:enabled?)
+Gum.Forms.Controls.Primitives.RangeBase: enabled? (gum-forms-controls-primitives-range-base:enabled?)
+"))
+
+(cl:defgeneric enabled-recursively? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: enabled-recursively? (gum-wireframe-interactive-gue:enabled-recursively?)
+"))
+
+(cl:defgeneric outside-of-bounds-hit-testing-enabled? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: outside-of-bounds-hit-testing-enabled? (gum-wireframe-interactive-gue:outside-of-bounds-hit-testing-enabled?)
+Gum.Wireframe.GraphicalUiElement: outside-of-bounds-hit-testing-enabled? (gum-wireframe-graphical-ui-element:outside-of-bounds-hit-testing-enabled?)
+"))
+
+(cl:defgeneric raise-children-events-outside-of-bounds (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: raise-children-events-outside-of-bounds (gum-wireframe-interactive-gue:raise-children-events-outside-of-bounds)
+"))
+
+(cl:defgeneric call-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: call-click (gum-wireframe-interactive-gue:call-click)
+"))
+
+(cl:defgeneric call-right-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: call-right-click (gum-wireframe-interactive-gue:call-right-click)
+"))
+
+(cl:defgeneric has-cursor-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: has-cursor-over (gum-wireframe-interactive-gue:has-cursor-over)
+RenderingLibrary.Graphics.IRenderableIpso: has-cursor-over (rendering-library-graphics-i-renderable-ipso:has-cursor-over)
+"))
+
+(cl:defgeneric in-parent-chain? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: in-parent-chain? (gum-wireframe-interactive-gue:in-parent-chain?)
+"))
+
+(cl:defgeneric remove-from-managers (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-from-managers (gum-wireframe-interactive-gue:remove-from-managers)
+Gum.Wireframe.GraphicalUiElement: remove-from-managers (gum-wireframe-graphical-ui-element:remove-from-managers)
+"))
+
+(cl:defgeneric try-call-dragging (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-dragging (gum-wireframe-interactive-gue:try-call-dragging)
+"))
+
+(cl:defgeneric try-call-hover-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-hover-over (gum-wireframe-interactive-gue:try-call-hover-over)
+"))
+
+(cl:defgeneric try-call-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-push (gum-wireframe-interactive-gue:try-call-push)
+"))
+
+(cl:defgeneric try-call-remove-as-pushed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-remove-as-pushed (gum-wireframe-interactive-gue:try-call-remove-as-pushed)
+"))
+
+(cl:defgeneric try-call-roll-off (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-roll-off (gum-wireframe-interactive-gue:try-call-roll-off)
+"))
+
+(cl:defgeneric try-call-roll-on (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-roll-on (gum-wireframe-interactive-gue:try-call-roll-on)
+"))
+
+(cl:defgeneric try-call-roll-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: try-call-roll-over (gum-wireframe-interactive-gue:try-call-roll-over)
+"))
+
+(cl:defgeneric add-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-click (gum-wireframe-interactive-gue:add-click)
+Gum.Forms.Controls.Primitives.ButtonBase: add-click (gum-forms-controls-primitives-button-base:add-click)
+"))
+
+(cl:defgeneric remove-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-click (gum-wireframe-interactive-gue:remove-click)
+Gum.Forms.Controls.Primitives.ButtonBase: remove-click (gum-forms-controls-primitives-button-base:remove-click)
+"))
+
+(cl:defgeneric add-click-preview (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-click-preview (gum-wireframe-interactive-gue:add-click-preview)
+"))
+
+(cl:defgeneric remove-click-preview (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-click-preview (gum-wireframe-interactive-gue:remove-click-preview)
+"))
+
+(cl:defgeneric add-double-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-double-click (gum-wireframe-interactive-gue:add-double-click)
+"))
+
+(cl:defgeneric remove-double-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-double-click (gum-wireframe-interactive-gue:remove-double-click)
+"))
+
+(cl:defgeneric add-dragging (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-dragging (gum-wireframe-interactive-gue:add-dragging)
+"))
+
+(cl:defgeneric remove-dragging (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-dragging (gum-wireframe-interactive-gue:remove-dragging)
+"))
+
+(cl:defgeneric add-enabled-change (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-enabled-change (gum-wireframe-interactive-gue:add-enabled-change)
+"))
+
+(cl:defgeneric remove-enabled-change (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-enabled-change (gum-wireframe-interactive-gue:remove-enabled-change)
+"))
+
+(cl:defgeneric add-hover-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-hover-over (gum-wireframe-interactive-gue:add-hover-over)
+"))
+
+(cl:defgeneric remove-hover-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-hover-over (gum-wireframe-interactive-gue:remove-hover-over)
+"))
+
+(cl:defgeneric add-lose-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-lose-push (gum-wireframe-interactive-gue:add-lose-push)
+"))
+
+(cl:defgeneric remove-lose-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-lose-push (gum-wireframe-interactive-gue:remove-lose-push)
+"))
+
+(cl:defgeneric add-mouse-wheel-scroll (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-mouse-wheel-scroll (gum-wireframe-interactive-gue:add-mouse-wheel-scroll)
+"))
+
+(cl:defgeneric remove-mouse-wheel-scroll (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-mouse-wheel-scroll (gum-wireframe-interactive-gue:remove-mouse-wheel-scroll)
+"))
+
+(cl:defgeneric add-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-push (gum-wireframe-interactive-gue:add-push)
+Gum.Forms.Controls.Primitives.ButtonBase: add-push (gum-forms-controls-primitives-button-base:add-push)
+"))
+
+(cl:defgeneric remove-push (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-push (gum-wireframe-interactive-gue:remove-push)
+Gum.Forms.Controls.Primitives.ButtonBase: remove-push (gum-forms-controls-primitives-button-base:remove-push)
+"))
+
+(cl:defgeneric add-push-preview (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-push-preview (gum-wireframe-interactive-gue:add-push-preview)
+"))
+
+(cl:defgeneric remove-push-preview (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-push-preview (gum-wireframe-interactive-gue:remove-push-preview)
+"))
+
+(cl:defgeneric add-removed-as-pushed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-removed-as-pushed (gum-wireframe-interactive-gue:add-removed-as-pushed)
+"))
+
+(cl:defgeneric remove-removed-as-pushed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-removed-as-pushed (gum-wireframe-interactive-gue:remove-removed-as-pushed)
+"))
+
+(cl:defgeneric add-right-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-right-click (gum-wireframe-interactive-gue:add-right-click)
+"))
+
+(cl:defgeneric remove-right-click (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-right-click (gum-wireframe-interactive-gue:remove-right-click)
+"))
+
+(cl:defgeneric add-roll-off (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-roll-off (gum-wireframe-interactive-gue:add-roll-off)
+"))
+
+(cl:defgeneric remove-roll-off (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-roll-off (gum-wireframe-interactive-gue:remove-roll-off)
+"))
+
+(cl:defgeneric add-roll-on (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-roll-on (gum-wireframe-interactive-gue:add-roll-on)
+"))
+
+(cl:defgeneric remove-roll-on (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-roll-on (gum-wireframe-interactive-gue:remove-roll-on)
+"))
+
+(cl:defgeneric add-roll-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-roll-over (gum-wireframe-interactive-gue:add-roll-over)
+"))
+
+(cl:defgeneric remove-roll-over (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-roll-over (gum-wireframe-interactive-gue:remove-roll-over)
+"))
+
+(cl:defgeneric add-roll-over-bubbling (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: add-roll-over-bubbling (gum-wireframe-interactive-gue:add-roll-over-bubbling)
+"))
+
+(cl:defgeneric remove-roll-over-bubbling (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: remove-roll-over-bubbling (gum-wireframe-interactive-gue:remove-roll-over-bubbling)
+"))
+
+(cl:defgeneric batch-key (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: batch-key (rendering-library-graphics-i-renderable:batch-key)
+Gum.Wireframe.GraphicalUiElement: batch-key (gum-wireframe-graphical-ui-element:batch-key)
+MonoGameGum.GueDeriving.ContainerRuntime: batch-key (mono-game-gum-gue-deriving-container-runtime:batch-key)
+"))
+
+(cl:defgeneric wrap (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: wrap (rendering-library-graphics-i-renderable:wrap)
+Gum.Wireframe.GraphicalUiElement: wrap (gum-wireframe-graphical-ui-element:wrap)
+"))
+
+(cl:defgeneric end-batch (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: end-batch (rendering-library-graphics-i-renderable:end-batch)
+Gum.Wireframe.GraphicalUiElement: end-batch (gum-wireframe-graphical-ui-element:end-batch)
+"))
+
+(cl:defgeneric pre-render (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: pre-render (rendering-library-graphics-i-renderable:pre-render)
+Gum.Wireframe.GraphicalUiElement: pre-render (gum-wireframe-graphical-ui-element:pre-render)
+"))
+
+(cl:defgeneric render (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: render (rendering-library-graphics-i-renderable:render)
+Gum.Wireframe.GraphicalUiElement: render (gum-wireframe-graphical-ui-element:render)
+"))
+
+(cl:defgeneric start-batch (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderable: start-batch (rendering-library-graphics-i-renderable:start-batch)
+Gum.Wireframe.GraphicalUiElement: start-batch (gum-wireframe-graphical-ui-element:start-batch)
+"))
+
+(cl:defgeneric alpha (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: alpha (rendering-library-graphics-i-renderable-ipso:alpha)
+MonoGameGum.GueDeriving.TextRuntime: alpha (mono-game-gum-gue-deriving-text-runtime:alpha)
+MonoGameGum.GueDeriving.ContainerRuntime: alpha (mono-game-gum-gue-deriving-container-runtime:alpha)
+"))
+
+(cl:defgeneric children (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: children (rendering-library-graphics-i-renderable-ipso:children)
+Gum.Wireframe.GraphicalUiElement: children (gum-wireframe-graphical-ui-element:children)
+Gum.Forms.Controls.Panel: children (gum-forms-controls-panel:children)
+"))
+
+(cl:defgeneric clips-children (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: clips-children (rendering-library-graphics-i-renderable-ipso:clips-children)
+Gum.Wireframe.GraphicalUiElement: clips-children (gum-wireframe-graphical-ui-element:clips-children)
+"))
+
+(cl:defgeneric color-operation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: color-operation (rendering-library-graphics-i-renderable-ipso:color-operation)
+"))
+
+(cl:defgeneric render-target? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: render-target? (rendering-library-graphics-i-renderable-ipso:render-target?)
+Gum.Wireframe.GraphicalUiElement: render-target? (gum-wireframe-graphical-ui-element:render-target?)
+MonoGameGum.GueDeriving.ContainerRuntime: render-target? (mono-game-gum-gue-deriving-container-runtime:render-target?)
+"))
+
+(cl:defgeneric parent (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: parent (rendering-library-graphics-i-renderable-ipso:parent)
+RenderingLibrary.Graphics.IVisible: parent (rendering-library-graphics-i-visible:parent)
+Gum.Wireframe.GraphicalUiElement: parent (gum-wireframe-graphical-ui-element:parent)
+"))
+
+(cl:defgeneric set-parent-direct (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: set-parent-direct (rendering-library-graphics-i-renderable-ipso:set-parent-direct)
+"))
+
+(cl:defgeneric in-render-target-recursively? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: in-render-target-recursively? (rendering-library-graphics-i-renderable-ipso:in-render-target-recursively?)
+"))
+
+(cl:defgeneric get-absolute-bottom (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-bottom (rendering-library-graphics-i-renderable-ipso:get-absolute-bottom)
+"))
+
+(cl:defgeneric get-absolute-center-x (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-center-x (rendering-library-graphics-i-renderable-ipso:get-absolute-center-x)
+"))
+
+(cl:defgeneric get-absolute-center-y (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-center-y (rendering-library-graphics-i-renderable-ipso:get-absolute-center-y)
+"))
+
+(cl:defgeneric get-absolute-flip-horizontal (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-flip-horizontal (rendering-library-graphics-i-renderable-ipso:get-absolute-flip-horizontal)
+"))
+
+(cl:defgeneric get-absolute-left (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-left (rendering-library-graphics-i-renderable-ipso:get-absolute-left)
+"))
+
+(cl:defgeneric get-absolute-right (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-right (rendering-library-graphics-i-renderable-ipso:get-absolute-right)
+"))
+
+(cl:defgeneric get-absolute-rotation-matrix (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-rotation-matrix (rendering-library-graphics-i-renderable-ipso:get-absolute-rotation-matrix)
+"))
+
+(cl:defgeneric get-absolute-top (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-top (rendering-library-graphics-i-renderable-ipso:get-absolute-top)
+"))
+
+(cl:defgeneric get-absolute-x (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-x (rendering-library-graphics-i-renderable-ipso:get-absolute-x)
+"))
+
+(cl:defgeneric get-absolute-y (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-absolute-y (rendering-library-graphics-i-renderable-ipso:get-absolute-y)
+"))
+
+(cl:defgeneric get-rotation-matrix (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-rotation-matrix (rendering-library-graphics-i-renderable-ipso:get-rotation-matrix)
+"))
+
+(cl:defgeneric get-top-parent (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: get-top-parent (rendering-library-graphics-i-renderable-ipso:get-top-parent)
+"))
+
+(cl:defgeneric absolute-visible (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IVisible: absolute-visible (rendering-library-graphics-i-visible:absolute-visible)
+Gum.Wireframe.GraphicalUiElement: absolute-visible (gum-wireframe-graphical-ui-element:absolute-visible)
+"))
+
+(cl:defgeneric visible (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IVisible: visible (rendering-library-graphics-i-visible:visible)
+Gum.Wireframe.GraphicalUiElement: visible (gum-wireframe-graphical-ui-element:visible)
+"))
+
+(cl:defgeneric get-absolute-visible (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IVisible: get-absolute-visible (rendering-library-graphics-i-visible:get-absolute-visible)
+"))
+
+(cl:defgeneric flip-horizontal (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: flip-horizontal (rendering-library-i-positioned-sized-object:flip-horizontal)
+Gum.Wireframe.GraphicalUiElement: flip-horizontal (gum-wireframe-graphical-ui-element:flip-horizontal)
+"))
+
+(cl:defgeneric rotation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: rotation (rendering-library-i-positioned-sized-object:rotation)
+Gum.Wireframe.GraphicalUiElement: rotation (gum-wireframe-graphical-ui-element:rotation)
+"))
+
+(cl:defgeneric tag (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: tag (rendering-library-i-positioned-sized-object:tag)
+Gum.Wireframe.GraphicalUiElement: tag (gum-wireframe-graphical-ui-element:tag)
+"))
+
+(cl:defgeneric z (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: z (rendering-library-i-positioned-sized-object:z)
+Gum.Wireframe.GraphicalUiElement: z (gum-wireframe-graphical-ui-element:z)
+"))
+
+(cl:defgeneric get-position (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: get-position (rendering-library-i-positioned-sized-object:get-position)
+"))
+
+(cl:defgeneric set-position (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: set-position (rendering-library-i-positioned-sized-object:set-position)
+"))
+
+(cl:defgeneric absolute-x (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: absolute-x (gum-wireframe-graphical-ui-element:absolute-x)
+"))
+
+(cl:defgeneric absolute-y (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: absolute-y (gum-wireframe-graphical-ui-element:absolute-y)
+"))
+
+(cl:defgeneric animation-controller (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: animation-controller (gum-wireframe-graphical-ui-element:animation-controller)
+"))
+
+(cl:defgeneric animations (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: animations (gum-wireframe-graphical-ui-element:animations)
+"))
+
+(cl:defgeneric auto-grid-horizontal-cells (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: auto-grid-horizontal-cells (gum-wireframe-graphical-ui-element:auto-grid-horizontal-cells)
+"))
+
+(cl:defgeneric auto-grid-vertical-cells (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: auto-grid-vertical-cells (gum-wireframe-graphical-ui-element:auto-grid-vertical-cells)
+"))
+
+(cl:defgeneric binding-context (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: binding-context (gum-wireframe-graphical-ui-element:binding-context)
+Gum.Forms.Controls.FrameworkElement: binding-context (gum-forms-controls-framework-element:binding-context)
+"))
+
+(cl:defgeneric binding-context-binding (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: binding-context-binding (gum-wireframe-graphical-ui-element:binding-context-binding)
+"))
+
+(cl:defgeneric binding-context-binding-property-owner (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: binding-context-binding-property-owner (gum-wireframe-graphical-ui-element:binding-context-binding-property-owner)
+"))
+
+(cl:defgeneric categories (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: categories (gum-wireframe-graphical-ui-element:categories)
+"))
+
+(cl:defgeneric children-layout (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: children-layout (gum-wireframe-graphical-ui-element:children-layout)
+"))
+
+(cl:defgeneric component (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: component (gum-wireframe-graphical-ui-element:component)
+"))
+
+(cl:defgeneric contained-elements (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: contained-elements (gum-wireframe-graphical-ui-element:contained-elements)
+"))
+
+(cl:defgeneric effective-managers (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: effective-managers (gum-wireframe-graphical-ui-element:effective-managers)
+"))
+
+(cl:defgeneric effective-parent-gue (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: effective-parent-gue (gum-wireframe-graphical-ui-element:effective-parent-gue)
+"))
+
+(cl:defgeneric element-gue-containing-this (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: element-gue-containing-this (gum-wireframe-graphical-ui-element:element-gue-containing-this)
+"))
+
+(cl:defgeneric element-save (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: element-save (gum-wireframe-graphical-ui-element:element-save)
+"))
+
+(cl:defgeneric explicit-i-visible-parent (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: explicit-i-visible-parent (gum-wireframe-graphical-ui-element:explicit-i-visible-parent)
+"))
+
+(cl:defgeneric height-units (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: height-units (gum-wireframe-graphical-ui-element:height-units)
+Gum.Forms.Controls.FrameworkElement: height-units (gum-forms-controls-framework-element:height-units)
+"))
+
+(cl:defgeneric ignored-by-parent-size (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: ignored-by-parent-size (gum-wireframe-graphical-ui-element:ignored-by-parent-size)
+"))
+
+(cl:defgeneric font-dirty? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: font-dirty? (gum-wireframe-graphical-ui-element:font-dirty?)
+"))
+
+(cl:defgeneric fully-created? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: fully-created? (gum-wireframe-graphical-ui-element:fully-created?)
+"))
+
+(cl:defgeneric layout-suspended? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: layout-suspended? (gum-wireframe-graphical-ui-element:layout-suspended?)
+"))
+
+(cl:defgeneric layer (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: layer (gum-wireframe-graphical-ui-element:layer)
+"))
+
+(cl:defgeneric managers (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: managers (gum-wireframe-graphical-ui-element:managers)
+"))
+
+(cl:defgeneric max-height (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: max-height (gum-wireframe-graphical-ui-element:max-height)
+Gum.Forms.Controls.FrameworkElement: max-height (gum-forms-controls-framework-element:max-height)
+"))
+
+(cl:defgeneric max-width (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: max-width (gum-wireframe-graphical-ui-element:max-width)
+Gum.Forms.Controls.FrameworkElement: max-width (gum-forms-controls-framework-element:max-width)
+"))
+
+(cl:defgeneric min-height (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: min-height (gum-wireframe-graphical-ui-element:min-height)
+Gum.Forms.Controls.FrameworkElement: min-height (gum-forms-controls-framework-element:min-height)
+"))
+
+(cl:defgeneric min-width (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: min-width (gum-wireframe-graphical-ui-element:min-width)
+Gum.Forms.Controls.FrameworkElement: min-width (gum-forms-controls-framework-element:min-width)
+"))
+
+(cl:defgeneric parent-gue (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: parent-gue (gum-wireframe-graphical-ui-element:parent-gue)
+"))
+
+(cl:defgeneric renderable-component (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: renderable-component (gum-wireframe-graphical-ui-element:renderable-component)
+"))
+
+(cl:defgeneric stacked-row-or-column-dimensions (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: stacked-row-or-column-dimensions (gum-wireframe-graphical-ui-element:stacked-row-or-column-dimensions)
+"))
+
+(cl:defgeneric stacked-row-or-column-index (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: stacked-row-or-column-index (gum-wireframe-graphical-ui-element:stacked-row-or-column-index)
+"))
+
+(cl:defgeneric stack-spacing (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: stack-spacing (gum-wireframe-graphical-ui-element:stack-spacing)
+"))
+
+(cl:defgeneric states (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: states (gum-wireframe-graphical-ui-element:states)
+"))
+
+(cl:defgeneric text-overflow-vertical-mode (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: text-overflow-vertical-mode (gum-wireframe-graphical-ui-element:text-overflow-vertical-mode)
+"))
+
+(cl:defgeneric texture-address (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-address (gum-wireframe-graphical-ui-element:texture-address)
+"))
+
+(cl:defgeneric texture-height (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-height (gum-wireframe-graphical-ui-element:texture-height)
+"))
+
+(cl:defgeneric texture-height-scale (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-height-scale (gum-wireframe-graphical-ui-element:texture-height-scale)
+"))
+
+(cl:defgeneric texture-left (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-left (gum-wireframe-graphical-ui-element:texture-left)
+"))
+
+(cl:defgeneric texture-top (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-top (gum-wireframe-graphical-ui-element:texture-top)
+"))
+
+(cl:defgeneric texture-width (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-width (gum-wireframe-graphical-ui-element:texture-width)
+"))
+
+(cl:defgeneric texture-width-scale (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: texture-width-scale (gum-wireframe-graphical-ui-element:texture-width-scale)
+"))
+
+(cl:defgeneric use-fixed-stack-children-size (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: use-fixed-stack-children-size (gum-wireframe-graphical-ui-element:use-fixed-stack-children-size)
+"))
+
+(cl:defgeneric what-this-contains (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: what-this-contains (gum-wireframe-graphical-ui-element:what-this-contains)
+"))
+
+(cl:defgeneric width-units (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: width-units (gum-wireframe-graphical-ui-element:width-units)
+Gum.Forms.Controls.FrameworkElement: width-units (gum-forms-controls-framework-element:width-units)
+"))
+
+(cl:defgeneric wraps-children (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: wraps-children (gum-wireframe-graphical-ui-element:wraps-children)
+"))
+
+(cl:defgeneric x-origin (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: x-origin (gum-wireframe-graphical-ui-element:x-origin)
+Gum.Forms.Controls.FrameworkElement: x-origin (gum-forms-controls-framework-element:x-origin)
+"))
+
+(cl:defgeneric x-units (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: x-units (gum-wireframe-graphical-ui-element:x-units)
+Gum.Forms.Controls.FrameworkElement: x-units (gum-forms-controls-framework-element:x-units)
+"))
+
+(cl:defgeneric y-origin (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: y-origin (gum-wireframe-graphical-ui-element:y-origin)
+Gum.Forms.Controls.FrameworkElement: y-origin (gum-forms-controls-framework-element:y-origin)
+"))
+
+(cl:defgeneric y-units (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: y-units (gum-wireframe-graphical-ui-element:y-units)
+Gum.Forms.Controls.FrameworkElement: y-units (gum-forms-controls-framework-element:y-units)
+"))
+
+(cl:defgeneric add-category (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-category (gum-wireframe-graphical-ui-element:add-category)
+"))
+
+(cl:defgeneric add-child (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-child (gum-wireframe-graphical-ui-element:add-child)
+Gum.Forms.Controls.FrameworkElement: add-child (gum-forms-controls-framework-element:add-child)
+"))
+
+(cl:defgeneric add-exposed-variable (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-exposed-variable (gum-wireframe-graphical-ui-element:add-exposed-variable)
+"))
+
+(cl:defgeneric add-states (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-states (gum-wireframe-graphical-ui-element:add-states)
+"))
+
+(cl:defgeneric add-to-managers (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-to-managers (gum-wireframe-graphical-ui-element:add-to-managers)
+MonoGameGum.GueDeriving.TextRuntime: add-to-managers (mono-game-gum-gue-deriving-text-runtime:add-to-managers)
+MonoGameGum.GueDeriving.ContainerRuntime: add-to-managers (mono-game-gum-gue-deriving-container-runtime:add-to-managers)
+"))
+
+(cl:defgeneric after-full-creation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: after-full-creation (gum-wireframe-graphical-ui-element:after-full-creation)
+"))
+
+(cl:defgeneric anchor (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: anchor (gum-wireframe-graphical-ui-element:anchor)
+Gum.Forms.Controls.FrameworkElement: anchor (gum-forms-controls-framework-element:anchor)
+"))
+
+(cl:defgeneric animate-self (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: animate-self (gum-wireframe-graphical-ui-element:animate-self)
+"))
+
+(cl:defgeneric apply-state (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: apply-state (gum-wireframe-graphical-ui-element:apply-state)
+"))
+
+(cl:defgeneric apply-state-recursive (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: apply-state-recursive (gum-wireframe-graphical-ui-element:apply-state-recursive)
+"))
+
+(cl:defgeneric clear-dirty-layout-state (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: clear-dirty-layout-state (gum-wireframe-graphical-ui-element:clear-dirty-layout-state)
+"))
+
+(cl:defgeneric clear-managers (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: clear-managers (gum-wireframe-graphical-ui-element:clear-managers)
+"))
+
+(cl:defgeneric create-children-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: create-children-recursively (gum-wireframe-graphical-ui-element:create-children-recursively)
+"))
+
+(cl:defgeneric dock (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: dock (gum-wireframe-graphical-ui-element:dock)
+Gum.Forms.Controls.FrameworkElement: dock (gum-forms-controls-framework-element:dock)
+"))
+
+(cl:defgeneric get-absolute-height (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-absolute-height (gum-wireframe-graphical-ui-element:get-absolute-height)
+"))
+
+(cl:defgeneric get-absolute-width (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-absolute-width (gum-wireframe-graphical-ui-element:get-absolute-width)
+"))
+
+(cl:defgeneric get-anchor (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-anchor (gum-wireframe-graphical-ui-element:get-anchor)
+"))
+
+(cl:defgeneric get-child-by-name (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-child-by-name (gum-wireframe-graphical-ui-element:get-child-by-name)
+"))
+
+(cl:defgeneric get-child-by-name-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-child-by-name-recursively (gum-wireframe-graphical-ui-element:get-child-by-name-recursively)
+"))
+
+(cl:defgeneric get-child-by-type (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-child-by-type (gum-wireframe-graphical-ui-element:get-child-by-type)
+"))
+
+(cl:defgeneric get-child-by-type-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-child-by-type-recursively (gum-wireframe-graphical-ui-element:get-child-by-type-recursively)
+"))
+
+(cl:defgeneric get-dock (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-dock (gum-wireframe-graphical-ui-element:get-dock)
+"))
+
+(cl:defgeneric get-graphical-ui-element-by-name (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-graphical-ui-element-by-name (gum-wireframe-graphical-ui-element:get-graphical-ui-element-by-name)
+"))
+
+(cl:defgeneric get-if-dimensions-depend-on-children (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-if-dimensions-depend-on-children (gum-wireframe-graphical-ui-element:get-if-dimensions-depend-on-children)
+"))
+
+(cl:defgeneric get-parent-by-name-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-parent-by-name-recursively (gum-wireframe-graphical-ui-element:get-parent-by-name-recursively)
+"))
+
+(cl:defgeneric get-parent-by-type-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: get-parent-by-type-recursively (gum-wireframe-graphical-ui-element:get-parent-by-type-recursively)
+"))
+
+(cl:defgeneric interpolate-between (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: interpolate-between (gum-wireframe-graphical-ui-element:interpolate-between)
+"))
+
+(cl:defgeneric exposed-variable? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: exposed-variable? (gum-wireframe-graphical-ui-element:exposed-variable?)
+"))
+
+(cl:defgeneric point-inside? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: point-inside? (gum-wireframe-graphical-ui-element:point-inside?)
+"))
+
+(cl:defgeneric move-to-layer (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: move-to-layer (gum-wireframe-graphical-ui-element:move-to-layer)
+"))
+
+(cl:defgeneric notify-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: notify-property-changed (gum-wireframe-graphical-ui-element:notify-property-changed)
+"))
+
+(cl:defgeneric play-animation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: play-animation (gum-wireframe-graphical-ui-element:play-animation)
+"))
+
+(cl:defgeneric push-value-to-view-model (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: push-value-to-view-model (gum-wireframe-graphical-ui-element:push-value-to-view-model)
+Gum.Forms.Controls.FrameworkElement: push-value-to-view-model (gum-forms-controls-framework-element:push-value-to-view-model)
+"))
+
+(cl:defgeneric refresh-styles (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: refresh-styles (gum-wireframe-graphical-ui-element:refresh-styles)
+MonoGameGum.GumService: refresh-styles (mono-game-gum-gum-service:refresh-styles)
+"))
+
+(cl:defgeneric refresh-text-overflow-vertical-mode (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: refresh-text-overflow-vertical-mode (gum-wireframe-graphical-ui-element:refresh-text-overflow-vertical-mode)
+"))
+
+(cl:defgeneric remove-child (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-child (gum-wireframe-graphical-ui-element:remove-child)
+Gum.Forms.Controls.FrameworkElement: remove-child (gum-forms-controls-framework-element:remove-child)
+"))
+
+(cl:defgeneric resume-layout (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: resume-layout (gum-wireframe-graphical-ui-element:resume-layout)
+"))
+
+(cl:defgeneric set-binding (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-binding (gum-wireframe-graphical-ui-element:set-binding)
+Gum.Forms.Controls.FrameworkElement: set-binding (gum-forms-controls-framework-element:set-binding)
+"))
+
+(cl:defgeneric set-contained-object (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-contained-object (gum-wireframe-graphical-ui-element:set-contained-object)
+"))
+
+(cl:defgeneric set-gue-values (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-gue-values (gum-wireframe-graphical-ui-element:set-gue-values)
+"))
+
+(cl:defgeneric set-initial-state (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-initial-state (gum-wireframe-graphical-ui-element:set-initial-state)
+"))
+
+(cl:defgeneric set-property (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-property (gum-wireframe-graphical-ui-element:set-property)
+"))
+
+(cl:defgeneric stop-animation (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: stop-animation (gum-wireframe-graphical-ui-element:stop-animation)
+"))
+
+(cl:defgeneric suspend-layout (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: suspend-layout (gum-wireframe-graphical-ui-element:suspend-layout)
+"))
+
+(cl:defgeneric update-font-recursive (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-font-recursive (gum-wireframe-graphical-ui-element:update-font-recursive)
+"))
+
+(cl:defgeneric update-height (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-height (gum-wireframe-graphical-ui-element:update-height)
+"))
+
+(cl:defgeneric update-layout (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-layout (gum-wireframe-graphical-ui-element:update-layout)
+"))
+
+(cl:defgeneric update-texture-values-from (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-texture-values-from (gum-wireframe-graphical-ui-element:update-texture-values-from)
+"))
+
+(cl:defgeneric update-to-font-values (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-to-font-values (gum-wireframe-graphical-ui-element:update-to-font-values)
+"))
+
+(cl:defgeneric update-width (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: update-width (gum-wireframe-graphical-ui-element:update-width)
+"))
+
+(cl:defgeneric add-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-binding-context-changed (gum-wireframe-graphical-ui-element:add-binding-context-changed)
+Gum.Forms.Controls.FrameworkElement: add-binding-context-changed (gum-forms-controls-framework-element:add-binding-context-changed)
+"))
+
+(cl:defgeneric remove-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-binding-context-changed (gum-wireframe-graphical-ui-element:remove-binding-context-changed)
+Gum.Forms.Controls.FrameworkElement: remove-binding-context-changed (gum-forms-controls-framework-element:remove-binding-context-changed)
+"))
+
+(cl:defgeneric add-inherited-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-inherited-binding-context-changed (gum-wireframe-graphical-ui-element:add-inherited-binding-context-changed)
+"))
+
+(cl:defgeneric remove-inherited-binding-context-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-inherited-binding-context-changed (gum-wireframe-graphical-ui-element:remove-inherited-binding-context-changed)
+"))
+
+(cl:defgeneric add-parent-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-parent-changed (gum-wireframe-graphical-ui-element:add-parent-changed)
+"))
+
+(cl:defgeneric remove-parent-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-parent-changed (gum-wireframe-graphical-ui-element:remove-parent-changed)
+"))
+
+(cl:defgeneric add-position-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-position-changed (gum-wireframe-graphical-ui-element:add-position-changed)
+"))
+
+(cl:defgeneric remove-position-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-position-changed (gum-wireframe-graphical-ui-element:remove-position-changed)
+"))
+
+(cl:defgeneric add-size-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-size-changed (gum-wireframe-graphical-ui-element:add-size-changed)
+"))
+
+(cl:defgeneric remove-size-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-size-changed (gum-wireframe-graphical-ui-element:remove-size-changed)
+"))
+
+(cl:defgeneric add-visible-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-visible-changed (gum-wireframe-graphical-ui-element:add-visible-changed)
+"))
+
+(cl:defgeneric remove-visible-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-visible-changed (gum-wireframe-graphical-ui-element:remove-visible-changed)
+"))
+
+(cl:defgeneric do-ui-activity-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: do-ui-activity-recursively (gum-wireframe-graphical-ui-element:do-ui-activity-recursively)
+"))
+
+(cl:defgeneric add-exposed-variables-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-exposed-variables-recursively (gum-wireframe-graphical-ui-element:add-exposed-variables-recursively)
+"))
+
+(cl:defgeneric add-states-and-categories-recursively-to-gue (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-states-and-categories-recursively-to-gue (gum-wireframe-graphical-ui-element:add-states-and-categories-recursively-to-gue)
+"))
+
+(cl:defgeneric apply-variable-references (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: apply-variable-references (gum-wireframe-graphical-ui-element:apply-variable-references)
+"))
+
+(cl:defgeneric create-graphical-component (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: create-graphical-component (gum-wireframe-graphical-ui-element:create-graphical-component)
+"))
+
+(cl:defgeneric set-states-and-categories-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-states-and-categories-recursively (gum-wireframe-graphical-ui-element:set-states-and-categories-recursively)
+"))
+
+(cl:defgeneric set-variables-recursively (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: set-variables-recursively (gum-wireframe-graphical-ui-element:set-variables-recursively)
+"))
+
+(cl:defgeneric export-layout-json (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: export-layout-json (gum-wireframe-graphical-ui-element:export-layout-json)
+"))
+
+(cl:defgeneric to-layout-json (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: to-layout-json (gum-wireframe-graphical-ui-element:to-layout-json)
+"))
+
+(cl:defgeneric add-to-root (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: add-to-root (gum-wireframe-graphical-ui-element:add-to-root)
+Gum.Forms.Controls.FrameworkElement: add-to-root (gum-forms-controls-framework-element:add-to-root)
+"))
+
+(cl:defgeneric remove-from-root (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: remove-from-root (gum-wireframe-graphical-ui-element:remove-from-root)
+Gum.Forms.Controls.FrameworkElement: remove-from-root (gum-forms-controls-framework-element:remove-from-root)
 "))
 
 (cl:defgeneric canvas-height (obj! cl:&rest args)
@@ -3149,11 +4301,6 @@ MonoGameGum.GumService: initialize-for-testing (mono-game-gum-gum-service:initia
 MonoGameGum.GumService: load-animations (mono-game-gum-gum-service:load-animations)
 "))
 
-(cl:defgeneric refresh-styles (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-MonoGameGum.GumService: refresh-styles (mono-game-gum-gum-service:refresh-styles)
-"))
-
 (cl:defgeneric uninitialize (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GumService: uninitialize (mono-game-gum-gum-service:uninitialize)
@@ -3195,11 +4342,6 @@ Gum.Forms.Controls.FrameworkElement: actual-height (gum-forms-controls-framework
 Gum.Forms.Controls.FrameworkElement: actual-width (gum-forms-controls-framework-element:actual-width)
 "))
 
-(cl:defgeneric binding-context (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: binding-context (gum-forms-controls-framework-element:binding-context)
-"))
-
 (cl:defgeneric custom-cursor (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: custom-cursor (gum-forms-controls-framework-element:custom-cursor)
@@ -3208,17 +4350,6 @@ Gum.Forms.Controls.FrameworkElement: custom-cursor (gum-forms-controls-framework
 (cl:defgeneric gamepad-tabbing-focus-behavior (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: gamepad-tabbing-focus-behavior (gum-forms-controls-framework-element:gamepad-tabbing-focus-behavior)
-"))
-
-(cl:defgeneric height-units (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: height-units (gum-forms-controls-framework-element:height-units)
-"))
-
-(cl:defgeneric enabled? (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: enabled? (gum-forms-controls-framework-element:enabled?)
-Gum.Forms.Controls.Primitives.RangeBase: enabled? (gum-forms-controls-primitives-range-base:enabled?)
 "))
 
 (cl:defgeneric focused? (obj! cl:&rest args)
@@ -3237,26 +4368,6 @@ Gum.Forms.Controls.FrameworkElement: tab-navigation-enabled? (gum-forms-controls
 Gum.Forms.Controls.FrameworkElement: using-left-and-right-gamepad-directions-for-navigation? (gum-forms-controls-framework-element:using-left-and-right-gamepad-directions-for-navigation?)
 "))
 
-(cl:defgeneric max-height (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: max-height (gum-forms-controls-framework-element:max-height)
-"))
-
-(cl:defgeneric max-width (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: max-width (gum-forms-controls-framework-element:max-width)
-"))
-
-(cl:defgeneric min-height (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: min-height (gum-forms-controls-framework-element:min-height)
-"))
-
-(cl:defgeneric min-width (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: min-width (gum-forms-controls-framework-element:min-width)
-"))
-
 (cl:defgeneric parent-framework-element (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: parent-framework-element (gum-forms-controls-framework-element:parent-framework-element)
@@ -3270,41 +4381,6 @@ Gum.Forms.Controls.FrameworkElement: tool-tip (gum-forms-controls-framework-elem
 (cl:defgeneric visual (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: visual (gum-forms-controls-framework-element:visual)
-"))
-
-(cl:defgeneric width-units (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: width-units (gum-forms-controls-framework-element:width-units)
-"))
-
-(cl:defgeneric x-origin (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: x-origin (gum-forms-controls-framework-element:x-origin)
-"))
-
-(cl:defgeneric x-units (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: x-units (gum-forms-controls-framework-element:x-units)
-"))
-
-(cl:defgeneric y-origin (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: y-origin (gum-forms-controls-framework-element:y-origin)
-"))
-
-(cl:defgeneric y-units (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: y-units (gum-forms-controls-framework-element:y-units)
-"))
-
-(cl:defgeneric add-child (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: add-child (gum-forms-controls-framework-element:add-child)
-"))
-
-(cl:defgeneric anchor (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: anchor (gum-forms-controls-framework-element:anchor)
 "))
 
 (cl:defgeneric apply-runtime-properties (obj! cl:&rest args)
@@ -3328,11 +4404,6 @@ Gum.Forms.Controls.FrameworkElement: clear-binding (gum-forms-controls-framework
 (cl:defgeneric close (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: close (gum-forms-controls-framework-element:close)
-"))
-
-(cl:defgeneric dock (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: dock (gum-forms-controls-framework-element:dock)
 "))
 
 (cl:defgeneric get-desired-state (obj! cl:&rest args)
@@ -3406,11 +4477,6 @@ Gum.Forms.Controls.FrameworkElement: on-binding-context-changed (gum-forms-contr
 Gum.Forms.Controls.FrameworkElement: on-property-changed (gum-forms-controls-framework-element:on-property-changed)
 "))
 
-(cl:defgeneric push-value-to-view-model (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: push-value-to-view-model (gum-forms-controls-framework-element:push-value-to-view-model)
-"))
-
 (cl:defgeneric raise-key-down (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: raise-key-down (gum-forms-controls-framework-element:raise-key-down)
@@ -3447,11 +4513,6 @@ Gum.Forms.Controls.Primitives.RangeBase: refresh-internal-visual-references (gum
 Gum.Forms.Controls.FrameworkElement: register-runtime-property (gum-forms-controls-framework-element:register-runtime-property)
 "))
 
-(cl:defgeneric remove-child (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: remove-child (gum-forms-controls-framework-element:remove-child)
-"))
-
 (cl:defgeneric reposition-to-keep-in-screen (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: reposition-to-keep-in-screen (gum-forms-controls-framework-element:reposition-to-keep-in-screen)
@@ -3462,11 +4523,6 @@ Gum.Forms.Controls.FrameworkElement: reposition-to-keep-in-screen (gum-forms-con
 Gum.Forms.Controls.FrameworkElement: save-runtime-properties (gum-forms-controls-framework-element:save-runtime-properties)
 Gum.Forms.Controls.Button: save-runtime-properties (gum-forms-controls-button:save-runtime-properties)
 Gum.Forms.Controls.Label: save-runtime-properties (gum-forms-controls-label:save-runtime-properties)
-"))
-
-(cl:defgeneric set-binding (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: set-binding (gum-forms-controls-framework-element:set-binding)
 "))
 
 (cl:defgeneric show (obj! cl:&rest args)
@@ -3504,16 +4560,6 @@ Gum.Forms.Controls.FrameworkElement: add-before-refresh-styles (gum-forms-contro
 (cl:defgeneric remove-before-refresh-styles (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: remove-before-refresh-styles (gum-forms-controls-framework-element:remove-before-refresh-styles)
-"))
-
-(cl:defgeneric add-binding-context-changed (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: add-binding-context-changed (gum-forms-controls-framework-element:add-binding-context-changed)
-"))
-
-(cl:defgeneric remove-binding-context-changed (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: remove-binding-context-changed (gum-forms-controls-framework-element:remove-binding-context-changed)
 "))
 
 (cl:defgeneric add-got-focus (obj! cl:&rest args)
@@ -3574,21 +4620,6 @@ Gum.Forms.Controls.FrameworkElement: get-framework-element (gum-forms-controls-f
 (cl:defgeneric get-parent-input-receiver (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: get-parent-input-receiver (gum-forms-controls-framework-element:get-parent-input-receiver)
-"))
-
-(cl:defgeneric remove-from-root (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: remove-from-root (gum-forms-controls-framework-element:remove-from-root)
-"))
-
-(cl:defgeneric add-to-root (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: add-to-root (gum-forms-controls-framework-element:add-to-root)
-"))
-
-(cl:defgeneric children (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Panel: children (gum-forms-controls-panel:children)
 "))
 
 (cl:defgeneric text (obj! cl:&rest args)
@@ -3662,16 +4693,6 @@ Gum.Forms.Controls.Primitives.ButtonBase: receive-input (gum-forms-controls-prim
 Gum.Forms.Controls.Slider: receive-input (gum-forms-controls-slider:receive-input)
 "))
 
-(cl:defgeneric add-click (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: add-click (gum-forms-controls-primitives-button-base:add-click)
-"))
-
-(cl:defgeneric remove-click (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: remove-click (gum-forms-controls-primitives-button-base:remove-click)
-"))
-
 (cl:defgeneric add-controller-button-pushed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.Primitives.ButtonBase: add-controller-button-pushed (gum-forms-controls-primitives-button-base:add-controller-button-pushed)
@@ -3696,16 +4717,6 @@ Gum.Forms.Controls.Primitives.ButtonBase: remove-focus-update (gum-forms-control
 Gum.Forms.Controls.Slider: remove-focus-update (gum-forms-controls-slider:remove-focus-update)
 "))
 
-(cl:defgeneric add-push (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: add-push (gum-forms-controls-primitives-button-base:add-push)
-"))
-
-(cl:defgeneric remove-push (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.Primitives.ButtonBase: remove-push (gum-forms-controls-primitives-button-base:remove-push)
-"))
-
 (cl:defgeneric default-height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: default-height (mono-game-gum-gue-deriving-text-runtime:default-height)
@@ -3726,11 +4737,6 @@ MonoGameGum.GueDeriving.TextRuntime: default-width (mono-game-gum-gue-deriving-t
 MonoGameGum.GueDeriving.TextRuntime: default-width-units (mono-game-gum-gue-deriving-text-runtime:default-width-units)
 "))
 
-(cl:defgeneric alpha (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-MonoGameGum.GueDeriving.TextRuntime: alpha (mono-game-gum-gue-deriving-text-runtime:alpha)
-"))
-
 (cl:defgeneric bitmap-font (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: bitmap-font (mono-game-gum-gue-deriving-text-runtime:bitmap-font)
@@ -3739,6 +4745,7 @@ MonoGameGum.GueDeriving.TextRuntime: bitmap-font (mono-game-gum-gue-deriving-tex
 (cl:defgeneric blend (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: blend (mono-game-gum-gue-deriving-text-runtime:blend)
+MonoGameGum.GueDeriving.ContainerRuntime: blend (mono-game-gum-gue-deriving-container-runtime:blend)
 "))
 
 (cl:defgeneric blue (obj! cl:&rest args)
@@ -3854,11 +4861,6 @@ MonoGameGum.GueDeriving.TextRuntime: vertical-alignment (mono-game-gum-gue-deriv
 (cl:defgeneric wrapped-text (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: wrapped-text (mono-game-gum-gue-deriving-text-runtime:wrapped-text)
-"))
-
-(cl:defgeneric add-to-managers (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-MonoGameGum.GueDeriving.TextRuntime: add-to-managers (mono-game-gum-gue-deriving-text-runtime:add-to-managers)
 "))
 
 (cl:defgeneric get-character-index-at-position (obj! cl:&rest args)
@@ -4252,6 +5254,8 @@ Microsoft.Xna.Framework.Vector2: (cl:setf x) (cl:setf (microsoft-xna-framework-v
 Microsoft.Xna.Framework.Rectangle: (cl:setf x) (cl:setf (microsoft-xna-framework-rectangle:x ...))
 Microsoft.Xna.Framework.Point: (cl:setf x) (cl:setf (microsoft-xna-framework-point:x ...))
 RenderingLibrary.Camera: (cl:setf x) (cl:setf (rendering-library-camera:x ...))
+RenderingLibrary.IPositionedSizedObject: (cl:setf x) (cl:setf (rendering-library-i-positioned-sized-object:x ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf x) (cl:setf (gum-wireframe-graphical-ui-element:x ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf x) (cl:setf (gum-forms-controls-framework-element:x ...))
 "))
 
@@ -4261,12 +5265,16 @@ Microsoft.Xna.Framework.Vector2: (cl:setf y) (cl:setf (microsoft-xna-framework-v
 Microsoft.Xna.Framework.Rectangle: (cl:setf y) (cl:setf (microsoft-xna-framework-rectangle:y ...))
 Microsoft.Xna.Framework.Point: (cl:setf y) (cl:setf (microsoft-xna-framework-point:y ...))
 RenderingLibrary.Camera: (cl:setf y) (cl:setf (rendering-library-camera:y ...))
+RenderingLibrary.IPositionedSizedObject: (cl:setf y) (cl:setf (rendering-library-i-positioned-sized-object:y ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf y) (cl:setf (gum-wireframe-graphical-ui-element:y ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf y) (cl:setf (gum-forms-controls-framework-element:y ...))
 "))
 
 (cl:defgeneric (cl:setf height) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: (cl:setf height) (cl:setf (microsoft-xna-framework-rectangle:height ...))
+RenderingLibrary.IPositionedSizedObject: (cl:setf height) (cl:setf (rendering-library-i-positioned-sized-object:height ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf height) (cl:setf (gum-wireframe-graphical-ui-element:height ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf height) (cl:setf (gum-forms-controls-framework-element:height ...))
 "))
 
@@ -4274,6 +5282,8 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf height) (cl:setf (gum-forms-contro
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: (cl:setf width) (cl:setf (microsoft-xna-framework-rectangle:width ...))
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: (cl:setf width) (cl:setf (microsoft-xna-framework-graphics-sprite-font-glyph:width ...))
+RenderingLibrary.IPositionedSizedObject: (cl:setf width) (cl:setf (rendering-library-i-positioned-sized-object:width ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf width) (cl:setf (gum-wireframe-graphical-ui-element:width ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf width) (cl:setf (gum-forms-controls-framework-element:width ...))
 "))
 
@@ -4510,6 +5520,7 @@ Microsoft.Xna.Framework.Graphics.GraphicsDevice: (cl:setf blend-factor) (cl:setf
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.GraphicsDevice: (cl:setf blend-state) (cl:setf (microsoft-xna-framework-graphics-graphics-device:blend-state ...))
 MonoGameGum.GueDeriving.TextRuntime: (cl:setf blend-state) (cl:setf (mono-game-gum-gue-deriving-text-runtime:blend-state ...))
+MonoGameGum.GueDeriving.ContainerRuntime: (cl:setf blend-state) (cl:setf (mono-game-gum-gue-deriving-container-runtime:blend-state ...))
 "))
 
 (cl:defgeneric (cl:setf depth-stencil-state) (new-value obj! cl:&rest args)
@@ -4645,6 +5656,8 @@ Microsoft.Xna.Framework.Graphics.PresentationParameters: (cl:setf render-target-
 (cl:defgeneric (cl:setf name) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Audio.SoundEffect: (cl:setf name) (cl:setf (microsoft-xna-framework-audio-sound-effect:name ...))
+RenderingLibrary.IPositionedSizedObject: (cl:setf name) (cl:setf (rendering-library-i-positioned-sized-object:name ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf name) (cl:setf (gum-wireframe-graphical-ui-element:name ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf name) (cl:setf (gum-forms-controls-framework-element:name ...))
 "))
 
@@ -4708,6 +5721,255 @@ RenderingLibrary.Camera: (cl:setf client-width) (cl:setf (rendering-library-came
 RenderingLibrary.Camera: (cl:setf zoom) (cl:setf (rendering-library-camera:zoom ...))
 "))
 
+(cl:defgeneric (cl:setf expose-children-events) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: (cl:setf expose-children-events) (cl:setf (gum-wireframe-interactive-gue:expose-children-events ...))
+"))
+
+(cl:defgeneric (cl:setf forms-control-as-object) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: (cl:setf forms-control-as-object) (cl:setf (gum-wireframe-interactive-gue:forms-control-as-object ...))
+"))
+
+(cl:defgeneric (cl:setf has-events) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: (cl:setf has-events) (cl:setf (gum-wireframe-interactive-gue:has-events ...))
+"))
+
+(cl:defgeneric (cl:setf enabled?) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: (cl:setf enabled?) (cl:setf (gum-wireframe-interactive-gue:enabled? ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf enabled?) (cl:setf (gum-forms-controls-framework-element:enabled? ...))
+Gum.Forms.Controls.Primitives.RangeBase: (cl:setf enabled?) (cl:setf (gum-forms-controls-primitives-range-base:enabled? ...))
+"))
+
+(cl:defgeneric (cl:setf raise-children-events-outside-of-bounds) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.InteractiveGue: (cl:setf raise-children-events-outside-of-bounds) (cl:setf (gum-wireframe-interactive-gue:raise-children-events-outside-of-bounds ...))
+"))
+
+(cl:defgeneric (cl:setf parent) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IRenderableIpso: (cl:setf parent) (cl:setf (rendering-library-graphics-i-renderable-ipso:parent ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf parent) (cl:setf (gum-wireframe-graphical-ui-element:parent ...))
+"))
+
+(cl:defgeneric (cl:setf visible) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.Graphics.IVisible: (cl:setf visible) (cl:setf (rendering-library-graphics-i-visible:visible ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf visible) (cl:setf (gum-wireframe-graphical-ui-element:visible ...))
+"))
+
+(cl:defgeneric (cl:setf flip-horizontal) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: (cl:setf flip-horizontal) (cl:setf (rendering-library-i-positioned-sized-object:flip-horizontal ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf flip-horizontal) (cl:setf (gum-wireframe-graphical-ui-element:flip-horizontal ...))
+"))
+
+(cl:defgeneric (cl:setf rotation) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: (cl:setf rotation) (cl:setf (rendering-library-i-positioned-sized-object:rotation ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf rotation) (cl:setf (gum-wireframe-graphical-ui-element:rotation ...))
+"))
+
+(cl:defgeneric (cl:setf tag) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: (cl:setf tag) (cl:setf (rendering-library-i-positioned-sized-object:tag ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf tag) (cl:setf (gum-wireframe-graphical-ui-element:tag ...))
+"))
+
+(cl:defgeneric (cl:setf z) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+RenderingLibrary.IPositionedSizedObject: (cl:setf z) (cl:setf (rendering-library-i-positioned-sized-object:z ...))
+Gum.Wireframe.GraphicalUiElement: (cl:setf z) (cl:setf (gum-wireframe-graphical-ui-element:z ...))
+"))
+
+(cl:defgeneric (cl:setf animations) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf animations) (cl:setf (gum-wireframe-graphical-ui-element:animations ...))
+"))
+
+(cl:defgeneric (cl:setf auto-grid-horizontal-cells) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf auto-grid-horizontal-cells) (cl:setf (gum-wireframe-graphical-ui-element:auto-grid-horizontal-cells ...))
+"))
+
+(cl:defgeneric (cl:setf auto-grid-vertical-cells) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf auto-grid-vertical-cells) (cl:setf (gum-wireframe-graphical-ui-element:auto-grid-vertical-cells ...))
+"))
+
+(cl:defgeneric (cl:setf binding-context) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf binding-context) (cl:setf (gum-wireframe-graphical-ui-element:binding-context ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf binding-context) (cl:setf (gum-forms-controls-framework-element:binding-context ...))
+"))
+
+(cl:defgeneric (cl:setf children-layout) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf children-layout) (cl:setf (gum-wireframe-graphical-ui-element:children-layout ...))
+"))
+
+(cl:defgeneric (cl:setf clips-children) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf clips-children) (cl:setf (gum-wireframe-graphical-ui-element:clips-children ...))
+"))
+
+(cl:defgeneric (cl:setf element-gue-containing-this) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf element-gue-containing-this) (cl:setf (gum-wireframe-graphical-ui-element:element-gue-containing-this ...))
+"))
+
+(cl:defgeneric (cl:setf element-save) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf element-save) (cl:setf (gum-wireframe-graphical-ui-element:element-save ...))
+"))
+
+(cl:defgeneric (cl:setf explicit-i-visible-parent) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf explicit-i-visible-parent) (cl:setf (gum-wireframe-graphical-ui-element:explicit-i-visible-parent ...))
+"))
+
+(cl:defgeneric (cl:setf height-units) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf height-units) (cl:setf (gum-wireframe-graphical-ui-element:height-units ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf height-units) (cl:setf (gum-forms-controls-framework-element:height-units ...))
+"))
+
+(cl:defgeneric (cl:setf ignored-by-parent-size) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf ignored-by-parent-size) (cl:setf (gum-wireframe-graphical-ui-element:ignored-by-parent-size ...))
+"))
+
+(cl:defgeneric (cl:setf font-dirty?) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf font-dirty?) (cl:setf (gum-wireframe-graphical-ui-element:font-dirty? ...))
+"))
+
+(cl:defgeneric (cl:setf max-height) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf max-height) (cl:setf (gum-wireframe-graphical-ui-element:max-height ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf max-height) (cl:setf (gum-forms-controls-framework-element:max-height ...))
+"))
+
+(cl:defgeneric (cl:setf max-width) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf max-width) (cl:setf (gum-wireframe-graphical-ui-element:max-width ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf max-width) (cl:setf (gum-forms-controls-framework-element:max-width ...))
+"))
+
+(cl:defgeneric (cl:setf min-height) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf min-height) (cl:setf (gum-wireframe-graphical-ui-element:min-height ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf min-height) (cl:setf (gum-forms-controls-framework-element:min-height ...))
+"))
+
+(cl:defgeneric (cl:setf min-width) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf min-width) (cl:setf (gum-wireframe-graphical-ui-element:min-width ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf min-width) (cl:setf (gum-forms-controls-framework-element:min-width ...))
+"))
+
+(cl:defgeneric (cl:setf parent-gue) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf parent-gue) (cl:setf (gum-wireframe-graphical-ui-element:parent-gue ...))
+"))
+
+(cl:defgeneric (cl:setf stacked-row-or-column-index) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf stacked-row-or-column-index) (cl:setf (gum-wireframe-graphical-ui-element:stacked-row-or-column-index ...))
+"))
+
+(cl:defgeneric (cl:setf stack-spacing) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf stack-spacing) (cl:setf (gum-wireframe-graphical-ui-element:stack-spacing ...))
+"))
+
+(cl:defgeneric (cl:setf text-overflow-vertical-mode) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf text-overflow-vertical-mode) (cl:setf (gum-wireframe-graphical-ui-element:text-overflow-vertical-mode ...))
+"))
+
+(cl:defgeneric (cl:setf texture-address) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-address) (cl:setf (gum-wireframe-graphical-ui-element:texture-address ...))
+"))
+
+(cl:defgeneric (cl:setf texture-height) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-height) (cl:setf (gum-wireframe-graphical-ui-element:texture-height ...))
+"))
+
+(cl:defgeneric (cl:setf texture-height-scale) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-height-scale) (cl:setf (gum-wireframe-graphical-ui-element:texture-height-scale ...))
+"))
+
+(cl:defgeneric (cl:setf texture-left) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-left) (cl:setf (gum-wireframe-graphical-ui-element:texture-left ...))
+"))
+
+(cl:defgeneric (cl:setf texture-top) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-top) (cl:setf (gum-wireframe-graphical-ui-element:texture-top ...))
+"))
+
+(cl:defgeneric (cl:setf texture-width) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-width) (cl:setf (gum-wireframe-graphical-ui-element:texture-width ...))
+"))
+
+(cl:defgeneric (cl:setf texture-width-scale) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf texture-width-scale) (cl:setf (gum-wireframe-graphical-ui-element:texture-width-scale ...))
+"))
+
+(cl:defgeneric (cl:setf use-fixed-stack-children-size) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf use-fixed-stack-children-size) (cl:setf (gum-wireframe-graphical-ui-element:use-fixed-stack-children-size ...))
+"))
+
+(cl:defgeneric (cl:setf width-units) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf width-units) (cl:setf (gum-wireframe-graphical-ui-element:width-units ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf width-units) (cl:setf (gum-forms-controls-framework-element:width-units ...))
+"))
+
+(cl:defgeneric (cl:setf wrap) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf wrap) (cl:setf (gum-wireframe-graphical-ui-element:wrap ...))
+"))
+
+(cl:defgeneric (cl:setf wraps-children) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf wraps-children) (cl:setf (gum-wireframe-graphical-ui-element:wraps-children ...))
+"))
+
+(cl:defgeneric (cl:setf x-origin) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf x-origin) (cl:setf (gum-wireframe-graphical-ui-element:x-origin ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf x-origin) (cl:setf (gum-forms-controls-framework-element:x-origin ...))
+"))
+
+(cl:defgeneric (cl:setf x-units) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf x-units) (cl:setf (gum-wireframe-graphical-ui-element:x-units ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf x-units) (cl:setf (gum-forms-controls-framework-element:x-units ...))
+"))
+
+(cl:defgeneric (cl:setf y-origin) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf y-origin) (cl:setf (gum-wireframe-graphical-ui-element:y-origin ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf y-origin) (cl:setf (gum-forms-controls-framework-element:y-origin ...))
+"))
+
+(cl:defgeneric (cl:setf y-units) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Gum.Wireframe.GraphicalUiElement: (cl:setf y-units) (cl:setf (gum-wireframe-graphical-ui-element:y-units ...))
+Gum.Forms.Controls.FrameworkElement: (cl:setf y-units) (cl:setf (gum-forms-controls-framework-element:y-units ...))
+"))
+
 (cl:defgeneric (cl:setf canvas-height) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GumService: (cl:setf canvas-height) (cl:setf (mono-game-gum-gum-service:canvas-height ...))
@@ -4718,11 +5980,6 @@ MonoGameGum.GumService: (cl:setf canvas-height) (cl:setf (mono-game-gum-gum-serv
 MonoGameGum.GumService: (cl:setf canvas-width) (cl:setf (mono-game-gum-gum-service:canvas-width ...))
 "))
 
-(cl:defgeneric (cl:setf binding-context) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf binding-context) (cl:setf (gum-forms-controls-framework-element:binding-context ...))
-"))
-
 (cl:defgeneric (cl:setf custom-cursor) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: (cl:setf custom-cursor) (cl:setf (gum-forms-controls-framework-element:custom-cursor ...))
@@ -4731,17 +5988,6 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf custom-cursor) (cl:setf (gum-forms
 (cl:defgeneric (cl:setf gamepad-tabbing-focus-behavior) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: (cl:setf gamepad-tabbing-focus-behavior) (cl:setf (gum-forms-controls-framework-element:gamepad-tabbing-focus-behavior ...))
-"))
-
-(cl:defgeneric (cl:setf height-units) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf height-units) (cl:setf (gum-forms-controls-framework-element:height-units ...))
-"))
-
-(cl:defgeneric (cl:setf enabled?) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf enabled?) (cl:setf (gum-forms-controls-framework-element:enabled? ...))
-Gum.Forms.Controls.Primitives.RangeBase: (cl:setf enabled?) (cl:setf (gum-forms-controls-primitives-range-base:enabled? ...))
 "))
 
 (cl:defgeneric (cl:setf focused?) (new-value obj! cl:&rest args)
@@ -4760,26 +6006,6 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf using-left-and-right-gamepad-direc
 Gum.Forms.Controls.FrameworkElement: (cl:setf visible?) (cl:setf (gum-forms-controls-framework-element:visible? ...))
 "))
 
-(cl:defgeneric (cl:setf max-height) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf max-height) (cl:setf (gum-forms-controls-framework-element:max-height ...))
-"))
-
-(cl:defgeneric (cl:setf max-width) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf max-width) (cl:setf (gum-forms-controls-framework-element:max-width ...))
-"))
-
-(cl:defgeneric (cl:setf min-height) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf min-height) (cl:setf (gum-forms-controls-framework-element:min-height ...))
-"))
-
-(cl:defgeneric (cl:setf min-width) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf min-width) (cl:setf (gum-forms-controls-framework-element:min-width ...))
-"))
-
 (cl:defgeneric (cl:setf tool-tip) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: (cl:setf tool-tip) (cl:setf (gum-forms-controls-framework-element:tool-tip ...))
@@ -4788,31 +6014,6 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf tool-tip) (cl:setf (gum-forms-cont
 (cl:defgeneric (cl:setf visual) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: (cl:setf visual) (cl:setf (gum-forms-controls-framework-element:visual ...))
-"))
-
-(cl:defgeneric (cl:setf width-units) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf width-units) (cl:setf (gum-forms-controls-framework-element:width-units ...))
-"))
-
-(cl:defgeneric (cl:setf x-origin) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf x-origin) (cl:setf (gum-forms-controls-framework-element:x-origin ...))
-"))
-
-(cl:defgeneric (cl:setf x-units) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf x-units) (cl:setf (gum-forms-controls-framework-element:x-units ...))
-"))
-
-(cl:defgeneric (cl:setf y-origin) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf y-origin) (cl:setf (gum-forms-controls-framework-element:y-origin ...))
-"))
-
-(cl:defgeneric (cl:setf y-units) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: (cl:setf y-units) (cl:setf (gum-forms-controls-framework-element:y-units ...))
 "))
 
 (cl:defgeneric (cl:setf text) (new-value obj! cl:&rest args)
@@ -4856,6 +6057,7 @@ MonoGameGum.GueDeriving.TextRuntime: (cl:setf default-width-units) (cl:setf (mon
 (cl:defgeneric (cl:setf alpha) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: (cl:setf alpha) (cl:setf (mono-game-gum-gue-deriving-text-runtime:alpha ...))
+MonoGameGum.GueDeriving.ContainerRuntime: (cl:setf alpha) (cl:setf (mono-game-gum-gue-deriving-container-runtime:alpha ...))
 "))
 
 (cl:defgeneric (cl:setf bitmap-font) (new-value obj! cl:&rest args)
@@ -4866,6 +6068,7 @@ MonoGameGum.GueDeriving.TextRuntime: (cl:setf bitmap-font) (cl:setf (mono-game-g
 (cl:defgeneric (cl:setf blend) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 MonoGameGum.GueDeriving.TextRuntime: (cl:setf blend) (cl:setf (mono-game-gum-gue-deriving-text-runtime:blend ...))
+MonoGameGum.GueDeriving.ContainerRuntime: (cl:setf blend) (cl:setf (mono-game-gum-gue-deriving-container-runtime:blend ...))
 "))
 
 (cl:defgeneric (cl:setf blue) (new-value obj! cl:&rest args)
@@ -5026,6 +6229,11 @@ RenderingLibrary.Graphics.Renderer: (cl:setf using-premultiplied-alpha?) (cl:set
 (cl:defgeneric (cl:setf single-pixel-texture) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Graphics.Renderer: (cl:setf single-pixel-texture) (cl:setf (rendering-library-graphics-renderer:single-pixel-texture ...))
+"))
+
+(cl:defgeneric (cl:setf render-target?) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+MonoGameGum.GueDeriving.ContainerRuntime: (cl:setf render-target?) (cl:setf (mono-game-gum-gue-deriving-container-runtime:render-target? ...))
 "))
 
 (cl:defgeneric (cl:setf move-to-point-enabled?) (new-value obj! cl:&rest args)
@@ -7104,6 +8312,25 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 (cl:defmethod (cl:setf zoom) (new-value (obj! dotcl-internal::|Camera|) cl:&rest args)
   (cl:apply (cl:function (cl:setf rendering-library-camera:zoom)) new-value obj! args))
 
+;; Gum.Collections.GraphicalUiElementCollection (gum-collections-graphical-ui-element-collection)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicalUiElementCollection|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod read-only? ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:read-only?) obj! args))
+(cl:defmethod clear-items ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:clear-items) obj! args))
+(cl:defmethod insert-item ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:insert-item) obj! args))
+(cl:defmethod move-item ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:move-item) obj! args))
+(cl:defmethod remove-item ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:remove-item) obj! args))
+(cl:defmethod set-item ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
+  (cl:apply (cl:function gum-collections-graphical-ui-element-collection:set-item) obj! args))
+
 ;; Gum.Wireframe.IInputReceiver (gum-wireframe-i-input-receiver)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IInputReceiver|.
 ;; No known simple-name conflicts: no other type reflected across the
@@ -7122,6 +8349,672 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-wireframe-i-input-receiver:on-gain-focus) obj! args))
 (cl:defmethod on-lose-focus ((obj! dotcl-internal::|IInputReceiver|) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-i-input-receiver:on-lose-focus) obj! args))
+
+;; Gum.Wireframe.InteractiveGue (gum-wireframe-interactive-gue)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|InteractiveGue|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod expose-children-events ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:expose-children-events) obj! args))
+(cl:defmethod forms-control-as-object ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:forms-control-as-object) obj! args))
+(cl:defmethod has-events ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:has-events) obj! args))
+(cl:defmethod enabled? ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:enabled?) obj! args))
+(cl:defmethod enabled-recursively? ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:enabled-recursively?) obj! args))
+(cl:defmethod outside-of-bounds-hit-testing-enabled? ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:outside-of-bounds-hit-testing-enabled?) obj! args))
+(cl:defmethod raise-children-events-outside-of-bounds ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:raise-children-events-outside-of-bounds) obj! args))
+(cl:defmethod call-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:call-click) obj! args))
+(cl:defmethod call-right-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:call-right-click) obj! args))
+(cl:defmethod has-cursor-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:has-cursor-over) obj! args))
+(cl:defmethod in-parent-chain? ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:in-parent-chain?) obj! args))
+(cl:defmethod remove-from-managers ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-from-managers) obj! args))
+(cl:defmethod to-string ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:to-string) obj! args))
+(cl:defmethod try-call-dragging ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-dragging) obj! args))
+(cl:defmethod try-call-hover-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-hover-over) obj! args))
+(cl:defmethod try-call-push ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-push) obj! args))
+(cl:defmethod try-call-remove-as-pushed ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-remove-as-pushed) obj! args))
+(cl:defmethod try-call-roll-off ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-roll-off) obj! args))
+(cl:defmethod try-call-roll-on ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-roll-on) obj! args))
+(cl:defmethod try-call-roll-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:try-call-roll-over) obj! args))
+(cl:defmethod add-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-click) obj! args))
+(cl:defmethod remove-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-click) obj! args))
+(cl:defmethod add-click-preview ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-click-preview) obj! args))
+(cl:defmethod remove-click-preview ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-click-preview) obj! args))
+(cl:defmethod add-double-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-double-click) obj! args))
+(cl:defmethod remove-double-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-double-click) obj! args))
+(cl:defmethod add-dragging ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-dragging) obj! args))
+(cl:defmethod remove-dragging ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-dragging) obj! args))
+(cl:defmethod add-enabled-change ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-enabled-change) obj! args))
+(cl:defmethod remove-enabled-change ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-enabled-change) obj! args))
+(cl:defmethod add-hover-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-hover-over) obj! args))
+(cl:defmethod remove-hover-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-hover-over) obj! args))
+(cl:defmethod add-lose-push ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-lose-push) obj! args))
+(cl:defmethod remove-lose-push ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-lose-push) obj! args))
+(cl:defmethod add-mouse-wheel-scroll ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-mouse-wheel-scroll) obj! args))
+(cl:defmethod remove-mouse-wheel-scroll ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-mouse-wheel-scroll) obj! args))
+(cl:defmethod add-push ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-push) obj! args))
+(cl:defmethod remove-push ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-push) obj! args))
+(cl:defmethod add-push-preview ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-push-preview) obj! args))
+(cl:defmethod remove-push-preview ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-push-preview) obj! args))
+(cl:defmethod add-removed-as-pushed ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-removed-as-pushed) obj! args))
+(cl:defmethod remove-removed-as-pushed ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-removed-as-pushed) obj! args))
+(cl:defmethod add-right-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-right-click) obj! args))
+(cl:defmethod remove-right-click ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-right-click) obj! args))
+(cl:defmethod add-roll-off ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-roll-off) obj! args))
+(cl:defmethod remove-roll-off ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-roll-off) obj! args))
+(cl:defmethod add-roll-on ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-roll-on) obj! args))
+(cl:defmethod remove-roll-on ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-roll-on) obj! args))
+(cl:defmethod add-roll-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-roll-over) obj! args))
+(cl:defmethod remove-roll-over ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-roll-over) obj! args))
+(cl:defmethod add-roll-over-bubbling ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:add-roll-over-bubbling) obj! args))
+(cl:defmethod remove-roll-over-bubbling ((obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-interactive-gue:remove-roll-over-bubbling) obj! args))
+(cl:defmethod (cl:setf expose-children-events) (new-value (obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:expose-children-events)) new-value obj! args))
+(cl:defmethod (cl:setf forms-control-as-object) (new-value (obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:forms-control-as-object)) new-value obj! args))
+(cl:defmethod (cl:setf has-events) (new-value (obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:has-events)) new-value obj! args))
+(cl:defmethod (cl:setf enabled?) (new-value (obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:enabled?)) new-value obj! args))
+(cl:defmethod (cl:setf raise-children-events-outside-of-bounds) (new-value (obj! dotcl-internal::|InteractiveGue|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:raise-children-events-outside-of-bounds)) new-value obj! args))
+
+;; RenderingLibrary.Graphics.IRenderable (rendering-library-graphics-i-renderable)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IRenderable|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod batch-key ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:batch-key) obj! args))
+(cl:defmethod blend-state ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:blend-state) obj! args))
+(cl:defmethod wrap ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:wrap) obj! args))
+(cl:defmethod end-batch ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:end-batch) obj! args))
+(cl:defmethod pre-render ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:pre-render) obj! args))
+(cl:defmethod render ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:render) obj! args))
+(cl:defmethod start-batch ((obj! dotcl-internal::|IRenderable|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable:start-batch) obj! args))
+
+;; RenderingLibrary.Graphics.IRenderableIpso (rendering-library-graphics-i-renderable-ipso)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IRenderableIpso|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod alpha ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:alpha) obj! args))
+(cl:defmethod children ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:children) obj! args))
+(cl:defmethod clips-children ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:clips-children) obj! args))
+(cl:defmethod color-operation ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:color-operation) obj! args))
+(cl:defmethod render-target? ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:render-target?) obj! args))
+(cl:defmethod parent ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:parent) obj! args))
+(cl:defmethod set-parent-direct ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:set-parent-direct) obj! args))
+(cl:defmethod in-render-target-recursively? ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:in-render-target-recursively?) obj! args))
+(cl:defmethod get-absolute-bottom ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-bottom) obj! args))
+(cl:defmethod get-absolute-center-x ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-center-x) obj! args))
+(cl:defmethod get-absolute-center-y ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-center-y) obj! args))
+(cl:defmethod get-absolute-flip-horizontal ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-flip-horizontal) obj! args))
+(cl:defmethod get-absolute-left ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-left) obj! args))
+(cl:defmethod get-absolute-right ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-right) obj! args))
+(cl:defmethod get-absolute-rotation-matrix ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-rotation-matrix) obj! args))
+(cl:defmethod get-absolute-top ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-top) obj! args))
+(cl:defmethod get-absolute-x ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-x) obj! args))
+(cl:defmethod get-absolute-y ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-absolute-y) obj! args))
+(cl:defmethod get-rotation-matrix ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-rotation-matrix) obj! args))
+(cl:defmethod get-top-parent ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:get-top-parent) obj! args))
+(cl:defmethod has-cursor-over ((obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:has-cursor-over) obj! args))
+(cl:defmethod (cl:setf parent) (new-value (obj! dotcl-internal::|IRenderableIpso|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-graphics-i-renderable-ipso:parent)) new-value obj! args))
+
+;; RenderingLibrary.Graphics.IVisible (rendering-library-graphics-i-visible)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IVisible|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod absolute-visible ((obj! dotcl-internal::|IVisible|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-visible:absolute-visible) obj! args))
+(cl:defmethod parent ((obj! dotcl-internal::|IVisible|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-visible:parent) obj! args))
+(cl:defmethod visible ((obj! dotcl-internal::|IVisible|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-visible:visible) obj! args))
+(cl:defmethod get-absolute-visible ((obj! dotcl-internal::|IVisible|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-i-visible:get-absolute-visible) obj! args))
+(cl:defmethod (cl:setf visible) (new-value (obj! dotcl-internal::|IVisible|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-graphics-i-visible:visible)) new-value obj! args))
+
+;; RenderingLibrary.IPositionedSizedObject (rendering-library-i-positioned-sized-object)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IPositionedSizedObject|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod flip-horizontal ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:flip-horizontal) obj! args))
+(cl:defmethod height ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:height) obj! args))
+(cl:defmethod name ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:name) obj! args))
+(cl:defmethod rotation ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:rotation) obj! args))
+(cl:defmethod tag ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:tag) obj! args))
+(cl:defmethod width ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:width) obj! args))
+(cl:defmethod x ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:x) obj! args))
+(cl:defmethod y ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:y) obj! args))
+(cl:defmethod z ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:z) obj! args))
+(cl:defmethod get-position ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:get-position) obj! args))
+(cl:defmethod set-position ((obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-i-positioned-sized-object:set-position) obj! args))
+(cl:defmethod (cl:setf flip-horizontal) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:flip-horizontal)) new-value obj! args))
+(cl:defmethod (cl:setf height) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:height)) new-value obj! args))
+(cl:defmethod (cl:setf name) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:name)) new-value obj! args))
+(cl:defmethod (cl:setf rotation) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:rotation)) new-value obj! args))
+(cl:defmethod (cl:setf tag) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:tag)) new-value obj! args))
+(cl:defmethod (cl:setf width) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:width)) new-value obj! args))
+(cl:defmethod (cl:setf x) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:x)) new-value obj! args))
+(cl:defmethod (cl:setf y) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:y)) new-value obj! args))
+(cl:defmethod (cl:setf z) (new-value (obj! dotcl-internal::|IPositionedSizedObject|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:z)) new-value obj! args))
+
+;; Gum.Wireframe.GraphicalUiElement (gum-wireframe-graphical-ui-element)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GraphicalUiElement|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod absolute-bottom ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-bottom) obj! args))
+(cl:defmethod absolute-left ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-left) obj! args))
+(cl:defmethod absolute-right ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-right) obj! args))
+(cl:defmethod absolute-top ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-top) obj! args))
+(cl:defmethod absolute-visible ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-visible) obj! args))
+(cl:defmethod absolute-x ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-x) obj! args))
+(cl:defmethod absolute-y ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-y) obj! args))
+(cl:defmethod animation-controller ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:animation-controller) obj! args))
+(cl:defmethod animations ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:animations) obj! args))
+(cl:defmethod auto-grid-horizontal-cells ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:auto-grid-horizontal-cells) obj! args))
+(cl:defmethod auto-grid-vertical-cells ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:auto-grid-vertical-cells) obj! args))
+(cl:defmethod batch-key ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:batch-key) obj! args))
+(cl:defmethod binding-context ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:binding-context) obj! args))
+(cl:defmethod binding-context-binding ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:binding-context-binding) obj! args))
+(cl:defmethod binding-context-binding-property-owner ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:binding-context-binding-property-owner) obj! args))
+(cl:defmethod categories ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:categories) obj! args))
+(cl:defmethod children ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:children) obj! args))
+(cl:defmethod children-layout ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:children-layout) obj! args))
+(cl:defmethod clips-children ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:clips-children) obj! args))
+(cl:defmethod component ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:component) obj! args))
+(cl:defmethod contained-elements ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:contained-elements) obj! args))
+(cl:defmethod effective-managers ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:effective-managers) obj! args))
+(cl:defmethod effective-parent-gue ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:effective-parent-gue) obj! args))
+(cl:defmethod element-gue-containing-this ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:element-gue-containing-this) obj! args))
+(cl:defmethod element-save ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:element-save) obj! args))
+(cl:defmethod explicit-i-visible-parent ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:explicit-i-visible-parent) obj! args))
+(cl:defmethod flip-horizontal ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:flip-horizontal) obj! args))
+(cl:defmethod height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:height) obj! args))
+(cl:defmethod height-units ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:height-units) obj! args))
+(cl:defmethod ignored-by-parent-size ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:ignored-by-parent-size) obj! args))
+(cl:defmethod font-dirty? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:font-dirty?) obj! args))
+(cl:defmethod fully-created? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:fully-created?) obj! args))
+(cl:defmethod layout-suspended? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:layout-suspended?) obj! args))
+(cl:defmethod outside-of-bounds-hit-testing-enabled? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:outside-of-bounds-hit-testing-enabled?) obj! args))
+(cl:defmethod render-target? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:render-target?) obj! args))
+(cl:defmethod layer ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:layer) obj! args))
+(cl:defmethod managers ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:managers) obj! args))
+(cl:defmethod max-height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:max-height) obj! args))
+(cl:defmethod max-width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:max-width) obj! args))
+(cl:defmethod min-height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:min-height) obj! args))
+(cl:defmethod min-width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:min-width) obj! args))
+(cl:defmethod name ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:name) obj! args))
+(cl:defmethod parent ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:parent) obj! args))
+(cl:defmethod parent-gue ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:parent-gue) obj! args))
+(cl:defmethod renderable-component ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:renderable-component) obj! args))
+(cl:defmethod rotation ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:rotation) obj! args))
+(cl:defmethod stacked-row-or-column-dimensions ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:stacked-row-or-column-dimensions) obj! args))
+(cl:defmethod stacked-row-or-column-index ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:stacked-row-or-column-index) obj! args))
+(cl:defmethod stack-spacing ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:stack-spacing) obj! args))
+(cl:defmethod states ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:states) obj! args))
+(cl:defmethod tag ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:tag) obj! args))
+(cl:defmethod text-overflow-vertical-mode ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:text-overflow-vertical-mode) obj! args))
+(cl:defmethod texture-address ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-address) obj! args))
+(cl:defmethod texture-height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-height) obj! args))
+(cl:defmethod texture-height-scale ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-height-scale) obj! args))
+(cl:defmethod texture-left ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-left) obj! args))
+(cl:defmethod texture-top ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-top) obj! args))
+(cl:defmethod texture-width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-width) obj! args))
+(cl:defmethod texture-width-scale ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:texture-width-scale) obj! args))
+(cl:defmethod use-fixed-stack-children-size ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:use-fixed-stack-children-size) obj! args))
+(cl:defmethod visible ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:visible) obj! args))
+(cl:defmethod what-this-contains ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:what-this-contains) obj! args))
+(cl:defmethod width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:width) obj! args))
+(cl:defmethod width-units ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:width-units) obj! args))
+(cl:defmethod wrap ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:wrap) obj! args))
+(cl:defmethod wraps-children ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:wraps-children) obj! args))
+(cl:defmethod x ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:x) obj! args))
+(cl:defmethod x-origin ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:x-origin) obj! args))
+(cl:defmethod x-units ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:x-units) obj! args))
+(cl:defmethod y ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:y) obj! args))
+(cl:defmethod y-origin ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:y-origin) obj! args))
+(cl:defmethod y-units ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:y-units) obj! args))
+(cl:defmethod z ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:z) obj! args))
+(cl:defmethod add-category ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-category) obj! args))
+(cl:defmethod add-child ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-child) obj! args))
+(cl:defmethod add-exposed-variable ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-exposed-variable) obj! args))
+(cl:defmethod add-states ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-states) obj! args))
+(cl:defmethod add-to-managers ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-to-managers) obj! args))
+(cl:defmethod after-full-creation ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:after-full-creation) obj! args))
+(cl:defmethod anchor ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:anchor) obj! args))
+(cl:defmethod animate-self ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:animate-self) obj! args))
+(cl:defmethod apply-state ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:apply-state) obj! args))
+(cl:defmethod apply-state-recursive ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:apply-state-recursive) obj! args))
+(cl:defmethod clear-dirty-layout-state ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:clear-dirty-layout-state) obj! args))
+(cl:defmethod clear-managers ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:clear-managers) obj! args))
+(cl:defmethod clone ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:clone) obj! args))
+(cl:defmethod create-children-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:create-children-recursively) obj! args))
+(cl:defmethod dock ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:dock) obj! args))
+(cl:defmethod end-batch ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:end-batch) obj! args))
+(cl:defmethod get-absolute-height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-absolute-height) obj! args))
+(cl:defmethod get-absolute-width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-absolute-width) obj! args))
+(cl:defmethod get-anchor ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-anchor) obj! args))
+(cl:defmethod get-child-by-name ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-child-by-name) obj! args))
+(cl:defmethod get-child-by-name-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-child-by-name-recursively) obj! args))
+(cl:defmethod get-child-by-type ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-child-by-type) obj! args))
+(cl:defmethod get-child-by-type-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-child-by-type-recursively) obj! args))
+(cl:defmethod get-dock ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-dock) obj! args))
+(cl:defmethod get-graphical-ui-element-by-name ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-graphical-ui-element-by-name) obj! args))
+(cl:defmethod get-if-dimensions-depend-on-children ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-if-dimensions-depend-on-children) obj! args))
+(cl:defmethod get-parent-by-name-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-parent-by-name-recursively) obj! args))
+(cl:defmethod get-parent-by-type-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:get-parent-by-type-recursively) obj! args))
+(cl:defmethod interpolate-between ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:interpolate-between) obj! args))
+(cl:defmethod exposed-variable? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:exposed-variable?) obj! args))
+(cl:defmethod point-inside? ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:point-inside?) obj! args))
+(cl:defmethod move-to-layer ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:move-to-layer) obj! args))
+(cl:defmethod notify-property-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:notify-property-changed) obj! args))
+(cl:defmethod play-animation ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:play-animation) obj! args))
+(cl:defmethod pre-render ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:pre-render) obj! args))
+(cl:defmethod push-value-to-view-model ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:push-value-to-view-model) obj! args))
+(cl:defmethod refresh-styles ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:refresh-styles) obj! args))
+(cl:defmethod refresh-text-overflow-vertical-mode ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:refresh-text-overflow-vertical-mode) obj! args))
+(cl:defmethod remove-child ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-child) obj! args))
+(cl:defmethod remove-from-managers ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-from-managers) obj! args))
+(cl:defmethod render ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:render) obj! args))
+(cl:defmethod resume-layout ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:resume-layout) obj! args))
+(cl:defmethod set-binding ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-binding) obj! args))
+(cl:defmethod set-contained-object ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-contained-object) obj! args))
+(cl:defmethod set-gue-values ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-gue-values) obj! args))
+(cl:defmethod set-initial-state ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-initial-state) obj! args))
+(cl:defmethod set-property ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-property) obj! args))
+(cl:defmethod start-batch ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:start-batch) obj! args))
+(cl:defmethod stop-animation ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:stop-animation) obj! args))
+(cl:defmethod suspend-layout ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:suspend-layout) obj! args))
+(cl:defmethod to-string ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:to-string) obj! args))
+(cl:defmethod update-font-recursive ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-font-recursive) obj! args))
+(cl:defmethod update-height ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-height) obj! args))
+(cl:defmethod update-layout ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-layout) obj! args))
+(cl:defmethod update-texture-values-from ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-texture-values-from) obj! args))
+(cl:defmethod update-to-font-values ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-to-font-values) obj! args))
+(cl:defmethod update-width ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:update-width) obj! args))
+(cl:defmethod add-binding-context-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-binding-context-changed) obj! args))
+(cl:defmethod remove-binding-context-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-binding-context-changed) obj! args))
+(cl:defmethod add-inherited-binding-context-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-inherited-binding-context-changed) obj! args))
+(cl:defmethod remove-inherited-binding-context-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-inherited-binding-context-changed) obj! args))
+(cl:defmethod add-parent-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-parent-changed) obj! args))
+(cl:defmethod remove-parent-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-parent-changed) obj! args))
+(cl:defmethod add-position-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-position-changed) obj! args))
+(cl:defmethod remove-position-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-position-changed) obj! args))
+(cl:defmethod add-property-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-property-changed) obj! args))
+(cl:defmethod remove-property-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-property-changed) obj! args))
+(cl:defmethod add-size-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-size-changed) obj! args))
+(cl:defmethod remove-size-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-size-changed) obj! args))
+(cl:defmethod add-visible-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-visible-changed) obj! args))
+(cl:defmethod remove-visible-changed ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-visible-changed) obj! args))
+(cl:defmethod do-ui-activity-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:do-ui-activity-recursively) obj! args))
+(cl:defmethod add-exposed-variables-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-exposed-variables-recursively) obj! args))
+(cl:defmethod add-states-and-categories-recursively-to-gue ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-states-and-categories-recursively-to-gue) obj! args))
+(cl:defmethod apply-variable-references ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:apply-variable-references) obj! args))
+(cl:defmethod create-graphical-component ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:create-graphical-component) obj! args))
+(cl:defmethod set-states-and-categories-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-states-and-categories-recursively) obj! args))
+(cl:defmethod set-variables-recursively ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:set-variables-recursively) obj! args))
+(cl:defmethod export-layout-json ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:export-layout-json) obj! args))
+(cl:defmethod to-layout-json ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:to-layout-json) obj! args))
+(cl:defmethod add-to-root ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:add-to-root) obj! args))
+(cl:defmethod remove-from-root ((obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function gum-wireframe-graphical-ui-element:remove-from-root) obj! args))
+(cl:defmethod (cl:setf animations) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:animations)) new-value obj! args))
+(cl:defmethod (cl:setf auto-grid-horizontal-cells) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:auto-grid-horizontal-cells)) new-value obj! args))
+(cl:defmethod (cl:setf auto-grid-vertical-cells) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:auto-grid-vertical-cells)) new-value obj! args))
+(cl:defmethod (cl:setf binding-context) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:binding-context)) new-value obj! args))
+(cl:defmethod (cl:setf children-layout) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:children-layout)) new-value obj! args))
+(cl:defmethod (cl:setf clips-children) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:clips-children)) new-value obj! args))
+(cl:defmethod (cl:setf element-gue-containing-this) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:element-gue-containing-this)) new-value obj! args))
+(cl:defmethod (cl:setf element-save) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:element-save)) new-value obj! args))
+(cl:defmethod (cl:setf explicit-i-visible-parent) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:explicit-i-visible-parent)) new-value obj! args))
+(cl:defmethod (cl:setf flip-horizontal) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:flip-horizontal)) new-value obj! args))
+(cl:defmethod (cl:setf height) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:height)) new-value obj! args))
+(cl:defmethod (cl:setf height-units) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:height-units)) new-value obj! args))
+(cl:defmethod (cl:setf ignored-by-parent-size) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:ignored-by-parent-size)) new-value obj! args))
+(cl:defmethod (cl:setf font-dirty?) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:font-dirty?)) new-value obj! args))
+(cl:defmethod (cl:setf max-height) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:max-height)) new-value obj! args))
+(cl:defmethod (cl:setf max-width) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:max-width)) new-value obj! args))
+(cl:defmethod (cl:setf min-height) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:min-height)) new-value obj! args))
+(cl:defmethod (cl:setf min-width) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:min-width)) new-value obj! args))
+(cl:defmethod (cl:setf name) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:name)) new-value obj! args))
+(cl:defmethod (cl:setf parent) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:parent)) new-value obj! args))
+(cl:defmethod (cl:setf parent-gue) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:parent-gue)) new-value obj! args))
+(cl:defmethod (cl:setf rotation) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:rotation)) new-value obj! args))
+(cl:defmethod (cl:setf stacked-row-or-column-index) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:stacked-row-or-column-index)) new-value obj! args))
+(cl:defmethod (cl:setf stack-spacing) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:stack-spacing)) new-value obj! args))
+(cl:defmethod (cl:setf tag) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:tag)) new-value obj! args))
+(cl:defmethod (cl:setf text-overflow-vertical-mode) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:text-overflow-vertical-mode)) new-value obj! args))
+(cl:defmethod (cl:setf texture-address) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-address)) new-value obj! args))
+(cl:defmethod (cl:setf texture-height) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-height)) new-value obj! args))
+(cl:defmethod (cl:setf texture-height-scale) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-height-scale)) new-value obj! args))
+(cl:defmethod (cl:setf texture-left) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-left)) new-value obj! args))
+(cl:defmethod (cl:setf texture-top) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-top)) new-value obj! args))
+(cl:defmethod (cl:setf texture-width) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-width)) new-value obj! args))
+(cl:defmethod (cl:setf texture-width-scale) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:texture-width-scale)) new-value obj! args))
+(cl:defmethod (cl:setf use-fixed-stack-children-size) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:use-fixed-stack-children-size)) new-value obj! args))
+(cl:defmethod (cl:setf visible) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:visible)) new-value obj! args))
+(cl:defmethod (cl:setf width) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:width)) new-value obj! args))
+(cl:defmethod (cl:setf width-units) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:width-units)) new-value obj! args))
+(cl:defmethod (cl:setf wrap) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:wrap)) new-value obj! args))
+(cl:defmethod (cl:setf wraps-children) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:wraps-children)) new-value obj! args))
+(cl:defmethod (cl:setf x) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:x)) new-value obj! args))
+(cl:defmethod (cl:setf x-origin) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:x-origin)) new-value obj! args))
+(cl:defmethod (cl:setf x-units) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:x-units)) new-value obj! args))
+(cl:defmethod (cl:setf y) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:y)) new-value obj! args))
+(cl:defmethod (cl:setf y-origin) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:y-origin)) new-value obj! args))
+(cl:defmethod (cl:setf y-units) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:y-units)) new-value obj! args))
+(cl:defmethod (cl:setf z) (new-value (obj! dotcl-internal::|GraphicalUiElement|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:z)) new-value obj! args))
 
 ;; MonoGameGum.GumService (mono-game-gum-gum-service)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|GumService|.
@@ -7879,6 +9772,33 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; provided assemblies reduces to this same simple name.
 ;; See doc/make-everything-defgeneric.md's "Static specializer collision
 ;; caveat" for the full mechanism and a worked example.
+
+;; MonoGameGum.GueDeriving.ContainerRuntime (mono-game-gum-gue-deriving-container-runtime)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ContainerRuntime|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod alpha ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:alpha) obj! args))
+(cl:defmethod batch-key ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:batch-key) obj! args))
+(cl:defmethod blend ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:blend) obj! args))
+(cl:defmethod blend-state ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:blend-state) obj! args))
+(cl:defmethod render-target? ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:render-target?) obj! args))
+(cl:defmethod add-to-managers ((obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:add-to-managers) obj! args))
+(cl:defmethod (cl:setf alpha) (new-value (obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-container-runtime:alpha)) new-value obj! args))
+(cl:defmethod (cl:setf blend) (new-value (obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-container-runtime:blend)) new-value obj! args))
+(cl:defmethod (cl:setf blend-state) (new-value (obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-container-runtime:blend-state)) new-value obj! args))
+(cl:defmethod (cl:setf render-target?) (new-value (obj! dotcl-internal::|ContainerRuntime|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-container-runtime:render-target?)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Primitives.RangeBase (gum-forms-controls-primitives-range-base)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|RangeBase|.

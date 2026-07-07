@@ -21,20 +21,14 @@ to do with this game & framework.
   It doesn't seem to matter. So put a wrapper around that sleep and
   catch that error and exit?
 
-# Implemented Chapters
-
-* **DONE** Chapter 16: SpriteFonts and Score Display
-  * Added `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string`
-  * Added score tracking to `game-1` with `score` slot
-  * Score increments by 100 when slime collides with bat
-  * Score text rendered in top-left corner using `04B_30.ttf` font
-  * Font asset: `AdwaitaMono-Regular.ttf` (system font) — the tutorial's
-    `04B_30.ttf` download link returns 404
-  * SpriteFont loaded via proper MonoGame content pipeline
-  * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
-
 
 # Miscellaneous
+
+* Add a nice threading macro library, e.g.,
+  * [Arrows](https://quickdocs.org/arrows) - dependency free
+    * [GitLab for Arrows](https://gitlab.com/Harleqin/arrows)
+  * Serapeum - very powerful, but a lot of dependencies 
+    * [GitHub for Serapeum](https://github.com/ruricolist/serapeum)
 
 * Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
   new features about building a whole system.
@@ -44,21 +38,6 @@ to do with this game & framework.
   * **DONE** Change package generator to use the new `(dotnet:invoke (the (...`
   * Figure out how the 0.1.10 capability to have overloaded class names in
     the generic dispatch mechanism works - and prove it with tests
-
-* **DONE** Remove my custom `Vector2` code and use the package generator's code
-
-* **DONE** Package generator for `Color` has non-static constants.
-  * Consider forcing them to be made as defconstant, forcing the
-    C# assembly and class/struct to be loaded before the constants
-    are defined?
-  * Same with `SamplerState` but these are static readonly non-constants,
-    which probably can be treated as constants?
-  * Maybe make two symbols for each of these sorts of things, one which is
-    treated as a constant and another that is re-evaluated. Maybe make the
-    re-evaluated one have a `!` at the end so it's always re-evaluated?
-  * The problem is there is no semantic difference in the code between something
-    that just has a getter that will never change, vs. one that can (like
-    `CapsLock`).
 
 * Add a Slynk server & `icl` connection `Makefile` target
 
@@ -86,3 +65,81 @@ to do with this game & framework.
 * Look into the performance of the various `dotnet:` calls in the main
   event loop (e.g., `Update()` and `Draw()`). See if there is optimization
   that can be made.
+
+
+
+# Notes
+
+Arrows loaded nicely with the "official" patched QuickLisp:
+
+```lisp
+[dfields@AdmiralIXA dotcl-dungeonslime]$ dotcl
+WARNING: DEFGENERIC: EMPTYP is being redefined as a generic function, but it was previously defined as an ordinary function.
+dotcl REPL. Ctrl+D to exit.
+CL-USER> (load "~/quicklisp/setup.lisp")                                                                                    
+T
+CL-USER> (ql:quickload "arrows")                                                                                            
+To load "arrows":
+  Load 1 ASDF system:
+    asdf
+  Install 1 Quicklisp release:
+    arrows
+
+; Fetching #<URL "http://beta.quicklisp.org/archive/arrows/2018-10-18/arrows-20181018-git.tgz">
+; 4.95KB
+==================================================
+5,067 bytes in 0.02 seconds (291.07KB/sec)
+; Loading "arrows"
+
+("arrows")
+CL-USER> (arrows:-> '(3 4 5) car)                                                                                           
+3
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# DONE
+
+
+# Implemented Chapters
+
+* **DONE** Chapter 16: SpriteFonts and Score Display
+  * Added `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string`
+  * Added score tracking to `game-1` with `score` slot
+  * Score increments by 100 when slime collides with bat
+  * Score text rendered in top-left corner using `04B_30.ttf` font
+  * Font asset: `AdwaitaMono-Regular.ttf` (system font) — the tutorial's
+    `04B_30.ttf` download link returns 404
+  * SpriteFont loaded via proper MonoGame content pipeline
+  * See [doc/chapter-16-plan.md](doc/chapter-16-plan.md) for full plan
+
+
+* **DONE** Remove my custom `Vector2` code and use the package generator's code
+
+* **DONE** Package generator for `Color` has non-static constants.
+  * Consider forcing them to be made as defconstant, forcing the
+    C# assembly and class/struct to be loaded before the constants
+    are defined?
+  * Same with `SamplerState` but these are static readonly non-constants,
+    which probably can be treated as constants?
+  * Maybe make two symbols for each of these sorts of things, one which is
+    treated as a constant and another that is re-evaluated. Maybe make the
+    re-evaluated one have a `!` at the end so it's always re-evaluated?
+  * The problem is there is no semantic difference in the code between something
+    that just has a getter that will never change, vs. one that can (like
+    `CapsLock`).
