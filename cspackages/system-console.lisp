@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Console
-;;; Generator Version: 39
-;;; Creation Date: 2026-07-06T21:35:35Z
+;;; Generator Version: 40
+;;; Creation Date: 2026-07-07T01:03:12Z
 
 (cl:in-package :system-console)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Console"))
 (cl:defconstant <type-str> "System.Console")
-(cl:defconstant <creation> "2026-07-06T21:35:35Z")
-(cl:defconstant <version> 39)
+(cl:defconstant <creation> "2026-07-07T01:03:12Z")
+(cl:defconstant <version> 40)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

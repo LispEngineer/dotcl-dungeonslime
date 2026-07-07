@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 39
-;;; Creation Date: 2026-07-07T00:23:35Z
+;;; Generator Version: 40
+;;; Creation Date: 2026-07-07T01:03:12Z
 
 (cl:in-package :cl-user)
 
@@ -32,13 +32,13 @@
   (:shadow
    #:load
    #:get-properties
+   #:count
+   #:remove
    #:ceiling
    #:floor
    #:length
    #:round
    #:position
-   #:count
-   #:remove
    #:character
    #:close
    #:find
@@ -46,8 +46,20 @@
    #:sort
   )
   (:export
+   #:add-collection-changed
+   #:remove-collection-changed
    #:add-property-changed
    #:remove-property-changed
+   #:block-reentrancy
+   #:check-reentrancy
+   #:clear-items
+   #:insert-item
+   #:move
+   #:move-item
+   #:on-collection-changed
+   #:on-property-changed
+   #:remove-item
+   #:set-item
    #:days
    #:hours
    #:microseconds
@@ -315,6 +327,21 @@
    #:get-custom-attributes-data
    #:has-same-metadata-definition-as
    #:defined?
+   #:count
+   #:read-only?
+   #:clear
+   #:contains
+   #:copy-to
+   #:remove
+   #:get-enumerator
+   #:item
+   #:index-of
+   #:insert
+   #:remove-at
+   #:synchronized?
+   #:sync-root
+   #:fixed-size?
+   #:items
    #:x
    #:y
    #:ceiling
@@ -338,7 +365,6 @@
    #:right
    #:size
    #:top
-   #:contains
    #:inflate
    #:intersects
    #:offset
@@ -417,7 +443,6 @@
    #:add-text-input
    #:remove-text-input
    #:caps-lock
-   #:item
    #:num-lock
    #:get-pressed-key-count
    #:get-pressed-keys
@@ -440,15 +465,6 @@
    #:button-up?
    #:down
    #:up
-   #:count
-   #:read-only?
-   #:clear
-   #:copy-to
-   #:get-enumerator
-   #:index-of
-   #:insert
-   #:remove
-   #:remove-at
    #:pressure
    #:state
    #:high-frequency-event?
@@ -608,11 +624,6 @@
    #:zoom
    #:get-transformation-matrix
    #:get-scissor-rectangle-for
-   #:clear-items
-   #:insert-item
-   #:move-item
-   #:remove-item
-   #:set-item
    #:parent-input-receiver
    #:do-keyboard-action
    #:on-focus-update
@@ -883,7 +894,6 @@
    #:handle-visual-binding-context-changed
    #:data-bound?
    #:on-binding-context-changed
-   #:on-property-changed
    #:raise-key-down
    #:react-to-visual-changed
    #:react-to-visual-removed
@@ -1030,6 +1040,20 @@
    #:true-for-all
   ))
 
+;;; Source File: system-collections-specialized-i-notify-collection-changed.lisp
+;;; C# Class: System.Collections.Specialized.INotifyCollectionChanged
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-specialized-i-notify-collection-changed
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:add-collection-changed
+   #:remove-collection-changed
+  ))
+
 ;;; Source File: system-component-model-i-notify-property-changed.lisp
 ;;; C# Class: System.ComponentModel.INotifyPropertyChanged
 ;;; Constant Properties: (none)
@@ -1040,6 +1064,33 @@
    #:<type-str>
    #:<creation>
    #:<version>
+   #:add-property-changed
+   #:remove-property-changed
+  ))
+
+;;; Source File: system-collections-object-model-observable-collection-1.lisp
+;;; C# Class: System.Collections.ObjectModel.ObservableCollection`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-object-model-observable-collection-1
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:block-reentrancy
+   #:check-reentrancy
+   #:clear-items
+   #:insert-item
+   #:move
+   #:move-item
+   #:on-collection-changed
+   #:on-property-changed
+   #:remove-item
+   #:set-item
+   #:add-collection-changed
+   #:remove-collection-changed
    #:add-property-changed
    #:remove-property-changed
   ))
@@ -2016,6 +2067,177 @@
    #:has-same-metadata-definition-as
    #:defined?
    #:not=
+  ))
+
+;;; Source File: system-collections-generic-i-collection-1.lisp
+;;; C# Class: System.Collections.Generic.ICollection`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-i-collection-1
+  (:use :cl)
+  (:shadow
+   #:count
+   #:remove
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:count
+   #:read-only?
+   #:add
+   #:clear
+   #:contains
+   #:copy-to
+   #:remove
+  ))
+
+;;; Source File: system-collections-generic-i-enumerable-1.lisp
+;;; C# Class: System.Collections.Generic.IEnumerable`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-i-enumerable-1
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:get-enumerator
+  ))
+
+;;; Source File: system-collections-generic-i-list-1.lisp
+;;; C# Class: System.Collections.Generic.IList`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-i-list-1
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:item
+   #:index-of
+   #:insert
+   #:remove-at
+  ))
+
+;;; Source File: system-collections-generic-i-read-only-collection-1.lisp
+;;; C# Class: System.Collections.Generic.IReadOnlyCollection`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-i-read-only-collection-1
+  (:use :cl)
+  (:shadow
+   #:count
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:count
+  ))
+
+;;; Source File: system-collections-generic-i-read-only-list-1.lisp
+;;; C# Class: System.Collections.Generic.IReadOnlyList`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-generic-i-read-only-list-1
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:item
+  ))
+
+;;; Source File: system-collections-i-collection.lisp
+;;; C# Class: System.Collections.ICollection
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-i-collection
+  (:use :cl)
+  (:shadow
+   #:count
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:count
+   #:synchronized?
+   #:sync-root
+   #:copy-to
+  ))
+
+;;; Source File: system-collections-i-enumerable.lisp
+;;; C# Class: System.Collections.IEnumerable
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-i-enumerable
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:get-enumerator
+  ))
+
+;;; Source File: system-collections-i-list.lisp
+;;; C# Class: System.Collections.IList
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-i-list
+  (:use :cl)
+  (:shadow
+   #:remove
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:fixed-size?
+   #:read-only?
+   #:item
+   #:add
+   #:clear
+   #:contains
+   #:index-of
+   #:insert
+   #:remove
+   #:remove-at
+  ))
+
+;;; Source File: system-collections-object-model-collection-1.lisp
+;;; C# Class: System.Collections.ObjectModel.Collection`1
+;;; Constant Properties: (none)
+(cl:defpackage :system-collections-object-model-collection-1
+  (:use :cl)
+  (:shadow
+   #:count
+   #:remove
+  )
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:count
+   #:item
+   #:items
+   #:add
+   #:clear
+   #:clear-items
+   #:contains
+   #:copy-to
+   #:get-enumerator
+   #:index-of
+   #:insert
+   #:insert-item
+   #:remove
+   #:remove-at
+   #:remove-item
+   #:set-item
   ))
 
 ;;; Source File: microsoft-xna-framework-vector2.lisp
@@ -3567,6 +3789,21 @@
    #:set-item
   ))
 
+;;; Source File: rendering-library-graphics-observable-collection-no-reset-1.lisp
+;;; C# Class: RenderingLibrary.Graphics.ObservableCollectionNoReset`1
+;;; Constant Properties: (none)
+(cl:defpackage :rendering-library-graphics-observable-collection-no-reset-1
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:clear-items
+   #:on-collection-changed
+  ))
+
 ;;; Source File: gum-wireframe-i-input-receiver.lisp
 ;;; C# Class: Gum.Wireframe.IInputReceiver
 ;;; Constant Properties: (none)
@@ -4546,6 +4783,101 @@
   ))
 
 ;;; ===== Re-exports from parent/interface packages =====
+
+;;; system-collections-object-model-observable-collection-1: re-exports inherited members from system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-generic-i-enumerable-1, system-collections-generic-i-list-1, system-collections-generic-i-read-only-collection-1, system-collections-generic-i-read-only-list-1, system-collections-i-collection, system-collections-i-enumerable, system-collections-i-list, system-collections-specialized-i-notify-collection-changed, system-component-model-i-notify-property-changed
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-generic-i-read-only-collection-1, system-collections-i-collection): count
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-list-1, system-collections-generic-i-read-only-list-1, system-collections-i-list): item
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-i-list): add
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-i-list): clear
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): clear-items
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-i-list): contains
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-i-collection): copy-to
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-enumerable-1, system-collections-i-enumerable): get-enumerator
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-list-1, system-collections-i-list): index-of
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-list-1, system-collections-i-list): insert
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): insert-item
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-collection-1, system-collections-i-list): remove
+;;; Skipped (ambiguous across ancestors: system-collections-object-model-collection-1, system-collections-generic-i-list-1, system-collections-i-list): remove-at
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): remove-item
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): set-item
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list): read-only?
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): add-collection-changed
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): remove-collection-changed
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): add-property-changed
+;;; Skipped (system-collections-object-model-observable-collection-1 declares its own): remove-property-changed
+(cl:import '(system-collections-object-model-collection-1::items system-collections-i-collection::synchronized? system-collections-i-collection::sync-root system-collections-i-list::fixed-size?) ':system-collections-object-model-observable-collection-1)
+(cl:export '(system-collections-object-model-observable-collection-1::items system-collections-object-model-observable-collection-1::synchronized? system-collections-object-model-observable-collection-1::sync-root system-collections-object-model-observable-collection-1::fixed-size?) ':system-collections-object-model-observable-collection-1)
+
+;;; system-collections-generic-i-collection-1: re-exports inherited members from system-collections-generic-i-enumerable-1, system-collections-i-enumerable
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-enumerable-1, system-collections-i-enumerable): get-enumerator
+
+;;; system-collections-generic-i-enumerable-1: re-exports inherited members from system-collections-i-enumerable
+;;; Skipped (system-collections-generic-i-enumerable-1 declares its own): get-enumerator
+
+;;; system-collections-generic-i-list-1: re-exports inherited members from system-collections-generic-i-collection-1, system-collections-generic-i-enumerable-1, system-collections-i-enumerable
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-enumerable-1, system-collections-i-enumerable): get-enumerator
+(cl:shadowing-import '(system-collections-generic-i-collection-1::count system-collections-generic-i-collection-1::remove) ':system-collections-generic-i-list-1)
+(cl:import '(system-collections-generic-i-collection-1::read-only? system-collections-generic-i-collection-1::add system-collections-generic-i-collection-1::clear system-collections-generic-i-collection-1::contains system-collections-generic-i-collection-1::copy-to) ':system-collections-generic-i-list-1)
+(cl:export '(system-collections-generic-i-list-1::count system-collections-generic-i-list-1::read-only? system-collections-generic-i-list-1::add system-collections-generic-i-list-1::clear system-collections-generic-i-list-1::contains system-collections-generic-i-list-1::copy-to system-collections-generic-i-list-1::remove) ':system-collections-generic-i-list-1)
+
+;;; system-collections-generic-i-read-only-collection-1: re-exports inherited members from system-collections-generic-i-enumerable-1, system-collections-i-enumerable
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-enumerable-1, system-collections-i-enumerable): get-enumerator
+
+;;; system-collections-generic-i-read-only-list-1: re-exports inherited members from system-collections-generic-i-enumerable-1, system-collections-generic-i-read-only-collection-1, system-collections-i-enumerable
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-enumerable-1, system-collections-i-enumerable): get-enumerator
+(cl:shadowing-import '(system-collections-generic-i-read-only-collection-1::count) ':system-collections-generic-i-read-only-list-1)
+(cl:export '(system-collections-generic-i-read-only-list-1::count) ':system-collections-generic-i-read-only-list-1)
+
+;;; system-collections-i-collection: re-exports inherited members from system-collections-i-enumerable
+(cl:import '(system-collections-i-enumerable::get-enumerator) ':system-collections-i-collection)
+(cl:export '(system-collections-i-collection::get-enumerator) ':system-collections-i-collection)
+
+;;; system-collections-i-list: re-exports inherited members from system-collections-i-collection, system-collections-i-enumerable
+(cl:shadowing-import '(system-collections-i-collection::count) ':system-collections-i-list)
+(cl:import '(system-collections-i-collection::synchronized? system-collections-i-collection::sync-root system-collections-i-collection::copy-to system-collections-i-enumerable::get-enumerator) ':system-collections-i-list)
+(cl:export '(system-collections-i-list::count system-collections-i-list::synchronized? system-collections-i-list::sync-root system-collections-i-list::copy-to system-collections-i-list::get-enumerator) ':system-collections-i-list)
+
+;;; system-collections-object-model-collection-1: re-exports inherited members from system-collections-generic-i-collection-1, system-collections-generic-i-enumerable-1, system-collections-generic-i-list-1, system-collections-generic-i-read-only-collection-1, system-collections-generic-i-read-only-list-1, system-collections-i-collection, system-collections-i-enumerable, system-collections-i-list
+;;; Skipped (system-collections-object-model-collection-1 declares its own): count
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list): read-only?
+;;; Skipped (system-collections-object-model-collection-1 declares its own): add
+;;; Skipped (system-collections-object-model-collection-1 declares its own): clear
+;;; Skipped (system-collections-object-model-collection-1 declares its own): contains
+;;; Skipped (system-collections-object-model-collection-1 declares its own): copy-to
+;;; Skipped (system-collections-object-model-collection-1 declares its own): remove
+;;; Skipped (system-collections-object-model-collection-1 declares its own): get-enumerator
+;;; Skipped (system-collections-object-model-collection-1 declares its own): item
+;;; Skipped (system-collections-object-model-collection-1 declares its own): index-of
+;;; Skipped (system-collections-object-model-collection-1 declares its own): insert
+;;; Skipped (system-collections-object-model-collection-1 declares its own): remove-at
+(cl:import '(system-collections-i-collection::synchronized? system-collections-i-collection::sync-root system-collections-i-list::fixed-size?) ':system-collections-object-model-collection-1)
+(cl:export '(system-collections-object-model-collection-1::synchronized? system-collections-object-model-collection-1::sync-root system-collections-object-model-collection-1::fixed-size?) ':system-collections-object-model-collection-1)
+
+;;; gum-collections-graphical-ui-element-collection: re-exports inherited members from rendering-library-graphics-observable-collection-no-reset-1, system-collections-generic-i-collection-1, system-collections-generic-i-enumerable-1, system-collections-generic-i-list-1, system-collections-generic-i-read-only-collection-1, system-collections-generic-i-read-only-list-1, system-collections-i-collection, system-collections-i-enumerable, system-collections-i-list, system-collections-specialized-i-notify-collection-changed, system-component-model-i-notify-property-changed, system-collections-object-model-observable-collection-1, system-collections-object-model-collection-1
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): clear-items
+;;; Skipped (ambiguous across ancestors: rendering-library-graphics-observable-collection-no-reset-1, system-collections-object-model-observable-collection-1): on-collection-changed
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-generic-i-read-only-collection-1, system-collections-i-collection, system-collections-object-model-collection-1): count
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): read-only?
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list, system-collections-object-model-collection-1): add
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list, system-collections-object-model-collection-1): clear
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list, system-collections-object-model-collection-1): contains
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-collection, system-collections-object-model-collection-1): copy-to
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-collection-1, system-collections-i-list, system-collections-object-model-collection-1): remove
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-enumerable-1, system-collections-i-enumerable, system-collections-object-model-collection-1): get-enumerator
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-list-1, system-collections-generic-i-read-only-list-1, system-collections-i-list, system-collections-object-model-collection-1): item
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-list-1, system-collections-i-list, system-collections-object-model-collection-1): index-of
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-list-1, system-collections-i-list, system-collections-object-model-collection-1): insert
+;;; Skipped (ambiguous across ancestors: system-collections-generic-i-list-1, system-collections-i-list, system-collections-object-model-collection-1): remove-at
+;;; Skipped (ambiguous across ancestors: system-collections-specialized-i-notify-collection-changed, system-collections-object-model-observable-collection-1): add-collection-changed
+;;; Skipped (ambiguous across ancestors: system-collections-specialized-i-notify-collection-changed, system-collections-object-model-observable-collection-1): remove-collection-changed
+;;; Skipped (ambiguous across ancestors: system-component-model-i-notify-property-changed, system-collections-object-model-observable-collection-1): add-property-changed
+;;; Skipped (ambiguous across ancestors: system-component-model-i-notify-property-changed, system-collections-object-model-observable-collection-1): remove-property-changed
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): insert-item
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): move-item
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): remove-item
+;;; Skipped (gum-collections-graphical-ui-element-collection declares its own): set-item
+(cl:import '(system-collections-i-collection::synchronized? system-collections-i-collection::sync-root system-collections-i-list::fixed-size? system-collections-object-model-observable-collection-1::block-reentrancy system-collections-object-model-observable-collection-1::check-reentrancy system-collections-object-model-observable-collection-1::move system-collections-object-model-observable-collection-1::on-property-changed system-collections-object-model-collection-1::items) ':gum-collections-graphical-ui-element-collection)
+(cl:export '(gum-collections-graphical-ui-element-collection::synchronized? gum-collections-graphical-ui-element-collection::sync-root gum-collections-graphical-ui-element-collection::fixed-size? gum-collections-graphical-ui-element-collection::block-reentrancy gum-collections-graphical-ui-element-collection::check-reentrancy gum-collections-graphical-ui-element-collection::move gum-collections-graphical-ui-element-collection::on-property-changed gum-collections-graphical-ui-element-collection::items) ':gum-collections-graphical-ui-element-collection)
 
 ;;; gum-wireframe-interactive-gue: re-exports inherited members from gum-wireframe-graphical-ui-element, rendering-library-graphics-i-renderable, rendering-library-graphics-i-renderable-ipso, rendering-library-graphics-i-visible, rendering-library-i-positioned-sized-object, system-component-model-i-notify-property-changed
 ;;; Skipped (ambiguous across ancestors: gum-wireframe-graphical-ui-element, rendering-library-graphics-i-visible): absolute-visible

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePad
-;;; Generator Version: 39
-;;; Creation Date: 2026-07-06T21:35:35Z
+;;; Generator Version: 40
+;;; Creation Date: 2026-07-07T01:03:12Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad)
 
 (cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePad")
-(cl:defconstant <creation> "2026-07-06T21:35:35Z")
-(cl:defconstant <version> 39)
+(cl:defconstant <creation> "2026-07-07T01:03:12Z")
+(cl:defconstant <version> 40)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

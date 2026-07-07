@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.ButtonBase
-;;; Generator Version: 39
-;;; Creation Date: 2026-07-06T21:35:35Z
+;;; Generator Version: 40
+;;; Creation Date: 2026-07-07T01:03:12Z
 
 (cl:in-package :gum-forms-controls-primitives-button-base)
 
 (cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.ButtonBase")
-(cl:defconstant <creation> "2026-07-06T21:35:35Z")
-(cl:defconstant <version> 39)
+(cl:defconstant <creation> "2026-07-07T01:03:12Z")
+(cl:defconstant <version> 40)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

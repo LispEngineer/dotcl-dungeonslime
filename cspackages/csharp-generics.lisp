@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 39
-;;; Creation Date: 2026-07-07T00:23:35Z
+;;; Generator Version: 40
+;;; Creation Date: 2026-07-07T01:03:12Z
 
 (cl:in-package :csharp-generics)
 
@@ -10,9 +10,22 @@
 ;;; "Static specializer collision caveat" before relying on this with
 ;;; two same-simple-name classes in one batch.
 
+(cl:defgeneric add-collection-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Specialized.INotifyCollectionChanged: add-collection-changed (system-collections-specialized-i-notify-collection-changed:add-collection-changed)
+System.Collections.ObjectModel.ObservableCollection`1: add-collection-changed (system-collections-object-model-observable-collection-1:add-collection-changed)
+"))
+
+(cl:defgeneric remove-collection-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Specialized.INotifyCollectionChanged: remove-collection-changed (system-collections-specialized-i-notify-collection-changed:remove-collection-changed)
+System.Collections.ObjectModel.ObservableCollection`1: remove-collection-changed (system-collections-object-model-observable-collection-1:remove-collection-changed)
+"))
+
 (cl:defgeneric add-property-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.ComponentModel.INotifyPropertyChanged: add-property-changed (system-component-model-i-notify-property-changed:add-property-changed)
+System.Collections.ObjectModel.ObservableCollection`1: add-property-changed (system-collections-object-model-observable-collection-1:add-property-changed)
 Gum.Wireframe.GraphicalUiElement: add-property-changed (gum-wireframe-graphical-ui-element:add-property-changed)
 Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-framework-element:add-property-changed)
 "))
@@ -20,8 +33,71 @@ Gum.Forms.Controls.FrameworkElement: add-property-changed (gum-forms-controls-fr
 (cl:defgeneric remove-property-changed (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.ComponentModel.INotifyPropertyChanged: remove-property-changed (system-component-model-i-notify-property-changed:remove-property-changed)
+System.Collections.ObjectModel.ObservableCollection`1: remove-property-changed (system-collections-object-model-observable-collection-1:remove-property-changed)
 Gum.Wireframe.GraphicalUiElement: remove-property-changed (gum-wireframe-graphical-ui-element:remove-property-changed)
 Gum.Forms.Controls.FrameworkElement: remove-property-changed (gum-forms-controls-framework-element:remove-property-changed)
+"))
+
+(cl:defgeneric block-reentrancy (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: block-reentrancy (system-collections-object-model-observable-collection-1:block-reentrancy)
+"))
+
+(cl:defgeneric check-reentrancy (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: check-reentrancy (system-collections-object-model-observable-collection-1:check-reentrancy)
+"))
+
+(cl:defgeneric clear-items (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: clear-items (system-collections-object-model-observable-collection-1:clear-items)
+System.Collections.ObjectModel.Collection`1: clear-items (system-collections-object-model-collection-1:clear-items)
+Gum.Collections.GraphicalUiElementCollection: clear-items (gum-collections-graphical-ui-element-collection:clear-items)
+RenderingLibrary.Graphics.ObservableCollectionNoReset`1: clear-items (rendering-library-graphics-observable-collection-no-reset-1:clear-items)
+"))
+
+(cl:defgeneric insert-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: insert-item (system-collections-object-model-observable-collection-1:insert-item)
+System.Collections.ObjectModel.Collection`1: insert-item (system-collections-object-model-collection-1:insert-item)
+Gum.Collections.GraphicalUiElementCollection: insert-item (gum-collections-graphical-ui-element-collection:insert-item)
+"))
+
+(cl:defgeneric move (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: move (system-collections-object-model-observable-collection-1:move)
+"))
+
+(cl:defgeneric move-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: move-item (system-collections-object-model-observable-collection-1:move-item)
+Gum.Collections.GraphicalUiElementCollection: move-item (gum-collections-graphical-ui-element-collection:move-item)
+"))
+
+(cl:defgeneric on-collection-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: on-collection-changed (system-collections-object-model-observable-collection-1:on-collection-changed)
+RenderingLibrary.Graphics.ObservableCollectionNoReset`1: on-collection-changed (rendering-library-graphics-observable-collection-no-reset-1:on-collection-changed)
+"))
+
+(cl:defgeneric on-property-changed (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: on-property-changed (system-collections-object-model-observable-collection-1:on-property-changed)
+Gum.Forms.Controls.FrameworkElement: on-property-changed (gum-forms-controls-framework-element:on-property-changed)
+"))
+
+(cl:defgeneric remove-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: remove-item (system-collections-object-model-observable-collection-1:remove-item)
+System.Collections.ObjectModel.Collection`1: remove-item (system-collections-object-model-collection-1:remove-item)
+Gum.Collections.GraphicalUiElementCollection: remove-item (gum-collections-graphical-ui-element-collection:remove-item)
+"))
+
+(cl:defgeneric set-item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.ObservableCollection`1: set-item (system-collections-object-model-observable-collection-1:set-item)
+System.Collections.ObjectModel.Collection`1: set-item (system-collections-object-model-collection-1:set-item)
+Gum.Collections.GraphicalUiElementCollection: set-item (gum-collections-graphical-ui-element-collection:set-item)
 "))
 
 (cl:defgeneric days (obj! cl:&rest args)
@@ -102,6 +178,9 @@ System.TimeSpan: total-seconds (system-time-span:total-seconds)
 (cl:defgeneric add (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 System.TimeSpan: add (system-time-span:add)
+System.Collections.Generic.ICollection`1: add (system-collections-generic-i-collection-1:add)
+System.Collections.IList: add (system-collections-i-list:add)
+System.Collections.ObjectModel.Collection`1: add (system-collections-object-model-collection-1:add)
 Microsoft.Xna.Framework.Input.Touch.TouchCollection: add (microsoft-xna-framework-input-touch-touch-collection:add)
 System.Collections.Generic.List`1: add (system-collections-generic-list-1:add)
 "))
@@ -1458,6 +1537,130 @@ System.Reflection.MemberInfo: has-same-metadata-definition-as (system-reflection
 System.Reflection.MemberInfo: defined? (system-reflection-member-info:defined?)
 "))
 
+(cl:defgeneric count (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: count (system-collections-generic-i-collection-1:count)
+System.Collections.Generic.IReadOnlyCollection`1: count (system-collections-generic-i-read-only-collection-1:count)
+System.Collections.ICollection: count (system-collections-i-collection:count)
+System.Collections.ObjectModel.Collection`1: count (system-collections-object-model-collection-1:count)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: count (microsoft-xna-framework-input-touch-touch-collection:count)
+System.Collections.Generic.List`1: count (system-collections-generic-list-1:count)
+"))
+
+(cl:defgeneric read-only? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: read-only? (system-collections-generic-i-collection-1:read-only?)
+System.Collections.IList: read-only? (system-collections-i-list:read-only?)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: read-only? (microsoft-xna-framework-input-touch-touch-collection:read-only?)
+Gum.Collections.GraphicalUiElementCollection: read-only? (gum-collections-graphical-ui-element-collection:read-only?)
+"))
+
+(cl:defgeneric clear (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: clear (system-collections-generic-i-collection-1:clear)
+System.Collections.IList: clear (system-collections-i-list:clear)
+System.Collections.ObjectModel.Collection`1: clear (system-collections-object-model-collection-1:clear)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: clear (microsoft-xna-framework-input-touch-touch-collection:clear)
+Microsoft.Xna.Framework.Graphics.GraphicsDevice: clear (microsoft-xna-framework-graphics-graphics-device:clear)
+Microsoft.Xna.Framework.Graphics.PresentationParameters: clear (microsoft-xna-framework-graphics-presentation-parameters:clear)
+System.Collections.Generic.List`1: clear (system-collections-generic-list-1:clear)
+"))
+
+(cl:defgeneric contains (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: contains (system-collections-generic-i-collection-1:contains)
+System.Collections.IList: contains (system-collections-i-list:contains)
+System.Collections.ObjectModel.Collection`1: contains (system-collections-object-model-collection-1:contains)
+Microsoft.Xna.Framework.Rectangle: contains (microsoft-xna-framework-rectangle:contains)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: contains (microsoft-xna-framework-input-touch-touch-collection:contains)
+System.Collections.Generic.List`1: contains (system-collections-generic-list-1:contains)
+"))
+
+(cl:defgeneric copy-to (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: copy-to (system-collections-generic-i-collection-1:copy-to)
+System.Collections.ICollection: copy-to (system-collections-i-collection:copy-to)
+System.Collections.ObjectModel.Collection`1: copy-to (system-collections-object-model-collection-1:copy-to)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: copy-to (microsoft-xna-framework-input-touch-touch-collection:copy-to)
+System.Collections.Generic.List`1: copy-to (system-collections-generic-list-1:copy-to)
+"))
+
+(cl:defgeneric remove (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.ICollection`1: remove (system-collections-generic-i-collection-1:remove)
+System.Collections.IList: remove (system-collections-i-list:remove)
+System.Collections.ObjectModel.Collection`1: remove (system-collections-object-model-collection-1:remove)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: remove (microsoft-xna-framework-input-touch-touch-collection:remove)
+System.Collections.Generic.List`1: remove (system-collections-generic-list-1:remove)
+"))
+
+(cl:defgeneric get-enumerator (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IEnumerable`1: get-enumerator (system-collections-generic-i-enumerable-1:get-enumerator)
+System.Collections.IEnumerable: get-enumerator (system-collections-i-enumerable:get-enumerator)
+System.Collections.ObjectModel.Collection`1: get-enumerator (system-collections-object-model-collection-1:get-enumerator)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: get-enumerator (microsoft-xna-framework-input-touch-touch-collection:get-enumerator)
+System.Collections.Generic.List`1: get-enumerator (system-collections-generic-list-1:get-enumerator)
+"))
+
+(cl:defgeneric item (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IList`1: item (system-collections-generic-i-list-1:item)
+System.Collections.Generic.IReadOnlyList`1: item (system-collections-generic-i-read-only-list-1:item)
+System.Collections.IList: item (system-collections-i-list:item)
+System.Collections.ObjectModel.Collection`1: item (system-collections-object-model-collection-1:item)
+Microsoft.Xna.Framework.Input.KeyboardState: item (microsoft-xna-framework-input-keyboard-state:item)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: item (microsoft-xna-framework-input-touch-touch-collection:item)
+System.Collections.Generic.List`1: item (system-collections-generic-list-1:item)
+"))
+
+(cl:defgeneric index-of (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IList`1: index-of (system-collections-generic-i-list-1:index-of)
+System.Collections.IList: index-of (system-collections-i-list:index-of)
+System.Collections.ObjectModel.Collection`1: index-of (system-collections-object-model-collection-1:index-of)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: index-of (microsoft-xna-framework-input-touch-touch-collection:index-of)
+System.Collections.Generic.List`1: index-of (system-collections-generic-list-1:index-of)
+"))
+
+(cl:defgeneric insert (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IList`1: insert (system-collections-generic-i-list-1:insert)
+System.Collections.IList: insert (system-collections-i-list:insert)
+System.Collections.ObjectModel.Collection`1: insert (system-collections-object-model-collection-1:insert)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: insert (microsoft-xna-framework-input-touch-touch-collection:insert)
+System.Collections.Generic.List`1: insert (system-collections-generic-list-1:insert)
+"))
+
+(cl:defgeneric remove-at (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IList`1: remove-at (system-collections-generic-i-list-1:remove-at)
+System.Collections.IList: remove-at (system-collections-i-list:remove-at)
+System.Collections.ObjectModel.Collection`1: remove-at (system-collections-object-model-collection-1:remove-at)
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: remove-at (microsoft-xna-framework-input-touch-touch-collection:remove-at)
+System.Collections.Generic.List`1: remove-at (system-collections-generic-list-1:remove-at)
+"))
+
+(cl:defgeneric synchronized? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ICollection: synchronized? (system-collections-i-collection:synchronized?)
+"))
+
+(cl:defgeneric sync-root (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ICollection: sync-root (system-collections-i-collection:sync-root)
+"))
+
+(cl:defgeneric fixed-size? (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.IList: fixed-size? (system-collections-i-list:fixed-size?)
+"))
+
+(cl:defgeneric items (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.ObjectModel.Collection`1: items (system-collections-object-model-collection-1:items)
+"))
+
 (cl:defgeneric x (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Vector2: x (microsoft-xna-framework-vector2:x)
@@ -1598,13 +1801,6 @@ Microsoft.Xna.Framework.Rectangle: size (microsoft-xna-framework-rectangle:size)
 (cl:defgeneric top (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: top (microsoft-xna-framework-rectangle:top)
-"))
-
-(cl:defgeneric contains (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Rectangle: contains (microsoft-xna-framework-rectangle:contains)
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: contains (microsoft-xna-framework-input-touch-touch-collection:contains)
-System.Collections.Generic.List`1: contains (system-collections-generic-list-1:contains)
 "))
 
 (cl:defgeneric inflate (obj! cl:&rest args)
@@ -2029,13 +2225,6 @@ Microsoft.Xna.Framework.GameWindow: remove-text-input (microsoft-xna-framework-g
 Microsoft.Xna.Framework.Input.KeyboardState: caps-lock (microsoft-xna-framework-input-keyboard-state:caps-lock)
 "))
 
-(cl:defgeneric item (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.KeyboardState: item (microsoft-xna-framework-input-keyboard-state:item)
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: item (microsoft-xna-framework-input-touch-touch-collection:item)
-System.Collections.Generic.List`1: item (system-collections-generic-list-1:item)
-"))
-
 (cl:defgeneric num-lock (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Input.KeyboardState: num-lock (microsoft-xna-framework-input-keyboard-state:num-lock)
@@ -2145,62 +2334,6 @@ Microsoft.Xna.Framework.Input.GamePadDPad: down (microsoft-xna-framework-input-g
 (cl:defgeneric up (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Input.GamePadDPad: up (microsoft-xna-framework-input-game-pad-d-pad:up)
-"))
-
-(cl:defgeneric count (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: count (microsoft-xna-framework-input-touch-touch-collection:count)
-System.Collections.Generic.List`1: count (system-collections-generic-list-1:count)
-"))
-
-(cl:defgeneric read-only? (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: read-only? (microsoft-xna-framework-input-touch-touch-collection:read-only?)
-Gum.Collections.GraphicalUiElementCollection: read-only? (gum-collections-graphical-ui-element-collection:read-only?)
-"))
-
-(cl:defgeneric clear (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: clear (microsoft-xna-framework-input-touch-touch-collection:clear)
-Microsoft.Xna.Framework.Graphics.GraphicsDevice: clear (microsoft-xna-framework-graphics-graphics-device:clear)
-Microsoft.Xna.Framework.Graphics.PresentationParameters: clear (microsoft-xna-framework-graphics-presentation-parameters:clear)
-System.Collections.Generic.List`1: clear (system-collections-generic-list-1:clear)
-"))
-
-(cl:defgeneric copy-to (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: copy-to (microsoft-xna-framework-input-touch-touch-collection:copy-to)
-System.Collections.Generic.List`1: copy-to (system-collections-generic-list-1:copy-to)
-"))
-
-(cl:defgeneric get-enumerator (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: get-enumerator (microsoft-xna-framework-input-touch-touch-collection:get-enumerator)
-System.Collections.Generic.List`1: get-enumerator (system-collections-generic-list-1:get-enumerator)
-"))
-
-(cl:defgeneric index-of (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: index-of (microsoft-xna-framework-input-touch-touch-collection:index-of)
-System.Collections.Generic.List`1: index-of (system-collections-generic-list-1:index-of)
-"))
-
-(cl:defgeneric insert (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: insert (microsoft-xna-framework-input-touch-touch-collection:insert)
-System.Collections.Generic.List`1: insert (system-collections-generic-list-1:insert)
-"))
-
-(cl:defgeneric remove (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: remove (microsoft-xna-framework-input-touch-touch-collection:remove)
-System.Collections.Generic.List`1: remove (system-collections-generic-list-1:remove)
-"))
-
-(cl:defgeneric remove-at (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: remove-at (microsoft-xna-framework-input-touch-touch-collection:remove-at)
-System.Collections.Generic.List`1: remove-at (system-collections-generic-list-1:remove-at)
 "))
 
 (cl:defgeneric pressure (obj! cl:&rest args)
@@ -3021,31 +3154,6 @@ RenderingLibrary.Camera: get-transformation-matrix (rendering-library-camera:get
 (cl:defgeneric get-scissor-rectangle-for (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 RenderingLibrary.Camera: get-scissor-rectangle-for (rendering-library-camera:get-scissor-rectangle-for)
-"))
-
-(cl:defgeneric clear-items (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Collections.GraphicalUiElementCollection: clear-items (gum-collections-graphical-ui-element-collection:clear-items)
-"))
-
-(cl:defgeneric insert-item (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Collections.GraphicalUiElementCollection: insert-item (gum-collections-graphical-ui-element-collection:insert-item)
-"))
-
-(cl:defgeneric move-item (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Collections.GraphicalUiElementCollection: move-item (gum-collections-graphical-ui-element-collection:move-item)
-"))
-
-(cl:defgeneric remove-item (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Collections.GraphicalUiElementCollection: remove-item (gum-collections-graphical-ui-element-collection:remove-item)
-"))
-
-(cl:defgeneric set-item (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Collections.GraphicalUiElementCollection: set-item (gum-collections-graphical-ui-element-collection:set-item)
 "))
 
 (cl:defgeneric parent-input-receiver (obj! cl:&rest args)
@@ -4472,11 +4580,6 @@ Gum.Forms.Controls.FrameworkElement: data-bound? (gum-forms-controls-framework-e
 Gum.Forms.Controls.FrameworkElement: on-binding-context-changed (gum-forms-controls-framework-element:on-binding-context-changed)
 "))
 
-(cl:defgeneric on-property-changed (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Gum.Forms.Controls.FrameworkElement: on-property-changed (gum-forms-controls-framework-element:on-property-changed)
-"))
-
 (cl:defgeneric raise-key-down (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Gum.Forms.Controls.FrameworkElement: raise-key-down (gum-forms-controls-framework-element:raise-key-down)
@@ -5248,6 +5351,15 @@ Gum.Wireframe.Dock: (cl:setf value__) (cl:setf (gum-wireframe-dock:value__ ...))
 Gum.Forms.DefaultVisualsVersion: (cl:setf value__) (cl:setf (gum-forms-default-visuals-version:value__ ...))
 "))
 
+(cl:defgeneric (cl:setf item) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+System.Collections.Generic.IList`1: (cl:setf item) (cl:setf (system-collections-generic-i-list-1:item ...))
+System.Collections.IList: (cl:setf item) (cl:setf (system-collections-i-list:item ...))
+System.Collections.ObjectModel.Collection`1: (cl:setf item) (cl:setf (system-collections-object-model-collection-1:item ...))
+Microsoft.Xna.Framework.Input.Touch.TouchCollection: (cl:setf item) (cl:setf (microsoft-xna-framework-input-touch-touch-collection:item ...))
+System.Collections.Generic.List`1: (cl:setf item) (cl:setf (system-collections-generic-list-1:item ...))
+"))
+
 (cl:defgeneric (cl:setf x) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Vector2: (cl:setf x) (cl:setf (microsoft-xna-framework-vector2:x ...))
@@ -5366,12 +5478,6 @@ RenderingLibrary.Camera: (cl:setf position) (cl:setf (rendering-library-camera:p
 (cl:defgeneric (cl:setf title) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.GameWindow: (cl:setf title) (cl:setf (microsoft-xna-framework-game-window:title ...))
-"))
-
-(cl:defgeneric (cl:setf item) (new-value obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Input.Touch.TouchCollection: (cl:setf item) (cl:setf (microsoft-xna-framework-input-touch-touch-collection:item ...))
-System.Collections.Generic.List`1: (cl:setf item) (cl:setf (system-collections-generic-list-1:item ...))
 "))
 
 (cl:defgeneric (cl:setf a) (new-value obj! cl:&rest args)
@@ -6276,6 +6382,17 @@ Gum.Forms.Controls.Primitives.RangeBase: (cl:setf value) (cl:setf (gum-forms-con
 System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collections-generic-list-1:capacity ...))
 "))
 
+;; System.Collections.Specialized.INotifyCollectionChanged (system-collections-specialized-i-notify-collection-changed)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|INotifyCollectionChanged|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod add-collection-changed ((obj! dotcl-internal::|INotifyCollectionChanged|) cl:&rest args)
+  (cl:apply (cl:function system-collections-specialized-i-notify-collection-changed:add-collection-changed) obj! args))
+(cl:defmethod remove-collection-changed ((obj! dotcl-internal::|INotifyCollectionChanged|) cl:&rest args)
+  (cl:apply (cl:function system-collections-specialized-i-notify-collection-changed:remove-collection-changed) obj! args))
+
 ;; System.ComponentModel.INotifyPropertyChanged (system-component-model-i-notify-property-changed)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|INotifyPropertyChanged|.
 ;; No known simple-name conflicts: no other type reflected across the
@@ -6286,6 +6403,41 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-component-model-i-notify-property-changed:add-property-changed) obj! args))
 (cl:defmethod remove-property-changed ((obj! dotcl-internal::|INotifyPropertyChanged|) cl:&rest args)
   (cl:apply (cl:function system-component-model-i-notify-property-changed:remove-property-changed) obj! args))
+
+;; System.Collections.ObjectModel.ObservableCollection`1 (system-collections-object-model-observable-collection-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ObservableCollection`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod block-reentrancy ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:block-reentrancy) obj! args))
+(cl:defmethod check-reentrancy ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:check-reentrancy) obj! args))
+(cl:defmethod clear-items ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:clear-items) obj! args))
+(cl:defmethod insert-item ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:insert-item) obj! args))
+(cl:defmethod move ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:move) obj! args))
+(cl:defmethod move-item ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:move-item) obj! args))
+(cl:defmethod on-collection-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:on-collection-changed) obj! args))
+(cl:defmethod on-property-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:on-property-changed) obj! args))
+(cl:defmethod remove-item ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:remove-item) obj! args))
+(cl:defmethod set-item ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:set-item) obj! args))
+(cl:defmethod add-collection-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:add-collection-changed) obj! args))
+(cl:defmethod remove-collection-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:remove-collection-changed) obj! args))
+(cl:defmethod add-property-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:add-property-changed) obj! args))
+(cl:defmethod remove-property-changed ((obj! dotcl-internal::|ObservableCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-observable-collection-1:remove-property-changed) obj! args))
 
 ;; System.Console (system-console)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Console|.
@@ -6975,6 +7127,165 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-reflection-member-info:has-same-metadata-definition-as) obj! args))
 (cl:defmethod defined? ((obj! dotcl-internal::|MemberInfo|) cl:&rest args)
   (cl:apply (cl:function system-reflection-member-info:defined?) obj! args))
+
+;; System.Collections.Generic.ICollection`1 (system-collections-generic-i-collection-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ICollection`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod count ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:count) obj! args))
+(cl:defmethod read-only? ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:read-only?) obj! args))
+(cl:defmethod add ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:add) obj! args))
+(cl:defmethod clear ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:clear) obj! args))
+(cl:defmethod contains ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:contains) obj! args))
+(cl:defmethod copy-to ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:copy-to) obj! args))
+(cl:defmethod remove ((obj! dotcl-internal::|ICollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-collection-1:remove) obj! args))
+
+;; System.Collections.Generic.IEnumerable`1 (system-collections-generic-i-enumerable-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IEnumerable`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod get-enumerator ((obj! dotcl-internal::|IEnumerable`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-enumerable-1:get-enumerator) obj! args))
+
+;; System.Collections.Generic.IList`1 (system-collections-generic-i-list-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IList`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod item ((obj! dotcl-internal::|IList`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-list-1:item) obj! args))
+(cl:defmethod index-of ((obj! dotcl-internal::|IList`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-list-1:index-of) obj! args))
+(cl:defmethod insert ((obj! dotcl-internal::|IList`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-list-1:insert) obj! args))
+(cl:defmethod remove-at ((obj! dotcl-internal::|IList`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-list-1:remove-at) obj! args))
+(cl:defmethod (cl:setf item) (new-value (obj! dotcl-internal::|IList`1|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf system-collections-generic-i-list-1:item)) new-value obj! args))
+
+;; System.Collections.Generic.IReadOnlyCollection`1 (system-collections-generic-i-read-only-collection-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IReadOnlyCollection`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod count ((obj! dotcl-internal::|IReadOnlyCollection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-read-only-collection-1:count) obj! args))
+
+;; System.Collections.Generic.IReadOnlyList`1 (system-collections-generic-i-read-only-list-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IReadOnlyList`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod item ((obj! dotcl-internal::|IReadOnlyList`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-generic-i-read-only-list-1:item) obj! args))
+
+;; System.Collections.ICollection (system-collections-i-collection)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ICollection|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod count ((obj! dotcl-internal::|ICollection|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-collection:count) obj! args))
+(cl:defmethod synchronized? ((obj! dotcl-internal::|ICollection|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-collection:synchronized?) obj! args))
+(cl:defmethod sync-root ((obj! dotcl-internal::|ICollection|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-collection:sync-root) obj! args))
+(cl:defmethod copy-to ((obj! dotcl-internal::|ICollection|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-collection:copy-to) obj! args))
+
+;; System.Collections.IEnumerable (system-collections-i-enumerable)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IEnumerable|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod get-enumerator ((obj! dotcl-internal::|IEnumerable|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-enumerable:get-enumerator) obj! args))
+
+;; System.Collections.IList (system-collections-i-list)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IList|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod fixed-size? ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:fixed-size?) obj! args))
+(cl:defmethod read-only? ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:read-only?) obj! args))
+(cl:defmethod item ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:item) obj! args))
+(cl:defmethod add ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:add) obj! args))
+(cl:defmethod clear ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:clear) obj! args))
+(cl:defmethod contains ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:contains) obj! args))
+(cl:defmethod index-of ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:index-of) obj! args))
+(cl:defmethod insert ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:insert) obj! args))
+(cl:defmethod remove ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:remove) obj! args))
+(cl:defmethod remove-at ((obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function system-collections-i-list:remove-at) obj! args))
+(cl:defmethod (cl:setf item) (new-value (obj! dotcl-internal::|IList|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf system-collections-i-list:item)) new-value obj! args))
+
+;; System.Collections.ObjectModel.Collection`1 (system-collections-object-model-collection-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Collection`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod count ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:count) obj! args))
+(cl:defmethod item ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:item) obj! args))
+(cl:defmethod items ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:items) obj! args))
+(cl:defmethod add ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:add) obj! args))
+(cl:defmethod clear ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:clear) obj! args))
+(cl:defmethod clear-items ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:clear-items) obj! args))
+(cl:defmethod contains ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:contains) obj! args))
+(cl:defmethod copy-to ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:copy-to) obj! args))
+(cl:defmethod get-enumerator ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:get-enumerator) obj! args))
+(cl:defmethod index-of ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:index-of) obj! args))
+(cl:defmethod insert ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:insert) obj! args))
+(cl:defmethod insert-item ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:insert-item) obj! args))
+(cl:defmethod remove ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:remove) obj! args))
+(cl:defmethod remove-at ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:remove-at) obj! args))
+(cl:defmethod remove-item ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:remove-item) obj! args))
+(cl:defmethod set-item ((obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function system-collections-object-model-collection-1:set-item) obj! args))
+(cl:defmethod (cl:setf item) (new-value (obj! dotcl-internal::|Collection`1|) cl:&rest args)
+  (cl:apply (cl:function (cl:setf system-collections-object-model-collection-1:item)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Vector2 (microsoft-xna-framework-vector2)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|Vector2|.
@@ -8330,6 +8641,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-collections-graphical-ui-element-collection:remove-item) obj! args))
 (cl:defmethod set-item ((obj! dotcl-internal::|GraphicalUiElementCollection|) cl:&rest args)
   (cl:apply (cl:function gum-collections-graphical-ui-element-collection:set-item) obj! args))
+
+;; RenderingLibrary.Graphics.ObservableCollectionNoReset`1 (rendering-library-graphics-observable-collection-no-reset-1)
+;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|ObservableCollectionNoReset`1|.
+;; No known simple-name conflicts: no other type reflected across the
+;; provided assemblies reduces to this same simple name.
+;; See doc/make-everything-defgeneric.md's "Static specializer collision
+;; caveat" for the full mechanism and a worked example.
+(cl:defmethod clear-items ((obj! dotcl-internal::|ObservableCollectionNoReset`1|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-observable-collection-no-reset-1:clear-items) obj! args))
+(cl:defmethod on-collection-changed ((obj! dotcl-internal::|ObservableCollectionNoReset`1|) cl:&rest args)
+  (cl:apply (cl:function rendering-library-graphics-observable-collection-no-reset-1:on-collection-changed) obj! args))
 
 ;; Gum.Wireframe.IInputReceiver (gum-wireframe-i-input-receiver)
 ;; NOTE: specializes on the simple-name CLOS class dotcl-internal::|IInputReceiver|.

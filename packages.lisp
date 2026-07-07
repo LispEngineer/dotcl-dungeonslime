@@ -80,11 +80,23 @@
 (cl:defpackage :rendering-library-graphics-i-renderable-ipso)
 (cl:defpackage :rendering-library-graphics-i-renderable)
 (cl:defpackage :rendering-library-graphics-i-visible)
+(cl:defpackage :rendering-library-graphics-observable-collection-no-reset-1)
 (cl:defpackage :rendering-library-graphics-renderer)
 (cl:defpackage :rendering-library-i-positioned-sized-object)
 (cl:defpackage :system-app-domain)
 (cl:defpackage :system-boolean)
+(cl:defpackage :system-collections-generic-i-collection-1)
+(cl:defpackage :system-collections-generic-i-enumerable-1)
+(cl:defpackage :system-collections-generic-i-list-1)
+(cl:defpackage :system-collections-generic-i-read-only-collection-1)
+(cl:defpackage :system-collections-generic-i-read-only-list-1)
 (cl:defpackage :system-collections-generic-list-1)
+(cl:defpackage :system-collections-i-collection)
+(cl:defpackage :system-collections-i-enumerable)
+(cl:defpackage :system-collections-i-list)
+(cl:defpackage :system-collections-object-model-collection-1)
+(cl:defpackage :system-collections-object-model-observable-collection-1)
+(cl:defpackage :system-collections-specialized-i-notify-collection-changed)
 (cl:defpackage :system-component-model-i-notify-property-changed)
 (cl:defpackage :system-console)
 (cl:defpackage :system-convert)
@@ -97,7 +109,6 @@
 (cl:defpackage :system-type)
 (cl:defpackage :system-uri-kind)
 (cl:defpackage :system-uri)
-
 
 ;; Some special packages ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
