@@ -740,6 +740,10 @@ PulseAudio) is frequently restricted, causing OpenAL device initialization to fa
 - **Protected Actions**: Playback controls and volume setters/getters in
   [audio-controller.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/audio-controller.lisp) are wrapped in `handler-case` and guard against `nil`
   inputs, ensuring volume adjustments or collision triggers do not crash during silent runs.
+- **WSL2 Audio Setup**: If running under WSL2 with Ubuntu 24.04, the OpenAL initialization
+  can fail due to missing native libraries (PulseAudio, ALSA, PipeWire clients). See the
+  detailed guide [enable-audio-under-wsl-ubuntu24.04.md](enable-audio-under-wsl-ubuntu24.04.md)
+  on how to install these packages and enable audio playback.
 
 
 # Wiring `dungeon-slime.asd` to the Generator's Self-Contained `.asd` (Package Generator v23)

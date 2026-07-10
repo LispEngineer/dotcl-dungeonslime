@@ -24,6 +24,9 @@ and files in this repository.
 * [implementation-notes.md](doc/implementation-notes.md): How this
   was implemented, how to do various things in the future, etc.
 
+* [enable-audio-under-wsl-ubuntu24.04.md](doc/enable-audio-under-wsl-ubuntu24.04.md): Detailed
+  guide for enabling OpenAL audio support under WSL2 running Ubuntu 24.04.
+
 * [abcl-java-interop.md](doc/abcl-java-interop.md): Documentation on ABCL Java interop concepts.
 
 * [opencode-implementation-notes.md](doc/opencode-implementation-notes.md):

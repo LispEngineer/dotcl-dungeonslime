@@ -1724,4 +1724,21 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 - **Dynamic Viewport Dimensions**: Fixed a layout and tiling issue where the background and text centering did not scale to fill the full resolution window (`1280x720`). Replaced static fallback values from `window-info` (which defaulted to `800x480` due to `window-info` being `nil`) with dynamic queries of the active graphics device viewport bounds. Using `(gd:viewport gd)` and the `width`/`height` generic functions, the code now dynamically fetches the actual backbuffer rendering dimensions, extending the tiled background to cover the entire screen and centering all text elements correctly.
 
 
+## Session: July 10, 2026
+
+### 1. File Modifications Log
+
+| Date | File | Action | Description |
+|---|---|---|---|
+| July 10, 2026 | [doc/enable-audio-under-wsl-ubuntu24.04.md](doc/enable-audio-under-wsl-ubuntu24.04.md) | Created | Created documentation on how to enable OpenAL audio support under WSL2 running Ubuntu 24.04. |
+| July 10, 2026 | [FILES.md](FILES.md) | Modified | Added description for `doc/enable-audio-under-wsl-ubuntu24.04.md`. |
+| July 10, 2026 | [antigravity-log.md](antigravity-log.md) | Modified | Logged the WSL2 Ubuntu 24.04 audio enabling session. |
+
+### 2. Explanations Log
+
+#### WSL2 Ubuntu 24.04 OpenAL Audio Support
+- **Objective**: Document the setup steps to get OpenAL audio working inside a WSL2 environment running Ubuntu 24.04.
+- **Diagnostics**: Traced MonoGame's bundled OpenAL soft (`libopenal.so`) loader using `ALSOFT_LOGLEVEL=3`. OpenAL soft failed to load client libraries for PulseAudio (`libpulse.so.0`), ALSA (`libasound.so.2`), and PipeWire (`libpipewire-0.3.so.0`), leading to the `OpenAL device could not be initialized` crash in `sound-effect:from-file` during `make test`.
+- **WSLg Server Bridge**: Verified that WSLg provides a PulseAudio server at `unix:/mnt/wslg/PulseServer` via `PULSE_SERVER` environment variable, which is automatically configured.
+- **Resolution**: Identified the necessary package dependencies on Ubuntu 24.04: `libpulse0` for PulseAudio client, `libasound2t64` for ALSA client, and `libpipewire-0.3-0t64` for PipeWire client. Alternatively, `libopenal-dev` can be installed. Documented these findings and commands in a new file `doc/enable-audio-under-wsl-ubuntu24.04.md`.
 
