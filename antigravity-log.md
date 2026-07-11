@@ -1795,3 +1795,22 @@ The custom `defc#generic` and `defc#method` dispatch system in `clr-generic.lisp
 - **Git Write Restrictions**: Explanations were provided to the user regarding repository rule constraints in `AGENTS.md` and `GEMINI.md` that restrict the agent to read-only Git operations, requiring the user to run the rebase command directly.
 - **Rebase Merge Conflict Resolution**: A merge conflict arose in `antigravity-log.md` because both the remote branch and the local branch made modifications to the end of the file. The conflict markers were removed, and the file was updated to cleanly sequence both sessions. Instructions were provided to the user to stage the file and continue the rebase.
 
+---
+
+## Session: July 10, 2026 (DotCL 0.1.17 REPL Fix)
+
+### 1. File Modifications Log
+
+| Date | File | Action | Description |
+|---|---|---|---|
+| Jul 10, 2026 | [DungeonSlime.csproj](file:///home/dfields/src/cl/dotcl-dungeonslime/DungeonSlime.csproj) | Modified | Upgraded `DotCL.Runtime` dependency version from `0.1.16` to `0.1.17`. |
+| Jul 10, 2026 | [cspackages/csharp-generics.lisp](file:///home/dfields/src/cl/dotcl-dungeonslime/cspackages/csharp-generics.lisp) | Modified | Regenerated package wrappers via `make cspackages` using `dotcl-packagegen 2.41.0`. |
+| Jul 10, 2026 | [repl_fix_plan.md](file:///home/dfields/.gemini/antigravity-cli/brain/347115c7-54b2-41eb-97a7-c6c67a284a3f/repl_fix_plan.md) | Created | Created implementation plan detailing the DotCL 0.1.17 upgrade path to resolve the REPL loading crash. |
+| Jul 10, 2026 | [walkthrough.md](file:///home/dfields/.gemini/antigravity-cli/brain/347115c7-54b2-41eb-97a7-c6c67a284a3f/walkthrough.md) | Modified | Updated walkthrough to document both Git sync and REPL fix verification. |
+
+### 2. Explanations Log
+
+#### REPL Loading Crash under DotCL 0.1.17
+- **Diagnostics**: Traced the `FIND-CLASS: no class named ObservableCollection`1` crash during `make repl` to a version mismatch. The global `dotcl` CLI runs on version `0.1.17` while the project was built against `0.1.16`. In DotCL 0.1.17, class registration for generic definitions was updated to use display names (e.g. `ObservableCollection<T>`), causing references to the 0.1.16 symbol `dotcl-internal::|ObservableCollection`1|` in `csharp-generics.lisp` to fail to resolve.
+- **Resolution**: Upgraded the `DotCL.Runtime` reference in `DungeonSlime.csproj` to `0.1.17` and ran `make cspackages` to regenerate all Lisp wrappers with `dotcl-packagegen 2.41.0`. Generator version 41 skips emitting generic method definitions on generic arity classes, resolving the class resolution hazard.
+- **Verification**: Ran `make build test` to confirm compilation and test correctness, and dry-ran `make repl` to verify that the ASDF system loads cleanly to the interactive Lisp prompt.

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Content.ContentLoader
-;;; Generator Version: 40
-;;; Creation Date: 2026-07-07T01:03:12Z
+;;; Generator Version: 41
+;;; Creation Date: 2026-07-11T03:41:42Z
 
 (cl:in-package :rendering-library-content-content-loader)
 
 (cl:defconstant <type> (dotnet:resolve-type "RenderingLibrary.Content.ContentLoader"))
 (cl:defconstant <type-str> "RenderingLibrary.Content.ContentLoader")
-(cl:defconstant <creation> "2026-07-07T01:03:12Z")
-(cl:defconstant <version> 40)
+(cl:defconstant <creation> "2026-07-11T03:41:42Z")
+(cl:defconstant <version> 41)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)

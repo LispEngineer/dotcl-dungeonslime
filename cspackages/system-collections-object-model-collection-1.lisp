@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.ObjectModel.Collection`1
-;;; Generator Version: 40
-;;; Creation Date: 2026-07-07T01:03:12Z
+;;; Generator Version: 41
+;;; Creation Date: 2026-07-11T03:41:42Z
 
 (cl:in-package :system-collections-object-model-collection-1)
 
 (cl:defconstant <type> (dotnet:resolve-type "System.Collections.ObjectModel.Collection`1"))
 (cl:defconstant <type-str> "System.Collections.ObjectModel.Collection`1")
-(cl:defconstant <creation> "2026-07-07T01:03:12Z")
-(cl:defconstant <version> 40)
+(cl:defconstant <creation> "2026-07-11T03:41:42Z")
+(cl:defconstant <version> 41)
 
 ;; Register C# Type with CLOS
 (cl:eval-when (:compile-toplevel :load-toplevel :execute)
