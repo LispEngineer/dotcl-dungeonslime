@@ -8,9 +8,6 @@ to do with this game & framework.
 
 # Open Bugs
 
-* Make a new bat start away from the edges by at least some amount, so it
-  doesn't immediately start the game with the "bat hits wall" noise.
-
 * If the standalone game is exited using the GUI of the game (currently
   by pressing `ESC`), it gives this error:
   ```
@@ -30,37 +27,19 @@ to do with this game & framework.
   * Serapeum - very powerful, but a lot of dependencies 
     * [GitHub for Serapeum](https://github.com/ruricolist/serapeum)
 
-* Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
-  new features about building a whole system.
-
-* Update to [DotCL 0.1.11](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#type-declared-net-calls-compile-to-a-direct-call)
-  * Remove the various `eval-when` that are no longer necessary
-  * **DONE** Change package generator to use the new `(dotnet:invoke (the (...`
-  * Figure out how the 0.1.10 capability to have overloaded class names in
-    the generic dispatch mechanism works - and prove it with tests
-
 * Add a Slynk server & `icl` connection `Makefile` target
-
-* Migrate to DotCL 0.1.9
-  * Use the new `invoke-generic`
-  * Use the new C# `defmethod` dispatching
 
 * Implement build improvements:
   * Automatically vendor all libraries used
     * [See Dependency Management](https://github.com/LispEngineer/rlgdx#dependency-management)
       in my `rlgdx` project (built upon ABCL) for ideas
-  * Automatically find and include all necessary files for the (SENTENCE FRAGMENT!)
   * Build & package for Windows on Linux
   * Build, test & package on Windows for Windows and Linux
-
-* Enhance the generic methods that dispatch on C# classes.
-  Rationale: I'd like `width` to work on CLOS classes AND C# classes.
-  * Exact class match (e.g., the string of the exact class name)
-  * Instance of class match (e.g., that class or any subclass)
-  * Make it work with basic `defmethod` not just `defc#method`
+    (use WSL?)
 
 * Build a MultiInvoke which does invoke on each one along the way, for example,
   `(multi-invoke mg-game "Window" "ClientBounds" "Width")`.
+  * This can just be done with an arrows library
 
 * Look into the performance of the various `dotnet:` calls in the main
   event loop (e.g., `Update()` and `Draw()`). See if there is optimization
@@ -115,8 +94,29 @@ CL-USER> (arrows:-> '(3 4 5) car)
 
 # DONE
 
+* Make a new bat start away from the edges by at least some amount, so it
+  doesn't immediately start the game with the "bat hits wall" noise.
 
-# Implemented Chapters
+* Enhance the generic methods that dispatch on C# classes.
+  Rationale: I'd like `width` to work on CLOS classes AND C# classes.
+  * Exact class match (e.g., the string of the exact class name)
+  * Instance of class match (e.g., that class or any subclass)
+  * Make it work with basic `defmethod` not just `defc#method`
+
+* Modify the build with [DotCL 0.1.12](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#v0112--2026-06-18)'s
+  new features about building a whole system.
+
+* Update to [DotCL 0.1.11](https://github.com/dotcl/dotcl/blob/master/RELEASES.md#type-declared-net-calls-compile-to-a-direct-call)
+  * Remove the various `eval-when` that are no longer necessary
+  * **DONE** Change package generator to use the new `(dotnet:invoke (the (...`
+  * Figure out how the 0.1.10 capability to have overloaded class names in
+    the generic dispatch mechanism works - and prove it with tests
+
+* Migrate to DotCL 0.1.9
+  * Use the new `invoke-generic`
+  * Use the new C# `defmethod` dispatching
+
+## Implemented Chapters
 
 * **DONE** Chapter 16: SpriteFonts and Score Display
   * Added `sprite-font.lisp` with `load-font`, `measure-string`, `draw-string`
