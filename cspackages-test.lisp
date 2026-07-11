@@ -8,6 +8,23 @@
 
 (in-package :dungeon-slime-tests)
 
+;; Expands to a direct reference to the symbol named NAME (a string) in
+;; package PKG -- both literal, resolved at macroexpansion time via
+;; find-symbol, never at runtime. The expansion is just that symbol, so
+;; ordinary compilation of the surrounding code handles it exactly as if
+;; it had been written by hand: a define-symbol-macro constant (the
+;; generator's "dynamic" memoized constants, e.g. Vector2's +zero+/+one+,
+;; wrapping a mutable boxed .NET value type -- see the WARNING comment
+;; above each one in cspackages/*.lisp) expands inline, and a plain
+;; defconstant compiles to an ordinary constant reference -- either way,
+;; no runtime find-symbol, symbol-value, or eval needed at all.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defmacro cspkg-const (pkg name)
+    (let ((sym (find-symbol (string name) pkg)))
+      (if sym
+          sym
+          (error "cspkg-const: no symbol named ~A in package ~A" name pkg)))))
+
 (defun run-cspackages-tests ()
   "Run all integration tests for generated C# packages."
 
@@ -230,22 +247,22 @@
   ;; Vector2 constant properties (version 9)
   (let* ((v2-pkg :microsoft-xna-framework-vector2)
          (v2-eq (find-symbol "=" v2-pkg)))
-    (assert-cspkg (funcall v2-eq (eval (find-symbol "+ZERO+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (cspkg-const :microsoft-xna-framework-vector2 "+ZERO+")
                            (v2:new 0.0e0 0.0e0)) t
                   "Vector2.Zero constant")
-    (assert-cspkg (funcall v2-eq (eval (find-symbol "+ONE+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (cspkg-const :microsoft-xna-framework-vector2 "+ONE+")
                            (v2:new 1.0e0 1.0e0)) t
                   "Vector2.One constant")
-    (assert-cspkg (funcall v2-eq (eval (find-symbol "+UNIT-X+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (cspkg-const :microsoft-xna-framework-vector2 "+UNIT-X+")
                            (v2:new 1.0e0 0.0e0)) t
                   "Vector2.UnitX constant")
-    (assert-cspkg (funcall v2-eq (eval (find-symbol "+UNIT-Y+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (cspkg-const :microsoft-xna-framework-vector2 "+UNIT-Y+")
                            (v2:new 0.0e0 1.0e0)) t
                   "Vector2.UnitY constant"))
 
   ;; Rectangle constant property (version 9)
   (let* ((rect-pkg :microsoft-xna-framework-rectangle)
-         (empty (eval (find-symbol "+EMPTY+" rect-pkg))))
+         (empty (cspkg-const :microsoft-xna-framework-rectangle "+EMPTY+")))
     (assert-cspkg (and (= (funcall (find-symbol "LEFT" rect-pkg) empty) 0)
                        (= (funcall (find-symbol "TOP" rect-pkg) empty) 0)
                        (= (funcall (find-symbol "RIGHT" rect-pkg) empty) 0)
