@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.ButtonBase
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :gum-forms-controls-primitives-button-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.ButtonBase")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.ButtonBase constructor overloads. Dispatches at runtime.

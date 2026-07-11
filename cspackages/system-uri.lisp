@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.

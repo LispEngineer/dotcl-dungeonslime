@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :system-boolean)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

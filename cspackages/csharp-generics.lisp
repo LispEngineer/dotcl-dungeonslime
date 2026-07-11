@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :csharp-generics)
 

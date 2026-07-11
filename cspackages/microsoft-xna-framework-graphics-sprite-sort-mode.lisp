@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteSortMode
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-sort-mode)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteSortMode")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
 ;; the binding below computes its value at most once (cached on first

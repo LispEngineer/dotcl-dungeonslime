@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.UriKind
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :system-uri-kind)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.UriKind"))
 (cl:defconstant <type-str> "System.UriKind")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
 ;; the binding below computes its value at most once (cached on first

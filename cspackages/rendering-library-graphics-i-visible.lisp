@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.IVisible
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :rendering-library-graphics-i-visible)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.IVisible"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.IVisible")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun absolute-visible (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IVisible") obj!) "get_AbsoluteVisible"))

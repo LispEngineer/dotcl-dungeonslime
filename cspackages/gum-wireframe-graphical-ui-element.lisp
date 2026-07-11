@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.GraphicalUiElement
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :gum-wireframe-graphical-ui-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement"))
 (cl:defconstant <type-str> "Gum.Wireframe.GraphicalUiElement")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement constructor overloads. Dispatches at runtime.

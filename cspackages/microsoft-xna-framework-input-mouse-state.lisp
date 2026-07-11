@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :microsoft-xna-framework-input-mouse-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.MouseState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 (cl:defun new (cl:&optional (x cl:nil supplied-x) (y cl:nil supplied-y) (scroll-wheel cl:nil supplied-scroll-wheel) (left-button cl:nil supplied-left-button) (middle-button cl:nil supplied-middle-button) (right-button cl:nil supplied-right-button) (x-button1 cl:nil supplied-x-button1) (x-button2 cl:nil supplied-x-button2) (horizontal-scroll-wheel cl:nil supplied-horizontal-scroll-wheel))
   "Master wrapper for Microsoft.Xna.Framework.Input.MouseState constructor overloads. Dispatches at runtime.

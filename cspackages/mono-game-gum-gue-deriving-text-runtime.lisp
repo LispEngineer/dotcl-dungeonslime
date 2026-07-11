@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 46
-;;; Creation Date: 2026-07-11T19:25:01Z
+;;; Generator Version: 47
+;;; Creation Date: 2026-07-11T23:07:59Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-11T19:25:01Z")
-(cl:defconstant <version> 46)
+(cl:defconstant <creation> "2026-07-11T23:07:59Z")
+(cl:defconstant <version> 47)
 
 ;; The following C# MonoGameGum.GueDeriving.TextRuntime constructors have special parameter types
 ;; (ref, out, params, or defaults) and are not yet supported:
