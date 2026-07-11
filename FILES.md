@@ -53,9 +53,6 @@ and files in this repository.
   DotCL 0.1.17 evaluates and compiles a form. (It only does compilation,
   no interpretive evaluation.)
 
-* [clr-generic-functions.md](doc/clr-generic-functions.md) describes the design
-  and implementation plan of the custom C# class-aware generic function system.
-
 * [dotcl-generic.md](doc/dotcl-generic.md) details the internal workings of
   generic functions and method dispatch inside the DotCL 0.1.17 runtime environment.
 
@@ -109,13 +106,6 @@ and files in this repository.
 
 * `constants.lisp`: Defines system-wide constants; very often these are
   Lispy versions of C# enumerations.
-
-* `clr-generic.lisp`: Implements the Version 1 C# class-aware generic function
-  system macros (`defc#generic`, `defc#method`) and dispatch/specificity resolution logic.
-  Refactored to utilize `dotnet:is-instance-of` for assignability checks under DotCL 0.1.17.
-
-* `clr-generic-test.lisp`: Startup test suite verifying C# generic function 
-  dispatching, interface specificity, and alias resolution.
 
 * `typed-calls-test.lisp`: Test suite verifying that type-declared direct method calls
   work correctly under DotCL 0.1.17, that invalid cast exceptions are handled correctly,

@@ -13,10 +13,7 @@
   (format *error-output* "[test-harness.lisp] Running poc-tests...~%")
   (poc-tests)
 
-  (format *error-output* "[test-harness.lisp] Running clr-generic tests...~%")
-  (test-basic-dispatch)
-  (test-inheritance-precedence)
-  (test-alias-resolution)
+  (format *error-output* "[test-harness.lisp] Running clr-defmethods tests...~%")
   (test-clr-defmethods)
   (test-tilemap-and-tileset)
   (dungeon-slime::run-audio-tests)

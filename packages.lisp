@@ -177,14 +177,11 @@
             #:*no-lisp-repl*
             #:*background-repl*))
 
-(defpackage :clr-generic
-  (:use :cl)
-  (:export #:defc#generic
-            #:defc#method))
+
 
 (defpackage :dungeon-slime
   (:use :cl 
-        :utils :mg-classes :monoutils :csharp :game-repl :clr-generic)
+        :utils :mg-classes :monoutils :csharp :game-repl)
   (:local-nicknames 
     (:v2 :microsoft-xna-framework-vector2)
     (:ts :system-time-span)
@@ -270,7 +267,7 @@
       #:load-font #:measure-string #:draw-string))
 
 (defpackage :dungeon-slime-tests
-  (:use :cl :dungeon-slime :csharp :utils :clr-generic :monoutils :mg-classes)
+  (:use :cl :dungeon-slime :csharp :utils :monoutils :mg-classes)
   (:local-nicknames
     (:v2 :microsoft-xna-framework-vector2)
     (:rect :microsoft-xna-framework-rectangle)

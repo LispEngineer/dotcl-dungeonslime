@@ -1716,6 +1716,36 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 #### Texture Sampling and Tiling Backgrounds (Chapter 18)
 - **Objective**: Implement a repeating, scrolling background pattern on the title screen using texture wrapping and fully integrate generated wrapper packages.
 - **Scrolling Offsets**: Background scrolling position is tracked in Lisp-native float slots (`background-offset-x` and `background-offset-y`) rather than mutating a C# `Vector2` struct. Offsets are updated based on a scrolling speed of `120.0f0` pixels per second and delta time, wrapping seamlessly within the background texture's boundaries using Lisp's standard `mod` function.
+
+---
+
+## Session: July 10, 2026 (Modernizing to DotCL 0.1.17)
+
+### 1. File Modifications Log
+
+| Date | File | Action | Description |
+|---|---|---|---|
+| Jul 10, 2026 | [FILES.md](FILES.md) | Modified | Updated references to match DotCL 0.1.17 and removed entries for clr-generic files. |
+| Jul 10, 2026 | [README.md](README.md) | Modified | Added 0.1.17 target banner and removed clr-generic documentation. |
+| Jul 10, 2026 | [AGENTS.md](AGENTS.md) / [GEMINI.md](GEMINI.md) | Modified | Updated build instructions to target DotCL 0.1.17 and simplified build commands. |
+| Jul 10, 2026 | [DungeonSlime.csproj](DungeonSlime.csproj) | Modified | Migrated DotCL.Runtime to version 0.1.16 for in-process MSBuild Lisp compilation. |
+| Jul 10, 2026 | [doc/clr-interop-ideas.md](doc/clr-interop-ideas.md) | Modified | Moved implemented interop features (caching, extension methods, CLOS type dispatch) to a Done section. |
+| Jul 10, 2026 | [doc/dotcl-generic.md](doc/dotcl-generic.md) | Modified | Added details on CLOS improvements between 0.1.8 and 0.1.17 (thread-safety, caching, AMOP, CPL standard conformance). |
+| Jul 10, 2026 | [doc/package-dotnet.md](doc/package-dotnet.md) / [doc/package-dotcl.md](doc/package-dotcl.md) | Modified | Updated for 0.1.17 and manually documented missing symbols (`CLASS-FOR-TYPE`, `MAKE-FFI-CALLBACK`, `SET-PARALLEL-EVAL`). |
+| Jul 10, 2026 | [CLAUDE.md](CLAUDE.md) / [doc/BUILD-GUIDE.md](doc/BUILD-GUIDE.md) | Modified | Updated version references and removed clr-generic bullet points. |
+| Jul 10, 2026 | [doc/opencode-*.md](doc/opencode-qwen36-dotnet-analysis-0.1.15-v2.md) | Modified | Added 0.1.17 version disclaimers to older automated analyses. |
+| Jul 10, 2026 | [clr-generic.lisp](clr-generic.lisp) | Deleted | Removed the custom C# class-aware generic function system. |
+| Jul 10, 2026 | [clr-generic-test.lisp](clr-generic-test.lisp) | Deleted | Removed obsolete custom generic tests. |
+| Jul 10, 2026 | [doc/clr-generic-functions.md](doc/clr-generic-functions.md) | Deleted | Removed custom generic design documentation. |
+| Jul 10, 2026 | [packages.lisp](packages.lisp) | Modified | Removed `:clr-generic` package and uses. |
+| Jul 10, 2026 | [dungeon-slime.asd](dungeon-slime.asd) | Modified | Removed `clr-generic` and `clr-generic-test` components and dependencies. |
+| Jul 10, 2026 | [test-harness.lisp](test-harness.lisp) | Modified | Removed `clr-generic` test runs from the test harness. |
+| Jul 10, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Updated ASDF Dependency Chain diagram and removed clr-generic type checking notes. |
+
+### 2. Explanations Log
+
+#### A. Removal of Custom C# Generic Dispatch System (clr-generic)
+The custom `defc#generic` and `defc#method` dispatch system in `clr-generic.lisp` was originally written to support C# class type dispatch when the DotCL runtime (v0.1.8) lacked native CLOS specializers for .NET types. Since DotCL 0.1.17 fully implements native CLOS dispatch on .NET types using `#.(dotnet:class-for-type "System.String")` and readable closed generic type names (e.g. `List<Int32>`), this custom code became obsolete. We deleted `clr-generic.lisp`, `clr-generic-test.lisp`, and `doc/clr-generic-functions.md`, removed package definitions in `packages.lisp`, cleaned up all dependencies in `dungeon-slime.asd` (such as removing `clr-generic` dependencies from `mg-classes.lisp` and `sprite-font.lisp`), and removed test invocations from `test-harness.lisp`. Programmatic tests verify the project builds and runs successfully.
 - **Tiling via PointWrap**: Implemented multi-pass rendering by splitting drawing into two separate `SpriteBatch` blocks:
   1. The background pattern is rendered under `sampler-state:+point-wrap+` using `sprite-batch:draw-texture2-d-rectangle-rectangle]-color`. A destination rectangle covers the entire screen, and a source rectangle of the same dimensions is offset by the rounded scrolling variables, prompting the GPU to wrap coordinates and tile the texture automatically.
   2. Foreground text/UI elements are drawn under `sampler-state:+point-clamp+` to keep the pixel-art fonts crisp and restrict them from tiling.

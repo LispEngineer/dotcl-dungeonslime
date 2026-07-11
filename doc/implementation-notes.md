@@ -462,12 +462,11 @@ The position is computed once during `initialize` (after `load-content` via
 ## ASDF Dependency Chain
 
 ```
-packages -> mg-classes -> clr-generic -> sprite-font -> game-1
+packages -> mg-classes -> sprite-font -> game-1
 ```
 
 `sprite-font.lisp` depends on `mg-classes` for `v2:+zero+`, `v2:+one+`
-and `sprite-effects:+none+`. It depends on `clr-generic` for the
-`dotnet-class` require.
+and `sprite-effects:+none+`.
 
 
 # Refactoring Raw .NET Interop Calls to C# Package Wrappers
@@ -577,23 +576,7 @@ as completely benign.
   affect the game.
 
 
-# C# Generic Function Type Checking Refactoring (DotCL 0.1.14 Upgrade - Part 1)
 
-The C# Generic Function type checking in `clr-generic.lisp` was updated from manual reflection-based `IsAssignableFrom` checks to use `dotnet:is-instance-of` which was introduced in DotCL 0.1.14.
-
-## 1. Type Assignability Verification
-In `c#method-applicable-p` (defined in `clr-generic.lisp`), the previous implementation looked up types manually and invoked reflection:
-```lisp
-(let ((arg-type (monoutils:get-type first-arg))
-      (spec-type (monoutils:get-type spec)))
-  (when (and arg-type spec-type)
-    (dotnet:invoke spec-type "IsAssignableFrom" arg-type)))
-```
-This was refactored to use the native type predicate:
-```lisp
-(dotnet:is-instance-of first-arg spec)
-```
-This eliminates manual type-lookup reflection logic in Lisp and delegates it to the DotCL runtime.
 
 ## 2. Resolving the `"ANAPHORA"` Package Error during Clean Build
 When upgrading to DotCL 0.1.14 and performing `make build`, the compilation crashed with a `PACKAGE-ERROR` stating that no package named `"ANAPHORA"` exists.
