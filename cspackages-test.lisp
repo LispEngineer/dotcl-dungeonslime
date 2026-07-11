@@ -230,22 +230,22 @@
   ;; Vector2 constant properties (version 9)
   (let* ((v2-pkg :microsoft-xna-framework-vector2)
          (v2-eq (find-symbol "=" v2-pkg)))
-    (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+ZERO+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (eval (find-symbol "+ZERO+" v2-pkg))
                            (v2:new 0.0e0 0.0e0)) t
                   "Vector2.Zero constant")
-    (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+ONE+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (eval (find-symbol "+ONE+" v2-pkg))
                            (v2:new 1.0e0 1.0e0)) t
                   "Vector2.One constant")
-    (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+UNIT-X+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (eval (find-symbol "+UNIT-X+" v2-pkg))
                            (v2:new 1.0e0 0.0e0)) t
                   "Vector2.UnitX constant")
-    (assert-cspkg (funcall v2-eq (symbol-value (find-symbol "+UNIT-Y+" v2-pkg))
+    (assert-cspkg (funcall v2-eq (eval (find-symbol "+UNIT-Y+" v2-pkg))
                            (v2:new 0.0e0 1.0e0)) t
                   "Vector2.UnitY constant"))
 
   ;; Rectangle constant property (version 9)
   (let* ((rect-pkg :microsoft-xna-framework-rectangle)
-         (empty (symbol-value (find-symbol "+EMPTY+" rect-pkg))))
+         (empty (eval (find-symbol "+EMPTY+" rect-pkg))))
     (assert-cspkg (and (= (funcall (find-symbol "LEFT" rect-pkg) empty) 0)
                        (= (funcall (find-symbol "TOP" rect-pkg) empty) 0)
                        (= (funcall (find-symbol "RIGHT" rect-pkg) empty) 0)

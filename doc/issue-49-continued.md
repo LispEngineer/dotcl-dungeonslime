@@ -1,8 +1,12 @@
-# Follow-up to dotcl/dotcl#49: a plain `:depends-on` still doesn't work
+# Follow-up to dotcl/dotcl#49: getting a plain `:depends-on` working
 
 * Author: Douglas P. Fields, Jr. - symbolics@lisp.engineer
 * Related: [dotcl/dotcl#49](https://github.com/dotcl/dotcl/issues/49) (closed,
   "delivered in 0.1.17")
+* Status: **Resolved** (generator v45's `--ensure-type-in-generic`, plus
+  one unrelated test fix) — see "Resolution" below. Kept as a full
+  timeline because the underlying architectural question — should this
+  have been this hard? — is still worth raising.
 
 This is a follow-up investigation after trying to actually apply the fix
 described in #49. The short version: the fix in DotCL 0.1.17 plus the
@@ -18,7 +22,9 @@ change (removing eager `EnsureDotNetTypeClass` calls) that fixed the build
 in the first place. We also tried the generator's own `--ensure-type` flag
 to restore that eager registration, which doesn't fix it — it just moves
 the original build failure to the *other* build phase, which turns out to
-be genuinely informative about why. Full timeline below.
+be genuinely informative about why. A new, more targeted generator flag
+(`--ensure-type-in-generic`, v45) finally resolves it. Full timeline below,
+then the resolution, then the case for a deeper fix.
 
 ## Recap: why a plain `:depends-on` was broken
 
@@ -376,3 +382,107 @@ side — flagging for snmsts's take:
   type-registration call is safe anywhere in a `:depends-on`'d
   `csharp-assembly-packages`, in either build phase, for as long as it
   remains a genuine system dependency rather than spliced into the root.
+
+## Resolution
+
+Generator v45 added a new, more targeted flag: `--ensure-type-in-generic`.
+Instead of re-emitting "Register C# Type with CLOS" in every per-class
+file (where, per the finding above, it can never be safe while
+`csharp-assembly-packages` is a real `:depends-on`), it emits that
+`eval-when` *inside `csharp-generics.lisp` itself*, immediately before each
+class's own `#.(dotnet:class-for-type ...)` specializer block:
+
+```lisp
+;; System.Collections.Specialized.INotifyCollectionChanged (system-collections-specialized-i-notify-collection-changed)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Collections.Specialized.INotifyCollectionChanged")))
+
+(cl:defmethod add-collection-changed ((obj! #.(dotnet:class-for-type "System.Collections.Specialized.INotifyCollectionChanged")) cl:&rest args)
+  (cl:apply (cl:function system-collections-specialized-i-notify-collection-changed:add-collection-changed) obj! args))
+```
+
+This works because `csharp-generics.lisp` (per direction 3, already pulled
+out of `cspackages/csharp-assembly-packages.asd` and placed as
+`dungeon-slime`'s own component, positioned after `type-aliases.lisp`)
+never loads until `MonoGame.Framework.dll` is already loaded, in *every*
+build phase and at deployed runtime alike — unlike the individual per-class
+files, which remain genuinely `:depends-on`-safe (no eager anything) since
+they're never the ones needing the class pre-registered. The registration
+now lives exactly where both requirements — "must run after the assembly
+loads" and "must run before this file's own `#.` specializers need the
+class" — are simultaneously satisfiable, because both requirements attach
+to the same file instead of being split across two different ASDF systems
+loaded in two different phases.
+
+With this, `make build test` passes completely: 79 assertions, 0 failures.
+
+One unrelated bug surfaced along the way and needed a separate fix:
+`cspackages-test.lisp` read constant properties like `+ZERO+`/`+ONE+` via
+`(symbol-value (find-symbol "+ZERO+" v2-pkg))`. That only ever worked
+because the original v41 generator emitted these as plain `defconstant`s;
+current generator versions correctly emit `define-symbol-macro` instead for
+"dynamic" (mutable-value-type) constants, to avoid presenting one shared
+mutable boxed .NET object as if it were an immutable constant. `symbol-value`
+reads a real special-variable binding and does not expand symbol-macros, so
+it failed with "Unbound variable: +ZERO+" — the fix was swapping
+`symbol-value` for `eval` at all five call sites (`+ZERO+`, `+ONE+`,
+`+UNIT-X+`, `+UNIT-Y+`, `+EMPTY+`), since `eval` evaluates the symbol as an
+ordinary form and correctly goes through symbol-macro expansion. This bug
+was pre-existing and had nothing to do with the phase-ordering work above —
+it just took getting this far through the test suite to expose it, since
+this project had never previously reached this test path with a
+`define-symbol-macro`-based generator version.
+
+## The case for a deeper fix, despite the resolution above
+
+The generator-side fix above works, and `dungeon-slime.asd` now uses a
+plain ASDF `:depends-on` for everything except one file that needs manual
+placement — a real simplification over the original all-or-nothing splice.
+But it's worth being blunt about what it took to get here: three separate,
+non-obvious mechanisms (`defconstant` → `define-symbol-macro` for per-class
+type constants; `EnsureDotNetTypeClass` removed from every per-class file
+specifically so it stops running too early; `EnsureDotNetTypeClass`
+*re-added*, but only inside one specific hand-placed file, at exactly the
+one position in exactly the one build where it's safe) — plus a full day of
+back-and-forth generator releases — to correctly answer one underlying
+question every time: *is `MonoGame.Framework.dll` loaded yet, right now, in
+this process, at this exact point in this exact build phase?*
+
+That question shouldn't need answering at all. **The better resolution
+would be for DotCL to guarantee that every C#/CLR assembly a project
+references is loaded and available in *every* Lisp process the build
+pipeline ever spins up — `_DotCLResolveDeps`, `_DotCLCompileRoot`, and the
+final deployed runtime alike — with no phase, ever, in which a referenced
+assembly is not yet loaded.** If that were true:
+
+* The original #49 issue would never have existed — a plain `:depends-on`
+  on `csharp-assembly-packages` would have worked the first time, with no
+  generator changes at all.
+* `defconstant`-vs-`define-symbol-macro` for `<type>` would be purely a
+  performance/semantics choice (as Doug's original comment on #49 already
+  wanted — a real constant, not a deferred computation on every access),
+  never a correctness requirement.
+* `#.(dotnet:class-for-type "...")` at read time in `csharp-generics.lisp`
+  would just work, in whichever file it happened to live, with no
+  `EnsureDotNetTypeClass` companion call needed anywhere, in any file, ever.
+* This project's entire `dungeon-slime.asd` could go back to one flat list
+  of ordinary `:depends-on` systems, with zero special-cased files, zero
+  manual splicing, and zero "must run after type-aliases.lisp" ordering
+  constraints on generated code.
+
+Every workaround in this document — the splice, the symbol-macro, the
+`--ensure-type`/`--ensure-type-in-generic` flags, the careful manual
+placement of one file relative to another — exists purely to route around
+the fact that assembly availability is phase- and process-dependent rather
+than a fixed, always-true property of the build. That's a lot of
+accumulated complexity, spread across two separate projects
+(`dotcl-package-generator` and this one), to compensate for something that
+feels like it should be a build-system invariant rather than something
+every consumer has to reason about individually.
