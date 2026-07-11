@@ -35,32 +35,11 @@ game in SANO-san's awesome DotCL Common Lisp later.
 This package uses [my C# lisp package generator](https://github.com/LispEngineer/dotcl-package-generator)
 (`dotcl-packagegen`), which originally was a part of this code, but is now standalone.
 
-As of generator version 21+ (this project currently uses v30), `make cspackages`
-produces a fully self-contained `cspackages/csharp-assembly-packages.asd` alongside the
-generated `.lisp` files, in addition to the usual `packages.lisp` and
-`csharp-assembly-utils.lisp`. That `.asd` is loadable entirely on its own
-(`(asdf:load-system "csharp-assembly-packages")`), with no dependency on anything in
-this project.
-
-`dungeon-slime.asd` doesn't just point at that `.asd` and add it to its own
-`:depends-on`, though — the generated `.lisp` files call `dotnet:resolve-type` at
-load time (to look up MonoGame/System types), which only succeeds once
-`MonoGame.Framework.dll` has already been loaded into the process. Under this
-project's DotCL/MSBuild build pipeline, an ordinary `:depends-on` system dependency
-gets compiled in an earlier build phase than the one that loads the game's own
-.NET assembly references, so `dotnet:resolve-type` would fail during the build.
-Instead, `dungeon-slime.asd` `read`s `cspackages/csharp-assembly-packages.asd`'s own
-`:components` form directly — the authoritative file list and dependency graph,
-straight from the generator — and splices those files into `dungeon-slime`'s own
-component list (in the same build phase as the rest of the game, after the file
-that loads the MonoGame assembly). See
-["Wiring dungeon-slime.asd to the Generator's Self-Contained .asd"](doc/implementation-notes.md)
-in the implementation notes for the full story, including the build failure this
-was designed around.
+See `Use and Integration of C# Assemblies as Lisp Packages` below for more details.
 
 ### Installation and Use
 
-Please clone the package generator and run `make deploy` to get the
+Please clone the package generator and run `make build test deploy` to get the
 `dotcl-packagegen` command line tool installed. This is needed by the
 build system if you wish to run `make cspackages`. If you do not edit
 the `cspackages`, you do not need to install the tool.
@@ -68,7 +47,7 @@ the `cspackages`, you do not need to install the tool.
 
 # How to Use
 
-I've built and tested this on Ubuntu 24.04 on x64 only. I make no
+I've built and tested this on Linux on x64 only. I make no
 guarantees that this will work on any other platform.
 
 You will need to check out [dotcl](https://github.com/dotcl/dotcl) 
@@ -100,15 +79,21 @@ As of DotCL 0.1.15+ (currently targeting 0.1.17), the project build system is mi
 sibling `dotcl` repository check-out.
 
 Key features of the updated build system:
+
 1. **Quicklisp Integration via Build-Init**: The project utilizes DotCL's `<DotclBuildInit>`
    task pointing to [build-setup.lisp](build-setup.lisp). At build time, this script loads the local
    Quicklisp installation (`~/quicklisp/setup.lisp`) to register ASDF system search hooks.
    External systems (such as `anaphora`) are resolved, compiled, and bundled into the output
    directory automatically without requiring manual `CL_SOURCE_REGISTRY` environment variables
    or wrappers.
+   * Note: a [DotCL Patched QuickLisp](https://github.com/quicklisp/quicklisp-client/pull/245) is available.
+     I recommend installing QuickLisp normally with SBCL (or whatever existing CL implementation
+     you have that is supported by QL) then edit the installed `~/quicklisp/` files per the
+     patch above, and then just use it normally with DotCL.
 2. **Automated Reference Copying**: A custom MSBuild target (`CopyReferencesBeforeLisp`) copies
    all referenced NuGet assemblies (like `MonoGame.Framework.dll`) to the output folder before
-   Lisp compilation runs, preventing compile-time assembly load errors.
+   Lisp compilation runs, in an attempt to prevent compile-time assembly load errors.
+   (They still happen, though.)
 3. **Decoupled Compile-time Assemblies**: The Lisp compilation process does not require loading
    `DungeonSlime.dll` during the `:compile-toplevel` phase (avoiding circular dependency or file
    missing errors on clean builds). The assembly is dynamically loaded only during runtime
@@ -145,7 +130,8 @@ Or manually run the steps:
    * `-v d` shows more details.
    * `-v diag` shows the most, but I haven't really noticed a difference.
 
-2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime`
+2. To run: `bin/Debug/net10.0/ubuntu.24.04-x64/DungeonSlime` (or whatever your
+   platform-specific path is)
    * To run in test mode, add `--test` to the command line, and it will not invoke the game.
 
 3. To generate C# assembly lisp packages: `make cspackages`
@@ -214,6 +200,7 @@ by another user account (or from a different directory), several design and
 build system choices are implemented.
 
 ### Portable Design Features Implemented
+
 1. **Raw Sound File Copying**: Raw `.wav` audio files are explicitly copied to
    the output folder via the MSBuild project file (`DungeonSlime.csproj`) so they
    are available on disk for native filesystem loading.
@@ -231,6 +218,7 @@ build system choices are implemented.
    rather than crashing.
 
 ### Guidelines for Future Portable Development
+
 - **Qualify Filesystem Paths**: Never pass raw relative strings directly to
   foreign filesystem methods. Wrap them in `qualify-path` to ensure directory
   independence.
@@ -243,6 +231,7 @@ build system choices are implemented.
 - **Trap Host Subsystem Exceptions**: Wrap host hardware and driver initialization
   routines (sound, graphics, network) in `handler-case` blocks so the game degrades
   gracefully on restricted host environments.
+
 
 # A Note on ML/AI & Tooling
 
@@ -378,21 +367,6 @@ MonoGame Framework Classes: Texture Regions, Sprites and Texture Atlases:
 Lisp utility functionality:
 * `safe-read-form-from-file` is used to securely load
   Lisp-based texture atlas descriptions without read-time evaluation.
-
-
-## Deprecated Functionality
-
-Assembly Lisp Package Generator: Moved to its own repository.
-* TODO: Add a link once published.
-
-BaseCaller: This is a class that works around the missing base class
-calling function in the dotnet package. Run the built binary with
-the `--base` argument to see it work (in C#).
-* Call a base method taking Void returning Void
-* Get a `Func<>` to call any base method
-* Invoke that `Func`tion
-* Get any type by String name, even if System.Type.GetType() would fail
-* Deprecated because SANO-san implemented `dotnet:call-base`
 
 
 # Where to Go Next

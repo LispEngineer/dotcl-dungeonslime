@@ -143,3 +143,17 @@ CL-USER> (arrows:-> '(3 4 5) car)
   * The problem is there is no semantic difference in the code between something
     that just has a getter that will never change, vs. one that can (like
     `CapsLock`).
+
+## Deprecated Functionality
+
+Assembly Lisp Package Generator: Moved to its own repository.
+* TODO: Add a link once published.
+
+BaseCaller: This is a class that works around the missing base class
+calling function in the dotnet package. Run the built binary with
+the `--base` argument to see it work (in C#).
+* Call a base method taking Void returning Void
+* Get a `Func<>` to call any base method
+* Invoke that `Func`tion
+* Get any type by String name, even if System.Type.GetType() would fail
+* Deprecated because SANO-san implemented `dotnet:call-base`
