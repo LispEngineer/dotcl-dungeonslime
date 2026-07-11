@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.RangeBase
-;;; Generator Version: 45
-;;; Creation Date: 2026-07-11T18:42:16Z
+;;; Generator Version: 46
+;;; Creation Date: 2026-07-11T19:25:01Z
 
 (cl:in-package :gum-forms-controls-primitives-range-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.RangeBase")
-(cl:defconstant <creation> "2026-07-11T18:42:16Z")
-(cl:defconstant <version> 45)
+(cl:defconstant <creation> "2026-07-11T19:25:01Z")
+(cl:defconstant <version> 46)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.RangeBase constructor overloads. Dispatches at runtime.

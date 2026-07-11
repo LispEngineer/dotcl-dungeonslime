@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.Dock
-;;; Generator Version: 45
-;;; Creation Date: 2026-07-11T18:42:16Z
+;;; Generator Version: 46
+;;; Creation Date: 2026-07-11T19:25:01Z
 
 (cl:in-package :gum-wireframe-dock)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.Dock"))
 (cl:defconstant <type-str> "Gum.Wireframe.Dock")
-(cl:defconstant <creation> "2026-07-11T18:42:16Z")
-(cl:defconstant <version> 45)
+(cl:defconstant <creation> "2026-07-11T19:25:01Z")
+(cl:defconstant <version> 46)
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
 ;; the binding below computes its value at most once (cached on first

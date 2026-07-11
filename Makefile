@@ -48,7 +48,7 @@ cspackages:
   # MonoGameGum.GueDeriving.ContainerRuntime is the "Root" class in GumService.Default.Root.Children.Clear();
   # Gum.Collections.GraphicalUiElementCollection is the "Children" class in the above.
 	mkdir -p $(OUT_DIR)
-	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric --ensure-type-in-generic \
+	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric --ensure-type-in-generic --no-csharp-generic-in-asd \
             --assembly $(REF_DIR)System.ObjectModel.dll \
 	    --assembly $(REF_DIR)System.Console.dll \
 	      --class System.Console \

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 45
-;;; Creation Date: 2026-07-11T18:42:16Z
+;;; Generator Version: 46
+;;; Creation Date: 2026-07-11T19:25:01Z
 
 (cl:in-package :system-reflection-member-info)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-07-11T18:42:16Z")
-(cl:defconstant <version> 45)
+(cl:defconstant <creation> "2026-07-11T19:25:01Z")
+(cl:defconstant <version> 46)
 
 (cl:defun new ()
   "Summary: Initializes a new instance of the System.Reflection.MemberInfo class.

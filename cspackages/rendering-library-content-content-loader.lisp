@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Content.ContentLoader
-;;; Generator Version: 45
-;;; Creation Date: 2026-07-11T18:42:16Z
+;;; Generator Version: 46
+;;; Creation Date: 2026-07-11T19:25:01Z
 
 (cl:in-package :rendering-library-content-content-loader)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Content.ContentLoader"))
 (cl:defconstant <type-str> "RenderingLibrary.Content.ContentLoader")
-(cl:defconstant <creation> "2026-07-11T18:42:16Z")
-(cl:defconstant <version> 45)
+(cl:defconstant <creation> "2026-07-11T19:25:01Z")
+(cl:defconstant <version> 46)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

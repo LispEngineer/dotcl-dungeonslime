@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchLocation
-;;; Generator Version: 45
-;;; Creation Date: 2026-07-11T18:42:16Z
+;;; Generator Version: 46
+;;; Creation Date: 2026-07-11T19:25:01Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-location)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchLocation")
-(cl:defconstant <creation> "2026-07-11T18:42:16Z")
-(cl:defconstant <version> 45)
+(cl:defconstant <creation> "2026-07-11T19:25:01Z")
+(cl:defconstant <version> 46)
 
 (cl:defun new (cl:&optional (id cl:nil supplied-id) (state cl:nil supplied-state) (position cl:nil supplied-position) (previous-state cl:nil supplied-previous-state) (previous-position cl:nil supplied-previous-position))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.TouchLocation constructor overloads. Dispatches at runtime.
