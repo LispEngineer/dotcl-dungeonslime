@@ -11,8 +11,14 @@ problem (per-class type constants), but `dotcl-package-generator`'s newer
 CLOS generic-dispatch file (`csharp-generics.lisp`) hits the exact same
 class of problem in a form that can't be fixed the same way, because it
 uses the Lisp reader's `#.` (read-time-eval) syntax, not a runtime call.
-This blocks simplifying `dungeon-slime.asd` to a plain ASDF `:depends-on`
-even with every fix from #49 applied.
+Manually splitting that one file out gets `make build` passing again, but
+uncovers a second, distinct problem underneath: a `find-class` failure at
+FASL-load time in the deployed test binary, caused by the same generator
+change (removing eager `EnsureDotNetTypeClass` calls) that fixed the build
+in the first place. We also tried the generator's own `--ensure-type` flag
+to restore that eager registration, which doesn't fix it — it just moves
+the original build failure to the *other* build phase, which turns out to
+be genuinely informative about why. Full timeline below.
 
 ## Recap: why a plain `:depends-on` was broken
 
@@ -178,18 +184,133 @@ This is a materially different, harder problem than the per-class
 | When it runs | load-time (deferrable to first-use via symbol-macro) | **read-time** (cannot be deferred by any evaluation-time construct) |
 | Fix applied | ✅ symbol-macro (v43+), `EnsureDotNetTypeClass` removed (v44) | ❌ still blocks `_DotCLResolveDeps` |
 
-## Where that leaves things
-
 With generator v44, the *per-class* wrapper files (e.g.
-`microsoft-xna-framework-vector2.lisp`) are now genuinely
-`:depends-on`-safe — they contain no code that runs before first actual
-use. But `csharp-assembly-packages.asd` bundles `csharp-generics.lisp` in
-the same system, and that file alone reintroduces the original failure
-mode through a different, non-deferrable mechanism. Simplifying
-`dungeon-slime.asd` to a plain `:depends-on` is still blocked, and the
-current splicing workaround (see `dungeon-slime.asd`'s `eval-when`/
-`*cspackages-components*` block and `packages.lisp`'s stub `defpackage`
-pre-declarations) is still required as of this writing.
+`microsoft-xna-framework-vector2.lisp`) are genuinely `:depends-on`-safe —
+they contain no code that runs before first actual use. But
+`csharp-assembly-packages.asd` bundles `csharp-generics.lisp` in the same
+system, and that file alone reintroduces the original failure mode through
+a different, non-deferrable mechanism.
+
+## Direction 3, tried by hand: split `csharp-generics.lisp` out
+
+Of the three directions above, (3) is the cheapest to try without any
+generator change, so we tried it directly: comment `csharp-generics` out of
+`cspackages/csharp-assembly-packages.asd`'s `:components`, and instead add
+it as an ordinary component of `dungeon-slime.asd` itself (the depending
+project), positioned after `type-aliases.lisp` (which loads
+`MonoGame.Framework.dll`) and depending on the whole
+`"csharp-assembly-packages"` system:
+
+```lisp
+;; cspackages/csharp-assembly-packages.asd:
+;;   (:file "csharp-generics" :depends-on (...))   ; <-- commented out
+
+;; dungeon-slime.asd's own :components:
+(:file "packages")
+(:file "settings" :depends-on ("packages"))
+(:file "type-aliases" :depends-on ("packages" "settings"))   ; loads MonoGame.Framework.dll
+(:file "monoutils" :depends-on ("packages" "type-aliases"))
+(:file "utils" :depends-on ("packages" "type-aliases"))
+(:file "cspackages/csharp-generics" :depends-on ("csharp-assembly-packages"))
+(:file "constants")
+...
+```
+
+**This builds.** Every other generated file goes through the plain
+`:depends-on ("csharp-assembly-packages" ...)` on `dungeon-slime`; only
+`csharp-generics.lisp` needs manual placement, and only because of its `#.`
+read-time class resolution.
+
+## New failure: `make test` fails at runtime, not build time
+
+`make build` succeeds, but `make test` (which actually runs the built
+binary) doesn't:
+
+```
+Unhandled exception. DotCL.LispErrorException: FIND-CLASS: no class named INotifyCollectionChanged
+   at DotCL.Runtime.LoadFasl(String filePath, LispObject filespec, Boolean isVerbose, Boolean isPrint)
+   at DotCL.Runtime.Load(LispObject[] args)
+   at DotCL.DotclHost.LoadFromManifest(String manifestPath)
+```
+
+This is not a `.NET` resolution error — it's a plain CLOS `find-class`
+failure, and it happens while **loading precompiled FASLs** into the
+deployed test binary's own fresh process, before any of our own code runs.
+`INotifyCollectionChanged` is, not coincidentally, the very first
+per-class `defmethod` block in `csharp-generics.lisp` (line 6384 of 9,700).
+
+**Root cause:** comparing the currently-committed (working) v44 files
+against the original, actually-shipped v41 files (`git show
+21966f1:cspackages/microsoft-xna-framework-vector2.lisp`) shows every v41
+per-class file had this, which v44 removed entirely:
+
+```lisp
+;; Register C# Type with CLOS
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
+```
+
+The `:load-toplevel` situation means "run this every time this file's
+compiled FASL is loaded, in *any* process." That's exactly what guaranteed,
+unconditionally, that every class existed by the time `csharp-generics.lisp`
+(loaded right after, in file order) tried to use it.
+
+`csharp-generics.lisp`'s specializers are built via
+`#.(dotnet:class-for-type "...")`, evaluated once, in the **build
+process**, while generating the FASL — `class-for-type` does register the
+class, but only in that transient build process. The resulting FASL then
+carries a reference to that class that DotCL's FASL format reconstructs via
+a plain `find-class` lookup by name at load time. The deployed test binary
+is a **separate OS process** with its own fresh Lisp image; nothing in it
+has ever created a CLOS class called `INotifyCollectionChanged`, because
+v44 removed the one thing that used to do that unconditionally, in every
+process, on every load.
+
+## Experiment: re-enabling `--ensure-type`
+
+The generator actually already ships a flag for exactly this — `--ensure-type`
+(sticky, applies to the current and all subsequent `--class`, OFF by
+default since v44) re-emits the "Register C# Type with CLOS" block, now
+restricted to `(:load-toplevel :execute)` (no `:compile-toplevel`, "for the
+same ASDF-dependency-phase reason as `<type>` itself"). Per your request, we
+tried turning it on: added `--ensure-type` to the `Makefile`'s
+`cspackages` target (right after `--enable-defgeneric`, so it applies to
+every subsequent `--class`), regenerated, and rebuilt.
+
+**Result: it doesn't fix the problem, and it's informative about why.**
+`_DotCLResolveDeps` (phase 1) now succeeds — but `_DotCLCompileRoot`
+(phase 2) fails instead, with the *same* error, for the *same* type:
+
+```
+error : dotcl compile-project failed for .../dungeon-slime.asd:
+DOTNET: type not found: Microsoft.Xna.Framework.Vector2
+```
+
+This is the key finding: **the failure didn't go away, it moved phases.**
+That makes sense once you notice that `csharp-assembly-packages` is now a
+genuine ASDF system *dependency* of `dungeon-slime`, not a spliced-in set
+of components — and an ASDF `:depends-on` system's entire FASL always
+loads *before any* of the depending system's own components, regardless of
+which build phase is doing the loading. `type-aliases.lisp` (the file that
+loads `MonoGame.Framework.dll`) is a component *of* `dungeon-slime`, so it
+can never run before `csharp-assembly-packages`'s FASL — including its
+newly-reinstated eager `EnsureDotNetTypeClass` calls — has already loaded
+completely, in *every* phase that reloads the dependency graph, not just
+`_DotCLResolveDeps`. `_DotCLCompileRoot` turns out to *also* reload the full
+`:depends-on` graph before compiling the root system's own files (needed to
+make the dependency's packages/macros visible), and at that point in
+`_DotCLCompileRoot`, `type-aliases.lisp` hasn't executed yet either.
+
+So: **as long as `csharp-assembly-packages` is a genuine ASDF system
+dependency (rather than spliced into the root system's own components),
+nothing in it can safely do an eager, unconditional
+`resolve-type`/`EnsureDotNetTypeClass` call for any assembly-provided type —
+in *either* build phase** — because the depending project's own
+assembly-loading code is, by construction, always compiled/loaded strictly
+after the whole dependency graph, in both phases alike. We reverted this
+experiment (removed `--ensure-type` from the `Makefile`, regenerated) to
+get back to the "builds, but `make test` fails" state described above.
 
 ## Possible directions (for discussion)
 
@@ -204,7 +325,10 @@ side — flagging for snmsts's take:
    compilation needs to precede assembly loading; the two phases seem to
    exist for a different reason (making a dependency's packages/macros
    visible to the root system's compilation) that doesn't actually require
-   assemblies to stay unloaded.
+   assemblies to stay unloaded. Note this alone wouldn't be sufficient by
+   itself given the `_DotCLCompileRoot` finding above — the dependency
+   graph reloads *there* too, so the assembly would need to be loaded
+   before *both* phases, not just the first one.
 
 2. **Defer CLOS registration in `csharp-generics.lisp` to runtime.**
    Instead of `#.(dotnet:class-for-type "...")` as a literal specializer,
@@ -214,28 +338,41 @@ side — flagging for snmsts's take:
    function, rather than baking the class object into the `defmethod` form
    at read time. This keeps the generic-dispatch feature but defers the
    actual `.NET` type resolution the same way the per-class fix already
-   does.
+   does — and, unlike `--ensure-type`, defers it all the way to actual
+   first use in the deployed app, not merely to "whenever this FASL next
+   loads," which we've now shown is still too early in every build phase.
 
 3. **Split `csharp-generics.lisp` out of `csharp-assembly-packages.asd`.**
-   If (1) and (2) are out of scope for now, the generator could at least
-   emit the generics file as a separate, non-`:depends-on`-able unit (e.g.
-   its own system, or simply excluded from `:components` and documented as
-   "splice this one file manually"), so every *other* generated file can
-   go through a plain `:depends-on` while only this one file keeps needing
-   the phase-2 splicing workaround. That would still be a real
-   simplification over today's all-or-nothing splice.
+   This is the one we actually got working for `make build` (see above) —
+   the generator could emit the generics file as a separate,
+   non-`:depends-on`-able unit (e.g. its own system, or simply excluded
+   from `:components` and documented as "splice this one file manually"),
+   so every *other* generated file goes through a plain `:depends-on` while
+   only this one file keeps needing the phase-2 splicing workaround. Note
+   this alone does *not* fix the remaining `make test` failure — that needs
+   (2) as well, since simply moving `csharp-generics.lisp` later doesn't
+   change that its `#.(dotnet:class-for-type ...)` literals still need
+   their classes to already exist in the fresh deployed process, and
+   nothing currently guarantees that once `--ensure-type` is off.
 
 ## Current repro
 
 * DotCL runtime: 0.1.17
 * Generator: 2.44.0 (package format version 44)
-* `dungeon-slime.asd`: modified to a plain `:depends-on ("csharp-assembly-packages" ...)`
-  (see this project's working tree; not merged, since it doesn't build)
-* Command: `make build` (`dotnet build DungeonSlime.csproj`), after
-  `make cspackages` and `rm -rf obj bin` to rule out stale FASL caching
-* Error:
+* `dungeon-slime.asd`: plain `:depends-on ("csharp-assembly-packages" ...)`,
+  plus `csharp-generics.lisp` manually pulled out of
+  `cspackages/csharp-assembly-packages.asd` and added as `dungeon-slime`'s
+  own component (direction 3 above)
+* `make build` succeeds; `make test` fails:
   ```
-  /home/dfields/.nuget/packages/dotcl.runtime/0.1.17/buildTransitive/DotCL.Runtime.ProjectCore.targets(51,5):
-  error : dotcl resolve-deps failed for /home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd:
-  DOTNET: type not found: Microsoft.Xna.Framework.Vector2 [/home/dfields/src/cl/dotcl-dungeonslime/DungeonSlime.csproj]
+  Unhandled exception. DotCL.LispErrorException: FIND-CLASS: no class named INotifyCollectionChanged
+     at DotCL.Runtime.LoadFasl(String filePath, LispObject filespec, Boolean isVerbose, Boolean isPrint)
+     at DotCL.Runtime.Load(LispObject[] args)
+     at DotCL.DotclHost.LoadFromManifest(String manifestPath)
   ```
+* Re-enabling `--ensure-type` (generator flag, OFF by default since v44)
+  does not fix this; it moves the *original* build failure from
+  `_DotCLResolveDeps` to `_DotCLCompileRoot`, confirming that no eager
+  type-registration call is safe anywhere in a `:depends-on`'d
+  `csharp-assembly-packages`, in either build phase, for as long as it
+  remains a genuine system dependency rather than spliced into the root.
