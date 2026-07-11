@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SamplerState
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sampler-state)
 
-(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SamplerState"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SamplerState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SamplerState")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SamplerState")))
 
@@ -19,7 +19,8 @@
   (dotnet:new <type-str>))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -29,10 +30,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +anisotropic-clamp+ (dotnet:static <type-str> "AnisotropicClamp"))
+(cl:defvar %anisotropic-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +anisotropic-clamp+
+  (cl:if (cl:eq %anisotropic-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %anisotropic-clamp-cache% (dotnet:static <type-str> "AnisotropicClamp"))
+      %anisotropic-clamp-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -42,10 +48,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +anisotropic-wrap+ (dotnet:static <type-str> "AnisotropicWrap"))
+(cl:defvar %anisotropic-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +anisotropic-wrap+
+  (cl:if (cl:eq %anisotropic-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %anisotropic-wrap-cache% (dotnet:static <type-str> "AnisotropicWrap"))
+      %anisotropic-wrap-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -55,10 +66,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +linear-clamp+ (dotnet:static <type-str> "LinearClamp"))
+(cl:defvar %linear-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +linear-clamp+
+  (cl:if (cl:eq %linear-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %linear-clamp-cache% (dotnet:static <type-str> "LinearClamp"))
+      %linear-clamp-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -68,10 +84,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +linear-wrap+ (dotnet:static <type-str> "LinearWrap"))
+(cl:defvar %linear-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +linear-wrap+
+  (cl:if (cl:eq %linear-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %linear-wrap-cache% (dotnet:static <type-str> "LinearWrap"))
+      %linear-wrap-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -81,10 +102,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +point-clamp+ (dotnet:static <type-str> "PointClamp"))
+(cl:defvar %point-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +point-clamp+
+  (cl:if (cl:eq %point-clamp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %point-clamp-cache% (dotnet:static <type-str> "PointClamp"))
+      %point-clamp-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Graphics.SamplerState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -94,7 +120,11 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +point-wrap+ (dotnet:static <type-str> "PointWrap"))
+(cl:defvar %point-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +point-wrap+
+  (cl:if (cl:eq %point-wrap-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %point-wrap-cache% (dotnet:static <type-str> "PointWrap"))
+      %point-wrap-cache%))
 
 (cl:defun address-u (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SamplerState") obj!) "get_AddressU"))

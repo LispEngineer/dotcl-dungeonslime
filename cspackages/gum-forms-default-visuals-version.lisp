@@ -1,22 +1,23 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.DefaultVisualsVersion
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-default-visuals-version)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.DefaultVisualsVersion"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.DefaultVisualsVersion"))
 (cl:defconstant <type-str> "Gum.Forms.DefaultVisualsVersion")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.DefaultVisualsVersion")))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Gum.Forms.DefaultVisualsVersion is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Gum.Forms.DefaultVisualsVersion is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -26,10 +27,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +newest+ (dotnet:static <type-str> "Newest"))
+(cl:defvar %newest-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +newest+
+  (cl:if (cl:eq %newest-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %newest-cache% (dotnet:static <type-str> "Newest"))
+      %newest-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Gum.Forms.DefaultVisualsVersion is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Gum.Forms.DefaultVisualsVersion is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -39,10 +45,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +v1+ (dotnet:static <type-str> "V1"))
+(cl:defvar %v1-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +v1+
+  (cl:if (cl:eq %v1-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %v1-cache% (dotnet:static <type-str> "V1"))
+      %v1-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Gum.Forms.DefaultVisualsVersion is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Gum.Forms.DefaultVisualsVersion is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -52,10 +63,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +v2+ (dotnet:static <type-str> "V2"))
+(cl:defvar %v2-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +v2+
+  (cl:if (cl:eq %v2-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %v2-cache% (dotnet:static <type-str> "V2"))
+      %v2-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Gum.Forms.DefaultVisualsVersion is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Gum.Forms.DefaultVisualsVersion is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -65,7 +81,11 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +v3+ (dotnet:static <type-str> "V3"))
+(cl:defvar %v3-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +v3+
+  (cl:if (cl:eq %v3-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %v3-cache% (dotnet:static <type-str> "V3"))
+      %v3-cache%))
 
 (cl:defun value__ (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.DefaultVisualsVersion") obj!) "value__"))
@@ -73,7 +93,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf value__) (new-value obj!)

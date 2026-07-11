@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.Generic.IEnumerable`1
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :system-collections-generic-i-enumerable-1)
 
-(cl:defconstant <type> (dotnet:resolve-type "System.Collections.Generic.IEnumerable`1"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.Generic.IEnumerable`1"))
 (cl:defconstant <type-str> "System.Collections.Generic.IEnumerable`1")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.Collections.Generic.IEnumerable`1")))
 

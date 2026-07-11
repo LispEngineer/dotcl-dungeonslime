@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement")))
 
@@ -33,41 +33,113 @@ new(InteractiveGue)
                     :method-name "new"
                     :supplied-args (cl:append (cl:when supplied-visual (cl:list :visual visual)))))))
 
-(cl:defconstant +disabled-focused-state+ (dotnet:static <type-str> "DisabledFocusedState"))
+(cl:defvar %disabled-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +disabled-focused-state+
+  (cl:if (cl:eq %disabled-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %disabled-focused-state-cache% (dotnet:static <type-str> "DisabledFocusedState"))
+      %disabled-focused-state-cache%))
 
-(cl:defconstant +disabled-focused-state-name+ (dotnet:static <type-str> "DisabledFocusedStateName"))
+(cl:defvar %disabled-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +disabled-focused-state-name+
+  (cl:if (cl:eq %disabled-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %disabled-focused-state-name-cache% (dotnet:static <type-str> "DisabledFocusedStateName"))
+      %disabled-focused-state-name-cache%))
 
-(cl:defconstant +disabled-state+ (dotnet:static <type-str> "DisabledState"))
+(cl:defvar %disabled-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +disabled-state+
+  (cl:if (cl:eq %disabled-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %disabled-state-cache% (dotnet:static <type-str> "DisabledState"))
+      %disabled-state-cache%))
 
-(cl:defconstant +disabled-state-name+ (dotnet:static <type-str> "DisabledStateName"))
+(cl:defvar %disabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +disabled-state-name+
+  (cl:if (cl:eq %disabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %disabled-state-name-cache% (dotnet:static <type-str> "DisabledStateName"))
+      %disabled-state-name-cache%))
 
-(cl:defconstant +enabled-state+ (dotnet:static <type-str> "EnabledState"))
+(cl:defvar %enabled-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +enabled-state+
+  (cl:if (cl:eq %enabled-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %enabled-state-cache% (dotnet:static <type-str> "EnabledState"))
+      %enabled-state-cache%))
 
-(cl:defconstant +enabled-state-name+ (dotnet:static <type-str> "EnabledStateName"))
+(cl:defvar %enabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +enabled-state-name+
+  (cl:if (cl:eq %enabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %enabled-state-name-cache% (dotnet:static <type-str> "EnabledStateName"))
+      %enabled-state-name-cache%))
 
-(cl:defconstant +focused-state+ (dotnet:static <type-str> "FocusedState"))
+(cl:defvar %focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +focused-state+
+  (cl:if (cl:eq %focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %focused-state-cache% (dotnet:static <type-str> "FocusedState"))
+      %focused-state-cache%))
 
-(cl:defconstant +focused-state-name+ (dotnet:static <type-str> "FocusedStateName"))
+(cl:defvar %focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +focused-state-name+
+  (cl:if (cl:eq %focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %focused-state-name-cache% (dotnet:static <type-str> "FocusedStateName"))
+      %focused-state-name-cache%))
 
-(cl:defconstant +highlighted-focused-state+ (dotnet:static <type-str> "HighlightedFocusedState"))
+(cl:defvar %highlighted-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +highlighted-focused-state+
+  (cl:if (cl:eq %highlighted-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %highlighted-focused-state-cache% (dotnet:static <type-str> "HighlightedFocusedState"))
+      %highlighted-focused-state-cache%))
 
-(cl:defconstant +highlighted-focused-state-name+ (dotnet:static <type-str> "HighlightedFocusedStateName"))
+(cl:defvar %highlighted-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +highlighted-focused-state-name+
+  (cl:if (cl:eq %highlighted-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %highlighted-focused-state-name-cache% (dotnet:static <type-str> "HighlightedFocusedStateName"))
+      %highlighted-focused-state-name-cache%))
 
-(cl:defconstant +highlighted-state+ (dotnet:static <type-str> "HighlightedState"))
+(cl:defvar %highlighted-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +highlighted-state+
+  (cl:if (cl:eq %highlighted-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %highlighted-state-cache% (dotnet:static <type-str> "HighlightedState"))
+      %highlighted-state-cache%))
 
-(cl:defconstant +highlighted-state-name+ (dotnet:static <type-str> "HighlightedStateName"))
+(cl:defvar %highlighted-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +highlighted-state-name+
+  (cl:if (cl:eq %highlighted-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %highlighted-state-name-cache% (dotnet:static <type-str> "HighlightedStateName"))
+      %highlighted-state-name-cache%))
 
-(cl:defconstant +horizontal-state-name+ (dotnet:static <type-str> "HorizontalStateName"))
+(cl:defvar %horizontal-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +horizontal-state-name+
+  (cl:if (cl:eq %horizontal-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %horizontal-state-name-cache% (dotnet:static <type-str> "HorizontalStateName"))
+      %horizontal-state-name-cache%))
 
-(cl:defconstant +pushed-state+ (dotnet:static <type-str> "PushedState"))
+(cl:defvar %pushed-state-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pushed-state+
+  (cl:if (cl:eq %pushed-state-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pushed-state-cache% (dotnet:static <type-str> "PushedState"))
+      %pushed-state-cache%))
 
-(cl:defconstant +pushed-state-name+ (dotnet:static <type-str> "PushedStateName"))
+(cl:defvar %pushed-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pushed-state-name+
+  (cl:if (cl:eq %pushed-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pushed-state-name-cache% (dotnet:static <type-str> "PushedStateName"))
+      %pushed-state-name-cache%))
 
-(cl:defconstant +selected-highlighted-state-name+ (dotnet:static <type-str> "SelectedHighlightedStateName"))
+(cl:defvar %selected-highlighted-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +selected-highlighted-state-name+
+  (cl:if (cl:eq %selected-highlighted-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %selected-highlighted-state-name-cache% (dotnet:static <type-str> "SelectedHighlightedStateName"))
+      %selected-highlighted-state-name-cache%))
 
-(cl:defconstant +selected-state-name+ (dotnet:static <type-str> "SelectedStateName"))
+(cl:defvar %selected-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +selected-state-name+
+  (cl:if (cl:eq %selected-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %selected-state-name-cache% (dotnet:static <type-str> "SelectedStateName"))
+      %selected-state-name-cache%))
 
-(cl:defconstant +vertical-state-name+ (dotnet:static <type-str> "VerticalStateName"))
+(cl:defvar %vertical-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +vertical-state-name+
+  (cl:if (cl:eq %vertical-state-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %vertical-state-name-cache% (dotnet:static <type-str> "VerticalStateName"))
+      %vertical-state-name-cache%))
 
 (cl:define-symbol-macro default-forms-components (dotnet:static <type-str> "DefaultFormsComponents"))
 

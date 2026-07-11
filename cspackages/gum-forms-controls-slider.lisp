@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Slider
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-controls-slider)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Slider"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Slider"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Slider")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.Controls.Slider")))
 
@@ -33,7 +33,11 @@ new(InteractiveGue)
                     :method-name "new"
                     :supplied-args (cl:append (cl:when supplied-visual (cl:list :visual visual)))))))
 
-(cl:defconstant +slider-category-name+ (dotnet:static <type-str> "SliderCategoryName"))
+(cl:defvar %slider-category-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +slider-category-name+
+  (cl:if (cl:eq %slider-category-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %slider-category-name-cache% (dotnet:static <type-str> "SliderCategoryName"))
+      %slider-category-name-cache%))
 
 (cl:defun ignored-keys (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Slider") obj!) "get_IgnoredKeys"))

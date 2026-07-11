@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :microsoft-xna-framework-color)
 
-(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Color")))
 
@@ -70,7 +70,8 @@ new(Byte, Byte, Byte, Byte)
                     :supplied-args (cl:append (cl:when supplied-packed-value (cl:list :packed-value packed-value)) (cl:when supplied-alpha (cl:list :alpha alpha)) (cl:when supplied-b (cl:list :b b)) (cl:when supplied-alpha2 (cl:list :alpha2 alpha2)))))))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -80,10 +81,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +alice-blue+ (dotnet:static <type-str> "AliceBlue"))
+(cl:defvar %alice-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +alice-blue+
+  (cl:if (cl:eq %alice-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %alice-blue-cache% (dotnet:static <type-str> "AliceBlue"))
+      %alice-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -93,10 +99,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +antique-white+ (dotnet:static <type-str> "AntiqueWhite"))
+(cl:defvar %antique-white-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +antique-white+
+  (cl:if (cl:eq %antique-white-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %antique-white-cache% (dotnet:static <type-str> "AntiqueWhite"))
+      %antique-white-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -106,10 +117,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +aqua+ (dotnet:static <type-str> "Aqua"))
+(cl:defvar %aqua-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +aqua+
+  (cl:if (cl:eq %aqua-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %aqua-cache% (dotnet:static <type-str> "Aqua"))
+      %aqua-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -119,10 +135,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +aquamarine+ (dotnet:static <type-str> "Aquamarine"))
+(cl:defvar %aquamarine-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +aquamarine+
+  (cl:if (cl:eq %aquamarine-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %aquamarine-cache% (dotnet:static <type-str> "Aquamarine"))
+      %aquamarine-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -132,10 +153,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +azure+ (dotnet:static <type-str> "Azure"))
+(cl:defvar %azure-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +azure+
+  (cl:if (cl:eq %azure-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %azure-cache% (dotnet:static <type-str> "Azure"))
+      %azure-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -145,10 +171,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +beige+ (dotnet:static <type-str> "Beige"))
+(cl:defvar %beige-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +beige+
+  (cl:if (cl:eq %beige-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %beige-cache% (dotnet:static <type-str> "Beige"))
+      %beige-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -158,10 +189,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +bisque+ (dotnet:static <type-str> "Bisque"))
+(cl:defvar %bisque-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +bisque+
+  (cl:if (cl:eq %bisque-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %bisque-cache% (dotnet:static <type-str> "Bisque"))
+      %bisque-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -171,10 +207,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +black+ (dotnet:static <type-str> "Black"))
+(cl:defvar %black-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +black+
+  (cl:if (cl:eq %black-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %black-cache% (dotnet:static <type-str> "Black"))
+      %black-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -184,10 +225,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +blanched-almond+ (dotnet:static <type-str> "BlanchedAlmond"))
+(cl:defvar %blanched-almond-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +blanched-almond+
+  (cl:if (cl:eq %blanched-almond-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %blanched-almond-cache% (dotnet:static <type-str> "BlanchedAlmond"))
+      %blanched-almond-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -197,10 +243,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +blue+ (dotnet:static <type-str> "Blue"))
+(cl:defvar %blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +blue+
+  (cl:if (cl:eq %blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %blue-cache% (dotnet:static <type-str> "Blue"))
+      %blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -210,10 +261,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +blue-violet+ (dotnet:static <type-str> "BlueViolet"))
+(cl:defvar %blue-violet-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +blue-violet+
+  (cl:if (cl:eq %blue-violet-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %blue-violet-cache% (dotnet:static <type-str> "BlueViolet"))
+      %blue-violet-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -223,10 +279,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +brown+ (dotnet:static <type-str> "Brown"))
+(cl:defvar %brown-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +brown+
+  (cl:if (cl:eq %brown-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %brown-cache% (dotnet:static <type-str> "Brown"))
+      %brown-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -236,10 +297,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +burly-wood+ (dotnet:static <type-str> "BurlyWood"))
+(cl:defvar %burly-wood-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +burly-wood+
+  (cl:if (cl:eq %burly-wood-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %burly-wood-cache% (dotnet:static <type-str> "BurlyWood"))
+      %burly-wood-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -249,10 +315,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +cadet-blue+ (dotnet:static <type-str> "CadetBlue"))
+(cl:defvar %cadet-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +cadet-blue+
+  (cl:if (cl:eq %cadet-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %cadet-blue-cache% (dotnet:static <type-str> "CadetBlue"))
+      %cadet-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -262,10 +333,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +chartreuse+ (dotnet:static <type-str> "Chartreuse"))
+(cl:defvar %chartreuse-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +chartreuse+
+  (cl:if (cl:eq %chartreuse-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %chartreuse-cache% (dotnet:static <type-str> "Chartreuse"))
+      %chartreuse-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -275,10 +351,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +chocolate+ (dotnet:static <type-str> "Chocolate"))
+(cl:defvar %chocolate-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +chocolate+
+  (cl:if (cl:eq %chocolate-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %chocolate-cache% (dotnet:static <type-str> "Chocolate"))
+      %chocolate-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -288,10 +369,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +coral+ (dotnet:static <type-str> "Coral"))
+(cl:defvar %coral-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +coral+
+  (cl:if (cl:eq %coral-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %coral-cache% (dotnet:static <type-str> "Coral"))
+      %coral-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -301,10 +387,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +cornflower-blue+ (dotnet:static <type-str> "CornflowerBlue"))
+(cl:defvar %cornflower-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +cornflower-blue+
+  (cl:if (cl:eq %cornflower-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %cornflower-blue-cache% (dotnet:static <type-str> "CornflowerBlue"))
+      %cornflower-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -314,10 +405,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +cornsilk+ (dotnet:static <type-str> "Cornsilk"))
+(cl:defvar %cornsilk-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +cornsilk+
+  (cl:if (cl:eq %cornsilk-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %cornsilk-cache% (dotnet:static <type-str> "Cornsilk"))
+      %cornsilk-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -327,10 +423,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +crimson+ (dotnet:static <type-str> "Crimson"))
+(cl:defvar %crimson-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +crimson+
+  (cl:if (cl:eq %crimson-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %crimson-cache% (dotnet:static <type-str> "Crimson"))
+      %crimson-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -340,10 +441,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +cyan+ (dotnet:static <type-str> "Cyan"))
+(cl:defvar %cyan-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +cyan+
+  (cl:if (cl:eq %cyan-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %cyan-cache% (dotnet:static <type-str> "Cyan"))
+      %cyan-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -353,10 +459,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-blue+ (dotnet:static <type-str> "DarkBlue"))
+(cl:defvar %dark-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-blue+
+  (cl:if (cl:eq %dark-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-blue-cache% (dotnet:static <type-str> "DarkBlue"))
+      %dark-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -366,10 +477,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-cyan+ (dotnet:static <type-str> "DarkCyan"))
+(cl:defvar %dark-cyan-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-cyan+
+  (cl:if (cl:eq %dark-cyan-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-cyan-cache% (dotnet:static <type-str> "DarkCyan"))
+      %dark-cyan-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -379,10 +495,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-goldenrod+ (dotnet:static <type-str> "DarkGoldenrod"))
+(cl:defvar %dark-goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-goldenrod+
+  (cl:if (cl:eq %dark-goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-goldenrod-cache% (dotnet:static <type-str> "DarkGoldenrod"))
+      %dark-goldenrod-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -392,10 +513,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-gray+ (dotnet:static <type-str> "DarkGray"))
+(cl:defvar %dark-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-gray+
+  (cl:if (cl:eq %dark-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-gray-cache% (dotnet:static <type-str> "DarkGray"))
+      %dark-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -405,10 +531,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-green+ (dotnet:static <type-str> "DarkGreen"))
+(cl:defvar %dark-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-green+
+  (cl:if (cl:eq %dark-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-green-cache% (dotnet:static <type-str> "DarkGreen"))
+      %dark-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -418,10 +549,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-khaki+ (dotnet:static <type-str> "DarkKhaki"))
+(cl:defvar %dark-khaki-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-khaki+
+  (cl:if (cl:eq %dark-khaki-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-khaki-cache% (dotnet:static <type-str> "DarkKhaki"))
+      %dark-khaki-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -431,10 +567,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-magenta+ (dotnet:static <type-str> "DarkMagenta"))
+(cl:defvar %dark-magenta-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-magenta+
+  (cl:if (cl:eq %dark-magenta-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-magenta-cache% (dotnet:static <type-str> "DarkMagenta"))
+      %dark-magenta-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -444,10 +585,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-olive-green+ (dotnet:static <type-str> "DarkOliveGreen"))
+(cl:defvar %dark-olive-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-olive-green+
+  (cl:if (cl:eq %dark-olive-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-olive-green-cache% (dotnet:static <type-str> "DarkOliveGreen"))
+      %dark-olive-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -457,10 +603,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-orange+ (dotnet:static <type-str> "DarkOrange"))
+(cl:defvar %dark-orange-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-orange+
+  (cl:if (cl:eq %dark-orange-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-orange-cache% (dotnet:static <type-str> "DarkOrange"))
+      %dark-orange-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -470,10 +621,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-orchid+ (dotnet:static <type-str> "DarkOrchid"))
+(cl:defvar %dark-orchid-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-orchid+
+  (cl:if (cl:eq %dark-orchid-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-orchid-cache% (dotnet:static <type-str> "DarkOrchid"))
+      %dark-orchid-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -483,10 +639,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-red+ (dotnet:static <type-str> "DarkRed"))
+(cl:defvar %dark-red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-red+
+  (cl:if (cl:eq %dark-red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-red-cache% (dotnet:static <type-str> "DarkRed"))
+      %dark-red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -496,10 +657,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-salmon+ (dotnet:static <type-str> "DarkSalmon"))
+(cl:defvar %dark-salmon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-salmon+
+  (cl:if (cl:eq %dark-salmon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-salmon-cache% (dotnet:static <type-str> "DarkSalmon"))
+      %dark-salmon-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -509,10 +675,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-sea-green+ (dotnet:static <type-str> "DarkSeaGreen"))
+(cl:defvar %dark-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-sea-green+
+  (cl:if (cl:eq %dark-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-sea-green-cache% (dotnet:static <type-str> "DarkSeaGreen"))
+      %dark-sea-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -522,10 +693,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-slate-blue+ (dotnet:static <type-str> "DarkSlateBlue"))
+(cl:defvar %dark-slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-slate-blue+
+  (cl:if (cl:eq %dark-slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-slate-blue-cache% (dotnet:static <type-str> "DarkSlateBlue"))
+      %dark-slate-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -535,10 +711,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-slate-gray+ (dotnet:static <type-str> "DarkSlateGray"))
+(cl:defvar %dark-slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-slate-gray+
+  (cl:if (cl:eq %dark-slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-slate-gray-cache% (dotnet:static <type-str> "DarkSlateGray"))
+      %dark-slate-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -548,10 +729,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-turquoise+ (dotnet:static <type-str> "DarkTurquoise"))
+(cl:defvar %dark-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-turquoise+
+  (cl:if (cl:eq %dark-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-turquoise-cache% (dotnet:static <type-str> "DarkTurquoise"))
+      %dark-turquoise-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -561,10 +747,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dark-violet+ (dotnet:static <type-str> "DarkViolet"))
+(cl:defvar %dark-violet-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dark-violet+
+  (cl:if (cl:eq %dark-violet-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dark-violet-cache% (dotnet:static <type-str> "DarkViolet"))
+      %dark-violet-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -574,10 +765,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +deep-pink+ (dotnet:static <type-str> "DeepPink"))
+(cl:defvar %deep-pink-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +deep-pink+
+  (cl:if (cl:eq %deep-pink-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %deep-pink-cache% (dotnet:static <type-str> "DeepPink"))
+      %deep-pink-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -587,10 +783,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +deep-sky-blue+ (dotnet:static <type-str> "DeepSkyBlue"))
+(cl:defvar %deep-sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +deep-sky-blue+
+  (cl:if (cl:eq %deep-sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %deep-sky-blue-cache% (dotnet:static <type-str> "DeepSkyBlue"))
+      %deep-sky-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -600,10 +801,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dim-gray+ (dotnet:static <type-str> "DimGray"))
+(cl:defvar %dim-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dim-gray+
+  (cl:if (cl:eq %dim-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dim-gray-cache% (dotnet:static <type-str> "DimGray"))
+      %dim-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -613,10 +819,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +dodger-blue+ (dotnet:static <type-str> "DodgerBlue"))
+(cl:defvar %dodger-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +dodger-blue+
+  (cl:if (cl:eq %dodger-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %dodger-blue-cache% (dotnet:static <type-str> "DodgerBlue"))
+      %dodger-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -626,10 +837,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +firebrick+ (dotnet:static <type-str> "Firebrick"))
+(cl:defvar %firebrick-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +firebrick+
+  (cl:if (cl:eq %firebrick-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %firebrick-cache% (dotnet:static <type-str> "Firebrick"))
+      %firebrick-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -639,10 +855,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +floral-white+ (dotnet:static <type-str> "FloralWhite"))
+(cl:defvar %floral-white-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +floral-white+
+  (cl:if (cl:eq %floral-white-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %floral-white-cache% (dotnet:static <type-str> "FloralWhite"))
+      %floral-white-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -652,10 +873,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +forest-green+ (dotnet:static <type-str> "ForestGreen"))
+(cl:defvar %forest-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +forest-green+
+  (cl:if (cl:eq %forest-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %forest-green-cache% (dotnet:static <type-str> "ForestGreen"))
+      %forest-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -665,10 +891,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +fuchsia+ (dotnet:static <type-str> "Fuchsia"))
+(cl:defvar %fuchsia-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +fuchsia+
+  (cl:if (cl:eq %fuchsia-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %fuchsia-cache% (dotnet:static <type-str> "Fuchsia"))
+      %fuchsia-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -678,10 +909,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +gainsboro+ (dotnet:static <type-str> "Gainsboro"))
+(cl:defvar %gainsboro-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +gainsboro+
+  (cl:if (cl:eq %gainsboro-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %gainsboro-cache% (dotnet:static <type-str> "Gainsboro"))
+      %gainsboro-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -691,10 +927,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +ghost-white+ (dotnet:static <type-str> "GhostWhite"))
+(cl:defvar %ghost-white-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +ghost-white+
+  (cl:if (cl:eq %ghost-white-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %ghost-white-cache% (dotnet:static <type-str> "GhostWhite"))
+      %ghost-white-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -704,10 +945,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +gold+ (dotnet:static <type-str> "Gold"))
+(cl:defvar %gold-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +gold+
+  (cl:if (cl:eq %gold-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %gold-cache% (dotnet:static <type-str> "Gold"))
+      %gold-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -717,10 +963,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +goldenrod+ (dotnet:static <type-str> "Goldenrod"))
+(cl:defvar %goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +goldenrod+
+  (cl:if (cl:eq %goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %goldenrod-cache% (dotnet:static <type-str> "Goldenrod"))
+      %goldenrod-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -730,10 +981,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +gray+ (dotnet:static <type-str> "Gray"))
+(cl:defvar %gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +gray+
+  (cl:if (cl:eq %gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %gray-cache% (dotnet:static <type-str> "Gray"))
+      %gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -743,10 +999,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +green+ (dotnet:static <type-str> "Green"))
+(cl:defvar %green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +green+
+  (cl:if (cl:eq %green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %green-cache% (dotnet:static <type-str> "Green"))
+      %green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -756,10 +1017,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +green-yellow+ (dotnet:static <type-str> "GreenYellow"))
+(cl:defvar %green-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +green-yellow+
+  (cl:if (cl:eq %green-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %green-yellow-cache% (dotnet:static <type-str> "GreenYellow"))
+      %green-yellow-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -769,10 +1035,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +honeydew+ (dotnet:static <type-str> "Honeydew"))
+(cl:defvar %honeydew-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +honeydew+
+  (cl:if (cl:eq %honeydew-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %honeydew-cache% (dotnet:static <type-str> "Honeydew"))
+      %honeydew-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -782,10 +1053,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +hot-pink+ (dotnet:static <type-str> "HotPink"))
+(cl:defvar %hot-pink-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +hot-pink+
+  (cl:if (cl:eq %hot-pink-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %hot-pink-cache% (dotnet:static <type-str> "HotPink"))
+      %hot-pink-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -795,10 +1071,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +indian-red+ (dotnet:static <type-str> "IndianRed"))
+(cl:defvar %indian-red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +indian-red+
+  (cl:if (cl:eq %indian-red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %indian-red-cache% (dotnet:static <type-str> "IndianRed"))
+      %indian-red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -808,10 +1089,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +indigo+ (dotnet:static <type-str> "Indigo"))
+(cl:defvar %indigo-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +indigo+
+  (cl:if (cl:eq %indigo-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %indigo-cache% (dotnet:static <type-str> "Indigo"))
+      %indigo-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -821,10 +1107,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +ivory+ (dotnet:static <type-str> "Ivory"))
+(cl:defvar %ivory-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +ivory+
+  (cl:if (cl:eq %ivory-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %ivory-cache% (dotnet:static <type-str> "Ivory"))
+      %ivory-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -834,10 +1125,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +khaki+ (dotnet:static <type-str> "Khaki"))
+(cl:defvar %khaki-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +khaki+
+  (cl:if (cl:eq %khaki-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %khaki-cache% (dotnet:static <type-str> "Khaki"))
+      %khaki-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -847,10 +1143,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lavender+ (dotnet:static <type-str> "Lavender"))
+(cl:defvar %lavender-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lavender+
+  (cl:if (cl:eq %lavender-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lavender-cache% (dotnet:static <type-str> "Lavender"))
+      %lavender-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -860,10 +1161,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lavender-blush+ (dotnet:static <type-str> "LavenderBlush"))
+(cl:defvar %lavender-blush-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lavender-blush+
+  (cl:if (cl:eq %lavender-blush-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lavender-blush-cache% (dotnet:static <type-str> "LavenderBlush"))
+      %lavender-blush-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -873,10 +1179,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lawn-green+ (dotnet:static <type-str> "LawnGreen"))
+(cl:defvar %lawn-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lawn-green+
+  (cl:if (cl:eq %lawn-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lawn-green-cache% (dotnet:static <type-str> "LawnGreen"))
+      %lawn-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -886,10 +1197,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lemon-chiffon+ (dotnet:static <type-str> "LemonChiffon"))
+(cl:defvar %lemon-chiffon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lemon-chiffon+
+  (cl:if (cl:eq %lemon-chiffon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lemon-chiffon-cache% (dotnet:static <type-str> "LemonChiffon"))
+      %lemon-chiffon-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -899,10 +1215,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-blue+ (dotnet:static <type-str> "LightBlue"))
+(cl:defvar %light-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-blue+
+  (cl:if (cl:eq %light-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-blue-cache% (dotnet:static <type-str> "LightBlue"))
+      %light-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -912,10 +1233,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-coral+ (dotnet:static <type-str> "LightCoral"))
+(cl:defvar %light-coral-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-coral+
+  (cl:if (cl:eq %light-coral-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-coral-cache% (dotnet:static <type-str> "LightCoral"))
+      %light-coral-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -925,10 +1251,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-cyan+ (dotnet:static <type-str> "LightCyan"))
+(cl:defvar %light-cyan-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-cyan+
+  (cl:if (cl:eq %light-cyan-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-cyan-cache% (dotnet:static <type-str> "LightCyan"))
+      %light-cyan-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -938,10 +1269,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-goldenrod-yellow+ (dotnet:static <type-str> "LightGoldenrodYellow"))
+(cl:defvar %light-goldenrod-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-goldenrod-yellow+
+  (cl:if (cl:eq %light-goldenrod-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-goldenrod-yellow-cache% (dotnet:static <type-str> "LightGoldenrodYellow"))
+      %light-goldenrod-yellow-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -951,10 +1287,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-gray+ (dotnet:static <type-str> "LightGray"))
+(cl:defvar %light-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-gray+
+  (cl:if (cl:eq %light-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-gray-cache% (dotnet:static <type-str> "LightGray"))
+      %light-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -964,10 +1305,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-green+ (dotnet:static <type-str> "LightGreen"))
+(cl:defvar %light-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-green+
+  (cl:if (cl:eq %light-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-green-cache% (dotnet:static <type-str> "LightGreen"))
+      %light-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -977,10 +1323,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-pink+ (dotnet:static <type-str> "LightPink"))
+(cl:defvar %light-pink-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-pink+
+  (cl:if (cl:eq %light-pink-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-pink-cache% (dotnet:static <type-str> "LightPink"))
+      %light-pink-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -990,10 +1341,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-salmon+ (dotnet:static <type-str> "LightSalmon"))
+(cl:defvar %light-salmon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-salmon+
+  (cl:if (cl:eq %light-salmon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-salmon-cache% (dotnet:static <type-str> "LightSalmon"))
+      %light-salmon-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1003,10 +1359,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-sea-green+ (dotnet:static <type-str> "LightSeaGreen"))
+(cl:defvar %light-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-sea-green+
+  (cl:if (cl:eq %light-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-sea-green-cache% (dotnet:static <type-str> "LightSeaGreen"))
+      %light-sea-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1016,10 +1377,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-sky-blue+ (dotnet:static <type-str> "LightSkyBlue"))
+(cl:defvar %light-sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-sky-blue+
+  (cl:if (cl:eq %light-sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-sky-blue-cache% (dotnet:static <type-str> "LightSkyBlue"))
+      %light-sky-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1029,10 +1395,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-slate-gray+ (dotnet:static <type-str> "LightSlateGray"))
+(cl:defvar %light-slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-slate-gray+
+  (cl:if (cl:eq %light-slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-slate-gray-cache% (dotnet:static <type-str> "LightSlateGray"))
+      %light-slate-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1042,10 +1413,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-steel-blue+ (dotnet:static <type-str> "LightSteelBlue"))
+(cl:defvar %light-steel-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-steel-blue+
+  (cl:if (cl:eq %light-steel-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-steel-blue-cache% (dotnet:static <type-str> "LightSteelBlue"))
+      %light-steel-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1055,10 +1431,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +light-yellow+ (dotnet:static <type-str> "LightYellow"))
+(cl:defvar %light-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +light-yellow+
+  (cl:if (cl:eq %light-yellow-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %light-yellow-cache% (dotnet:static <type-str> "LightYellow"))
+      %light-yellow-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1068,10 +1449,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lime+ (dotnet:static <type-str> "Lime"))
+(cl:defvar %lime-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lime+
+  (cl:if (cl:eq %lime-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lime-cache% (dotnet:static <type-str> "Lime"))
+      %lime-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1081,10 +1467,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +lime-green+ (dotnet:static <type-str> "LimeGreen"))
+(cl:defvar %lime-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +lime-green+
+  (cl:if (cl:eq %lime-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %lime-green-cache% (dotnet:static <type-str> "LimeGreen"))
+      %lime-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1094,10 +1485,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +linen+ (dotnet:static <type-str> "Linen"))
+(cl:defvar %linen-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +linen+
+  (cl:if (cl:eq %linen-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %linen-cache% (dotnet:static <type-str> "Linen"))
+      %linen-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1107,10 +1503,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +magenta+ (dotnet:static <type-str> "Magenta"))
+(cl:defvar %magenta-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +magenta+
+  (cl:if (cl:eq %magenta-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %magenta-cache% (dotnet:static <type-str> "Magenta"))
+      %magenta-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1120,10 +1521,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +maroon+ (dotnet:static <type-str> "Maroon"))
+(cl:defvar %maroon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +maroon+
+  (cl:if (cl:eq %maroon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %maroon-cache% (dotnet:static <type-str> "Maroon"))
+      %maroon-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1133,10 +1539,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-aquamarine+ (dotnet:static <type-str> "MediumAquamarine"))
+(cl:defvar %medium-aquamarine-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-aquamarine+
+  (cl:if (cl:eq %medium-aquamarine-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-aquamarine-cache% (dotnet:static <type-str> "MediumAquamarine"))
+      %medium-aquamarine-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1146,10 +1557,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-blue+ (dotnet:static <type-str> "MediumBlue"))
+(cl:defvar %medium-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-blue+
+  (cl:if (cl:eq %medium-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-blue-cache% (dotnet:static <type-str> "MediumBlue"))
+      %medium-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1159,10 +1575,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-orchid+ (dotnet:static <type-str> "MediumOrchid"))
+(cl:defvar %medium-orchid-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-orchid+
+  (cl:if (cl:eq %medium-orchid-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-orchid-cache% (dotnet:static <type-str> "MediumOrchid"))
+      %medium-orchid-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1172,10 +1593,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-purple+ (dotnet:static <type-str> "MediumPurple"))
+(cl:defvar %medium-purple-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-purple+
+  (cl:if (cl:eq %medium-purple-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-purple-cache% (dotnet:static <type-str> "MediumPurple"))
+      %medium-purple-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1185,10 +1611,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-sea-green+ (dotnet:static <type-str> "MediumSeaGreen"))
+(cl:defvar %medium-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-sea-green+
+  (cl:if (cl:eq %medium-sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-sea-green-cache% (dotnet:static <type-str> "MediumSeaGreen"))
+      %medium-sea-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1198,10 +1629,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-slate-blue+ (dotnet:static <type-str> "MediumSlateBlue"))
+(cl:defvar %medium-slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-slate-blue+
+  (cl:if (cl:eq %medium-slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-slate-blue-cache% (dotnet:static <type-str> "MediumSlateBlue"))
+      %medium-slate-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1211,10 +1647,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-spring-green+ (dotnet:static <type-str> "MediumSpringGreen"))
+(cl:defvar %medium-spring-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-spring-green+
+  (cl:if (cl:eq %medium-spring-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-spring-green-cache% (dotnet:static <type-str> "MediumSpringGreen"))
+      %medium-spring-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1224,10 +1665,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-turquoise+ (dotnet:static <type-str> "MediumTurquoise"))
+(cl:defvar %medium-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-turquoise+
+  (cl:if (cl:eq %medium-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-turquoise-cache% (dotnet:static <type-str> "MediumTurquoise"))
+      %medium-turquoise-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1237,10 +1683,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +medium-violet-red+ (dotnet:static <type-str> "MediumVioletRed"))
+(cl:defvar %medium-violet-red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +medium-violet-red+
+  (cl:if (cl:eq %medium-violet-red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %medium-violet-red-cache% (dotnet:static <type-str> "MediumVioletRed"))
+      %medium-violet-red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1250,10 +1701,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +midnight-blue+ (dotnet:static <type-str> "MidnightBlue"))
+(cl:defvar %midnight-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +midnight-blue+
+  (cl:if (cl:eq %midnight-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %midnight-blue-cache% (dotnet:static <type-str> "MidnightBlue"))
+      %midnight-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1263,10 +1719,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +mint-cream+ (dotnet:static <type-str> "MintCream"))
+(cl:defvar %mint-cream-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +mint-cream+
+  (cl:if (cl:eq %mint-cream-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %mint-cream-cache% (dotnet:static <type-str> "MintCream"))
+      %mint-cream-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1276,10 +1737,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +misty-rose+ (dotnet:static <type-str> "MistyRose"))
+(cl:defvar %misty-rose-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +misty-rose+
+  (cl:if (cl:eq %misty-rose-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %misty-rose-cache% (dotnet:static <type-str> "MistyRose"))
+      %misty-rose-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1289,10 +1755,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +moccasin+ (dotnet:static <type-str> "Moccasin"))
+(cl:defvar %moccasin-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +moccasin+
+  (cl:if (cl:eq %moccasin-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %moccasin-cache% (dotnet:static <type-str> "Moccasin"))
+      %moccasin-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1302,10 +1773,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +mono-game-orange+ (dotnet:static <type-str> "MonoGameOrange"))
+(cl:defvar %mono-game-orange-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +mono-game-orange+
+  (cl:if (cl:eq %mono-game-orange-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %mono-game-orange-cache% (dotnet:static <type-str> "MonoGameOrange"))
+      %mono-game-orange-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1315,10 +1791,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +navajo-white+ (dotnet:static <type-str> "NavajoWhite"))
+(cl:defvar %navajo-white-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +navajo-white+
+  (cl:if (cl:eq %navajo-white-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %navajo-white-cache% (dotnet:static <type-str> "NavajoWhite"))
+      %navajo-white-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1328,10 +1809,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +navy+ (dotnet:static <type-str> "Navy"))
+(cl:defvar %navy-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +navy+
+  (cl:if (cl:eq %navy-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %navy-cache% (dotnet:static <type-str> "Navy"))
+      %navy-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1341,10 +1827,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +old-lace+ (dotnet:static <type-str> "OldLace"))
+(cl:defvar %old-lace-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +old-lace+
+  (cl:if (cl:eq %old-lace-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %old-lace-cache% (dotnet:static <type-str> "OldLace"))
+      %old-lace-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1354,10 +1845,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +olive+ (dotnet:static <type-str> "Olive"))
+(cl:defvar %olive-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +olive+
+  (cl:if (cl:eq %olive-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %olive-cache% (dotnet:static <type-str> "Olive"))
+      %olive-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1367,10 +1863,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +olive-drab+ (dotnet:static <type-str> "OliveDrab"))
+(cl:defvar %olive-drab-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +olive-drab+
+  (cl:if (cl:eq %olive-drab-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %olive-drab-cache% (dotnet:static <type-str> "OliveDrab"))
+      %olive-drab-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1380,10 +1881,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +orange+ (dotnet:static <type-str> "Orange"))
+(cl:defvar %orange-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +orange+
+  (cl:if (cl:eq %orange-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %orange-cache% (dotnet:static <type-str> "Orange"))
+      %orange-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1393,10 +1899,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +orange-red+ (dotnet:static <type-str> "OrangeRed"))
+(cl:defvar %orange-red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +orange-red+
+  (cl:if (cl:eq %orange-red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %orange-red-cache% (dotnet:static <type-str> "OrangeRed"))
+      %orange-red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1406,10 +1917,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +orchid+ (dotnet:static <type-str> "Orchid"))
+(cl:defvar %orchid-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +orchid+
+  (cl:if (cl:eq %orchid-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %orchid-cache% (dotnet:static <type-str> "Orchid"))
+      %orchid-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1419,10 +1935,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +pale-goldenrod+ (dotnet:static <type-str> "PaleGoldenrod"))
+(cl:defvar %pale-goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pale-goldenrod+
+  (cl:if (cl:eq %pale-goldenrod-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pale-goldenrod-cache% (dotnet:static <type-str> "PaleGoldenrod"))
+      %pale-goldenrod-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1432,10 +1953,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +pale-green+ (dotnet:static <type-str> "PaleGreen"))
+(cl:defvar %pale-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pale-green+
+  (cl:if (cl:eq %pale-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pale-green-cache% (dotnet:static <type-str> "PaleGreen"))
+      %pale-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1445,10 +1971,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +pale-turquoise+ (dotnet:static <type-str> "PaleTurquoise"))
+(cl:defvar %pale-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pale-turquoise+
+  (cl:if (cl:eq %pale-turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pale-turquoise-cache% (dotnet:static <type-str> "PaleTurquoise"))
+      %pale-turquoise-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1458,10 +1989,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +pale-violet-red+ (dotnet:static <type-str> "PaleVioletRed"))
+(cl:defvar %pale-violet-red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pale-violet-red+
+  (cl:if (cl:eq %pale-violet-red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pale-violet-red-cache% (dotnet:static <type-str> "PaleVioletRed"))
+      %pale-violet-red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1471,10 +2007,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +papaya-whip+ (dotnet:static <type-str> "PapayaWhip"))
+(cl:defvar %papaya-whip-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +papaya-whip+
+  (cl:if (cl:eq %papaya-whip-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %papaya-whip-cache% (dotnet:static <type-str> "PapayaWhip"))
+      %papaya-whip-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1484,10 +2025,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +peach-puff+ (dotnet:static <type-str> "PeachPuff"))
+(cl:defvar %peach-puff-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +peach-puff+
+  (cl:if (cl:eq %peach-puff-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %peach-puff-cache% (dotnet:static <type-str> "PeachPuff"))
+      %peach-puff-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1497,10 +2043,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +peru+ (dotnet:static <type-str> "Peru"))
+(cl:defvar %peru-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +peru+
+  (cl:if (cl:eq %peru-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %peru-cache% (dotnet:static <type-str> "Peru"))
+      %peru-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1510,10 +2061,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +pink+ (dotnet:static <type-str> "Pink"))
+(cl:defvar %pink-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pink+
+  (cl:if (cl:eq %pink-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pink-cache% (dotnet:static <type-str> "Pink"))
+      %pink-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1523,10 +2079,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +plum+ (dotnet:static <type-str> "Plum"))
+(cl:defvar %plum-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +plum+
+  (cl:if (cl:eq %plum-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %plum-cache% (dotnet:static <type-str> "Plum"))
+      %plum-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1536,10 +2097,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +powder-blue+ (dotnet:static <type-str> "PowderBlue"))
+(cl:defvar %powder-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +powder-blue+
+  (cl:if (cl:eq %powder-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %powder-blue-cache% (dotnet:static <type-str> "PowderBlue"))
+      %powder-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1549,10 +2115,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +purple+ (dotnet:static <type-str> "Purple"))
+(cl:defvar %purple-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +purple+
+  (cl:if (cl:eq %purple-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %purple-cache% (dotnet:static <type-str> "Purple"))
+      %purple-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1562,10 +2133,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +red+ (dotnet:static <type-str> "Red"))
+(cl:defvar %red-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +red+
+  (cl:if (cl:eq %red-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %red-cache% (dotnet:static <type-str> "Red"))
+      %red-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1575,10 +2151,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +rosy-brown+ (dotnet:static <type-str> "RosyBrown"))
+(cl:defvar %rosy-brown-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +rosy-brown+
+  (cl:if (cl:eq %rosy-brown-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %rosy-brown-cache% (dotnet:static <type-str> "RosyBrown"))
+      %rosy-brown-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1588,10 +2169,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +royal-blue+ (dotnet:static <type-str> "RoyalBlue"))
+(cl:defvar %royal-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +royal-blue+
+  (cl:if (cl:eq %royal-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %royal-blue-cache% (dotnet:static <type-str> "RoyalBlue"))
+      %royal-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1601,10 +2187,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +saddle-brown+ (dotnet:static <type-str> "SaddleBrown"))
+(cl:defvar %saddle-brown-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +saddle-brown+
+  (cl:if (cl:eq %saddle-brown-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %saddle-brown-cache% (dotnet:static <type-str> "SaddleBrown"))
+      %saddle-brown-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1614,10 +2205,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +salmon+ (dotnet:static <type-str> "Salmon"))
+(cl:defvar %salmon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +salmon+
+  (cl:if (cl:eq %salmon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %salmon-cache% (dotnet:static <type-str> "Salmon"))
+      %salmon-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1627,10 +2223,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +sandy-brown+ (dotnet:static <type-str> "SandyBrown"))
+(cl:defvar %sandy-brown-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +sandy-brown+
+  (cl:if (cl:eq %sandy-brown-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %sandy-brown-cache% (dotnet:static <type-str> "SandyBrown"))
+      %sandy-brown-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1640,10 +2241,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +sea-green+ (dotnet:static <type-str> "SeaGreen"))
+(cl:defvar %sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +sea-green+
+  (cl:if (cl:eq %sea-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %sea-green-cache% (dotnet:static <type-str> "SeaGreen"))
+      %sea-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1653,10 +2259,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +sea-shell+ (dotnet:static <type-str> "SeaShell"))
+(cl:defvar %sea-shell-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +sea-shell+
+  (cl:if (cl:eq %sea-shell-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %sea-shell-cache% (dotnet:static <type-str> "SeaShell"))
+      %sea-shell-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1666,10 +2277,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +sienna+ (dotnet:static <type-str> "Sienna"))
+(cl:defvar %sienna-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +sienna+
+  (cl:if (cl:eq %sienna-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %sienna-cache% (dotnet:static <type-str> "Sienna"))
+      %sienna-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1679,10 +2295,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +silver+ (dotnet:static <type-str> "Silver"))
+(cl:defvar %silver-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +silver+
+  (cl:if (cl:eq %silver-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %silver-cache% (dotnet:static <type-str> "Silver"))
+      %silver-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1692,10 +2313,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +sky-blue+ (dotnet:static <type-str> "SkyBlue"))
+(cl:defvar %sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +sky-blue+
+  (cl:if (cl:eq %sky-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %sky-blue-cache% (dotnet:static <type-str> "SkyBlue"))
+      %sky-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1705,10 +2331,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +slate-blue+ (dotnet:static <type-str> "SlateBlue"))
+(cl:defvar %slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +slate-blue+
+  (cl:if (cl:eq %slate-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %slate-blue-cache% (dotnet:static <type-str> "SlateBlue"))
+      %slate-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1718,10 +2349,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +slate-gray+ (dotnet:static <type-str> "SlateGray"))
+(cl:defvar %slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +slate-gray+
+  (cl:if (cl:eq %slate-gray-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %slate-gray-cache% (dotnet:static <type-str> "SlateGray"))
+      %slate-gray-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1731,10 +2367,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +snow+ (dotnet:static <type-str> "Snow"))
+(cl:defvar %snow-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +snow+
+  (cl:if (cl:eq %snow-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %snow-cache% (dotnet:static <type-str> "Snow"))
+      %snow-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1744,10 +2385,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +spring-green+ (dotnet:static <type-str> "SpringGreen"))
+(cl:defvar %spring-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +spring-green+
+  (cl:if (cl:eq %spring-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %spring-green-cache% (dotnet:static <type-str> "SpringGreen"))
+      %spring-green-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1757,10 +2403,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +steel-blue+ (dotnet:static <type-str> "SteelBlue"))
+(cl:defvar %steel-blue-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +steel-blue+
+  (cl:if (cl:eq %steel-blue-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %steel-blue-cache% (dotnet:static <type-str> "SteelBlue"))
+      %steel-blue-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1770,10 +2421,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +tan+ (dotnet:static <type-str> "Tan"))
+(cl:defvar %tan-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +tan+
+  (cl:if (cl:eq %tan-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %tan-cache% (dotnet:static <type-str> "Tan"))
+      %tan-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1783,10 +2439,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +teal+ (dotnet:static <type-str> "Teal"))
+(cl:defvar %teal-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +teal+
+  (cl:if (cl:eq %teal-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %teal-cache% (dotnet:static <type-str> "Teal"))
+      %teal-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1796,10 +2457,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +thistle+ (dotnet:static <type-str> "Thistle"))
+(cl:defvar %thistle-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +thistle+
+  (cl:if (cl:eq %thistle-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %thistle-cache% (dotnet:static <type-str> "Thistle"))
+      %thistle-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1809,10 +2475,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +tomato+ (dotnet:static <type-str> "Tomato"))
+(cl:defvar %tomato-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +tomato+
+  (cl:if (cl:eq %tomato-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %tomato-cache% (dotnet:static <type-str> "Tomato"))
+      %tomato-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1822,10 +2493,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +transparent+ (dotnet:static <type-str> "Transparent"))
+(cl:defvar %transparent-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +transparent+
+  (cl:if (cl:eq %transparent-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %transparent-cache% (dotnet:static <type-str> "Transparent"))
+      %transparent-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1835,10 +2511,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +turquoise+ (dotnet:static <type-str> "Turquoise"))
+(cl:defvar %turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +turquoise+
+  (cl:if (cl:eq %turquoise-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %turquoise-cache% (dotnet:static <type-str> "Turquoise"))
+      %turquoise-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1848,10 +2529,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +violet+ (dotnet:static <type-str> "Violet"))
+(cl:defvar %violet-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +violet+
+  (cl:if (cl:eq %violet-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %violet-cache% (dotnet:static <type-str> "Violet"))
+      %violet-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1861,10 +2547,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +wheat+ (dotnet:static <type-str> "Wheat"))
+(cl:defvar %wheat-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +wheat+
+  (cl:if (cl:eq %wheat-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %wheat-cache% (dotnet:static <type-str> "Wheat"))
+      %wheat-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1874,10 +2565,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +white+ (dotnet:static <type-str> "White"))
+(cl:defvar %white-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +white+
+  (cl:if (cl:eq %white-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %white-cache% (dotnet:static <type-str> "White"))
+      %white-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1887,10 +2583,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +white-smoke+ (dotnet:static <type-str> "WhiteSmoke"))
+(cl:defvar %white-smoke-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +white-smoke+
+  (cl:if (cl:eq %white-smoke-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %white-smoke-cache% (dotnet:static <type-str> "WhiteSmoke"))
+      %white-smoke-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1900,10 +2601,15 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +yellow+ (dotnet:static <type-str> "Yellow"))
+(cl:defvar %yellow-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +yellow+
+  (cl:if (cl:eq %yellow-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %yellow-cache% (dotnet:static <type-str> "Yellow"))
+      %yellow-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Color is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Color is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -1913,7 +2619,11 @@ new(Byte, Byte, Byte, Byte)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +yellow-green+ (dotnet:static <type-str> "YellowGreen"))
+(cl:defvar %yellow-green-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +yellow-green+
+  (cl:if (cl:eq %yellow-green-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %yellow-green-cache% (dotnet:static <type-str> "YellowGreen"))
+      %yellow-green-cache%))
 
 (cl:defun a (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "get_A"))
@@ -1921,7 +2631,7 @@ new(Byte, Byte, Byte, Byte)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf a) (new-value obj!)
@@ -1933,7 +2643,7 @@ new(Byte, Byte, Byte, Byte)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf b) (new-value obj!)
@@ -1945,7 +2655,7 @@ new(Byte, Byte, Byte, Byte)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf g) (new-value obj!)
@@ -1957,7 +2667,7 @@ new(Byte, Byte, Byte, Byte)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf packed-value) (new-value obj!)
@@ -1969,7 +2679,7 @@ new(Byte, Byte, Byte, Byte)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf r) (new-value obj!)

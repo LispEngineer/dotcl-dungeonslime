@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :microsoft-xna-framework-point)
 
-(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Point"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Point"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Point")))
 
@@ -38,7 +38,8 @@ new(Int32, Int32)
                     :supplied-args (cl:append (cl:when supplied-value (cl:list :value value)) (cl:when supplied-y (cl:list :y y)))))))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Point is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Point is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -48,7 +49,11 @@ new(Int32, Int32)
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +zero+ (dotnet:static <type-str> "Zero"))
+(cl:defvar %zero-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +zero+
+  (cl:if (cl:eq %zero-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %zero-cache% (dotnet:static <type-str> "Zero"))
+      %zero-cache%))
 
 (cl:defun x (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Point") obj!) "X"))
@@ -56,7 +61,7 @@ new(Int32, Int32)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf x) (new-value obj!)
@@ -68,7 +73,7 @@ new(Int32, Int32)
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf y) (new-value obj!)

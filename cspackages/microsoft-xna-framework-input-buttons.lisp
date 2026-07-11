@@ -1,22 +1,23 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Buttons
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :microsoft-xna-framework-input-buttons)
 
-(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Buttons"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Buttons"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Buttons")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Buttons")))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -26,10 +27,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +a+ (dotnet:static <type-str> "A"))
+(cl:defvar %a-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +a+
+  (cl:if (cl:eq %a-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %a-cache% (dotnet:static <type-str> "A"))
+      %a-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -39,10 +45,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +b+ (dotnet:static <type-str> "B"))
+(cl:defvar %b-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +b+
+  (cl:if (cl:eq %b-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %b-cache% (dotnet:static <type-str> "B"))
+      %b-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -52,10 +63,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +back+ (dotnet:static <type-str> "Back"))
+(cl:defvar %back-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +back+
+  (cl:if (cl:eq %back-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %back-cache% (dotnet:static <type-str> "Back"))
+      %back-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -65,10 +81,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +big-button+ (dotnet:static <type-str> "BigButton"))
+(cl:defvar %big-button-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +big-button+
+  (cl:if (cl:eq %big-button-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %big-button-cache% (dotnet:static <type-str> "BigButton"))
+      %big-button-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -78,10 +99,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +d-pad-down+ (dotnet:static <type-str> "DPadDown"))
+(cl:defvar %d-pad-down-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +d-pad-down+
+  (cl:if (cl:eq %d-pad-down-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %d-pad-down-cache% (dotnet:static <type-str> "DPadDown"))
+      %d-pad-down-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -91,10 +117,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +d-pad-left+ (dotnet:static <type-str> "DPadLeft"))
+(cl:defvar %d-pad-left-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +d-pad-left+
+  (cl:if (cl:eq %d-pad-left-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %d-pad-left-cache% (dotnet:static <type-str> "DPadLeft"))
+      %d-pad-left-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -104,10 +135,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +d-pad-right+ (dotnet:static <type-str> "DPadRight"))
+(cl:defvar %d-pad-right-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +d-pad-right+
+  (cl:if (cl:eq %d-pad-right-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %d-pad-right-cache% (dotnet:static <type-str> "DPadRight"))
+      %d-pad-right-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -117,10 +153,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +d-pad-up+ (dotnet:static <type-str> "DPadUp"))
+(cl:defvar %d-pad-up-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +d-pad-up+
+  (cl:if (cl:eq %d-pad-up-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %d-pad-up-cache% (dotnet:static <type-str> "DPadUp"))
+      %d-pad-up-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -130,10 +171,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-shoulder+ (dotnet:static <type-str> "LeftShoulder"))
+(cl:defvar %left-shoulder-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-shoulder+
+  (cl:if (cl:eq %left-shoulder-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-shoulder-cache% (dotnet:static <type-str> "LeftShoulder"))
+      %left-shoulder-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -143,10 +189,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-stick+ (dotnet:static <type-str> "LeftStick"))
+(cl:defvar %left-stick-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-stick+
+  (cl:if (cl:eq %left-stick-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-stick-cache% (dotnet:static <type-str> "LeftStick"))
+      %left-stick-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -156,10 +207,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-thumbstick-down+ (dotnet:static <type-str> "LeftThumbstickDown"))
+(cl:defvar %left-thumbstick-down-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-thumbstick-down+
+  (cl:if (cl:eq %left-thumbstick-down-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-thumbstick-down-cache% (dotnet:static <type-str> "LeftThumbstickDown"))
+      %left-thumbstick-down-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -169,10 +225,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-thumbstick-left+ (dotnet:static <type-str> "LeftThumbstickLeft"))
+(cl:defvar %left-thumbstick-left-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-thumbstick-left+
+  (cl:if (cl:eq %left-thumbstick-left-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-thumbstick-left-cache% (dotnet:static <type-str> "LeftThumbstickLeft"))
+      %left-thumbstick-left-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -182,10 +243,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-thumbstick-right+ (dotnet:static <type-str> "LeftThumbstickRight"))
+(cl:defvar %left-thumbstick-right-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-thumbstick-right+
+  (cl:if (cl:eq %left-thumbstick-right-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-thumbstick-right-cache% (dotnet:static <type-str> "LeftThumbstickRight"))
+      %left-thumbstick-right-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -195,10 +261,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-thumbstick-up+ (dotnet:static <type-str> "LeftThumbstickUp"))
+(cl:defvar %left-thumbstick-up-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-thumbstick-up+
+  (cl:if (cl:eq %left-thumbstick-up-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-thumbstick-up-cache% (dotnet:static <type-str> "LeftThumbstickUp"))
+      %left-thumbstick-up-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -208,10 +279,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +left-trigger+ (dotnet:static <type-str> "LeftTrigger"))
+(cl:defvar %left-trigger-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +left-trigger+
+  (cl:if (cl:eq %left-trigger-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %left-trigger-cache% (dotnet:static <type-str> "LeftTrigger"))
+      %left-trigger-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -221,10 +297,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +none+ (dotnet:static <type-str> "None"))
+(cl:defvar %none-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +none+
+  (cl:if (cl:eq %none-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %none-cache% (dotnet:static <type-str> "None"))
+      %none-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -234,10 +315,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-shoulder+ (dotnet:static <type-str> "RightShoulder"))
+(cl:defvar %right-shoulder-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-shoulder+
+  (cl:if (cl:eq %right-shoulder-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-shoulder-cache% (dotnet:static <type-str> "RightShoulder"))
+      %right-shoulder-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -247,10 +333,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-stick+ (dotnet:static <type-str> "RightStick"))
+(cl:defvar %right-stick-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-stick+
+  (cl:if (cl:eq %right-stick-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-stick-cache% (dotnet:static <type-str> "RightStick"))
+      %right-stick-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -260,10 +351,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-thumbstick-down+ (dotnet:static <type-str> "RightThumbstickDown"))
+(cl:defvar %right-thumbstick-down-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-thumbstick-down+
+  (cl:if (cl:eq %right-thumbstick-down-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-thumbstick-down-cache% (dotnet:static <type-str> "RightThumbstickDown"))
+      %right-thumbstick-down-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -273,10 +369,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-thumbstick-left+ (dotnet:static <type-str> "RightThumbstickLeft"))
+(cl:defvar %right-thumbstick-left-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-thumbstick-left+
+  (cl:if (cl:eq %right-thumbstick-left-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-thumbstick-left-cache% (dotnet:static <type-str> "RightThumbstickLeft"))
+      %right-thumbstick-left-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -286,10 +387,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-thumbstick-right+ (dotnet:static <type-str> "RightThumbstickRight"))
+(cl:defvar %right-thumbstick-right-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-thumbstick-right+
+  (cl:if (cl:eq %right-thumbstick-right-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-thumbstick-right-cache% (dotnet:static <type-str> "RightThumbstickRight"))
+      %right-thumbstick-right-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -299,10 +405,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-thumbstick-up+ (dotnet:static <type-str> "RightThumbstickUp"))
+(cl:defvar %right-thumbstick-up-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-thumbstick-up+
+  (cl:if (cl:eq %right-thumbstick-up-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-thumbstick-up-cache% (dotnet:static <type-str> "RightThumbstickUp"))
+      %right-thumbstick-up-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -312,10 +423,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +right-trigger+ (dotnet:static <type-str> "RightTrigger"))
+(cl:defvar %right-trigger-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +right-trigger+
+  (cl:if (cl:eq %right-trigger-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %right-trigger-cache% (dotnet:static <type-str> "RightTrigger"))
+      %right-trigger-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -325,10 +441,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +start+ (dotnet:static <type-str> "Start"))
+(cl:defvar %start-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +start+
+  (cl:if (cl:eq %start-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %start-cache% (dotnet:static <type-str> "Start"))
+      %start-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -338,10 +459,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +x+ (dotnet:static <type-str> "X"))
+(cl:defvar %x-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +x+
+  (cl:if (cl:eq %x-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %x-cache% (dotnet:static <type-str> "X"))
+      %x-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Input.Buttons is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Input.Buttons is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -351,7 +477,11 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +y+ (dotnet:static <type-str> "Y"))
+(cl:defvar %y-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +y+
+  (cl:if (cl:eq %y-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %y-cache% (dotnet:static <type-str> "Y"))
+      %y-cache%))
 
 (cl:defun value__ (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Buttons") obj!) "value__"))
@@ -359,7 +489,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf value__) (new-value obj!)

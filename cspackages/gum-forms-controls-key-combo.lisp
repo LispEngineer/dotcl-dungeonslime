@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.KeyCombo
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-controls-key-combo)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.KeyCombo")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo")))
 
@@ -24,7 +24,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf held-key) (new-value obj!)
@@ -36,7 +36,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf triggered-on-repeat?) (new-value obj!)
@@ -48,7 +48,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf pushed-key) (new-value obj!)

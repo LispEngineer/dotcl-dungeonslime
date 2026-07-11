@@ -1,22 +1,23 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundState
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-state)
 
-(cl:defconstant <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundState"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundState")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundState")))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Audio.SoundState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Audio.SoundState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -26,10 +27,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +paused+ (dotnet:static <type-str> "Paused"))
+(cl:defvar %paused-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +paused+
+  (cl:if (cl:eq %paused-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %paused-cache% (dotnet:static <type-str> "Paused"))
+      %paused-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Audio.SoundState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Audio.SoundState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -39,10 +45,15 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +playing+ (dotnet:static <type-str> "Playing"))
+(cl:defvar %playing-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +playing+
+  (cl:if (cl:eq %playing-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %playing-cache% (dotnet:static <type-str> "Playing"))
+      %playing-cache%))
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
-;; the defconstant form below only runs once. If Microsoft.Xna.Framework.Audio.SoundState is a mutable
+;; the binding below computes its value at most once (cached on first
+;; use). If Microsoft.Xna.Framework.Audio.SoundState is a mutable
 ;; value type (struct) with settable properties/fields, mutating this
 ;; object -- through this binding, or through ANY other reference that
 ;; aliases the same boxed instance -- permanently corrupts it for every
@@ -52,7 +63,11 @@
 ;; instance via the type's own constructor (new) if you need to mutate
 ;; a copy. See FEATURES.md's "Static Constants and Symbol Macros"
 ;; section and doc/generator-design-notes.md for the full explanation.
-(cl:defconstant +stopped+ (dotnet:static <type-str> "Stopped"))
+(cl:defvar %stopped-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +stopped+
+  (cl:if (cl:eq %stopped-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %stopped-cache% (dotnet:static <type-str> "Stopped"))
+      %stopped-cache%))
 
 (cl:defun value__ (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundState") obj!) "value__"))
@@ -60,7 +75,7 @@
 ;; Note: obj! here is a boxed reference to a .NET value type (struct).
 ;; This setf mutates that exact boxed instance in place -- it does NOT
 ;; silently discard the change. However, if obj! is an alias of a shared
-;; or cached value (e.g. a constant defined via defconstant), this mutates
+;; or cached value (e.g. a memoized constant binding), this mutates
 ;; that shared instance for every other reference to it too. See
 ;; FEATURES.md's "Struct Boxing Caveat" section for details.
 (cl:defun (cl:setf value__) (new-value obj!)

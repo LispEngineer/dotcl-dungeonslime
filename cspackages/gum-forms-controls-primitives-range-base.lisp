@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.RangeBase
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-controls-primitives-range-base)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.RangeBase")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase")))
 

@@ -1,51 +1,91 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :system-single)
 
-(cl:defconstant <type> (dotnet:resolve-type "System.Single"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.Single")))
 
 (cl:defun new ()
   (dotnet:new <type-str>))
 
-(cl:defconstant +e+ (dotnet:static <type-str> "E"))
+(cl:defvar %e-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +e+
+  (cl:if (cl:eq %e-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %e-cache% (dotnet:static <type-str> "E"))
+      %e-cache%))
 (cl:setf (cl:documentation (cl:quote +e+) (cl:quote cl:variable)) "Represents the natural logarithmic base, specified by the constant, e.")
 
-(cl:defconstant +epsilon+ (dotnet:static <type-str> "Epsilon"))
+(cl:defvar %epsilon-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +epsilon+
+  (cl:if (cl:eq %epsilon-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %epsilon-cache% (dotnet:static <type-str> "Epsilon"))
+      %epsilon-cache%))
 (cl:setf (cl:documentation (cl:quote +epsilon+) (cl:quote cl:variable)) "Represents the smallest positive System.Single value that is greater than zero. This field is constant.")
 
-(cl:defconstant +max-value+ (dotnet:static <type-str> "MaxValue"))
+(cl:defvar %max-value-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +max-value+
+  (cl:if (cl:eq %max-value-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %max-value-cache% (dotnet:static <type-str> "MaxValue"))
+      %max-value-cache%))
 (cl:setf (cl:documentation (cl:quote +max-value+) (cl:quote cl:variable)) "Represents the largest possible value of System.Single. This field is constant.")
 
-(cl:defconstant +min-value+ (dotnet:static <type-str> "MinValue"))
+(cl:defvar %min-value-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +min-value+
+  (cl:if (cl:eq %min-value-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %min-value-cache% (dotnet:static <type-str> "MinValue"))
+      %min-value-cache%))
 (cl:setf (cl:documentation (cl:quote +min-value+) (cl:quote cl:variable)) "Represents the smallest possible value of System.Single. This field is constant.")
 
-(cl:defconstant +nan+ (dotnet:static <type-str> "NaN"))
+(cl:defvar %nan-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +nan+
+  (cl:if (cl:eq %nan-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %nan-cache% (dotnet:static <type-str> "NaN"))
+      %nan-cache%))
 (cl:setf (cl:documentation (cl:quote +nan+) (cl:quote cl:variable)) "Represents not a number (). This field is constant.")
 
-(cl:defconstant +negative-infinity+ (dotnet:static <type-str> "NegativeInfinity"))
+(cl:defvar %negative-infinity-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +negative-infinity+
+  (cl:if (cl:eq %negative-infinity-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %negative-infinity-cache% (dotnet:static <type-str> "NegativeInfinity"))
+      %negative-infinity-cache%))
 (cl:setf (cl:documentation (cl:quote +negative-infinity+) (cl:quote cl:variable)) "Represents negative infinity. This field is constant.")
 
-(cl:defconstant +negative-zero+ (dotnet:static <type-str> "NegativeZero"))
+(cl:defvar %negative-zero-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +negative-zero+
+  (cl:if (cl:eq %negative-zero-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %negative-zero-cache% (dotnet:static <type-str> "NegativeZero"))
+      %negative-zero-cache%))
 (cl:setf (cl:documentation (cl:quote +negative-zero+) (cl:quote cl:variable)) "Represents the number negative zero (-0).")
 
-(cl:defconstant +pi+ (dotnet:static <type-str> "Pi"))
+(cl:defvar %pi-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +pi+
+  (cl:if (cl:eq %pi-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %pi-cache% (dotnet:static <type-str> "Pi"))
+      %pi-cache%))
 (cl:setf (cl:documentation (cl:quote +pi+) (cl:quote cl:variable)) "Represents the ratio of the circumference of a circle to its diameter, specified by the constant, π.")
 
-(cl:defconstant +positive-infinity+ (dotnet:static <type-str> "PositiveInfinity"))
+(cl:defvar %positive-infinity-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +positive-infinity+
+  (cl:if (cl:eq %positive-infinity-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %positive-infinity-cache% (dotnet:static <type-str> "PositiveInfinity"))
+      %positive-infinity-cache%))
 (cl:setf (cl:documentation (cl:quote +positive-infinity+) (cl:quote cl:variable)) "Represents positive infinity. This field is constant.")
 
-(cl:defconstant +tau+ (dotnet:static <type-str> "Tau"))
+(cl:defvar %tau-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +tau+
+  (cl:if (cl:eq %tau-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %tau-cache% (dotnet:static <type-str> "Tau"))
+      %tau-cache%))
 (cl:setf (cl:documentation (cl:quote +tau+) (cl:quote cl:variable)) "Represents the number of radians in one turn, specified by the constant, τ.")
 
 (cl:defun < (left right)

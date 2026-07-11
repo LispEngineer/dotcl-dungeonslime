@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Button
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :gum-forms-controls-button)
 
-(cl:defconstant <type> (dotnet:resolve-type "Gum.Forms.Controls.Button"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Button"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Button")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Gum.Forms.Controls.Button")))
 
@@ -33,7 +33,11 @@ new(InteractiveGue)
                     :method-name "new"
                     :supplied-args (cl:append (cl:when supplied-visual (cl:list :visual visual)))))))
 
-(cl:defconstant +button-category-name+ (dotnet:static <type-str> "ButtonCategoryName"))
+(cl:defvar %button-category-name-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +button-category-name+
+  (cl:if (cl:eq %button-category-name-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %button-category-name-cache% (dotnet:static <type-str> "ButtonCategoryName"))
+      %button-category-name-cache%))
 
 (cl:defun text (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Button") obj!) "get_Text"))

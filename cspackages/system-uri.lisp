@@ -1,17 +1,17 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 41
-;;; Creation Date: 2026-07-11T03:41:42Z
+;;; Generator Version: 43
+;;; Creation Date: 2026-07-11T16:00:40Z
 
 (cl:in-package :system-uri)
 
-(cl:defconstant <type> (dotnet:resolve-type "System.Uri"))
+(cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-11T03:41:42Z")
-(cl:defconstant <version> 41)
+(cl:defconstant <creation> "2026-07-11T16:00:40Z")
+(cl:defconstant <version> 43)
 
 ;; Register C# Type with CLOS
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+(cl:eval-when (:load-toplevel :execute)
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "System.Uri")))
 
@@ -86,55 +86,123 @@ new(Uri, String, Boolean)
 ;; yet supported:
 ;;   new(String, UriCreationOptions&)
 
-(cl:defconstant +scheme-delimiter+ (dotnet:static <type-str> "SchemeDelimiter"))
+(cl:defvar %scheme-delimiter-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +scheme-delimiter+
+  (cl:if (cl:eq %scheme-delimiter-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %scheme-delimiter-cache% (dotnet:static <type-str> "SchemeDelimiter"))
+      %scheme-delimiter-cache%))
 (cl:setf (cl:documentation (cl:quote +scheme-delimiter+) (cl:quote cl:variable)) "Specifies the characters that separate the communication protocol scheme from the address portion of the URI. This field is read-only.")
 
-(cl:defconstant +uri-scheme-file+ (dotnet:static <type-str> "UriSchemeFile"))
+(cl:defvar %uri-scheme-file-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-file+
+  (cl:if (cl:eq %uri-scheme-file-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-file-cache% (dotnet:static <type-str> "UriSchemeFile"))
+      %uri-scheme-file-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-file+) (cl:quote cl:variable)) "Specifies that the URI is a pointer to a file. This field is read-only.")
 
-(cl:defconstant +uri-scheme-ftp+ (dotnet:static <type-str> "UriSchemeFtp"))
+(cl:defvar %uri-scheme-ftp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-ftp+
+  (cl:if (cl:eq %uri-scheme-ftp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-ftp-cache% (dotnet:static <type-str> "UriSchemeFtp"))
+      %uri-scheme-ftp-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-ftp+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the File Transfer Protocol (FTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-ftps+ (dotnet:static <type-str> "UriSchemeFtps"))
+(cl:defvar %uri-scheme-ftps-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-ftps+
+  (cl:if (cl:eq %uri-scheme-ftps-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-ftps-cache% (dotnet:static <type-str> "UriSchemeFtps"))
+      %uri-scheme-ftps-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-ftps+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the File Transfer Protocol Secure (FTPS). This field is read-only.")
 
-(cl:defconstant +uri-scheme-gopher+ (dotnet:static <type-str> "UriSchemeGopher"))
+(cl:defvar %uri-scheme-gopher-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-gopher+
+  (cl:if (cl:eq %uri-scheme-gopher-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-gopher-cache% (dotnet:static <type-str> "UriSchemeGopher"))
+      %uri-scheme-gopher-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-gopher+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the Gopher protocol. This field is read-only.")
 
-(cl:defconstant +uri-scheme-http+ (dotnet:static <type-str> "UriSchemeHttp"))
+(cl:defvar %uri-scheme-http-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-http+
+  (cl:if (cl:eq %uri-scheme-http-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-http-cache% (dotnet:static <type-str> "UriSchemeHttp"))
+      %uri-scheme-http-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-http+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-https+ (dotnet:static <type-str> "UriSchemeHttps"))
+(cl:defvar %uri-scheme-https-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-https+
+  (cl:if (cl:eq %uri-scheme-https-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-https-cache% (dotnet:static <type-str> "UriSchemeHttps"))
+      %uri-scheme-https-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-https+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the Secure Hypertext Transfer Protocol (HTTPS). This field is read-only.")
 
-(cl:defconstant +uri-scheme-mailto+ (dotnet:static <type-str> "UriSchemeMailto"))
+(cl:defvar %uri-scheme-mailto-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-mailto+
+  (cl:if (cl:eq %uri-scheme-mailto-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-mailto-cache% (dotnet:static <type-str> "UriSchemeMailto"))
+      %uri-scheme-mailto-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-mailto+) (cl:quote cl:variable)) "Specifies that the URI is an email address and is accessed through the Simple Mail Transport Protocol (SMTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-net-pipe+ (dotnet:static <type-str> "UriSchemeNetPipe"))
+(cl:defvar %uri-scheme-net-pipe-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-net-pipe+
+  (cl:if (cl:eq %uri-scheme-net-pipe-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-net-pipe-cache% (dotnet:static <type-str> "UriSchemeNetPipe"))
+      %uri-scheme-net-pipe-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-net-pipe+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the NetPipe scheme used by Windows Communication Foundation (WCF). This field is read-only.")
 
-(cl:defconstant +uri-scheme-net-tcp+ (dotnet:static <type-str> "UriSchemeNetTcp"))
+(cl:defvar %uri-scheme-net-tcp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-net-tcp+
+  (cl:if (cl:eq %uri-scheme-net-tcp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-net-tcp-cache% (dotnet:static <type-str> "UriSchemeNetTcp"))
+      %uri-scheme-net-tcp-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-net-tcp+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the NetTcp scheme used by Windows Communication Foundation (WCF). This field is read-only.")
 
-(cl:defconstant +uri-scheme-news+ (dotnet:static <type-str> "UriSchemeNews"))
+(cl:defvar %uri-scheme-news-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-news+
+  (cl:if (cl:eq %uri-scheme-news-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-news-cache% (dotnet:static <type-str> "UriSchemeNews"))
+      %uri-scheme-news-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-news+) (cl:quote cl:variable)) "Specifies that the URI is an Internet news group and is accessed through the Network News Transport Protocol (NNTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-nntp+ (dotnet:static <type-str> "UriSchemeNntp"))
+(cl:defvar %uri-scheme-nntp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-nntp+
+  (cl:if (cl:eq %uri-scheme-nntp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-nntp-cache% (dotnet:static <type-str> "UriSchemeNntp"))
+      %uri-scheme-nntp-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-nntp+) (cl:quote cl:variable)) "Specifies that the URI is an Internet news group and is accessed through the Network News Transport Protocol (NNTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-sftp+ (dotnet:static <type-str> "UriSchemeSftp"))
+(cl:defvar %uri-scheme-sftp-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-sftp+
+  (cl:if (cl:eq %uri-scheme-sftp-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-sftp-cache% (dotnet:static <type-str> "UriSchemeSftp"))
+      %uri-scheme-sftp-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-sftp+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the SSH File Transfer Protocol (SFTP). This field is read-only.")
 
-(cl:defconstant +uri-scheme-ssh+ (dotnet:static <type-str> "UriSchemeSsh"))
+(cl:defvar %uri-scheme-ssh-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-ssh+
+  (cl:if (cl:eq %uri-scheme-ssh-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-ssh-cache% (dotnet:static <type-str> "UriSchemeSsh"))
+      %uri-scheme-ssh-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-ssh+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the Secure Socket Shell protocol (SSH). This field is read-only.")
 
-(cl:defconstant +uri-scheme-telnet+ (dotnet:static <type-str> "UriSchemeTelnet"))
+(cl:defvar %uri-scheme-telnet-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-telnet+
+  (cl:if (cl:eq %uri-scheme-telnet-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-telnet-cache% (dotnet:static <type-str> "UriSchemeTelnet"))
+      %uri-scheme-telnet-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-telnet+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the Telnet protocol. This field is read-only.")
 
-(cl:defconstant +uri-scheme-ws+ (dotnet:static <type-str> "UriSchemeWs"))
+(cl:defvar %uri-scheme-ws-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-ws+
+  (cl:if (cl:eq %uri-scheme-ws-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-ws-cache% (dotnet:static <type-str> "UriSchemeWs"))
+      %uri-scheme-ws-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-ws+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the WebSocket protocol (WS). This field is read-only.")
 
-(cl:defconstant +uri-scheme-wss+ (dotnet:static <type-str> "UriSchemeWss"))
+(cl:defvar %uri-scheme-wss-cache% csharp-assembly-utils:+unbound-marker+)
+(cl:define-symbol-macro +uri-scheme-wss+
+  (cl:if (cl:eq %uri-scheme-wss-cache% csharp-assembly-utils:+unbound-marker+)
+      (cl:setf %uri-scheme-wss-cache% (dotnet:static <type-str> "UriSchemeWss"))
+      %uri-scheme-wss-cache%))
 (cl:setf (cl:documentation (cl:quote +uri-scheme-wss+) (cl:quote cl:variable)) "Specifies that the URI is accessed through the WebSocket Secure protocol (WSS). This field is read-only.")
 
 (cl:defun absolute-path (obj!)
