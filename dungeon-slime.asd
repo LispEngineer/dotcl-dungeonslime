@@ -28,6 +28,7 @@
                (:file "type-aliases" :depends-on ("packages" "settings"))
                (:file "monoutils" :depends-on ("packages" "type-aliases"))
                (:file "utils" :depends-on ("packages" "type-aliases"))
+	       (:file "cspackages/csharp-generics" :depends-on ("csharp-assembly-packages"))
                (:file "constants")
                (:file "load-system-test")
                (:file "csharp" :depends-on ("packages"))
