@@ -117,7 +117,7 @@ These custom variables define parameters utilized by the imported Lisp build tar
 
 ## 2. The Compilation and Execution Pipeline
 
-*(Note: as of DotCL 0.1.15 this project builds via the `DotCL.Runtime` NuGet
+*(Note: as of DotCL 0.1.15+ (currently 0.1.17) this project builds via the `DotCL.Runtime` NuGet
 package's `DotCL.Runtime.ProjectCore.targets` rather than a sibling `../dotcl`
 checkout — the target names below (`DotclResolveDeps`/`DotclCompileRoot`) are
 from the older sibling-repo pipeline this doc was originally written against,

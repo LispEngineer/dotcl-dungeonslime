@@ -2,6 +2,8 @@
 
 This document provides detailed documentation for the symbols exported by the `DOTNET` package in the DotCL Common Lisp environment. These functions provide the core interop capabilities between Common Lisp and the .NET Common Language Runtime (CLR), as well as low-level native Foreign Function Interface (FFI) memory and function calling capabilities.
 
+*(Note: Originally generated against DotCL 0.1.15. Manually updated to include new capabilities up to DotCL 0.1.17).*
+
 All symbols in the `DOTNET` package are registered at runtime by the C# engine (specifically in `Startup.cs`) and backed by static methods in the `DotCL.Runtime`, `DotCL.DotNetEvents`, `DotCL.DotNetNuGet`, and `DotCL.DotNetWinForms` classes.
 
 ---
@@ -33,6 +35,7 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * [`DOTNET:HINT-TYPE`](#dotnethint-type)
 * [`DOTNET:OBJECT-TYPE`](#dotnetobject-type)
 * [`DOTNET:RESOLVE-TYPE`](#dotnetresolve-type)
+* [`DOTNET:CLASS-FOR-TYPE`](#dotnetclass-for-type)
 * [`DOTNET:IS-INSTANCE-OF`](#dotnetis-instance-of)
 * [`DOTNET:CAST`](#dotnetcast)
 * [`DOTNET:NULL`](#dotnetnull)
@@ -43,6 +46,7 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 * [`DOTNET:ADD-EVENT`](#dotnetadd-event)
 * [`DOTNET:REMOVE-EVENT`](#dotnetremove-event)
 * [`DOTNET:MAKE-DELEGATE`](#dotnetmake-delegate)
+* [`DOTNET:MAKE-FFI-CALLBACK`](#dotnetmake-ffi-callback)
 
 ### Exception Handling
 * [`DOTNET:HANDLER-BIND`](#dotnethandler-bind)
@@ -551,6 +555,17 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
 
 ---
 
+### `DOTNET:MAKE-FFI-CALLBACK`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:make-ffi-callback function)
+  ```
+* **Description:** Exposes a Lisp function as a native function pointer callable from C, enabling Lisp to be used in callback-based native APIs.
+
+---
+
 ### `DOTNET:MEM-READ`
 
 * **Type:** Function
@@ -677,6 +692,24 @@ All symbols in the `DOTNET` package are registered at runtime by the C# engine (
   (dotnet:resolve-type type-name)
   ```
 * **Description:** Resolves a .NET `System.Type` from a name string, searching loaded assemblies (loading by namespace prefix, and COM ProgIDs on Windows). The result can be inspected or passed anywhere a `System.Type` is expected. Errors if not found.
+
+---
+
+### `DOTNET:CLASS-FOR-TYPE`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotnet:class-for-type type-name-or-type)
+  ```
+* **Description:** Returns the CLOS class that DotCL uses for a .NET type, given a `System.Type` or a type-name string. Registers it lazily on first call. Useful for specializing methods on .NET types (including closed generics) using `#.`.
+* **Parameters:**
+  * `type-name-or-type` (String or `System.Type`): The .NET type to resolve.
+* **Usage Example:**
+  ```lisp
+  (defmethod do-something ((arg #.(dotnet:class-for-type "System.String")))
+    ...)
+  ```
 
 ---
 

@@ -6,6 +6,8 @@
 * Original Copyright: [SANO, Masatoshi](https://github.com/snmsts)
 * [Original README](README-original.md)
 
+> **Note:** This project targets DotCL 0.1.17.
+
 This is an implementation of the 
 [MonoGame 2D Dungeon Slime demo](https://docs.monogame.net/articles/tutorials/building_2d_games/index.html)
 in as Lispy a fashion as possible. It is a learning vehicle for how
@@ -77,17 +79,10 @@ in the `DungeonSlime.csproj` file.
 
 ## DotCL Version
 
-As of 0.1.9 the game works "out of the box," and a custom patched
-`dotcl` is no longer necessary.
-* I will migrate to using the new 0.1.9 features in due course.
+The game is tested and works out-of-the-box on DotCL 0.1.17.
+This updated version includes massive performance boosts (via typed `dotnet:invoke` natively compiling to `callvirt`, and unboxed float/int64 numerics), async/await, and a drastically improved interop model (like automatically inferring receiver types, extension methods, and resolving generics).
 
-As of 0.1.8 I am still using the self-compiled `dotcl` but I did
-not test the `dotnet tool install`ed one.
-* I am using a patched 0.1.8 that fixes a minor bug in the
-  provided readline (backwards history) and also allows the
-  readline to be interrupted (i.e., to stop a background thread).
-  The game should build fine without these minor patches, which
-  I have already submitted to DotCL.
+A custom-patched DotCL is no longer necessary.
 
 ## Build & Launch Steps
 
@@ -98,10 +93,10 @@ Preparation:
    * This installs `dotnet-mgcb` and `dotnet-mgcb-editor` and `dotnet-mgcb-editor-linux`
      among other things.
 
-### The Upgraded Build System (DotCL 0.1.15+)
+### The Upgraded Build System (DotCL 0.1.17)
 
-As of DotCL 0.1.15, the project build system is migrated to a pure NuGet package reference structure
-(`<PackageReference Include="DotCL.Runtime" Version="0.1.15" />`). This removes the need for a local
+As of DotCL 0.1.15+ (currently targeting 0.1.17), the project build system is migrated to a pure NuGet package reference structure
+(`<PackageReference Include="DotCL.Runtime" Version="0.1.17" />`). This removes the need for a local
 sibling `dotcl` repository check-out.
 
 Key features of the updated build system:
@@ -385,11 +380,11 @@ Lisp utility functionality:
   Lisp-based texture atlas descriptions without read-time evaluation.
 
 C# Class-Aware Generic Function System (Version 1.1):
-* NOTE: This may have been superseded by DotCL's 0.1.9 ability to dispatch
-  C# types in (CLOS) methods.
+* NOTE: This may have been superseded by DotCL's 0.1.17 ability to natively dispatch
+  C# types and closed generic types (like `List<Int32>`) directly in standard CLOS methods using `dotnet:class-for-type`.
 * Implemented the `defc#generic` and `defc#method` macros in `clr-generic.lisp` 
   to support C# class type dispatch.
-* Refactored in DotCL 0.1.14 to use `dotnet:is-instance-of` for dynamic assignability 
+* Refactored in DotCL 0.1.14+ to use `dotnet:is-instance-of` for dynamic assignability 
   checks instead of manual reflection (`IsAssignableFrom` checks).
 * Performs topological class/interface inheritance specificity sorting on applicable 
   methods to find the most specific target method.

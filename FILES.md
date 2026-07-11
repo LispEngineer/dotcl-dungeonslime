@@ -39,7 +39,7 @@ and files in this repository.
 
 * [lispdoc.md](doc/lispdoc.md) describes DotCL's `LispDoc`
   annotation, which I thought would generate docstrings.
-  This does not work as of DotCL 0.1.8.
+  This did not work in 0.1.8, but was fixed in 0.1.9 and should work as of DotCL 0.1.17.
 
 * [BUILD-GUIDE.md](doc/BUILD-GUIDE.md) describes in great detail how this
   project is built when you call `dotnet build`.
@@ -50,18 +50,18 @@ and files in this repository.
   function or an analog will be incorporated into DotCL.
 
 * [dotcl-form-evaluation.md](doc/dotcl-form-evaluation.md) explains how
-  DotCL 0.1.8 evaluates and compiles a form. (It only does compilation,
+  DotCL 0.1.17 evaluates and compiles a form. (It only does compilation,
   no interpretive evaluation.)
 
 * [clr-generic-functions.md](doc/clr-generic-functions.md) describes the design
   and implementation plan of the custom C# class-aware generic function system.
 
 * [dotcl-generic.md](doc/dotcl-generic.md) details the internal workings of
-  generic functions and method dispatch inside the DotCL 0.1.8 runtime environment.
+  generic functions and method dispatch inside the DotCL 0.1.17 runtime environment.
 
 * [opencode-qwen36-dotnet-analysis-0.1.15-v2.md](doc/opencode-qwen36-dotnet-analysis-0.1.15-v2.md):
-  Comprehensive analysis of all 53 exported symbols in the DotCL `DOTNET` package
-  as of v0.1.15, organized by functional category with detailed documentation,
+  Comprehensive analysis of all exported symbols in the DotCL `DOTNET` package
+  as of v0.1.15 (note we are now on 0.1.17), organized by functional category with detailed documentation,
   internal mechanics, and examples. Supersedes the incomplete v1 analysis.
 
 * [package-dotcl.md](doc/package-dotcl.md) lists the exported symbols in the `DOTCL` package.
@@ -72,7 +72,7 @@ and files in this repository.
 
 * [dotnet-dotcl-interop.md](doc/dotnet-dotcl-interop.md) explains in detail all the mechanisms for .NET interoperability, in both directions, between DotCL Common Lisp and the .NET CLR.
 
-* [compilation-warnings-in-0.1.14.md](doc/compilation-warnings-in-0.1.14.md): Detailed analysis of the compile and load warnings under DotCL 0.1.14.
+* [compilation-warnings-in-0.1.14.md](doc/compilation-warnings-in-0.1.14.md): Detailed analysis of the compile and load warnings under older DotCL 0.1.14 (we are now on 0.1.17).
 
 * [package-generator-dependencies.md](doc/package-generator-dependencies.md): Dependency analysis of the Lisp C# package generator and the generated packages.
 
@@ -112,13 +112,13 @@ and files in this repository.
 
 * `clr-generic.lisp`: Implements the Version 1 C# class-aware generic function
   system macros (`defc#generic`, `defc#method`) and dispatch/specificity resolution logic.
-  Refactored to utilize `dotnet:is-instance-of` for assignability checks under DotCL 0.1.14.
+  Refactored to utilize `dotnet:is-instance-of` for assignability checks under DotCL 0.1.17.
 
 * `clr-generic-test.lisp`: Startup test suite verifying C# generic function 
   dispatching, interface specificity, and alias resolution.
 
 * `typed-calls-test.lisp`: Test suite verifying that type-declared direct method calls
-  work correctly under DotCL 0.1.11, that invalid cast exceptions are handled correctly,
+  work correctly under DotCL 0.1.17, that invalid cast exceptions are handled correctly,
   and that the generated instance property accessors, mutators, and read-only properties
   function as expected.
 

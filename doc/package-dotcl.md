@@ -2,6 +2,8 @@
 
 This document provides detailed documentation for the symbols exported (and key internal ones) by the `DOTCL` package in the DotCL Common Lisp environment. These symbols provide core system services, platform diagnostic metrics, package management extensions (including package locks and package-local nicknames), and complete threading/synchronization primitives compliant with modern Common Lisp library expectations (such as `bordeaux-threads`).
 
+*(Note: Originally generated against DotCL 0.1.15. Manually updated to include new capabilities up to DotCL 0.1.17).*
+
 All functionality is backed by the C# engine under the hood, mostly mapped via static helper functions inside the `DotCL.Runtime` class.
 
 ---
@@ -21,6 +23,7 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
 * [`DOTCL:%CTYPE-STATS`](#dotclctype-stats)
 * [`DOTCL:%RUN-PROCESS`](#dotclrun-process)
 * [`DOTCL::%SET-REPL-READLINE-HOOK`](#dotclset-repl-readline-hook)
+* [`DOTCL:SET-PARALLEL-EVAL`](#dotclset-parallel-eval)
 * [`DOTCL::GC`](#dotclgc)
 * [`DOTCL:ACQUIRE-LOCK`](#dotclacquire-lock)
 * [`DOTCL:ADD-PACKAGE-LOCAL-NICKNAME`](#dotcladd-package-local-nickname)
@@ -197,6 +200,19 @@ All functionality is backed by the C# engine under the hood, mostly mapped via s
       (format t "~A" prompt)
       (read-line)))
   ```
+
+---
+
+### `DOTCL:SET-PARALLEL-EVAL`
+
+* **Type:** Function
+* **Syntax:**
+  ```lisp
+  (dotcl:set-parallel-eval flag)
+  ```
+* **Description:** Opt-in to parallel `eval`. When set to true, macro expansion and evaluation paths are executed with parallel semantics using the thread-safe internal macro table introduced in DotCL 0.1.17.
+* **Parameters:**
+  * `flag` (Boolean): Truthy value to enable parallel eval, `nil` to disable.
 
 ---
 

@@ -7,6 +7,7 @@
 
 This document provides a comprehensive analysis of every public function,
 macro, and special variable in the DotCL `dotnet` package as of v0.1.15.
+*(Note: As of this update, the project now targets DotCL 0.1.17, which includes new features like `dotnet:class-for-type` and typed `dotnet:invoke` optimization not covered here).*
 The `dotnet` package is the primary interface for Common Lisp code to
 interact with .NET types, objects, methods, and assemblies.
 

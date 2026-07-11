@@ -1,7 +1,7 @@
 # Thoughts and Ideas on CLR Interoperability
 
 * Author: Douglas P. Fields, Jr. - symbolics@lisp.engineer
-* Last revised: 2026-05-25
+* Last revised: 2026-05-25 (Updated for 0.1.17)
 
 # Brief Summary
 
@@ -46,7 +46,6 @@ all necessarily compatible with each other.
 * Some way to call overloaded operators on types elegantly
   * `"operator+"`, etc.?
   * `"+"` → `"op_Addition"`, etc.?
-* Support Extension Method calls, e.g. in C# `"some-string".ExtensionMethod()`
 * Allow delegates in operator position, e.g., C# Action
   * Should it should be in Function cell
   * `(defun symbol delegate "docstring")`
@@ -62,27 +61,8 @@ all necessarily compatible with each other.
 ## Optimization
 
 * C# `dynamic` style optimizations?
-* Cache (memoize) reflection results for reuse?
 * Can we let the CLR JIT optimize reflected calls away? 
   (I don't know anything about it.)
-
-## CLOS
-
-* Multimethods: Allow dispatching on C# types - **DONE (as of 0.1.9)**
-  * Example:
-    ```lisp
-    (defmethod do-something ((arg "Some.CSharp.Type"))
-      ...)
-    (defmethod do-something ((arg "Another.Class"))
-      ...)
-    (defmethod do-something ((arg "A.Generic.Class<string>"))
-      ...)
-    (defmethod do-something ((arg "A.Generic.Class<System.Type>"))
-      ...)
-    (defmethod do-something ((arg "A.Generic.Class"))
-      ;; Without any type parameters? Allowed? Good idea?
-      ...)
-    ```
 
 ## Miscellaneous
 
@@ -107,19 +87,16 @@ all necessarily compatible with each other.
 
 * How do all of these things impact conformance tests?
 
-
 # Detailed Discussion
 
 TODO
-
 
 # Implementation Thoughts
 
 * For static strings in operator position:
   * [Look here](https://github.com/dotcl/dotcl/blob/7299d104f7cd4225464109322296036f97dc448e/compiler/cil-compiler.lisp#L707)
-    (v0.1.8 cli-compiler.lisp), and add a new case to the `cond` for
+    (historical reference: v0.1.8 cli-compiler.lisp), and add a new case to the `cond` for
     `(stringp op)`
-
 
 # Other Hosted Lisps
 
@@ -133,3 +110,16 @@ TODO
   (compiles to C)
 * [JSCL](https://github.com/jscl-project/jscl) - JavaScript Common Lisp
 * [Clasp](https://clasp-developers.github.io/) - Common Lisp on LLVM with strong C++ interop
+
+---
+
+# Done in DotCL 0.1.17
+
+The following interop ideas have already been natively implemented in DotCL as of versions up to 0.1.17:
+
+* **Support Extension Method calls, e.g. in C# `"some-string".ExtensionMethod()`**
+  * Completed in **0.1.14**. `dotnet:invoke` automatically resolves LINQ and other extension methods directly on the receiver.
+* **Cache (memoize) reflection results for reuse?**
+  * Completed in **0.1.10** and **0.1.11**. Dynamic `dotnet:invoke` caches resolved methods by call shape, improving speed by ~4.6x. Type-declared interop via `(the (dotnet "...") ...)` compiles to direct `callvirt` instructions.
+* **CLOS Multimethods: Allow dispatching on C# types**
+  * Partially completed in **0.1.9** and fully realized in **0.1.17**. `defmethod` now accepts a class object as a specializer via `#.`, e.g., `(defmethod do-something ((arg #.(dotnet:class-for-type "System.String"))))`. Closed generics get distinct readable class names like `List<Int32>`.

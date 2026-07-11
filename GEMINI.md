@@ -54,8 +54,9 @@
 * Build the project: `make build`
 * Compile the lisp parts of the project:
   * Note: This may change with different DotCL versions! This command is current
-    as of 0.1.8.
-  * Linux: `dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/dungeon-slime.fasl"`
+    as of 0.1.17.
+  * Linux: `dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-asdf "/home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/dungeon-slime.fasl"`
+  * Note: As of 0.1.17+, you can also use `dotcl build MyApp.asd --output obj/MyApp.fasl` if you have `dotcl` installed, or rely on `<DotclProjectAsd>` in MSBuild.
   * (This can be found in the `.csproj` file.)
 * Run the game: `make run`
   * Important: This does **not** first build the project. So, consider `make build run`
@@ -121,7 +122,7 @@ All new code must have tests. However:
 
 When parentheses are mismatched, the build will break with errors that often have
 nothing to do with the problem (of mismatched parentheses). If the DotCL portion
-fails with an output similar to this: (from DotCL 0.1.8)
+fails with an output similar to this: (from DotCL 0.1.17)
 
 ```
 /home/dfields/src/cl/dotcl/runtime/build/Dotcl.targets(143,5): error MSB3073: The command "dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/dungeon-slime.fasl"" exited with code 134.

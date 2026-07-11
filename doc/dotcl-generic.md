@@ -1,7 +1,5 @@
 Gemini 3.5 Flash written summary of how `defgeneric` and `defmethod`
-are implemented and work in DotCL 0.1.8. My only edit was to the
-links to be relative than absolute. Gemini-written description
-begins below the line.
+are implemented and work in DotCL. (Originally analyzed for 0.1.8; updated for 0.1.17 changes).
 
 ---
 
@@ -34,3 +32,16 @@ The routing and execution of applicable methods happen in:
     3.  Evaluates `EQL` specializers.
     4.  Collects applicable methods, filters them, and groups them by qualifier (`:around`, `:before`, `:primary`, `:after`).
     5.  Sorts grouped methods by precedence via **`CompareMethodSpecificity`** ([Runtime.CLOS.cs:L2743](../../dotcl/runtime/Runtime.CLOS.cs#L2743)) using the **Class Precedence List (CPL)** of the argument types.
+
+---
+
+# Major CLOS Updates (0.1.9 - 0.1.17)
+
+Since the original analysis (0.1.8), the CLOS implementation has received major upgrades:
+
+*   **Thread Safety (0.1.9):** The method list in `GenericFunction` is now copy-on-write, fixing concurrency issues when modifying methods while another thread dispatches.
+*   **Native .NET Type Specialization (0.1.9+):** `defmethod` now directly supports dispatching on .NET types without workarounds. In 0.1.17, `defmethod` accepts a class object as a specializer via `#.`, allowing direct targeting of classes retrieved by `(dotnet:class-for-type "System.String")`.
+*   **Closed Generics Handling (0.1.17):** Generic types now get distinct, readable class names (e.g. `List<Int32>`) rather than colliding on the bare ``List`1``, ensuring predictable dispatch across instantiations.
+*   **Caching & Performance (0.1.16):** CLOS dispatch is significantly faster. A dispatch cache for EQL-specialized functions was added, and `call-next-method` closures are built lazily without per-dispatch allocation.
+*   **Standard Conformance (0.1.14):** The Class Precedence List (CPL) now rigorously follows the CLHS class linearization, including non-monotonic hierarchies. `:argument-precedence-order` is also fully honored.
+*   **AMOP Support (0.1.15):** The Metaobject Protocol was expanded with primitives like `compute-applicable-methods-using-classes`, `compute-discriminating-function`, and `compute-effective-method`.

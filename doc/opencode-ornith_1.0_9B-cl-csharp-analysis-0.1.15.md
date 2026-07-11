@@ -5,6 +5,7 @@
 * Based on: DotCL repository at `../dotcl`, v0.1.15
 * Purpose: Document how every standard Common Lisp function behaves when
   given arguments that are C# objects wrapped in DotCL's interop types.
+  *(Note: As of this update, the project now targets DotCL 0.1.17. Some behaviors or features may have changed).*
 * NOTE: (Added by human) No guarantees on the accuracy of anything in this
   document; it hasn't been manually checked (yet).
 

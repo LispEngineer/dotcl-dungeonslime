@@ -127,8 +127,8 @@ interop.
   (instance call), `#!!Class.Method` (static call).
 * `clr-generic.lisp` implements `defc#generic`/`defc#method`, a C#-type-aware
   CLOS-like generic dispatch system with topological specificity sorting over
-  class/interface inheritance (may be superseded by DotCL 0.1.9+'s native C#
-  type dispatch in ordinary CLOS methods — check before extending this).
+  class/interface inheritance (may be superseded by DotCL 0.1.17's native C#
+  type dispatch and `dotnet:class-for-type` in ordinary CLOS methods — check before extending this).
 * `monoutils.lisp` / `MonoUtils.cs` add small custom interop helpers DotCL
   lacks natively (e.g. `monoutils:invoke-generic` for generic method calls
   with Lisp type-alias resolution via `dotnet::*type-aliases*`).
