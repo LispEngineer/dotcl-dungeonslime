@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :csharp-generics)
 
@@ -6382,12 +6382,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 "))
 
 ;; System.Collections.Specialized.INotifyCollectionChanged (system-collections-specialized-i-notify-collection-changed)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Collections.Specialized.INotifyCollectionChanged")))
+
 (cl:defmethod add-collection-changed ((obj! #.(dotnet:class-for-type "System.Collections.Specialized.INotifyCollectionChanged")) cl:&rest args)
   (cl:apply (cl:function system-collections-specialized-i-notify-collection-changed:add-collection-changed) obj! args))
 (cl:defmethod remove-collection-changed ((obj! #.(dotnet:class-for-type "System.Collections.Specialized.INotifyCollectionChanged")) cl:&rest args)
   (cl:apply (cl:function system-collections-specialized-i-notify-collection-changed:remove-collection-changed) obj! args))
 
 ;; System.ComponentModel.INotifyPropertyChanged (system-component-model-i-notify-property-changed)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.ComponentModel.INotifyPropertyChanged")))
+
 (cl:defmethod add-property-changed ((obj! #.(dotnet:class-for-type "System.ComponentModel.INotifyPropertyChanged")) cl:&rest args)
   (cl:apply (cl:function system-component-model-i-notify-property-changed:add-property-changed) obj! args))
 (cl:defmethod remove-property-changed ((obj! #.(dotnet:class-for-type "System.ComponentModel.INotifyPropertyChanged")) cl:&rest args)
@@ -6401,8 +6423,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; doc/dispatch-on-open-generics.md.
 
 ;; System.Console (system-console)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Console")))
+
 
 ;; System.TimeSpan (system-time-span)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.TimeSpan")))
+
 (cl:defmethod days ((obj! #.(dotnet:class-for-type "System.TimeSpan")) cl:&rest args)
   (cl:apply (cl:function system-time-span:days) obj! args))
 (cl:defmethod hours ((obj! #.(dotnet:class-for-type "System.TimeSpan")) cl:&rest args)
@@ -6455,12 +6499,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-time-span:to-string) obj! args))
 
 ;; System.UriKind (system-uri-kind)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.UriKind")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "System.UriKind")) cl:&rest args)
   (cl:apply (cl:function system-uri-kind:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "System.UriKind")) cl:&rest args)
   (cl:apply (cl:function (cl:setf system-uri-kind:value__)) new-value obj! args))
 
 ;; System.Uri (system-uri)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Uri")))
+
 (cl:defmethod absolute-path ((obj! #.(dotnet:class-for-type "System.Uri")) cl:&rest args)
   (cl:apply (cl:function system-uri:absolute-path) obj! args))
 (cl:defmethod absolute-uri ((obj! #.(dotnet:class-for-type "System.Uri")) cl:&rest args)
@@ -6541,8 +6607,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-uri:unescape) obj! args))
 
 ;; System.Convert (system-convert)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Convert")))
+
 
 ;; System.AppDomain (system-app-domain)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.AppDomain")))
+
 (cl:defmethod base-directory ((obj! #.(dotnet:class-for-type "System.AppDomain")) cl:&rest args)
   (cl:apply (cl:function system-app-domain:base-directory) obj! args))
 (cl:defmethod dynamic-directory ((obj! #.(dotnet:class-for-type "System.AppDomain")) cl:&rest args)
@@ -6657,8 +6745,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-app-domain:remove-unhandled-exception) obj! args))
 
 ;; System.IO.Path (system-io-path)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.IO.Path")))
+
 
 ;; System.Boolean (system-boolean)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Boolean")))
+
 (cl:defmethod compare-to ((obj! #.(dotnet:class-for-type "System.Boolean")) cl:&rest args)
   (cl:apply (cl:function system-boolean:compare-to) obj! args))
 (cl:defmethod equals ((obj! #.(dotnet:class-for-type "System.Boolean")) cl:&rest args)
@@ -6671,6 +6781,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-boolean:to-string) obj! args))
 
 ;; System.Type (system-type)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Type")))
+
 (cl:defmethod assembly ((obj! #.(dotnet:class-for-type "System.Type")) cl:&rest args)
   (cl:apply (cl:function system-type:assembly) obj! args))
 (cl:defmethod assembly-qualified-name ((obj! #.(dotnet:class-for-type "System.Type")) cl:&rest args)
@@ -6957,6 +7078,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-type:get-runtime-property) obj! args))
 
 ;; System.Object (system-object)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Object")))
+
 (cl:defmethod equals ((obj! #.(dotnet:class-for-type "System.Object")) cl:&rest args)
   (cl:apply (cl:function system-object:equals) obj! args))
 (cl:defmethod finalize ((obj! #.(dotnet:class-for-type "System.Object")) cl:&rest args)
@@ -6971,6 +7103,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-object:to-string) obj! args))
 
 ;; System.Single (system-single)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Single")))
+
 (cl:defmethod compare-to ((obj! #.(dotnet:class-for-type "System.Single")) cl:&rest args)
   (cl:apply (cl:function system-single:compare-to) obj! args))
 (cl:defmethod equals ((obj! #.(dotnet:class-for-type "System.Single")) cl:&rest args)
@@ -6983,6 +7126,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-single:to-string) obj! args))
 
 ;; System.Double (system-double)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Double")))
+
 (cl:defmethod compare-to ((obj! #.(dotnet:class-for-type "System.Double")) cl:&rest args)
   (cl:apply (cl:function system-double:compare-to) obj! args))
 (cl:defmethod equals ((obj! #.(dotnet:class-for-type "System.Double")) cl:&rest args)
@@ -6995,6 +7149,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-double:to-string) obj! args))
 
 ;; System.Reflection.MemberInfo (system-reflection-member-info)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Reflection.MemberInfo")))
+
 (cl:defmethod custom-attributes ((obj! #.(dotnet:class-for-type "System.Reflection.MemberInfo")) cl:&rest args)
   (cl:apply (cl:function system-reflection-member-info:custom-attributes) obj! args))
 (cl:defmethod declaring-type ((obj! #.(dotnet:class-for-type "System.Reflection.MemberInfo")) cl:&rest args)
@@ -7060,6 +7225,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; doc/dispatch-on-open-generics.md.
 
 ;; System.Collections.ICollection (system-collections-i-collection)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Collections.ICollection")))
+
 (cl:defmethod count ((obj! #.(dotnet:class-for-type "System.Collections.ICollection")) cl:&rest args)
   (cl:apply (cl:function system-collections-i-collection:count) obj! args))
 (cl:defmethod synchronized? ((obj! #.(dotnet:class-for-type "System.Collections.ICollection")) cl:&rest args)
@@ -7070,10 +7246,32 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function system-collections-i-collection:copy-to) obj! args))
 
 ;; System.Collections.IEnumerable (system-collections-i-enumerable)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Collections.IEnumerable")))
+
 (cl:defmethod get-enumerator ((obj! #.(dotnet:class-for-type "System.Collections.IEnumerable")) cl:&rest args)
   (cl:apply (cl:function system-collections-i-enumerable:get-enumerator) obj! args))
 
 ;; System.Collections.IList (system-collections-i-list)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "System.Collections.IList")))
+
 (cl:defmethod fixed-size? ((obj! #.(dotnet:class-for-type "System.Collections.IList")) cl:&rest args)
   (cl:apply (cl:function system-collections-i-list:fixed-size?) obj! args))
 (cl:defmethod read-only? ((obj! #.(dotnet:class-for-type "System.Collections.IList")) cl:&rest args)
@@ -7105,6 +7303,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; doc/dispatch-on-open-generics.md.
 
 ;; Microsoft.Xna.Framework.Vector2 (microsoft-xna-framework-vector2)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2")))
+
 (cl:defmethod x ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Vector2")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-vector2:x) obj! args))
 (cl:defmethod y ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Vector2")) cl:&rest args)
@@ -7143,6 +7352,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-vector2:y)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Rectangle (microsoft-xna-framework-rectangle)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle")))
+
 (cl:defmethod height ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Rectangle")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-rectangle:height) obj! args))
 (cl:defmethod width ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Rectangle")) cl:&rest args)
@@ -7197,6 +7417,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-rectangle:size)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Point (microsoft-xna-framework-point)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Point")))
+
 (cl:defmethod x ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Point")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-point:x) obj! args))
 (cl:defmethod y ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Point")) cl:&rest args)
@@ -7215,6 +7446,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-point:y)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GameTime (microsoft-xna-framework-game-time)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.GameTime")))
+
 (cl:defmethod elapsed-game-time ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GameTime")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game-time:elapsed-game-time) obj! args))
 (cl:defmethod running-slowly? ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GameTime")) cl:&rest args)
@@ -7229,6 +7471,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game-time:total-game-time)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Game (microsoft-xna-framework-game)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Game")))
+
 (cl:defmethod components ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Game")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game:components) obj! args))
 (cl:defmethod content ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Game")) cl:&rest args)
@@ -7323,6 +7576,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game:target-elapsed-time)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GameWindow (microsoft-xna-framework-game-window)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.GameWindow")))
+
 (cl:defmethod allow-alt-f4 ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GameWindow")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-game-window:allow-alt-f4) obj! args))
 (cl:defmethod allow-user-resizing ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GameWindow")) cl:&rest args)
@@ -7399,8 +7663,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-game-window:title)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Keyboard (microsoft-xna-framework-input-keyboard)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard")))
+
 
 ;; Microsoft.Xna.Framework.Input.KeyboardState (microsoft-xna-framework-input-keyboard-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState")))
+
 (cl:defmethod caps-lock ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.KeyboardState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-keyboard-state:caps-lock) obj! args))
 (cl:defmethod item ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.KeyboardState")) cl:&rest args)
@@ -7421,14 +7707,47 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-keyboard-state:key-up?) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Keys (microsoft-xna-framework-input-keys)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keys")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Keys")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-keys:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Keys")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-keys:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Mouse (microsoft-xna-framework-input-mouse)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Mouse")))
+
 
 ;; Microsoft.Xna.Framework.Input.MouseState (microsoft-xna-framework-input-mouse-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.MouseState")))
+
 (cl:defmethod horizontal-scroll-wheel-value ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.MouseState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-mouse-state:horizontal-scroll-wheel-value) obj! args))
 (cl:defmethod left-button ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.MouseState")) cl:&rest args)
@@ -7457,14 +7776,47 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-mouse-state:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.ButtonState (microsoft-xna-framework-input-button-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.ButtonState")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.ButtonState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-button-state:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.ButtonState")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-button-state:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePad (microsoft-xna-framework-input-game-pad)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePad")))
+
 
 ;; Microsoft.Xna.Framework.Input.GamePadState (microsoft-xna-framework-input-game-pad-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState")))
+
 (cl:defmethod buttons ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-state:buttons) obj! args))
 (cl:defmethod d-pad ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadState")) cl:&rest args)
@@ -7489,6 +7841,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-state:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadDPad (microsoft-xna-framework-input-game-pad-d-pad)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad")))
+
 (cl:defmethod down ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadDPad")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-d-pad:down) obj! args))
 (cl:defmethod left ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadDPad")) cl:&rest args)
@@ -7505,6 +7868,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-d-pad:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadThumbSticks (microsoft-xna-framework-input-game-pad-thumb-sticks)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")))
+
 (cl:defmethod left ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-thumb-sticks:left) obj! args))
 (cl:defmethod right ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks")) cl:&rest args)
@@ -7517,6 +7891,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-thumb-sticks:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.GamePadTriggers (microsoft-xna-framework-input-game-pad-triggers)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadTriggers")))
+
 (cl:defmethod left ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadTriggers")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-triggers:left) obj! args))
 (cl:defmethod right ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.GamePadTriggers")) cl:&rest args)
@@ -7529,14 +7914,47 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-game-pad-triggers:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Buttons (microsoft-xna-framework-input-buttons)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Buttons")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Buttons")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-buttons:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Buttons")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-buttons:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchPanel (microsoft-xna-framework-input-touch-touch-panel)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchPanel")))
+
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchCollection (microsoft-xna-framework-input-touch-touch-collection)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection")))
+
 (cl:defmethod count ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-collection:count) obj! args))
 (cl:defmethod connected? ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection")) cl:&rest args)
@@ -7567,6 +7985,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-input-touch-touch-collection:item)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.TouchLocation (microsoft-xna-framework-input-touch-touch-location)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation")))
+
 (cl:defmethod id ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-location:id) obj! args))
 (cl:defmethod position ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation")) cl:&rest args)
@@ -7585,6 +8014,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-touch-touch-location:to-string) obj! args))
 
 ;; Microsoft.Xna.Framework.Input.Touch.GestureSample (microsoft-xna-framework-input-touch-gesture-sample)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.GestureSample")))
+
 (cl:defmethod delta ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.GestureSample")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-input-touch-gesture-sample:delta) obj! args))
 (cl:defmethod delta2 ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Input.Touch.GestureSample")) cl:&rest args)
@@ -7599,6 +8039,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-input-touch-gesture-sample:timestamp) obj! args))
 
 ;; Microsoft.Xna.Framework.Color (microsoft-xna-framework-color)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Color")))
+
 (cl:defmethod a ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Color")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-color:a) obj! args))
 (cl:defmethod b ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Color")) cl:&rest args)
@@ -7637,6 +8088,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-color:r)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Content.ContentManager (microsoft-xna-framework-content-content-manager)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Content.ContentManager")))
+
 (cl:defmethod loaded-assets ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Content.ContentManager")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-content-content-manager:loaded-assets) obj! args))
 (cl:defmethod root-directory ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Content.ContentManager")) cl:&rest args)
@@ -7661,6 +8123,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-content-content-manager:root-directory)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.GraphicsDeviceManager (microsoft-xna-framework-graphics-device-manager)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.GraphicsDeviceManager")))
+
 (cl:defmethod graphics-device ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GraphicsDeviceManager")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-device-manager:graphics-device) obj! args))
 (cl:defmethod graphics-profile ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.GraphicsDeviceManager")) cl:&rest args)
@@ -7753,18 +8226,51 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-device-manager:synchronize-with-vertical-retrace)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteEffects (microsoft-xna-framework-graphics-sprite-effects)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteEffects")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteEffects")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-effects:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteEffects")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-effects:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteSortMode (microsoft-xna-framework-graphics-sprite-sort-mode)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-sort-mode:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteSortMode")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-sort-mode:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SamplerState (microsoft-xna-framework-graphics-sampler-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SamplerState")))
+
 (cl:defmethod address-u ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SamplerState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sampler-state:address-u) obj! args))
 (cl:defmethod address-v ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SamplerState")) cl:&rest args)
@@ -7809,6 +8315,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sampler-state:mip-map-level-of-detail-bias)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.GraphicsDevice (microsoft-xna-framework-graphics-graphics-device)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice")))
+
 (cl:defmethod adapter ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-graphics-device:adapter) obj! args))
 (cl:defmethod blend-factor ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice")) cl:&rest args)
@@ -7923,6 +8440,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-graphics-device:viewport)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteBatch (microsoft-xna-framework-graphics-sprite-batch)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteBatch")))
+
 (cl:defmethod begin ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteBatch")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:begin) obj! args))
 (cl:defmethod dispose ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteBatch")) cl:&rest args)
@@ -7935,6 +8463,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:end) obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteFont (microsoft-xna-framework-graphics-sprite-font)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont")))
+
 (cl:defmethod characters ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteFont")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-font:characters) obj! args))
 (cl:defmethod default-character ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteFont")) cl:&rest args)
@@ -7959,6 +8498,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-font:spacing)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph (microsoft-xna-framework-graphics-sprite-font-glyph)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph")))
+
 (cl:defmethod bounds-in-texture ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-font-glyph:bounds-in-texture) obj! args))
 (cl:defmethod character ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph")) cl:&rest args)
@@ -7991,6 +8541,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-sprite-font-glyph:width-including-bearings)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.PresentationParameters (microsoft-xna-framework-graphics-presentation-parameters)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.PresentationParameters")))
+
 (cl:defmethod back-buffer-format ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.PresentationParameters")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-presentation-parameters:back-buffer-format) obj! args))
 (cl:defmethod back-buffer-height ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.PresentationParameters")) cl:&rest args)
@@ -8043,12 +8604,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-presentation-parameters:render-target-usage)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.PlayerIndex (microsoft-xna-framework-player-index)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.PlayerIndex")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.PlayerIndex")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-player-index:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.PlayerIndex")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-player-index:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundEffect (microsoft-xna-framework-audio-sound-effect)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffect")))
+
 (cl:defmethod duration ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundEffect")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-effect:duration) obj! args))
 (cl:defmethod disposed? ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundEffect")) cl:&rest args)
@@ -8067,6 +8650,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-effect:name)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundEffectInstance (microsoft-xna-framework-audio-sound-effect-instance)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance")))
+
 (cl:defmethod disposed? ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-effect-instance:disposed?) obj! args))
 (cl:defmethod looped? ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance")) cl:&rest args)
@@ -8103,12 +8697,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-effect-instance:volume)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Audio.SoundState (microsoft-xna-framework-audio-sound-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundState")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundState")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-audio-sound-state:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Audio.SoundState")) cl:&rest args)
   (cl:apply (cl:function (cl:setf microsoft-xna-framework-audio-sound-state:value__)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Media.Song (microsoft-xna-framework-media-song)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Media.Song")))
+
 (cl:defmethod album ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Media.Song")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-media-song:album) obj! args))
 (cl:defmethod artist ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Media.Song")) cl:&rest args)
@@ -8143,22 +8759,77 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-media-song:get-hash-code) obj! args))
 
 ;; Microsoft.Xna.Framework.Media.MediaPlayer (microsoft-xna-framework-media-media-player)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer")))
+
 
 ;; Gum.Wireframe.Anchor (gum-wireframe-anchor)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Wireframe.Anchor")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Gum.Wireframe.Anchor")) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-anchor:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Gum.Wireframe.Anchor")) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-wireframe-anchor:value__)) new-value obj! args))
 
 ;; Gum.Wireframe.Dock (gum-wireframe-dock)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Wireframe.Dock")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Gum.Wireframe.Dock")) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-dock:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Gum.Wireframe.Dock")) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-wireframe-dock:value__)) new-value obj! args))
 
 ;; RenderingLibrary.Content.IContentLoader (rendering-library-content-i-content-loader)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Content.IContentLoader")))
+
 
 ;; RenderingLibrary.Camera (rendering-library-camera)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Camera")))
+
 (cl:defmethod position ((obj! #.(dotnet:class-for-type "RenderingLibrary.Camera")) cl:&rest args)
   (cl:apply (cl:function rendering-library-camera:position) obj! args))
 (cl:defmethod absolute-bottom ((obj! #.(dotnet:class-for-type "RenderingLibrary.Camera")) cl:&rest args)
@@ -8217,6 +8888,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-camera:zoom)) new-value obj! args))
 
 ;; Gum.Collections.GraphicalUiElementCollection (gum-collections-graphical-ui-element-collection)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Collections.GraphicalUiElementCollection")))
+
 (cl:defmethod read-only? ((obj! #.(dotnet:class-for-type "Gum.Collections.GraphicalUiElementCollection")) cl:&rest args)
   (cl:apply (cl:function gum-collections-graphical-ui-element-collection:read-only?) obj! args))
 (cl:defmethod clear-items ((obj! #.(dotnet:class-for-type "Gum.Collections.GraphicalUiElementCollection")) cl:&rest args)
@@ -8238,6 +8920,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
 ;; doc/dispatch-on-open-generics.md.
 
 ;; Gum.Wireframe.IInputReceiver (gum-wireframe-i-input-receiver)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Wireframe.IInputReceiver")))
+
 (cl:defmethod parent-input-receiver ((obj! #.(dotnet:class-for-type "Gum.Wireframe.IInputReceiver")) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-i-input-receiver:parent-input-receiver) obj! args))
 (cl:defmethod do-keyboard-action ((obj! #.(dotnet:class-for-type "Gum.Wireframe.IInputReceiver")) cl:&rest args)
@@ -8252,6 +8945,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function gum-wireframe-i-input-receiver:on-lose-focus) obj! args))
 
 ;; Gum.Wireframe.InteractiveGue (gum-wireframe-interactive-gue)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Wireframe.InteractiveGue")))
+
 (cl:defmethod expose-children-events ((obj! #.(dotnet:class-for-type "Gum.Wireframe.InteractiveGue")) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-interactive-gue:expose-children-events) obj! args))
 (cl:defmethod forms-control-as-object ((obj! #.(dotnet:class-for-type "Gum.Wireframe.InteractiveGue")) cl:&rest args)
@@ -8368,6 +9072,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-wireframe-interactive-gue:raise-children-events-outside-of-bounds)) new-value obj! args))
 
 ;; RenderingLibrary.Graphics.IRenderable (rendering-library-graphics-i-renderable)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderable")))
+
 (cl:defmethod batch-key ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IRenderable")) cl:&rest args)
   (cl:apply (cl:function rendering-library-graphics-i-renderable:batch-key) obj! args))
 (cl:defmethod blend-state ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IRenderable")) cl:&rest args)
@@ -8384,6 +9099,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function rendering-library-graphics-i-renderable:start-batch) obj! args))
 
 ;; RenderingLibrary.Graphics.IRenderableIpso (rendering-library-graphics-i-renderable-ipso)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderableIpso")))
+
 (cl:defmethod alpha ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IRenderableIpso")) cl:&rest args)
   (cl:apply (cl:function rendering-library-graphics-i-renderable-ipso:alpha) obj! args))
 (cl:defmethod children ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IRenderableIpso")) cl:&rest args)
@@ -8430,6 +9156,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-graphics-i-renderable-ipso:parent)) new-value obj! args))
 
 ;; RenderingLibrary.Graphics.IVisible (rendering-library-graphics-i-visible)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Graphics.IVisible")))
+
 (cl:defmethod absolute-visible ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IVisible")) cl:&rest args)
   (cl:apply (cl:function rendering-library-graphics-i-visible:absolute-visible) obj! args))
 (cl:defmethod parent ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.IVisible")) cl:&rest args)
@@ -8442,6 +9179,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-graphics-i-visible:visible)) new-value obj! args))
 
 ;; RenderingLibrary.IPositionedSizedObject (rendering-library-i-positioned-sized-object)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.IPositionedSizedObject")))
+
 (cl:defmethod flip-horizontal ((obj! #.(dotnet:class-for-type "RenderingLibrary.IPositionedSizedObject")) cl:&rest args)
   (cl:apply (cl:function rendering-library-i-positioned-sized-object:flip-horizontal) obj! args))
 (cl:defmethod height ((obj! #.(dotnet:class-for-type "RenderingLibrary.IPositionedSizedObject")) cl:&rest args)
@@ -8484,6 +9232,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-i-positioned-sized-object:z)) new-value obj! args))
 
 ;; Gum.Wireframe.GraphicalUiElement (gum-wireframe-graphical-ui-element)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement")))
+
 (cl:defmethod absolute-bottom ((obj! #.(dotnet:class-for-type "Gum.Wireframe.GraphicalUiElement")) cl:&rest args)
   (cl:apply (cl:function gum-wireframe-graphical-ui-element:absolute-bottom) obj! args))
 (cl:defmethod absolute-left ((obj! #.(dotnet:class-for-type "Gum.Wireframe.GraphicalUiElement")) cl:&rest args)
@@ -8888,6 +9647,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-wireframe-graphical-ui-element:z)) new-value obj! args))
 
 ;; MonoGameGum.GumService (mono-game-gum-gum-service)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "MonoGameGum.GumService")))
+
 (cl:defmethod canvas-height ((obj! #.(dotnet:class-for-type "MonoGameGum.GumService")) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gum-service:canvas-height) obj! args))
 (cl:defmethod canvas-width ((obj! #.(dotnet:class-for-type "MonoGameGum.GumService")) cl:&rest args)
@@ -8956,6 +9726,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf mono-game-gum-gum-service:canvas-width)) new-value obj! args))
 
 ;; Gum.Forms.Controls.FrameworkElement (gum-forms-controls-framework-element)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement")))
+
 (cl:defmethod absolute-left ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.FrameworkElement")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-framework-element:absolute-left) obj! args))
 (cl:defmethod absolute-top ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.FrameworkElement")) cl:&rest args)
@@ -9184,12 +9965,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-framework-element:y-units)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Panel (gum-forms-controls-panel)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Panel")))
+
 (cl:defmethod children ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Panel")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-panel:children) obj! args))
 (cl:defmethod react-to-visual-changed ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Panel")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-panel:react-to-visual-changed) obj! args))
 
 ;; Gum.Forms.Controls.Button (gum-forms-controls-button)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Button")))
+
 (cl:defmethod text ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Button")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-button:text) obj! args))
 (cl:defmethod apply-runtime-properties ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Button")) cl:&rest args)
@@ -9208,6 +10011,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-button:text)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Primitives.ButtonBase (gum-forms-controls-primitives-button-base)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase")))
+
 (cl:defmethod click-gamepad-button ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Primitives.ButtonBase")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-primitives-button-base:click-gamepad-button) obj! args))
 (cl:defmethod ignored-keys ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Primitives.ButtonBase")) cl:&rest args)
@@ -9270,6 +10084,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-primitives-button-base:next-in-tab-sequence)) new-value obj! args))
 
 ;; MonoGameGum.GueDeriving.TextRuntime (mono-game-gum-gue-deriving-text-runtime)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime")))
+
 (cl:defmethod default-height ((obj! #.(dotnet:class-for-type "MonoGameGum.GueDeriving.TextRuntime")) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gue-deriving-text-runtime:default-height) obj! args))
 (cl:defmethod default-height-units ((obj! #.(dotnet:class-for-type "MonoGameGum.GueDeriving.TextRuntime")) cl:&rest args)
@@ -9406,6 +10231,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-text-runtime:vertical-alignment)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Label (gum-forms-controls-label)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Label")))
+
 (cl:defmethod text ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Label")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-label:text) obj! args))
 (cl:defmethod text-component ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Label")) cl:&rest args)
@@ -9424,6 +10260,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-label:text)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Slider (gum-forms-controls-slider)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Slider")))
+
 (cl:defmethod ignored-keys ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Slider")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-slider:ignored-keys) obj! args))
 (cl:defmethod snap-to-tick-enabled? ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Slider")) cl:&rest args)
@@ -9490,12 +10337,34 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-slider:ticks-frequency)) new-value obj! args))
 
 ;; Gum.Forms.DefaultVisualsVersion (gum-forms-default-visuals-version)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.DefaultVisualsVersion")))
+
 (cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Gum.Forms.DefaultVisualsVersion")) cl:&rest args)
   (cl:apply (cl:function gum-forms-default-visuals-version:value__) obj! args))
 (cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Gum.Forms.DefaultVisualsVersion")) cl:&rest args)
   (cl:apply (cl:function (cl:setf gum-forms-default-visuals-version:value__)) new-value obj! args))
 
 ;; RenderingLibrary.Content.ContentLoader (rendering-library-content-content-loader)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Content.ContentLoader")))
+
 (cl:defmethod system-managers ((obj! #.(dotnet:class-for-type "RenderingLibrary.Content.ContentLoader")) cl:&rest args)
   (cl:apply (cl:function rendering-library-content-content-loader:system-managers) obj! args))
 (cl:defmethod xna-content-manager ((obj! #.(dotnet:class-for-type "RenderingLibrary.Content.ContentLoader")) cl:&rest args)
@@ -9506,6 +10375,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-content-content-loader:xna-content-manager)) new-value obj! args))
 
 ;; Gum.Forms.Controls.KeyCombo (gum-forms-controls-key-combo)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo")))
+
 (cl:defmethod held-key ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.KeyCombo")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-key-combo:held-key) obj! args))
 (cl:defmethod triggered-on-repeat? ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.KeyCombo")) cl:&rest args)
@@ -9526,6 +10406,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf gum-forms-controls-key-combo:pushed-key)) new-value obj! args))
 
 ;; RenderingLibrary.Graphics.Renderer (rendering-library-graphics-renderer)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "RenderingLibrary.Graphics.Renderer")))
+
 (cl:defmethod single-pixel-source-rectangle ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.Renderer")) cl:&rest args)
   (cl:apply (cl:function rendering-library-graphics-renderer:single-pixel-source-rectangle) obj! args))
 (cl:defmethod camera ((obj! #.(dotnet:class-for-type "RenderingLibrary.Graphics.Renderer")) cl:&rest args)
@@ -9578,8 +10469,30 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf rendering-library-graphics-renderer:single-pixel-texture)) new-value obj! args))
 
 ;; MonoGameGum.GraphicalUiElementExtensionMethods (mono-game-gum-graphical-ui-element-extension-methods)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "MonoGameGum.GraphicalUiElementExtensionMethods")))
+
 
 ;; MonoGameGum.GueDeriving.ContainerRuntime (mono-game-gum-gue-deriving-container-runtime)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "MonoGameGum.GueDeriving.ContainerRuntime")))
+
 (cl:defmethod alpha ((obj! #.(dotnet:class-for-type "MonoGameGum.GueDeriving.ContainerRuntime")) cl:&rest args)
   (cl:apply (cl:function mono-game-gum-gue-deriving-container-runtime:alpha) obj! args))
 (cl:defmethod batch-key ((obj! #.(dotnet:class-for-type "MonoGameGum.GueDeriving.ContainerRuntime")) cl:&rest args)
@@ -9602,6 +10515,17 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function (cl:setf mono-game-gum-gue-deriving-container-runtime:render-target?)) new-value obj! args))
 
 ;; Gum.Forms.Controls.Primitives.RangeBase (gum-forms-controls-primitives-range-base)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase")))
+
 (cl:defmethod enabled? ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Primitives.RangeBase")) cl:&rest args)
   (cl:apply (cl:function gum-forms-controls-primitives-range-base:enabled?) obj! args))
 (cl:defmethod move-to-point-enabled? ((obj! #.(dotnet:class-for-type "Gum.Forms.Controls.Primitives.RangeBase")) cl:&rest args)

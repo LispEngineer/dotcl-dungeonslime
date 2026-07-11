@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.IRenderableIpso
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :rendering-library-graphics-i-renderable-ipso)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderableIpso"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.IRenderableIpso")
-(cl:defconstant <creation> "2026-07-11T16:30:12Z")
-(cl:defconstant <version> 44)
+(cl:defconstant <creation> "2026-07-11T18:42:16Z")
+(cl:defconstant <version> 45)
 
 (cl:defun alpha (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IRenderableIpso") obj!) "get_Alpha"))

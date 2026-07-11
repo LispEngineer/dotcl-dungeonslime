@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Collections.GraphicalUiElementCollection
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :gum-collections-graphical-ui-element-collection)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Collections.GraphicalUiElementCollection"))
 (cl:defconstant <type-str> "Gum.Collections.GraphicalUiElementCollection")
-(cl:defconstant <creation> "2026-07-11T16:30:12Z")
-(cl:defconstant <version> 44)
+(cl:defconstant <creation> "2026-07-11T18:42:16Z")
+(cl:defconstant <version> 45)
 
 (cl:defun new (inner-collection)
   (dotnet:new <type-str> inner-collection))

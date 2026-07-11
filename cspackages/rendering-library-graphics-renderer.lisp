@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.Renderer
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :rendering-library-graphics-renderer)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.Renderer"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.Renderer")
-(cl:defconstant <creation> "2026-07-11T16:30:12Z")
-(cl:defconstant <version> 44)
+(cl:defconstant <creation> "2026-07-11T18:42:16Z")
+(cl:defconstant <version> 45)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

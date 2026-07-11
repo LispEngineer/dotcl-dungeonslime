@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GraphicalUiElementExtensionMethods
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :mono-game-gum-graphical-ui-element-extension-methods)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GraphicalUiElementExtensionMethods"))
 (cl:defconstant <type-str> "MonoGameGum.GraphicalUiElementExtensionMethods")
-(cl:defconstant <creation> "2026-07-11T16:30:12Z")
-(cl:defconstant <version> 44)
+(cl:defconstant <creation> "2026-07-11T18:42:16Z")
+(cl:defconstant <version> 45)
 
 (cl:defun add-child (element child)
   (dotnet:static <type-str> "AddChild" (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") element) (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") child)))

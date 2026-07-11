@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameTime
-;;; Generator Version: 44
-;;; Creation Date: 2026-07-11T16:30:12Z
+;;; Generator Version: 45
+;;; Creation Date: 2026-07-11T18:42:16Z
 
 (cl:in-package :microsoft-xna-framework-game-time)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.GameTime"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
-(cl:defconstant <creation> "2026-07-11T16:30:12Z")
-(cl:defconstant <version> 44)
+(cl:defconstant <creation> "2026-07-11T18:42:16Z")
+(cl:defconstant <version> 45)
 
 (cl:defun new (cl:&optional (total-game-time cl:nil supplied-total-game-time) (elapsed-game-time cl:nil supplied-elapsed-game-time) (is-running-slowly cl:nil supplied-is-running-slowly))
   "Master wrapper for Microsoft.Xna.Framework.GameTime constructor overloads. Dispatches at runtime.

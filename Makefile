@@ -48,8 +48,8 @@ cspackages:
   # MonoGameGum.GueDeriving.ContainerRuntime is the "Root" class in GumService.Default.Root.Children.Clear();
   # Gum.Collections.GraphicalUiElementCollection is the "Children" class in the above.
 	mkdir -p $(OUT_DIR)
-	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric \
-      --assembly $(REF_DIR)System.ObjectModel.dll \
+	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric --ensure-type-in-generic \
+            --assembly $(REF_DIR)System.ObjectModel.dll \
 	    --assembly $(REF_DIR)System.Console.dll \
 	      --class System.Console \
 	    --assembly $(REF_DIR)System.Runtime.dll \
@@ -105,37 +105,37 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Audio.SoundState --constant-properties "*" \
 	      --class Microsoft.Xna.Framework.Media.Song \
 	      --class Microsoft.Xna.Framework.Media.MediaPlayer \
-			--assembly $(BIN_DIR)GumCommon.dll \
-				--class Gum.Wireframe.Anchor \
-				--class Gum.Wireframe.Dock \
-        --class RenderingLibrary.Content.IContentLoader \
-        --class RenderingLibrary.Camera \
-        --class Gum.Collections.GraphicalUiElementCollection --export-parents --export-interfaces \
-        --class 'RenderingLibrary.Graphics.ObservableCollectionNoReset`1' \
-			--assembly $(BIN_DIR)MonoGameGum.dll \
-			  --class MonoGameGum.GumService \
-				--class Gum.Forms.Controls.FrameworkElement \
-				--class Gum.Forms.Controls.Panel --export-parents --export-interfaces \
-				--class Gum.Forms.Controls.Button --export-parents --export-interfaces \
-        --class Gum.Forms.Controls.Primitives.ButtonBase \
-				--class MonoGameGum.GueDeriving.TextRuntime \
-				--class Gum.Forms.Controls.Label --export-parents --export-interfaces \
-				--class Gum.Forms.Controls.Slider --export-parents --export-interfaces \
-				--class Gum.Forms.DefaultVisualsVersion \
-        --class RenderingLibrary.Content.ContentLoader \
-        --class Gum.Forms.Controls.KeyCombo \
-        --class RenderingLibrary.Graphics.Renderer \
-        --class MonoGameGum.GraphicalUiElementExtensionMethods \
-        --class MonoGameGum.GueDeriving.ContainerRuntime --export-parents --export-interfaces \
-			--assembly $(REF_DIR)System.Collections.dll \
-        --class 'System.Collections.Generic.List`1'
+	    --assembly $(BIN_DIR)GumCommon.dll \
+              --class Gum.Wireframe.Anchor \
+              --class Gum.Wireframe.Dock \
+              --class RenderingLibrary.Content.IContentLoader \
+              --class RenderingLibrary.Camera \
+              --class Gum.Collections.GraphicalUiElementCollection --export-parents --export-interfaces \
+              --class 'RenderingLibrary.Graphics.ObservableCollectionNoReset`1' \
+           --assembly $(BIN_DIR)MonoGameGum.dll \
+              --class MonoGameGum.GumService \
+              --class Gum.Forms.Controls.FrameworkElement \
+              --class Gum.Forms.Controls.Panel --export-parents --export-interfaces \
+              --class Gum.Forms.Controls.Button --export-parents --export-interfaces \
+              --class Gum.Forms.Controls.Primitives.ButtonBase \
+              --class MonoGameGum.GueDeriving.TextRuntime \
+              --class Gum.Forms.Controls.Label --export-parents --export-interfaces \
+              --class Gum.Forms.Controls.Slider --export-parents --export-interfaces \
+              --class Gum.Forms.DefaultVisualsVersion \
+              --class RenderingLibrary.Content.ContentLoader \
+              --class Gum.Forms.Controls.KeyCombo \
+              --class RenderingLibrary.Graphics.Renderer \
+              --class MonoGameGum.GraphicalUiElementExtensionMethods \
+              --class MonoGameGum.GueDeriving.ContainerRuntime --export-parents --export-interfaces \
+            --assembly $(REF_DIR)System.Collections.dll \
+              --class 'System.Collections.Generic.List`1'
 	# Add more classes here: --class X [--constant-properties "..."]
 	#
 	# Cleaning up unchanged packages
 	./revert-cspackages-timestamps.sh
 	#
 	# Package list for top level packages.lisp
-	echo "" ; fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/' ; echo ""
+	# echo "" ; fgrep -h in-package cspackages/* | fgrep -v cl-user | sed 's/in-/def/' ; echo ""
 
 test:
 	$(EXECUTABLE) --test
