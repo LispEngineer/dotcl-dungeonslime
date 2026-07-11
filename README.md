@@ -428,3 +428,42 @@ After `make repl`:
 ;; A single class
 (find "ContainerRuntime" y :test #'string= :key (lambda (plist) (getf plist :name)))
 ```
+
+
+# Use and Integration of C# Assemblies as Lisp Packages
+
+The `cspackages/` directory is machine-generated (never hand-edited) by the external
+[`dotcl-packagegen`](https://github.com/LispEngineer/dotcl-package-generator) tool,
+(also designed by this package's author), driven by the `--assembly`/`--class` list
+in the `Makefile`'s `cspackages` target. `make cspackages` regenerates it; the result
+is committed, since generation itself needs a already-built project's assemblies
+present to reflect over. Each requested C# class gets its own small Lisp package
+wrapping its constructors, methods, and properties as ordinary Lisp functions (e.g.
+`v2:new`, `rect:contains`), plus one shared `csharp-generics` package unifying
+same-named methods across classes into CLOS generic functions dispatching on eac
+object's .NET runtime type. Most generated packages call `dotnet:resolve-type`
+(safely deferred via `define-symbol-macro`, so it's fine as an ordinary ASDF dependency).
+
+However, `csharp-generics.lisp` specifically resolves classes at Lisp *read time* via
+`#.(dotnet:class-for-type ...)` specializers, that one file can only be compiled once
+the .NET assemblies it wraps are already loaded into the process.
+
+So, `dungeon-slime.asd` pulls in `cspackages/csharp-assembly-packages.asd` as a normal
+ASDF system via `:depends-on` (after setting up ASDF's search path), but the
+`--no-csharp-generic-in-asd` excludes `csharp-generics.lisp` from the generated ASDF system.
+`dungeon-slime.asd` then re-adds that single file as an ordinary file component,
+positioned after `type-aliases.lisp`, the file that loads C# assembliens such as 
+`MonoGame.Framework.dll`. 
+
+From there, application code just uses the generated packages like any other Lisp
+package, typically through a short `:local-nickname` declared in `packages.lisp` 
+(e.g. `v2` for `microsoft-xna-framework-vector2`), calling things like 
+`(v2:new 1.0 2.0)` or referencing a generated constant directly, e.g. `v2:+zero+`.
+Most functions are also available via the generics package, e.g.,
+`csg:+` or `csg:dispose`. This makes using C# classes & assemblies much more
+Lispy, though there are some sharp edges.
+
+See [`doc/issue-49-continued.md`](doc/issue-49-continued.md) for the full story of
+why this split was necessary. Hopefully a future enhancement to DotCL will obviate
+this requirement; see [DotCL issue 49](https://github.com/dotcl/dotcl/issues/49)
+for details.

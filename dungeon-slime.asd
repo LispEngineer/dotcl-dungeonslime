@@ -22,13 +22,14 @@
                "dotcl-thread"
                "dotcl-repl"
                "anaphora"
+               ;; This next one is in the directory cspackages, referenced above
                "csharp-assembly-packages")
   :components ((:file "packages")
                (:file "settings" :depends-on ("packages")) ;; Load this file early, it contains declaims
                (:file "type-aliases" :depends-on ("packages" "settings"))
                (:file "monoutils" :depends-on ("packages" "type-aliases"))
                (:file "utils" :depends-on ("packages" "type-aliases"))
-	       (:file "cspackages/csharp-generics" :depends-on ("type-aliases"))
+	             (:file "cspackages/csharp-generics" :depends-on ("type-aliases"))
                (:file "constants")
                (:file "load-system-test")
                (:file "csharp" :depends-on ("packages"))
