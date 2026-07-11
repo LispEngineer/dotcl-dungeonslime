@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.TimeSpan
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :system-time-span)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.TimeSpan"))
 (cl:defconstant <type-str> "System.TimeSpan")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "System.TimeSpan")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new (cl:&optional (ticks cl:nil supplied-ticks) (minutes cl:nil supplied-minutes) (seconds cl:nil supplied-seconds) (seconds2 cl:nil supplied-seconds2) (milliseconds cl:nil supplied-milliseconds) (microseconds cl:nil supplied-microseconds))
   "Master wrapper for System.TimeSpan constructor overloads. Dispatches at runtime.

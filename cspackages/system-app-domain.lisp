@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :system-app-domain)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "System.AppDomain")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:define-symbol-macro current-domain (dotnet:static <type-str> "CurrentDomain"))
 (cl:setf (cl:documentation (cl:quote current-domain) (cl:quote cl:variable)) "Gets the current application domain for the current System.Threading.Thread.")

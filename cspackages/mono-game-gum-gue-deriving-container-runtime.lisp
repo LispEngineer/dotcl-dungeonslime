@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.ContainerRuntime
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :mono-game-gum-gue-deriving-container-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.ContainerRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.ContainerRuntime")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "MonoGameGum.GueDeriving.ContainerRuntime")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

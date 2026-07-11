@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Collections.GraphicalUiElementCollection
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :gum-collections-graphical-ui-element-collection)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Collections.GraphicalUiElementCollection"))
 (cl:defconstant <type-str> "Gum.Collections.GraphicalUiElementCollection")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "Gum.Collections.GraphicalUiElementCollection")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new (inner-collection)
   (dotnet:new <type-str> inner-collection))

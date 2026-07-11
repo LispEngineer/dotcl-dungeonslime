@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchCollection
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-collection)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchCollection")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new (cl:&optional (touches cl:nil supplied-touches))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.TouchCollection constructor overloads. Dispatches at runtime.

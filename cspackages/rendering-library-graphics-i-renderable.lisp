@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.IRenderable
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :rendering-library-graphics-i-renderable)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderable"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.IRenderable")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderable")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun batch-key (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IRenderable") obj!) "get_BatchKey"))

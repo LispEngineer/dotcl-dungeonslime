@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :microsoft-xna-framework-rectangle)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new (cl:&optional (location cl:nil supplied-location) (size cl:nil supplied-size) (width cl:nil supplied-width) (height cl:nil supplied-height))
   "Master wrapper for Microsoft.Xna.Framework.Rectangle constructor overloads. Dispatches at runtime.

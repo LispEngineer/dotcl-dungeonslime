@@ -1,19 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 43
-;;; Creation Date: 2026-07-11T16:00:40Z
+;;; Generator Version: 44
+;;; Creation Date: 2026-07-11T16:30:12Z
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-11T16:00:40Z")
-(cl:defconstant <version> 43)
-
-;; Register C# Type with CLOS
-(cl:eval-when (:load-toplevel :execute)
-  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
-                 (dotnet:resolve-type "System.Uri")))
+(cl:defconstant <creation> "2026-07-11T16:30:12Z")
+(cl:defconstant <version> 44)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.
