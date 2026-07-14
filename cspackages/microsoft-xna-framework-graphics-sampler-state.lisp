@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SamplerState
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sampler-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SamplerState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SamplerState")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteBatch
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-batch)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteBatch"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteBatch")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (graphics-device cl:&optional (capacity cl:nil supplied-capacity))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.SpriteBatch constructor overloads. Dispatches at runtime.
@@ -28,24 +28,19 @@ new(GraphicsDevice, Int32)
                     :method-name "new"
                     :supplied-args (cl:append (cl:list :graphics-device graphics-device) (cl:when supplied-capacity (cl:list :capacity capacity)))))))
 
-(cl:defun begin (obj! cl:&key (sort-mode cl:nil supplied-sort-mode) (blend-state cl:nil supplied-blend-state) (sampler-state cl:nil supplied-sampler-state) (depth-stencil-state cl:nil supplied-depth-stencil-state) (rasterizer-state cl:nil supplied-rasterizer-state) (effect cl:nil supplied-effect) (transform-matrix cl:nil supplied-transform-matrix))
+(cl:defun begin (obj! cl:&key (sort-mode (dotnet:enum-or "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred") supplied-sort-mode) (blend-state cl:nil supplied-blend-state) (sampler-state cl:nil supplied-sampler-state) (depth-stencil-state cl:nil supplied-depth-stencil-state) (rasterizer-state cl:nil supplied-rasterizer-state) (effect cl:nil supplied-effect) (transform-matrix cl:nil supplied-transform-matrix))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin overloads. Dispatches at runtime.
 
-Begin(SpriteSortMode, BlendState, SamplerState, DepthStencilState, RasterizerState, Effect, Matrix]) -> Void
+Begin(SpriteSortMode = Deferred, BlendState = null, SamplerState = null, DepthStencilState = null, RasterizerState = null, Effect = null, Matrix] = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null sort-mode) (dotnet:object-type sort-mode)) (cl:or (cl:null blend-state) (dotnet:object-type blend-state)) (cl:or (cl:null sampler-state) (dotnet:object-type sampler-state)) (cl:or (cl:null depth-stencil-state) (dotnet:object-type depth-stencil-state)) (cl:or (cl:null rasterizer-state) (dotnet:object-type rasterizer-state)) (cl:or (cl:null effect) (dotnet:object-type effect)) (cl:or (cl:null transform-matrix) (dotnet:object-type transform-matrix)))
-     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteBatch") obj!) "Begin" sort-mode blend-state sampler-state depth-stencil-state rasterizer-state effect transform-matrix))
+    ((cl:and (cl:or (cl:not supplied-sort-mode) (cl:or (cl:null sort-mode) (dotnet:object-type sort-mode))) (cl:or (cl:not supplied-blend-state) (cl:or (cl:null blend-state) (dotnet:object-type blend-state))) (cl:or (cl:not supplied-sampler-state) (cl:or (cl:null sampler-state) (dotnet:object-type sampler-state))) (cl:or (cl:not supplied-depth-stencil-state) (cl:or (cl:null depth-stencil-state) (dotnet:object-type depth-stencil-state))) (cl:or (cl:not supplied-rasterizer-state) (cl:or (cl:null rasterizer-state) (dotnet:object-type rasterizer-state))) (cl:or (cl:not supplied-effect) (cl:or (cl:null effect) (dotnet:object-type effect))) (cl:or (cl:not supplied-transform-matrix) (cl:or (cl:null transform-matrix) (dotnet:object-type transform-matrix))))
+     (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteBatch") obj!) "Begin" (cl:if supplied-sort-mode sort-mode (dotnet:enum-or "Microsoft.Xna.Framework.Graphics.SpriteSortMode" "Deferred")) (cl:if supplied-blend-state blend-state cl:nil) (cl:if supplied-sampler-state sampler-state cl:nil) (cl:if supplied-depth-stencil-state depth-stencil-state cl:nil) (cl:if supplied-rasterizer-state rasterizer-state cl:nil) (cl:if supplied-effect effect cl:nil) (cl:if supplied-transform-matrix transform-matrix cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-SPRITE-BATCH"
                     :class-name <type-str>
                     :method-name "Begin"
                     :supplied-args (cl:append (cl:when supplied-sort-mode (cl:list :sort-mode sort-mode)) (cl:when supplied-blend-state (cl:list :blend-state blend-state)) (cl:when supplied-sampler-state (cl:list :sampler-state sampler-state)) (cl:when supplied-depth-stencil-state (cl:list :depth-stencil-state depth-stencil-state)) (cl:when supplied-rasterizer-state (cl:list :rasterizer-state rasterizer-state)) (cl:when supplied-effect (cl:list :effect effect)) (cl:when supplied-transform-matrix (cl:list :transform-matrix transform-matrix)))))))
-
-;; Note: Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Begin(SpriteSortMode, BlendState, SamplerState, DepthStencilState, RasterizerState, Effect, Matrix]) -> Void
 
 (cl:defun dispose (obj! disposing)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteBatch") obj!) "Dispose" disposing))

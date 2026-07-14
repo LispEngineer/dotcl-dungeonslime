@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:define-symbol-macro game-has-control (dotnet:static <type-str> "GameHasControl"))
 
@@ -60,13 +60,13 @@ Play(Song) -> Void
 
 Play(Song, TimeSpan]) -> Void
 
-Play(SongCollection, Int32) -> Void
+Play(SongCollection, Int32 = 0) -> Void
 "
   (cl:cond
     ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:or (cl:null start-position) (dotnet:object-type start-position)))
      (dotnet:static <type-str> "Play" song start-position))
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:numberp start-position))
-     (dotnet:static <type-str> "Play" song start-position))
+    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) (cl:or (cl:not supplied-start-position) (cl:numberp start-position)))
+     (dotnet:static <type-str> "Play" song (cl:if supplied-start-position start-position 0)))
     ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) (cl:not supplied-start-position))
      (dotnet:static <type-str> "Play" song))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
@@ -74,11 +74,6 @@ Play(SongCollection, Int32) -> Void
                     :class-name <type-str>
                     :method-name "Play"
                     :supplied-args (cl:append (cl:list :song song) (cl:when supplied-start-position (cl:list :start-position start-position)))))))
-
-;; Note: Microsoft.Xna.Framework.Media.MediaPlayer.Play also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Play(SongCollection, Int32) -> Void
 
 (cl:defun resume ()
   (dotnet:static <type-str> "Resume"))

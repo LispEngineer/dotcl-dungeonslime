@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.
@@ -77,7 +77,7 @@ new(Uri, String, Boolean)
                     :supplied-args (cl:append (cl:list :uri-string uri-string) (cl:when supplied-dont-escape (cl:list :dont-escape dont-escape)) (cl:when supplied-dont-escape2 (cl:list :dont-escape2 dont-escape2)))))))
 
 ;; Note: System.Uri also has the following constructors with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   new(String, UriCreationOptions&)
 
@@ -456,7 +456,7 @@ Parameters:
   (dotnet:static <type-str> "HexEscape" (cl:the (dotnet "System.Char") character)))
 
 ;; The following C# System.Uri.HexUnescape overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   HexUnescape(String, ref Int32&) -> Char
 
 (cl:defun bad-file-system-character? (obj! character)
@@ -560,22 +560,22 @@ Returns: The unescaped canonical representation of the System.Uri instance. All 
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "ToString"))
 
 ;; The following C# System.Uri.TryCreate overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryCreate(String, UriKind, out Uri&) -> Boolean
 ;;   TryCreate(String, UriCreationOptions&, out Uri&) -> Boolean
 ;;   TryCreate(Uri, String, out Uri&) -> Boolean
 ;;   TryCreate(Uri, Uri, out Uri&) -> Boolean
 
 ;; The following C# System.Uri.TryEscapeDataString overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryEscapeDataString(Char], Char], out Int32&) -> Boolean
 
 ;; The following C# System.Uri.TryFormat overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryFormat(Char], out Int32&) -> Boolean
 
 ;; The following C# System.Uri.TryUnescapeDataString overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryUnescapeDataString(Char], Char], out Int32&) -> Boolean
 
 (cl:defun unescape (obj! path)

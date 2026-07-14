@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-boolean)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -134,11 +134,11 @@ ToString(IFormatProvider) -> String
                     :supplied-args (cl:append (cl:when supplied-provider (cl:list :provider provider)))))))
 
 ;; The following C# System.Boolean.TryFormat overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryFormat(Char], out Int32&) -> Boolean
 
 ;; The following C# System.Boolean.TryParse overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryParse(String, out Boolean&) -> Boolean
 ;;   TryParse(Char], out Boolean&) -> Boolean
 

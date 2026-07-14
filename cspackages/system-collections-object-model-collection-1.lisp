@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.ObjectModel.Collection`1
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-collections-object-model-collection-1)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.ObjectModel.Collection`1"))
 (cl:defconstant <type-str> "System.Collections.ObjectModel.Collection`1")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (list cl:nil supplied-list))
   "Master wrapper for System.Collections.ObjectModel.Collection`1 constructor overloads. Dispatches at runtime.

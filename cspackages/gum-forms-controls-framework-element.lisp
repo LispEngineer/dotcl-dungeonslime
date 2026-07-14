@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement constructor overloads. Dispatches at runtime.
@@ -484,11 +484,11 @@ AddChild(GraphicalUiElement) -> Void
 (cl:defun get-visual-arity-1 (type obj! cl:&key (name cl:nil supplied-name))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.GetVisual overloads. Dispatches at runtime.
 
-GetVisual(String) -> T
+GetVisual(String = null) -> T
 "
   (cl:cond
-    ((cl:and (cl:stringp name))
-     (dotnet:invoke-generic (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "GetVisual" (cl:list type) name))
+    ((cl:and (cl:or (cl:not supplied-name) (cl:stringp name)))
+     (dotnet:invoke-generic (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "GetVisual" (cl:list type) (cl:if supplied-name name cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
                     :class-name <type-str>
@@ -512,25 +512,20 @@ GetVisual(String) -> T
                       :method-name "get-visual<>"
                       :supplied-args (cl:list :type-count (cl:length type-list) :types type-list))))))
 
-;; Note: Gum.Forms.Controls.FrameworkElement.GetVisual also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   GetVisual(String) -> T
-
 (cl:defun handle-gamepad-navigation (obj! gamepad)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleGamepadNavigation" gamepad))
 
 (cl:defun handle-keyboard-focus-update (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleKeyboardFocusUpdate"))
 
-(cl:defun handle-tab (obj! cl:&key (tab-direction cl:nil supplied-tab-direction) (requesting-element cl:nil supplied-requesting-element) (loop cl:nil supplied-loop))
+(cl:defun handle-tab (obj! cl:&key (tab-direction (dotnet:enum-or "Gum.Forms.Controls.TabDirection" "Down") supplied-tab-direction) (requesting-element cl:nil supplied-requesting-element) (loop cl:nil supplied-loop))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.HandleTab overloads. Dispatches at runtime.
 
-HandleTab(TabDirection, FrameworkElement, Boolean) -> Void
+HandleTab(TabDirection = Down, FrameworkElement = null, Boolean = NIL) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null tab-direction) (dotnet:object-type tab-direction)) (cl:or (cl:null requesting-element) (dotnet:object-type requesting-element)) (cl:typep loop 'cl:boolean))
-     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleTab" tab-direction requesting-element loop))
+    ((cl:and (cl:or (cl:not supplied-tab-direction) (cl:or (cl:null tab-direction) (dotnet:object-type tab-direction))) (cl:or (cl:not supplied-requesting-element) (cl:or (cl:null requesting-element) (dotnet:object-type requesting-element))) (cl:or (cl:not supplied-loop) (cl:typep loop 'cl:boolean)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleTab" (cl:if supplied-tab-direction tab-direction (dotnet:enum-or "Gum.Forms.Controls.TabDirection" "Down")) (cl:if supplied-requesting-element requesting-element cl:nil) (cl:if supplied-loop loop cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
                     :class-name <type-str>
@@ -539,11 +534,6 @@ HandleTab(TabDirection, FrameworkElement, Boolean) -> Void
 
 (cl:defun handle-tab* (tab-direction requesting-visual parent-visual should-ask-parent loop)
   (dotnet:static <type-str> "HandleTab" (cl:the (dotnet "Gum.Forms.Controls.TabDirection") tab-direction) (cl:the (dotnet "Gum.Wireframe.InteractiveGue") requesting-visual) (cl:the (dotnet "Gum.Wireframe.InteractiveGue") parent-visual) (cl:the (dotnet "System.Boolean") should-ask-parent) (cl:the (dotnet "System.Boolean") loop)))
-
-;; Note: Gum.Forms.Controls.FrameworkElement.HandleTab also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   HandleTab(TabDirection, FrameworkElement, Boolean) -> Void
 
 (cl:defun handle-visual-binding-context-changed (obj! sender args)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleVisualBindingContextChanged" sender args))
@@ -557,40 +547,30 @@ HandleTab(TabDirection, FrameworkElement, Boolean) -> Void
 (cl:defun on-property-changed (obj! cl:&key (property-name cl:nil supplied-property-name))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.OnPropertyChanged overloads. Dispatches at runtime.
 
-OnPropertyChanged(String) -> Void
+OnPropertyChanged(String = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:stringp property-name))
-     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "OnPropertyChanged" property-name))
+    ((cl:and (cl:or (cl:not supplied-property-name) (cl:stringp property-name)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "OnPropertyChanged" (cl:if supplied-property-name property-name cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
                     :class-name <type-str>
                     :method-name "OnPropertyChanged"
                     :supplied-args (cl:append (cl:when supplied-property-name (cl:list :property-name property-name)))))))
 
-;; Note: Gum.Forms.Controls.FrameworkElement.OnPropertyChanged also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   OnPropertyChanged(String) -> Void
-
 (cl:defun push-value-to-view-model (obj! cl:&key (ui-property-name cl:nil supplied-ui-property-name))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.PushValueToViewModel overloads. Dispatches at runtime.
 
-PushValueToViewModel(String) -> Void
+PushValueToViewModel(String = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:stringp ui-property-name))
-     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "PushValueToViewModel" ui-property-name))
+    ((cl:and (cl:or (cl:not supplied-ui-property-name) (cl:stringp ui-property-name)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "PushValueToViewModel" (cl:if supplied-ui-property-name ui-property-name cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
                     :class-name <type-str>
                     :method-name "PushValueToViewModel"
                     :supplied-args (cl:append (cl:when supplied-ui-property-name (cl:list :ui-property-name ui-property-name)))))))
-
-;; Note: Gum.Forms.Controls.FrameworkElement.PushValueToViewModel also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   PushValueToViewModel(String) -> Void
 
 (cl:defun raise-key-down (obj! e)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "RaiseKeyDown" e))
@@ -687,21 +667,16 @@ SetBinding(String, Binding) -> Void
 (cl:defun show (obj! cl:&key (layer cl:nil supplied-layer))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.Show overloads. Dispatches at runtime.
 
-Show(Layer) -> Void
+Show(Layer = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null layer) (dotnet:object-type layer)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "Show" layer))
+    ((cl:and (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "Show" (cl:if supplied-layer layer cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
                     :class-name <type-str>
                     :method-name "Show"
                     :supplied-args (cl:append (cl:when supplied-layer (cl:list :layer layer)))))))
-
-;; Note: Gum.Forms.Controls.FrameworkElement.Show also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Show(Layer) -> Void
 
 (cl:defun to-string (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "ToString"))

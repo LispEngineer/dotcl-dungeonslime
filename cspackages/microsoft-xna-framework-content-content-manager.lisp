@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-content-content-manager)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (service-provider cl:&optional (root-directory cl:nil supplied-root-directory))
   "Master wrapper for Microsoft.Xna.Framework.Content.ContentManager constructor overloads. Dispatches at runtime.

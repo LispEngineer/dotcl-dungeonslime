@@ -1,23 +1,37 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
-(cl:defun new ()
-  (dotnet:new <type-str>))
+(cl:defun new (cl:&optional (keys cl:nil supplied-keys) cl:&key (caps-lock cl:nil supplied-caps-lock) (num-lock cl:nil supplied-num-lock))
+  "Master wrapper for Microsoft.Xna.Framework.Input.KeyboardState constructor overloads. Dispatches at runtime.
+
+new()
+
+new(Keys[], Boolean = NIL, Boolean = NIL)
+"
+  (cl:cond
+    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:object-type keys)) (cl:or (cl:not supplied-caps-lock) (cl:typep caps-lock 'cl:boolean)) (cl:or (cl:not supplied-num-lock) (cl:typep num-lock 'cl:boolean)))
+     (dotnet:new <type-str> keys (cl:if supplied-caps-lock caps-lock cl:nil) (cl:if supplied-num-lock num-lock cl:nil)))
+    ((cl:and (cl:not supplied-keys) (cl:not supplied-caps-lock) (cl:not supplied-num-lock))
+     (dotnet:new <type-str>))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-KEYBOARD-STATE"
+                    :class-name <type-str>
+                    :method-name "new"
+                    :supplied-args (cl:append (cl:when supplied-keys (cl:list :keys keys)) (cl:when supplied-caps-lock (cl:list :caps-lock caps-lock)) (cl:when supplied-num-lock (cl:list :num-lock num-lock)))))))
 
 ;; Note: Microsoft.Xna.Framework.Input.KeyboardState also has the following constructors with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   new(params Keys[])
-;;   new(Keys[], Boolean, Boolean)
 
 (cl:defun caps-lock (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj!) "get_CapsLock"))

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (adapter graphics-profile presentation-parameters cl:&optional (presentation-parameters2 cl:nil supplied-presentation-parameters2))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice constructor overloads. Dispatches at runtime.
@@ -385,7 +385,7 @@ SetRenderTarget(RenderTargetCube, CubeMapFace) -> Void
                     :supplied-args (cl:append (cl:list :render-target render-target) (cl:when supplied-cube-map-face (cl:list :cube-map-face cube-map-face)))))))
 
 ;; The following C# Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetRenderTargets overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   SetRenderTargets(params RenderTargetBinding[]) -> Void
 
 (cl:defun set-vertex-buffer (obj! vertex-buffer cl:&optional (vertex-offset cl:nil supplied-vertex-offset))
@@ -407,6 +407,6 @@ SetVertexBuffer(VertexBuffer, Int32) -> Void
                     :supplied-args (cl:append (cl:list :vertex-buffer vertex-buffer) (cl:when supplied-vertex-offset (cl:list :vertex-offset vertex-offset)))))))
 
 ;; The following C# Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetVertexBuffers overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   SetVertexBuffers(params VertexBufferBinding[]) -> Void
 

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.InteractiveGue
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :gum-wireframe-interactive-gue)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.InteractiveGue"))
 (cl:defconstant <type-str> "Gum.Wireframe.InteractiveGue")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (renderable cl:nil supplied-renderable))
   "Master wrapper for Gum.Wireframe.InteractiveGue constructor overloads. Dispatches at runtime.
@@ -208,21 +208,16 @@ new(IRenderable)
 (cl:defun has-cursor-over (obj! cursor cl:&key (layer cl:nil supplied-layer))
   "Master wrapper for Gum.Wireframe.InteractiveGue.HasCursorOver overloads. Dispatches at runtime.
 
-HasCursorOver(ICursor, Layer) -> Boolean
+HasCursorOver(ICursor, Layer = null) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null cursor) (dotnet:object-type cursor)) (cl:or (cl:null layer) (dotnet:object-type layer)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "HasCursorOver" cursor layer))
+    ((cl:and (cl:or (cl:null cursor) (dotnet:object-type cursor)) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "HasCursorOver" cursor (cl:if supplied-layer layer cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-INTERACTIVE-GUE"
                     :class-name <type-str>
                     :method-name "HasCursorOver"
                     :supplied-args (cl:append (cl:list :cursor cursor) (cl:when supplied-layer (cl:list :layer layer)))))))
-
-;; Note: Gum.Wireframe.InteractiveGue.HasCursorOver also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   HasCursorOver(ICursor, Layer) -> Boolean
 
 (cl:defun in-parent-chain? (obj! possible-parent)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "IsInParentChain" possible-parent))
@@ -251,21 +246,16 @@ HasCursorOver(ICursor, Layer) -> Boolean
 (cl:defun try-call-roll-off (obj! cl:&key (cursor cl:nil supplied-cursor))
   "Master wrapper for Gum.Wireframe.InteractiveGue.TryCallRollOff overloads. Dispatches at runtime.
 
-TryCallRollOff(ICursor) -> Void
+TryCallRollOff(ICursor = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null cursor) (dotnet:object-type cursor)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "TryCallRollOff" cursor))
+    ((cl:and (cl:or (cl:not supplied-cursor) (cl:or (cl:null cursor) (dotnet:object-type cursor))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "TryCallRollOff" (cl:if supplied-cursor cursor cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-INTERACTIVE-GUE"
                     :class-name <type-str>
                     :method-name "TryCallRollOff"
                     :supplied-args (cl:append (cl:when supplied-cursor (cl:list :cursor cursor)))))))
-
-;; Note: Gum.Wireframe.InteractiveGue.TryCallRollOff also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   TryCallRollOff(ICursor) -> Void
 
 (cl:defun try-call-roll-on (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "TryCallRollOn"))

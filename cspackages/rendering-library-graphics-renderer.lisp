@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.Renderer
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :rendering-library-graphics-renderer)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.Renderer"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.Renderer")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -124,21 +124,16 @@ AddLayer(Layer) -> Void
 (cl:defun begin (obj! cl:&key (sprite-batch-matrix cl:nil supplied-sprite-batch-matrix))
   "Master wrapper for RenderingLibrary.Graphics.Renderer.Begin overloads. Dispatches at runtime.
 
-Begin(Matrix]) -> Void
+Begin(Matrix] = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null sprite-batch-matrix) (dotnet:object-type sprite-batch-matrix)))
-     (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Begin" sprite-batch-matrix))
+    ((cl:and (cl:or (cl:not supplied-sprite-batch-matrix) (cl:or (cl:null sprite-batch-matrix) (dotnet:object-type sprite-batch-matrix))))
+     (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Begin" (cl:if supplied-sprite-batch-matrix sprite-batch-matrix cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "RENDERING-LIBRARY-GRAPHICS-RENDERER"
                     :class-name <type-str>
                     :method-name "Begin"
                     :supplied-args (cl:append (cl:when supplied-sprite-batch-matrix (cl:list :sprite-batch-matrix sprite-batch-matrix)))))))
-
-;; Note: RenderingLibrary.Graphics.Renderer.Begin also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Begin(Matrix]) -> Void
 
 (cl:defun clear-performance-recording-variables (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "ClearPerformanceRecordingVariables"))

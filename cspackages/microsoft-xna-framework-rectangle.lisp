@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-rectangle)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (location cl:nil supplied-location) (size cl:nil supplied-size) (width cl:nil supplied-width) (height cl:nil supplied-height))
   "Master wrapper for Microsoft.Xna.Framework.Rectangle constructor overloads. Dispatches at runtime.
@@ -174,14 +174,14 @@ Contains(Single, Single) -> Boolean
                     :supplied-args (cl:append (cl:list :value value) (cl:when supplied-y (cl:list :y y)))))))
 
 ;; Note: Microsoft.Xna.Framework.Rectangle.Contains also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Contains(ref Point&, out Boolean&) -> Void
 ;;   Contains(ref Vector2&, out Boolean&) -> Void
 ;;   Contains(ref Rectangle&, out Boolean&) -> Void
 
 ;; The following C# Microsoft.Xna.Framework.Rectangle.Deconstruct overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   Deconstruct(out Int32&, out Int32&, out Int32&, out Int32&) -> Void
 
 (cl:defun equals (obj! obj)
@@ -227,7 +227,7 @@ Inflate(Single, Single) -> Void
   (dotnet:static <type-str> "Intersect" (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Rectangle.Intersect also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Intersect(ref Rectangle&, ref Rectangle&, out Rectangle&) -> Void
 
@@ -235,7 +235,7 @@ Inflate(Single, Single) -> Void
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Intersects" value))
 
 ;; Note: Microsoft.Xna.Framework.Rectangle.Intersects also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Intersects(ref Rectangle&, out Boolean&) -> Void
 
@@ -275,7 +275,7 @@ Offset(Single, Single) -> Void
   (dotnet:static <type-str> "Union" (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Rectangle.Union also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Union(ref Rectangle&, ref Rectangle&, out Rectangle&) -> Void
 

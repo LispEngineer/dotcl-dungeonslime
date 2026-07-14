@@ -1,22 +1,32 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.GraphicalUiElement
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :gum-wireframe-graphical-ui-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement"))
 (cl:defconstant <type-str> "Gum.Wireframe.GraphicalUiElement")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
-(cl:defun new ()
-  (dotnet:new <type-str>))
+(cl:defun new (cl:&optional (contained-object cl:nil supplied-contained-object) cl:&key (what-contains-this cl:nil supplied-what-contains-this))
+  "Master wrapper for Gum.Wireframe.GraphicalUiElement constructor overloads. Dispatches at runtime.
 
-;; Note: Gum.Wireframe.GraphicalUiElement also has the following constructors with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   new(IRenderable, GraphicalUiElement)
+new()
+
+new(IRenderable, GraphicalUiElement = null)
+"
+  (cl:cond
+    ((cl:and supplied-contained-object (cl:or (cl:null contained-object) (dotnet:object-type contained-object)) (cl:or (cl:not supplied-what-contains-this) (cl:or (cl:null what-contains-this) (dotnet:object-type what-contains-this))))
+     (dotnet:new <type-str> contained-object (cl:if supplied-what-contains-this what-contains-this cl:nil)))
+    ((cl:and (cl:not supplied-contained-object) (cl:not supplied-what-contains-this))
+     (dotnet:new <type-str>))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
+                    :class-name <type-str>
+                    :method-name "new"
+                    :supplied-args (cl:append (cl:when supplied-contained-object (cl:list :contained-object contained-object)) (cl:when supplied-what-contains-this (cl:list :what-contains-this what-contains-this)))))))
 
 (cl:defun are-updates-applied-when-invisible ()
   (dotnet:static <type-str> "AreUpdatesAppliedWhenInvisible"))
@@ -561,11 +571,11 @@
 
 AddToManagers() -> Void
 
-AddToManagers(ISystemManagers, Layer) -> Void
+AddToManagers(ISystemManagers, Layer = null) -> Void
 "
   (cl:cond
-    ((cl:and supplied-managers (cl:or (cl:null managers) (dotnet:object-type managers)) (cl:or (cl:null layer) (dotnet:object-type layer)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AddToManagers" managers layer))
+    ((cl:and supplied-managers (cl:or (cl:null managers) (dotnet:object-type managers)) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AddToManagers" managers (cl:if supplied-layer layer cl:nil)))
     ((cl:and (cl:not supplied-managers) (cl:not supplied-layer))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AddToManagers"))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
@@ -573,11 +583,6 @@ AddToManagers(ISystemManagers, Layer) -> Void
                     :class-name <type-str>
                     :method-name "AddToManagers"
                     :supplied-args (cl:append (cl:when supplied-managers (cl:list :managers managers)) (cl:when supplied-layer (cl:list :layer layer)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.AddToManagers also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   AddToManagers(ISystemManagers, Layer) -> Void
 
 (cl:defun after-full-creation (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AfterFullCreation"))
@@ -684,7 +689,7 @@ FillListWithChildrenByTypeRecursively(List) -> Void
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "GetGraphicalUiElementByName" name))
 
 ;; Note: Gum.Wireframe.GraphicalUiElement.GetGraphicalUiElementByName also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   GetGraphicalUiElementByName(params String[]) -> GraphicalUiElement
 
@@ -698,7 +703,7 @@ FillListWithChildrenByTypeRecursively(List) -> Void
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "GetParentByTypeRecursively" type))
 
 ;; The following C# Gum.Wireframe.GraphicalUiElement.GetParentOffsets overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   GetParentOffsets(out Single&, out Single&) -> Void
 
 (cl:defun interpolate-between (obj! first second interpolation-value)
@@ -716,21 +721,16 @@ FillListWithChildrenByTypeRecursively(List) -> Void
 (cl:defun notify-property-changed (obj! cl:&key (property-name cl:nil supplied-property-name))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.NotifyPropertyChanged overloads. Dispatches at runtime.
 
-NotifyPropertyChanged(String) -> Void
+NotifyPropertyChanged(String = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:stringp property-name))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "NotifyPropertyChanged" property-name))
+    ((cl:and (cl:or (cl:not supplied-property-name) (cl:stringp property-name)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "NotifyPropertyChanged" (cl:if supplied-property-name property-name cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
                     :class-name <type-str>
                     :method-name "NotifyPropertyChanged"
                     :supplied-args (cl:append (cl:when supplied-property-name (cl:list :property-name property-name)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.NotifyPropertyChanged also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   NotifyPropertyChanged(String) -> Void
 
 (cl:defun play-animation (obj! animation)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "PlayAnimation" animation))
@@ -741,21 +741,16 @@ NotifyPropertyChanged(String) -> Void
 (cl:defun push-value-to-view-model (obj! cl:&key (ui-property-name cl:nil supplied-ui-property-name))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.PushValueToViewModel overloads. Dispatches at runtime.
 
-PushValueToViewModel(String) -> Void
+PushValueToViewModel(String = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:stringp ui-property-name))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "PushValueToViewModel" ui-property-name))
+    ((cl:and (cl:or (cl:not supplied-ui-property-name) (cl:stringp ui-property-name)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "PushValueToViewModel" (cl:if supplied-ui-property-name ui-property-name cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
                     :class-name <type-str>
                     :method-name "PushValueToViewModel"
                     :supplied-args (cl:append (cl:when supplied-ui-property-name (cl:list :ui-property-name ui-property-name)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.PushValueToViewModel also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   PushValueToViewModel(String) -> Void
 
 (cl:defun refresh-styles (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "RefreshStyles"))
@@ -775,40 +770,30 @@ PushValueToViewModel(String) -> Void
 (cl:defun resume-layout (obj! cl:&key (recursive cl:nil supplied-recursive))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.ResumeLayout overloads. Dispatches at runtime.
 
-ResumeLayout(Boolean) -> Void
+ResumeLayout(Boolean = NIL) -> Void
 "
   (cl:cond
-    ((cl:and (cl:typep recursive 'cl:boolean))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ResumeLayout" recursive))
+    ((cl:and (cl:or (cl:not supplied-recursive) (cl:typep recursive 'cl:boolean)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ResumeLayout" (cl:if supplied-recursive recursive cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
                     :class-name <type-str>
                     :method-name "ResumeLayout"
                     :supplied-args (cl:append (cl:when supplied-recursive (cl:list :recursive recursive)))))))
 
-;; Note: Gum.Wireframe.GraphicalUiElement.ResumeLayout also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   ResumeLayout(Boolean) -> Void
-
 (cl:defun set-binding (obj! ui-property vm-property cl:&key (to-string-format cl:nil supplied-to-string-format))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.SetBinding overloads. Dispatches at runtime.
 
-SetBinding(String, String, String) -> Void
+SetBinding(String, String, String = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:stringp ui-property) (cl:stringp vm-property) (cl:stringp to-string-format))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "SetBinding" ui-property vm-property to-string-format))
+    ((cl:and (cl:stringp ui-property) (cl:stringp vm-property) (cl:or (cl:not supplied-to-string-format) (cl:stringp to-string-format)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "SetBinding" ui-property vm-property (cl:if supplied-to-string-format to-string-format cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
                     :class-name <type-str>
                     :method-name "SetBinding"
                     :supplied-args (cl:append (cl:list :ui-property ui-property) (cl:list :vm-property vm-property) (cl:when supplied-to-string-format (cl:list :to-string-format to-string-format)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.SetBinding also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   SetBinding(String, String, String) -> Void
 
 (cl:defun set-contained-object (obj! contained-object)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "SetContainedObject" contained-object))
@@ -834,21 +819,16 @@ SetBinding(String, String, String) -> Void
 (cl:defun suspend-layout (obj! cl:&key (recursive cl:nil supplied-recursive))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.SuspendLayout overloads. Dispatches at runtime.
 
-SuspendLayout(Boolean) -> Void
+SuspendLayout(Boolean = NIL) -> Void
 "
   (cl:cond
-    ((cl:and (cl:typep recursive 'cl:boolean))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "SuspendLayout" recursive))
+    ((cl:and (cl:or (cl:not supplied-recursive) (cl:typep recursive 'cl:boolean)))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "SuspendLayout" (cl:if supplied-recursive recursive cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
                     :class-name <type-str>
                     :method-name "SuspendLayout"
                     :supplied-args (cl:append (cl:when supplied-recursive (cl:list :recursive recursive)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.SuspendLayout also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   SuspendLayout(Boolean) -> Void
 
 (cl:defun to-string (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ToString"))
@@ -866,15 +846,15 @@ UpdateLayout() -> Void
 
 UpdateLayout(Boolean, Boolean) -> Void
 
-UpdateLayout(Boolean, Int32, XOrY]) -> Void
+UpdateLayout(Boolean, Int32, XOrY] = null) -> Void
 
-UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY]) -> Void
+UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY] = null) -> Void
 "
   (cl:cond
-    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children x-or-y))
-    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:object-type update-parent)) supplied-update-children (cl:numberp update-children) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children x-or-y))
+    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
+    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:object-type update-parent)) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
     ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:typep update-children 'cl:boolean) (cl:not supplied-x-or-y))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children))
     ((cl:and (cl:not supplied-update-parent) (cl:not supplied-update-children) (cl:not supplied-x-or-y))
@@ -884,12 +864,6 @@ UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY]) -> Void
                     :class-name <type-str>
                     :method-name "UpdateLayout"
                     :supplied-args (cl:append (cl:when supplied-update-parent (cl:list :update-parent update-parent)) (cl:when supplied-update-children (cl:list :update-children update-children)) (cl:when supplied-x-or-y (cl:list :x-or-y x-or-y)))))))
-
-;; Note: Gum.Wireframe.GraphicalUiElement.UpdateLayout also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   UpdateLayout(Boolean, Int32, XOrY]) -> Void
-;;   UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY]) -> Void
 
 (cl:defun update-texture-values-from (obj! as-sprite)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateTextureValuesFrom" as-sprite))

@@ -1,7 +1,7 @@
 # Plan: Implement `CreateOptionsPanel` (MonoGame Tutorial Chapter 20)
 
-*Plan authored by opencode (Qwen3.6-27B-MTP-GGUF) on 2025-07-14*
-*Target C# reference: `private void CreateOptionsPanel()` from [MonoGame Gum UI tutorial](https://docs.monogame.net/articles/tutorials/building_2d_games/20_implementing_ui_with_gum/index.html)*
+* *Plan authored by opencode (Qwen3.6-27B-MTP-GGUF) on 2025-07-14*
+* *Target C# reference: `private void CreateOptionsPanel()` from [MonoGame Gum UI tutorial](https://docs.monogame.net/articles/tutorials/building_2d_games/20_implementing_ui_with_gum/index.html)*
 
 ## Objective
 

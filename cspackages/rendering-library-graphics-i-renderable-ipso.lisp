@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.IRenderableIpso
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :rendering-library-graphics-i-renderable-ipso)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderableIpso"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.IRenderableIpso")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun alpha (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IRenderableIpso") obj!) "get_Alpha"))
@@ -35,7 +35,7 @@
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IRenderableIpso") obj!) "SetParentDirect" new-parent))
 
 ;; Extension methods (exact match on this == RenderingLibrary.Graphics.IRenderableIpso):
-;;   RenderingLibrary.IPositionedSizedObjectExtensionMethods::GetAbsoluteRotation(IRenderableIpso, Boolean) -> Single -- skipped (special parameter types (ref/out/params/default) not yet supported)
+;;   RenderingLibrary.IPositionedSizedObjectExtensionMethods::GetAbsoluteRotation(IRenderableIpso, Boolean = NIL) -> Single -- skipped (special parameter types (ref/out/params/default) not yet supported)
 (cl:defun in-render-target-recursively? (obj!)
   "Extension method from RenderingLibrary.Graphics.IRenderableIpsoExtensions (assembly GumCommon.dll)."
   (dotnet:static "RenderingLibrary.Graphics.IRenderableIpsoExtensions" "IsInRenderTargetRecursively" obj!))

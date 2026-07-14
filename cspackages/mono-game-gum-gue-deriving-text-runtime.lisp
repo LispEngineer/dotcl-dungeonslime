@@ -1,18 +1,28 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
-;; The following C# MonoGameGum.GueDeriving.TextRuntime constructors have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
-;;   new(Boolean, SystemManagers)
+(cl:defun new (cl:&key (full-instantiation cl:t supplied-full-instantiation) (system-managers cl:nil supplied-system-managers))
+  "Master wrapper for MonoGameGum.GueDeriving.TextRuntime constructor overloads. Dispatches at runtime.
+
+new(Boolean = T, SystemManagers = null)
+"
+  (cl:cond
+    ((cl:and (cl:or (cl:not supplied-full-instantiation) (cl:typep full-instantiation 'cl:boolean)) (cl:or (cl:not supplied-system-managers) (cl:or (cl:null system-managers) (dotnet:object-type system-managers))))
+     (dotnet:new <type-str> (cl:if supplied-full-instantiation full-instantiation cl:t) (cl:if supplied-system-managers system-managers cl:nil)))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MONO-GAME-GUM-GUE-DERIVING-TEXT-RUNTIME"
+                    :class-name <type-str>
+                    :method-name "new"
+                    :supplied-args (cl:append (cl:when supplied-full-instantiation (cl:list :full-instantiation full-instantiation)) (cl:when supplied-system-managers (cl:list :system-managers system-managers)))))))
 
 (cl:defun alpha (obj!)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.TextRuntime") obj!) "get_Alpha"))

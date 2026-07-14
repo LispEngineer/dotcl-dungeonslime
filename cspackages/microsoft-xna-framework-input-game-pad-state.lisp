@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (thumb-sticks cl:nil supplied-thumb-sticks) (triggers cl:nil supplied-triggers) (buttons cl:nil supplied-buttons) (d-pad cl:nil supplied-d-pad) (button cl:nil supplied-button))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadState constructor overloads. Dispatches at runtime.

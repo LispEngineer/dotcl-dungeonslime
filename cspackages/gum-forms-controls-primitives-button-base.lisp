@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.ButtonBase
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :gum-forms-controls-primitives-button-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.ButtonBase")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.ButtonBase constructor overloads. Dispatches at runtime.
@@ -116,21 +116,16 @@ new(InteractiveGue)
 (cl:defun perform-click (obj! cl:&key (input-device cl:nil supplied-input-device))
   "Master wrapper for Gum.Forms.Controls.Primitives.ButtonBase.PerformClick overloads. Dispatches at runtime.
 
-PerformClick(Object) -> Void
+PerformClick(Object = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null input-device) (dotnet:object-type input-device)))
-     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "PerformClick" input-device))
+    ((cl:and (cl:or (cl:not supplied-input-device) (cl:or (cl:null input-device) (dotnet:object-type input-device))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "PerformClick" (cl:if supplied-input-device input-device cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-PRIMITIVES-BUTTON-BASE"
                     :class-name <type-str>
                     :method-name "PerformClick"
                     :supplied-args (cl:append (cl:when supplied-input-device (cl:list :input-device input-device)))))))
-
-;; Note: Gum.Forms.Controls.Primitives.ButtonBase.PerformClick also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   PerformClick(Object) -> Void
 
 (cl:defun react-to-visual-changed (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "ReactToVisualChanged"))

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.IInputReceiver
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :gum-wireframe-i-input-receiver)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.IInputReceiver"))
 (cl:defconstant <type-str> "Gum.Wireframe.IInputReceiver")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun parent-input-receiver (obj!)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.IInputReceiver") obj!) "get_ParentInputReceiver"))

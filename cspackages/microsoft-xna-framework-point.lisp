@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-point)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Point"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
   "Master wrapper for Microsoft.Xna.Framework.Point constructor overloads. Dispatches at runtime.
@@ -90,7 +90,7 @@ new(Int32, Int32)
   (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Point") a) (cl:the (dotnet "Microsoft.Xna.Framework.Point") b)))
 
 ;; The following C# Microsoft.Xna.Framework.Point.Deconstruct overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   Deconstruct(out Int32&, out Int32&) -> Void
 
 (cl:defun equals (obj! obj)

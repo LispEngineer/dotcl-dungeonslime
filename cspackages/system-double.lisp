@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Double
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-double)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Double"))
 (cl:defconstant <type-str> "System.Double")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -858,7 +858,7 @@ Parse(String, NumberStyles, IFormatProvider) -> Double
     - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicate the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
     - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
 
-Parse(Char], NumberStyles, IFormatProvider) -> Double
+Parse(Char], NumberStyles = AllowThousands, Float, IFormatProvider = null) -> Double
   Summary: Converts a character span that contains the string representation of a number in a specified style and culture-specific format to its double-precision floating-point number equivalent.
   Returns: A double-precision floating-point number that is equivalent to the numeric value or symbol specified in s.
   Parameters:
@@ -866,7 +866,7 @@ Parse(Char], NumberStyles, IFormatProvider) -> Double
     - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicate the style elements that can be present in s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
     - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
 
-Parse(Byte], NumberStyles, IFormatProvider) -> Double
+Parse(Byte], NumberStyles = AllowThousands, Float, IFormatProvider = null) -> Double
   Summary: Parses a span of UTF-8 characters into a value.
   Returns: The result of parsing utf8Text.
   Parameters:
@@ -877,10 +877,10 @@ Parse(Byte], NumberStyles, IFormatProvider) -> Double
   (cl:cond
     ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
      (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
-     (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
-     (dotnet:static <type-str> "Parse" s style provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:object-type style))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:object-type provider))))
+     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
+    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:object-type style))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:object-type provider))))
+     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
     ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
     ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
@@ -896,12 +896,6 @@ Parse(Byte], NumberStyles, IFormatProvider) -> Double
                     :class-name <type-str>
                     :method-name "Parse"
                     :supplied-args (cl:append (cl:list :s s) (cl:when supplied-style (cl:list :style style)) (cl:when supplied-provider (cl:list :provider provider)))))))
-
-;; Note: System.Double.Parse also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Parse(Char], NumberStyles, IFormatProvider) -> Double
-;;   Parse(Byte], NumberStyles, IFormatProvider) -> Double
 
 (cl:defun pow (x y)
   "Summary: Computes a value raised to a given power.
@@ -1130,12 +1124,12 @@ Parameters:
   (dotnet:static <type-str> "Truncate" (cl:the (dotnet "System.Double") x)))
 
 ;; The following C# System.Double.TryFormat overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
-;;   TryFormat(Char], out Int32&, Char], IFormatProvider) -> Boolean
-;;   TryFormat(Byte], out Int32&, Char], IFormatProvider) -> Boolean
+;; (ref, out, or params) and are not yet supported:
+;;   TryFormat(Char], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
+;;   TryFormat(Byte], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
 
 ;; The following C# System.Double.TryParse overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryParse(String, out Double&) -> Boolean
 ;;   TryParse(Char], out Double&) -> Boolean
 ;;   TryParse(Byte], out Double&) -> Boolean

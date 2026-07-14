@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-app-domain)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:define-symbol-macro current-domain (dotnet:static <type-str> "CurrentDomain"))
 (cl:setf (cl:documentation (cl:quote current-domain) (cl:quote cl:variable)) "Gets the current application domain for the current System.Threading.Thread.")
@@ -404,7 +404,7 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ExecuteAssemblyByName" assembly-name))
 
 ;; Note: System.AppDomain.ExecuteAssemblyByName also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   ExecuteAssemblyByName(AssemblyName, params String[]) -> Int32
 ;;   ExecuteAssemblyByName(String, params String[]) -> Int32

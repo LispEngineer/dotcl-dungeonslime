@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :system-io-path)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:define-symbol-macro alt-directory-separator-char (dotnet:static <type-str> "AltDirectorySeparatorChar"))
 (cl:setf (cl:documentation (cl:quote alt-directory-separator-char) (cl:quote cl:variable)) "Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.")
@@ -83,7 +83,7 @@ Combine(String, String, String, String) -> String
                     :supplied-args (cl:append (cl:list :paths paths) (cl:when supplied-path2 (cl:list :path2 path2)) (cl:when supplied-path3 (cl:list :path3 path3)) (cl:when supplied-path4 (cl:list :path4 path4)))))))
 
 ;; Note: System.IO.Path.Combine also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Combine(params String[]) -> String
 
@@ -474,7 +474,7 @@ Join(String, String, String, String) -> String
                     :supplied-args (cl:append (cl:list :paths paths) (cl:when supplied-path2 (cl:list :path2 path2)) (cl:when supplied-path3 (cl:list :path3 path3)) (cl:when supplied-path4 (cl:list :path4 path4)))))))
 
 ;; Note: System.IO.Path.Join also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Join(params String[]) -> String
 
@@ -505,7 +505,7 @@ TrimEndingDirectorySeparator(Char]) -> Char]
                     :supplied-args (cl:append (cl:list :path path))))))
 
 ;; The following C# System.IO.Path.TryJoin overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryJoin(Char], Char], Char], out Int32&) -> Boolean
 ;;   TryJoin(Char], Char], Char], Char], out Int32&) -> Boolean
 

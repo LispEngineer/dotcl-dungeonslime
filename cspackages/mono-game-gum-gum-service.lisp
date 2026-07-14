@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -91,34 +91,28 @@
 (cl:defun initialize (obj! game cl:&optional (gum-project-file cl:nil supplied-gum-project-file))
   "Master wrapper for MonoGameGum.GumService.Initialize overloads. Dispatches at runtime.
 
-Initialize(Game, String) -> GumProjectSave
+Initialize(Game, String = null) -> GumProjectSave
 
 Initialize(Game, DefaultVisualsVersion) -> Void
 
 Initialize(Game, SystemManagers) -> Void
 
-Initialize(GraphicsDevice, String) -> GumProjectSave
+Initialize(GraphicsDevice, String = null) -> GumProjectSave
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:stringp gum-project-file))
-     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
+    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
+     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game (cl:if supplied-gum-project-file gum-project-file cl:nil)))
     ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:object-type gum-project-file)))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
     ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:object-type gum-project-file)))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:stringp gum-project-file))
-     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
+    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
+     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game (cl:if supplied-gum-project-file gum-project-file cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MONO-GAME-GUM-GUM-SERVICE"
                     :class-name <type-str>
                     :method-name "Initialize"
                     :supplied-args (cl:append (cl:list :game game) (cl:when supplied-gum-project-file (cl:list :gum-project-file gum-project-file)))))))
-
-;; Note: MonoGameGum.GumService.Initialize also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
-;; yet supported:
-;;   Initialize(Game, String) -> GumProjectSave
-;;   Initialize(GraphicsDevice, String) -> GumProjectSave
 
 (cl:defun initialize-for-testing (obj!)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "InitializeForTesting"))

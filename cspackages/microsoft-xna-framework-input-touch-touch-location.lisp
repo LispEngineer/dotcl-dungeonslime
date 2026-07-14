@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchLocation
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-location)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchLocation")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (id cl:nil supplied-id) (state cl:nil supplied-state) (position cl:nil supplied-position) (previous-state cl:nil supplied-previous-state) (previous-position cl:nil supplied-previous-position))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.TouchLocation constructor overloads. Dispatches at runtime.
@@ -78,6 +78,6 @@ Equals(TouchLocation) -> Boolean
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchLocation") obj!) "ToString"))
 
 ;; The following C# Microsoft.Xna.Framework.Input.Touch.TouchLocation.TryGetPreviousLocation overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   TryGetPreviousLocation(out TouchLocation&) -> Boolean
 

@@ -22,7 +22,7 @@
                    ;; Symbol is internal or inherited internally
                    (format nil "~A::~A" pkg-name sym-name))))))))
 
-(defparameter all-symbols
+(defun get-all-symbols ()
   (let ((omitted-packages '("COMMON-LISP" "KEYWORD" "DOTCL.CIL-COMPILER"))
         (collected-symbols '()))
     ;; 1. Loop through all packages in the image
@@ -39,8 +39,8 @@
     ;; 5. Sort the collected symbols alphabetically by name
     (sort collected-symbols #'string< :key #'symbol-name)))
 
-(defparameter all-sym-sorted
-  (sort (mapcar #'full-symbol-name all-symbols) #'string<))
+(defun get-all-sym-sorted ()
+  (sort (mapcar #'full-symbol-name (get-all-symbols)) #'string<))
 
 ;; Function? Variable? Struct?
 ;; Type, if it's a variable or struct.

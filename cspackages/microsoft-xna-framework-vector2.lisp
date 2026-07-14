@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
   "Master wrapper for Microsoft.Xna.Framework.Vector2 constructor overloads. Dispatches at runtime.
@@ -196,7 +196,7 @@ new(Single, Single)
   (dotnet:static <type-str> "Add" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Add also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Add(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
@@ -204,7 +204,7 @@ new(Single, Single)
   (dotnet:static <type-str> "Barycentric" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value3) (cl:the (dotnet "System.Single") amount1) (cl:the (dotnet "System.Single") amount2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Barycentric also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Barycentric(ref Vector2&, ref Vector2&, ref Vector2&, Single, Single, out Vector2&) -> Void
 
@@ -212,7 +212,7 @@ new(Single, Single)
   (dotnet:static <type-str> "CatmullRom" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value3) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value4) (cl:the (dotnet "System.Single") amount)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.CatmullRom also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   CatmullRom(ref Vector2&, ref Vector2&, ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
@@ -223,7 +223,7 @@ new(Single, Single)
   (dotnet:static <type-str> "Ceiling" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Ceiling also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Ceiling(ref Vector2&, out Vector2&) -> Void
 
@@ -231,19 +231,19 @@ new(Single, Single)
   (dotnet:static <type-str> "Clamp" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") min) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") max)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Clamp also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Clamp(ref Vector2&, ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
 ;; The following C# Microsoft.Xna.Framework.Vector2.Deconstruct overloads have special parameter types
-;; (ref, out, params, or defaults) and are not yet supported:
+;; (ref, out, or params) and are not yet supported:
 ;;   Deconstruct(out Single&, out Single&) -> Void
 
 (cl:defun distance (value1 value2)
   (dotnet:static <type-str> "Distance" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Distance also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Distance(ref Vector2&, ref Vector2&, out Single&) -> Void
 
@@ -251,7 +251,7 @@ new(Single, Single)
   (dotnet:static <type-str> "DistanceSquared" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.DistanceSquared also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   DistanceSquared(ref Vector2&, ref Vector2&, out Single&) -> Void
 
@@ -274,7 +274,7 @@ Divide(Vector2, Single) -> Vector2
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Divide also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Divide(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 ;;   Divide(ref Vector2&, Single, out Vector2&) -> Void
@@ -283,7 +283,7 @@ Divide(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Dot" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Dot also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Dot(ref Vector2&, ref Vector2&, out Single&) -> Void
 
@@ -312,7 +312,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "Floor" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Floor also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Floor(ref Vector2&, out Vector2&) -> Void
 
@@ -323,7 +323,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "Hermite" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") tangent1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") tangent2) (cl:the (dotnet "System.Single") amount)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Hermite also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Hermite(ref Vector2&, ref Vector2&, ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
@@ -340,7 +340,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "Lerp" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "System.Single") amount)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Lerp also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Lerp(ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
@@ -348,7 +348,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "LerpPrecise" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "System.Single") amount)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.LerpPrecise also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   LerpPrecise(ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
@@ -356,7 +356,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "Max" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Max also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Max(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
@@ -364,7 +364,7 @@ Equals(Vector2) -> Boolean
   (dotnet:static <type-str> "Min" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Min also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Min(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
@@ -387,7 +387,7 @@ Multiply(Vector2, Single) -> Vector2
                     :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Multiply also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Multiply(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 ;;   Multiply(ref Vector2&, Single, out Vector2&) -> Void
@@ -396,7 +396,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Negate" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Negate also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Negate(ref Vector2&, out Vector2&) -> Void
 
@@ -407,7 +407,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Normalize" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Normalize also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Normalize(ref Vector2&, out Vector2&) -> Void
 
@@ -418,7 +418,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Reflect" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") vector) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") normal)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Reflect also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Reflect(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
@@ -441,7 +441,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Round" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Round also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Round(ref Vector2&, out Vector2&) -> Void
 
@@ -449,7 +449,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "SmoothStep" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2) (cl:the (dotnet "System.Single") amount)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.SmoothStep also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   SmoothStep(ref Vector2&, ref Vector2&, Single, out Vector2&) -> Void
 
@@ -457,7 +457,7 @@ Multiply(Vector2, Single) -> Vector2
   (dotnet:static <type-str> "Subtract" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") value2)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Subtract also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Subtract(ref Vector2&, ref Vector2&, out Vector2&) -> Void
 
@@ -489,7 +489,7 @@ Transform(Vector2, Quaternion) -> Vector2
                     :supplied-args (cl:append (cl:list :position position) (cl:list :matrix matrix))))))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.Transform also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   Transform(ref Vector2&, ref Matrix&, out Vector2&) -> Void
 ;;   Transform(ref Vector2&, ref Quaternion&, out Vector2&) -> Void
@@ -502,7 +502,7 @@ Transform(Vector2, Quaternion) -> Vector2
   (dotnet:static <type-str> "TransformNormal" (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") normal) (cl:the (dotnet "Microsoft.Xna.Framework.Matrix") matrix)))
 
 ;; Note: Microsoft.Xna.Framework.Vector2.TransformNormal also has the following overloads with special
-;; parameter types (ref, out, params, or defaults) that are not
+;; parameter types (ref, out, or params) that are not
 ;; yet supported:
 ;;   TransformNormal(ref Vector2&, ref Matrix&, out Vector2&) -> Void
 ;;   TransformNormal(Vector2[], ref Matrix&, Vector2[]) -> Void

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.GestureSample
-;;; Generator Version: 47
-;;; Creation Date: 2026-07-11T23:07:59Z
+;;; Generator Version: 48
+;;; Creation Date: 2026-07-14T16:32:54Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-gesture-sample)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.GestureSample"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.GestureSample")
-(cl:defconstant <creation> "2026-07-11T23:07:59Z")
-(cl:defconstant <version> 47)
+(cl:defconstant <creation> "2026-07-14T16:32:54Z")
+(cl:defconstant <version> 48)
 
 (cl:defun new (cl:&optional (gesture-type cl:nil supplied-gesture-type) (timestamp cl:nil supplied-timestamp) (position cl:nil supplied-position) (position2 cl:nil supplied-position2) (delta cl:nil supplied-delta) (delta2 cl:nil supplied-delta2))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.GestureSample constructor overloads. Dispatches at runtime.
