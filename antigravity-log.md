@@ -122,6 +122,7 @@
 | Jun 23, 2026 | [doc/package-dotnet.md](doc/package-dotnet.md) | Modified | Noted that `dotnet:call-out` does not support generic methods. |
 | Jun 23, 2026 | [doc/dotnet-dotcl-interop.md](doc/dotnet-dotcl-interop.md) | Modified | Noted that `dotnet:call-out` does not support generic methods. |
 | Jun 23, 2026 | [doc/dotnet-dotcl-interop.md](doc/dotnet-dotcl-interop.md) | Modified | Appended a detailed "Missing Interoperability Capabilities & Proposed Enhancements" section. |
+| Jul 14, 2026 | [gameplay-scene.lisp](gameplay-scene.lisp) | Modified | Refactored `update` method to reduce deep nesting: extracted `clamp-slime-to-bounds`, `clamp-bat-to-bounds`, and `handle-slime-bat-collision` helpers. Max nesting dropped from 5 levels to 2. |
 
 
 ---

@@ -238,110 +238,109 @@
           (setf (slime-pos scene) (v2:new (+ (x (slime-pos scene)) speed)
                                          (y (slime-pos scene)))))))))
 
+(defun clamp-slime-to-bounds (scene r-bounds)
+  "Keep the slime within room bounds by clamping its position to each edge."
+  (let* ((slime-width (width (slime scene)))
+         (slime-height (height (slime scene)))
+         (sp (slime-pos scene))
+         (slime-bounds
+           (make-instance 'circle
+             :x (+ (x sp) (* slime-width 0.5e0))
+             :y (+ (y sp) (* slime-height 0.5e0))
+             :radius (* slime-width 0.5e0))))
+    (when (< (circle-left slime-bounds) (rect:left r-bounds))
+      (setf (slime-pos scene) (v2:new (rect:left r-bounds) (y sp))))
+    (when (> (circle-right slime-bounds) (rect:right r-bounds))
+      (setf (slime-pos scene) (v2:new (- (rect:right r-bounds) slime-width) (y sp))))
+    (when (< (circle-top slime-bounds) (rect:top r-bounds))
+      (setf (slime-pos scene) (v2:new (x sp) (rect:top r-bounds))))
+    (when (> (circle-bottom slime-bounds) (rect:bottom r-bounds))
+      (setf (slime-pos scene) (v2:new (x sp) (- (rect:bottom r-bounds) slime-height))))))
+
+(defun clamp-bat-to-bounds (scene new-bat-pos r-bounds game)
+  "Reflect the bat off room edges, play bounce sound on impact, and return clamped position."
+  (let* ((bat-width (width (bat scene)))
+         (bat-height (height (bat scene)))
+         (bat-bounds
+           (make-instance 'circle
+             :x (+ (x new-bat-pos) (* bat-width 0.5e0))
+             :y (+ (y new-bat-pos) (* bat-height 0.5e0))
+             :radius (* bat-width 0.5e0)))
+         (normal-x 0.0e0)
+         (normal-y 0.0e0))
+    ;; Reflect off left or right edge
+    (if (< (circle-left bat-bounds) (rect:left r-bounds))
+        (progn
+          (setf normal-x 1.0e0)
+          (setf new-bat-pos (v2:new (rect:left r-bounds) (y new-bat-pos))))
+        (when (> (circle-right bat-bounds) (rect:right r-bounds))
+          (setf normal-x -1.0e0)
+          (setf new-bat-pos (v2:new (- (rect:right r-bounds) bat-width) (y new-bat-pos)))))
+    ;; Reflect off top or bottom edge
+    (if (< (circle-top bat-bounds) (rect:top r-bounds))
+        (progn
+          (setf normal-y 1.0e0)
+          (setf new-bat-pos (v2:new (x new-bat-pos) (rect:top r-bounds))))
+        (when (> (circle-bottom bat-bounds) (rect:bottom r-bounds))
+          (setf normal-y -1.0e0)
+          (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
+    ;; Reflect velocity and play sound when a wall was hit
+    (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
+      (let ((normal (v2:normalize* (v2:new normal-x normal-y))))
+        (setf (bat-vel scene) (v2:reflect (bat-vel scene) normal))
+        (play-sound-effect (audio-controller game) (bounce-sound scene))))
+    new-bat-pos))
+
+(defun handle-slime-bat-collision (scene game)
+  "Check if the slime eats the bat; if so, update score, play sound, and reposition bat."
+  (let* ((slime-width (width (slime scene)))
+         (slime-height (height (slime scene)))
+         (sp (slime-pos scene))
+         (bat-width (width (bat scene)))
+         (bat-height (height (bat scene)))
+         (bp (bat-pos scene))
+         (slime-bounds
+           (make-instance 'circle
+             :x (+ (x sp) (* slime-width 0.5e0))
+             :y (+ (y sp) (* slime-height 0.5e0))
+             :radius (* slime-width 0.5e0)))
+         (bat-bounds
+           (make-instance 'circle
+             :x (+ (x bp) (* bat-width 0.5e0))
+             :y (+ (y bp) (* bat-height 0.5e0))
+             :radius (* bat-width 0.5e0))))
+    (when (circle-intersects slime-bounds bat-bounds)
+      (play-sound-effect (audio-controller game) (collect-sound scene))
+      (setf (score scene) (+ (score scene) 100))
+      (assign-random-bat-position scene)
+      (assign-random-bat-velocity scene))))
+
 (defmethod update ((scene gameplay-scene) gt)
   "Updates slime/bat animated frames, handles keyboard/gamepad inputs,
    and computes boundaries, wall reflections, and slime-vs-bat collisions.
    Returns to title scene if Escape key is pressed."
   (let* ((game (scene-game scene))
          (kb (im-keyboard (input-manager game))))
-    ;; Return to title scene on Escape
     (when (was-key-just-pressed kb key:+escape+)
       (format *error-output* "[gameplay-scene:update] Escape pressed; returning to title screen...~%")
       (change-scene scene (make-instance 'title-scene :game game))
       (return-from update))
 
-  ;; Send our updates to our other objects
-  (update (slime scene) gt)
-  (update (bat scene) gt)
+    ;; Animate sprites
+    (update (slime scene) gt)
+    (update (bat scene) gt)
 
-  ;; Read movement input
-  (check-gameplay-keyboard-input scene)
-  (check-gameplay-gamepad-input scene)
+    ;; Read movement input
+    (check-gameplay-keyboard-input scene)
+    (check-gameplay-gamepad-input scene)
 
-  ;; Collision detection and response
-  (let* ((r-bounds (room-bounds scene))
-         ;; Slime sprite dimensions
-         (slime-width (width (slime scene)))
-         (slime-height (height (slime scene)))
-         ;; Slime position
-         (sp (slime-pos scene))
-         ;; Create a bounding circle for the slime centered on the sprite
-         (slime-bounds
-           (make-instance 'circle
-             :x (+ (x sp) (* slime-width 0.5e0))
-             :y (+ (y sp) (* slime-height 0.5e0))
-             :radius (* slime-width 0.5e0))))
-
-    ;; Blocking collision response: keep the slime within screen bounds.
-    ;; Check left edge
-    (when (< (circle-left slime-bounds) (rect:left r-bounds))
-      (setf (slime-pos scene) (v2:new (rect:left r-bounds) (y sp))))
-    ;; Check right edge
-    (when (> (circle-right slime-bounds) (rect:right r-bounds))
-      (setf (slime-pos scene) (v2:new (- (rect:right r-bounds) slime-width) (y sp))))
-    ;; Check top edge
-    (when (< (circle-top slime-bounds) (rect:top r-bounds))
-      (setf (slime-pos scene) (v2:new (x sp) (rect:top r-bounds))))
-    ;; Check bottom edge
-    (when (> (circle-bottom slime-bounds) (rect:bottom r-bounds))
-      (setf (slime-pos scene) (v2:new (x sp) (- (rect:bottom r-bounds) slime-height))))
-
-    ;; Re-read the slime position after blocking adjustments
-    (let* ((sp-adjusted (slime-pos scene))
-           ;; Recalculate slime bounding circle after adjustments (for bat collision)
-           (slime-bounds-adjusted
-             (make-instance 'circle
-               :x (+ (x sp-adjusted) (* slime-width 0.5e0))
-               :y (+ (y sp-adjusted) (* slime-height 0.5e0))
-               :radius (* slime-width 0.5e0)))
-           ;; Calculate the new position of the bat based on the velocity.
-           (new-bat-pos (v2:+ (bat-pos scene) (bat-vel scene)))
-           ;; Bat sprite dimensions
-           (bat-width (width (bat scene)))
-           (bat-height (height (bat scene)))
-           ;; Create a bounding circle for the bat.
-           (bat-bounds
-             (make-instance 'circle
-               :x (+ (x new-bat-pos) (* bat-width 0.5e0))
-               :y (+ (y new-bat-pos) (* bat-height 0.5e0))
-               :radius (* bat-width 0.5e0)))
-           ;; Normal vector for reflection (starts at zero)
-           (normal-x 0.0e0)
-           (normal-y 0.0e0))
-
-      ;; Bounce collision response: reflect the bat off screen edges.
-      ;; Check left edge
-      (if (< (circle-left bat-bounds) (rect:left r-bounds))
-        (progn
-          (setf normal-x 1.0e0)
-          (setf new-bat-pos (v2:new (rect:left r-bounds) (y new-bat-pos))))
-        ;; Check right edge
-        (when (> (circle-right bat-bounds) (rect:right r-bounds))
-          (setf normal-x -1.0e0)
-          (setf new-bat-pos (v2:new (- (rect:right r-bounds) bat-width) (y new-bat-pos)))))
-      ;; Check top edge
-      (if (< (circle-top bat-bounds) (rect:top r-bounds))
-        (progn
-          (setf normal-y 1.0e0)
-          (setf new-bat-pos (v2:new (x new-bat-pos) (rect:top r-bounds))))
-        ;; Check bottom edge
-        (when (> (circle-bottom bat-bounds) (rect:bottom r-bounds))
-          (setf normal-y -1.0e0)
-          (setf new-bat-pos (v2:new (x new-bat-pos) (- (rect:bottom r-bounds) bat-height)))))
-      ;; If the normal is non-zero, reflect the velocity about the normal and play sound.
-      (unless (and (= normal-x 0.0e0) (= normal-y 0.0e0))
-        (let ((normal (v2:normalize* (v2:new normal-x normal-y))))
-          (setf (bat-vel scene) (v2:reflect (bat-vel scene) normal))
-          (play-sound-effect (audio-controller game) (bounce-sound scene))))
-      ;; Update the bat position
+    ;; Collision detection and response
+    (let ((r-bounds (room-bounds scene))
+          (new-bat-pos (v2:+ (bat-pos scene) (bat-vel scene))))
+      (clamp-slime-to-bounds scene r-bounds)
+      (setf new-bat-pos (clamp-bat-to-bounds scene new-bat-pos r-bounds game))
       (setf (bat-pos scene) new-bat-pos)
-
-      ;; Trigger collision response: slime "eats" the bat.
-      (when (circle-intersects slime-bounds-adjusted bat-bounds)
-        (play-sound-effect (audio-controller game) (collect-sound scene))
-        (setf (score scene) (+ (score scene) 100))
-        (assign-random-bat-position scene)
-        (assign-random-bat-velocity scene))))))
+      (handle-slime-bat-collision scene game))))
 
 (defmethod draw ((scene gameplay-scene) gt)
   "Clears screen to pulsing color, renders tilemap, slime, bat, and score text."
