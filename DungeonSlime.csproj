@@ -120,7 +120,7 @@
   <!-- allowing in-process Lisp compilation during MSBuild runs.                 -->
   <!-- ========================================================================= -->
   <ItemGroup>
-    <PackageReference Include="DotCL.Runtime" Version="0.1.17" />
+    <PackageReference Include="DotCL.Runtime" Version="0.1.18" />
   </ItemGroup>
 
   <!-- ========================================================================= -->
