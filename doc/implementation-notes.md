@@ -1037,3 +1037,41 @@ rendering backbuffer resolution is retrieved dynamically. These bounds are then 
   resolution.
 
 
+# Gum UI Event Handler Pattern (MonoGame Chapter 20)
+
+Gum UI controls dispatch C# events (like `Click`, `ValueChanged`, `ValueChangeCompleted`) that
+pass `object sender` and `EventArgs e` to the handler. In the Lisp world, these are delivered
+as two arguments to a Common Lisp function.
+
+## The `*core*` Global Pattern
+
+Gum event handlers cannot use closures to capture scene references, because they are registered
+as function objects and invoked by the Gum/C# runtime without closure context. Instead, all
+Gum event handlers access the current game state through the `*core*` global variable:
+
+```lisp
+(defun handle-options-button-back (sender args)
+  (declare (ignore sender args))
+  (let ((scene (active-scene *core*)))
+    ...use scene to access audio-controller, panels, buttons...))
+```
+
+This pattern works because `*core*` is set to the active game core instance at startup,
+and `(active-scene *core*)` returns the currently displayed scene.
+
+## Slider Volume Handlers
+
+Volume slider handlers must coerce C# property values to `single-float` before passing them
+to Lisp setter methods, because C# `float` properties are marshaled to Lisp as `DoubleFloat`
+(see "Challenging Type Issues with .NET Reflection" above).
+
+## TextRuntime Constructor Gap
+
+The `mono-game-gum-gue-deriving-text-runtime` auto-generated wrapper does not provide a
+`new` constructor function because its C# constructors have default parameters not yet
+supported by the package generator. Instead, use `dotnet:new` directly:
+
+```lisp
+(dotnet:new "MonoGameGum.GueDeriving.TextRuntime")
+```
+

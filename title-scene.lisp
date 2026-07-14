@@ -211,27 +211,62 @@
   (format t "Start Clicked: sender: ~A, args: ~A~%" sender args))
 
 (defun handle-options-clicked (sender args)
-  "A C# Event Handler invoked when the Start button is clicked.
+  "A C# Event Handler invoked when the Options button is clicked.
+   Swaps the title panel for the options panel.
    Expected types:
    sender: C# System.Object
    args: C# System.EventArgs"
-  ;; TODO: CODE ME
-  ; // A UI interaction occurred, play the sound effect
-  ; Core.Audio.PlaySoundEffect(_uiSoundEffect);
-  
-  ; // Set the title panel to be invisible.
-  ; _titleScreenButtonsPanel.IsVisible = false;
+  (declare (ignore sender args))
+  (let ((scene (active-scene *core*)))
+    (play-sound-effect (audio-controller (scene-game scene))
+                       (ui-sound-effect scene))
+    (setf (cs:visible? (title-screen-buttons-panel scene)) nil)
+    (setf (cs:visible? (options-panel scene)) t)
+    (setf (cs:focused? (options-back-button scene)) t)))
 
-  ; // Set the options panel to be visible.
-  ; _optionsPanel.IsVisible = true;
+(defun handle-music-slider-value-changed (sender args)
+  "Update music volume as the slider is being moved."
+  (declare (ignore args))
+  (let* ((scene (active-scene *core*))
+         (audio (audio-controller (scene-game scene))))
+    (setf (song-volume audio)
+          (coerce (cs:value sender) 'single-float))))
 
-  ; // Give the back button on the options panel focus.
-  ; _optionsBackButton.IsFocused = true;
-  (format t "Options Clicked~%"))
+(defun handle-music-slider-value-change-completed (sender args)
+  "Play UI sound effect after the music slider adjustment completes."
+  (declare (ignore sender args))
+  (let* ((scene (active-scene *core*))
+         (audio (audio-controller (scene-game scene))))
+    (play-sound-effect audio (ui-sound-effect scene))))
+
+(defun handle-sfx-slider-value-changed (sender args)
+  "Update SFX volume as the slider is being moved."
+  (declare (ignore args))
+  (let* ((scene (active-scene *core*))
+         (audio (audio-controller (scene-game scene))))
+    (setf (sound-effect-volume audio)
+          (coerce (cs:value sender) 'single-float))))
+
+(defun handle-sfx-slider-value-change-completed (sender args)
+  "Play UI sound effect after the SFX slider adjustment completes."
+  (declare (ignore sender args))
+  (let* ((scene (active-scene *core*))
+         (audio (audio-controller (scene-game scene))))
+    (play-sound-effect audio (ui-sound-effect scene))))
+
+(defun handle-options-button-back (sender args)
+  "Return to title panel when the BACK button is clicked."
+  (declare (ignore sender args))
+  (let ((scene (active-scene *core*)))
+    (play-sound-effect (audio-controller (scene-game scene))
+                       (ui-sound-effect scene))
+    (setf (cs:visible? (title-screen-buttons-panel scene)) t)
+    (setf (cs:visible? (options-panel scene)) nil)
+    (setf (cs:focused? (options-button scene)) t)))
 
 (defmethod create-title-panel ((scene title-scene))
   "Builds the main menu panel with start and options buttons."
-  
+
   ;; Create a container to hold the buttons
   ;; A panel is also a gum-forms-controls-framework-element, nickname :gfe
   (setf (title-screen-buttons-panel scene) (panel:new))
@@ -265,6 +300,74 @@
     (cs:add-click button #'handle-options-clicked)
     (cs:add-child (title-screen-buttons-panel scene) button)))
 
+(defmethod create-options-panel ((scene title-scene))
+  "Build the options panel with volume sliders for music and SFX."
+  (setf (options-panel scene) (panel:new))
+  (cs:dock (options-panel scene) dock:+fill+)
+  (setf (cs:visible? (options-panel scene)) nil)
+  (cs:add-to-root (options-panel scene))
+
+  ;; "OPTIONS" title text at position (10, 10)
+  ;; Note: TextRuntime has no auto-generated 'new' wrapper due to constructors
+  ;; with default parameters, so we use dotnet:new directly.
+  (let ((options-text (dotnet:new "MonoGameGum.GueDeriving.TextRuntime")))
+    (setf (cs:x options-text) 10)
+    (setf (cs:y options-text) 10)
+    (setf (cs:text options-text) "OPTIONS")
+    (cs:add-child (options-panel scene) options-text))
+
+  ;; "Music" label at position (35, 35)
+  (let ((music-label (lbl:new)))
+    (setf (cs:text music-label) "Music")
+    (setf (cs:x music-label) 35)
+    (setf (cs:y music-label) 35)
+    (cs:add-child (options-panel scene) music-label))
+
+  ;; Music volume slider: anchored Top, Y=30, range [0..1]
+  (let ((music-slider (gum-forms-controls-slider:new)))
+    (cs:anchor music-slider anchor:+top+)
+    (setf (cs:y music-slider) 30.0f0)
+    (setf (cs:minimum music-slider) 0.0f0)
+    (setf (cs:maximum music-slider) 1.0f0)
+    (setf (cs:value music-slider)
+          (song-volume (audio-controller (scene-game scene))))
+    (setf (cs:small-change music-slider) 0.1f0)
+    (setf (cs:large-change music-slider) 0.2f0)
+    (cs:add-value-changed music-slider #'handle-music-slider-value-changed)
+    (cs:add-value-change-completed music-slider #'handle-music-slider-value-change-completed)
+    (cs:add-child (options-panel scene) music-slider))
+
+  ;; "SFX" label at position (20, 80)
+  (let ((sfx-label (lbl:new)))
+    (setf (cs:text sfx-label) "SFX")
+    (setf (cs:x sfx-label) 20)
+    (setf (cs:y sfx-label) 80)
+    (cs:add-child (options-panel scene) sfx-label))
+
+  ;; SFX volume slider: anchored Top, Y=93, range [0..1]
+  (let ((sfx-slider (gum-forms-controls-slider:new)))
+    (cs:anchor sfx-slider anchor:+top+)
+    (setf (cs:y sfx-slider) 93.0f0)
+    (setf (cs:minimum sfx-slider) 0.0f0)
+    (setf (cs:maximum sfx-slider) 1.0f0)
+    (setf (cs:value sfx-slider)
+          (sound-effect-volume (audio-controller (scene-game scene))))
+    (setf (cs:small-change sfx-slider) 0.1f0)
+    (setf (cs:large-change sfx-slider) 0.2f0)
+    (cs:add-value-changed sfx-slider #'handle-sfx-slider-value-changed)
+    (cs:add-value-change-completed sfx-slider #'handle-sfx-slider-value-change-completed)
+    (cs:add-child (options-panel scene) sfx-slider))
+
+  ;; "BACK" button: anchored BottomRight, offset (-28, -10)
+  (let ((button (uibutton:new)))
+    (setf (options-back-button scene) button)
+    (setf (cs:text button) "BACK")
+    (cs:anchor button anchor:+bottom-right+)
+    (setf (cs:x button) -28.0f0)
+    (setf (cs:y button) -10.0f0)
+    (cs:add-click button #'handle-options-button-back)
+    (cs:add-child (options-panel scene) button)))
+
 (defmethod initialize-ui ((scene title-scene))
   "Set up the title-scene UI"
   ; Clear out any previous UI in case we came here from
@@ -277,8 +380,6 @@
 
   ;; Set up this scene's UI panels
   (create-title-panel scene)
-  ; CreateOptionsPanel();
-  ;; FIXME: CODE ME
-)
+  (create-options-panel scene))
   
 

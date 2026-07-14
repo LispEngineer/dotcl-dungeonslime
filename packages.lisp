@@ -131,6 +131,7 @@
     (:buibutton :gum-forms-controls-primitives-button-base)
     (:anchor :gum-wireframe-anchor)
     (:gfe :gum-forms-controls-framework-element)
+    (:lbl :gum-forms-controls-label)
     ;; The main generic interface
     (:cs :csharp-generics)
   ) ; end local-nicknames

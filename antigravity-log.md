@@ -1814,3 +1814,61 @@ The custom `defc#generic` and `defc#method` dispatch system in `clr-generic.lisp
 - **Diagnostics**: Traced the `FIND-CLASS: no class named ObservableCollection`1` crash during `make repl` to a version mismatch. The global `dotcl` CLI runs on version `0.1.17` while the project was built against `0.1.16`. In DotCL 0.1.17, class registration for generic definitions was updated to use display names (e.g. `ObservableCollection<T>`), causing references to the 0.1.16 symbol `dotcl-internal::|ObservableCollection`1|` in `csharp-generics.lisp` to fail to resolve.
 - **Resolution**: Upgraded the `DotCL.Runtime` reference in `DungeonSlime.csproj` to `0.1.17` and ran `make cspackages` to regenerate all Lisp wrappers with `dotcl-packagegen 2.41.0`. Generator version 41 skips emitting generic method definitions on generic arity classes, resolving the class resolution hazard.
 - **Verification**: Ran `make build test` to confirm compilation and test correctness, and dry-ran `make repl` to verify that the ASDF system loads cleanly to the interactive Lisp prompt.
+
+---
+
+## 2026-07-14: Implement CreateOptionsPanel (MonoGame Chapter 20)
+
+**Plan**: `.opencode/plans/settings.md`
+
+(Done by OpenCode with Qwen3.6-27B)
+
+Implemented the `CreateOptionsPanel` function from the MonoGame Gum UI tutorial (Chapter 20) in Common Lisp. Added music and SFX volume sliders as Gum UI controls accessible from the title screen.
+
+### Changes Made
+
+#### packages.lisp
+- Added `(:lbl :gum-forms-controls-label)` local nickname to `:dungeon-slime` package for Gum Label controls.
+
+#### audio-controller.lisp
+- Added `song-volume` / `(setf song-volume)` method on `audio-controller` that returns media player volume and sets it while updating `previous-song-volume` slot.
+- Added `sound-effect-volume` / `(setf sound-effect-volume)` method on `audio-controller` that returns SoundEffect master volume and sets it while updating `previous-se-volume` slot.
+- Both setter methods coerce values to `single-float` before C# interop to avoid Float/DoubleFloat reflection mismatch.
+
+#### title-scene.lisp
+- Added five event handler functions:
+  - `handle-music-slider-value-changed` - Updates music volume during slider drag, coerces slider value to single-float.
+  - `handle-music-slider-value-change-completed` - Plays UI sound after music slider release.
+  - `handle-sfx-slider-value-changed` - Updates SFX volume during slider drag, coerces slider value to single-float.
+  - `handle-sfx-slider-value-change-completed` - Plays UI sound after SFX slider release.
+  - `handle-options-button-back` - Returns to title panel, toggles visibility, sets focus on options button.
+- All handlers use the `*core*` global pattern to access active scene state (closures are not viable for C# event delegates).
+- Added `create-options-panel` method on `title-scene` that builds the panel with:
+  - TextRuntime "OPTIONS" title at (10, 10)
+  - Label "Music" at (35, 35)
+  - Slider for music volume anchored Top at Y=30, range [0..1], initial value from current media volume
+  - Label "SFX" at (20, 80)
+  - Slider for SFX volume anchored Top at Y=93, range [0..1], initial value from current master volume
+  - Button "BACK" anchored BottomRight at (-28, -10)
+- Updated `handle-options-clicked` to implement full panel-swap behavior via `*core*` pattern.
+- Wired `create-options-panel` into `initialize-ui`.
+- Note: TextRuntime cannot use auto-generated `new` wrapper due to generator limitation with default parameters; uses `dotnet:new` directly.
+
+#### doc/implementation-notes.md
+- Added section documenting the `*core*` global pattern for Gum event handlers.
+- Documented the TextRuntime constructor gap workaround.
+
+#### FILES.md (new)
+- Created comprehensive file inventory with descriptions.
+
+### Verification
+- `make check-parens`: All project source files pass (only scratch/ files have mismatches, as expected).
+- `make build`: Succeeded with 0 errors, 0 warnings.
+- `make test`: All tests passed.
+- `make run`: Game runs and transitions through title scene to gameplay scene.
+- REPL loads successfully via `load-repl.lisp`.
+
+### Design Decisions
+- Event handlers use `*core*` global instead of closures because C# event delegates cannot carry closure state.
+- `song-volume` and `sound-effect-volume` are methods on `audio-controller` rather than standalone functions, so that the setters can update instance-specific `previous-volume` slots for mute/unmute restoration.
+- TextRuntime is constructed via `dotnet:new "MonoGameGum.GueDeriving.TextRuntime"` because the auto-generated wrapper lacks a `new` function (generators do not yet support constructors with default parameters).

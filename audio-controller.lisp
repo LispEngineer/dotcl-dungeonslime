@@ -99,6 +99,24 @@
             (coerce vol 'single-float))
     (error () nil)))
 
+(defmethod song-volume ((ac audio-controller))
+  "Return the current music volume from the MediaPlayer."
+  (get-media-volume))
+
+(defmethod (setf song-volume) (new-val (ac audio-controller))
+  "Set music volume and record in previous-song-volume for mute/unmute."
+  (setf (previous-song-volume ac) (coerce new-val 'single-float))
+  (set-media-volume (coerce new-val 'single-float)))
+
+(defmethod sound-effect-volume ((ac audio-controller))
+  "Return the current SFX volume from SoundEffect.MasterVolume."
+  (get-master-volume))
+
+(defmethod (setf sound-effect-volume) (new-val (ac audio-controller))
+  "Set SFX volume and record in previous-se-volume for mute/unmute."
+  (setf (previous-se-volume ac) (coerce new-val 'single-float))
+  (set-master-volume (coerce new-val 'single-float)))
+
 (defmethod toggle-mute ((ac audio-controller))
   "Toggles the global mute state."
   (when (disposed? ac) (return-from toggle-mute))
