@@ -47,7 +47,11 @@
   (when (or (disposed? ac) (null song)) (return-from play-song))
   (handler-case
       (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
-        (media-player:play song))
+        ;; media-player:play's generated overload dispatch always matches its
+        ;; Play(SongCollection, Int32) clause when no start-position is
+        ;; supplied, passing a stray 0 that no MediaPlayer.Play overload
+        ;; accepts for a Song argument. Call the Play(Song) overload directly.
+        (dotnet:static "Microsoft.Xna.Framework.Media.MediaPlayer" "Play" song))
     (error (c)
       (format *error-output* "Warning: play-song failed: ~A~%" c))))
 
