@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Creation Date: 2026-07-15T03:30:42Z
 
 (cl:in-package :cl-user)
 
@@ -3673,6 +3673,22 @@
    #:play
    #:resume
    #:stop
+  ))
+
+;;; Source File: microsoft-xna-framework-media-media-state.lisp
+;;; C# Class: Microsoft.Xna.Framework.Media.MediaState
+;;; Constant Properties: (none)
+(cl:defpackage :microsoft-xna-framework-media-media-state
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:+paused+
+   #:+playing+
+   #:+stopped+
+   #:value__
   ))
 
 ;;; Source File: gum-wireframe-anchor.lisp

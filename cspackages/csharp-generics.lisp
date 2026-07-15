@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
 ;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Creation Date: 2026-07-15T03:30:42Z
 
 (cl:in-package :csharp-generics)
 
@@ -304,6 +304,7 @@ Microsoft.Xna.Framework.Graphics.SpriteEffects: value__ (microsoft-xna-framework
 Microsoft.Xna.Framework.Graphics.SpriteSortMode: value__ (microsoft-xna-framework-graphics-sprite-sort-mode:value__)
 Microsoft.Xna.Framework.PlayerIndex: value__ (microsoft-xna-framework-player-index:value__)
 Microsoft.Xna.Framework.Audio.SoundState: value__ (microsoft-xna-framework-audio-sound-state:value__)
+Microsoft.Xna.Framework.Media.MediaState: value__ (microsoft-xna-framework-media-media-state:value__)
 Gum.Wireframe.Anchor: value__ (gum-wireframe-anchor:value__)
 Gum.Wireframe.Dock: value__ (gum-wireframe-dock:value__)
 Gum.Forms.DefaultVisualsVersion: value__ (gum-forms-default-visuals-version:value__)
@@ -5345,6 +5346,7 @@ Microsoft.Xna.Framework.Graphics.SpriteEffects: (cl:setf value__) (cl:setf (micr
 Microsoft.Xna.Framework.Graphics.SpriteSortMode: (cl:setf value__) (cl:setf (microsoft-xna-framework-graphics-sprite-sort-mode:value__ ...))
 Microsoft.Xna.Framework.PlayerIndex: (cl:setf value__) (cl:setf (microsoft-xna-framework-player-index:value__ ...))
 Microsoft.Xna.Framework.Audio.SoundState: (cl:setf value__) (cl:setf (microsoft-xna-framework-audio-sound-state:value__ ...))
+Microsoft.Xna.Framework.Media.MediaState: (cl:setf value__) (cl:setf (microsoft-xna-framework-media-media-state:value__ ...))
 Gum.Wireframe.Anchor: (cl:setf value__) (cl:setf (gum-wireframe-anchor:value__ ...))
 Gum.Wireframe.Dock: (cl:setf value__) (cl:setf (gum-wireframe-dock:value__ ...))
 Gum.Forms.DefaultVisualsVersion: (cl:setf value__) (cl:setf (gum-forms-default-visuals-version:value__ ...))
@@ -8770,6 +8772,23 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
                  (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer")))
 
+
+;; Microsoft.Xna.Framework.Media.MediaState (microsoft-xna-framework-media-media-state)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaState")))
+
+(cl:defmethod value__ ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Media.MediaState")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-media-media-state:value__) obj! args))
+(cl:defmethod (cl:setf value__) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Media.MediaState")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-media-media-state:value__)) new-value obj! args))
 
 ;; Gum.Wireframe.Anchor (gum-wireframe-anchor)
 ;; Register C# Type with CLOS (--ensure-type-in-generic) --

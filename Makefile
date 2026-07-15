@@ -105,6 +105,7 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Audio.SoundState --constant-properties "*" \
 	      --class Microsoft.Xna.Framework.Media.Song \
 	      --class Microsoft.Xna.Framework.Media.MediaPlayer \
+	      --class Microsoft.Xna.Framework.Media.MediaState \
 	    --assembly $(BIN_DIR)GumCommon.dll \
               --class Gum.Wireframe.Anchor \
               --class Gum.Wireframe.Dock \
