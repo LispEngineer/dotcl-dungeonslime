@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (buffer sample-rate channels cl:&optional (sample-rate2 cl:nil supplied-sample-rate2) (channels2 cl:nil supplied-channels2) (loop-start cl:nil supplied-loop-start) (loop-length cl:nil supplied-loop-length))
   "Master wrapper for Microsoft.Xna.Framework.Audio.SoundEffect constructor overloads. Dispatches at runtime.
@@ -18,9 +18,9 @@ new(Byte[], Int32, AudioChannels)
 new(Byte[], Int32, Int32, Int32, AudioChannels, Int32, Int32)
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null buffer) (dotnet:object-type buffer)) (cl:numberp sample-rate) (cl:numberp channels) supplied-sample-rate2 (cl:numberp sample-rate2) supplied-channels2 (cl:or (cl:null channels2) (dotnet:object-type channels2)) supplied-loop-start (cl:numberp loop-start) supplied-loop-length (cl:numberp loop-length))
+    ((cl:and (cl:or (cl:null buffer) (dotnet:is-instance-of buffer "System.Byte[]")) (cl:numberp sample-rate) (cl:numberp channels) supplied-sample-rate2 (cl:numberp sample-rate2) supplied-channels2 (cl:or (cl:null channels2) (dotnet:is-instance-of channels2 "Microsoft.Xna.Framework.Audio.AudioChannels")) supplied-loop-start (cl:numberp loop-start) supplied-loop-length (cl:numberp loop-length))
      (dotnet:new <type-str> buffer sample-rate channels sample-rate2 channels2 loop-start loop-length))
-    ((cl:and (cl:or (cl:null buffer) (dotnet:object-type buffer)) (cl:numberp sample-rate) (cl:or (cl:null channels) (dotnet:object-type channels)) (cl:not supplied-sample-rate2) (cl:not supplied-channels2) (cl:not supplied-loop-start) (cl:not supplied-loop-length))
+    ((cl:and (cl:or (cl:null buffer) (dotnet:is-instance-of buffer "System.Byte[]")) (cl:numberp sample-rate) (cl:or (cl:null channels) (dotnet:is-instance-of channels "Microsoft.Xna.Framework.Audio.AudioChannels")) (cl:not supplied-sample-rate2) (cl:not supplied-channels2) (cl:not supplied-loop-start) (cl:not supplied-loop-length))
      (dotnet:new <type-str> buffer sample-rate channels))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT"

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.Song
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-media-song)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.Song"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.Song")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun album (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj!) "get_Album"))
@@ -60,9 +60,9 @@ Equals(Song) -> Boolean
 Equals(Object) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj!) "Equals" song))
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Media.Song") obj!) "Equals" song))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-MEDIA-SONG"

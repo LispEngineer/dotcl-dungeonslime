@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePad
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePad")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:define-symbol-macro maximum-game-pad-count (dotnet:static <type-str> "MaximumGamePadCount"))
 
@@ -20,7 +20,7 @@ GetCapabilities(PlayerIndex) -> GamePadCapabilities
 GetCapabilities(Int32) -> GamePadCapabilities
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")))
      (dotnet:static <type-str> "GetCapabilities" player-index))
     ((cl:and (cl:numberp player-index))
      (dotnet:static <type-str> "GetCapabilities" player-index))
@@ -46,15 +46,15 @@ GetState(PlayerIndex, GamePadDeadZone, GamePadDeadZone) -> GamePadState
 GetState(Int32, GamePadDeadZone, GamePadDeadZone) -> GamePadState
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:object-type dead-zone-mode)) supplied-right-dead-zone-mode (cl:or (cl:null right-dead-zone-mode) (dotnet:object-type right-dead-zone-mode)))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:is-instance-of dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")) supplied-right-dead-zone-mode (cl:or (cl:null right-dead-zone-mode) (dotnet:is-instance-of right-dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")))
      (dotnet:static <type-str> "GetState" player-index dead-zone-mode right-dead-zone-mode))
-    ((cl:and (cl:numberp player-index) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:object-type dead-zone-mode)) supplied-right-dead-zone-mode (cl:or (cl:null right-dead-zone-mode) (dotnet:object-type right-dead-zone-mode)))
+    ((cl:and (cl:numberp player-index) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:is-instance-of dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")) supplied-right-dead-zone-mode (cl:or (cl:null right-dead-zone-mode) (dotnet:is-instance-of right-dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")))
      (dotnet:static <type-str> "GetState" player-index dead-zone-mode right-dead-zone-mode))
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:object-type dead-zone-mode)) (cl:not supplied-right-dead-zone-mode))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:is-instance-of dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")) (cl:not supplied-right-dead-zone-mode))
      (dotnet:static <type-str> "GetState" player-index dead-zone-mode))
-    ((cl:and (cl:numberp player-index) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:object-type dead-zone-mode)) (cl:not supplied-right-dead-zone-mode))
+    ((cl:and (cl:numberp player-index) supplied-dead-zone-mode (cl:or (cl:null dead-zone-mode) (dotnet:is-instance-of dead-zone-mode "Microsoft.Xna.Framework.Input.GamePadDeadZone")) (cl:not supplied-right-dead-zone-mode))
      (dotnet:static <type-str> "GetState" player-index dead-zone-mode))
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)) (cl:not supplied-dead-zone-mode) (cl:not supplied-right-dead-zone-mode))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")) (cl:not supplied-dead-zone-mode) (cl:not supplied-right-dead-zone-mode))
      (dotnet:static <type-str> "GetState" player-index))
     ((cl:and (cl:numberp player-index) (cl:not supplied-dead-zone-mode) (cl:not supplied-right-dead-zone-mode))
      (dotnet:static <type-str> "GetState" player-index))
@@ -76,11 +76,11 @@ SetVibration(PlayerIndex, Single, Single, Single, Single) -> Boolean
 SetVibration(Int32, Single, Single, Single, Single) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)) (cl:numberp left-motor) (cl:numberp right-motor) supplied-left-trigger (cl:numberp left-trigger) supplied-right-trigger (cl:numberp right-trigger))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")) (cl:numberp left-motor) (cl:numberp right-motor) supplied-left-trigger (cl:numberp left-trigger) supplied-right-trigger (cl:numberp right-trigger))
      (dotnet:static <type-str> "SetVibration" player-index left-motor right-motor left-trigger right-trigger))
     ((cl:and (cl:numberp player-index) (cl:numberp left-motor) (cl:numberp right-motor) supplied-left-trigger (cl:numberp left-trigger) supplied-right-trigger (cl:numberp right-trigger))
      (dotnet:static <type-str> "SetVibration" player-index left-motor right-motor left-trigger right-trigger))
-    ((cl:and (cl:or (cl:null player-index) (dotnet:object-type player-index)) (cl:numberp left-motor) (cl:numberp right-motor) (cl:not supplied-left-trigger) (cl:not supplied-right-trigger))
+    ((cl:and (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")) (cl:numberp left-motor) (cl:numberp right-motor) (cl:not supplied-left-trigger) (cl:not supplied-right-trigger))
      (dotnet:static <type-str> "SetVibration" player-index left-motor right-motor))
     ((cl:and (cl:numberp player-index) (cl:numberp left-motor) (cl:numberp right-motor) (cl:not supplied-left-trigger) (cl:not supplied-right-trigger))
      (dotnet:static <type-str> "SetVibration" player-index left-motor right-motor))

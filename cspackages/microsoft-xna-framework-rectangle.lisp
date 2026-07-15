@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Rectangle
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-rectangle)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Rectangle"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Rectangle")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (location cl:nil supplied-location) (size cl:nil supplied-size) (width cl:nil supplied-width) (height cl:nil supplied-height))
   "Master wrapper for Microsoft.Xna.Framework.Rectangle constructor overloads. Dispatches at runtime.
@@ -22,7 +22,7 @@ new(Int32, Int32, Int32, Int32)
   (cl:cond
     ((cl:and supplied-location (cl:numberp location) supplied-size (cl:numberp size) supplied-width (cl:numberp width) supplied-height (cl:numberp height))
      (dotnet:new <type-str> location size width height))
-    ((cl:and supplied-location (cl:or (cl:null location) (dotnet:object-type location)) supplied-size (cl:or (cl:null size) (dotnet:object-type size)) (cl:not supplied-width) (cl:not supplied-height))
+    ((cl:and supplied-location (cl:or (cl:null location) (dotnet:is-instance-of location "Microsoft.Xna.Framework.Point")) supplied-size (cl:or (cl:null size) (dotnet:is-instance-of size "Microsoft.Xna.Framework.Point")) (cl:not supplied-width) (cl:not supplied-height))
      (dotnet:new <type-str> location size))
     ((cl:and (cl:not supplied-location) (cl:not supplied-size) (cl:not supplied-width) (cl:not supplied-height))
      (dotnet:new <type-str>))
@@ -161,11 +161,11 @@ Contains(Single, Single) -> Boolean
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Contains" value y))
     ((cl:and (cl:numberp value) supplied-y (cl:numberp y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Contains" value y))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:not supplied-y))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Point")) (cl:not supplied-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Contains" value))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:not supplied-y))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Vector2")) (cl:not supplied-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Contains" value))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:not supplied-y))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Rectangle")) (cl:not supplied-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Contains" value))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-RECTANGLE"
@@ -192,9 +192,9 @@ Equals(Object) -> Boolean
 Equals(Rectangle) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "Microsoft.Xna.Framework.Rectangle")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-RECTANGLE"
@@ -258,9 +258,9 @@ Offset(Single, Single) -> Void
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Offset" amount offset-y))
     ((cl:and (cl:numberp amount) supplied-offset-y (cl:numberp offset-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Offset" amount offset-y))
-    ((cl:and (cl:or (cl:null amount) (dotnet:object-type amount)) (cl:not supplied-offset-y))
+    ((cl:and (cl:or (cl:null amount) (dotnet:is-instance-of amount "Microsoft.Xna.Framework.Point")) (cl:not supplied-offset-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Offset" amount))
-    ((cl:and (cl:or (cl:null amount) (dotnet:object-type amount)) (cl:not supplied-offset-y))
+    ((cl:and (cl:or (cl:null amount) (dotnet:is-instance-of amount "Microsoft.Xna.Framework.Vector2")) (cl:not supplied-offset-y))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Rectangle") obj!) "Offset" amount))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-RECTANGLE"

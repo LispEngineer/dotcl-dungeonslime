@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.Anchor
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-wireframe-anchor)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.Anchor"))
 (cl:defconstant <type-str> "Gum.Wireframe.Anchor")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 ;; WARNING: this is a single, permanently-cached boxed .NET object --
 ;; the binding below computes its value at most once (cached on first

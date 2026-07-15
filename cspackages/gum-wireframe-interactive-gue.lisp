@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.InteractiveGue
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-wireframe-interactive-gue)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.InteractiveGue"))
 (cl:defconstant <type-str> "Gum.Wireframe.InteractiveGue")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (renderable cl:nil supplied-renderable))
   "Master wrapper for Gum.Wireframe.InteractiveGue constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(IRenderable)
 "
   (cl:cond
-    ((cl:and supplied-renderable (cl:or (cl:null renderable) (dotnet:object-type renderable)))
+    ((cl:and supplied-renderable (cl:or (cl:null renderable) (dotnet:is-instance-of renderable "RenderingLibrary.Graphics.IRenderable")))
      (dotnet:new <type-str> renderable))
     ((cl:and (cl:not supplied-renderable))
      (dotnet:new <type-str>))
@@ -211,7 +211,7 @@ new(IRenderable)
 HasCursorOver(ICursor, Layer = null) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null cursor) (dotnet:object-type cursor)) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+    ((cl:and (cl:or (cl:null cursor) (dotnet:is-instance-of cursor "Gum.Wireframe.ICursor")) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:is-instance-of layer "RenderingLibrary.Graphics.Layer"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "HasCursorOver" cursor (cl:if supplied-layer layer cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-INTERACTIVE-GUE"
@@ -249,7 +249,7 @@ HasCursorOver(ICursor, Layer = null) -> Boolean
 TryCallRollOff(ICursor = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-cursor) (cl:or (cl:null cursor) (dotnet:object-type cursor))))
+    ((cl:and (cl:or (cl:not supplied-cursor) (cl:or (cl:null cursor) (dotnet:is-instance-of cursor "Gum.Wireframe.ICursor"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.InteractiveGue") obj!) "TryCallRollOff" (cl:if supplied-cursor cursor cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-INTERACTIVE-GUE"

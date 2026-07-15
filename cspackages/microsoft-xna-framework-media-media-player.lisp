@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:define-symbol-macro game-has-control (dotnet:static <type-str> "GameHasControl"))
 
@@ -63,12 +63,12 @@ Play(Song, TimeSpan]) -> Void
 Play(SongCollection, Int32 = 0) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) supplied-start-position (cl:or (cl:null start-position) (dotnet:object-type start-position)))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")) supplied-start-position (cl:or (cl:null start-position) (dotnet:is-instance-of start-position "System.Nullable`1[System.TimeSpan]")))
      (dotnet:static <type-str> "Play" song start-position))
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) (cl:or (cl:not supplied-start-position) (cl:numberp start-position)))
-     (dotnet:static <type-str> "Play" song (cl:if supplied-start-position start-position 0)))
-    ((cl:and (cl:or (cl:null song) (dotnet:object-type song)) (cl:not supplied-start-position))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")) (cl:not supplied-start-position))
      (dotnet:static <type-str> "Play" song))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.SongCollection")) (cl:or (cl:not supplied-start-position) (cl:numberp start-position)))
+     (dotnet:static <type-str> "Play" song (cl:if supplied-start-position start-position 0)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-MEDIA-MEDIA-PLAYER"
                     :class-name <type-str>

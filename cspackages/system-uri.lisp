@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.
@@ -56,17 +56,17 @@ new(Uri, String, Boolean)
     - dont-escape (System.Boolean): if baseUri and relativeUri are completely escaped; otherwise, .
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null uri-string) (dotnet:object-type uri-string)) supplied-dont-escape (cl:stringp dont-escape) supplied-dont-escape2 (cl:typep dont-escape2 'cl:boolean))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Uri")) supplied-dont-escape (cl:stringp dont-escape) supplied-dont-escape2 (cl:typep dont-escape2 'cl:boolean))
      (dotnet:new <type-str> uri-string dont-escape dont-escape2))
     ((cl:and (cl:stringp uri-string) supplied-dont-escape (cl:typep dont-escape 'cl:boolean) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string dont-escape))
-    ((cl:and (cl:stringp uri-string) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:object-type dont-escape)) (cl:not supplied-dont-escape2))
+    ((cl:and (cl:stringp uri-string) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:is-instance-of dont-escape "System.UriKind")) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string dont-escape))
-    ((cl:and (cl:or (cl:null uri-string) (dotnet:object-type uri-string)) supplied-dont-escape (cl:stringp dont-escape) (cl:not supplied-dont-escape2))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Uri")) supplied-dont-escape (cl:stringp dont-escape) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string dont-escape))
-    ((cl:and (cl:or (cl:null uri-string) (dotnet:object-type uri-string)) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:object-type dont-escape)) (cl:not supplied-dont-escape2))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Runtime.Serialization.SerializationInfo")) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:is-instance-of dont-escape "System.Runtime.Serialization.StreamingContext")) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string dont-escape))
-    ((cl:and (cl:or (cl:null uri-string) (dotnet:object-type uri-string)) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:object-type dont-escape)) (cl:not supplied-dont-escape2))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Uri")) supplied-dont-escape (cl:or (cl:null dont-escape) (dotnet:is-instance-of dont-escape "System.Uri")) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string dont-escape))
     ((cl:and (cl:stringp uri-string) (cl:not supplied-dont-escape) (cl:not supplied-dont-escape2))
      (dotnet:new <type-str> uri-string))
@@ -351,9 +351,9 @@ Equals(Uri) -> Boolean
     - other (System.Uri): The System.Uri to compare to this instance.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null comparand) (dotnet:object-type comparand)))
+    ((cl:and (cl:or (cl:null comparand) (dotnet:is-instance-of comparand "System.Object")))
      (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "Equals" comparand))
-    ((cl:and (cl:or (cl:null comparand) (dotnet:object-type comparand)))
+    ((cl:and (cl:or (cl:null comparand) (dotnet:is-instance-of comparand "System.Uri")))
      (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "Equals" comparand))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
@@ -384,7 +384,7 @@ EscapeDataString(Char]) -> String
   (cl:cond
     ((cl:and (cl:stringp string-to-escape))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
-    ((cl:and (cl:or (cl:null string-to-escape) (dotnet:object-type string-to-escape)))
+    ((cl:and (cl:or (cl:null string-to-escape) (dotnet:is-instance-of string-to-escape "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
@@ -604,7 +604,7 @@ UnescapeDataString(Char]) -> String
   (cl:cond
     ((cl:and (cl:stringp string-to-unescape))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
-    ((cl:and (cl:or (cl:null string-to-unescape) (dotnet:object-type string-to-unescape)))
+    ((cl:and (cl:or (cl:null string-to-unescape) (dotnet:is-instance-of string-to-unescape "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"

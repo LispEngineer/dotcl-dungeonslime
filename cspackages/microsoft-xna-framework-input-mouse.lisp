@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Mouse
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-mouse)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Mouse"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Mouse")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun window-handle ()
   (dotnet:static <type-str> "WindowHandle"))
@@ -24,7 +24,7 @@ GetState() -> MouseState
 GetState(GameWindow) -> MouseState
 "
   (cl:cond
-    ((cl:and supplied-window (cl:or (cl:null window) (dotnet:object-type window)))
+    ((cl:and supplied-window (cl:or (cl:null window) (dotnet:is-instance-of window "Microsoft.Xna.Framework.GameWindow")))
      (dotnet:static <type-str> "GetState" window))
     ((cl:and (cl:not supplied-window))
      (dotnet:static <type-str> "GetState"))

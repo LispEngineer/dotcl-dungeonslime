@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.GestureSample
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-gesture-sample)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.GestureSample"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.GestureSample")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (gesture-type cl:nil supplied-gesture-type) (timestamp cl:nil supplied-timestamp) (position cl:nil supplied-position) (position2 cl:nil supplied-position2) (delta cl:nil supplied-delta) (delta2 cl:nil supplied-delta2))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.GestureSample constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(GestureType, TimeSpan, Vector2, Vector2, Vector2, Vector2)
 "
   (cl:cond
-    ((cl:and supplied-gesture-type (cl:or (cl:null gesture-type) (dotnet:object-type gesture-type)) supplied-timestamp (cl:or (cl:null timestamp) (dotnet:object-type timestamp)) supplied-position (cl:or (cl:null position) (dotnet:object-type position)) supplied-position2 (cl:or (cl:null position2) (dotnet:object-type position2)) supplied-delta (cl:or (cl:null delta) (dotnet:object-type delta)) supplied-delta2 (cl:or (cl:null delta2) (dotnet:object-type delta2)))
+    ((cl:and supplied-gesture-type (cl:or (cl:null gesture-type) (dotnet:is-instance-of gesture-type "Microsoft.Xna.Framework.Input.Touch.GestureType")) supplied-timestamp (cl:or (cl:null timestamp) (dotnet:is-instance-of timestamp "System.TimeSpan")) supplied-position (cl:or (cl:null position) (dotnet:is-instance-of position "Microsoft.Xna.Framework.Vector2")) supplied-position2 (cl:or (cl:null position2) (dotnet:is-instance-of position2 "Microsoft.Xna.Framework.Vector2")) supplied-delta (cl:or (cl:null delta) (dotnet:is-instance-of delta "Microsoft.Xna.Framework.Vector2")) supplied-delta2 (cl:or (cl:null delta2) (dotnet:is-instance-of delta2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:new <type-str> gesture-type timestamp position position2 delta delta2))
     ((cl:and (cl:not supplied-gesture-type) (cl:not supplied-timestamp) (cl:not supplied-position) (cl:not supplied-position2) (cl:not supplied-delta) (cl:not supplied-delta2))
      (dotnet:new <type-str>))

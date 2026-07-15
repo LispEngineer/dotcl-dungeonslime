@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Content.ContentManager
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-content-content-manager)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Content.ContentManager"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Content.ContentManager")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (service-provider cl:&optional (root-directory cl:nil supplied-root-directory))
   "Master wrapper for Microsoft.Xna.Framework.Content.ContentManager constructor overloads. Dispatches at runtime.
@@ -18,9 +18,9 @@ new(IServiceProvider)
 new(IServiceProvider, String)
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null service-provider) (dotnet:object-type service-provider)) supplied-root-directory (cl:stringp root-directory))
+    ((cl:and (cl:or (cl:null service-provider) (dotnet:is-instance-of service-provider "System.IServiceProvider")) supplied-root-directory (cl:stringp root-directory))
      (dotnet:new <type-str> service-provider root-directory))
-    ((cl:and (cl:or (cl:null service-provider) (dotnet:object-type service-provider)) (cl:not supplied-root-directory))
+    ((cl:and (cl:or (cl:null service-provider) (dotnet:is-instance-of service-provider "System.IServiceProvider")) (cl:not supplied-root-directory))
      (dotnet:new <type-str> service-provider))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-CONTENT-CONTENT-MANAGER"

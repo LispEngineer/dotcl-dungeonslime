@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffectInstance
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect-instance)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffectInstance"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffectInstance")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun disposed? (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj!) "get_IsDisposed"))
@@ -48,9 +48,9 @@ Apply3D(AudioListener, AudioEmitter) -> Void
 Apply3D(AudioListener[], AudioEmitter) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null listener) (dotnet:object-type listener)) (cl:or (cl:null emitter) (dotnet:object-type emitter)))
+    ((cl:and (cl:or (cl:null listener) (dotnet:is-instance-of listener "Microsoft.Xna.Framework.Audio.AudioListener")) (cl:or (cl:null emitter) (dotnet:is-instance-of emitter "Microsoft.Xna.Framework.Audio.AudioEmitter")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj!) "Apply3D" listener emitter))
-    ((cl:and (cl:or (cl:null listener) (dotnet:object-type listener)) (cl:or (cl:null emitter) (dotnet:object-type emitter)))
+    ((cl:and (cl:or (cl:null listener) (dotnet:is-instance-of listener "Microsoft.Xna.Framework.Audio.AudioListener[]")) (cl:or (cl:null emitter) (dotnet:is-instance-of emitter "Microsoft.Xna.Framework.Audio.AudioEmitter")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Audio.SoundEffectInstance") obj!) "Apply3D" listener emitter))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-AUDIO-SOUND-EFFECT-INSTANCE"

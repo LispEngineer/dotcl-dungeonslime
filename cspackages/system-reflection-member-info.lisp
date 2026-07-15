@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Reflection.MemberInfo
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-reflection-member-info)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Reflection.MemberInfo"))
 (cl:defconstant <type-str> "System.Reflection.MemberInfo")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new ()
   "Summary: Initializes a new instance of the System.Reflection.MemberInfo class.
@@ -81,7 +81,7 @@ GetCustomAttributes(Type, Boolean) -> Object[]
     - inherit (System.Boolean): to search this member's inheritance chain to find the attributes; otherwise, . This parameter is ignored for properties and events.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null inherit) (dotnet:object-type inherit)) supplied-inherit2 (cl:typep inherit2 'cl:boolean))
+    ((cl:and (cl:or (cl:null inherit) (dotnet:is-instance-of inherit "System.Type")) supplied-inherit2 (cl:typep inherit2 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj!) "GetCustomAttributes" inherit inherit2))
     ((cl:and (cl:typep inherit 'cl:boolean) (cl:not supplied-inherit2))
      (dotnet:invoke (cl:the (dotnet "System.Reflection.MemberInfo") obj!) "GetCustomAttributes" inherit))

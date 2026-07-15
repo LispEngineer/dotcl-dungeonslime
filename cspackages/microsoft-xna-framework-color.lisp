@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-color)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (packed-value cl:nil supplied-packed-value) (alpha cl:nil supplied-alpha) (b cl:nil supplied-b) (alpha2 cl:nil supplied-alpha2))
   "Master wrapper for Microsoft.Xna.Framework.Color constructor overloads. Dispatches at runtime.
@@ -46,15 +46,15 @@ new(Byte, Byte, Byte, Byte)
      (dotnet:new <type-str> packed-value alpha b))
     ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value alpha b))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:object-type packed-value)) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
+    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Color")) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value alpha))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:object-type packed-value)) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
+    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Color")) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value alpha))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:object-type packed-value)) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
+    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "System.UInt32")) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:object-type packed-value)) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
+    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Vector4")) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:object-type packed-value)) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
+    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Vector3")) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value))
     ((cl:and (cl:not supplied-packed-value) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str>))
@@ -2690,11 +2690,11 @@ new(Byte, Byte, Byte, Byte)
 *(Color, Color) -> Color
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:numberp scale))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Color")) (cl:numberp scale))
      (dotnet:static <type-str> "op_Multiply" value scale))
-    ((cl:and (cl:numberp value) (cl:or (cl:null scale) (dotnet:object-type scale)))
+    ((cl:and (cl:numberp value) (cl:or (cl:null scale) (dotnet:is-instance-of scale "Microsoft.Xna.Framework.Color")))
      (dotnet:static <type-str> "op_Multiply" value scale))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:or (cl:null scale) (dotnet:object-type scale)))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Color")) (cl:or (cl:null scale) (dotnet:is-instance-of scale "Microsoft.Xna.Framework.Color")))
      (dotnet:static <type-str> "op_Multiply" value scale))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
@@ -2720,9 +2720,9 @@ Equals(Object) -> Boolean
 Equals(Color) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "Microsoft.Xna.Framework.Color")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
@@ -2740,7 +2740,7 @@ FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
   (cl:cond
     ((cl:and (cl:numberp vector) supplied-g (cl:numberp g) supplied-b (cl:numberp b) supplied-a (cl:numberp a))
      (dotnet:static <type-str> "FromNonPremultiplied" vector g b a))
-    ((cl:and (cl:or (cl:null vector) (dotnet:object-type vector)) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
+    ((cl:and (cl:or (cl:null vector) (dotnet:is-instance-of vector "Microsoft.Xna.Framework.Vector4")) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
      (dotnet:static <type-str> "FromNonPremultiplied" vector))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"

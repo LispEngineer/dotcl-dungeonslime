@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -100,13 +100,13 @@ Initialize(Game, SystemManagers) -> Void
 Initialize(GraphicsDevice, String = null) -> GumProjectSave
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
+    ((cl:and (cl:or (cl:null game) (dotnet:is-instance-of game "Microsoft.Xna.Framework.Game")) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:is-instance-of gum-project-file "Gum.Forms.DefaultVisualsVersion")))
+     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
+    ((cl:and (cl:or (cl:null game) (dotnet:is-instance-of game "Microsoft.Xna.Framework.Game")) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:is-instance-of gum-project-file "RenderingLibrary.SystemManagers")))
+     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
+    ((cl:and (cl:or (cl:null game) (dotnet:is-instance-of game "Microsoft.Xna.Framework.Game")) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game (cl:if supplied-gum-project-file gum-project-file cl:nil)))
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:object-type gum-project-file)))
-     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) supplied-gum-project-file (cl:or (cl:null gum-project-file) (dotnet:object-type gum-project-file)))
-     (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game gum-project-file))
-    ((cl:and (cl:or (cl:null game) (dotnet:object-type game)) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
+    ((cl:and (cl:or (cl:null game) (dotnet:is-instance-of game "Microsoft.Xna.Framework.Graphics.GraphicsDevice")) (cl:or (cl:not supplied-gum-project-file) (cl:stringp gum-project-file)))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Initialize" game (cl:if supplied-gum-project-file gum-project-file cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MONO-GAME-GUM-GUM-SERVICE"
@@ -128,7 +128,7 @@ RefreshStyles() -> Void
 RefreshStyles(GraphicalUiElement) -> Void
 "
   (cl:cond
-    ((cl:and supplied-target (cl:or (cl:null target) (dotnet:object-type target)))
+    ((cl:and supplied-target (cl:or (cl:null target) (dotnet:is-instance-of target "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "RefreshStyles" target))
     ((cl:and (cl:not supplied-target))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "RefreshStyles"))
@@ -159,19 +159,19 @@ Update(Game, GameTime, GraphicalUiElement) -> Void
 Update(Game, GameTime, GraphicalUiElement]) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) supplied-root (cl:or (cl:null root) (dotnet:object-type root)))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "Gum.Forms.Controls.FrameworkElement")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) supplied-root (cl:or (cl:null root) (dotnet:object-type root)))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) supplied-root (cl:or (cl:null root) (dotnet:object-type root)))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "System.Collections.Generic.IEnumerable`1[Gum.Wireframe.GraphicalUiElement]")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) (cl:not supplied-root))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) (cl:not supplied-root))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Gum.Wireframe.GraphicalUiElement")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:object-type game-time2)) (cl:not supplied-root))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "System.Collections.Generic.IEnumerable`1[Gum.Wireframe.GraphicalUiElement]")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:object-type game-time)) (cl:not supplied-game-time2) (cl:not supplied-root))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) (cl:not supplied-game-time2) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MONO-GAME-GUM-GUM-SERVICE"

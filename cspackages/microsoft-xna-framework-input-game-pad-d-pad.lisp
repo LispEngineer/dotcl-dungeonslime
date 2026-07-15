@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-d-pad)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (up-value cl:nil supplied-up-value) (down-value cl:nil supplied-down-value) (left-value cl:nil supplied-left-value) (right-value cl:nil supplied-right-value))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadDPad constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(ButtonState, ButtonState, ButtonState, ButtonState)
 "
   (cl:cond
-    ((cl:and supplied-up-value (cl:or (cl:null up-value) (dotnet:object-type up-value)) supplied-down-value (cl:or (cl:null down-value) (dotnet:object-type down-value)) supplied-left-value (cl:or (cl:null left-value) (dotnet:object-type left-value)) supplied-right-value (cl:or (cl:null right-value) (dotnet:object-type right-value)))
+    ((cl:and supplied-up-value (cl:or (cl:null up-value) (dotnet:is-instance-of up-value "Microsoft.Xna.Framework.Input.ButtonState")) supplied-down-value (cl:or (cl:null down-value) (dotnet:is-instance-of down-value "Microsoft.Xna.Framework.Input.ButtonState")) supplied-left-value (cl:or (cl:null left-value) (dotnet:is-instance-of left-value "Microsoft.Xna.Framework.Input.ButtonState")) supplied-right-value (cl:or (cl:null right-value) (dotnet:is-instance-of right-value "Microsoft.Xna.Framework.Input.ButtonState")))
      (dotnet:new <type-str> up-value down-value left-value right-value))
     ((cl:and (cl:not supplied-up-value) (cl:not supplied-down-value) (cl:not supplied-left-value) (cl:not supplied-right-value))
      (dotnet:new <type-str>))

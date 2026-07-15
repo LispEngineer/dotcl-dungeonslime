@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-single)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -294,7 +294,7 @@ CompareTo(Single) -> Int32
     - value (System.Single): A single-precision floating-point number to compare.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "System.Object")))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "CompareTo" value))
     ((cl:and (cl:numberp value))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "CompareTo" value))
@@ -401,7 +401,7 @@ Equals(Single) -> Boolean
     - obj (System.Single): An object to compare with this instance.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "Equals" obj))
     ((cl:and (cl:numberp obj))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "Equals" obj))
@@ -875,22 +875,22 @@ Parse(Byte], NumberStyles = AllowThousands, Float, IFormatProvider = null) -> Si
     - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
 "
   (cl:cond
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles")) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")))
      (dotnet:static <type-str> "Parse" s style provider))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:object-type style))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:object-type provider))))
-     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:object-type style))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:object-type provider))))
-     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
+    ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Char]")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (dotnet:object-type s)) supplied-style (cl:or (cl:null style) (dotnet:object-type style)) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Byte]")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
     ((cl:and (cl:stringp s) (cl:not supplied-style) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Char]")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Byte]")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+     (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-SINGLE"
                     :class-name <type-str>
@@ -971,11 +971,11 @@ Round(Single, Int32, MidpointRounding) -> Single
     - mode (System.MidpointRounding): The mode under which x should be rounded.
 "
   (cl:cond
-    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (dotnet:object-type mode)))
+    ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) supplied-mode (cl:or (cl:null mode) (dotnet:is-instance-of mode "System.MidpointRounding")))
      (dotnet:static <type-str> "Round" x digits mode))
     ((cl:and (cl:numberp x) supplied-digits (cl:numberp digits) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x digits))
-    ((cl:and (cl:numberp x) supplied-digits (cl:or (cl:null digits) (dotnet:object-type digits)) (cl:not supplied-mode))
+    ((cl:and (cl:numberp x) supplied-digits (cl:or (cl:null digits) (dotnet:is-instance-of digits "System.MidpointRounding")) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x digits))
     ((cl:and (cl:numberp x) (cl:not supplied-digits) (cl:not supplied-mode))
      (dotnet:static <type-str> "Round" x))
@@ -1101,9 +1101,9 @@ ToString(String, IFormatProvider) -> String
     - provider (System.IFormatProvider): An object that supplies culture-specific formatting information.
 "
   (cl:cond
-    ((cl:and supplied-provider (cl:stringp provider) supplied-provider2 (cl:or (cl:null provider2) (dotnet:object-type provider2)))
+    ((cl:and supplied-provider (cl:stringp provider) supplied-provider2 (cl:or (cl:null provider2) (dotnet:is-instance-of provider2 "System.IFormatProvider")))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider provider2))
-    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)) (cl:not supplied-provider2))
+    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")) (cl:not supplied-provider2))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider))
     ((cl:and supplied-provider (cl:stringp provider) (cl:not supplied-provider2))
      (dotnet:invoke (cl:the (dotnet "System.Single") obj!) "ToString" provider))

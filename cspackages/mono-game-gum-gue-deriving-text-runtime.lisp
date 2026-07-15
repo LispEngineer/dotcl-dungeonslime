@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&key (full-instantiation cl:t supplied-full-instantiation) (system-managers cl:nil supplied-system-managers))
   "Master wrapper for MonoGameGum.GueDeriving.TextRuntime constructor overloads. Dispatches at runtime.
@@ -16,7 +16,7 @@
 new(Boolean = T, SystemManagers = null)
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-full-instantiation) (cl:typep full-instantiation 'cl:boolean)) (cl:or (cl:not supplied-system-managers) (cl:or (cl:null system-managers) (dotnet:object-type system-managers))))
+    ((cl:and (cl:or (cl:not supplied-full-instantiation) (cl:typep full-instantiation 'cl:boolean)) (cl:or (cl:not supplied-system-managers) (cl:or (cl:null system-managers) (dotnet:is-instance-of system-managers "RenderingLibrary.SystemManagers"))))
      (dotnet:new <type-str> (cl:if supplied-full-instantiation full-instantiation cl:t) (cl:if supplied-system-managers system-managers cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MONO-GAME-GUM-GUE-DERIVING-TEXT-RUNTIME"

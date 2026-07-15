@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-point)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Point"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
   "Master wrapper for Microsoft.Xna.Framework.Point constructor overloads. Dispatches at runtime.
@@ -101,9 +101,9 @@ Equals(Object) -> Boolean
 Equals(Point) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Point") obj!) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "Microsoft.Xna.Framework.Point")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Point") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-POINT"

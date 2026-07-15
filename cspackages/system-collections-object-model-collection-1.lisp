@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.ObjectModel.Collection`1
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-collections-object-model-collection-1)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.ObjectModel.Collection`1"))
 (cl:defconstant <type-str> "System.Collections.ObjectModel.Collection`1")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (list cl:nil supplied-list))
   "Master wrapper for System.Collections.ObjectModel.Collection`1 constructor overloads. Dispatches at runtime.
@@ -22,7 +22,7 @@ new(IList)
     - list (System.Collections.Generic.IList`1[T]): The list that is wrapped by the new collection.
 "
   (cl:cond
-    ((cl:and supplied-list (cl:or (cl:null list) (dotnet:object-type list)))
+    ((cl:and supplied-list (cl:or (cl:null list) (dotnet:is-instance-of list "System.Collections.Generic.IList`1[T]")))
      (dotnet:new <type-str> list))
     ((cl:and (cl:not supplied-list))
      (dotnet:new <type-str>))

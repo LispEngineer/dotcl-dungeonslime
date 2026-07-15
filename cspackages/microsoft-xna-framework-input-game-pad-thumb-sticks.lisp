@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-thumb-sticks)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (left-position cl:nil supplied-left-position) (right-position cl:nil supplied-right-position))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadThumbSticks constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(Vector2, Vector2)
 "
   (cl:cond
-    ((cl:and supplied-left-position (cl:or (cl:null left-position) (dotnet:object-type left-position)) supplied-right-position (cl:or (cl:null right-position) (dotnet:object-type right-position)))
+    ((cl:and supplied-left-position (cl:or (cl:null left-position) (dotnet:is-instance-of left-position "Microsoft.Xna.Framework.Vector2")) supplied-right-position (cl:or (cl:null right-position) (dotnet:is-instance-of right-position "Microsoft.Xna.Framework.Vector2")))
      (dotnet:new <type-str> left-position right-position))
     ((cl:and (cl:not supplied-left-position) (cl:not supplied-right-position))
      (dotnet:new <type-str>))

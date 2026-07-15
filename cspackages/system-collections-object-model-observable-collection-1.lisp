@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.ObjectModel.ObservableCollection`1
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-collections-object-model-observable-collection-1)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.ObjectModel.ObservableCollection`1"))
 (cl:defconstant <type-str> "System.Collections.ObjectModel.ObservableCollection`1")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (collection cl:nil supplied-collection))
   "Master wrapper for System.Collections.ObjectModel.ObservableCollection`1 constructor overloads. Dispatches at runtime.
@@ -27,9 +27,9 @@ new(List)
     - list (System.Collections.Generic.List`1[T]): The list from which the elements are copied.
 "
   (cl:cond
-    ((cl:and supplied-collection (cl:or (cl:null collection) (dotnet:object-type collection)))
+    ((cl:and supplied-collection (cl:or (cl:null collection) (dotnet:is-instance-of collection "System.Collections.Generic.IEnumerable`1[T]")))
      (dotnet:new <type-str> collection))
-    ((cl:and supplied-collection (cl:or (cl:null collection) (dotnet:object-type collection)))
+    ((cl:and supplied-collection (cl:or (cl:null collection) (dotnet:is-instance-of collection "System.Collections.Generic.List`1[T]")))
      (dotnet:new <type-str> collection))
     ((cl:and (cl:not supplied-collection))
      (dotnet:new <type-str>))

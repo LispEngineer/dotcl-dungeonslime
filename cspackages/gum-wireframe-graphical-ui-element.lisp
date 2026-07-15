@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.GraphicalUiElement
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-wireframe-graphical-ui-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement"))
 (cl:defconstant <type-str> "Gum.Wireframe.GraphicalUiElement")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (contained-object cl:nil supplied-contained-object) cl:&key (what-contains-this cl:nil supplied-what-contains-this))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(IRenderable, GraphicalUiElement = null)
 "
   (cl:cond
-    ((cl:and supplied-contained-object (cl:or (cl:null contained-object) (dotnet:object-type contained-object)) (cl:or (cl:not supplied-what-contains-this) (cl:or (cl:null what-contains-this) (dotnet:object-type what-contains-this))))
+    ((cl:and supplied-contained-object (cl:or (cl:null contained-object) (dotnet:is-instance-of contained-object "RenderingLibrary.Graphics.IRenderable")) (cl:or (cl:not supplied-what-contains-this) (cl:or (cl:null what-contains-this) (dotnet:is-instance-of what-contains-this "Gum.Wireframe.GraphicalUiElement"))))
      (dotnet:new <type-str> contained-object (cl:if supplied-what-contains-this what-contains-this cl:nil)))
     ((cl:and (cl:not supplied-contained-object) (cl:not supplied-what-contains-this))
      (dotnet:new <type-str>))
@@ -574,7 +574,7 @@ AddToManagers() -> Void
 AddToManagers(ISystemManagers, Layer = null) -> Void
 "
   (cl:cond
-    ((cl:and supplied-managers (cl:or (cl:null managers) (dotnet:object-type managers)) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+    ((cl:and supplied-managers (cl:or (cl:null managers) (dotnet:is-instance-of managers "RenderingLibrary.ISystemManagers")) (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:is-instance-of layer "RenderingLibrary.Graphics.Layer"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AddToManagers" managers (cl:if supplied-layer layer cl:nil)))
     ((cl:and (cl:not supplied-managers) (cl:not supplied-layer))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "AddToManagers"))
@@ -609,9 +609,9 @@ ApplyState(String, String) -> Void
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name state-name))
     ((cl:and (cl:stringp name) (cl:not supplied-state-name))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
-    ((cl:and (cl:or (cl:null name) (dotnet:object-type name)) (cl:not supplied-state-name))
+    ((cl:and (cl:or (cl:null name) (dotnet:is-instance-of name "Gum.DataTypes.Variables.StateSave")) (cl:not supplied-state-name))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
-    ((cl:and (cl:or (cl:null name) (dotnet:object-type name)) (cl:not supplied-state-name))
+    ((cl:and (cl:or (cl:null name) (dotnet:is-instance-of name "System.Collections.Generic.List`1[Gum.DataTypes.Variables.VariableSaveValues]")) (cl:not supplied-state-name))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
@@ -651,7 +651,7 @@ FillListWithChildrenByTypeRecursively() -> List
 FillListWithChildrenByTypeRecursively(List) -> Void
 "
   (cl:cond
-    ((cl:and supplied-list-to-fill (cl:or (cl:null list-to-fill) (dotnet:object-type list-to-fill)))
+    ((cl:and supplied-list-to-fill (cl:or (cl:null list-to-fill) (dotnet:is-instance-of list-to-fill "System.Collections.Generic.List`1[T]")))
      (dotnet:invoke-generic (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "FillListWithChildrenByTypeRecursively" (cl:list type) list-to-fill))
     ((cl:and (cl:not supplied-list-to-fill))
      (dotnet:invoke-generic (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "FillListWithChildrenByTypeRecursively" (cl:list type)))
@@ -851,12 +851,12 @@ UpdateLayout(Boolean, Int32, XOrY] = null) -> Void
 UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY] = null) -> Void
 "
   (cl:cond
-    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y))))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
-    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:object-type update-parent)) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:object-type x-or-y))))
-     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
     ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:typep update-children 'cl:boolean) (cl:not supplied-x-or-y))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children))
+    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "System.Nullable`1[Gum.Converters.XOrY]"))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
+    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:is-instance-of update-parent "Gum.Wireframe.GraphicalUiElement+ParentUpdateType")) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "System.Nullable`1[Gum.Converters.XOrY]"))))
+     (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
     ((cl:and (cl:not supplied-update-parent) (cl:not supplied-update-children) (cl:not supplied-x-or-y))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout"))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found

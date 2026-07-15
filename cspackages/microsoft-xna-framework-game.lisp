@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Game
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-game)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Game"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Game")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -160,7 +160,7 @@ Run() -> Void
 Run(GameRunBehavior) -> Void
 "
   (cl:cond
-    ((cl:and supplied-run-behavior (cl:or (cl:null run-behavior) (dotnet:object-type run-behavior)))
+    ((cl:and supplied-run-behavior (cl:or (cl:null run-behavior) (dotnet:is-instance-of run-behavior "Microsoft.Xna.Framework.GameRunBehavior")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Run" run-behavior))
     ((cl:and (cl:not supplied-run-behavior))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Game") obj!) "Run"))

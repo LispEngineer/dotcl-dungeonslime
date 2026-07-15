@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Panel
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-forms-controls-panel)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Panel"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Panel")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Panel constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(InteractiveGue)
 "
   (cl:cond
-    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:object-type visual)))
+    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:is-instance-of visual "Gum.Wireframe.InteractiveGue")))
      (dotnet:new <type-str> visual))
     ((cl:and (cl:not supplied-visual))
      (dotnet:new <type-str>))

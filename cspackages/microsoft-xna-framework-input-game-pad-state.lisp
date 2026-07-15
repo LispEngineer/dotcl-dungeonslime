@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadState
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadState")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (thumb-sticks cl:nil supplied-thumb-sticks) (triggers cl:nil supplied-triggers) (buttons cl:nil supplied-buttons) (d-pad cl:nil supplied-d-pad) (button cl:nil supplied-button))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadState constructor overloads. Dispatches at runtime.
@@ -22,11 +22,11 @@ new(Vector2, Vector2, Single, Single, Buttons)
 new(Vector2, Vector2, Single, Single, Buttons[])
 "
   (cl:cond
-    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:object-type thumb-sticks)) supplied-triggers (cl:or (cl:null triggers) (dotnet:object-type triggers)) supplied-buttons (cl:numberp buttons) supplied-d-pad (cl:numberp d-pad) supplied-button (cl:or (cl:null button) (dotnet:object-type button)))
+    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:is-instance-of thumb-sticks "Microsoft.Xna.Framework.Vector2")) supplied-triggers (cl:or (cl:null triggers) (dotnet:is-instance-of triggers "Microsoft.Xna.Framework.Vector2")) supplied-buttons (cl:numberp buttons) supplied-d-pad (cl:numberp d-pad) supplied-button (cl:or (cl:null button) (dotnet:is-instance-of button "Microsoft.Xna.Framework.Input.Buttons")))
      (dotnet:new <type-str> thumb-sticks triggers buttons d-pad button))
-    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:object-type thumb-sticks)) supplied-triggers (cl:or (cl:null triggers) (dotnet:object-type triggers)) supplied-buttons (cl:numberp buttons) supplied-d-pad (cl:numberp d-pad) supplied-button (cl:or (cl:null button) (dotnet:object-type button)))
+    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:is-instance-of thumb-sticks "Microsoft.Xna.Framework.Vector2")) supplied-triggers (cl:or (cl:null triggers) (dotnet:is-instance-of triggers "Microsoft.Xna.Framework.Vector2")) supplied-buttons (cl:numberp buttons) supplied-d-pad (cl:numberp d-pad) supplied-button (cl:or (cl:null button) (dotnet:is-instance-of button "Microsoft.Xna.Framework.Input.Buttons[]")))
      (dotnet:new <type-str> thumb-sticks triggers buttons d-pad button))
-    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:object-type thumb-sticks)) supplied-triggers (cl:or (cl:null triggers) (dotnet:object-type triggers)) supplied-buttons (cl:or (cl:null buttons) (dotnet:object-type buttons)) supplied-d-pad (cl:or (cl:null d-pad) (dotnet:object-type d-pad)) (cl:not supplied-button))
+    ((cl:and supplied-thumb-sticks (cl:or (cl:null thumb-sticks) (dotnet:is-instance-of thumb-sticks "Microsoft.Xna.Framework.Input.GamePadThumbSticks")) supplied-triggers (cl:or (cl:null triggers) (dotnet:is-instance-of triggers "Microsoft.Xna.Framework.Input.GamePadTriggers")) supplied-buttons (cl:or (cl:null buttons) (dotnet:is-instance-of buttons "Microsoft.Xna.Framework.Input.GamePadButtons")) supplied-d-pad (cl:or (cl:null d-pad) (dotnet:is-instance-of d-pad "Microsoft.Xna.Framework.Input.GamePadDPad")) (cl:not supplied-button))
      (dotnet:new <type-str> thumb-sticks triggers buttons d-pad))
     ((cl:and (cl:not supplied-thumb-sticks) (cl:not supplied-triggers) (cl:not supplied-buttons) (cl:not supplied-d-pad) (cl:not supplied-button))
      (dotnet:new <type-str>))

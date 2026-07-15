@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.ButtonBase
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-forms-controls-primitives-button-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.ButtonBase")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.ButtonBase constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(InteractiveGue)
 "
   (cl:cond
-    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:object-type visual)))
+    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:is-instance-of visual "Gum.Wireframe.InteractiveGue")))
      (dotnet:new <type-str> visual))
     ((cl:and (cl:not supplied-visual))
      (dotnet:new <type-str>))
@@ -119,7 +119,7 @@ new(InteractiveGue)
 PerformClick(Object = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-input-device) (cl:or (cl:null input-device) (dotnet:object-type input-device))))
+    ((cl:and (cl:or (cl:not supplied-input-device) (cl:or (cl:null input-device) (dotnet:is-instance-of input-device "System.Object"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "PerformClick" (cl:if supplied-input-device input-device cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-PRIMITIVES-BUTTON-BASE"

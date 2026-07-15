@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.GameTime
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-game-time)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.GameTime"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.GameTime")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (total-game-time cl:nil supplied-total-game-time) (elapsed-game-time cl:nil supplied-elapsed-game-time) (is-running-slowly cl:nil supplied-is-running-slowly))
   "Master wrapper for Microsoft.Xna.Framework.GameTime constructor overloads. Dispatches at runtime.
@@ -20,9 +20,9 @@ new(TimeSpan, TimeSpan)
 new(TimeSpan, TimeSpan, Boolean)
 "
   (cl:cond
-    ((cl:and supplied-total-game-time (cl:or (cl:null total-game-time) (dotnet:object-type total-game-time)) supplied-elapsed-game-time (cl:or (cl:null elapsed-game-time) (dotnet:object-type elapsed-game-time)) supplied-is-running-slowly (cl:typep is-running-slowly 'cl:boolean))
+    ((cl:and supplied-total-game-time (cl:or (cl:null total-game-time) (dotnet:is-instance-of total-game-time "System.TimeSpan")) supplied-elapsed-game-time (cl:or (cl:null elapsed-game-time) (dotnet:is-instance-of elapsed-game-time "System.TimeSpan")) supplied-is-running-slowly (cl:typep is-running-slowly 'cl:boolean))
      (dotnet:new <type-str> total-game-time elapsed-game-time is-running-slowly))
-    ((cl:and supplied-total-game-time (cl:or (cl:null total-game-time) (dotnet:object-type total-game-time)) supplied-elapsed-game-time (cl:or (cl:null elapsed-game-time) (dotnet:object-type elapsed-game-time)) (cl:not supplied-is-running-slowly))
+    ((cl:and supplied-total-game-time (cl:or (cl:null total-game-time) (dotnet:is-instance-of total-game-time "System.TimeSpan")) supplied-elapsed-game-time (cl:or (cl:null elapsed-game-time) (dotnet:is-instance-of elapsed-game-time "System.TimeSpan")) (cl:not supplied-is-running-slowly))
      (dotnet:new <type-str> total-game-time elapsed-game-time))
     ((cl:and (cl:not supplied-total-game-time) (cl:not supplied-elapsed-game-time) (cl:not supplied-is-running-slowly))
      (dotnet:new <type-str>))

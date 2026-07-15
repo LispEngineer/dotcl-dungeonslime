@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.MouseState
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-mouse-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.MouseState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.MouseState")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (x cl:nil supplied-x) (y cl:nil supplied-y) (scroll-wheel cl:nil supplied-scroll-wheel) (left-button cl:nil supplied-left-button) (middle-button cl:nil supplied-middle-button) (right-button cl:nil supplied-right-button) (x-button1 cl:nil supplied-x-button1) (x-button2 cl:nil supplied-x-button2) (horizontal-scroll-wheel cl:nil supplied-horizontal-scroll-wheel))
   "Master wrapper for Microsoft.Xna.Framework.Input.MouseState constructor overloads. Dispatches at runtime.
@@ -20,9 +20,9 @@ new(Int32, Int32, Int32, ButtonState, ButtonState, ButtonState, ButtonState, But
 new(Int32, Int32, Int32, ButtonState, ButtonState, ButtonState, ButtonState, ButtonState, Int32)
 "
   (cl:cond
-    ((cl:and supplied-x (cl:numberp x) supplied-y (cl:numberp y) supplied-scroll-wheel (cl:numberp scroll-wheel) supplied-left-button (cl:or (cl:null left-button) (dotnet:object-type left-button)) supplied-middle-button (cl:or (cl:null middle-button) (dotnet:object-type middle-button)) supplied-right-button (cl:or (cl:null right-button) (dotnet:object-type right-button)) supplied-x-button1 (cl:or (cl:null x-button1) (dotnet:object-type x-button1)) supplied-x-button2 (cl:or (cl:null x-button2) (dotnet:object-type x-button2)) supplied-horizontal-scroll-wheel (cl:numberp horizontal-scroll-wheel))
+    ((cl:and supplied-x (cl:numberp x) supplied-y (cl:numberp y) supplied-scroll-wheel (cl:numberp scroll-wheel) supplied-left-button (cl:or (cl:null left-button) (dotnet:is-instance-of left-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-middle-button (cl:or (cl:null middle-button) (dotnet:is-instance-of middle-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-right-button (cl:or (cl:null right-button) (dotnet:is-instance-of right-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-x-button1 (cl:or (cl:null x-button1) (dotnet:is-instance-of x-button1 "Microsoft.Xna.Framework.Input.ButtonState")) supplied-x-button2 (cl:or (cl:null x-button2) (dotnet:is-instance-of x-button2 "Microsoft.Xna.Framework.Input.ButtonState")) supplied-horizontal-scroll-wheel (cl:numberp horizontal-scroll-wheel))
      (dotnet:new <type-str> x y scroll-wheel left-button middle-button right-button x-button1 x-button2 horizontal-scroll-wheel))
-    ((cl:and supplied-x (cl:numberp x) supplied-y (cl:numberp y) supplied-scroll-wheel (cl:numberp scroll-wheel) supplied-left-button (cl:or (cl:null left-button) (dotnet:object-type left-button)) supplied-middle-button (cl:or (cl:null middle-button) (dotnet:object-type middle-button)) supplied-right-button (cl:or (cl:null right-button) (dotnet:object-type right-button)) supplied-x-button1 (cl:or (cl:null x-button1) (dotnet:object-type x-button1)) supplied-x-button2 (cl:or (cl:null x-button2) (dotnet:object-type x-button2)) (cl:not supplied-horizontal-scroll-wheel))
+    ((cl:and supplied-x (cl:numberp x) supplied-y (cl:numberp y) supplied-scroll-wheel (cl:numberp scroll-wheel) supplied-left-button (cl:or (cl:null left-button) (dotnet:is-instance-of left-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-middle-button (cl:or (cl:null middle-button) (dotnet:is-instance-of middle-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-right-button (cl:or (cl:null right-button) (dotnet:is-instance-of right-button "Microsoft.Xna.Framework.Input.ButtonState")) supplied-x-button1 (cl:or (cl:null x-button1) (dotnet:is-instance-of x-button1 "Microsoft.Xna.Framework.Input.ButtonState")) supplied-x-button2 (cl:or (cl:null x-button2) (dotnet:is-instance-of x-button2 "Microsoft.Xna.Framework.Input.ButtonState")) (cl:not supplied-horizontal-scroll-wheel))
      (dotnet:new <type-str> x y scroll-wheel left-button middle-button right-button x-button1 x-button2))
     ((cl:and (cl:not supplied-x) (cl:not supplied-y) (cl:not supplied-scroll-wheel) (cl:not supplied-left-button) (cl:not supplied-middle-button) (cl:not supplied-right-button) (cl:not supplied-x-button1) (cl:not supplied-x-button2) (cl:not supplied-horizontal-scroll-wheel))
      (dotnet:new <type-str>))

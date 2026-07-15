@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-boolean)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -35,7 +35,7 @@ CompareTo(Boolean) -> Int32
     - value (System.Boolean): A System.Boolean object to compare to this instance.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "CompareTo" obj))
     ((cl:and (cl:typep obj 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "CompareTo" obj))
@@ -61,7 +61,7 @@ Equals(Boolean) -> Boolean
     - obj (System.Boolean): A System.Boolean value to compare to this instance.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "Equals" obj))
     ((cl:and (cl:typep obj 'cl:boolean))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "Equals" obj))
@@ -101,7 +101,7 @@ Parse(Char]) -> Boolean
   (cl:cond
     ((cl:and (cl:stringp value))
      (dotnet:static <type-str> "Parse" value))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "Parse" value))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-BOOLEAN"
@@ -123,7 +123,7 @@ ToString(IFormatProvider) -> String
     - provider (System.IFormatProvider): (Reserved) An System.IFormatProvider object.
 "
   (cl:cond
-    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:object-type provider)))
+    ((cl:and supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "ToString" provider))
     ((cl:and (cl:not supplied-provider))
      (dotnet:invoke (cl:the (dotnet "System.Boolean") obj!) "ToString"))

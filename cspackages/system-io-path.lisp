@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :system-io-path)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:define-symbol-macro alt-directory-separator-char (dotnet:static <type-str> "AltDirectorySeparatorChar"))
 (cl:setf (cl:documentation (cl:quote alt-directory-separator-char) (cl:quote cl:variable)) "Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.")
@@ -74,7 +74,7 @@ Combine(String, String, String, String) -> String
      (dotnet:static <type-str> "Combine" paths path2 path3))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Combine" paths path2))
-    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:is-instance-of paths "System.ReadOnlySpan`1[System.String]")) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Combine" paths))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -103,7 +103,7 @@ EndsInDirectorySeparator(String) -> Boolean
     - path (System.String): The path to analyze.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "EndsInDirectorySeparator" path))
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "EndsInDirectorySeparator" path))
@@ -139,7 +139,7 @@ GetDirectoryName(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetDirectoryName" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "GetDirectoryName" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -165,7 +165,7 @@ GetExtension(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetExtension" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "GetExtension" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -191,7 +191,7 @@ GetFileName(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetFileName" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "GetFileName" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -217,7 +217,7 @@ GetFileNameWithoutExtension(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetFileNameWithoutExtension" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "GetFileNameWithoutExtension" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -282,7 +282,7 @@ GetPathRoot(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "GetPathRoot" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "GetPathRoot" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -335,7 +335,7 @@ HasExtension(Char]) -> Boolean
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "HasExtension" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "HasExtension" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -361,7 +361,7 @@ IsPathFullyQualified(Char]) -> Boolean
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "IsPathFullyQualified" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "IsPathFullyQualified" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -387,7 +387,7 @@ IsPathRooted(Char]) -> Boolean
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "IsPathRooted" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "IsPathRooted" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -453,19 +453,19 @@ Join(String, String, String, String) -> String
     - path4 (System.String): The fourth path to join.
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) supplied-path3 (cl:or (cl:null path3) (dotnet:object-type path3)) supplied-path4 (cl:or (cl:null path4) (dotnet:object-type path4)))
+    ((cl:and (cl:or (cl:null paths) (dotnet:is-instance-of paths "System.ReadOnlySpan`1[System.Char]")) supplied-path2 (cl:or (cl:null path2) (dotnet:is-instance-of path2 "System.ReadOnlySpan`1[System.Char]")) supplied-path3 (cl:or (cl:null path3) (dotnet:is-instance-of path3 "System.ReadOnlySpan`1[System.Char]")) supplied-path4 (cl:or (cl:null path4) (dotnet:is-instance-of path4 "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "Join" paths path2 path3 path4))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) supplied-path3 (cl:stringp path3) supplied-path4 (cl:stringp path4))
      (dotnet:static <type-str> "Join" paths path2 path3 path4))
-    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) supplied-path3 (cl:or (cl:null path3) (dotnet:object-type path3)) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:is-instance-of paths "System.ReadOnlySpan`1[System.Char]")) supplied-path2 (cl:or (cl:null path2) (dotnet:is-instance-of path2 "System.ReadOnlySpan`1[System.Char]")) supplied-path3 (cl:or (cl:null path3) (dotnet:is-instance-of path3 "System.ReadOnlySpan`1[System.Char]")) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2 path3))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) supplied-path3 (cl:stringp path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2 path3))
-    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) supplied-path2 (cl:or (cl:null path2) (dotnet:object-type path2)) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:is-instance-of paths "System.ReadOnlySpan`1[System.Char]")) supplied-path2 (cl:or (cl:null path2) (dotnet:is-instance-of path2 "System.ReadOnlySpan`1[System.Char]")) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2))
     ((cl:and (cl:stringp paths) supplied-path2 (cl:stringp path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths path2))
-    ((cl:and (cl:or (cl:null paths) (dotnet:object-type paths)) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
+    ((cl:and (cl:or (cl:null paths) (dotnet:is-instance-of paths "System.ReadOnlySpan`1[System.String]")) (cl:not supplied-path2) (cl:not supplied-path3) (cl:not supplied-path4))
      (dotnet:static <type-str> "Join" paths))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"
@@ -496,7 +496,7 @@ TrimEndingDirectorySeparator(Char]) -> Char]
   (cl:cond
     ((cl:and (cl:stringp path))
      (dotnet:static <type-str> "TrimEndingDirectorySeparator" path))
-    ((cl:and (cl:or (cl:null path) (dotnet:object-type path)))
+    ((cl:and (cl:or (cl:null path) (dotnet:is-instance-of path "System.ReadOnlySpan`1[System.Char]")))
      (dotnet:static <type-str> "TrimEndingDirectorySeparator" path))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-IO-PATH"

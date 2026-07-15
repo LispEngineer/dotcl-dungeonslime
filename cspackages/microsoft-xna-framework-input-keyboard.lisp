@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun get-state (cl:&optional (player-index cl:nil supplied-player-index))
   "Master wrapper for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ GetState() -> KeyboardState
 GetState(PlayerIndex) -> KeyboardState
 "
   (cl:cond
-    ((cl:and supplied-player-index (cl:or (cl:null player-index) (dotnet:object-type player-index)))
+    ((cl:and supplied-player-index (cl:or (cl:null player-index) (dotnet:is-instance-of player-index "Microsoft.Xna.Framework.PlayerIndex")))
      (dotnet:static <type-str> "GetState" player-index))
     ((cl:and (cl:not supplied-player-index))
      (dotnet:static <type-str> "GetState"))

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GraphicalUiElementExtensionMethods
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :mono-game-gum-graphical-ui-element-extension-methods)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GraphicalUiElementExtensionMethods"))
 (cl:defconstant <type-str> "MonoGameGum.GraphicalUiElementExtensionMethods")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun add-child (element child)
   (dotnet:static <type-str> "AddChild" (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") element) (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") child)))
@@ -21,9 +21,9 @@ AddToRoot(GraphicalUiElement) -> Void
 AddToRoot(FrameworkElement) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null element) (dotnet:object-type element)))
+    ((cl:and (cl:or (cl:null element) (dotnet:is-instance-of element "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:static <type-str> "AddToRoot" element))
-    ((cl:and (cl:or (cl:null element) (dotnet:object-type element)))
+    ((cl:and (cl:or (cl:null element) (dotnet:is-instance-of element "Gum.Forms.Controls.FrameworkElement")))
      (dotnet:static <type-str> "AddToRoot" element))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MONO-GAME-GUM-GRAPHICAL-UI-ELEMENT-EXTENSION-METHODS"

@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchLocation
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-location)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchLocation"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchLocation")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (id cl:nil supplied-id) (state cl:nil supplied-state) (position cl:nil supplied-position) (previous-state cl:nil supplied-previous-state) (previous-position cl:nil supplied-previous-position))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.TouchLocation constructor overloads. Dispatches at runtime.
@@ -20,9 +20,9 @@ new(Int32, TouchLocationState, Vector2)
 new(Int32, TouchLocationState, Vector2, TouchLocationState, Vector2)
 "
   (cl:cond
-    ((cl:and supplied-id (cl:numberp id) supplied-state (cl:or (cl:null state) (dotnet:object-type state)) supplied-position (cl:or (cl:null position) (dotnet:object-type position)) supplied-previous-state (cl:or (cl:null previous-state) (dotnet:object-type previous-state)) supplied-previous-position (cl:or (cl:null previous-position) (dotnet:object-type previous-position)))
+    ((cl:and supplied-id (cl:numberp id) supplied-state (cl:or (cl:null state) (dotnet:is-instance-of state "Microsoft.Xna.Framework.Input.Touch.TouchLocationState")) supplied-position (cl:or (cl:null position) (dotnet:is-instance-of position "Microsoft.Xna.Framework.Vector2")) supplied-previous-state (cl:or (cl:null previous-state) (dotnet:is-instance-of previous-state "Microsoft.Xna.Framework.Input.Touch.TouchLocationState")) supplied-previous-position (cl:or (cl:null previous-position) (dotnet:is-instance-of previous-position "Microsoft.Xna.Framework.Vector2")))
      (dotnet:new <type-str> id state position previous-state previous-position))
-    ((cl:and supplied-id (cl:numberp id) supplied-state (cl:or (cl:null state) (dotnet:object-type state)) supplied-position (cl:or (cl:null position) (dotnet:object-type position)) (cl:not supplied-previous-state) (cl:not supplied-previous-position))
+    ((cl:and supplied-id (cl:numberp id) supplied-state (cl:or (cl:null state) (dotnet:is-instance-of state "Microsoft.Xna.Framework.Input.Touch.TouchLocationState")) supplied-position (cl:or (cl:null position) (dotnet:is-instance-of position "Microsoft.Xna.Framework.Vector2")) (cl:not supplied-previous-state) (cl:not supplied-previous-position))
      (dotnet:new <type-str> id state position))
     ((cl:and (cl:not supplied-id) (cl:not supplied-state) (cl:not supplied-position) (cl:not supplied-previous-state) (cl:not supplied-previous-position))
      (dotnet:new <type-str>))
@@ -55,9 +55,9 @@ Equals(Object) -> Boolean
 Equals(TouchLocation) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchLocation") obj!) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "Microsoft.Xna.Framework.Input.Touch.TouchLocation")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchLocation") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-INPUT-TOUCH-TOUCH-LOCATION"

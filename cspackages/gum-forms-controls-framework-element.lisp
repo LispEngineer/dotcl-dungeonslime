@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(InteractiveGue)
 "
   (cl:cond
-    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:object-type visual)))
+    ((cl:and supplied-visual (cl:or (cl:null visual) (dotnet:is-instance-of visual "Gum.Wireframe.InteractiveGue")))
      (dotnet:new <type-str> visual))
     ((cl:and (cl:not supplied-visual))
      (dotnet:new <type-str>))
@@ -426,9 +426,9 @@ AddChild(FrameworkElement) -> Void
 AddChild(GraphicalUiElement) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null child) (dotnet:object-type child)))
+    ((cl:and (cl:or (cl:null child) (dotnet:is-instance-of child "Gum.Forms.Controls.FrameworkElement")))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "AddChild" child))
-    ((cl:and (cl:or (cl:null child) (dotnet:object-type child)))
+    ((cl:and (cl:or (cl:null child) (dotnet:is-instance-of child "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "AddChild" child))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
@@ -524,7 +524,7 @@ GetVisual(String = null) -> T
 HandleTab(TabDirection = Down, FrameworkElement = null, Boolean = NIL) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-tab-direction) (cl:or (cl:null tab-direction) (dotnet:object-type tab-direction))) (cl:or (cl:not supplied-requesting-element) (cl:or (cl:null requesting-element) (dotnet:object-type requesting-element))) (cl:or (cl:not supplied-loop) (cl:typep loop 'cl:boolean)))
+    ((cl:and (cl:or (cl:not supplied-tab-direction) (cl:or (cl:null tab-direction) (dotnet:is-instance-of tab-direction "Gum.Forms.Controls.TabDirection"))) (cl:or (cl:not supplied-requesting-element) (cl:or (cl:null requesting-element) (dotnet:is-instance-of requesting-element "Gum.Forms.Controls.FrameworkElement"))) (cl:or (cl:not supplied-loop) (cl:typep loop 'cl:boolean)))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleTab" (cl:if supplied-tab-direction tab-direction (dotnet:enum-or "Gum.Forms.Controls.TabDirection" "Down")) (cl:if supplied-requesting-element requesting-element cl:nil) (cl:if supplied-loop loop cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
@@ -592,7 +592,7 @@ RegisterRuntimeProperty(String) -> Void
 RegisterRuntimeProperty(Object, String) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null property-name) (dotnet:object-type property-name)) supplied-property-name2 (cl:stringp property-name2))
+    ((cl:and (cl:or (cl:null property-name) (dotnet:is-instance-of property-name "System.Object")) supplied-property-name2 (cl:stringp property-name2))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "RegisterRuntimeProperty" property-name property-name2))
     ((cl:and (cl:stringp property-name) (cl:not supplied-property-name2))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "RegisterRuntimeProperty" property-name))
@@ -630,9 +630,9 @@ RemoveChild(FrameworkElement) -> Void
 RemoveChild(GraphicalUiElement) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null child) (dotnet:object-type child)))
+    ((cl:and (cl:or (cl:null child) (dotnet:is-instance-of child "Gum.Forms.Controls.FrameworkElement")))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "RemoveChild" child))
-    ((cl:and (cl:or (cl:null child) (dotnet:object-type child)))
+    ((cl:and (cl:or (cl:null child) (dotnet:is-instance-of child "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "RemoveChild" child))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
@@ -656,7 +656,7 @@ SetBinding(String, Binding) -> Void
   (cl:cond
     ((cl:and (cl:stringp ui-property) (cl:stringp vm-property))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "SetBinding" ui-property vm-property))
-    ((cl:and (cl:stringp ui-property) (cl:or (cl:null vm-property) (dotnet:object-type vm-property)))
+    ((cl:and (cl:stringp ui-property) (cl:or (cl:null vm-property) (dotnet:is-instance-of vm-property "Gum.Forms.Data.Binding")))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "SetBinding" ui-property vm-property))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"
@@ -670,7 +670,7 @@ SetBinding(String, Binding) -> Void
 Show(Layer = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:object-type layer))))
+    ((cl:and (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:is-instance-of layer "RenderingLibrary.Graphics.Layer"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "Show" (cl:if supplied-layer layer cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-FORMS-CONTROLS-FRAMEWORK-ELEMENT"

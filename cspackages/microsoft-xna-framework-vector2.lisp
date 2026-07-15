@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Vector2
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-vector2)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Vector2"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Vector2")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
   "Master wrapper for Microsoft.Xna.Framework.Vector2 constructor overloads. Dispatches at runtime.
@@ -136,9 +136,9 @@ new(Single, Single)
 -(Vector2, Vector2) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) supplied-value2 (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Vector2")) supplied-value2 (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "op_Subtraction" value value2))
-    ((cl:and (cl:or (cl:null value) (dotnet:object-type value)) (cl:not supplied-value2))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "Microsoft.Xna.Framework.Vector2")) (cl:not supplied-value2))
      (dotnet:static <type-str> "op_UnaryNegation" value))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -156,11 +156,11 @@ new(Single, Single)
 *(Single, Vector2) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:numberp value2))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
-    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "op_Multiply" value1 value2))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -176,9 +176,9 @@ new(Single, Single)
 /(Vector2, Single) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "op_Division" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:numberp value2))
      (dotnet:static <type-str> "op_Division" value1 value2))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -263,9 +263,9 @@ Divide(Vector2, Vector2) -> Vector2
 Divide(Vector2, Single) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "Divide" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:numberp value2))
      (dotnet:static <type-str> "Divide" value1 value2))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -295,9 +295,9 @@ Equals(Object) -> Boolean
 Equals(Vector2) -> Boolean
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "System.Object")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Equals" obj))
-    ((cl:and (cl:or (cl:null obj) (dotnet:object-type obj)))
+    ((cl:and (cl:or (cl:null obj) (dotnet:is-instance-of obj "Microsoft.Xna.Framework.Vector2")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Vector2") obj!) "Equals" obj))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -376,9 +376,9 @@ Multiply(Vector2, Vector2) -> Vector2
 Multiply(Vector2, Single) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:or (cl:null value2) (dotnet:object-type value2)))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Vector2")))
      (dotnet:static <type-str> "Multiply" value1 value2))
-    ((cl:and (cl:or (cl:null value1) (dotnet:object-type value1)) (cl:numberp value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Vector2")) (cl:numberp value2))
      (dotnet:static <type-str> "Multiply" value1 value2))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"
@@ -478,9 +478,9 @@ Transform(Vector2, Matrix) -> Vector2
 Transform(Vector2, Quaternion) -> Vector2
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null position) (dotnet:object-type position)) (cl:or (cl:null matrix) (dotnet:object-type matrix)))
+    ((cl:and (cl:or (cl:null position) (dotnet:is-instance-of position "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null matrix) (dotnet:is-instance-of matrix "Microsoft.Xna.Framework.Matrix")))
      (dotnet:static <type-str> "Transform" position matrix))
-    ((cl:and (cl:or (cl:null position) (dotnet:object-type position)) (cl:or (cl:null matrix) (dotnet:object-type matrix)))
+    ((cl:and (cl:or (cl:null position) (dotnet:is-instance-of position "Microsoft.Xna.Framework.Vector2")) (cl:or (cl:null matrix) (dotnet:is-instance-of matrix "Microsoft.Xna.Framework.Quaternion")))
      (dotnet:static <type-str> "Transform" position matrix))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-VECTOR2"

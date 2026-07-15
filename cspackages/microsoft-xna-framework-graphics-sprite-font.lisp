@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-font)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (texture glyph-bounds cropping characters line-spacing spacing kerning default-character)
   (dotnet:new <type-str> texture glyph-bounds cropping characters line-spacing spacing kerning default-character))
@@ -53,7 +53,7 @@ MeasureString(StringBuilder) -> Vector2
   (cl:cond
     ((cl:and (cl:stringp text))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj!) "MeasureString" text))
-    ((cl:and (cl:or (cl:null text) (dotnet:object-type text)))
+    ((cl:and (cl:or (cl:null text) (dotnet:is-instance-of text "System.Text.StringBuilder")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.SpriteFont") obj!) "MeasureString" text))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-GRAPHICS-SPRITE-FONT"

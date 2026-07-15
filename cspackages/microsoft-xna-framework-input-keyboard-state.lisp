@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.KeyboardState
-;;; Generator Version: 48
-;;; Creation Date: 2026-07-14T16:32:54Z
+;;; Generator Version: 49
+;;; Creation Date: 2026-07-15T03:11:29Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard-state)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.KeyboardState"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.KeyboardState")
-(cl:defconstant <creation> "2026-07-14T16:32:54Z")
-(cl:defconstant <version> 48)
+(cl:defconstant <creation> "2026-07-15T03:11:29Z")
+(cl:defconstant <version> 49)
 
 (cl:defun new (cl:&optional (keys cl:nil supplied-keys) cl:&key (caps-lock cl:nil supplied-caps-lock) (num-lock cl:nil supplied-num-lock))
   "Master wrapper for Microsoft.Xna.Framework.Input.KeyboardState constructor overloads. Dispatches at runtime.
@@ -18,7 +18,7 @@ new()
 new(Keys[], Boolean = NIL, Boolean = NIL)
 "
   (cl:cond
-    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:object-type keys)) (cl:or (cl:not supplied-caps-lock) (cl:typep caps-lock 'cl:boolean)) (cl:or (cl:not supplied-num-lock) (cl:typep num-lock 'cl:boolean)))
+    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:is-instance-of keys "Microsoft.Xna.Framework.Input.Keys[]")) (cl:or (cl:not supplied-caps-lock) (cl:typep caps-lock 'cl:boolean)) (cl:or (cl:not supplied-num-lock) (cl:typep num-lock 'cl:boolean)))
      (dotnet:new <type-str> keys (cl:if supplied-caps-lock caps-lock cl:nil) (cl:if supplied-num-lock num-lock cl:nil)))
     ((cl:and (cl:not supplied-keys) (cl:not supplied-caps-lock) (cl:not supplied-num-lock))
      (dotnet:new <type-str>))
@@ -62,7 +62,7 @@ GetPressedKeys() -> Keys[]
 GetPressedKeys(Keys[]) -> Void
 "
   (cl:cond
-    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:object-type keys)))
+    ((cl:and supplied-keys (cl:or (cl:null keys) (dotnet:is-instance-of keys "Microsoft.Xna.Framework.Input.Keys[]")))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj!) "GetPressedKeys" keys))
     ((cl:and (cl:not supplied-keys))
      (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.KeyboardState") obj!) "GetPressedKeys"))
