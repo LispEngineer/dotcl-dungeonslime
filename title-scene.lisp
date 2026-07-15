@@ -157,8 +157,14 @@
              (ox (round (background-offset-x scene)))
              (oy (round (background-offset-y scene)))
              (src-rect (rect:new ox oy win-w win-h)))
-        ;; Use SpriteBatch wrapper to draw with destination and source rectangles
-        (sprite-batch:draw sb bg-tex dest-rect src-rect color:+white+))
+        ;; sprite-batch:draw's generated overload dispatch tries to
+        ;; is-instance-of-check the nullable source-rectangle argument
+        ;; against "System.Nullable`1[Microsoft.Xna.Framework.Rectangle]",
+        ;; a type string DotCL cannot resolve (and even if it could, a
+        ;; boxed non-null Rectangle? unboxes to a plain Rectangle, never to
+        ;; Nullable<Rectangle>, so the check could never match). Call Draw
+        ;; directly, as texture-region.lisp's tr-draw already does.
+        (dotnet:invoke sb "Draw" bg-tex dest-rect src-rect color:+white+))
       (sprite-batch:end sb))
 
     ;; 2. Draw text and UI elements using PointClamp sampler state
