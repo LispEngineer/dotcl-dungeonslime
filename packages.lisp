@@ -105,6 +105,7 @@
     (:sei :microsoft-xna-framework-audio-sound-effect-instance)
     (:sound-state :microsoft-xna-framework-audio-sound-state)
     (:media-player :microsoft-xna-framework-media-media-player)
+    (:media-state :microsoft-xna-framework-media-media-state)
     (:song :microsoft-xna-framework-media-song)
     (:game-time :microsoft-xna-framework-game-time)
     (:game :microsoft-xna-framework-game)

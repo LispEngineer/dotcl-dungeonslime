@@ -27,7 +27,7 @@
   (when (disposed? ac) (return-from update-audio))
   (let ((remaining-instances nil))
     (dolist (instance (active-instances ac))
-      (if (string-equal (dotnet:invoke (sei:state instance) "ToString") "Stopped")
+      (if (eq (sei:state instance) sound-state:+stopped+)
           (sei:dispose instance)
           (push instance remaining-instances)))
     (setf (active-instances ac) (nreverse remaining-instances))))
@@ -46,7 +46,7 @@
   "Plays the given song if not already playing."
   (when (or (disposed? ac) (null song)) (return-from play-song))
   (handler-case
-      (unless (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+      (unless (eq media-player:state media-state:+playing+)
         (media-player:play song))
     (error (c)
       (format *error-output* "Warning: play-song failed: ~A~%" c))))
@@ -57,9 +57,9 @@
   (handler-case
       (progn
         (dolist (instance (active-instances ac))
-          (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Playing")
+          (when (eq (sei:state instance) sound-state:+playing+)
             (sei:pause instance)))
-        (when (string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+        (when (eq media-player:state media-state:+playing+)
           (media-player:pause)))
     (error (c)
       (format *error-output* "Warning: pause-audio failed: ~A~%" c))))
@@ -70,9 +70,9 @@
   (handler-case
       (progn
         (dolist (instance (active-instances ac))
-          (when (string-equal (dotnet:invoke (sei:state instance) "ToString") "Paused")
+          (when (eq (sei:state instance) sound-state:+paused+)
             (sei:resume instance)))
-        (when (string-equal (dotnet:invoke media-player:state "ToString") "Paused")
+        (when (eq media-player:state media-state:+paused+)
           (media-player:resume)))
     (error (c)
       (format *error-output* "Warning: resume-audio failed: ~A~%" c))))

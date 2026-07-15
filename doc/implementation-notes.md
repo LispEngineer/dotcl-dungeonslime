@@ -1075,3 +1075,45 @@ supported by the package generator. Instead, use `dotnet:new` directly:
 (dotnet:new "MonoGameGum.GueDeriving.TextRuntime")
 ```
 
+## Enum State Comparison (audio-controller.lisp)
+
+Methods in `audio-controller.lisp` that check the state of `SoundEffectInstance` and
+`MediaPlayer` previously used `string-equal` on `ToString` output:
+
+```lisp
+;; Before
+(string-equal (dotnet:invoke (sei:state instance) "ToString") "Stopped")
+(string-equal (dotnet:invoke media-player:state "ToString") "Playing")
+```
+
+This was inefficient (string allocation + comparison) and semantically wrong, since
+`.State` returns a typed enum value, not a string.
+
+Replaced with `eq` against generated enum constants:
+
+```lisp
+;; After
+(eq (sei:state instance) sound-state:+stopped+)
+(eq media-player:state media-state:+playing+)
+```
+
+Two enum types are involved:
+- `sei:state` returns `Microsoft.Xna.Framework.Audio.SoundState` (local nickname: `:sound-state`)
+- `media-player:state` returns `Microsoft.Xna.Framework.Media.MediaState` (local nickname: `:media-state`)
+
+Both enum types have the same members (`Stopped`, `Paused`, `Playing`), but they are
+distinct .NET types. Each comparison uses the corresponding enum's constants.
+
+`eq` works because the CLR provides singleton identity for boxed enum values of the
+same type within an AppDomain, and the auto-generated constants are cached on first
+access via `define-symbol-macro`.
+
+If `eq` comparisons fail at runtime (e.g., if the interop layer doesn't preserve
+singleton identity), the fallback is to compare underlying integer values:
+
+```lisp
+(= (cs:value__ (sei:state instance)) (cs:value__ sound-state:+stopped+))
+```
+
+where `cs:value__` is the type-generic accessor dispatched via `csharp-generics`.
+

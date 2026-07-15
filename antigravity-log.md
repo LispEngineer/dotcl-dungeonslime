@@ -1212,6 +1212,9 @@ We researched and resolved the generation of Common Lisp constructors for C# cla
 | June 26, 2026 | [mg-core.lisp](mg-core.lisp) | Modified | Refactored Content, IsMouseVisible, GraphicsDevice, and Window property gets/sets, and SpriteBatch constructor. |
 | June 26, 2026 | [FILES.md](FILES.md) | Modified | Updated description of Lisp files in FILES.md to note the refactoring to C# wrappers. |
 | June 26, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added a section detailing the raw interop refactoring to generated wrappers. |
+| July 14, 2026 | [audio-controller.lisp](audio-controller.lisp) | Modified | Replaced `string-equal` on `ToString` output with `eq` against generated enum constants (`sound-state:+stopped+`, `sound-state:+playing+`, `sound-state:+paused+`, `media-state:+playing+`, `media-state:+paused+`) for `SoundEffectInstance.State` and `MediaPlayer.State` comparisons. |
+| July 14, 2026 | [packages.lisp](packages.lisp) | Modified | Added `:media-state` local nickname for `microsoft-xna-framework-media-media-state` package. |
+| July 14, 2026 | [doc/implementation-notes.md](doc/implementation-notes.md) | Modified | Added section on enum state comparison replacing `string-equal`. |
 
 ### 2. Explanations Log
 
