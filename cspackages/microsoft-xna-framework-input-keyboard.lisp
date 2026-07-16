@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Keyboard
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :microsoft-xna-framework-input-keyboard)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Keyboard"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Keyboard")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun get-state (cl:&optional (player-index cl:nil supplied-player-index))
   "Master wrapper for Microsoft.Xna.Framework.Input.Keyboard.GetState overloads. Dispatches at runtime.

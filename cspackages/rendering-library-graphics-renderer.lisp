@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.Renderer
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :rendering-library-graphics-renderer)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.Renderer"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.Renderer")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -127,7 +127,7 @@ AddLayer(Layer) -> Void
 Begin(Matrix] = null) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:not supplied-sprite-batch-matrix) (cl:or (cl:null sprite-batch-matrix) (dotnet:is-instance-of sprite-batch-matrix "System.Nullable`1[Microsoft.Xna.Framework.Matrix]"))))
+    ((cl:and (cl:or (cl:not supplied-sprite-batch-matrix) (cl:or (cl:null sprite-batch-matrix) (dotnet:is-instance-of sprite-batch-matrix "Microsoft.Xna.Framework.Matrix"))))
      (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Begin" (cl:if supplied-sprite-batch-matrix sprite-batch-matrix cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "RENDERING-LIBRARY-GRAPHICS-RENDERER"
@@ -152,7 +152,7 @@ Draw(SystemManagers, Layer]) -> Void
   (cl:cond
     ((cl:and (cl:or (cl:null managers) (dotnet:is-instance-of managers "RenderingLibrary.SystemManagers")) supplied-layer (cl:or (cl:null layer) (dotnet:is-instance-of layer "RenderingLibrary.Graphics.Layer")))
      (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Draw" managers layer))
-    ((cl:and (cl:or (cl:null managers) (dotnet:is-instance-of managers "RenderingLibrary.SystemManagers")) supplied-layer (cl:or (cl:null layer) (dotnet:is-instance-of layer "System.Collections.Generic.List`1[RenderingLibrary.Graphics.Layer]")))
+    ((cl:and (cl:or (cl:null managers) (dotnet:is-instance-of managers "RenderingLibrary.SystemManagers")) supplied-layer (cl:or (cl:null layer) (dotnet:is-instance-of layer "System.Collections.Generic.List`1[[RenderingLibrary.Graphics.Layer, GumCommon, Version=2026.5.8.1, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
      (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Draw" managers layer))
     ((cl:and (cl:or (cl:null managers) (dotnet:is-instance-of managers "RenderingLibrary.SystemManagers")) (cl:not supplied-layer))
      (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.Renderer") obj!) "Draw" managers))

@@ -10,11 +10,6 @@
 (format *error-output* "[sprite.lisp] Loading in package ~S~%" *package*)
 (require :dotnet-class)
 
-;; Alternatively to use-package, we can just get the specific symbols we want.
-(use-package :mg-classes)
-;; (eval-when (:compile-toplevel :load-toplevel :execute)
-;;   (shadowing-import '(mg-classes:x)))
-
 ;; Sprite implemented as a CLOS class
 (defclass sprite ()
   ((region
@@ -64,24 +59,26 @@
     (setf (layer-depth spr) 0.0e0))
   (format *error-output* "[sprite:initialize-instance:after] Sprite initialized.~%"))
 
-(defmethod width ((obj sprite))
+(defmethod cs:width ((obj sprite) &rest args)
   "Gets the width, in pixels, of this sprite.
-   Width is calculated by multiplying the width of the source texture region 
+   Width is calculated by multiplying the width of the source texture region
    by the x-axis scale factor."
-  (* (width (region obj)) (x (scale obj))))
+  (declare (ignore args))
+  (* (cs:width (region obj)) (cs:x (scale obj))))
 
-(defmethod height ((obj sprite))
+(defmethod cs:height ((obj sprite) &rest args)
   "Gets the height, in pixels, of this sprite.
-   Height is calculated by multiplying the height of the source 
+   Height is calculated by multiplying the height of the source
    texture region by the y-axis scale factor."
-  (* (height (region obj)) (y (scale obj))))
+  (declare (ignore args))
+  (* (cs:height (region obj)) (cs:y (scale obj))))
 
 (defun sprite-center-origin (spr)
   "Sets the origin of this sprite to the center.
    Silently do nothing when the region is unbound."
   (when (slot-boundp spr 'region)
     (setf (origin spr)
-          (v2:* (v2:new (height (region spr)) (width (region spr))) 0.5e0))))
+          (v2:* (v2:new (cs:height (region spr)) (cs:width (region spr))) 0.5e0))))
 
 (defun sprite-draw (sprite sprite-batch position)
   "Submit this sprite for drawing in the specified batch at the specified position."

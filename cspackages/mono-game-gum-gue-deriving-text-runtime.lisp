@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (cl:&key (full-instantiation cl:t supplied-full-instantiation) (system-managers cl:nil supplied-system-managers))
   "Master wrapper for MonoGameGum.GueDeriving.TextRuntime constructor overloads. Dispatches at runtime.

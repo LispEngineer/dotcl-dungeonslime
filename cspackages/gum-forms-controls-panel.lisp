@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Panel
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :gum-forms-controls-panel)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Panel"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Panel")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Panel constructor overloads. Dispatches at runtime.

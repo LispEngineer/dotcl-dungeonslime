@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:30:42Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :csharp-generics)
 
@@ -288,6 +288,7 @@ Microsoft.Xna.Framework.Input.GamePadThumbSticks: to-string (microsoft-xna-frame
 Microsoft.Xna.Framework.Input.GamePadTriggers: to-string (microsoft-xna-framework-input-game-pad-triggers:to-string)
 Microsoft.Xna.Framework.Input.Touch.TouchLocation: to-string (microsoft-xna-framework-input-touch-touch-location:to-string)
 Microsoft.Xna.Framework.Color: to-string (microsoft-xna-framework-color:to-string)
+Microsoft.Xna.Framework.Graphics.Viewport: to-string (microsoft-xna-framework-graphics-viewport:to-string)
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: to-string (microsoft-xna-framework-graphics-sprite-font-glyph:to-string)
 Gum.Wireframe.InteractiveGue: to-string (gum-wireframe-interactive-gue:to-string)
 Gum.Wireframe.GraphicalUiElement: to-string (gum-wireframe-graphical-ui-element:to-string)
@@ -1667,6 +1668,7 @@ Microsoft.Xna.Framework.Vector2: x (microsoft-xna-framework-vector2:x)
 Microsoft.Xna.Framework.Rectangle: x (microsoft-xna-framework-rectangle:x)
 Microsoft.Xna.Framework.Point: x (microsoft-xna-framework-point:x)
 Microsoft.Xna.Framework.Input.MouseState: x (microsoft-xna-framework-input-mouse-state:x)
+Microsoft.Xna.Framework.Graphics.Viewport: x (microsoft-xna-framework-graphics-viewport:x)
 RenderingLibrary.Camera: x (rendering-library-camera:x)
 RenderingLibrary.IPositionedSizedObject: x (rendering-library-i-positioned-sized-object:x)
 Gum.Wireframe.GraphicalUiElement: x (gum-wireframe-graphical-ui-element:x)
@@ -1679,6 +1681,7 @@ Microsoft.Xna.Framework.Vector2: y (microsoft-xna-framework-vector2:y)
 Microsoft.Xna.Framework.Rectangle: y (microsoft-xna-framework-rectangle:y)
 Microsoft.Xna.Framework.Point: y (microsoft-xna-framework-point:y)
 Microsoft.Xna.Framework.Input.MouseState: y (microsoft-xna-framework-input-mouse-state:y)
+Microsoft.Xna.Framework.Graphics.Viewport: y (microsoft-xna-framework-graphics-viewport:y)
 RenderingLibrary.Camera: y (rendering-library-camera:y)
 RenderingLibrary.IPositionedSizedObject: y (rendering-library-i-positioned-sized-object:y)
 Gum.Wireframe.GraphicalUiElement: y (gum-wireframe-graphical-ui-element:y)
@@ -1743,6 +1746,8 @@ Microsoft.Xna.Framework.Vector2: to-system-numerics (microsoft-xna-framework-vec
 (cl:defgeneric height (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: height (microsoft-xna-framework-rectangle:height)
+Microsoft.Xna.Framework.Graphics.Texture2D: height (microsoft-xna-framework-graphics-texture2-d:height)
+Microsoft.Xna.Framework.Graphics.Viewport: height (microsoft-xna-framework-graphics-viewport:height)
 RenderingLibrary.IPositionedSizedObject: height (rendering-library-i-positioned-sized-object:height)
 Gum.Wireframe.GraphicalUiElement: height (gum-wireframe-graphical-ui-element:height)
 Gum.Forms.Controls.FrameworkElement: height (gum-forms-controls-framework-element:height)
@@ -1751,6 +1756,8 @@ Gum.Forms.Controls.FrameworkElement: height (gum-forms-controls-framework-elemen
 (cl:defgeneric width (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: width (microsoft-xna-framework-rectangle:width)
+Microsoft.Xna.Framework.Graphics.Texture2D: width (microsoft-xna-framework-graphics-texture2-d:width)
+Microsoft.Xna.Framework.Graphics.Viewport: width (microsoft-xna-framework-graphics-viewport:width)
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: width (microsoft-xna-framework-graphics-sprite-font-glyph:width)
 RenderingLibrary.IPositionedSizedObject: width (rendering-library-i-positioned-sized-object:width)
 Gum.Wireframe.GraphicalUiElement: width (gum-wireframe-graphical-ui-element:width)
@@ -2867,6 +2874,58 @@ Microsoft.Xna.Framework.Graphics.SpriteBatch: end (microsoft-xna-framework-graph
 RenderingLibrary.Graphics.Renderer: end (rendering-library-graphics-renderer:end)
 "))
 
+(cl:defgeneric bounds (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Texture2D: bounds (microsoft-xna-framework-graphics-texture2-d:bounds)
+Microsoft.Xna.Framework.Graphics.Viewport: bounds (microsoft-xna-framework-graphics-viewport:bounds)
+Microsoft.Xna.Framework.Graphics.PresentationParameters: bounds (microsoft-xna-framework-graphics-presentation-parameters:bounds)
+"))
+
+(cl:defgeneric reload (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Texture2D: reload (microsoft-xna-framework-graphics-texture2-d:reload)
+"))
+
+(cl:defgeneric save-as-jpeg (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Texture2D: save-as-jpeg (microsoft-xna-framework-graphics-texture2-d:save-as-jpeg)
+"))
+
+(cl:defgeneric save-as-png (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Texture2D: save-as-png (microsoft-xna-framework-graphics-texture2-d:save-as-png)
+"))
+
+(cl:defgeneric aspect-ratio (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: aspect-ratio (microsoft-xna-framework-graphics-viewport:aspect-ratio)
+"))
+
+(cl:defgeneric max-depth (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: max-depth (microsoft-xna-framework-graphics-viewport:max-depth)
+"))
+
+(cl:defgeneric min-depth (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: min-depth (microsoft-xna-framework-graphics-viewport:min-depth)
+"))
+
+(cl:defgeneric title-safe-area (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: title-safe-area (microsoft-xna-framework-graphics-viewport:title-safe-area)
+"))
+
+(cl:defgeneric project (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: project (microsoft-xna-framework-graphics-viewport:project)
+"))
+
+(cl:defgeneric unproject (obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: unproject (microsoft-xna-framework-graphics-viewport:unproject)
+"))
+
 (cl:defgeneric characters (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.SpriteFont: characters (microsoft-xna-framework-graphics-sprite-font:characters)
@@ -2950,11 +3009,6 @@ Microsoft.Xna.Framework.Graphics.PresentationParameters: back-buffer-height (mic
 (cl:defgeneric back-buffer-width (obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.PresentationParameters: back-buffer-width (microsoft-xna-framework-graphics-presentation-parameters:back-buffer-width)
-"))
-
-(cl:defgeneric bounds (obj! cl:&rest args)
-  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
-Microsoft.Xna.Framework.Graphics.PresentationParameters: bounds (microsoft-xna-framework-graphics-presentation-parameters:bounds)
 "))
 
 (cl:defgeneric depth-stencil-format (obj! cl:&rest args)
@@ -5366,6 +5420,7 @@ System.Collections.Generic.List`1: (cl:setf item) (cl:setf (system-collections-g
 Microsoft.Xna.Framework.Vector2: (cl:setf x) (cl:setf (microsoft-xna-framework-vector2:x ...))
 Microsoft.Xna.Framework.Rectangle: (cl:setf x) (cl:setf (microsoft-xna-framework-rectangle:x ...))
 Microsoft.Xna.Framework.Point: (cl:setf x) (cl:setf (microsoft-xna-framework-point:x ...))
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf x) (cl:setf (microsoft-xna-framework-graphics-viewport:x ...))
 RenderingLibrary.Camera: (cl:setf x) (cl:setf (rendering-library-camera:x ...))
 RenderingLibrary.IPositionedSizedObject: (cl:setf x) (cl:setf (rendering-library-i-positioned-sized-object:x ...))
 Gum.Wireframe.GraphicalUiElement: (cl:setf x) (cl:setf (gum-wireframe-graphical-ui-element:x ...))
@@ -5377,6 +5432,7 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf x) (cl:setf (gum-forms-controls-fr
 Microsoft.Xna.Framework.Vector2: (cl:setf y) (cl:setf (microsoft-xna-framework-vector2:y ...))
 Microsoft.Xna.Framework.Rectangle: (cl:setf y) (cl:setf (microsoft-xna-framework-rectangle:y ...))
 Microsoft.Xna.Framework.Point: (cl:setf y) (cl:setf (microsoft-xna-framework-point:y ...))
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf y) (cl:setf (microsoft-xna-framework-graphics-viewport:y ...))
 RenderingLibrary.Camera: (cl:setf y) (cl:setf (rendering-library-camera:y ...))
 RenderingLibrary.IPositionedSizedObject: (cl:setf y) (cl:setf (rendering-library-i-positioned-sized-object:y ...))
 Gum.Wireframe.GraphicalUiElement: (cl:setf y) (cl:setf (gum-wireframe-graphical-ui-element:y ...))
@@ -5386,6 +5442,7 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf y) (cl:setf (gum-forms-controls-fr
 (cl:defgeneric (cl:setf height) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: (cl:setf height) (cl:setf (microsoft-xna-framework-rectangle:height ...))
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf height) (cl:setf (microsoft-xna-framework-graphics-viewport:height ...))
 RenderingLibrary.IPositionedSizedObject: (cl:setf height) (cl:setf (rendering-library-i-positioned-sized-object:height ...))
 Gum.Wireframe.GraphicalUiElement: (cl:setf height) (cl:setf (gum-wireframe-graphical-ui-element:height ...))
 Gum.Forms.Controls.FrameworkElement: (cl:setf height) (cl:setf (gum-forms-controls-framework-element:height ...))
@@ -5394,6 +5451,7 @@ Gum.Forms.Controls.FrameworkElement: (cl:setf height) (cl:setf (gum-forms-contro
 (cl:defgeneric (cl:setf width) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Rectangle: (cl:setf width) (cl:setf (microsoft-xna-framework-rectangle:width ...))
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf width) (cl:setf (microsoft-xna-framework-graphics-viewport:width ...))
 Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph: (cl:setf width) (cl:setf (microsoft-xna-framework-graphics-sprite-font-glyph:width ...))
 RenderingLibrary.IPositionedSizedObject: (cl:setf width) (cl:setf (rendering-library-i-positioned-sized-object:width ...))
 Gum.Wireframe.GraphicalUiElement: (cl:setf width) (cl:setf (gum-wireframe-graphical-ui-element:width ...))
@@ -5668,6 +5726,21 @@ Microsoft.Xna.Framework.Graphics.GraphicsDevice: (cl:setf scissor-rectangle) (cl
 (cl:defgeneric (cl:setf viewport) (new-value obj! cl:&rest args)
   (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
 Microsoft.Xna.Framework.Graphics.GraphicsDevice: (cl:setf viewport) (cl:setf (microsoft-xna-framework-graphics-graphics-device:viewport ...))
+"))
+
+(cl:defgeneric (cl:setf bounds) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf bounds) (cl:setf (microsoft-xna-framework-graphics-viewport:bounds ...))
+"))
+
+(cl:defgeneric (cl:setf max-depth) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf max-depth) (cl:setf (microsoft-xna-framework-graphics-viewport:max-depth ...))
+"))
+
+(cl:defgeneric (cl:setf min-depth) (new-value obj! cl:&rest args)
+  (:documentation "Dispatches on the C# runtime type of OBJ!. Specialized by:
+Microsoft.Xna.Framework.Graphics.Viewport: (cl:setf min-depth) (cl:setf (microsoft-xna-framework-graphics-viewport:min-depth ...))
 "))
 
 (cl:defgeneric (cl:setf default-character) (new-value obj! cl:&rest args)
@@ -8463,6 +8536,82 @@ System.Collections.Generic.List`1: (cl:setf capacity) (cl:setf (system-collectio
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:draw-string) obj! args))
 (cl:defmethod end ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.SpriteBatch")) cl:&rest args)
   (cl:apply (cl:function microsoft-xna-framework-graphics-sprite-batch:end) obj! args))
+
+;; Microsoft.Xna.Framework.Graphics.Texture2D (microsoft-xna-framework-graphics-texture2-d)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.Texture2D")))
+
+(cl:defmethod bounds ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:bounds) obj! args))
+(cl:defmethod height ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:height) obj! args))
+(cl:defmethod width ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:width) obj! args))
+(cl:defmethod reload ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:reload) obj! args))
+(cl:defmethod save-as-jpeg ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:save-as-jpeg) obj! args))
+(cl:defmethod save-as-png ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Texture2D")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-texture2-d:save-as-png) obj! args))
+
+;; Microsoft.Xna.Framework.Graphics.Viewport (microsoft-xna-framework-graphics-viewport)
+;; Register C# Type with CLOS (--ensure-type-in-generic) --
+;; :compile-toplevel is required here, unlike --ensure-type's own
+;; per-class eval-when: #.(dotnet:class-for-type ...) below is
+;; read-time-evaluated, i.e. already resolved at COMPILE time of
+;; this file, so influencing same-simple-name collision order
+;; relative to it requires running at compile time too. See
+;; doc/generator-design-notes.md's Version 45 section.
+(cl:eval-when (:compile-toplevel :load-toplevel :execute)
+  (dotnet:static "DotCL.Runtime" "EnsureDotNetTypeClass"
+                 (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.Viewport")))
+
+(cl:defmethod aspect-ratio ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:aspect-ratio) obj! args))
+(cl:defmethod bounds ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:bounds) obj! args))
+(cl:defmethod height ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:height) obj! args))
+(cl:defmethod max-depth ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:max-depth) obj! args))
+(cl:defmethod min-depth ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:min-depth) obj! args))
+(cl:defmethod title-safe-area ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:title-safe-area) obj! args))
+(cl:defmethod width ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:width) obj! args))
+(cl:defmethod x ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:x) obj! args))
+(cl:defmethod y ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:y) obj! args))
+(cl:defmethod project ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:project) obj! args))
+(cl:defmethod to-string ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:to-string) obj! args))
+(cl:defmethod unproject ((obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function microsoft-xna-framework-graphics-viewport:unproject) obj! args))
+(cl:defmethod (cl:setf bounds) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:bounds)) new-value obj! args))
+(cl:defmethod (cl:setf height) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:height)) new-value obj! args))
+(cl:defmethod (cl:setf max-depth) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:max-depth)) new-value obj! args))
+(cl:defmethod (cl:setf min-depth) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:min-depth)) new-value obj! args))
+(cl:defmethod (cl:setf width) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:width)) new-value obj! args))
+(cl:defmethod (cl:setf x) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:x)) new-value obj! args))
+(cl:defmethod (cl:setf y) (new-value (obj! #.(dotnet:class-for-type "Microsoft.Xna.Framework.Graphics.Viewport")) cl:&rest args)
+  (cl:apply (cl:function (cl:setf microsoft-xna-framework-graphics-viewport:y)) new-value obj! args))
 
 ;; Microsoft.Xna.Framework.Graphics.SpriteFont (microsoft-xna-framework-graphics-sprite-font)
 ;; Register C# Type with CLOS (--ensure-type-in-generic) --

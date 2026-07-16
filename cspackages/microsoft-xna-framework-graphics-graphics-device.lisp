@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (adapter graphics-profile presentation-parameters cl:&optional (presentation-parameters2 cl:nil supplied-presentation-parameters2))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice constructor overloads. Dispatches at runtime.
@@ -315,7 +315,7 @@ GetBackBufferData(T[], Int32, Int32) -> Void
 GetBackBufferData(Rectangle], T[], Int32, Int32) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null data) (dotnet:is-instance-of data "System.Nullable`1[Microsoft.Xna.Framework.Rectangle]")) supplied-start-index (cl:or (cl:null start-index) (dotnet:is-instance-of start-index "T[]")) supplied-element-count (cl:numberp element-count) supplied-element-count2 (cl:numberp element-count2))
+    ((cl:and (cl:or (cl:null data) (dotnet:is-instance-of data "Microsoft.Xna.Framework.Rectangle")) supplied-start-index (cl:or (cl:null start-index) (dotnet:is-instance-of start-index "T[]")) supplied-element-count (cl:numberp element-count) supplied-element-count2 (cl:numberp element-count2))
      (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "GetBackBufferData" (cl:list type) data start-index element-count element-count2))
     ((cl:and (cl:or (cl:null data) (dotnet:is-instance-of data "T[]")) supplied-start-index (cl:numberp start-index) supplied-element-count (cl:numberp element-count) (cl:not supplied-element-count2))
      (dotnet:invoke-generic (cl:the (dotnet "Microsoft.Xna.Framework.Graphics.GraphicsDevice") obj!) "GetBackBufferData" (cl:list type) data start-index element-count))

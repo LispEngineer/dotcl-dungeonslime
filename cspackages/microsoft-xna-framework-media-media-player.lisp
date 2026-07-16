@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Media.MediaPlayer
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :microsoft-xna-framework-media-media-player)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Media.MediaPlayer"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Media.MediaPlayer")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:define-symbol-macro game-has-control (dotnet:static <type-str> "GameHasControl"))
 
@@ -63,7 +63,7 @@ Play(Song, TimeSpan]) -> Void
 Play(SongCollection, Int32 = 0) -> Void
 "
   (cl:cond
-    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")) supplied-start-position (cl:or (cl:null start-position) (dotnet:is-instance-of start-position "System.Nullable`1[System.TimeSpan]")))
+    ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")) supplied-start-position (cl:or (cl:null start-position) (dotnet:is-instance-of start-position "System.TimeSpan")))
      (dotnet:static <type-str> "Play" song start-position))
     ((cl:and (cl:or (cl:null song) (dotnet:is-instance-of song "Microsoft.Xna.Framework.Media.Song")) (cl:not supplied-start-position))
      (dotnet:static <type-str> "Play" song))

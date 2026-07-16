@@ -8,14 +8,6 @@
 
 (format *error-output* "[texture-atlas.lisp] Loading in package ~S~%" *package*)
 
-;; Alternatively to use-package, we can just get the specific symbols we want.
-;; (use-package :mg-classes)
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (shadowing-import '(mg-classes:x
-                      mg-classes:y
-                      mg-classes:width
-                      mg-classes:height)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Texture Atlas
 
@@ -173,14 +165,14 @@
       (assert reg-a)
       (assert reg-b)
       (assert (monoutils:dotnet-p (source-rect reg-a)))
-      (assert (equal (x      reg-a) 0))
-      (assert (equal (y      reg-a) 0))
-      (assert (equal (width  reg-a) 64))
-      (assert (equal (height reg-a) 64))
-      (assert (equal (x      reg-b) 64))
-      (assert (equal (y      reg-b) 0))
-      (assert (equal (width  reg-b) 64))
-      (assert (equal (height reg-b) 64))
+      (assert (equal (cs:x      reg-a) 0))
+      (assert (equal (cs:y      reg-a) 0))
+      (assert (equal (cs:width  reg-a) 64))
+      (assert (equal (cs:height reg-a) 64))
+      (assert (equal (cs:x      reg-b) 64))
+      (assert (equal (cs:y      reg-b) 0))
+      (assert (equal (cs:width  reg-b) 64))
+      (assert (equal (cs:height reg-b) 64))
       ;; Animation tests
       (let* ((delay-ts (delay ani-ab))
             (delay-ms (ts:total-milliseconds delay-ts)))

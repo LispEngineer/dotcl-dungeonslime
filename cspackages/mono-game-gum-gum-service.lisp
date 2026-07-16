@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -163,13 +163,13 @@ Update(Game, GameTime, GraphicalUiElement]) -> Void
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
     ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "Gum.Wireframe.GraphicalUiElement")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "System.Collections.Generic.IEnumerable`1[Gum.Wireframe.GraphicalUiElement]")))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "System.Collections.Generic.IEnumerable`1[[Gum.Wireframe.GraphicalUiElement, GumCommon, Version=2026.5.8.1, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2 root))
     ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
     ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Gum.Wireframe.GraphicalUiElement")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
-    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "System.Collections.Generic.IEnumerable`1[Gum.Wireframe.GraphicalUiElement]")) (cl:not supplied-root))
+    ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "System.Collections.Generic.IEnumerable`1[[Gum.Wireframe.GraphicalUiElement, GumCommon, Version=2026.5.8.1, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time game-time2))
     ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.GameTime")) (cl:not supplied-game-time2) (cl:not supplied-root))
      (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "Update" game-time))

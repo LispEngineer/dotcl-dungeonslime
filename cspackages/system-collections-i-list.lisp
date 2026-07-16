@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.IList
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :system-collections-i-list)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.IList"))
 (cl:defconstant <type-str> "System.Collections.IList")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun fixed-size? (obj!)
   "Gets a value indicating whether the System.Collections.IList has a fixed size."

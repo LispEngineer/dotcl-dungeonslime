@@ -17,16 +17,16 @@
     (assert (= (tile-count ts) 100) () "Tileset count mismatch")
 
     (let ((tile-tr (get-tile ts 11)))
-      (assert (= (width tile-tr) 10) () "Tile width mismatch")
-      (assert (= (height tile-tr) 10) () "Tile height mismatch")
-      (assert (= (x tile-tr) 10) () "Tile x mismatch")
-      (assert (= (y tile-tr) 10) () "Tile y mismatch"))
+      (assert (= (cs:width tile-tr) 10) () "Tile width mismatch")
+      (assert (= (cs:height tile-tr) 10) () "Tile height mismatch")
+      (assert (= (cs:x tile-tr) 10) () "Tile x mismatch")
+      (assert (= (cs:y tile-tr) 10) () "Tile y mismatch"))
 
     (let ((tile-tr (get-tile ts 1 1)))
-      (assert (= (width tile-tr) 10) () "Tile width mismatch")
-      (assert (= (height tile-tr) 10) () "Tile height mismatch")
-      (assert (= (x tile-tr) 10) () "Tile x mismatch")
-      (assert (= (y tile-tr) 10) () "Tile y mismatch"))
+      (assert (= (cs:width tile-tr) 10) () "Tile width mismatch")
+      (assert (= (cs:height tile-tr) 10) () "Tile height mismatch")
+      (assert (= (cs:x tile-tr) 10) () "Tile x mismatch")
+      (assert (= (cs:y tile-tr) 10) () "Tile y mismatch"))
 
     (let ((tm (make-instance 'tilemap :tileset ts :columns 20 :rows 15)))
       (assert (= (tile-count tm) 300) () "Tilemap count mismatch")
@@ -38,8 +38,8 @@
       (assert (= (aref (tiles tm) 20) 21) () "Tilemap 0,1 mismatch")
 
       (let ((tile-tr (tm-get-tile tm 0 0)))
-        (assert (= (x tile-tr) 10) () "Tilemap tile x mismatch")
-        (assert (= (y tile-tr) 10) () "Tilemap tile y mismatch"))))
+        (assert (= (cs:x tile-tr) 10) () "Tilemap tile x mismatch")
+        (assert (= (cs:y tile-tr) 10) () "Tilemap tile y mismatch"))))
 
   (format *error-output* "[test-tilemap] Finished successfully.~%"))
 

@@ -8,14 +8,6 @@
 
 (format *error-output* "[texture-region.lisp] Loading in package ~S~%" *package*)
 
-;; Alternatively to use-package, we can just get the specific symbols we want.
-;; (use-package :mg-classes)
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (shadowing-import '(mg-classes:x
-                      mg-classes:y
-                      mg-classes:width
-                      mg-classes:height)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Texture Region
 
@@ -32,36 +24,25 @@
     :initarg :source-rect))
   (:documentation "Stores a texture and its source rectangle."))
 
-; (format *error-output* "[texture-region.lisp] Showing defined generic methods on width~%")
-; (format *error-output* "[texture-region.lisp] Before defining texture-region specialization~%")
-; (print-gf-methods 'width)
-(defmethod width ((tr texture-region))
+(defmethod cs:width ((tr texture-region) &rest args)
   "Gets the width of the source-rect of this texture-region"
-  ; (format *error-output* "[texture-region:width] tr = ~A~%" tr)
-  (width (source-rect tr)))
-; (format *error-output* "[texture-region.lisp] After defining texture-region specialization~%")
-; (print-gf-methods 'width)
-#|
-(defmethod width ((str string))
-  "Gets the length of this string"
-  (length str))
-(format *error-output* "[texture-region.lisp] After defining string specialization~%")
-(print-gf-methods 'width)
-|#
-; (format *error-output* "[texture-region.lisp] End showing defined generic methods on width~%")
+  (declare (ignore args))
+  (cs:width (source-rect tr)))
 
-(defmethod height ((obj texture-region))
+(defmethod cs:height ((obj texture-region) &rest args)
   "Gets the height of the source-rect of this texture-region"
-  (height (source-rect obj)))
+  (declare (ignore args))
+  (cs:height (source-rect obj)))
 
-(defmethod x ((obj texture-region))
+(defmethod cs:x ((obj texture-region) &rest args)
   "Gets the x-coordinate of the source-rect of this texture-region"
-  (format *error-output* "[texture-region:x] (source-rect obj) = ~A~%" (source-rect obj))
-  (x (source-rect obj)))
+  (declare (ignore args))
+  (cs:x (source-rect obj)))
 
-(defmethod y ((obj texture-region))
+(defmethod cs:y ((obj texture-region) &rest args)
   "Gets the y-coordinate of the source-rect of this texture-region"
-  (y (source-rect obj)))
+  (declare (ignore args))
+  (cs:y (source-rect obj)))
 
 (defun tr-draw (tr sb pos color 
                 &optional (rotation 0.0e0) (origin nil) (scale v2:+one+)

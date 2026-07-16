@@ -9,51 +9,6 @@
 
 (format *error-output* "[mg-classes.lisp] Loading in package ~S~%" *package*)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Generic functions
-
-;; If we figure out C# class dispatched multimethods, just make "x" and "y".
-;; They may be the same anyway, if the accessors on the class are the same!
-
-(defgeneric x (obj)
-  (:documentation "Gets the X component of the specified object"))
-
-(defmethod x ((obj t))
-  "Get X component of a C# Type with an X field, e.g. Vector2, Rectangle"
-  (if (dotnet-p obj)
-    (dotnet:invoke obj "X")
-    (error "Unknown object for X: ~S" obj)))
-
-(defgeneric y (obj)
-  (:documentation "Gets the Y component of the specified object"))
-
-(defmethod y ((obj t))
-  "Get Y component of a C# Type with an Y field, e.g. Vector2, Rectangle"
-  (if (dotnet-p obj)
-    (dotnet:invoke obj "Y")
-    (error "Unknown object for X: ~S" obj)))
-
-; (print-gf-methods 'width)
-(defgeneric width (obj)
-  (:documentation "Gets the width of the specified object"))
-
-; (print-gf-methods 'width)
-(defmethod width ((obj t))
-  "Get the width of a C# object like a Rectangle"
-  (if (dotnet-p obj)
-    (dotnet:invoke obj "Width")
-    (error "Unknown object for width: ~S" obj)))
-; (print-gf-methods 'width)
-
-(defgeneric height (obj)
-  (:documentation "Gets the height of the specified object"))
-
-(defmethod height ((obj t))
-  "Get the height of a C# object like a Rectangle"
-  (if (dotnet-p obj)
-    (dotnet:invoke obj "Height")
-    (error "Unknown object for height: ~S" obj)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper Functions
 

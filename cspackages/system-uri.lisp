@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.
@@ -384,7 +384,7 @@ EscapeDataString(Char]) -> String
   (cl:cond
     ((cl:and (cl:stringp string-to-escape))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
-    ((cl:and (cl:or (cl:null string-to-escape) (dotnet:is-instance-of string-to-escape "System.ReadOnlySpan`1[System.Char]")))
+    ((cl:and (cl:or (cl:null string-to-escape) (dotnet:is-instance-of string-to-escape "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
      (dotnet:static <type-str> "EscapeDataString" string-to-escape))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"
@@ -604,7 +604,7 @@ UnescapeDataString(Char]) -> String
   (cl:cond
     ((cl:and (cl:stringp string-to-unescape))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
-    ((cl:and (cl:or (cl:null string-to-unescape) (dotnet:is-instance-of string-to-unescape "System.ReadOnlySpan`1[System.Char]")))
+    ((cl:and (cl:or (cl:null string-to-unescape) (dotnet:is-instance-of string-to-unescape "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
      (dotnet:static <type-str> "UnescapeDataString" string-to-unescape))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-URI"

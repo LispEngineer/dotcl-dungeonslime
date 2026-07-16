@@ -119,8 +119,8 @@
     ;; Update scrolling offset diagonally at 30 pixels per second
     (when (background-texture scene)
       (let* ((tex (background-texture scene))
-             (w (float (width tex) 0.0f0))
-             (h (float (height tex) 0.0f0))
+             (w (float (texture2d:width tex) 0.0f0))
+             (h (float (texture2d:height tex) 0.0f0))
              (scroll-speed 30.0f0) ;; FIXME: Make a +constant+
              (offset-delta (* scroll-speed dt)))
         ;; Use mod to wrap the offsets seamlessly within texture dimensions
@@ -144,8 +144,8 @@
          (bg-tex (background-texture scene))
          ;; Retrieve actual viewport dimensions dynamically to support any window resolution
          (vp (gd:viewport gd))
-         (win-w (width vp))
-         (win-h (height vp)))
+         (win-w (viewport:width vp))
+         (win-h (viewport:height vp)))
     ;; Clear graphics device to a dark blue color (RGB: 24, 33, 58) using GraphicsDevice wrapper
     (gd:clear gd (color:new 24 33 58))
 
@@ -177,14 +177,14 @@
         (loop for line in lines
               for idx from 0
               do (let* ((size (measure-string title-font line))
-                        (pos-x (float (/ (- win-w (x size)) 2) 0.0f0))
+                        (pos-x (float (/ (- win-w (cs:x size)) 2) 0.0f0))
                         (pos-y (+ start-y (* idx line-spacing))))
                    (draw-string sb title-font line (v2:new pos-x pos-y) color:+white+)))))
 
     ;; Draw centered pulsing prompt text (smaller 1x font)
     (when (and prompt-font prompt)
       (let* ((prompt-size (measure-string prompt-font prompt))
-             (pos-x (float (/ (- win-w (x prompt-size)) 2) 0.0f0))
+             (pos-x (float (/ (- win-w (cs:x prompt-size)) 2) 0.0f0))
              (pos-y (* win-h 0.8f0))
              ;; Pulse text color alpha using sine function over total game time (using time wrappers)
              (secs (ts:total-seconds (game-time:total-game-time gt)))

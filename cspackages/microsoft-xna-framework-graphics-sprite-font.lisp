@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.SpriteFont
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :microsoft-xna-framework-graphics-sprite-font)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.SpriteFont"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.SpriteFont")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (texture glyph-bounds cropping characters line-spacing spacing kerning default-character)
   (dotnet:new <type-str> texture glyph-bounds cropping characters line-spacing spacing kerning default-character))

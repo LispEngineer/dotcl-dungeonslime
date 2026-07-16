@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadThumbSticks
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-thumb-sticks)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadThumbSticks"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadThumbSticks")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (cl:&optional (left-position cl:nil supplied-left-position) (right-position cl:nil supplied-right-position))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadThumbSticks constructor overloads. Dispatches at runtime.

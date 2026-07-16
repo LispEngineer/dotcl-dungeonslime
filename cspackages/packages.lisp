@@ -1,6 +1,6 @@
 ;;; Generated automatically. Do not edit.
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:30:42Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :cl-user)
 
@@ -569,6 +569,16 @@
    #:begin
    #:draw-string
    #:end
+   #:bounds
+   #:reload
+   #:save-as-jpeg
+   #:save-as-png
+   #:aspect-ratio
+   #:max-depth
+   #:min-depth
+   #:title-safe-area
+   #:project
+   #:unproject
    #:characters
    #:default-character
    #:glyphs
@@ -586,7 +596,6 @@
    #:back-buffer-format
    #:back-buffer-height
    #:back-buffer-width
-   #:bounds
    #:depth-stencil-format
    #:device-window-handle
    #:display-orientation
@@ -3450,6 +3459,54 @@
    #:draw
    #:draw-string
    #:end
+  ))
+
+;;; Source File: microsoft-xna-framework-graphics-texture2-d.lisp
+;;; C# Class: Microsoft.Xna.Framework.Graphics.Texture2D
+;;; Constant Properties: (none)
+(cl:defpackage :microsoft-xna-framework-graphics-texture2-d
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:bounds
+   #:height
+   #:width
+   #:from-file
+   #:from-stream
+   #:get-data
+   #:reload
+   #:save-as-jpeg
+   #:save-as-png
+   #:set-data
+  ))
+
+;;; Source File: microsoft-xna-framework-graphics-viewport.lisp
+;;; C# Class: Microsoft.Xna.Framework.Graphics.Viewport
+;;; Constant Properties: (none)
+(cl:defpackage :microsoft-xna-framework-graphics-viewport
+  (:use :cl)
+  (:export
+   #:<type>
+   #:<type-str>
+   #:<creation>
+   #:<version>
+   #:new
+   #:aspect-ratio
+   #:bounds
+   #:height
+   #:max-depth
+   #:min-depth
+   #:title-safe-area
+   #:width
+   #:x
+   #:y
+   #:project
+   #:to-string
+   #:unproject
   ))
 
 ;;; Source File: microsoft-xna-framework-graphics-sprite-font.lisp

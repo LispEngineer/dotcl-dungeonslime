@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Double
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :system-double)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Double"))
 (cl:defconstant <type-str> "System.Double")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -881,15 +881,15 @@ Parse(Byte], NumberStyles = AllowThousands, Float, IFormatProvider = null) -> Do
      (dotnet:static <type-str> "Parse" s style))
     ((cl:and (cl:stringp s) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Char]")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
-    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Byte]")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-style (cl:or (cl:null style) (dotnet:is-instance-of style "System.IFormatProvider")) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s style))
     ((cl:and (cl:stringp s) (cl:not supplied-style) (cl:not supplied-provider))
      (dotnet:static <type-str> "Parse" s))
-    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Char]")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
      (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
-    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[System.Byte]")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:not supplied-style) (cl:or (cl:null style) (dotnet:is-instance-of style "System.Globalization.NumberStyles"))) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
      (dotnet:static <type-str> "Parse" s (cl:if supplied-style style (dotnet:enum-or "System.Globalization.NumberStyles" "AllowThousands" "Float")) (cl:if supplied-provider provider cl:nil)))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "SYSTEM-DOUBLE"

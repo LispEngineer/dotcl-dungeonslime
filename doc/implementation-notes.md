@@ -245,6 +245,45 @@ see the outputs, the MSBuild cache must be invalidated by either:
 2. Running `make clean` (or `dotnet clean`) to delete the `obj/` and `bin/` directories, forcing MSBuild to
    rebuild the `.fasl` from scratch on the next build.
 
+## A Second, Independent FASL Cache That `make clean` Does Not Touch
+
+`make clean` only clears `obj/`/`bin/` inside the project directory, but DotCL/ASDF
+also maintains a *global*, content-addressed FASL cache outside the project entirely,
+at `~/.cache/common-lisp/dotcl-<version>-linux-x64/<absolute-path-to-source-tree>/`.
+This mirrors every compiled system by its full source path (e.g.
+`.../dotcl-0.1.18-linux-x64/home/dfields/src/cl/dotcl-dungeonslime/cspackages/packages.fasl`),
+and it is a *separate* staleness trap from the `obj/`/`bin/` one described above:
+`make clean` (i.e. `dotnet clean`) never deletes it, so it can persist across any
+number of clean rebuilds.
+
+This surfaced while removing the `x`/`y`/`width`/`height` generics from
+`mg-classes.lisp` in favor of the `cs:` (`csharp-generics`) package: two classes
+(`Texture2D`, `Viewport`) needed new wrapper packages added to `cspackages/`, so
+their `--class` entries were added to the `Makefile`'s `cspackages` target and
+`make cspackages` was run to regenerate the vendored wrappers. The subsequent
+`make build` still failed to compile the project's own `packages.lisp` with
+`ADD-PACKAGE-LOCAL-NICKNAME: no package named MICROSOFT-XNA-FRAMEWORK-GRAPHICS-TEXTURE2-D`,
+even after `make clean`. The `obj/Debug/.../dotcl-fasl/csharp-assembly-packages.fasl`
+in the project's own `obj/` was in fact stale too (both this file and its
+`deps/` copy dated from a build a day before the regeneration), but even after
+deleting `obj/` outright the *same* error persisted — because
+`~/.cache/common-lisp/dotcl-0.1.18-linux-x64/<project-path>/cspackages/packages.fasl`
+(dated from the older `cspackages/packages.lisp`, before `Texture2D`/`Viewport`
+were added) was still being picked up by ASDF's dependency resolution for the
+`csharp-assembly-packages` system, silently shadowing the freshly regenerated source.
+
+**Fix**: delete the project's subtree under the global cache directory, then rebuild:
+```sh
+rm -rf ~/.cache/common-lisp/dotcl-*-linux-x64$(pwd)
+make clean
+make build
+```
+When a Lisp build fails with a package/symbol-not-found error that only makes sense
+if stale `cspackages/` output were still in play — especially right after
+`make cspackages` regenerates wrapper packages — clearing this directory (not just
+`obj/`/`bin/` via `make clean`) should be one of the first things tried, alongside
+the `obj/`-only staleness case already covered above.
+
 
 # DotCL Build Execution Changes and ASDF Loading
 

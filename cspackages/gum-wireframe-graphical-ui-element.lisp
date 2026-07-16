@@ -1,14 +1,14 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.GraphicalUiElement
-;;; Generator Version: 49
-;;; Creation Date: 2026-07-15T03:11:29Z
+;;; Generator Version: 50
+;;; Creation Date: 2026-07-16T13:55:57Z
 
 (cl:in-package :gum-wireframe-graphical-ui-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement"))
 (cl:defconstant <type-str> "Gum.Wireframe.GraphicalUiElement")
-(cl:defconstant <creation> "2026-07-15T03:11:29Z")
-(cl:defconstant <version> 49)
+(cl:defconstant <creation> "2026-07-16T13:55:57Z")
+(cl:defconstant <version> 50)
 
 (cl:defun new (cl:&optional (contained-object cl:nil supplied-contained-object) cl:&key (what-contains-this cl:nil supplied-what-contains-this))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement constructor overloads. Dispatches at runtime.
@@ -611,7 +611,7 @@ ApplyState(String, String) -> Void
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
     ((cl:and (cl:or (cl:null name) (dotnet:is-instance-of name "Gum.DataTypes.Variables.StateSave")) (cl:not supplied-state-name))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
-    ((cl:and (cl:or (cl:null name) (dotnet:is-instance-of name "System.Collections.Generic.List`1[Gum.DataTypes.Variables.VariableSaveValues]")) (cl:not supplied-state-name))
+    ((cl:and (cl:or (cl:null name) (dotnet:is-instance-of name "System.Collections.Generic.List`1[[Gum.DataTypes.Variables.VariableSaveValues, GumCommon, Version=2026.5.8.1, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:not supplied-state-name))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ApplyState" name))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "GUM-WIREFRAME-GRAPHICAL-UI-ELEMENT"
@@ -853,9 +853,9 @@ UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY] = null) -> Void
   (cl:cond
     ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:typep update-children 'cl:boolean) (cl:not supplied-x-or-y))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children))
-    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "System.Nullable`1[Gum.Converters.XOrY]"))))
+    ((cl:and supplied-update-parent (cl:typep update-parent 'cl:boolean) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "Gum.Converters.XOrY"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
-    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:is-instance-of update-parent "Gum.Wireframe.GraphicalUiElement+ParentUpdateType")) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "System.Nullable`1[Gum.Converters.XOrY]"))))
+    ((cl:and supplied-update-parent (cl:or (cl:null update-parent) (dotnet:is-instance-of update-parent "Gum.Wireframe.GraphicalUiElement+ParentUpdateType")) supplied-update-children (cl:numberp update-children) (cl:or (cl:not supplied-x-or-y) (cl:or (cl:null x-or-y) (dotnet:is-instance-of x-or-y "Gum.Converters.XOrY"))))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout" update-parent update-children (cl:if supplied-x-or-y x-or-y cl:nil)))
     ((cl:and (cl:not supplied-update-parent) (cl:not supplied-update-children) (cl:not supplied-x-or-y))
      (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateLayout"))

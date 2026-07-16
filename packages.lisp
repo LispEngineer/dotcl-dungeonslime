@@ -57,11 +57,7 @@
     (:v2 :microsoft-xna-framework-vector2)
     (:rect :microsoft-xna-framework-rectangle)
     (:game-time :microsoft-xna-framework-game-time))
-  (:export 
-            #:x
-            #:y
-            #:width
-            #:height
+  (:export
             #:°2R
   ))
 
@@ -112,6 +108,8 @@
     (:window :microsoft-xna-framework-game-window)
     (:app-domain :system-app-domain)
     (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch)
+    (:texture2d :microsoft-xna-framework-graphics-texture2-d)
+    (:viewport :microsoft-xna-framework-graphics-viewport)
     (:gdm :microsoft-xna-framework-graphics-device-manager)
     (:cm :microsoft-xna-framework-content-content-manager)
     ;; Local nickname added for Chapter 18: Texture Sampling and Tiling Backgrounds.
@@ -171,7 +169,8 @@
     (:rect :microsoft-xna-framework-rectangle)
     (:single :system-single)
     (:ts :system-time-span)
-    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch))
+    (:sprite-batch :microsoft-xna-framework-graphics-sprite-batch)
+    (:cs :csharp-generics))
   (:export
     #:run-all-tests
     #:test-clr-defmethods))

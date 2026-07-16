@@ -96,6 +96,8 @@ cspackages:
 	      --class Microsoft.Xna.Framework.Graphics.SamplerState --constant-properties "*" \
 	      --class Microsoft.Xna.Framework.Graphics.GraphicsDevice \
 	      --class Microsoft.Xna.Framework.Graphics.SpriteBatch \
+	      --class Microsoft.Xna.Framework.Graphics.Texture2D \
+	      --class Microsoft.Xna.Framework.Graphics.Viewport \
 	      --class Microsoft.Xna.Framework.Graphics.SpriteFont \
 	      --class Microsoft.Xna.Framework.Graphics.SpriteFont+Glyph \
 	      --class Microsoft.Xna.Framework.Graphics.PresentationParameters \
