@@ -1,12 +1,37 @@
 # Makefile for DungeonSlime
 
-# Ubuntu
-#REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
-# Arch
-REF_DIR = /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
-BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
+# Some installs (notably Arch, whose dotnet-sdk package is rolling-release)
+# end up with a workload-set manifest that references packages package
+# management has since removed, breaking every `dotnet build`/`dotnet pack`
+# invocation with "SDK Resolver Failure ... Workload set version ... has
+# missing manifests" -- even `dotnet workload repair` reports "No workloads
+# are installed, nothing to repair", since the failure is in resolving the
+# workload SDK resolver itself, not in any actual installed workload. This
+# project uses no workloads (no mobile/wasm/MAUI targets), so disabling
+# workload resolution entirely is safe here (see ../package-generator/Makefile).
+export MSBuildEnableWorkloadResolver := false
+
+# On a fully clean checkout, -getProperty:OutputPath can return a mixed-separator
+# value (e.g. "bin\Debug/net10.0/"); normalize to forward slashes.
+BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath | tr '\\' '/')
 OUT_DIR = cspackages
 EXECUTABLE := $(BIN_DIR)DungeonSlime
+
+# Reference assembly directory for the standard .NET metadata used by
+# `cspackages` to reflect System.Console/System.Runtime/System.Collections.
+# Auto-discovered across both the Arch (/usr/share/dotnet/...) and Ubuntu
+# (/usr/lib/dotnet/...) pack layouts, picking the highest reference-pack
+# version whose major matches DungeonSlime.csproj's own TargetFramework --
+# no longer a hardcoded, SDK-patch-version-fragile constant (see
+# ../package-generator/doc/plan-fable-detail-08.md, which fixed the same
+# fragility there). Override explicitly with `make cspackages REF_DIR=...`
+# if auto-discovery picks the wrong one.
+TARGET_FRAMEWORK_MAJOR := $(shell grep -oP '<TargetFramework>net\K[0-9]+' DungeonSlime.csproj | head -1)
+ifndef REF_DIR
+REF_DIR := $(shell ls -d /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/$(TARGET_FRAMEWORK_MAJOR).*/ref/net*/ \
+                         /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/$(TARGET_FRAMEWORK_MAJOR).*/ref/net*/ 2>/dev/null \
+                    | sort -V | tail -1)
+endif
 
 .PHONY: all build test run clean cspackages repl check-parens
 
@@ -47,6 +72,7 @@ cspackages:
   # ObjectModel is required for System.ComponentModel.INotifyPropertyChanged
   # MonoGameGum.GueDeriving.ContainerRuntime is the "Root" class in GumService.Default.Root.Children.Clear();
   # Gum.Collections.GraphicalUiElementCollection is the "Children" class in the above.
+	@test -n "$(REF_DIR)" || (echo "REF_DIR not found; set REF_DIR=... explicitly" >&2 && exit 1)
 	mkdir -p $(OUT_DIR)
 	dotcl-packagegen --out-dir $(OUT_DIR) --enable-defgeneric --ensure-type-in-generic --no-csharp-generic-in-asd \
             --assembly $(REF_DIR)System.ObjectModel.dll \

@@ -148,8 +148,12 @@ directly from the MSBuild evaluation engine without actually building the code b
 querying the `OutputPath` property:
 
 ```makefile
-BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)
+BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath | tr '\\' '/')
 ```
+
+(The `tr '\\' '/'` normalizes a mixed-separator value `-getProperty:OutputPath` can return
+on a fully clean checkout, e.g. `bin\Debug/net10.0/` — see "De-Fragilizing the Makefile
+Against .NET Version/Distro Changes" below.)
 
 ## 2. At Runtime (C# / Lisp Execution)
 
@@ -1155,4 +1159,86 @@ singleton identity), the fallback is to compare underlying integer values:
 ```
 
 where `cs:value__` is the type-generic accessor dispatched via `csharp-generics`.
+
+
+# De-Fragilizing the Makefile Against .NET Version/Distro Changes
+
+The sibling `../package-generator` project's `doc/plan-fable-detail-08.md` fixed three
+build/test fragility bugs there: a hardcoded, SDK-patch-version-pinned reference-assembly
+path, a hardcoded choice between Arch's and Ubuntu's pack-layout root, and an Arch-only
+rolling-release SDK workload-resolver failure. This project's `Makefile` had the same two
+path-related bugs (verified by inspection, then fixed the same way):
+
+```make
+# Before
+# Ubuntu
+#REF_DIR = /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
+# Arch
+REF_DIR = /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/10.0.9/ref/net10.0/
+```
+
+Any `dotnet` SDK patch upgrade (`10.0.9` → `10.0.10`, etc.) silently broke `REF_DIR`
+(the directory stopped existing), and moving between Arch and Ubuntu required manually
+commenting/uncommenting the right line. Unlike `package-generator`, this project has no
+C# test harness consuming `REF_DIR` (`AssemblyToLispyTest`'s
+`ResolveRefAssemblyDirectory`-style resolver) — it's used purely inside the `Makefile`'s
+`cspackages` target as `--assembly` arguments to the external `dotcl-packagegen` CLI, so
+this was a Makefile-only fix, no `.cs`/`.lisp` changes needed.
+
+## Fix: auto-discovery, mirroring `package-generator`'s `Makefile`
+
+```make
+TARGET_FRAMEWORK_MAJOR := $(shell grep -oP '<TargetFramework>net\K[0-9]+' DungeonSlime.csproj | head -1)
+ifndef REF_DIR
+REF_DIR := $(shell ls -d /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/$(TARGET_FRAMEWORK_MAJOR).*/ref/net*/ \
+                         /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/$(TARGET_FRAMEWORK_MAJOR).*/ref/net*/ 2>/dev/null \
+                    | sort -V | tail -1)
+endif
+```
+
+* Extracts the target major version from `DungeonSlime.csproj` (which has two conditional
+  `<TargetFramework>` lines, `net10.0-windows` and `net10.0` — both major version 10, so
+  `head -1` picking either is fine) rather than hardcoding it.
+* Searches both the Arch (`/usr/share/dotnet/...`) and Ubuntu (`/usr/lib/dotnet/...`) pack
+  roots, filtered to that major version, version-sorted (`sort -V`), picking the highest —
+  so a patch upgrade just picks the new highest version automatically.
+* `ifndef REF_DIR` means `make cspackages REF_DIR=/explicit/path/` on the command line
+  still overrides auto-discovery entirely, same escape hatch as before.
+* A guard in the `cspackages` target (`@test -n "$(REF_DIR)" || (echo "REF_DIR not found;
+  set REF_DIR=... explicitly" >&2 && exit 1)`) fails loudly instead of silently passing an
+  empty `--assembly` path to `dotcl-packagegen` if discovery finds nothing.
+
+## Also carried over: the workload-resolver workaround and `BIN_DIR` fix
+
+Some installs (notably Arch, whose `dotnet-sdk` package is rolling-release) end up with a
+workload-set manifest referencing packages package management has since removed, breaking
+every `dotnet build`/`dotnet pack` invocation with `"SDK Resolver Failure ... Workload set
+version ... has missing manifests"` — even `dotnet workload repair` reports `"No workloads
+are installed, nothing to repair"`, since the failure is in resolving the workload SDK
+resolver itself, not in any actually-installed workload. This project uses no workloads
+(no mobile/wasm/MAUI targets), so it's safe to disable workload resolution entirely:
+
+```make
+export MSBuildEnableWorkloadResolver := false
+```
+
+Separately, `BIN_DIR := $(shell dotnet build DungeonSlime.csproj -getProperty:OutputPath)`
+can return a mixed-separator value (e.g. `bin\Debug/net10.0/`) on a fully clean checkout;
+piping through `| tr '\\' '/'` normalizes it (see "Resolving Build Output Paths
+Programmatically" above, which this updates).
+
+## Verified
+
+* `TARGET_FRAMEWORK_MAJOR`/`REF_DIR` resolve correctly on the current machine (Arch,
+  `.NET 10.0.10` at the time of this fix) to the same directory the old hardcoded
+  `10.0.9` path pointed to before the SDK patch-upgraded past it.
+* `make cspackages REF_DIR=/some/explicit/path/` still overrides auto-discovery.
+* An unresolvable `REF_DIR` (forced via a bogus `TARGET_FRAMEWORK_MAJOR=999`) hits the
+  guard and fails the build with a clear message instead of silently misgenerating.
+* `make build` (with the `MSBuildEnableWorkloadResolver`/`BIN_DIR` changes) and
+  `make cspackages` (end-to-end regeneration against the discovered `REF_DIR`) both still
+  succeed.
+
+No `*generator-version*`/`dungeon-slime.asd` version bump — this is a build-tooling fix
+only, not a change to any generated-output shape.
 
