@@ -16,6 +16,13 @@ address the build/compile system; 06-10 address code quality and testing;
 
 ### 01 — Documentation/code drift repair (high value, low effort)
 
+> **✅ DONE (2026-07-19, implemented by Claude Fable).** All five chunks
+> completed; see the annotations in
+> [20260719-plan-fable-detail-01.md](20260719-plan-fable-detail-01.md).
+> Notable extra finding during implementation: the stub-`defpackage` block
+> in `packages.lisp` that CLAUDE.md said to preserve had *also* already
+> been removed on 2026-07-11, so that CLAUDE.md section was rewritten too.
+
 `CLAUDE.md` and `doc/implementation-notes.md` still describe the old
 `*cspackages-components*` read-splice mechanism for including `cspackages/`
 in the build, and instruct contributors to add

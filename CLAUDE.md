@@ -48,46 +48,55 @@ first or the font won't rebuild.
 
 ### Build pipeline: two separate DotCL compile phases
 
-DotCL/MSBuild compiles a project's Lisp in **two distinct phases**, and this
-drives several odd-looking patterns in `dungeon-slime.asd`:
+DotCL/MSBuild compiles a project's Lisp in **two distinct phases**:
 
 1. `_DotCLResolveDeps` — compiles the `:depends-on` system graph
-   (`dotnet-class`, `dotcl-thread`, `dotcl-repl`, `anaphora`) standalone,
-   *before* this project's own .NET assembly references (e.g.
-   `MonoGame.Framework.dll`) are loaded.
+   (`dotnet-class`, `dotcl-thread`, `dotcl-repl`, `anaphora`,
+   `csharp-assembly-packages`) standalone, *before* this project's own .NET
+   assembly references (e.g. `MonoGame.Framework.dll`) are loaded.
 2. `_DotCLCompileRoot` — compiles the root system's own `:components` (the
    actual files listed directly in `dungeon-slime`'s component list), *after*
    the project's assemblies are loaded.
 
-Anything that calls `dotnet:resolve-type` at load time (all the generated
-`cspackages/*.lisp` wrappers do) must compile in phase 2, not phase 1. That's
-why `cspackages/` is never a `:depends-on` system dependency — instead,
-`dungeon-slime.asd` `read`s `cspackages/csharp-assembly-packages.asd` (the
-generator's own self-contained system definition) at `eval-when` time and
-splices its `:components` form directly into `dungeon-slime`'s own
-`:components`, prefixed with `"cspackages/"` and forced to depend on
-`type-aliases` (the file that actually loads `MonoGame.Framework.dll`). Full
-history and the exact failure modes this avoids are in
+`cspackages/` ships its own self-contained system definition,
+`cspackages/csharp-assembly-packages.asd`. `dungeon-slime.asd` registers the
+`cspackages/` directory on `asdf:*central-registry*` in an `eval-when` and
+then lists `"csharp-assembly-packages"` as an ordinary `:depends-on` entry.
+This is safe in phase 1 — even though the MonoGame assemblies aren't loaded
+yet — because the generator emits *lazy* type lookups: the per-class `<type>`
+bindings are `define-symbol-macro`s over memoized lookups (see
+`+unbound-marker+` in `cspackages/csharp-assembly-utils.lisp`), so no
+`dotnet:resolve-type` runs at load time.
+
+The single exception is `cspackages/csharp-generics.lisp`: it registers CLOS
+proxy classes at compile time (generator flag `--ensure-type-in-generic`) and
+resolves types at read time via `#.`, so it must compile in phase 2. The
+generator is invoked with `--no-csharp-generic-in-asd` (see the `Makefile`'s
+`cspackages` target) to keep it out of the generated system, and
+`dungeon-slime.asd` re-adds that one file as an ordinary root component with
+`:depends-on ("type-aliases")` — `type-aliases.lisp` being the file that
+actually loads `MonoGame.Framework.dll`.
+
+Consequence: new files that use generated `cspackages/` wrapper packages need
+no special `.asd` treatment — just normal `:depends-on` entries on other
+project files (see `mg-classes`, `input-manager`, `audio-controller`). The
+full history — including the superseded `*cspackages-components*` read/splice
+mechanism that older docs in this repo still describe — is in
 [doc/implementation-notes.md](doc/implementation-notes.md) under "Wiring
-`dungeon-slime.asd` to the Generator's Self-Contained `.asd`".
+`dungeon-slime.asd` to the Generator's Self-Contained `.asd`" (marked
+superseded) and [doc/issue-49-continued.md](doc/issue-49-continued.md).
 
-Consequence: any new file that uses generated `cspackages/` wrapper packages
-must list `,@(mapcar (lambda (comp) (second comp)) *cspackages-components*)`
-in its `:depends-on` in `dungeon-slime.asd` (see `mg-classes`, `input-manager`,
-`audio-controller`, etc. for the pattern).
+### Special packages in `packages.lisp`
 
-### Package pre-declaration
-
-`packages.lisp` pre-declares ~40 empty `(defpackage :microsoft-xna-framework-*)`
-stubs before the real `cspackages/packages.lisp` (with full exports) loads.
-This isn't leftover cruft — it breaks a genuine load-order cycle: this
-project's `packages.lisp` needs those package objects to exist so its
-`:local-nicknames` (e.g. `(:v2 :microsoft-xna-framework-vector2)`) resolve at
-compile time, but the real exports can only load later (phase 2, after
-`type-aliases.lisp`). `defpackage` can safely reopen/extend an existing
-package, so this works. Do not delete these stubs when adding new cspackages
-consumers — add a new stub instead if a genuinely new generated package name
-is introduced.
+`packages.lisp` no longer pre-declares stub `microsoft-xna-framework-*`
+packages (an older mechanism, removed 2026-07-11): since
+`csharp-assembly-packages` is now a real `:depends-on` system, the generated
+`cspackages/packages.lisp` (with full exports) is already loaded before any
+root component compiles, so `:local-nicknames` like
+`(:v2 :microsoft-xna-framework-vector2)` resolve directly against the real
+packages. The few hand-written `defpackage` forms that remain at the top of
+`packages.lisp` (`:system-object`, `:system-type`, `:anaphora`) each carry a
+comment explaining why they're needed — keep them.
 
 ### Generated C# wrappers (`cspackages/`)
 
@@ -148,7 +157,7 @@ interop.
   unexpectedly, run `make check-parens` on all touched files before digging
   further.
 * **MSBuild incremental caching hides compile-time output.** If `.fasl`
-  outputs are newer than all `.lisp`/`.asd` inputs, `DotclCompileRoot` is
+  outputs are newer than all `.lisp`/`.asd` inputs, `_DotCLCompileRoot` is
   skipped entirely — `eval-when (:compile-toplevel)` diagnostics won't print.
   Force a real recompile with a trivial edit or `make clean` when debugging
   compile-time macros.

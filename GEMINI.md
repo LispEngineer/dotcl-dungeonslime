@@ -122,11 +122,14 @@ All new code must have tests. However:
 
 When parentheses are mismatched, the build will break with errors that often have
 nothing to do with the problem (of mismatched parentheses). If the DotCL portion
-fails with an output similar to this: (from DotCL 0.1.17)
+fails with an output similar to this under the current NuGet-based build:
 
 ```
-/home/dfields/src/cl/dotcl/runtime/build/Dotcl.targets(143,5): error MSB3073: The command "dotnet run --project "/home/dfields/src/cl/dotcl-dungeonslime/../dotcl/runtime/runtime.csproj" -- --compile-project "/home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd" --output "obj/Debug/net10.0/ubuntu.24.04-x64/dotcl-fasl/dungeon-slime.fasl"" exited with code 134.
+/home/dfields/.nuget/packages/dotcl.runtime/0.1.18/buildTransitive/DotCL.Runtime.ProjectCore.targets(92,5): error : dotcl compile-project failed for /home/dfields/src/cl/dotcl-dungeonslime/dungeon-slime.asd: ...
 ```
+
+(or, under the older sibling-checkout `Dotcl.targets` pipeline, an
+`error MSB3073: ... exited with code 134.`)
 
 then always double (or even triple) check any changes to Lisp code for mismatched
 parentheses.

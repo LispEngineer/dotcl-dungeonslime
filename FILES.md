@@ -86,10 +86,12 @@ and files in this repository.
 
 * `build-setup.lisp`: Build-time Lisp initialization script loaded by the MSBuild task. It automatically searches for and loads Quicklisp to make Quicklisp-installed systems discoverable by ASDF during compilation.
 
-* `packages.lisp`: Defines the Lisp packages used across the project. Pre-declares C# package
-  stubs and the third-party `:anaphora` package at the top of the file to support local nicknames
-  and prevent compiler reader/lookup failures during compilation of early packages. Also registers
-  the `:sprite-font` local nickname for wrapper property access.
+* `packages.lisp`: Defines the Lisp packages used across the project. A few
+  special `defpackage` forms at the top (`:system-object`, `:system-type`,
+  `:anaphora`) prevent compiler symbol-lookup failures; the local nicknames
+  to generated `cspackages/` packages resolve directly against the real
+  packages, since `csharp-assembly-packages` loads as an ASDF system
+  dependency before any project component compiles.
 
 
 * `test-harness.lisp`: Runs all the other tests sprinkled all throughout
@@ -228,13 +230,15 @@ and files in this repository.
   compilation and REPL usage while remaining safe for standalone executable
   environments.
 
-* `dungeon-slime.asd`: ASDF system definition file for this game. Loads all
-  components in a linear build order. Reads `cspackages/csharp-assembly-packages.asd`
-  (the self-contained system emitted by `dotcl-packagegen` v21+) to get the generated
-  C# wrapper files' authoritative file list and dependency graph, and splices them
-  into this system's own `:components` (rather than depending on that system via
-  ASDF `:depends-on`, which fails under this project's build pipeline — see
-  [implementation-notes.md](doc/implementation-notes.md)).
+* `dungeon-slime.asd`: ASDF system definition file for this game. Registers
+  the `cspackages/` directory on `asdf:*central-registry*` and depends on
+  `csharp-assembly-packages` (the self-contained system emitted by
+  `dotcl-packagegen`) as an ordinary ASDF `:depends-on` system. The one
+  exception, `cspackages/csharp-generics.lisp`, is listed as a root
+  component with `:depends-on ("type-aliases")` because it resolves .NET
+  types at read/compile time and so must compile after the MonoGame
+  assemblies load (see [implementation-notes.md](doc/implementation-notes.md),
+  "Replacing the Splice with a Plain `:depends-on`").
 
 * `explore.lisp`: Just some functions I load into the REPL to explore
   the areas of DotCL.

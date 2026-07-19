@@ -203,7 +203,7 @@ the DotCL compilation task runs:
 
 **In DungeonSlime.csproj:**
 ```xml
-<Target Name="WriteOutDirForLisp" BeforeTargets="DotclCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
+<Target Name="WriteOutDirForLisp" BeforeTargets="_DotCLCompileRoot" Condition="'$(DotclProjectAsd)' != ''">
   <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
 </Target>
 ```
@@ -223,10 +223,11 @@ the DotCL compilation task runs:
 ```
 
 
-# DotCL Compilation Caching (`DotclCompileRoot`)
+# DotCL Compilation Caching (`_DotCLCompileRoot`)
 
-When integrating DotCL with MSBuild via `Dotcl.targets`, the actual execution of the Lisp compiler is
-managed by the `DotclCompileRoot` MSBuild target.
+When integrating DotCL with MSBuild (via the `DotCL.Runtime` NuGet package's targets; this target
+was named `DotclCompileRoot` in the older sibling-checkout `Dotcl.targets` era), the actual
+execution of the Lisp compiler is managed by the `_DotCLCompileRoot` MSBuild target.
 
 This target is configured with specific `Inputs` (all the `.lisp` files in the project and the
 `.asd` file) and `Outputs` (the compiled `.fasl` file). This enables MSBuild's native incremental
@@ -235,7 +236,7 @@ build caching mechanisms.
 When running `make build` or `dotnet build` multiple times in a row without making any modifications
 to the source files, MSBuild detects that the `.fasl` output file is already newer than all of the
 `.lisp` input files. When this happens, MSBuild prints a message stating:
-`Skipping target "DotclCompileRoot" because all output files are up-to-date with respect to the input files.`
+`Skipping target "_DotCLCompileRoot" because all output files are up-to-date with respect to the input files.`
 
 Because the compilation target is completely skipped, the DotCL compiler process is never launched.
 Consequently, any code inside `eval-when (:compile-toplevel)` blocks (such as `format` diagnostic prints,
@@ -576,7 +577,9 @@ were refactored:
 In `dungeon-slime.asd`, components that utilize the local C# package nicknames (`mg-classes` and
 `input-manager`) were updated to explicitly list the generated `*cspackages-components*` in their
 `:depends-on` declaration list. This ensures the generator stubs are fully loaded
-and defined before the main game files compile.
+and defined before the main game files compile. (Historical: the
+`*cspackages-components*` mechanism was retired on 2026-07-11 — see
+"Replacing the Splice with a Plain `:depends-on`" below.)
 
 
 # DotCL 0.1.14 ASDF Compilation and Load Warnings Analysis
@@ -670,6 +673,10 @@ With utility modules decoupled from generated code, the component load order in
 6. `*cspackages-components*` (loads all generated package wrappers, all of
    which now consistently depend on `packages`, `utils`, and `monoutils`)
 7. Remaining game files.
+
+(Historical: step 6's `*cspackages-components*` splice was later retired in
+favor of a plain `:depends-on` — see "Replacing the Splice with a Plain
+`:depends-on`" below.)
 
 This completely eliminated complex `remove-if` and `remove-if-not` filters
 from the system definition.
@@ -773,6 +780,18 @@ PulseAudio) is frequently restricted, causing OpenAL device initialization to fa
 
 
 # Wiring `dungeon-slime.asd` to the Generator's Self-Contained `.asd` (Package Generator v23)
+
+> **Superseded (2026-07-11).** This section describes the
+> `*cspackages-components*` read/splice mechanism, which is no longer what
+> `dungeon-slime.asd` does. As of commits `9630352`..`fa9c4d7` (2026-07-11),
+> the project uses a plain ASDF `:depends-on ("csharp-assembly-packages")`
+> with `cspackages/` pushed onto `asdf:*central-registry*`, plus one
+> hand-placed root component (`cspackages/csharp-generics`). See the section
+> "Replacing the Splice with a Plain `:depends-on` (Package Generator v45)"
+> below, and [issue-49-continued.md](issue-49-continued.md) for the full
+> investigation. The section is preserved unchanged as history: it documents
+> why the plain `:depends-on` *used to be impossible*, which is the context
+> the later fix responds to.
 
 Starting with generator v21, `dotcl-packagegen` (`../package-generator`) emits
 its own ASDF system definition, `cspackages/csharp-assembly-packages.asd`,
@@ -1023,6 +1042,60 @@ now report `PASS`, confirming the handler is actually exercised.
 * `make repl` equivalent (`dotcl --eval '(load "load-repl.lisp")' ...`) —
   loads the whole system, boots a `game-1` instance, and exposes `*mg-game*`
   with no package or condition errors.
+
+
+# Replacing the Splice with a Plain `:depends-on` (Package Generator v45)
+
+The splice mechanism documented in the previous section was retired on
+2026-07-11 (commits `9630352` "Move to the simpler inclusion of the
+cspackages .asd file" through `fa9c4d7` "Fix REPL load", after several
+intermediate broken states). `dungeon-slime.asd` now:
+
+1. Pushes `cspackages/` onto `asdf:*central-registry*` in a top-level
+   `eval-when` (the same idiom `load-repl.lisp` and `type-aliases.lisp`
+   already use), so ASDF can find `csharp-assembly-packages.asd` by name.
+2. Lists `"csharp-assembly-packages"` as an ordinary `:depends-on` system —
+   exactly the "approach that doesn't work" from section 1 above.
+3. Re-adds the one genuinely phase-sensitive file,
+   `cspackages/csharp-generics.lisp`, as a plain root component with
+   `:depends-on ("type-aliases")`, since the generator now emits the system
+   definition without it (Makefile flag `--no-csharp-generic-in-asd`).
+
+What made the "impossible" `:depends-on` possible is a series of generator
+changes (v41→v45, driven by [dotcl/dotcl#49](https://github.com/dotcl/dotcl/issues/49)
+and chronicled blow-by-blow in [issue-49-continued.md](issue-49-continued.md)):
+
+* Per-class `<type>` constants stopped being eager
+  `(defconstant <type> (dotnet:resolve-type ...))` forms and became lazy,
+  memoized lookups — `define-symbol-macro`s backed by the `+unbound-marker+`
+  machinery in `cspackages/csharp-assembly-utils.lisp`. Nothing resolves a
+  .NET type at load time anymore, so the per-class files compile fine in
+  `_DotCLResolveDeps` even though `MonoGame.Framework.dll` isn't loaded in
+  that phase.
+* The per-class `EnsureDotNetTypeClass` registration `eval-when`s (which
+  *did* need the assembly at compile/load time) were removed from the
+  per-class files (v44) and re-emitted inside `csharp-generics.lisp` itself
+  (v45, flag `--ensure-type-in-generic`) — the one file that is hand-placed
+  after `type-aliases`, so the registration always runs with the assembly
+  loaded, in every build phase and at runtime alike.
+
+Two knock-on simplifications landed with the same change:
+
+* The ~40 stub `(defpackage :microsoft-xna-framework-*)` pre-declarations in
+  this project's `packages.lisp` (section 3 of the previous section) were
+  deleted: with `csharp-assembly-packages` a real dependency system, the
+  generated `cspackages/packages.lisp` is fully loaded before any root
+  component compiles, so the `:local-nicknames` resolve against the real
+  packages and the load-order cycle the stubs broke no longer exists.
+* Consumer components (`mg-classes`, `input-manager`, `audio-controller`,
+  etc.) no longer splice `*cspackages-components*` into their `:depends-on`
+  — that variable is gone; they carry only ordinary project-file
+  dependencies.
+
+Practical rule going forward: a new file that uses generated wrapper
+packages needs no special `.asd` treatment at all. Only code with read-time
+(`#.`) or compile-time type resolution needs the `csharp-generics`-style
+manual placement after `type-aliases`.
 
 
 # Chapter 18: Texture Sampling and Tiling Backgrounds

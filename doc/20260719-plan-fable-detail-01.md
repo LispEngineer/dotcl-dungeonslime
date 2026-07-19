@@ -3,6 +3,13 @@
 Part of the 2026-07-19 enhancement plan; see
 `doc/20260719-plan-fable-overview.md`.
 
+> **✅ DONE (2026-07-19, implemented by Claude Fable).** All five chunks and
+> the verification steps completed; per-chunk annotations below. Docs-only
+> change: no `.lisp`/`.asd`/`.cs`/`Makefile` edits. `make build` and
+> `make test` verified passing afterward. (Note: `make check-parens` fails
+> on pre-existing git-ignored `scratch/test_*.lisp` files, unrelated to
+> this plan — plan 02 should exclude `scratch/` from the sweep.)
+
 ## Context
 
 The committed `dungeon-slime.asd` includes `cspackages/` via an `eval-when`
@@ -35,7 +42,19 @@ variable that no longer exists.
 
 ## Chunks of work
 
-### Chunk 1: Fix CLAUDE.md
+### Chunk 1: Fix CLAUDE.md ✅
+
+> Done. "Build pipeline" section rewritten to the `*central-registry*` +
+> plain `:depends-on` mechanism, including the `csharp-generics` exception
+> (`--no-csharp-generic-in-asd` / `--ensure-type-in-generic`) and the lazy
+> `+unbound-marker+` lookups that made it possible. The "Consequence"
+> instruction now says new files need no special `.asd` treatment. Extra
+> finding: the "Package pre-declaration" section was *also* stale — the ~40
+> stubs were deleted from `packages.lisp` in the same 2026-07-11 change
+> (verified via `git log -S`); that section was replaced with "Special
+> packages in `packages.lisp`" describing the three remaining special
+> `defpackage` forms. Also fixed `DotclCompileRoot` → `_DotCLCompileRoot`
+> in the Gotchas section.
 
 * Rewrite the "Build pipeline" architecture section to describe the actual
   mechanism: `*central-registry*` pushnew + ordinary `:depends-on`, with
@@ -54,7 +73,17 @@ variable that no longer exists.
 * Keep the "Package pre-declaration" section but re-verify it against
   `packages.lisp` — the stub-defpackage rationale may still be accurate.
 
-### Chunk 2: Fix implementation-notes.md
+### Chunk 2: Fix implementation-notes.md ✅
+
+> Done. Dated "Superseded (2026-07-11)" blockquote added at the top of the
+> "Wiring ..." section (historical text preserved unchanged), and a new
+> section "Replacing the Splice with a Plain `:depends-on` (Package
+> Generator v45)" added after it documenting what changed (commits
+> `9630352`..`fa9c4d7`, 2026-07-11), the three generator mechanisms that
+> made it possible, the stub-package removal, and the practical rule going
+> forward. Also updated the still-current "DotCL Compilation Caching"
+> section and the `WriteOutDirForLisp` csproj snippet to the current
+> `_DotCLCompileRoot` target name.
 
 * Do **not** delete the historical splice-mechanism section — this project's
   docs intentionally preserve history. Instead, add a dated "Superseded"
@@ -63,7 +92,16 @@ variable that no longer exists.
   `git log dungeon-slime.asd` to find the commit — and why it became
   possible).
 
-### Chunk 3: Fix or retire BUILD-GUIDE.md
+### Chunk 3: Fix or retire BUILD-GUIDE.md ✅
+
+> Done — took the preferred "update" route. Full rewrite against the
+> current `DungeonSlime.csproj`: NuGet `DotCL.Runtime` 0.1.18 (auto-imported
+> targets), `DotclBuildInit`/`build-setup.lisp`, Gum and MGCB package
+> references, contrib and raw-`.wav` copy items, the
+> `CopyReferencesBeforeLisp`/`WriteOutDirForLisp` custom targets, and a
+> three-stage pipeline walkthrough (`_DotCLResolveDeps` →
+> `_DotCLBundleDeps` → `_DotCLCompileRoot`, then C#/MGCB, then execution).
+> Attribution section kept, with a note recording the 2026-07-19 rewrite.
 
 * Either update the line-by-line csproj walkthrough to the current csproj
   (NuGet `DotCL.Runtime`, `CopyReferencesBeforeLisp`, `WriteOutDirForLisp`,
@@ -73,13 +111,31 @@ variable that no longer exists.
   preferred; the two custom targets and the two-phase pipeline deserve one
   accurate walkthrough somewhere.
 
-### Chunk 4: Disposition of asd-simplification-plan.md
+### Chunk 4: Disposition of asd-simplification-plan.md ✅
+
+> Done — header added in place (file left at the repo root to avoid
+> delete/re-add churn in the working tree): a "Superseded (never adopted)"
+> blockquote pointing at the current mechanism and the two documenting
+> sections, ending "do not implement".
 
 * The `asd-module` proposal was overtaken by the simpler `*central-registry*`
   approach. Move the file to `doc/` with a header noting it was superseded,
   or add that header in place. Do not silently delete.
 
-### Chunk 5: Sweep for other stale references
+### Chunk 5: Sweep for other stale references ✅
+
+> Done. Grep sweep run; fixed: FILES.md's `dungeon-slime.asd` entry (was
+> still describing the splice) and its `packages.lisp` entry (was still
+> describing the stubs); AGENTS.md/GEMINI.md's example build-failure
+> message updated to the current `DotCL.Runtime.ProjectCore.targets` form
+> (note: AGENTS.md is a symlink to GEMINI.md, so one edit covers both).
+> Left untouched as intentionally historical: README-original.md,
+> antigravity-log.md, antigravity-memory.md, ornith-1.0-35B-plan-for-split.md,
+> opencode-*.md, doc/issue-49-continued.md (already accurate). README.md
+> needed no changes (already describes the current mechanism at lines
+> ~409-428). FILES.md spot-check: `settings.lisp` present; generated
+> `cspackages/` files (e.g. the MediaState package) are correctly not
+> enumerated individually.
 
 * `grep -rn 'cspackages-components\|Dotcl.targets\|DotclResolveDeps\|DotclCompileRoot' --include='*.md' .`
   and fix any remaining hits (README.md, FILES.md, AGENTS.md/GEMINI.md).

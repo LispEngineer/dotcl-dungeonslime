@@ -1,25 +1,35 @@
 # Attribution
 
-This document was written by Antigravity CLI on 2026-05-20.
-Gemini's document starts with the next section.
+This document was originally written by Antigravity CLI on 2026-05-20,
+against the pre-NuGet build (a sibling `../dotcl` checkout with a
+`ProjectReference` and an `<Import>` of `Dotcl.targets`). It was rewritten
+on 2026-07-19 to describe the current build: the `DotCL.Runtime` NuGet
+package (0.1.18) and its `_DotCLResolveDeps` / `_DotCLCompileRoot` targets.
+For the ASDF-level details of how `cspackages/` is wired into
+`dungeon-slime.asd`, see `CLAUDE.md` ("Build pipeline") and
+[implementation-notes.md](implementation-notes.md) ("Replacing the Splice
+with a Plain `:depends-on`").
 
 
 # DungeonSlime Project & Build Explanation
 
-This document provides a detailed breakdown of the `DungeonSlime.csproj` project file, the overall build pipeline, and the referenced files from both this project and the sibling `dotcl` repository.
+This document provides a breakdown of the `DungeonSlime.csproj` project
+file, the overall build pipeline, and the roles of the referenced files.
+The `.csproj` itself carries a detailed comment banner above every section;
+this guide explains how the sections fit together rather than repeating
+those comments verbatim.
 
 ---
 
-## 1. Line-by-Line Breakdown of `DungeonSlime.csproj`
-
-Here is the explanation for every configuration section in [DungeonSlime.csproj](../DungeonSlime.csproj).
+## 1. Section-by-Section Breakdown of `DungeonSlime.csproj`
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 ```
-*   **Purpose:** Designates that this project uses the standard **.NET Core SDK**. This brings in standard build actions, compilers, and compiler rules for C# files without needing manual target declarations.
+*   Standard **.NET SDK** project: brings in the C# compiler, default file
+    globbing, and standard build targets without manual declarations.
 
-### PropertyGroup (General Configurations)
+### General Configuration
 ```xml
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -29,139 +39,213 @@ Here is the explanation for every configuration section in [DungeonSlime.csproj]
     <RollForward>Major</RollForward>
   </PropertyGroup>
 ```
-*   **`<OutputType>WinExe</OutputType>`**: Configures the compilation output to be a GUI application. On Windows, this prevents an empty, black cmd window from spawning behind the game window. On Linux, it compiles down to a native graphical binary.
-*   **`<RootNamespace>DungeonSlime</RootNamespace>`**: Defines the base namespace. Any C# classes declared without a namespace wrapper automatically fall under this namespace.
-*   **`<ImplicitUsings>enable</ImplicitUsings>`**: Automatically generates global `using` directives for common namespaces (`System`, `System.IO`, `System.Linq`, etc.) so they don't have to be manually imported at the top of every C# file.
-*   **`<Nullable>enable</Nullable>`**: Activates compiler warnings and diagnostics for C# Nullable Reference Types, helping to prevent runtime `NullReferenceException` bugs.
-*   **`<RollForward>Major</RollForward>`**: Permits the .NET runtime host to run the application on newer major runtime versions (e.g. .NET 11 or 12) if the targeted .NET 10.0 runtime is not present on the system.
+*   **`OutputType=WinExe`**: GUI application — on Windows this prevents a
+    console window from spawning behind the game window.
+*   **`RollForward=Major`**: lets the .NET host run on newer major runtimes
+    (e.g. .NET 11) if the targeted .NET 10.0 runtime is absent.
+*   The rest are standard modern-C# conveniences (implicit usings, nullable
+    reference-type warnings, default namespace).
 
----
-
-### PropertyGroup Condition (Platform-Specific Logic)
-
-MSBuild uses conditional evaluation to switch configurations between Windows and Linux/MacOS environments.
-
-#### Windows Configurations:
+### Platform-Conditional TFM and RuntimeIdentifier
 ```xml
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
     <TargetFramework>net10.0-windows</TargetFramework>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
-```
-*   **`IsOSPlatform('Windows')`**: Evaluates to true only on Windows systems.
-*   **`<TargetFramework>net10.0-windows</TargetFramework>`**: Targets the Windows-specific build flavor of .NET 10.0. This allows referencing Windows-only graphical and platform APIs.
-*   **`<RuntimeIdentifier>win-x64</RuntimeIdentifier>`**: Restricts the target architecture to 64-bit Intel/AMD Windows platforms. This is necessary because some native libraries (like the SDL2 runtime shipped with MonoGame) do not ship with Windows-ARM64 binaries.
-
-#### Linux / MacOS Configurations:
-```xml
   <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
     <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
   </PropertyGroup>
 ```
-*   **`!$([MSBuild]::IsOSPlatform('Windows'))`**: Evaluates to true on Linux and MacOS.
-*   **`<TargetFramework>net10.0</TargetFramework>`**: Targets standard, cross-platform .NET 10.0.
-*   **`<RuntimeIdentifier>`**: Dynamically resolves to the building host's architecture (e.g. `linux-x64` or `linux-arm64` on Ubuntu), matching your active system architecture.
+*   On Windows: `net10.0-windows` lets the MonoGame Windows packages
+    (shipped against `net8.0-windows7.0`) resolve through NuGet's compat
+    layer, and `win-x64` is forced because MonoGame's native SDL2 library
+    has no Windows-ARM64 build (Snapdragon machines run it under Prism
+    emulation).
+*   Elsewhere: plain `net10.0`, with the RID resolved dynamically to the
+    host (`linux-x64`, `linux-arm64`, `osx-arm64`, ...). This is why the
+    build output path varies and must never be hardcoded — resolve it with
+    `dotnet build DungeonSlime.csproj -getProperty:OutputPath` (as the
+    `Makefile` does).
 
----
-
-### dotcl Path Properties
-These custom variables define parameters utilized by the imported Lisp build targets.
+### DotCL Build Properties
 ```xml
   <PropertyGroup>
     <DotclProjectAsd>$(MSBuildProjectDirectory)/dungeon-slime.asd</DotclProjectAsd>
-    <DotclRuntimeProject>$(MSBuildProjectDirectory)/../dotcl/runtime/runtime.csproj</DotclRuntimeProject>
-    <DotclBaseCore>$(MSBuildProjectDirectory)/../dotcl/compiler/dotcl.core</DotclBaseCore>
   </PropertyGroup>
 ```
-*   **`$(MSBuildProjectDirectory)`**: A built-in macro containing the absolute path to this project's directory.
-*   **`<DotclProjectAsd>`**: Points to the ASDF system definition file (`.asd`) for this project, defining the Lisp source files.
-*   **`<DotclRuntimeProject>`**: Points to the local C# project file that implements the `dotcl` runtime.
-*   **`<DotclBaseCore>`**: Points to the pre-compiled Lisp core file (`dotcl.core`) containing CL standard definitions.
+*   **`DotclProjectAsd`**: the entry point for the Lisp side of the build.
+    The DotCL targets (imported automatically from the NuGet package)
+    resolve dependencies and compile Lisp sources relative to this ASDF
+    system definition. This is the only property the NuGet-based pipeline
+    needs — the old `DotclRuntimeProject`/`DotclBaseCore` sibling-checkout
+    paths are gone.
 
----
+### DotCL Build Initialization
+```xml
+  <ItemGroup>
+    <DotclBuildInit Include="$(MSBuildProjectDirectory)/build-setup.lisp" />
+  </ItemGroup>
+```
+*   **`DotclBuildInit`**: Lisp file(s) the DotCL compiler loads *before*
+    compiling project sources. `build-setup.lisp` locates and loads
+    Quicklisp and registers its ASDF search hooks, so external systems
+    (e.g. `anaphora`) resolve at build time. A commented-out
+    `DotclAsdSearchPath` example shows how to add non-Quicklisp ASDF search
+    paths if ever needed.
 
-### File Exclusions
+### Raw Lisp Source Exclusions
 ```xml
   <ItemGroup>
     <None Remove="main.lisp" />
     <None Remove="dungeon-slime.asd" />
   </ItemGroup>
 ```
-*   **`<None Remove="..." />`**: Excludes these Lisp files from being handled by standard C# copying rules. We remove them here because they are compiled separately by the custom `dotcl` targets and should not be bundled in their raw text forms.
+*   Keeps the SDK's default `<None>` globbing from copying raw Lisp source
+    into the output directory — the Lisp is compiled to FASLs under
+    `dotcl-fasl/` by the DotCL targets instead.
 
----
-
-### NuGet Packages and Project Dependencies
+### NuGet Package References
 ```xml
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*" />
+    <PackageReference Include="Gum.MonoGame" Version="2026.5.8.1" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\dotcl\runtime\DotCL.Runtime.csproj" />
+    <PackageReference Include="DotCL.Runtime" Version="0.1.18" />
   </ItemGroup>
 ```
-*   **`PackageReference`**: Resolves and installs the MonoGame framework from NuGet. `DesktopGL` uses the SDL2 cross-platform backend with OpenGL for graphic operations.
-*   **`ProjectReference`**: Links the C# source code of the `dotcl` runtime directly. This compiles the runtime engine side-by-side with your game binary.
+*   **`MonoGame.Framework.DesktopGL`**: cross-platform SDL2 + OpenGL
+    rendering, windowing, input, and audio.
+*   **`Gum.MonoGame`**: the Gum UI library (Chapter 20's panels, buttons,
+    sliders).
+*   **`MonoGame.Content.Builder.Task`**: runs the MonoGame Content Builder
+    (MGCB) over `Content/Content.mgcb` during the build, compiling
+    textures/fonts/songs into `.xnb` assets.
+*   **`DotCL.Runtime`**: the Lisp runtime *and* its MSBuild integration.
+    Referencing this package automatically imports
+    `DotCL.Runtime.ProjectCore.targets` from the NuGet cache — this is what
+    replaced the old explicit `<Import Project="..\dotcl\runtime\build\Dotcl.targets" />`
+    and `ProjectReference` to a sibling checkout.
 
----
-
-### Import Targets Integration
+### Contrib Lisp Library Copy
 ```xml
-  <Import Project="..\dotcl\runtime\build\Dotcl.targets" />
+  <ItemGroup Condition="'$(DotclProjectAsd)' != '' and '$(_DotCLContribDir)' != ''">
+    <None Include="$(_DotCLContribDir)\**\*"> ... </None>
+  </ItemGroup>
 ```
-*   **`<Import>`**: Merges the custom `Dotcl.targets` build pipeline into this project's build cycle. This instructs MSBuild on how to execute Lisp compilation.
+*   Copies DotCL's `contrib` Lisp library tree from the restored NuGet
+    package into the output directory, so the game host can
+    `(require "asdf")` at runtime (used by the in-game REPL and dynamic
+    system loading).
+
+### Raw Audio Asset Copy
+```xml
+  <ItemGroup>
+    <Content Include="Content\audio\*.wav"> ... </Content>
+  </ItemGroup>
+```
+*   Sound effects load via `SoundEffect.FromFile` directly from disk
+    (bypassing the MGCB content pipeline), so the raw `.wav` files must be
+    copied to the output directory themselves.
+
+### Custom Targets Bridging C# and Lisp Compilation
+```xml
+  <Target Name="CopyReferencesBeforeLisp" BeforeTargets="_DotCLResolveDeps"
+          DependsOnTargets="ResolveReferences" Condition="'$(DotclProjectAsd)' != ''">
+    <Copy SourceFiles="@(ReferenceCopyLocalPaths)" DestinationFolder="$(OutDir)" ... />
+  </Target>
+
+  <Target Name="WriteOutDirForLisp" BeforeTargets="_DotCLCompileRoot"
+          Condition="'$(DotclProjectAsd)' != ''">
+    <WriteLinesToFile File="obj/dotcl-outdir.txt" Lines="$(OutDir)" Overwrite="true" />
+  </Target>
+```
+*   **`CopyReferencesBeforeLisp`**: on a clean build, the NuGet reference
+    assemblies (MonoGame, Gum, ...) would not yet be in `$(OutDir)` when
+    Lisp compilation starts; this target copies them there first so
+    compile-time assembly loading can find them.
+*   **`WriteOutDirForLisp`**: writes `$(OutDir)` to `obj/dotcl-outdir.txt`
+    before Lisp root compilation. `type-aliases.lisp` reads this file at
+    compile time to locate and load `MonoGame.Framework.dll` (and friends)
+    without hardcoding the RID-dependent output path. See
+    [implementation-notes.md](implementation-notes.md), "Resolving Build
+    Output Paths Programmatically".
 
 ---
 
 ## 2. The Compilation and Execution Pipeline
 
-*(Note: as of DotCL 0.1.15+ (currently 0.1.17) this project builds via the `DotCL.Runtime` NuGet
-package's `DotCL.Runtime.ProjectCore.targets` rather than a sibling `../dotcl`
-checkout — the target names below (`DotclResolveDeps`/`DotclCompileRoot`) are
-from the older sibling-repo pipeline this doc was originally written against,
-but the two-stage split described here still holds under the current
-NuGet-based targets, now named `_DotCLResolveDeps` and `_DotCLCompileRoot`.
-See [implementation-notes.md](implementation-notes.md), section "Wiring
-dungeon-slime.asd to the Generator's Self-Contained .asd", for an important
-consequence of this split: `_DotCLResolveDeps` compiles a project's ASDF
-`:depends-on` graph *before* the game's own .NET assembly references (e.g.
-`MonoGame.Framework.dll`) are loaded, while only `_DotCLCompileRoot` has them
-loaded. Any Lisp code that resolves .NET types at load time — as the
-generated `cspackages/*.lisp` wrapper files do — must therefore be a plain
-component of the root system's own `:components`, not a `:depends-on`
-system, or the build fails with `DOTNET: type not found`.)*
+When running `dotnet build` (`make build`), the pipeline processes the
+project in these stages:
 
-When you run `dotnet build`, the build pipeline processes the project in two main stages:
+### Stage 1: The Lisp Build (DotCL NuGet targets)
 
-### Stage 1: The Lisp Build (Custom Targets)
-1.  **Resolve Dependencies:** The `DotclResolveDeps` target invokes the local `dotcl` runtime binary on `dungeon-slime.asd` with `--resolve-deps`. This analyzes dependencies (like `dotnet-class`, `dotcl-thread`, and `dotcl-repl`) and produces manifests of these dependencies and core source files.
-2.  **Lisp Compilation:** The `DotclCompileRoot` target runs `dotcl` with `--compile-project` on the `.asd` file. It concatenates `main.lisp` and compiles it into `dungeon-slime.fasl` (a compiled .NET IL assembly representing your Lisp code).
-3.  **Asset Bundling:** The standard compiler core (`dotcl.core`) along with dependency `.fasl` assemblies and the manifest are bundled together inside the build output directory `dotcl-fasl/`.
+1.  **`_DotCLResolveDeps`** — walks `dungeon-slime.asd`'s `:depends-on`
+    graph (`dotnet-class`, `dotcl-thread`, `dotcl-repl`, `anaphora`,
+    `csharp-assembly-packages`) and compiles each dependency system into
+    its own standalone `.fasl`, using only the DotCL base image plus
+    whatever `build-setup.lisp` registered. The consuming project's own
+    .NET assemblies (e.g. `MonoGame.Framework.dll`) are **not** loaded in
+    this phase — which is why the generated `cspackages/` wrappers must
+    avoid load-time `dotnet:resolve-type` (they use lazy, memoized
+    lookups; see `CLAUDE.md`, "Build pipeline").
+2.  **`_DotCLBundleDeps`** — bundles the per-dependency FASLs and a load
+    manifest into the output's `dotcl-fasl/` directory.
+3.  **`_DotCLCompileRoot`** — concatenates the root system's own
+    `:components` (in ASDF dependency order) into one `.concat.lisp` and
+    compiles it to `DungeonSlime.fasl`. The project's referenced assemblies
+    *are* loaded here, so this is the phase where
+    `cspackages/csharp-generics.lisp` (read-time `#.` type resolution,
+    compile-time CLOS proxy registration) and everything after
+    `type-aliases.lisp` can safely touch MonoGame types.
 
-### Stage 2: The C# Build (SDK Compiler)
-1.  **Core Compilation:** The standard C# compiler compiles [Program.cs](../Program.cs), [BaseCaller.cs](../BaseCaller.cs), and [CsharpSanityGame.cs](../CsharpSanityGame.cs).
-2.  **Asset Injection:** The files in the `dotcl-fasl/` directory are injected as outputs to the execution folder.
-3.  **Bootstrapping:** When you launch the final executable:
-    *   `DotclHost.Initialize()` runs standard package setup.
-    *   `DotclHost.LoadFromManifest()` loads the base Lisp core (`dotcl.core`) and the compiled FASLs in the correct order.
-    *   `DotclHost.Call("MAKE-GAME")` evaluates Lisp execution, constructs the Lisp CLOS instances, and runs the MonoGame GUI loop.
+    This target declares `Inputs`/`Outputs`, so MSBuild skips it entirely
+    when the FASL is newer than every `.lisp`/`.asd` input — see
+    [implementation-notes.md](implementation-notes.md), "DotCL Compilation
+    Caching", for why compile-time diagnostics sometimes don't print.
+
+### Stage 2: The C# and Content Build (SDK + MGCB)
+
+1.  The C# compiler builds the small interop shims (`Program.cs`, which
+    also defines `MonoGameCLOSProxy`; `BaseCaller.cs`; `MonoUtils.cs`;
+    `MonoGameLispUtilities.cs`).
+2.  `MonoGame.Content.Builder.Task` runs MGCB over `Content.mgcb`,
+    producing `.xnb` content in the output directory.
+3.  FASLs, contrib tree, reference assemblies, and raw `.wav` files land
+    in the output directory per the items/targets above.
+
+### Stage 3: Execution
+
+When the built executable launches:
+
+1.  `DotclHost.Initialize()` boots the Lisp runtime.
+2.  `DotclHost.LoadFromManifest()` loads `dotcl.core`, the dependency
+    FASLs, and `DungeonSlime.fasl` in manifest order.
+3.  `main.lisp`'s entry point constructs the CLOS `game-1` instance and its
+    C# `MonoGameCLOSProxy`, wires them together, and either runs the
+    MonoGame `Run()` loop (`make run`) or the test harness (`--test`,
+    `make test`).
 
 ---
 
-## 3. Sibling Files and Dependency Breakdown
+## 3. Key Files
 
-### Project Files
-*   **[dungeon-slime.asd](../dungeon-slime.asd)**: The ASDF system definition file. It tells the Lisp side which package dependencies are required (`dotcl-thread`, `dotcl-repl`, etc.) and the structure of files to read.
-*   **[main.lisp](../main.lisp)**: The Lisp application file. It uses `dotnet:define-class` to create class definitions recognized by C# (inheriting from MonoGame's `Game`), defines update loops, and color cycle logic.
-*   **[Program.cs](../Program.cs)**: The C# host program. It boots `dotcl`, loads manifest assets, resolves the Lisp game class instance, and triggers MonoGame's main loop.
-*   **[BaseCaller.cs](../BaseCaller.cs)**: Workaround utilities to allow Lisp classes to invoke parent class methods (e.g. `base.Update()` or `base.Draw()`).
-
-### dotcl Sibling Repository Files
-*   **`../dotcl/compiler/dotcl.core`**: The foundational compiled Lisp state file containing the runtime's core and ANSI-compatible Lisp compiler definitions.
-*   **`../dotcl/runtime/DotCL.Runtime.csproj`**: The MSBuild file for the Lisp execution interop library.
-*   **`../dotcl/runtime/build/Dotcl.targets`**: The XML file outlining custom build steps, handling dependency resolution and compilation targets.
-*   **[DotclHost.cs](../../dotcl-clean/runtime/DotclHost.cs)**: The C# host class providing utility methods for launching, evaluating, and querying Lisp scripts and modules in a C# environment.
-*   **[Program.cs](../../dotcl-clean/runtime/Program.cs)**: The entry point code for the standalone `dotcl` CLI engine, executing compiling directives during build actions.
-*   **[Runtime.DotNet.cs](../../dotcl-clean/runtime/Runtime.DotNet.cs)**: Bridge code containing the low-level logic mapping Lisp operations to .NET Interop execution.
+*   **[dungeon-slime.asd](../dungeon-slime.asd)**: the ASDF system
+    definition — dependency systems, the full component list with
+    `:depends-on` ordering, and the `eval-when` that registers
+    `cspackages/` on `asdf:*central-registry*`.
+*   **[build-setup.lisp](../build-setup.lisp)**: build-time init script
+    (Quicklisp discovery/registration) loaded via `DotclBuildInit`.
+*   **[main.lisp](../main.lisp)**: Lisp entry point — instantiates the game
+    and proxy, dispatches `--test`/GUI modes.
+*   **[Program.cs](../Program.cs)**: the C# host — boots DotCL, loads the
+    manifest, and calls into Lisp.
+*   **[BaseCaller.cs](../BaseCaller.cs)**: workaround utilities letting
+    Lisp CLOS methods invoke C# base-class methods (e.g. `base.Update()`).
+*   **`cspackages/`**: generated Lispy wrapper packages for MonoGame/System
+    classes (see `CLAUDE.md`, "Generated C# wrappers").
+*   **NuGet cache (`~/.nuget/packages/dotcl.runtime/0.1.18/`)**: source of
+    the imported `DotCL.Runtime.ProjectCore.targets`, `DotCL.Runtime.dll`,
+    `dotcl.core`, and the `contrib` tree.
