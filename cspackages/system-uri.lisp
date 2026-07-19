@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Uri
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-uri)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Uri"))
 (cl:defconstant <type-str> "System.Uri")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (uri-string cl:&optional (dont-escape cl:nil supplied-dont-escape) (dont-escape2 cl:nil supplied-dont-escape2))
   "Master wrapper for System.Uri constructor overloads. Dispatches at runtime.
@@ -19,6 +20,7 @@ new(String)
     - uri-string (System.String): A string that identifies the resource to be represented by the System.Uri instance.
 
 new(String, Boolean)
+  OBSOLETE: This constructor has been deprecated; the dontEscape parameter is always false. Use Uri(string) instead.
   Summary: Initializes a new instance of the System.Uri class with the specified URI, with explicit control of character escaping.
   Parameters:
     - uri-string (System.String): A string that identifies the resource to be represented by the System.Uri instance. Note that an IPv6 address in string form must be enclosed within brackets. For example, \"http://[2607:f8b0:400d:c06::69]\".
@@ -37,6 +39,7 @@ new(Uri, String)
     - relative-uri (System.String): The relative URI to add to the base URI.
 
 new(SerializationInfo, StreamingContext)
+  OBSOLETE: This API supports obsolete formatter-based serialization. It should not be called or extended by application code.
   Summary: Initializes a new instance of the System.Uri class from the specified instances of the System.Runtime.Serialization.SerializationInfo and System.Runtime.Serialization.StreamingContext classes.
   Parameters:
     - serialization-info (System.Runtime.Serialization.SerializationInfo): The information required to serialize the new System.Uri instance.
@@ -49,6 +52,7 @@ new(Uri, Uri)
     - relative-uri (System.Uri): A relative System.Uri instance that is combined with baseUri.
 
 new(Uri, String, Boolean)
+  OBSOLETE: This constructor has been deprecated; the dontEscape parameter is always false. Use Uri(Uri, string) instead.
   Summary: Initializes a new instance of the System.Uri class based on the specified base and relative URIs, with explicit control of character escaping.
   Parameters:
     - base-uri (System.Uri): The base URI.
@@ -298,7 +302,8 @@ Parameters:
   (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "System.Uri") uri1) (cl:the (dotnet "System.Uri") uri2)))
 
 (cl:defun canonicalize (obj!)
-  "Summary: Converts the internally stored URI to canonical form.
+  "OBSOLETE: Uri.Canonicalize has been deprecated and is not supported.
+Summary: Converts the internally stored URI to canonical form.
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "Canonicalize"))
 
@@ -319,7 +324,8 @@ Parameters:
   (dotnet:static <type-str> "CheckSchemeName" (cl:the (dotnet "System.String") scheme-name)))
 
 (cl:defun check-security (obj!)
-  "Summary: Calling this method has no effect.
+  "OBSOLETE: Uri.CheckSecurity has been deprecated and is not supported.
+Summary: Calling this method has no effect.
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "CheckSecurity"))
 
@@ -362,7 +368,8 @@ Equals(Uri) -> Boolean
                     :supplied-args (cl:append (cl:list :comparand comparand))))))
 
 (cl:defun escape (obj!)
-  "Summary: Converts any unsafe or reserved characters in the path component to their hexadecimal character representations.
+  "OBSOLETE: Uri.Escape has been deprecated and is not supported.
+Summary: Converts any unsafe or reserved characters in the path component to their hexadecimal character representations.
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "Escape"))
 
@@ -393,7 +400,8 @@ EscapeDataString(Char]) -> String
                     :supplied-args (cl:append (cl:list :string-to-escape string-to-escape))))))
 
 (cl:defun escape-string (str)
-  "Summary: Converts a string to its escaped representation.
+  "OBSOLETE: Uri.EscapeString has been deprecated. Use GetComponents() or Uri.EscapeDataString to escape a Uri component or a string.
+Summary: Converts a string to its escaped representation.
 Returns: The escaped representation of the string.
 Parameters:
   - str (System.String): The string to transform to its escaped representation.
@@ -401,7 +409,8 @@ Parameters:
   (dotnet:static <type-str> "EscapeString" (cl:the (dotnet "System.String") str)))
 
 (cl:defun escape-uri-string (string-to-escape)
-  "Summary: Converts a URI string to its escaped representation.
+  "OBSOLETE: Uri.EscapeUriString can corrupt the Uri string in some cases. Consider using Uri.EscapeDataString for query string components instead.
+Summary: Converts a URI string to its escaped representation.
 Returns: The escaped representation of stringToEscape.
 Parameters:
   - string-to-escape (System.String): The string to escape.
@@ -456,11 +465,12 @@ Parameters:
   (dotnet:static <type-str> "HexEscape" (cl:the (dotnet "System.Char") character)))
 
 ;; The following C# System.Uri.HexUnescape overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
+;; (ref or params) and are not yet supported:
 ;;   HexUnescape(String, ref Int32&) -> Char
 
 (cl:defun bad-file-system-character? (obj! character)
-  "Summary: Indicates whether a character is invalid in a file system name.
+  "OBSOLETE: Uri.IsBadFileSystemCharacter has been deprecated and is not supported.
+Summary: Indicates whether a character is invalid in a file system name.
 Returns: if the specified character is invalid; otherwise, .
 Parameters:
   - character (System.Char): The System.Char to test.
@@ -476,7 +486,8 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "IsBaseOf" uri))
 
 (cl:defun excluded-character? (character)
-  "Summary: Determines whether the specified character should be escaped.
+  "OBSOLETE: Uri.IsExcludedCharacter has been deprecated and is not supported.
+Summary: Determines whether the specified character should be escaped.
 Returns: if the specified character should be escaped; otherwise, .
 Parameters:
   - character (System.Char): The character to test.
@@ -501,7 +512,8 @@ Parameters:
   (dotnet:static <type-str> "IsHexEncoding" (cl:the (dotnet "System.String") pattern) (cl:the (dotnet "System.Int32") index)))
 
 (cl:defun reserved-character? (obj! character)
-  "Summary: Determines whether the specified character is a reserved character.
+  "OBSOLETE: Uri.IsReservedCharacter has been deprecated and is not supported.
+Summary: Determines whether the specified character is a reserved character.
 Returns: if the specified character is a reserved character otherwise, .
 Parameters:
   - character (System.Char): The character to test.
@@ -524,7 +536,8 @@ Parameters:
   (dotnet:static <type-str> "IsWellFormedUriString" (cl:the (dotnet "System.String") uri-string) (cl:the (dotnet "System.UriKind") uri-kind)))
 
 (cl:defun make-relative (obj! to-uri)
-  "Summary: Determines the difference between two System.Uri instances.
+  "OBSOLETE: Uri.MakeRelative has been deprecated. Use MakeRelativeUri(Uri uri) instead.
+Summary: Determines the difference between two System.Uri instances.
 Returns: If the hostname and scheme of this URI instance and toUri are the same, then this method returns a System.String that represents a relative URI that, when appended to the current URI instance, yields the toUri parameter. If the hostname or scheme is different, then this method returns a System.String that represents the toUri parameter.
 Parameters:
   - to-uri (System.Uri): The URI to compare to the current URI.
@@ -549,7 +562,8 @@ Parameters:
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.Uri") uri1) (cl:the (dotnet "System.Uri") uri2)))
 
 (cl:defun parse (obj!)
-  "Summary: Parses the URI of the current instance to ensure it contains all the parts required for a valid URI.
+  "OBSOLETE: Uri.Parse has been deprecated and is not supported.
+Summary: Parses the URI of the current instance to ensure it contains all the parts required for a valid URI.
 "
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "Parse"))
 
@@ -560,26 +574,12 @@ Returns: The unescaped canonical representation of the System.Uri instance. All 
   (dotnet:invoke (cl:the (dotnet "System.Uri") obj!) "ToString"))
 
 ;; The following C# System.Uri.TryCreate overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryCreate(String, UriKind, out Uri&) -> Boolean
+;; (ref or params) and are not yet supported:
 ;;   TryCreate(String, UriCreationOptions&, out Uri&) -> Boolean
-;;   TryCreate(Uri, String, out Uri&) -> Boolean
-;;   TryCreate(Uri, Uri, out Uri&) -> Boolean
-
-;; The following C# System.Uri.TryEscapeDataString overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryEscapeDataString(Char], Char], out Int32&) -> Boolean
-
-;; The following C# System.Uri.TryFormat overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryFormat(Char], out Int32&) -> Boolean
-
-;; The following C# System.Uri.TryUnescapeDataString overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryUnescapeDataString(Char], Char], out Int32&) -> Boolean
 
 (cl:defun unescape (obj! path)
-  "Summary: Converts the specified string by replacing any escape sequences with their unescaped representation.
+  "OBSOLETE: Uri.Unescape has been deprecated. Use GetComponents() or Uri.UnescapeDataString() to unescape a Uri component or a string.
+Summary: Converts the specified string by replacing any escape sequences with their unescaped representation.
 Returns: The unescaped value of the path parameter.
 Parameters:
   - path (System.String): The string to convert.
@@ -611,4 +611,73 @@ UnescapeDataString(Char]) -> String
                     :class-name <type-str>
                     :method-name "UnescapeDataString"
                     :supplied-args (cl:append (cl:list :string-to-unescape string-to-unescape))))))
+
+(cl:defun try-create (uri-string uri-kind)
+  "Master wrapper for System.Uri.TryCreate out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
+
+TryCreate(String, UriKind, out Uri&) -> Boolean
+  Summary: Creates a new System.Uri using the specified System.String instance and a System.UriKind.
+  Returns: if the System.Uri was successfully created; otherwise, .
+  Parameters:
+    - uri-string (System.String): The string representation of the System.Uri.
+    - uri-kind (System.UriKind): The type of the Uri.
+    - result (System.Uri&): When this method returns, contains the constructed System.Uri.
+
+TryCreate(Uri, String, out Uri&) -> Boolean
+  Summary: Creates a new System.Uri using the specified base and relative System.String instances.
+  Returns: if the System.Uri was successfully created; otherwise, .
+  Parameters:
+    - base-uri (System.Uri): The base URI.
+    - relative-uri (System.String): The string representation of the relative URI to add to the base System.Uri.
+    - result (System.Uri&): When this method returns, contains a System.Uri constructed from baseUri and relativeUri. This parameter is passed uninitialized.
+
+TryCreate(Uri, Uri, out Uri&) -> Boolean
+  Summary: Creates a new System.Uri using the specified base and relative System.Uri instances.
+  Returns: if the System.Uri was successfully created; otherwise, .
+  Parameters:
+    - base-uri (System.Uri): The base URI.
+    - relative-uri (System.Uri): The relative URI to add to the base System.Uri.
+    - result (System.Uri&): When this method returns, contains a System.Uri constructed from baseUri and relativeUri. This parameter is passed uninitialized.
+"
+  (cl:cond
+    ((cl:and (cl:stringp uri-string) (cl:or (cl:null uri-kind) (dotnet:is-instance-of uri-kind "System.UriKind")))
+     (dotnet:call-out <type-str> "TryCreate" uri-string uri-kind))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Uri")) (cl:stringp uri-kind))
+     (dotnet:call-out <type-str> "TryCreate" uri-string uri-kind))
+    ((cl:and (cl:or (cl:null uri-string) (dotnet:is-instance-of uri-string "System.Uri")) (cl:or (cl:null uri-kind) (dotnet:is-instance-of uri-kind "System.Uri")))
+     (dotnet:call-out <type-str> "TryCreate" uri-string uri-kind))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "SYSTEM-URI"
+                    :class-name <type-str>
+                    :method-name "TryCreate"
+                    :supplied-args (cl:append (cl:list :uri-string uri-string) (cl:list :uri-kind uri-kind))))))
+
+(cl:defun try-escape-data-string (chars-to-escape destination)
+  "Returns (cl:values <primary-return> chars-written) -- TryEscapeDataString(Char], Char], out Int32&) -> Boolean
+Summary: Attempts to convert a span to its escaped representation.
+Returns: if the destination was large enough to hold the entire result; otherwise, .
+Parameters:
+  - chars-to-escape (System.ReadOnlySpan`1[System.Char]): The span to escape.
+  - destination (System.Span`1[System.Char]): The output span that contains the escaped result of the operation.
+"
+  (dotnet:call-out <type-str> "TryEscapeDataString" chars-to-escape destination))
+
+(cl:defun try-format (obj! destination)
+  "Returns (cl:values <primary-return> chars-written) -- TryFormat(Char], out Int32&) -> Boolean
+Summary: Attempts to format a canonical string representation for the System.Uri instance into the specified span.
+Returns: if the formatting was successful; otherwise, .
+Parameters:
+  - destination (System.Span`1[System.Char]): The span into which to write this instance's value formatted as a span of characters.
+"
+  (dotnet:call-out obj! "TryFormat" destination))
+
+(cl:defun try-unescape-data-string (chars-to-unescape destination)
+  "Returns (cl:values <primary-return> chars-written) -- TryUnescapeDataString(Char], Char], out Int32&) -> Boolean
+Summary: Attempts to convert a span to its unescaped representation.
+Returns: if the destination was large enough to hold the entire result; otherwise, .
+Parameters:
+  - chars-to-unescape (System.ReadOnlySpan`1[System.Char]): The span to unescape.
+  - destination (System.Span`1[System.Char]): The output span that contains the unescaped result of the operation.
+"
+  (dotnet:call-out <type-str> "TryUnescapeDataString" chars-to-unescape destination))
 

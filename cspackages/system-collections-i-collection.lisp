@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.ICollection
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from Gum.Collections.GraphicalUiElementCollection
 
 (cl:in-package :system-collections-i-collection)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.ICollection"))
 (cl:defconstant <type-str> "System.Collections.ICollection")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun count (obj!)
   "Gets the number of elements contained in the System.Collections.ICollection."

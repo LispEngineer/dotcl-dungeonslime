@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchPanel
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-panel)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchPanel"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchPanel")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:define-symbol-macro gesture-available? (dotnet:static <type-str> "IsGestureAvailable"))
 

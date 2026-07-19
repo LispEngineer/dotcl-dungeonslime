@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.InteractiveGue
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from MonoGameGum.GueDeriving.ContainerRuntime
 
 (cl:in-package :gum-wireframe-interactive-gue)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.InteractiveGue"))
 (cl:defconstant <type-str> "Gum.Wireframe.InteractiveGue")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (renderable cl:nil supplied-renderable))
   "Master wrapper for Gum.Wireframe.InteractiveGue constructor overloads. Dispatches at runtime.

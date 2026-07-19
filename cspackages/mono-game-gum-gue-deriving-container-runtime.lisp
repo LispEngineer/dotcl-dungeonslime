@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.ContainerRuntime
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
 
 (cl:in-package :mono-game-gum-gue-deriving-container-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.ContainerRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.ContainerRuntime")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&key (full-instantiation cl:t supplied-full-instantiation))
   "Master wrapper for MonoGameGum.GueDeriving.ContainerRuntime constructor overloads. Dispatches at runtime.
@@ -56,5 +57,7 @@ new(Boolean = T)
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.ContainerRuntime") obj!) "set_IsRenderTarget" new-value))
 
 (cl:defun add-to-managers (obj!)
+  "OBSOLETE: Use the AddToRoot extension method instead (e.g. myContainer.AddToRoot()).
+"
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.ContainerRuntime") obj!) "AddToManagers"))
 

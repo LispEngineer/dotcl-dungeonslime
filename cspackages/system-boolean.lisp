@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Boolean
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-boolean)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Boolean"))
 (cl:defconstant <type-str> "System.Boolean")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -133,12 +134,40 @@ ToString(IFormatProvider) -> String
                     :method-name "ToString"
                     :supplied-args (cl:append (cl:when supplied-provider (cl:list :provider provider)))))))
 
-;; The following C# System.Boolean.TryFormat overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryFormat(Char], out Int32&) -> Boolean
+(cl:defun try-format (obj! destination)
+  "Returns (cl:values <primary-return> chars-written) -- TryFormat(Char], out Int32&) -> Boolean
+Summary: Tries to format the value of the current boolean instance into the provided span of characters.
+Returns: if the formatting was successful; otherwise, .
+Parameters:
+  - destination (System.Span`1[System.Char]): The span in which to write this instance's value formatted as a span of characters.
+"
+  (dotnet:call-out obj! "TryFormat" destination))
 
-;; The following C# System.Boolean.TryParse overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryParse(String, out Boolean&) -> Boolean
-;;   TryParse(Char], out Boolean&) -> Boolean
+(cl:defun try-parse (value)
+  "Master wrapper for System.Boolean.TryParse out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
+
+TryParse(String, out Boolean&) -> Boolean
+  Summary: Tries to convert the specified string representation of a logical value to its System.Boolean equivalent.
+  Returns: if value was converted successfully; otherwise, .
+  Parameters:
+    - value (System.String): A string containing the value to convert.
+    - result (System.Boolean&): When this method returns, if the conversion succeeded, contains if value is equal to System.Boolean.TrueString or if value is equal to System.Boolean.FalseString. If the conversion failed, contains . The conversion fails if value is or is not equal to the value of either the System.Boolean.TrueString or System.Boolean.FalseString field.
+
+TryParse(Char], out Boolean&) -> Boolean
+  Summary: Tries to convert the specified span representation of a logical value to its System.Boolean equivalent.
+  Returns: if value was converted successfully; otherwise, .
+  Parameters:
+    - value (System.ReadOnlySpan`1[System.Char]): A span containing the characters representing the value to convert.
+    - result (System.Boolean&): When this method returns, if the conversion succeeded, contains if value is equal to System.Boolean.TrueString or if value is equal to System.Boolean.FalseString. If the conversion failed, contains . The conversion fails if value is or is not equal to the value of either the System.Boolean.TrueString or System.Boolean.FalseString field.
+"
+  (cl:cond
+    ((cl:and (cl:stringp value))
+     (dotnet:call-out <type-str> "TryParse" value))
+    ((cl:and (cl:or (cl:null value) (dotnet:is-instance-of value "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
+     (dotnet:call-out <type-str> "TryParse" value))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "SYSTEM-BOOLEAN"
+                    :class-name <type-str>
+                    :method-name "TryParse"
+                    :supplied-args (cl:append (cl:list :value value))))))
 

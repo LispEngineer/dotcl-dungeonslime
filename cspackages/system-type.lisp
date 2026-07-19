@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Type
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-type)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Type"))
 (cl:defconstant <type-str> "System.Type")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   "Summary: Initializes a new instance of the System.Type class.
@@ -241,7 +242,8 @@
   (dotnet:invoke (cl:the (dotnet "System.Type") obj!) "get_IsSecurityTransparent"))
 
 (cl:defun serializable? (obj!)
-  "Gets a value indicating whether the System.Type is binary serializable."
+  "OBSOLETE: Formatter-based serialization is obsolete and should not be used.
+Gets a value indicating whether the System.Type is binary serializable."
   (dotnet:invoke (cl:the (dotnet "System.Type") obj!) "get_IsSerializable"))
 
 (cl:defun signature-type? (obj!)
@@ -1540,11 +1542,11 @@ Parameters:
   (dotnet:static <type-str> "MakeGenericMethodParameter" (cl:the (dotnet "System.Int32") position)))
 
 ;; The following C# System.Type.MakeGenericSignatureType overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
+;; (ref or params) and are not yet supported:
 ;;   MakeGenericSignatureType(Type, params Type[]) -> Type
 
 ;; The following C# System.Type.MakeGenericType overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
+;; (ref or params) and are not yet supported:
 ;;   MakeGenericType(params Type[]) -> Type
 
 (cl:defun make-pointer-type (obj!)
@@ -1563,7 +1565,8 @@ Parameters:
   (dotnet:static <type-str> "op_Inequality" (cl:the (dotnet "System.Type") left) (cl:the (dotnet "System.Type") right)))
 
 (cl:defun reflection-only-get-type (type-name throw-if-not-found ignore-case)
-  "Summary: Gets the System.Type with the specified name, specifying whether to perform a case-sensitive search and whether to throw an exception if the type is not found. The type is loaded for reflection only, not for execution.
+  "OBSOLETE: ReflectionOnly loading is not supported and throws PlatformNotSupportedException.
+Summary: Gets the System.Type with the specified name, specifying whether to perform a case-sensitive search and whether to throw an exception if the type is not found. The type is loaded for reflection only, not for execution.
 Returns: The type with the specified name, if found; otherwise, . If the type is not found, the throwIfNotFound parameter specifies whether is returned or an exception is thrown. In some cases, an exception is thrown regardless of the value of throwIfNotFound. See the Exceptions section.
 Parameters:
   - type-name (System.String): The assembly-qualified name of the System.Type to get.

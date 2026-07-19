@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.ButtonBase
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :gum-forms-controls-primitives-button-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.ButtonBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.ButtonBase")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.ButtonBase constructor overloads. Dispatches at runtime.
@@ -96,6 +97,8 @@ new(InteractiveGue)
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "HandleKeyDown" key is-shift-down is-alt-down is-ctrl-down))
 
 (cl:defun lose-focus (obj!)
+  "OBSOLETE: Use OnLoseFocus instead
+"
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.Primitives.ButtonBase") obj!) "LoseFocus"))
 
 (cl:defun on-click (obj!)

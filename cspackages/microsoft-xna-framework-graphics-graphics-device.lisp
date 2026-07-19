@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.GraphicsDevice
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-graphics-graphics-device)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.GraphicsDevice"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (adapter graphics-profile presentation-parameters cl:&optional (presentation-parameters2 cl:nil supplied-presentation-parameters2))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.GraphicsDevice constructor overloads. Dispatches at runtime.
@@ -221,6 +222,7 @@ Dispose(Boolean) -> Void
 DrawIndexedPrimitives(PrimitiveType, Int32, Int32, Int32) -> Void
 
 DrawIndexedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32, Int32) -> Void
+  OBSOLETE: Use DrawIndexedPrimitives(PrimitiveType primitiveType, int baseVertex, int startIndex, int primitiveCount) instead. In future versions this method can be removed.
 "
   (cl:cond
     ((cl:and (cl:or (cl:null primitive-type) (dotnet:is-instance-of primitive-type "Microsoft.Xna.Framework.Graphics.PrimitiveType")) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) supplied-start-index2 (cl:numberp start-index2) supplied-primitive-count2 (cl:numberp primitive-count2))
@@ -241,6 +243,7 @@ DrawInstancedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32) -> Void
 DrawInstancedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32, Int32) -> Void
 
 DrawInstancedPrimitives(PrimitiveType, Int32, Int32, Int32, Int32, Int32, Int32) -> Void
+  OBSOLETE: Use DrawInstancedPrimitives(PrimitiveType primitiveType, int baseVertex, int startIndex, int primitiveCount, int instanceCount) instead. In future versions this method can be removed.
 "
   (cl:cond
     ((cl:and (cl:or (cl:null primitive-type) (dotnet:is-instance-of primitive-type "Microsoft.Xna.Framework.Graphics.PrimitiveType")) (cl:numberp base-vertex) (cl:numberp start-index) (cl:numberp primitive-count) (cl:numberp instance-count) supplied-instance-count2 (cl:numberp instance-count2) supplied-instance-count3 (cl:numberp instance-count3))
@@ -385,7 +388,7 @@ SetRenderTarget(RenderTargetCube, CubeMapFace) -> Void
                     :supplied-args (cl:append (cl:list :render-target render-target) (cl:when supplied-cube-map-face (cl:list :cube-map-face cube-map-face)))))))
 
 ;; The following C# Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetRenderTargets overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
+;; (ref or params) and are not yet supported:
 ;;   SetRenderTargets(params RenderTargetBinding[]) -> Void
 
 (cl:defun set-vertex-buffer (obj! vertex-buffer cl:&optional (vertex-offset cl:nil supplied-vertex-offset))
@@ -407,6 +410,6 @@ SetVertexBuffer(VertexBuffer, Int32) -> Void
                     :supplied-args (cl:append (cl:list :vertex-buffer vertex-buffer) (cl:when supplied-vertex-offset (cl:list :vertex-offset vertex-offset)))))))
 
 ;; The following C# Microsoft.Xna.Framework.Graphics.GraphicsDevice.SetVertexBuffers overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
+;; (ref or params) and are not yet supported:
 ;;   SetVertexBuffers(params VertexBufferBinding[]) -> Void
 

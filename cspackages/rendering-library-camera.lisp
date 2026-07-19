@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Camera
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :rendering-library-camera)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Camera"))
 (cl:defconstant <type-str> "RenderingLibrary.Camera")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -131,13 +132,13 @@ GetTransformationMatrix(Single, Single, Single, Int32, Int32, Boolean = NIL) -> 
                     :method-name "GetTransformationMatrix"
                     :supplied-args (cl:append (cl:list :x x) (cl:list :y y) (cl:list :zoom zoom) (cl:list :client-width client-width) (cl:list :client-height client-height) (cl:when supplied-for-rendering (cl:list :for-rendering for-rendering)))))))
 
-;; The following C# RenderingLibrary.Camera.ScreenToWorld overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   ScreenToWorld(Single, Single, out Single&, out Single&) -> Void
+(cl:defun screen-to-world (obj! screen-x screen-y)
+  "Returns (cl:values <primary-return> world-x world-y) -- ScreenToWorld(Single, Single, out Single&, out Single&) -> Void"
+  (dotnet:call-out obj! "ScreenToWorld" screen-x screen-y))
 
-;; The following C# RenderingLibrary.Camera.WorldToScreen overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   WorldToScreen(Single, Single, out Single&, out Single&) -> Void
+(cl:defun world-to-screen (obj! world-x world-y)
+  "Returns (cl:values <primary-return> screen-x screen-y) -- WorldToScreen(Single, Single, out Single&, out Single&) -> Void"
+  (dotnet:call-out obj! "WorldToScreen" world-x world-y))
 
 ;; Extension methods (exact match on this == RenderingLibrary.Camera):
 (cl:defun get-scissor-rectangle-for (obj! layer ipso)

@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Single
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-single)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Single"))
 (cl:defconstant <type-str> "System.Single")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -1123,20 +1124,135 @@ Parameters:
 "
   (dotnet:static <type-str> "Truncate" (cl:the (dotnet "System.Single") x)))
 
-;; The following C# System.Single.TryFormat overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryFormat(Char], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
-;;   TryFormat(Byte], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
+(cl:defun try-format (obj! destination format cl:&key (provider cl:nil supplied-provider))
+  "Master wrapper for System.Single.TryFormat out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
 
-;; The following C# System.Single.TryParse overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryParse(String, out Single&) -> Boolean
-;;   TryParse(Char], out Single&) -> Boolean
-;;   TryParse(Byte], out Single&) -> Boolean
-;;   TryParse(String, IFormatProvider, out Single&) -> Boolean
-;;   TryParse(Char], IFormatProvider, out Single&) -> Boolean
-;;   TryParse(Byte], IFormatProvider, out Single&) -> Boolean
-;;   TryParse(String, NumberStyles, IFormatProvider, out Single&) -> Boolean
-;;   TryParse(Char], NumberStyles, IFormatProvider, out Single&) -> Boolean
-;;   TryParse(Byte], NumberStyles, IFormatProvider, out Single&) -> Boolean
+TryFormat(Char], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
+  Summary: Tries to format the value of the current float number instance into the provided span of characters.
+  Returns: if the formatting was successful; otherwise, .
+  Parameters:
+    - destination (System.Span`1[System.Char]): The span in which to write this instance's value formatted as a span of characters.
+    - chars-written (System.Int32&): When this method returns, contains the number of characters that were written in destination.
+    - format (System.ReadOnlySpan`1[System.Char]): A span containing the charactes that represent a standard or custom format string that defines the acceptable format for destination.
+    - provider (System.IFormatProvider): An optional object that supplies culture-specific formatting information for destination.
+
+TryFormat(Byte], out Int32&, Char] = default(System.ReadOnlySpan`1[System.Char]) [C# default of type System.ReadOnlySpan`1[System.Char] -- not representable in Lisp, must be supplied], IFormatProvider = null) -> Boolean
+  Summary: Tries to format the value of the current instance as UTF-8 into the provided span of bytes.
+  Returns: if the formatting was successful; otherwise, .
+  Parameters:
+    - utf8-destination (System.Span`1[System.Byte]): The span in which to write this instance's value formatted as a span of bytes.
+    - bytes-written (System.Int32&): When this method returns, contains the number of bytes that were written in utf8Destination.
+    - format (System.ReadOnlySpan`1[System.Char]): A span containing the characters that represent a standard or custom format string that defines the acceptable format for utf8Destination.
+    - provider (System.IFormatProvider): An optional object that supplies culture-specific formatting information for utf8Destination.
+"
+  (cl:cond
+    ((cl:and (cl:or (cl:null destination) (dotnet:is-instance-of destination "System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null format) (dotnet:is-instance-of format "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+     (dotnet:call-out obj! "TryFormat" destination format (cl:if supplied-provider provider cl:nil)))
+    ((cl:and (cl:or (cl:null destination) (dotnet:is-instance-of destination "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null format) (dotnet:is-instance-of format "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:not supplied-provider) (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider"))))
+     (dotnet:call-out obj! "TryFormat" destination format (cl:if supplied-provider provider cl:nil)))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "TryFormat"
+                    :supplied-args (cl:append (cl:list :destination destination) (cl:list :format format) (cl:when supplied-provider (cl:list :provider provider)))))))
+
+(cl:defun try-parse (s cl:&optional (provider cl:nil supplied-provider) (provider2 cl:nil supplied-provider2))
+  "Master wrapper for System.Single.TryParse out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
+
+TryParse(String, out Single&) -> Boolean
+  Summary: Converts the string representation of a number to its single-precision floating-point number equivalent. A return value indicates whether the conversion succeeded or failed.
+  Returns: if s was converted successfully; otherwise, .
+  Parameters:
+    - s (System.String): A string representing a number to convert.
+    - result (System.Single&): When this method returns, contains single-precision floating-point number equivalent to the numeric value or symbol contained in s, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is or System.String.Empty or is not a number in a valid format. It also fails on .NET Framework and .NET Core 2.2 and earlier versions if s represents a number less than System.Single.MinValue or greater than System.Single.MaxValue. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.
+
+TryParse(Char], out Single&) -> Boolean
+  Summary: Converts the string representation of a number in a character span to its single-precision floating-point number equivalent. A return value indicates whether the conversion succeeded or failed.
+  Returns: if s was converted successfully; otherwise, .
+  Parameters:
+    - s (System.ReadOnlySpan`1[System.Char]): >A character span that contains the string representation of the number to convert.
+    - result (System.Single&): When this method returns, contains the single-precision floating-point number equivalent of the s parameter, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is or empty or is not a number in a valid format. If s is a valid number less than System.Single.MinValue, result is System.Single.NegativeInfinity. If s is a valid number greater than System.Single.MaxValue, result is System.Single.PositiveInfinity. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.
+
+TryParse(Byte], out Single&) -> Boolean
+  Summary: Tries to convert a UTF-8 character span containing the string representation of a number to its single-precision floating-point number equivalent.
+  Returns: if utf8Text was converted successfully; otherwise, .
+  Parameters:
+    - utf8-text (System.ReadOnlySpan`1[System.Byte]): A read-only UTF-8 character span that contains the number to convert.
+    - result (System.Single&): When this method returns, contains a single-precision floating-point number equivalent of the numeric value or symbol contained in utf8Text if the conversion succeeded or zero if the conversion failed. The conversion fails if the utf8Text is System.ReadOnlySpan`1.Empty or is not in a valid format. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.
+
+TryParse(String, IFormatProvider, out Single&) -> Boolean
+  Summary: Tries to parse a string into a value.
+  Returns: if s was successfully parsed; otherwise, .
+  Parameters:
+    - s (System.String): The string to parse.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about s.
+    - result (System.Single&): When this method returns, contains the result of successfully parsing s or an undefined value on failure.
+
+TryParse(Char], IFormatProvider, out Single&) -> Boolean
+  Summary: Tries to parse a span of characters into a value.
+  Returns: if s was successfully parsed; otherwise, .
+  Parameters:
+    - s (System.ReadOnlySpan`1[System.Char]): The span of characters to parse.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about s.
+    - result (System.Single&): When this method returns, contains the result of successfully parsing s, or an undefined value on failure.
+
+TryParse(Byte], IFormatProvider, out Single&) -> Boolean
+  Summary: Tries to parse a span of UTF-8 characters into a value.
+  Returns: if utf8Text was successfully parsed; otherwise, .
+  Parameters:
+    - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+    - result (System.Single&): On return, contains the result of successfully parsing utf8Text or an undefined value on failure.
+
+TryParse(String, NumberStyles, IFormatProvider, out Single&) -> Boolean
+  Summary: Converts the string representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent. A return value indicates whether the conversion succeeded or failed.
+  Returns: if s was converted successfully; otherwise, .
+  Parameters:
+    - s (System.String): A string representing a number to convert.
+    - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the permitted format of s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+    - result (System.Single&): When this method returns, contains the single-precision floating-point number equivalent to the numeric value or symbol contained in s, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is or System.String.Empty, is not in a format compliant with style, or if style is not a valid combination of System.Globalization.NumberStyles enumeration constants. It also fails on .NET Framework or .NET Core 2.2 and earlier versions if s represents a number less than System.Single.MinValue or greater than System.Single.MaxValue. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.
+
+TryParse(Char], NumberStyles, IFormatProvider, out Single&) -> Boolean
+  Summary: Converts the span representation of a number in a specified style and culture-specific format to its single-precision floating-point number equivalent. A return value indicates whether the conversion succeeded or failed.
+  Returns: if s was converted successfully; otherwise, .
+  Parameters:
+    - s (System.ReadOnlySpan`1[System.Char]): A read-only character span that contains the number to convert. The span is interpreted using the style specified by style.
+    - style (System.Globalization.NumberStyles): A bitwise combination of enumeration values that indicates the permitted format of s. A typical value to specify is System.Globalization.NumberStyles.Float combined with System.Globalization.NumberStyles.AllowThousands.
+    - provider (System.IFormatProvider): An object that supplies culture-specific formatting information about s.
+    - result (System.Single&): When this method returns, contains the single-precision floating-point number equivalent to the numeric value or symbol contained in s, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is or System.String.Empty, is not in a format compliant with style, represents a number less than System.Single.MinValue or greater than System.Single.MaxValue, or if style is not a valid combination of System.Globalization.NumberStyles enumerated constants. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.
+
+TryParse(Byte], NumberStyles, IFormatProvider, out Single&) -> Boolean
+  Summary: Tries to parse a span of UTF-8 characters into a value.
+  Returns: if utf8Text was successfully parsed; otherwise, .
+  Parameters:
+    - utf8-text (System.ReadOnlySpan`1[System.Byte]): The span of UTF-8 characters to parse.
+    - style (System.Globalization.NumberStyles): A bitwise combination of number styles that can be present in utf8Text.
+    - provider (System.IFormatProvider): An object that provides culture-specific formatting information about utf8Text.
+    - result (System.Single&): On return, contains the result of successfully parsing utf8Text or an undefined value on failure.
+"
+  (cl:cond
+    ((cl:and (cl:stringp s) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.Globalization.NumberStyles")) supplied-provider2 (cl:or (cl:null provider2) (dotnet:is-instance-of provider2 "System.IFormatProvider")))
+     (dotnet:call-out <type-str> "TryParse" s provider provider2))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.Globalization.NumberStyles")) supplied-provider2 (cl:or (cl:null provider2) (dotnet:is-instance-of provider2 "System.IFormatProvider")))
+     (dotnet:call-out <type-str> "TryParse" s provider provider2))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.Globalization.NumberStyles")) supplied-provider2 (cl:or (cl:null provider2) (dotnet:is-instance-of provider2 "System.IFormatProvider")))
+     (dotnet:call-out <type-str> "TryParse" s provider provider2))
+    ((cl:and (cl:stringp s) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s provider))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-provider (cl:or (cl:null provider) (dotnet:is-instance-of provider "System.IFormatProvider")) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s provider))
+    ((cl:and (cl:stringp s) (cl:not supplied-provider) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:not supplied-provider) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s))
+    ((cl:and (cl:or (cl:null s) (dotnet:is-instance-of s "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:not supplied-provider) (cl:not supplied-provider2))
+     (dotnet:call-out <type-str> "TryParse" s))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "SYSTEM-SINGLE"
+                    :class-name <type-str>
+                    :method-name "TryParse"
+                    :supplied-args (cl:append (cl:list :s s) (cl:when supplied-provider (cl:list :provider provider)) (cl:when supplied-provider2 (cl:list :provider2 provider2)))))))
 

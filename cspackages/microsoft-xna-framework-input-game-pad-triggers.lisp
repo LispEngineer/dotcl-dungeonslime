@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadTriggers
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-triggers)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadTriggers"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadTriggers")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (left-trigger cl:nil supplied-left-trigger) (right-trigger cl:nil supplied-right-trigger))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadTriggers constructor overloads. Dispatches at runtime.

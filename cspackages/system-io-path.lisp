@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.IO.Path
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-io-path)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.IO.Path"))
 (cl:defconstant <type-str> "System.IO.Path")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:define-symbol-macro alt-directory-separator-char (dotnet:static <type-str> "AltDirectorySeparatorChar"))
 (cl:setf (cl:documentation (cl:quote alt-directory-separator-char) (cl:quote cl:variable)) "Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.")
@@ -17,7 +18,8 @@
 (cl:setf (cl:documentation (cl:quote directory-separator-char) (cl:quote cl:variable)) "Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.")
 
 (cl:define-symbol-macro invalid-path-chars (dotnet:static <type-str> "InvalidPathChars"))
-(cl:setf (cl:documentation (cl:quote invalid-path-chars) (cl:quote cl:variable)) "Provides a platform-specific array of characters that cannot be specified in path string arguments passed to members of the System.IO.Path class.")
+(cl:setf (cl:documentation (cl:quote invalid-path-chars) (cl:quote cl:variable)) "OBSOLETE: Path.InvalidPathChars has been deprecated. Use GetInvalidPathChars or GetInvalidFileNameChars instead.
+Provides a platform-specific array of characters that cannot be specified in path string arguments passed to members of the System.IO.Path class.")
 
 (cl:define-symbol-macro path-separator (dotnet:static <type-str> "PathSeparator"))
 (cl:setf (cl:documentation (cl:quote path-separator) (cl:quote cl:variable)) "A platform-specific separator character used to separate path strings in environment variables.")
@@ -83,7 +85,7 @@ Combine(String, String, String, String) -> String
                     :supplied-args (cl:append (cl:list :paths paths) (cl:when supplied-path2 (cl:list :path2 path2)) (cl:when supplied-path3 (cl:list :path3 path3)) (cl:when supplied-path4 (cl:list :path4 path4)))))))
 
 ;; Note: System.IO.Path.Combine also has the following overloads with special
-;; parameter types (ref, out, or params) that are not
+;; parameter types (ref or params) that are not
 ;; yet supported:
 ;;   Combine(params String[]) -> String
 
@@ -474,7 +476,7 @@ Join(String, String, String, String) -> String
                     :supplied-args (cl:append (cl:list :paths paths) (cl:when supplied-path2 (cl:list :path2 path2)) (cl:when supplied-path3 (cl:list :path3 path3)) (cl:when supplied-path4 (cl:list :path4 path4)))))))
 
 ;; Note: System.IO.Path.Join also has the following overloads with special
-;; parameter types (ref, out, or params) that are not
+;; parameter types (ref or params) that are not
 ;; yet supported:
 ;;   Join(params String[]) -> String
 
@@ -504,8 +506,36 @@ TrimEndingDirectorySeparator(Char]) -> Char]
                     :method-name "TrimEndingDirectorySeparator"
                     :supplied-args (cl:append (cl:list :path path))))))
 
-;; The following C# System.IO.Path.TryJoin overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   TryJoin(Char], Char], Char], out Int32&) -> Boolean
-;;   TryJoin(Char], Char], Char], Char], out Int32&) -> Boolean
+(cl:defun try-join (path1 path2 destination cl:&optional (destination2 cl:nil supplied-destination2))
+  "Master wrapper for System.IO.Path.TryJoin out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
+
+TryJoin(Char], Char], Char], out Int32&) -> Boolean
+  Summary: Attempts to concatenate two path components to a single preallocated character span, and returns a value that indicates whether the operation succeeded.
+  Returns: if the concatenation operation is successful; otherwise, .
+  Parameters:
+    - path1 (System.ReadOnlySpan`1[System.Char]): A character span that contains the first path to join.
+    - path2 (System.ReadOnlySpan`1[System.Char]): A character span that contains the second path to join.
+    - destination (System.Span`1[System.Char]): A character span to hold the concatenated path.
+    - chars-written (System.Int32&): When the method returns, a value that indicates the number of characters written to the destination.
+
+TryJoin(Char], Char], Char], Char], out Int32&) -> Boolean
+  Summary: Attempts to concatenate three path components to a single preallocated character span, and returns a value that indicates whether the operation succeeded.
+  Returns: if the concatenation operation is successful; otherwise, .
+  Parameters:
+    - path1 (System.ReadOnlySpan`1[System.Char]): A character span that contains the first path to join.
+    - path2 (System.ReadOnlySpan`1[System.Char]): A character span that contains the second path to join.
+    - path3 (System.ReadOnlySpan`1[System.Char]): A character span that contains the third path to join.
+    - destination (System.Span`1[System.Char]): A character span to hold the concatenated path.
+    - chars-written (System.Int32&): When the method returns, a value that indicates the number of characters written to the destination.
+"
+  (cl:cond
+    ((cl:and (cl:or (cl:null path1) (dotnet:is-instance-of path1 "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null path2) (dotnet:is-instance-of path2 "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null destination) (dotnet:is-instance-of destination "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) supplied-destination2 (cl:or (cl:null destination2) (dotnet:is-instance-of destination2 "System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")))
+     (dotnet:call-out <type-str> "TryJoin" path1 path2 destination destination2))
+    ((cl:and (cl:or (cl:null path1) (dotnet:is-instance-of path1 "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null path2) (dotnet:is-instance-of path2 "System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:or (cl:null destination) (dotnet:is-instance-of destination "System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e")) (cl:not supplied-destination2))
+     (dotnet:call-out <type-str> "TryJoin" path1 path2 destination))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "SYSTEM-IO-PATH"
+                    :class-name <type-str>
+                    :method-name "TryJoin"
+                    :supplied-args (cl:append (cl:list :path1 path1) (cl:list :path2 path2) (cl:list :destination destination) (cl:when supplied-destination2 (cl:list :destination2 destination2)))))))
 

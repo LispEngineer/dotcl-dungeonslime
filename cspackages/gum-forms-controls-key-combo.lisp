@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.KeyCombo
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :gum-forms-controls-key-combo)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.KeyCombo"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.KeyCombo")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   (dotnet:new <type-str>))

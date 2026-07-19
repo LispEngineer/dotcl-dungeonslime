@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.Primitives.RangeBase
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from Gum.Forms.Controls.Slider
 
 (cl:in-package :gum-forms-controls-primitives-range-base)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.Primitives.RangeBase"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.Primitives.RangeBase")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.Primitives.RangeBase constructor overloads. Dispatches at runtime.

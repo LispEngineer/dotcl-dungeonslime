@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Wireframe.GraphicalUiElement
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from MonoGameGum.GueDeriving.ContainerRuntime
 
 (cl:in-package :gum-wireframe-graphical-ui-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Wireframe.GraphicalUiElement"))
 (cl:defconstant <type-str> "Gum.Wireframe.GraphicalUiElement")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (contained-object cl:nil supplied-contained-object) cl:&key (what-contains-this cl:nil supplied-what-contains-this))
   "Master wrapper for Gum.Wireframe.GraphicalUiElement constructor overloads. Dispatches at runtime.
@@ -242,9 +244,13 @@ new(IRenderable, GraphicalUiElement = null)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "set_Parent" new-value))
 
 (cl:defun parent-gue (obj!)
+  "OBSOLETE: Use ElementGueContainingThis instead - it more clearly indicates the relationship, as the ParentGue may not actually be the parent. If the effective parent is desired, use EffectiveParentGue
+"
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "get_ParentGue"))
 
 (cl:defun (cl:setf parent-gue) (new-value obj!)
+  "OBSOLETE: Use ElementGueContainingThis instead - it more clearly indicates the relationship, as the ParentGue may not actually be the parent. If the effective parent is desired, use EffectiveParentGue
+"
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "set_ParentGue" new-value))
 
 (cl:defun renderable-component (obj!)
@@ -570,6 +576,7 @@ new(IRenderable, GraphicalUiElement = null)
   "Master wrapper for Gum.Wireframe.GraphicalUiElement.AddToManagers overloads. Dispatches at runtime.
 
 AddToManagers() -> Void
+  OBSOLETE: Use the AddToRoot extension method instead (e.g. myElement.AddToRoot()). AddToRoot adds this element to the GumService root container, which is the recommended approach for MonoGame, KNI, FNA, and raylib projects.
 
 AddToManagers(ISystemManagers, Layer = null) -> Void
 "
@@ -626,6 +633,8 @@ ApplyState(String, String) -> Void
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ClearDirtyLayoutState"))
 
 (cl:defun clear-managers (obj!)
+  "OBSOLETE: Don't use this, it exists only for FRB
+"
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "ClearManagers"))
 
 (cl:defun clone (obj!)
@@ -689,7 +698,7 @@ FillListWithChildrenByTypeRecursively(List) -> Void
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "GetGraphicalUiElementByName" name))
 
 ;; Note: Gum.Wireframe.GraphicalUiElement.GetGraphicalUiElementByName also has the following overloads with special
-;; parameter types (ref, out, or params) that are not
+;; parameter types (ref or params) that are not
 ;; yet supported:
 ;;   GetGraphicalUiElementByName(params String[]) -> GraphicalUiElement
 
@@ -701,10 +710,6 @@ FillListWithChildrenByTypeRecursively(List) -> Void
 
 (cl:defun get-parent-by-type-recursively (obj! type)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "GetParentByTypeRecursively" type))
-
-;; The following C# Gum.Wireframe.GraphicalUiElement.GetParentOffsets overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   GetParentOffsets(out Single&, out Single&) -> Void
 
 (cl:defun interpolate-between (obj! first second interpolation-value)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "InterpolateBetween" first second interpolation-value))
@@ -874,6 +879,10 @@ UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY] = null) -> Void
 (cl:defun update-width (obj! parent-width consider-wrapped-stacked)
   (dotnet:invoke (cl:the (dotnet "Gum.Wireframe.GraphicalUiElement") obj!) "UpdateWidth" parent-width consider-wrapped-stacked))
 
+(cl:defun get-parent-offsets (obj!)
+  "Returns (cl:values <primary-return> parent-origin-offset-x parent-origin-offset-y) -- GetParentOffsets(out Single&, out Single&) -> Void"
+  (dotnet:call-out obj! "GetParentOffsets"))
+
 ;; Extension methods (exact match on this == Gum.Wireframe.GraphicalUiElement):
 ;;   Gum.Forms.GraphicalUiElementFormsExtensions::GetFrameworkElementByName(GraphicalUiElement, String) -> FrameworkElementType -- skipped (generic type arguments/parameters not yet supported)
 ;;   Gum.Forms.GraphicalUiElementFormsExtensions::TryGetFrameworkElementByName(GraphicalUiElement, String) -> FrameworkElementType -- skipped (generic type arguments/parameters not yet supported)
@@ -906,7 +915,9 @@ UpdateLayout(GraphicalUiElement+ParentUpdateType, Int32, XOrY] = null) -> Void
   (dotnet:static "GumRuntime.ElementSaveExtensions" "CreateGraphicalComponent" obj! element-save system-managers))
 
 (cl:defun set-states-and-categories-recursively (obj! element-save)
-  "Extension method from GumRuntime.ElementSaveExtensions (assembly GumCommon.dll)."
+  "Extension method from GumRuntime.ElementSaveExtensions (assembly GumCommon.dll).
+OBSOLETE: Use AddStatesAndCategoriesRecursivelyToGue since that more clearly indicates what the method is doing
+"
   (dotnet:static "GumRuntime.ElementSaveExtensions" "SetStatesAndCategoriesRecursively" obj! element-save))
 
 (cl:defun set-variables-recursively (obj! element-save state-save)

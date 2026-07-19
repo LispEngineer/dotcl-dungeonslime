@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.IPositionedSizedObject
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from MonoGameGum.GueDeriving.ContainerRuntime
 
 (cl:in-package :rendering-library-i-positioned-sized-object)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.IPositionedSizedObject"))
 (cl:defconstant <type-str> "RenderingLibrary.IPositionedSizedObject")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun flip-horizontal (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.IPositionedSizedObject") obj!) "get_FlipHorizontal"))
@@ -66,11 +68,15 @@
 
 ;; Extension methods (exact match on this == RenderingLibrary.IPositionedSizedObject):
 (cl:defun get-position (obj!)
-  "Extension method from RenderingLibrary.IPositionedSizedObjectExtensionMethods (assembly GumCommon.dll)."
+  "Extension method from RenderingLibrary.IPositionedSizedObjectExtensionMethods (assembly GumCommon.dll).
+OBSOLETE: Use X or Y since this method is a little ambiguous when working with GraphicalUiElements
+"
   (dotnet:static "RenderingLibrary.IPositionedSizedObjectExtensionMethods" "GetPosition" obj!))
 
 (cl:defun set-position (obj! new-position)
-  "Extension method from RenderingLibrary.IPositionedSizedObjectExtensionMethods (assembly GumCommon.dll)."
+  "Extension method from RenderingLibrary.IPositionedSizedObjectExtensionMethods (assembly GumCommon.dll).
+OBSOLETE: Use X or Y since this method is a little ambiguous when working with GraphicalUiElements
+"
   (dotnet:static "RenderingLibrary.IPositionedSizedObjectExtensionMethods" "SetPosition" obj! new-position))
 
 

@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Point
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-point)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Point"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Point")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (value cl:nil supplied-value) (y cl:nil supplied-y))
   "Master wrapper for Microsoft.Xna.Framework.Point constructor overloads. Dispatches at runtime.
@@ -78,20 +79,50 @@ new(Int32, Int32)
   (dotnet:static <type-str> "op_Subtraction" (cl:the (dotnet "Microsoft.Xna.Framework.Point") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Point") value2)))
 
 (cl:defun * (value1 value2)
-  (dotnet:static <type-str> "op_Multiply" (cl:the (dotnet "Microsoft.Xna.Framework.Point") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Point") value2)))
+  "Master wrapper for Microsoft.Xna.Framework.Point.* overloads. Dispatches at runtime.
+
+*(Point, Point) -> Point
+
+*(Point, Int32) -> Point
+
+*(Int32, Point) -> Point
+"
+  (cl:cond
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Point")) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Point")))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    ((cl:and (cl:or (cl:null value1) (dotnet:is-instance-of value1 "Microsoft.Xna.Framework.Point")) (cl:numberp value2))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    ((cl:and (cl:numberp value1) (cl:or (cl:null value2) (dotnet:is-instance-of value2 "Microsoft.Xna.Framework.Point")))
+     (dotnet:static <type-str> "op_Multiply" value1 value2))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-POINT"
+                    :class-name <type-str>
+                    :method-name "*"
+                    :supplied-args (cl:append (cl:list :value1 value1) (cl:list :value2 value2))))))
 
 (cl:defun / (source divisor)
-  (dotnet:static <type-str> "op_Division" (cl:the (dotnet "Microsoft.Xna.Framework.Point") source) (cl:the (dotnet "Microsoft.Xna.Framework.Point") divisor)))
+  "Master wrapper for Microsoft.Xna.Framework.Point./ overloads. Dispatches at runtime.
+
+/(Point, Point) -> Point
+
+/(Point, Int32) -> Point
+"
+  (cl:cond
+    ((cl:and (cl:or (cl:null source) (dotnet:is-instance-of source "Microsoft.Xna.Framework.Point")) (cl:or (cl:null divisor) (dotnet:is-instance-of divisor "Microsoft.Xna.Framework.Point")))
+     (dotnet:static <type-str> "op_Division" source divisor))
+    ((cl:and (cl:or (cl:null source) (dotnet:is-instance-of source "Microsoft.Xna.Framework.Point")) (cl:numberp divisor))
+     (dotnet:static <type-str> "op_Division" source divisor))
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-POINT"
+                    :class-name <type-str>
+                    :method-name "/"
+                    :supplied-args (cl:append (cl:list :source source) (cl:list :divisor divisor))))))
 
 (cl:defun + (value1 value2)
   (dotnet:static <type-str> "op_Addition" (cl:the (dotnet "Microsoft.Xna.Framework.Point") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Point") value2)))
 
 (cl:defun = (a b)
   (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Point") a) (cl:the (dotnet "Microsoft.Xna.Framework.Point") b)))
-
-;; The following C# Microsoft.Xna.Framework.Point.Deconstruct overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   Deconstruct(out Int32&, out Int32&) -> Void
 
 (cl:defun equals (obj! obj)
   "Master wrapper for Microsoft.Xna.Framework.Point.Equals overloads. Dispatches at runtime.
@@ -122,4 +153,8 @@ Equals(Point) -> Boolean
 
 (cl:defun to-vector2 (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Point") obj!) "ToVector2"))
+
+(cl:defun deconstruct (obj!)
+  "Returns (cl:values <primary-return> x y) -- Deconstruct(out Int32&, out Int32&) -> Void"
+  (dotnet:call-out obj! "Deconstruct"))
 

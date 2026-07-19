@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Audio.SoundEffect
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-audio-sound-effect)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Audio.SoundEffect"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Audio.SoundEffect")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (buffer sample-rate channels cl:&optional (sample-rate2 cl:nil supplied-sample-rate2) (channels2 cl:nil supplied-channels2) (loop-start cl:nil supplied-loop-start) (loop-length cl:nil supplied-loop-length))
   "Master wrapper for Microsoft.Xna.Framework.Audio.SoundEffect constructor overloads. Dispatches at runtime.

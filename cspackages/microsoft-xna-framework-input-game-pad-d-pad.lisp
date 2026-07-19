@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.GamePadDPad
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-input-game-pad-d-pad)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.GamePadDPad"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.GamePadDPad")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (up-value cl:nil supplied-up-value) (down-value cl:nil supplied-down-value) (left-value cl:nil supplied-left-value) (right-value cl:nil supplied-right-value))
   "Master wrapper for Microsoft.Xna.Framework.Input.GamePadDPad constructor overloads. Dispatches at runtime.

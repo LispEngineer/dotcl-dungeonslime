@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Graphics.Texture2D
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-graphics-texture2-d)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Graphics.Texture2D"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Graphics.Texture2D")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (graphics-device width height cl:&optional (mipmap cl:nil supplied-mipmap) (format cl:nil supplied-format) (array-size cl:nil supplied-array-size) (shared cl:nil supplied-shared) (array-size2 cl:nil supplied-array-size2))
   "Master wrapper for Microsoft.Xna.Framework.Graphics.Texture2D constructor overloads. Dispatches at runtime.

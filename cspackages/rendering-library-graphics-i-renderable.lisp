@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: RenderingLibrary.Graphics.IRenderable
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from MonoGameGum.GueDeriving.ContainerRuntime
 
 (cl:in-package :rendering-library-graphics-i-renderable)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "RenderingLibrary.Graphics.IRenderable"))
 (cl:defconstant <type-str> "RenderingLibrary.Graphics.IRenderable")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun batch-key (obj!)
   (dotnet:invoke (cl:the (dotnet "RenderingLibrary.Graphics.IRenderable") obj!) "get_BatchKey"))

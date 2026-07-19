@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Gum.Forms.Controls.FrameworkElement
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :gum-forms-controls-framework-element)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Gum.Forms.Controls.FrameworkElement"))
 (cl:defconstant <type-str> "Gum.Forms.Controls.FrameworkElement")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (visual cl:nil supplied-visual))
   "Master wrapper for Gum.Forms.Controls.FrameworkElement constructor overloads. Dispatches at runtime.
@@ -33,6 +34,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %disabled-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %disabled-focused-state-cache% (dotnet:static <type-str> "DisabledFocusedState"))
       %disabled-focused-state-cache%))
+(cl:setf (cl:documentation (cl:quote +disabled-focused-state+) (cl:quote cl:variable)) "OBSOLETE: Use DisabledFocusedStateName
+")
 
 (cl:defvar %disabled-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +disabled-focused-state-name+
@@ -45,6 +48,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %disabled-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %disabled-state-cache% (dotnet:static <type-str> "DisabledState"))
       %disabled-state-cache%))
+(cl:setf (cl:documentation (cl:quote +disabled-state+) (cl:quote cl:variable)) "OBSOLETE: Use DisabledStateName
+")
 
 (cl:defvar %disabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +disabled-state-name+
@@ -57,6 +62,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %enabled-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %enabled-state-cache% (dotnet:static <type-str> "EnabledState"))
       %enabled-state-cache%))
+(cl:setf (cl:documentation (cl:quote +enabled-state+) (cl:quote cl:variable)) "OBSOLETE: Use EnabledStateName
+")
 
 (cl:defvar %enabled-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +enabled-state-name+
@@ -69,6 +76,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %focused-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %focused-state-cache% (dotnet:static <type-str> "FocusedState"))
       %focused-state-cache%))
+(cl:setf (cl:documentation (cl:quote +focused-state+) (cl:quote cl:variable)) "OBSOLETE: Use FocusedStateName
+")
 
 (cl:defvar %focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +focused-state-name+
@@ -81,6 +90,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %highlighted-focused-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %highlighted-focused-state-cache% (dotnet:static <type-str> "HighlightedFocusedState"))
       %highlighted-focused-state-cache%))
+(cl:setf (cl:documentation (cl:quote +highlighted-focused-state+) (cl:quote cl:variable)) "OBSOLETE: Use HighlightedFocusedStateName
+")
 
 (cl:defvar %highlighted-focused-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +highlighted-focused-state-name+
@@ -93,6 +104,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %highlighted-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %highlighted-state-cache% (dotnet:static <type-str> "HighlightedState"))
       %highlighted-state-cache%))
+(cl:setf (cl:documentation (cl:quote +highlighted-state+) (cl:quote cl:variable)) "OBSOLETE: Use HighlightedStateName
+")
 
 (cl:defvar %highlighted-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +highlighted-state-name+
@@ -111,6 +124,8 @@ new(InteractiveGue)
   (cl:if (cl:eq %pushed-state-cache% csharp-assembly-utils:+unbound-marker+)
       (cl:setf %pushed-state-cache% (dotnet:static <type-str> "PushedState"))
       %pushed-state-cache%))
+(cl:setf (cl:documentation (cl:quote +pushed-state+) (cl:quote cl:variable)) "OBSOLETE: Use PushedStateName
+")
 
 (cl:defvar %pushed-state-name-cache% csharp-assembly-utils:+unbound-marker+)
 (cl:define-symbol-macro +pushed-state-name+
@@ -137,6 +152,8 @@ new(InteractiveGue)
       %vertical-state-name-cache%))
 
 (cl:define-symbol-macro default-forms-components (dotnet:static <type-str> "DefaultFormsComponents"))
+(cl:setf (cl:documentation (cl:quote default-forms-components) (cl:quote cl:variable)) "OBSOLETE: Use DefaultFormsTemplates
+")
 
 (cl:define-symbol-macro default-forms-templates (dotnet:static <type-str> "DefaultFormsTemplates"))
 
@@ -536,6 +553,8 @@ HandleTab(TabDirection = Down, FrameworkElement = null, Boolean = NIL) -> Void
   (dotnet:static <type-str> "HandleTab" (cl:the (dotnet "Gum.Forms.Controls.TabDirection") tab-direction) (cl:the (dotnet "Gum.Wireframe.InteractiveGue") requesting-visual) (cl:the (dotnet "Gum.Wireframe.InteractiveGue") parent-visual) (cl:the (dotnet "System.Boolean") should-ask-parent) (cl:the (dotnet "System.Boolean") loop)))
 
 (cl:defun handle-visual-binding-context-changed (obj! sender args)
+  "OBSOLETE: Use OnBindingContextChanged
+"
   (dotnet:invoke (cl:the (dotnet "Gum.Forms.Controls.FrameworkElement") obj!) "HandleVisualBindingContextChanged" sender args))
 
 (cl:defun data-bound? (obj! property-name)
@@ -668,6 +687,7 @@ SetBinding(String, Binding) -> Void
   "Master wrapper for Gum.Forms.Controls.FrameworkElement.Show overloads. Dispatches at runtime.
 
 Show(Layer = null) -> Void
+  OBSOLETE: Do not use this method. Either add this to the Root, to a Screen, or to a parent container
 "
   (cl:cond
     ((cl:and (cl:or (cl:not supplied-layer) (cl:or (cl:null layer) (dotnet:is-instance-of layer "RenderingLibrary.Graphics.Layer"))))

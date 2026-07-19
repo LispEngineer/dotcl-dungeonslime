@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GueDeriving.TextRuntime
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :mono-game-gum-gue-deriving-text-runtime)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GueDeriving.TextRuntime"))
 (cl:defconstant <type-str> "MonoGameGum.GueDeriving.TextRuntime")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&key (full-instantiation cl:t supplied-full-instantiation) (system-managers cl:nil supplied-system-managers))
   "Master wrapper for MonoGameGum.GueDeriving.TextRuntime constructor overloads. Dispatches at runtime.
@@ -238,6 +239,8 @@ new(Boolean = T, SystemManagers = null)
   (cl:setf (dotnet:static <type-str> "DefaultFontSize") new-value))
 
 (cl:defun add-to-managers (obj!)
+  "OBSOLETE: Use the AddToRoot extension method instead (e.g. myText.AddToRoot()).
+"
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GueDeriving.TextRuntime") obj!) "AddToManagers"))
 
 (cl:defun clone (obj!)

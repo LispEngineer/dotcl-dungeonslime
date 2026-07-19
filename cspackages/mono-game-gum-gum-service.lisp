@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: MonoGameGum.GumService
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :mono-game-gum-gum-service)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "MonoGameGum.GumService"))
 (cl:defconstant <type-str> "MonoGameGum.GumService")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new ()
   (dotnet:new <type-str>))
@@ -118,6 +119,8 @@ Initialize(GraphicsDevice, String = null) -> GumProjectSave
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "InitializeForTesting"))
 
 (cl:defun load-animations (obj!)
+  "OBSOLETE: Experimental - this API may change in future versions
+"
   (dotnet:invoke (cl:the (dotnet "MonoGameGum.GumService") obj!) "LoadAnimations"))
 
 (cl:defun refresh-styles (obj! cl:&optional (target cl:nil supplied-target))
@@ -147,16 +150,20 @@ RefreshStyles(GraphicalUiElement) -> Void
 Update(GameTime) -> Void
 
 Update(Game, GameTime) -> Void
+  OBSOLETE: Use the version that does not take a Game
 
 Update(GameTime, GraphicalUiElement) -> Void
 
 Update(GameTime, GraphicalUiElement]) -> Void
 
 Update(Game, GameTime, FrameworkElement) -> Void
+  OBSOLETE: Use the version that does not take a Game
 
 Update(Game, GameTime, GraphicalUiElement) -> Void
+  OBSOLETE: Use the version which does not take a Game
 
 Update(Game, GameTime, GraphicalUiElement]) -> Void
+  OBSOLETE: Use the version of this method which does not take a Game
 "
   (cl:cond
     ((cl:and (cl:or (cl:null game-time) (dotnet:is-instance-of game-time "Microsoft.Xna.Framework.Game")) supplied-game-time2 (cl:or (cl:null game-time2) (dotnet:is-instance-of game-time2 "Microsoft.Xna.Framework.GameTime")) supplied-root (cl:or (cl:null root) (dotnet:is-instance-of root "Gum.Forms.Controls.FrameworkElement")))

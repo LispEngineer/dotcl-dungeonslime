@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Input.Touch.TouchCollection
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-input-touch-touch-collection)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Input.Touch.TouchCollection"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Input.Touch.TouchCollection")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (touches cl:nil supplied-touches))
   "Master wrapper for Microsoft.Xna.Framework.Input.Touch.TouchCollection constructor overloads. Dispatches at runtime.
@@ -61,10 +62,6 @@ new(TouchLocation[])
 (cl:defun copy-to (obj! array array-index)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchCollection") obj!) "CopyTo" array array-index))
 
-;; The following C# Microsoft.Xna.Framework.Input.Touch.TouchCollection.FindById overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   FindById(Int32, out TouchLocation&) -> Boolean
-
 (cl:defun get-enumerator (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchCollection") obj!) "GetEnumerator"))
 
@@ -79,4 +76,8 @@ new(TouchLocation[])
 
 (cl:defun remove-at (obj! index)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Input.Touch.TouchCollection") obj!) "RemoveAt" index))
+
+(cl:defun find-by-id (obj! id)
+  "Returns (cl:values <primary-return> touch-location) -- FindById(Int32, out TouchLocation&) -> Boolean"
+  (dotnet:call-out obj! "FindById" id))
 

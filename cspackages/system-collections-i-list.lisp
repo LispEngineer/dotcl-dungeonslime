@@ -1,14 +1,16 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.Collections.IList
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic --export-interfaces --export-parents
+;;; Discovered via: --export-parents/--export-interfaces from Gum.Collections.GraphicalUiElementCollection
 
 (cl:in-package :system-collections-i-list)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.Collections.IList"))
 (cl:defconstant <type-str> "System.Collections.IList")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun fixed-size? (obj!)
   "Gets a value indicating whether the System.Collections.IList has a fixed size."

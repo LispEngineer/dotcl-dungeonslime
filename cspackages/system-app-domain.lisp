@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: System.AppDomain
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :system-app-domain)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "System.AppDomain"))
 (cl:defconstant <type-str> "System.AppDomain")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:define-symbol-macro current-domain (dotnet:static <type-str> "CurrentDomain"))
 (cl:setf (cl:documentation (cl:quote current-domain) (cl:quote cl:variable)) "Gets the current application domain for the current System.Threading.Thread.")
@@ -61,7 +62,8 @@
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "get_MonitoringTotalProcessorTime"))
 
 (cl:defun permission-set (obj!)
-  "Gets the permission set of a sandboxed application domain."
+  "OBSOLETE: Code Access Security is not supported or honored by the runtime.
+Gets the permission set of a sandboxed application domain."
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "get_PermissionSet"))
 
 (cl:defun relative-search-path (obj!)
@@ -149,7 +151,8 @@
   (dotnet:remove-event (cl:the (dotnet "System.AppDomain") obj!) "UnhandledException" handler))
 
 (cl:defun append-private-path (obj! path)
-  "Summary: Appends the specified directory name to the private path list.
+  "OBSOLETE: AppDomain.AppendPrivatePath has been deprecated and is not supported.
+Summary: Appends the specified directory name to the private path list.
 Parameters:
   - path (System.String): The name of the directory to be appended to the private path.
 "
@@ -164,17 +167,20 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ApplyPolicy" assembly-name))
 
 (cl:defun clear-private-path (obj!)
-  "Summary: Resets the path that specifies the location of private assemblies to the empty string (\"\").
+  "OBSOLETE: AppDomain.ClearPrivatePath has been deprecated and is not supported.
+Summary: Resets the path that specifies the location of private assemblies to the empty string (\"\").
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ClearPrivatePath"))
 
 (cl:defun clear-shadow-copy-path (obj!)
-  "Summary: Resets the list of directories containing shadow copied assemblies to the empty string (\"\").
+  "OBSOLETE: AppDomain.ClearShadowCopyPath has been deprecated and is not supported.
+Summary: Resets the list of directories containing shadow copied assemblies to the empty string (\"\").
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ClearShadowCopyPath"))
 
 (cl:defun create-domain (friendly-name)
-  "Summary: Creates a new application domain with the specified name.
+  "OBSOLETE: Creating and unloading AppDomains is not supported and throws an exception.
+Summary: Creates a new application domain with the specified name.
 Returns: The newly created application domain.
 Parameters:
   - friendly-name (System.String): The friendly name of the domain.
@@ -374,6 +380,7 @@ ExecuteAssembly(String, String[]) -> Int32
     - args (System.String[]): The arguments to the entry point of the assembly.
 
 ExecuteAssembly(String, String[], Byte[], AssemblyHashAlgorithm) -> Int32
+  OBSOLETE: Code Access Security is not supported or honored by the runtime.
   Summary: Executes the assembly contained in the specified file, using the specified arguments, hash value, and hash algorithm.
   Returns: The value that is returned by the entry point of the assembly.
   Parameters:
@@ -404,7 +411,7 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ExecuteAssemblyByName" assembly-name))
 
 ;; Note: System.AppDomain.ExecuteAssemblyByName also has the following overloads with special
-;; parameter types (ref, out, or params) that are not
+;; parameter types (ref or params) that are not
 ;; yet supported:
 ;;   ExecuteAssemblyByName(AssemblyName, params String[]) -> Int32
 ;;   ExecuteAssemblyByName(String, params String[]) -> Int32
@@ -416,7 +423,8 @@ Returns: An array of assemblies in this application domain.
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "GetAssemblies"))
 
 (cl:defun get-current-thread-id ()
-  "Summary: Gets the current thread identifier.
+  "OBSOLETE: AppDomain.GetCurrentThreadId has been deprecated because it does not provide a stable Id when managed threads are running on fibers (aka lightweight threads). To get a stable identifier for a managed thread, use the ManagedThreadId property on Thread instead.
+Summary: Gets the current thread identifier.
 Returns: A 32-bit signed integer that is the identifier of the current thread.
 "
   (dotnet:static <type-str> "GetCurrentThreadId"))
@@ -499,7 +507,8 @@ Returns: An array of System.Reflection.Assembly objects that represent the assem
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ReflectionOnlyGetAssemblies"))
 
 (cl:defun set-cache-path (obj! path)
-  "Summary: Establishes the specified directory path as the location where assemblies are shadow copied.
+  "OBSOLETE: AppDomain.SetCachePath has been deprecated and is not supported.
+Summary: Establishes the specified directory path as the location where assemblies are shadow copied.
 Parameters:
   - path (System.String): The fully qualified path to the shadow copy location.
 "
@@ -514,7 +523,8 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "SetData" name data))
 
 (cl:defun set-dynamic-base (obj! path)
-  "Summary: Establishes the specified directory path as the base directory for subdirectories where dynamically generated files are stored and accessed.
+  "OBSOLETE: AppDomain.SetDynamicBase has been deprecated and is not supported.
+Summary: Establishes the specified directory path as the base directory for subdirectories where dynamically generated files are stored and accessed.
 Parameters:
   - path (System.String): The fully qualified path that is the base directory for subdirectories where dynamic assemblies are stored.
 "
@@ -528,12 +538,14 @@ Parameters:
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "SetPrincipalPolicy" policy))
 
 (cl:defun set-shadow-copy-files (obj!)
-  "Summary: Turns on shadow copying.
+  "OBSOLETE: AppDomain.SetShadowCopyFiles has been deprecated and is not supported.
+Summary: Turns on shadow copying.
 "
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "SetShadowCopyFiles"))
 
 (cl:defun set-shadow-copy-path (obj! path)
-  "Summary: Establishes the specified directory path as the location of assemblies to be shadow copied.
+  "OBSOLETE: AppDomain.SetShadowCopyPath has been deprecated and is not supported.
+Summary: Establishes the specified directory path as the location of assemblies to be shadow copied.
 Parameters:
   - path (System.String): A list of directory names, where each name is separated by a semicolon.
 "
@@ -553,7 +565,8 @@ Returns: A string formed by concatenating the literal string \"Name:\", the frie
   (dotnet:invoke (cl:the (dotnet "System.AppDomain") obj!) "ToString"))
 
 (cl:defun unload (domain)
-  "Summary: Unloads the specified application domain.
+  "OBSOLETE: Creating and unloading AppDomains is not supported and throws an exception.
+Summary: Unloads the specified application domain.
 Parameters:
   - domain (System.AppDomain): An application domain to unload.
 "

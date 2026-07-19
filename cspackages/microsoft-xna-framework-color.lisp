@@ -1,14 +1,15 @@
 ;;; Generated automatically. Do not edit.
 ;;; Class: Microsoft.Xna.Framework.Color
-;;; Generator Version: 50
-;;; Creation Date: 2026-07-16T13:55:57Z
+;;; Generator Version: 54
+;;; Creation Date: 2026-07-19T21:57:11Z
+;;; Options: --defgeneric --ensure-type-in-generic
 
 (cl:in-package :microsoft-xna-framework-color)
 
 (cl:define-symbol-macro <type> (dotnet:resolve-type "Microsoft.Xna.Framework.Color"))
 (cl:defconstant <type-str> "Microsoft.Xna.Framework.Color")
-(cl:defconstant <creation> "2026-07-16T13:55:57Z")
-(cl:defconstant <version> 50)
+(cl:defconstant <creation> "2026-07-19T21:57:11Z")
+(cl:defconstant <version> 54)
 
 (cl:defun new (cl:&optional (packed-value cl:nil supplied-packed-value) (alpha cl:nil supplied-alpha) (b cl:nil supplied-b) (alpha2 cl:nil supplied-alpha2))
   "Master wrapper for Microsoft.Xna.Framework.Color constructor overloads. Dispatches at runtime.
@@ -38,18 +39,14 @@ new(Byte, Byte, Byte, Byte)
   (cl:cond
     ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) supplied-alpha2 (cl:numberp alpha2))
      (dotnet:new <type-str> packed-value alpha b alpha2))
-    ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) supplied-alpha2 (cl:numberp alpha2))
-     (dotnet:new <type-str> packed-value alpha b alpha2))
-    ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) supplied-alpha2 (cl:numberp alpha2))
-     (dotnet:new <type-str> packed-value alpha b alpha2))
+    ;; unreachable: same runtime guard as new(Single, Single, Single, Single); calls new(Int32, Int32, Int32, Int32)
+    ;; unreachable: same runtime guard as new(Single, Single, Single, Single); calls new(Byte, Byte, Byte, Byte)
     ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value alpha b))
-    ((cl:and supplied-packed-value (cl:numberp packed-value) supplied-alpha (cl:numberp alpha) supplied-b (cl:numberp b) (cl:not supplied-alpha2))
-     (dotnet:new <type-str> packed-value alpha b))
+    ;; unreachable: same runtime guard as new(Single, Single, Single); calls new(Int32, Int32, Int32)
     ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Color")) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value alpha))
-    ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Color")) supplied-alpha (cl:numberp alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
-     (dotnet:new <type-str> packed-value alpha))
+    ;; unreachable: same runtime guard as new(Color, Int32); calls new(Color, Single)
     ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "System.UInt32")) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
      (dotnet:new <type-str> packed-value))
     ((cl:and supplied-packed-value (cl:or (cl:null packed-value) (dotnet:is-instance-of packed-value "Microsoft.Xna.Framework.Vector4")) (cl:not supplied-alpha) (cl:not supplied-b) (cl:not supplied-alpha2))
@@ -2705,13 +2702,6 @@ new(Byte, Byte, Byte, Byte)
 (cl:defun = (a b)
   (dotnet:static <type-str> "op_Equality" (cl:the (dotnet "Microsoft.Xna.Framework.Color") a) (cl:the (dotnet "Microsoft.Xna.Framework.Color") b)))
 
-;; The following C# Microsoft.Xna.Framework.Color.Deconstruct overloads have special parameter types
-;; (ref, out, or params) and are not yet supported:
-;;   Deconstruct(out Byte&, out Byte&, out Byte&) -> Void
-;;   Deconstruct(out Single&, out Single&, out Single&) -> Void
-;;   Deconstruct(out Byte&, out Byte&, out Byte&, out Byte&) -> Void
-;;   Deconstruct(out Single&, out Single&, out Single&, out Single&) -> Void
-
 (cl:defun equals (obj! obj)
   "Master wrapper for Microsoft.Xna.Framework.Color.Equals overloads. Dispatches at runtime.
 
@@ -2730,23 +2720,36 @@ Equals(Color) -> Boolean
                     :method-name "Equals"
                     :supplied-args (cl:append (cl:list :obj obj))))))
 
-(cl:defun from-non-premultiplied (vector cl:&optional (g cl:nil supplied-g) (b cl:nil supplied-b) (a cl:nil supplied-a))
+(cl:defun from-hsl (h s l)
+  (dotnet:static <type-str> "FromHSL" (cl:the (dotnet "System.Single") h) (cl:the (dotnet "System.Single") s) (cl:the (dotnet "System.Single") l)))
+
+(cl:defun from-hsv (h s v)
+  (dotnet:static <type-str> "FromHSV" (cl:the (dotnet "System.Single") h) (cl:the (dotnet "System.Single") s) (cl:the (dotnet "System.Single") v)))
+
+(cl:defun from-non-premultiplied (color cl:&optional (g cl:nil supplied-g) (b cl:nil supplied-b) (a cl:nil supplied-a))
   "Master wrapper for Microsoft.Xna.Framework.Color.FromNonPremultiplied overloads. Dispatches at runtime.
 
+FromNonPremultiplied(Color) -> Color
+
 FromNonPremultiplied(Vector4) -> Color
+
+FromNonPremultiplied(Single, Single, Single, Single) -> Color
 
 FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
 "
   (cl:cond
-    ((cl:and (cl:numberp vector) supplied-g (cl:numberp g) supplied-b (cl:numberp b) supplied-a (cl:numberp a))
-     (dotnet:static <type-str> "FromNonPremultiplied" vector g b a))
-    ((cl:and (cl:or (cl:null vector) (dotnet:is-instance-of vector "Microsoft.Xna.Framework.Vector4")) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
-     (dotnet:static <type-str> "FromNonPremultiplied" vector))
+    ((cl:and (cl:numberp color) supplied-g (cl:numberp g) supplied-b (cl:numberp b) supplied-a (cl:numberp a))
+     (dotnet:static <type-str> "FromNonPremultiplied" color g b a))
+    ;; unreachable: same runtime guard as FromNonPremultiplied(Single, Single, Single, Single) -> Color; calls FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
+    ((cl:and (cl:or (cl:null color) (dotnet:is-instance-of color "Microsoft.Xna.Framework.Color")) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
+     (dotnet:static <type-str> "FromNonPremultiplied" color))
+    ((cl:and (cl:or (cl:null color) (dotnet:is-instance-of color "Microsoft.Xna.Framework.Vector4")) (cl:not supplied-g) (cl:not supplied-b) (cl:not supplied-a))
+     (dotnet:static <type-str> "FromNonPremultiplied" color))
     (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
                     :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
                     :class-name <type-str>
                     :method-name "FromNonPremultiplied"
-                    :supplied-args (cl:append (cl:list :vector vector) (cl:when supplied-g (cl:list :g g)) (cl:when supplied-b (cl:list :b b)) (cl:when supplied-a (cl:list :a a)))))))
+                    :supplied-args (cl:append (cl:list :color color) (cl:when supplied-g (cl:list :g g)) (cl:when supplied-b (cl:list :b b)) (cl:when supplied-a (cl:list :a a)))))))
 
 (cl:defun get-hash-code (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "GetHashCode"))
@@ -2758,6 +2761,8 @@ FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
   (dotnet:static <type-str> "Lerp" (cl:the (dotnet "Microsoft.Xna.Framework.Color") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Color") value2) (cl:the (dotnet "System.Single") amount)))
 
 (cl:defun lerp-precise (value1 value2 amount)
+  "OBSOLETE: Color.Lerp should be used instead of this function.
+"
   (dotnet:static <type-str> "LerpPrecise" (cl:the (dotnet "Microsoft.Xna.Framework.Color") value1) (cl:the (dotnet "Microsoft.Xna.Framework.Color") value2) (cl:the (dotnet "System.Single") amount)))
 
 (cl:defun multiply (value scale)
@@ -2777,6 +2782,37 @@ FromNonPremultiplied(Int32, Int32, Int32, Int32) -> Color
 
 (cl:defun to-vector4 (obj!)
   (dotnet:invoke (cl:the (dotnet "Microsoft.Xna.Framework.Color") obj!) "ToVector4"))
+
+(cl:defun deconstruct (obj!)
+  "Master wrapper for Microsoft.Xna.Framework.Color.Deconstruct out-only overloads. Dispatches at runtime. Each out parameter is returned as an additional cl:values result (after the primary return value), in C# declaration order.
+
+Deconstruct(out Byte&, out Byte&, out Byte&) -> Void
+
+Deconstruct(out Single&, out Single&, out Single&) -> Void
+
+Deconstruct(out Byte&, out Byte&, out Byte&, out Byte&) -> Void
+
+Deconstruct(out Single&, out Single&, out Single&, out Single&) -> Void
+"
+  (cl:cond
+    ((cl:and )
+     (dotnet:call-out obj! "Deconstruct"))
+    ;; unreachable: same runtime guard as Deconstruct(out Byte&, out Byte&, out Byte&) -> Void; calls Deconstruct(out Single&, out Single&, out Single&) -> Void
+    ;; unreachable: same runtime guard as Deconstruct(out Byte&, out Byte&, out Byte&) -> Void; calls Deconstruct(out Byte&, out Byte&, out Byte&, out Byte&) -> Void
+    ;; unreachable: same runtime guard as Deconstruct(out Byte&, out Byte&, out Byte&) -> Void; calls Deconstruct(out Single&, out Single&, out Single&, out Single&) -> Void
+    (cl:t (cl:error 'csharp-assembly-utils:csharp-overload-not-found
+                    :package-name "MICROSOFT-XNA-FRAMEWORK-COLOR"
+                    :class-name <type-str>
+                    :method-name "Deconstruct"
+                    :supplied-args (cl:append )))))
+
+(cl:defun to-hsl (obj!)
+  "Returns (cl:values <primary-return> h s l) -- ToHSL(out Single&, out Single&, out Single&) -> Void"
+  (dotnet:call-out obj! "ToHSL"))
+
+(cl:defun to-hsv (obj!)
+  "Returns (cl:values <primary-return> h s v) -- ToHSV(out Single&, out Single&, out Single&) -> Void"
+  (dotnet:call-out obj! "ToHSV"))
 
 ;; Extension methods (exact match on this == Microsoft.Xna.Framework.Color):
 (cl:defun adjust (obj! amount)
