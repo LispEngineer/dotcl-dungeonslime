@@ -1242,3 +1242,120 @@ Programmatically" above, which this updates).
 No `*generator-version*`/`dungeon-slime.asd` version bump — this is a build-tooling fix
 only, not a change to any generated-output shape.
 
+
+# `make repl` and "Unbound variable: SELF" in Foreign Callbacks
+
+`make build`/`make run` worked fine, but `make repl` followed by
+`(dotnet:invoke *mg-game* "Run")` (or `"Initialize"`, `"BeginRun"`, etc. — any
+method defined via `dotnet:define-class`) failed immediately with:
+
+```
+;; Unhandled error in foreign callback: #<UNBOUND-VARIABLE: SELF>
+```
+
+## Root Cause
+
+`dotnet:define-class` (from DotCL's `contrib/dotnet-class/dotnet-class.lisp`,
+*not* part of this project) expands each `:methods` entry's body into
+roughly:
+
+```lisp
+(lambda (self ,@param-names)
+  (declare (ignorable self))
+  ,@body)
+```
+
+The `self` in that backquote template is an ordinary, unhygienic symbol —
+whichever one the Lisp reader produced when `dotnet-class.lisp` was itself
+compiled. Crucially, that file has **no `in-package` of its own**, so which
+package `self` lands in depends entirely on whatever `*package*` happened to
+be active at that compile.
+
+- `make repl`'s `load-repl.lisp` does `(asdf:load-system "dungeon-slime")`
+  starting from `*package*` = `COMMON-LISP-USER` (dotcl's default toplevel
+  package). Because `dungeon-slime.asd` lists `"dotnet-class"` as a
+  `:depends-on` system, ASDF's `(require :dotnet-class)` resolves before any
+  of this project's own components (including `packages.lisp`, which is what
+  defines the `:dungeon-slime` package) ever run. That `require` is satisfied
+  by a **pre-built FASL shipped with the installed `dotcl` tool**
+  (`~/.dotnet/tools/.store/dotcl/<ver>/.../contrib/dotnet-class/dotnet-class.fasl`),
+  compiled once, long ago, by the DotCL release process — under
+  `COMMON-LISP-USER`, its own default toplevel package. FASLs bake in the
+  *compile-time* package for every symbol they reference; loading that FASL
+  later, under a different `*package*`, does not change that. So the macro's
+  `self` parameter is fixed as `COMMON-LISP-USER::SELF`, forever, for that
+  FASL.
+- Meanwhile, every bare `self` written in this project's own source — e.g.
+  `mg-core.lisp`'s `MonoGameCLOSProxy` methods, `(dotnet:invoke self
+  "CLOSObject")` — is read by the standard CL reader while `*package*` =
+  `:dungeon-slime` (or `:dungeon-slime-tests` for `clr-defmethod-test.lisp`),
+  producing `DUNGEON-SLIME::SELF` — a *different* symbol object from
+  `COMMON-LISP-USER::SELF`, despite printing identically as `SELF`.
+
+At macroexpansion time, the body forms (containing `DUNGEON-SLIME::SELF`) are
+spliced as-is into the macro's `(lambda (COMMON-LISP-USER::SELF) ...)`. The
+parameter binds one symbol; the body reads a different, unrelated, genuinely
+unbound one. Confirmed directly via `macroexpand-1`:
+
+```lisp
+DUNGEON-SLIME> (macroexpand-1 '(dotnet:define-class "X" ("System.Object")
+                                  (:methods ("M" () :returns Void (foo self)))))
+(DOTNET:%DEFINE-CLASS "X" "System.Object" NIL NIL
+ (LIST (LIST "M" "System.Void" (LIST)
+             (LAMBDA (COMMON-LISP-USER::SELF)
+               (DECLARE (IGNORABLE COMMON-LISP-USER::SELF))
+               (FOO SELF))       ; SELF here reads as DUNGEON-SLIME::SELF
+             NIL NIL))
+ NIL NIL NIL NIL NIL NIL NIL)
+```
+
+Why didn't `make build` hit this? Its MSBuild-driven pipeline recompiles
+`dotnet-class.lisp` **from source**, as part of `_DotCLResolveDeps`, late
+enough that plain per-file ASDF `compile-op`/`load-op` ordering (each
+dependency is fully *loaded*, not just compiled, before the next file that
+needs its macros gets compiled — see "ASDF Dependency Ordering" above) means
+the recompiled macro's `self` ends up matching this project's own package by
+the time it's actually needed. `make repl`'s `(require :dotnet-class)` short-
+circuits that entirely by reusing the already-`*module-provider*`-satisfied
+shipped FASL instead of recompiling.
+
+## Fix
+
+In `packages.lisp`, immediately after the `:dungeon-slime` `defpackage` form:
+
+1. `intern` (and `export`, so `:dungeon-slime-tests` — which already `:use`s
+   `:dungeon-slime` — inherits the identical symbol instead of interning its
+   own `DUNGEON-SLIME-TESTS::SELF`) a `SELF` symbol into `:dungeon-slime`.
+2. Bind `*package*` to `:dungeon-slime` and reload `dotnet-class.lisp`'s
+   *source* (located via `(asdf:system-relative-pathname "dotnet-class"
+   "dotnet-class.lisp")`, not the pre-built FASL) so the reader, encountering
+   `self` in the macro's backquote template, finds and reuses the symbol
+   already interned in step 1 rather than creating a new one.
+
+This forces `dotnet:define-class` to recapture `self` as
+`DUNGEON-SLIME::SELF` for both the REPL and build paths, so the macro's
+parameter and every caller's body reference now agree.
+
+This is a `dotcl`-side defect (an unhygienic macro capturing a symbol from
+whatever package happens to be ambient at its own compile time, rather than
+the caller's), worked around here rather than fixed at the source, since
+`contrib/dotnet-class/dotnet-class.lisp` isn't part of this project. See
+[`doc/dotcl-bug-self.md`](dotcl-bug-self.md) for the upstream bug report.
+
+## Verified
+
+* `check_parens.py packages.lisp` passes.
+* `macroexpand-1` of a `dotnet:define-class` form in a fresh `make repl`
+  session now shows a single `DUNGEON-SLIME::SELF` for both the lambda
+  parameter and the body.
+* `make repl` followed by `(dotnet:invoke *mg-game* "Run")` now runs
+  `Initialize` → `LoadContent` → `BeginRun` → the title-scene transition with
+  no unbound-variable errors (previously failed immediately on
+  `Initialize`).
+* `make clean build` still succeeds; the built executable still runs
+  correctly end-to-end (`Initialize`'s `self` still prints the live
+  `MonoGameCLOSProxy` instance as before).
+* `make test` still passes in full, including `clr-defmethod-test.lisp`
+  (package `:dungeon-slime-tests`), confirming the exported/inherited `SELF`
+  symbol works for that package too.
+
