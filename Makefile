@@ -33,16 +33,39 @@ REF_DIR := $(shell ls -d /usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/$(TAR
                     | sort -V | tail -1)
 endif
 
-.PHONY: all build test run clean cspackages repl check-parens
+.PHONY: all build build-actual test run clean deep-clean cspackages repl \
+        check-parens check mgcb content-fonts
 
 all: build test
 
-build: build-actual # cspackages build-actual
+# "check" is the one-command-before-declaring-victory target: build then test.
+check: build test
+
+# cspackages is deliberately *not* a prerequisite here: the generated
+# cspackages/ files are vendored/committed, and regenerating them is a
+# manual, occasional step (see the `cspackages` target below), not part of
+# every build.
+build: build-actual
 
 check-parens:
-	find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py
+	find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" ! -path "*/scratch/*" | xargs python3 check_parens.py
 
-build-actual:
+# MGCB only watches the .spritefont XML, not the .ttf it references, so a
+# .ttf-only edit silently fails to rebuild the font unless the .spritefont
+# is touched too.
+content-fonts:
+	@for sf in Content/fonts/*.spritefont; do \
+		ttf="Content/fonts/$$(grep -oP '(?<=<FontName>)[^<]+' "$$sf")"; \
+		if [ "$$ttf" -nt "$$sf" ]; then \
+			echo "Touching $$sf ($$ttf is newer)"; \
+			touch "$$sf"; \
+		fi; \
+	done
+
+# check-parens runs first because a paren imbalance produces misleading
+# errors deep inside DotCL's concatenated .concat.lisp compile (e.g. an
+# MSB3073 exit 134) -- catching it here fails fast instead.
+build-actual: check-parens content-fonts
 	# Build the project, compiling both C# and DotCL Common Lisp code in one step.
 	# NuGet reference dependencies are automatically copied to the bin directory
 	# before Lisp dependency resolution and compilation targets run, and
@@ -176,6 +199,22 @@ clean:
 	dotnet clean DungeonSlime.csproj
 	# Keep our "vendored" cspackages that we previously created intentionally
 	# rm -rf $(OUT_DIR)
+
+# DotCL keeps a second, independent FASL cache under ~/.cache/common-lisp/,
+# keyed by "dotcl-<version>-linux-x64" + this project's absolute source path
+# (see doc/implementation-notes.md, "A Second, Independent FASL Cache" --
+# stale entries there have caused "no package named
+# MICROSOFT-XNA-FRAMEWORK-GRAPHICS-TEXTURE2-D" after an ordinary `make
+# clean`). The version directory changes as dotcl is upgraded, so glob over
+# every version rather than hardcoding one; each match is this project's own
+# cache subtree, never a bare glob of ~/.cache/common-lisp itself.
+deep-clean: clean
+	@for d in $(HOME)/.cache/common-lisp/dotcl-*-linux-x64$(abspath .); do \
+		if [ -d "$$d" ]; then \
+			echo "Removing $$d"; \
+			rm -rf "$$d"; \
+		fi; \
+	done
 
 mgcb:
 	dotnet tool restore

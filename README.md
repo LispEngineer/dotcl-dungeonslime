@@ -109,19 +109,27 @@ Key features of the updated build system:
 You can use the provided `Makefile` to build, test, and run the project:
 
 * **Rebuild C# Packages:** `make cspackages`
-* **Build the project:** `make build` (runs the consolidated `dotnet build` command in a single step)
-* **Run the test suite:** `make test` (runs the game in `--test` mode)
-* **Run the game:** `make run` (runs the GUI game)
+* **Build the project:** `make build` (runs the consolidated `dotnet build` command in a single
+  step; also gates on `make check-parens` and `make content-fonts` first, see below)
+* **Build then run the test suite:** `make check` (the one command to run before declaring a
+  change done)
+* **Run the test suite:** `make test` (runs the game in `--test` mode; does **not** build first,
+  use `make build test` or `make check`)
+* **Run the game:** `make run` (runs the GUI game; does **not** build first, use `make build run`)
 * **Clean build files:** `make clean` (cleans temporary directories and compiled FASL files)
+* **Deep-clean build files:** `make deep-clean` (`make clean` plus the second, independent ASDF
+  FASL cache under `~/.cache/common-lisp/` that `make clean` does not touch; see
+  `doc/implementation-notes.md`)
 * **Run MonoGame Content Builder**: `make mgcb`
-* **Check Lisp parentheses balance:** `make check-parens`
+* **Check Lisp parentheses balance:** `make check-parens` (runs automatically as part of
+  `make build`)
 
 > NOTE:
-> **Font Rebuilds:** If you edit or replace the raw `.ttf` font file under `Content/fonts/`,
-  the MonoGame Content Builder (MGCB) task will not automatically recompile it during `make build` 
-  because MGCB only monitors changes to the `.spritefont` XML descriptor. To force a rebuild of 
-  the font asset, you must touch the `.spritefont` file to update its timestamp:
-> `touch Content/fonts/04B_30.spritefont`
+> **Font Rebuilds:** The MonoGame Content Builder (MGCB) task only monitors changes to the
+  `.spritefont` XML descriptor, not the raw `.ttf` font file under `Content/fonts/` that it
+  references, so an edited/replaced `.ttf` would otherwise silently fail to rebuild. `make build`
+  runs `make content-fonts` first, which touches any `.spritefont` whose referenced `.ttf` is
+  newer, so this no longer needs to be done by hand.
 
 Or manually run the steps:
 
@@ -139,7 +147,9 @@ Or manually run the steps:
 4. If you want to edit the `.mgcb` file, execute: `dotnet tool run mgcb-editor-linux`
 
 5. To check Lisp parentheses balance manually:
-   `find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" | xargs python3 check_parens.py`
+   `find . -type f \( -name "*.lisp" -o -name "*.asd" \) ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/.git/*" ! -path "*/scratch/*" | xargs python3 check_parens.py`
+   (this is what `make check-parens` runs; the `scratch/` exclusion matters because that
+   gitignored directory holds throwaway files that are sometimes intentionally unbalanced)
    * Parentheses balance is usually not much of a problem for human coders due to IDE support,
      but it seems to trip up AI assistance a lot. The problem is compounded due to DotCL's
      mechanism of concatenating all Lisp files into a single input during compilation phase.

@@ -277,17 +277,15 @@ deleting `obj/` outright the *same* error persisted — because
 were added) was still being picked up by ASDF's dependency resolution for the
 `csharp-assembly-packages` system, silently shadowing the freshly regenerated source.
 
-**Fix**: delete the project's subtree under the global cache directory, then rebuild:
-```sh
-rm -rf ~/.cache/common-lisp/dotcl-*-linux-x64$(pwd)
-make clean
-make build
-```
-When a Lisp build fails with a package/symbol-not-found error that only makes sense
-if stale `cspackages/` output were still in play — especially right after
-`make cspackages` regenerates wrapper packages — clearing this directory (not just
-`obj/`/`bin/` via `make clean`) should be one of the first things tried, alongside
-the `obj/`-only staleness case already covered above.
+**Fix**: `make deep-clean` (Makefile:203-217) does this in one step — it runs
+`make clean` and then removes the project's subtree from every
+`dotcl-*-linux-x64` version directory under `~/.cache/common-lisp/`, echoing
+each path it removes. Follow it with `make build`. When a Lisp build fails
+with a package/symbol-not-found error that only makes sense if stale
+`cspackages/` output were still in play — especially right after
+`make cspackages` regenerates wrapper packages — `make deep-clean` should be
+one of the first things tried, alongside the `obj/`-only staleness case
+already covered above.
 
 
 # DotCL Build Execution Changes and ASDF Loading
@@ -1317,6 +1315,19 @@ only, not a change to any generated-output shape.
 
 
 # `make repl` and "Unbound variable: SELF" in Foreign Callbacks
+
+> **Resolved upstream in DotCL `0.1.19`.** `contrib/dotnet-class/dotnet-class.lisp`
+> now interns `self` via `(intern "SELF" *package*)` against the *caller's*
+> ambient package at macroexpansion time, instead of baking in whatever
+> package happened to be current when that file was itself compiled — see
+> [`doc/dotcl-bug-self.md`](dotcl-bug-self.md) for the upstream bug report and
+> its resolution. The `packages.lisp` workaround described below (interning
+> `SELF` early and reloading `dotnet-class.lisp`'s source under
+> `:dungeon-slime`) has been removed; confirmed via `macroexpand-1` in a
+> fresh `make repl` session, `(dotnet:invoke *mg-game* "Initialize")` running
+> the full callback chain (`Initialize` → `LoadContent` → scene transition)
+> with no unbound-variable error, `make clean build`, `make test`, and a
+> direct run of the built executable all succeeding with DotCL `0.1.19`.
 
 `make build`/`make run` worked fine, but `make repl` followed by
 `(dotnet:invoke *mg-game* "Run")` (or `"Initialize"`, `"BeginRun"`, etc. — any

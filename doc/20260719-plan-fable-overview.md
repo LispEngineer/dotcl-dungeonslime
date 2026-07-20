@@ -38,6 +38,14 @@ improvement available and should land first.
 
 ### 02 — Makefile and build hygiene (material build-system improvement)
 
+> **✅ DONE (2026-07-19, implemented by Claude).** All five chunks completed;
+> see the annotations in
+> [20260719-plan-fable-detail-02.md](20260719-plan-fable-detail-02.md).
+> Notable adjustment during implementation: making `check-parens` a build
+> prerequisite required excluding `scratch/` from its `find`, since that
+> gitignored directory already held several intentionally-unbalanced scratch
+> `.lisp` files that would otherwise have broken every `make build`.
+
 The single most material *behavioral* build improvement: encode the manual
 rituals currently documented only as gotchas into Makefile targets.
 Includes: a combined build+test target; wiring `make check-parens` in as a

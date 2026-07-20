@@ -1,5 +1,17 @@
 # Bug Report: `dotnet:define-class` captures `self` from its own compile-time package, not the caller's
 
+> **Fixed upstream in DotCL `0.1.19`.** `%process-ctor-form` and
+> `dotnet:define-class` now compute `(self-sym (intern "SELF" *package*))` at
+> the *caller's* macroexpansion time and splice `,self-sym` into the emitted
+> lambda list, instead of a literal `self` token whose package identity was
+> fixed at `dotnet-class.lisp`'s own compile time. This matches the "Suggested
+> Fix" direction below (hygienic, caller-resolved `self`), though via
+> per-expansion `intern` rather than a single fixed exported symbol. The
+> `packages.lisp` workaround in this project has been removed; see the
+> "Resolved upstream" note in
+> [`doc/implementation-notes.md`](implementation-notes.md) for verification
+> steps.
+
 * Reported by: Douglas P. Fields, Jr. — symbolics@lisp.engineer
 * Source repository: [dotcl-dungeonslime](https://github.com/LispEngineer/dotcl-dungeonslime)
   (a Common Lisp/DotCL port of the MonoGame "Dungeon Slime" tutorial)

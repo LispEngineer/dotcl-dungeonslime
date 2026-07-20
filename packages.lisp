@@ -160,35 +160,7 @@
     #:ta-create-sprite #:ta-create-animated-sprite #:ta-add-animation #:ta-get-animation
     #:ta-remove-animation #:ta-from-file
     #:texture-region #:tr-draw
-      #:load-font #:measure-string #:draw-string
-    ;; See the `self`-recapture fix just below: exported so that
-    ;; :dungeon-slime-tests (which :use's :dungeon-slime) inherits the same
-    ;; symbol instead of interning its own DUNGEON-SLIME-TESTS::SELF.
-    #:self))
-
-;;; DOTNET:DEFINE-CLASS-generated method lambdas bind a parameter literally
-;;; named `self` -- but contrib/dotnet-class/dotnet-class.lisp (part of the
-;;; DotCL distribution, not this project) has no `in-package` of its own, so
-;;; that macro's backquoted `self` is whatever unhygienic symbol got interned
-;;; into *whatever package happened to be current* when that file was first
-;;; compiled. `make repl`'s plain `(require :dotnet-class)` (triggered by
-;;; dungeon-slime.asd's :depends-on) is satisfied by a fasl pre-built by the
-;;; dotcl tool's own release process under COMMON-LISP-USER, and FASLs bake
-;;; in the compile-time package regardless of the *package* active when the
-;;; FASL is later loaded. Every bare `self` written in this project's own
-;;; source (e.g. mg-core.lisp's MonoGameCLOSProxy methods) is read under
-;;; :dungeon-slime and so, without this fix, is a *different* symbol than the
-;;; macro's -- producing "Unbound variable: SELF" the moment any such method
-;;; callback runs from the REPL. `make build`'s MSBuild-driven pipeline
-;;; happens not to hit this because it recompiles dotnet-class.lisp from
-;;; source late enough that :dungeon-slime already exists. Recompiling it
-;;; again here, now that :dungeon-slime exists and already has a SELF symbol
-;;; interned (via the intern below) for the reader to reuse, makes both paths
-;;; agree on a single DUNGEON-SLIME::SELF symbol.
-(let ((*package* (find-package :dungeon-slime)))
-  (intern "SELF" *package*)
-  (require "asdf")
-  (load (asdf:system-relative-pathname "dotnet-class" "dotnet-class.lisp")))
+      #:load-font #:measure-string #:draw-string))
 
 (defpackage :dungeon-slime-tests
   (:use :cl :dungeon-slime :csharp :utils :monoutils :mg-classes)

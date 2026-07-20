@@ -16,33 +16,43 @@ narrative and `FILES.md` for a description of every source file.
 Always prefer the `Makefile` targets below over ad hoc commands.
 
 * `make build` — builds everything (C# and Lisp) in one `dotnet build` step.
-  Does not run tests or the game.
+  Does not run tests or the game. `build-actual` (what `build` depends on)
+  itself depends on `check-parens` and `content-fonts`, so every build gates
+  on a paren-balance check and re-touches any stale `.spritefont` first —
+  see those targets below.
+* `make check` — `build` then `test` in one command; the one to run before
+  declaring a change done.
 * `make test` — runs the built executable with `--test` (does **not** build
-  first; use `make build test`).
+  first; use `make build test` or `make check`).
 * `make run` — runs the built executable's GUI game (does **not** build
   first; use `make build run`).
 * `make repl` — loads the whole system into a `dotcl` REPL and drops into the
   `:dungeon-slime` package (`*mg-game*` is bound to the game instance).
 * `make check-parens` — checks parenthesis balance across all `.lisp`/`.asd`
-  files via `check_parens.py`. **Run this immediately after editing any Lisp
-  file**, and especially before/after diagnosing any DotCL build failure (see
-  Gotchas below).
+  files (excluding `scratch/`) via `check_parens.py`. Runs automatically as
+  part of `make build`; still independently runnable, and worth running
+  immediately after editing any Lisp file, especially before/after
+  diagnosing any DotCL build failure (see Gotchas below).
+* `make content-fonts` — touches any `Content/fonts/*.spritefont` whose
+  referenced `.ttf` is newer than it. Runs automatically as part of
+  `make build`, since MGCB only watches the `.spritefont` XML, not the raw
+  `.ttf` it references.
 * `make cspackages` — regenerates `cspackages/` (the generated C# interop
   wrapper packages) using the external `dotcl-packagegen` tool. Requires a
   prior `make build` (bootstraps off the built `MonoGame.Framework.dll`).
   Only needed when adding/using a new .NET class; the generated wrappers are
-  committed, so this isn't part of the normal edit/test loop.
+  committed, so this isn't part of the normal edit/test loop, and it is
+  deliberately not a prerequisite of `build`.
 * `make mgcb` — launches the MonoGame Content Builder editor for
   `Content.mgcb`.
 * `make clean` — `dotnet clean`; does not remove the vendored `cspackages/`.
+* `make deep-clean` — `clean`, plus removes this project's entries from the
+  second, independent ASDF FASL cache under `~/.cache/common-lisp/` (see
+  Gotchas below). Use when a stale-wrapper error survives a plain `clean`.
 
 There is no separate unit test framework — tests are plain Lisp functions run
 via `--test`, aggregated in `test-harness.lisp`, printed to stderr. To run
 just the tests from a live REPL: `(dungeon-slime-tests::run-all-tests)`.
-
-Font note: MGCB only watches `.spritefont` files, not the raw `.ttf`. If you
-edit `Content/fonts/04B_30.ttf`, `touch Content/fonts/04B_30.spritefont`
-first or the font won't rebuild.
 
 ## Architecture
 
@@ -161,6 +171,13 @@ interop.
   skipped entirely — `eval-when (:compile-toplevel)` diagnostics won't print.
   Force a real recompile with a trivial edit or `make clean` when debugging
   compile-time macros.
+* **A second, independent FASL cache lives outside the project entirely**, at
+  `~/.cache/common-lisp/dotcl-<version>-linux-x64/<absolute-source-path>/`,
+  and `make clean` never touches it — it can silently shadow freshly
+  regenerated `cspackages/` output with stale `.fasl`s, surfacing as a
+  package/symbol-not-found error that persists even after `make clean`. Run
+  `make deep-clean` (see "A Second, Independent FASL Cache" in
+  `doc/implementation-notes.md`) to clear it too.
 * Don't hardcode the build output path (`bin/Debug/net10.0/<rid>/`) — it
   varies by OS/config. Use `dotnet build DungeonSlime.csproj
   -getProperty:OutputPath` (as the `Makefile` does) or, in Lisp, resolve
